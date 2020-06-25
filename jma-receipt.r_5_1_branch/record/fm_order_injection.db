@@ -1,0 +1,65 @@
+fm_order_injection {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	data {
+#---    注射処方箋
+		Form_ID				varchar(30);
+		Custom_ID			varchar(30);
+		Printer				varchar(20);
+#---    帳票タイトル
+		Number_Copies{
+			Title				varchar(30);
+			Copies 			varchar(2);
+		}[4];
+		Order_Class		varchar(1);
+ 		Perform_Date		varchar(10);
+		IssuedDate			varchar(10);
+ 		IssuedTime			varchar(5);
+		Department_Code			varchar(02);
+		Department_Name			varchar(40);
+		Ward_Number			varchar(02);
+		Ward_Name			varchar(20);
+		Room_Number			varchar(6);
+		Patient	{
+			ID	 		varchar(20);
+			Name 			varchar(50);
+			KanaName  		varchar(50);
+			BirthDate 		varchar(10);
+			Sex			varchar(1);
+		};
+		Doctor	{
+			Code			varchar(5);
+			Name 			varchar(50);
+			KanaName 		varchar(50);
+			Drug_Permission_ID	varchar(15);
+		};
+#---    麻薬
+		Narcotic_Flg		varchar(1);
+		Rp	{
+#---  診療区分
+			Medical_Class			varchar(02);
+#---            診療種別区分
+			Medical_Class2			varchar(03);
+#---            注射見出し
+			Injection_Name			varchar(100);
+#---            注射コード
+			Injection_Code			varchar(9);
+#---  回数連番
+		  Count			varchar(2);
+			Medication	{
+#---                   名称
+				Name			varchar(200);
+#---                   数量
+				Amount			varchar(12);
+#---                   単位
+				Unit_Name		varchar(12);
+#---                   コード
+				Code			varchar(9);
+			}[50];
+		};
+		Memo				varchar(110)[3];
+		User_ID			varchar(16);
+	};
+};

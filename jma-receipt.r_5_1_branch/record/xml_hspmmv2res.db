@@ -1,0 +1,16 @@
+xml_hspmmv2res{
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	hspmmv2res{
+		Information_Date	varchar(10);
+		Information_Time	varchar(8);
+		Api_Result		varchar(4);
+		Api_Result_Message	varchar(100);
+		Perform_Month_Max_Information{
+			Patient_ID					varchar(20);
+			Perform_Month				varchar(7);
+		}[1000];
+	};
+};

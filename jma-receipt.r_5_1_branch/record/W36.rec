@@ -1,0 +1,18 @@
+W36 {
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(1024);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed1 {
+    HKNCHK {
+      isactive bool;
+    };
+    MEMO1 {
+      isactive bool;
+    };
+    MEMO2 {
+      isactive bool;
+    };
+  };
+};

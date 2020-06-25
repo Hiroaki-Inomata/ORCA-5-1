@@ -1,0 +1,51 @@
+tbl_hknjainf_org {
+	HOSPNUM				number(2,0);
+	HKNJANUM			char(8);
+	HKNJANAME			varchar(200);
+	HKNJANAME_TAN1		varchar(100);
+	HKNJANAME_TAN2		varchar(40);
+	HKNJANAME_TAN3		varchar(40);
+	HKNNUM  			char(3);
+	HON_GAIKYURATE 			number(3);
+	HON_NYUKYURATE 			number(3);
+	KZK_GAIKYURATE 			number(3);
+	KZK_NYUKYURATE 			number(3);
+	POST        		varchar(7);
+	ADRS			    varchar(200);
+	BANTI 		    	varchar(200);
+	TEL 			    varchar(15);
+	KIGO    			varchar(80);
+	IDOKBN  			varchar(1);
+	IDOYMD  			varchar(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,HKNJANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_org_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_org
+			WHERE   HOSPNUM      =   :HOSPNUM  AND
+				HKNJANUM	=   :HKNJANUM
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_org_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_org
+			WHERE   HOSPNUM      =   :HOSPNUM
+			ORDER BY HKNJANUM
+ 		;
+	};
+};

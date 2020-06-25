@@ -1,0 +1,53 @@
+kanri_cd    : "2008"
+name        : "¥ì¥»¥×¥ÈÊÔÄÖ½ç¾ğÊó"
+class_cd    : "*"
+item_max    : 8
+item_list   :
+- item_no   : 1
+  item      : "PREFKBN-PRTJYUN"
+  item_jp   : "ÊÔÄÖ½ç¡§¸©Æâ¸©³°°õºş½ç"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "HKNJANUM-PRTJYUN"
+  item_jp   : "ÊÔÄÖ½ç¡§Êİ¸±¼Ô°õºş½ç"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "RECESYUBETU-PRTJYUN"
+  item_jp   : "ÊÔÄÖ½ç¡§¥ì¥»¥×¥È¼ïÊÌ°õºş½ç"
+  type      : "X"
+  start     : 3
+  length    : 1
+- item_no   : 4
+  item      : "ZAITAKU"
+  item_jp   : "ÊÔÄÖ½ç¡§ºßÁí¿Ç¡¦ºß°åÁí"
+  type      : "X"
+  start     : 4
+  length    : 1
+- item_no   : 5
+  item      : "CHOUKI"
+  item_jp   : "ÊÔÄÖ½ç¡§Ä¹´ü¡ÊÄ¹´ü¹â³ÛÎÅÍÜÈñ¡Ë"
+  type      : "X"
+  start     : 5
+  length    : 1
+- item_no   : 6
+  item      : "HKNJANUM"
+  item_jp   : "ÊÔÄÖ½ç¡§°åÎÅµ¡´Ø¤Î½êºßÃÏÊİ¸±¼Ô"
+  type      : "X"
+  start     : 6
+  length    : 8
+- item_no   : 7
+  item      : "HKNJANUM-PRTKBN"
+  item_jp   : "ÊÔÄÖ½ç¡§°åÎÅµ¡´Ø¤Î½êºßÃÏÊİ¸±¼Ô°õºş°ÌÃÖ"
+  type      : "X"
+  start     : 14
+  length    : 1
+- item_no   : 8
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 15
+  length    : 486

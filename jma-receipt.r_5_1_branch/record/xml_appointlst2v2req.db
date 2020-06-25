@@ -1,0 +1,10 @@
+xml_appointlst2v2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	appointlst2req {
+		Patient_ID			varchar(20);
+		Base_Date			varchar(10);
+	};
+};

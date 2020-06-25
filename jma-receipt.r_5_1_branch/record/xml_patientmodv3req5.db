@@ -1,0 +1,66 @@
+xml_patientmodv3req5 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3req5 {
+	Request_Number		varchar(2);
+	Karte_Uid		varchar(36);
+	Orca_Uid		varchar(36);
+	Continue_Mode		varchar(05);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        };
+#---    公費選択情報
+	PublicInsurance_Information	{
+#---        公費ＩＤ
+            PublicInsurance_Id			varchar(10);
+            PublicInsurance_Class		varchar(03);
+#---        受給者番号
+            PublicInsuredPerson_Number		varchar(20);
+#---        開始日
+            Certificate_IssuedDate		varchar(10);
+        };
+#---    公費負担額情報（リクエスト＝３）
+	Pi_Money_Information	{
+            Pi_Money_Mode			varchar(6);
+	    Pi_Money_Info 	{
+#---            処理区分
+            	Pi_Money_Line_Mode		varchar(6);
+#---            連番
+            	Pi_Money_Number			varchar(03);
+#---            開始日
+            	Pi_Money_StartDate		varchar(10);
+#---            終了日
+            	Pi_Money_ExpiredDate		varchar(10);
+#---            上限額１
+            	Pi_Money_Money1			varchar(7);
+#---            上限額２
+            	Pi_Money_Money2			varchar(7);
+            	} [300];
+        };
+#---    負担額選択情報
+	Pi_Money_Sel_Information	{
+#---        選択番号
+            Pi_Money_Sel_Number			varchar(3);
+#---        開始日
+            Pi_Money_Sel_StartDate		varchar(10);
+        };
+#---    他一部負担額情報
+	Pi_Etc_Money_Information	{
+            Pi_Etc_Money_Mode			varchar(6);
+	    Pi_Etc_Money_Info 	{
+#---            年月日
+            	Pi_Etc_Money_Date		varchar(10);
+#---            入外区分
+		Pi_Etc_Money_InOut 		varchar(01);
+#---            負担金額
+		Pi_Etc_Money_Money		varchar(7);
+            	} [100];
+        };
+    };
+};

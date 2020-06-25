@@ -1,0 +1,35 @@
+E01 {
+  fixed6 {
+    scrolledwindow1 {
+      CLIST1 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 char(25);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    scrolledwindow2 {
+      CLIST2 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 char(25);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    CHKBTN01 {
+      isactive bool;
+    };
+    CHKMSG01 {
+      textdata char(32);
+    };
+    CHKMSG02 {
+      textdata char(6);
+    };
+  };
+};

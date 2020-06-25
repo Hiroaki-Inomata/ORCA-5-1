@@ -1,0 +1,126 @@
+tbl_ptmemoinf {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	SYSYMD     			char(8);
+	MEMOKBN				number(1);
+	RENNUM				number(2);
+	SRYKA				char(2);
+	MEMO	        		varchar(1000);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SYSYMD,MEMOKBN,RENNUM,SRYKA;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYSYMD      =   :SYSYMD
+			AND   MEMOKBN     =   :MEMOKBN
+			AND   SRYKA       =   :SRYKA
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYSYMD      =   :SYSYMD
+			AND   MEMOKBN     =   :MEMOKBN
+			ORDER   BY        RENNUM DESC,
+                                          SRYKA
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   MEMOKBN     =   :MEMOKBN
+			ORDER   BY        SYSYMD DESC,
+                                          RENNUM DESC,
+                                          SRYKA
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYSYMD      =   :SYSYMD
+			AND   MEMOKBN     =   :MEMOKBN
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY        RENNUM DESC
+		;
+	};
+};
+
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYSYMD      =   :SYSYMD
+			ORDER   BY        MEMOKBN,
+                                          RENNUM DESC,
+                                          SRYKA
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptmemoinf_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptmemoinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYSYMD      =   :SYSYMD
+		;
+	};
+};
+

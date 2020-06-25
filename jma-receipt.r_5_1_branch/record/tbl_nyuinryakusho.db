@@ -1,0 +1,72 @@
+tbl_nyuinryakusho	{
+	SRYCD			char(9);
+	YUKOSTYMD		char(8);
+	YUKOEDYMD		char(8);
+	RYAKUSHO		varchar(20);
+	NAME			varchar(200);
+	TERMID		varchar(16);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+#-----> 主キー更新用項目
+	UPSRYCD		char(9),virtual;
+	UPYUKOSTYMD	char(8),virtual;
+	UPYUKOEDYMD 	char(8),virtual;
+};
+
+primary	{SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_nyuinryakusho_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinryakusho
+			WHERE	SRYCD      =  :SRYCD
+			AND		YUKOSTYMD     <=  :YUKOSTYMD
+			AND		YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_nyuinryakusho_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinryakusho
+      		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_nyuinryakusho_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinryakusho
+		WHERE 	SRYCD	= :SRYCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_nyuinryakusho
+				SET
+				SRYCD      = :SRYCD,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				RYAKUSHO      = :RYAKUSHO,
+				NAME      = :NAME,
+				TERMID      = :TERMID,
+				OPID      = :OPID,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE 	SRYCD      =  :UPSRYCD
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

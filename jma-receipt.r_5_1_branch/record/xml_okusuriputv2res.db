@@ -1,0 +1,12 @@
+xml_okusuriputv2res {
+	context		int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	okusuriputv2res {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+		Api_Result	     		varchar(04);
+		Api_Result_Message 		varchar(100);
+   	};
+};

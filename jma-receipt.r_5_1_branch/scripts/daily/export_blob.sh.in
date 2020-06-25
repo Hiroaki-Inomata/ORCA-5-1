@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        データファイルＤＢ保存
+#
+#        $1 ID
+#-------------------------------------------#
+ID=$1
+ZIP_FILE=${MCP_TEMPDIR}/${ID}.zip
+
+${MONBLOB} -dir ${LDDIRECTORY} -export ${ID} -output ${ZIP_FILE}
+
+exit
+

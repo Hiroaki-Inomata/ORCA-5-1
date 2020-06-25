@@ -1,0 +1,116 @@
+tbl_chk_org	{
+	HOSPNUM			number(2,0);
+	CHKKBN			char(1);
+	SRYCD   		char(9);
+	GRPNUM			number(2,0);
+	YUKOSTYMD  	char(8);
+	YUKOEDYMD  	char(8);
+	CDKBN   		char(1);
+	CD					varchar(9);
+	NYUGAIKBN		char(1);
+	NYUGAIBNDKBN		char(1);
+	SYORIKBN		char(1);
+	CHKERR				number(1,0);
+	DATAKBN			char(1);
+	RENNUM		 number(3);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM		number(2,0),virtual;
+	UPCHKKBN		char(1),virtual;
+	UPSRYCD   	char(9),virtual;
+	UPGRPNUM		number(2,0),virtual;
+	UPYUKOSTYMD char(8),virtual;
+	UPYUKOEDYMD char(8),virtual;
+	UPCDKBN   	char(1),virtual;
+	UPCD				varchar(9),virtual;
+#-----> 検索キー用項目
+	SELNAME			char(200),virtual;
+	SELCDSYU		char(1),virtual;
+	SELINPUTCD		char(20),virtual;
+};
+
+primary	{
+	HOSPNUM,CHKKBN,SRYCD,GRPNUM,YUKOSTYMD,YUKOEDYMD,CDKBN,CD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_org_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_org
+			WHERE HOSPNUM	= :HOSPNUM
+			AND   CHKKBN      =   :CHKKBN
+			AND   SRYCD       =   :SRYCD
+			AND   GRPNUM      =   :GRPNUM
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+			AND   CDKBN       =   :CDKBN
+			AND   CD          =   :CD
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_org_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_org
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   CHKKBN    =   :CHKKBN
+			AND   SRYCD       =   :SRYCD
+			AND   GRPNUM    =   :GRPNUM
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+			ORDER   BY      DATAKBN,RENNUM
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE	tbl_chk_org
+				SET
+				HOSPNUM      = :HOSPNUM,
+				CHKKBN       = :CHKKBN,
+				SRYCD        = :SRYCD,
+				GRPNUM       = :GRPNUM,
+				YUKOSTYMD    = :YUKOSTYMD,
+				YUKOEDYMD    = :YUKOEDYMD,
+				CDKBN        = :CDKBN,
+				CD           = :CD,
+				NYUGAIKBN    = :NYUGAIKBN,
+				NYUGAIBNDKBN = :NYUGAIBNDKBN,
+				SYORIKBN     = :SYORIKBN,
+				CHKERR       = :CHKERR,
+				DATAKBN      = :DATAKBN,
+				RENNUM       = :RENNUM,
+				TERMID       = :TERMID,
+				OPID         = :OPID,
+				CREYMD       = :CREYMD,
+				UPYMD        = :UPYMD,
+				UPHMS        = :UPHMS
+			WHERE HOSPNUM	 = :UPHOSPNUM
+			AND	CHKKBN		=	:UPCHKKBN
+			AND   	SRYCD		  =	:UPSRYCD
+			AND     GRPNUM    =	:UPGRPNUM
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+			AND	CDKBN	        =	:UPCDKBN
+			AND	CD	        =	:CD
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_org_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};

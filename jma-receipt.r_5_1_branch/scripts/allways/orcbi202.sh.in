@@ -1,0 +1,52 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+LOG_FILE=/var/log/jma-receipt/"$2"orcbi202.log
+GZ=${LOG_FILE}.gz
+
+[ -e "${LOG_FILE}" ] &&  rm ${LOG_FILE}
+[ -e "${GZ}" ]  &&  rm ${GZ}
+
+
+#-------------------------------------------#
+#        検索結果データ作成
+#        $1  TERMID
+#        $2  HOSPNUM
+#        $3  処理日
+#        $4  処理時間
+#        $5  期間開始日
+#        $6  期間終了日
+#-------------------------------------------#
+
+killtree(){
+  local children=$(pgrep -P $1 2>/dev/null)
+  for child in ${children} ; do
+    killtree ${child}
+  done
+  kill -9 $1
+}
+
+for p in $(pgrep -u orca -f "$0 $1" ) ; do
+  if [ $p -ne $$ ]; then
+    killtree $p
+  fi
+done
+
+n=1
+while [ $n -lt 3 ] ; do
+    n=$(expr $n + 1)
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBI202 -parameter "$1,$2,$3,$4,$5,$6,"
+    [ $? -eq 0 ] && break
+    sleep 3
+done
+
+        exit
+

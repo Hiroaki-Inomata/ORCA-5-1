@@ -1,0 +1,217 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *    患者登録 共通ＳＰＡ     (SPA-WORK の内容  最大RL=599)
+      *            画面　P02  　で使用  
+      *            画面　U02(受付)でも遷移のために使用
+      *                  修正時は受付にもコピーすること
+      *****************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-太田     01/04/20  受付からのパラメータ追加
+      *  01.00.02    MCC-太田     01/04/25  終了時の更新確認等
+      *  01.00.03    MCC-多々納   02/04/05  労災保険の追加
+      *  01.00.04    NACL-多々納  03/03/19  Ｈ１５年４月改正対応追加
+      *  03.00.01    NACL-多々納  06/08/25  平成１８年１０月改正対応
+      *                                     （老人割合変更）
+      *****************************************************************
+       01  SPA-P02KYOUTU.
+      *
+      *    更新フラグ
+           03  SPA-UPDFLG                 PIC X(01).
+      *    処理フラグ（１：新規、２：更新）
+           03  SPA-P02-SYORI              PIC 9(01).
+      *    保険確定フラグ（１：確定）
+           03  SPA-HKNKOH-FLG             PIC 9(01).
+      *    タグ切り替えフラグ
+           03  SPA-TAGU-FLG               PIC 9(01).
+      *
+      *    表示画面名
+           03  SPA-P02-GAMEN              PIC X(08).
+           03  SPA-FLG-END                PIC 9(01).
+           03  SPA-WIDGET                 PIC X(20).
+           03  SPA-HZN-PTNUM              PIC X(20).
+      *
+           03  SPA-P02-WIDGET             PIC X(20).
+      *    都道府県区分
+           03  SPA-NAI-PREFNUM            PIC 9(02).
+      *    病院種別
+           03  SPA-NAI-HOSPSBT           PIC 9(01).
+      *    老人支払区分
+           03  SPA-NAI-ROUPAYKBN         PIC X(01).
+      *    入力個所
+           03  SPA-MCP-WIDGET             PIC X(64).
+      *
+      *    システム管理より
+      *    人名辞書使用チェック
+           03  SPA-NAI-JINMEI-USE         PIC X(01).
+      *    患者登録のカルテ発行
+           03  SPA-NAI-KARUTE-HAKKO       PIC X(01).
+      *    自費保険の補助区分
+           03  SPA-NAI-JIHIHKN-TAX        PIC X(01).
+      *    同姓同名チェック
+           03  SPA-NAI-DOUMEI-CHKFLG      PIC X(01).
+      *    二重登録疑いチェック区分
+           03  SPA-NAI-JYUFUKU-CHKKBN     PIC X(01).
+      *    地方公費単独チェック
+           03  SPA-NAI-KOHONLY-CHKFLG     PIC X(01).
+      *    患者削除機能
+           03  SPA-NAI-PTNUMDEL-FLG       PIC X(01).
+      *    本人家族選択区分
+           03  SPA-NAI-HONKZKKBN-FLG      PIC X(01).
+      *    家族年齢区分
+           03  SPA-NAI-KZKNEN             PIC 9(02).
+      *    被保険者名設定区分
+           03  SPA-NAI-HIHKNJAKBN-FLG      PIC X(01).
+      *    世帯主名自動記載区分
+           03  SPA-NAI-SETAIKBN-FLG       PIC X(01).
+      *    グループ医療機関患者リスト
+           03  SPA-NAI-GRPPTLST-FLG       PIC X(01).
+      *    公費上限額履歴チェック
+           03  SPA-NAI-KOHRRKKBN-FLG      PIC X(01).
+      *    郵便番号自動記載区分
+           03  SPA-NAI-POSTKBN-FLG        PIC X(01).
+      *    都道府県名記載区分
+           03  SPA-NAI-KENMEIKBN-FLG      PIC X(01).
+      *    京都府通り名称編集区分
+           03  SPA-NAI-TOWNNAME2KBN-FLG   PIC X(01).
+      *    公費法別一覧編集区分
+           03  SPA-NAI-KOHHBTKBN-FLG      PIC X(01).
+      *    保険初期表示区分
+           03  SPA-NAI-HKNINITKBN-FLG     PIC X(01).
+      *
+      *    更新時警告あり
+           03  SPA-KEI2-FLG               PIC 9(01).
+           03  SPA-KEI-FLG                PIC 9(01).
+           03  SPA-KEI-ERRCD              PIC X(04).
+      *
+      *    ＣＬＡＩＭ処理区分
+           03  SPA-FLG-CLAIM              PIC 9(01).
+      *
+      *     患者別クリア
+           03  SPA-P02GMNAREA.
+      *        患者番号変換
+               05  SPA-PTNUM-AREA.
+      *            保険ＩＤ
+                   07  SPA-PTNUM-HKNID           PIC  9(10).
+      *            公費ＩＤ
+                   07  SPA-PTNUM-KOHID           PIC  9(10).
+      *            自動組合せ番号
+                   07  SPA-PTNUM-AUTOCOMBINUM    PIC  9(04).
+      *            手動組合せ番号
+                   07  SPA-PTNUM-MANUCOMBINUM    PIC  9(04).
+      *
+      *        患者番号変換の初期内容
+               05  SPA-MAE-PTNUM-AREA.
+                   07  SPA-MAE-HKNID           PIC  9(10).
+                   07  SPA-MAE-KOHID           PIC  9(10).
+                   07  SPA-MAE-AUTOCOMBINUM    PIC  9(04).
+                   07  SPA-MAE-MANUCOMBINUM    PIC  9(04).
+      *
+      * 保険公費情報マスタ　総件数（既削除データ除く）
+      *        労災保険
+               05  SPA-P02-RSHKNMAX           PIC 9(04).
+      *
+      *        二重登録表示有無
+               05  SPA-P02A-FLG1              PIC 9(01).
+               05  SPA-P02A-FLG2              PIC 9(01).
+      *        グループ医療機関
+               05  SPA-P02G-FLG               PIC 9(01).
+      *
+      * 組合せ表示　総件数（既削除データ除く）
+               05  SPA-P02-COMBMAX            PIC 9(04).
+      * 組合せ削除データ数（パラメータファイル内）
+               05  SPA-P02-COMBDCNT           PIC 9(04).
+      * 組合せ表示　最大画面ページ数
+               05  SPA-P027-PGMAX             PIC 9(04).
+      * 組合せ表示　ページ数
+               05  SPA-P027-PG                PIC 9(04).
+      *R01.6
+      * 難病等＋生保保険組合せ作成区分
+               05  SPA-NAI-COMBKBN            PIC X(01).
+      *
+      *警告メッセージ
+           03  SPA-PIDCD                  PIC X(04).
+           03  SPA-PIDMSG                 PIC X(100).
+      *警告画面より
+           03  SPA-PID1-AREA. 
+               05  SPA-PID1-FLG           PIC X(02).
+      * --------------------------ここまで X(101)
+      *保存元ＰＧ
+           03  SPA-HZN-MOTOPG             PIC X(08).
+      *
+      *    住所パラメタデータ
+           03  JPARA-REC.
+               05  JPAR-POST               PIC X(07).
+               05  JPAR-EDITADRS-NAME      PIC X(100).
+               05  JPAR-CITYNAME-NAME      PIC X(100).
+      ***      05  JPAR-CNT                PIC 9(02).
+      *****    05  JPAR-ERRCD              PIC X(01).
+      *        05  JPAR-KBN                PIC X(01).
+      ******** 05  JPAR-FREE               PIC X(438).
+      *
+      *    保険期間変換用
+           03  SPA-HKN-KENKAN-AREA.
+               05  SPA-HKN-IDX1             PIC 9(04).
+               05  SPA-END-TEKEDYMD         PIC X(08).
+               05  SPA-STR-TEKSTYMD         PIC X(08).
+      *    公費期間変換用
+           03  SPA-KOH-KENKAN-AREA.
+               05  SPA-KOH-IDX1             PIC 9(04).
+               05  SPA-KOH-IDX2             PIC 9(04).
+               05  SPA-KOH-FLG              PIC 9(01).
+               05  SPA-KOH-ADD              PIC 9(01).
+      *        Ｈ１８．１０改正対応
+               05  SPA-KOH-GMN1             PIC 9(04).
+               05  SPA-KOH-GMN2             PIC 9(04).
+      *
+               05  SPA-HKN-TEKEDYMD         PIC X(08).
+               05  SPA-HKN2-KOHNUM          PIC X(03).
+               05  SPA-HKN2-KOHID           PIC 9(10).
+               05  SPA-HKN2-JKYSNUM         PIC X(20).
+               05  SPA-HKN2-TEKSTYMD        PIC X(08).
+               05  SPA-HKN2-TEKEDYMD        PIC X(08).
+      *
+      *    労災・自賠責保険登録有無
+           03  SPA-ROSAI-FLG                PIC 9(01).
+           03  SPA-JIBAI-FLG                PIC 9(01).
+           03  SPA-DAISAN-FLG               PIC 9(01).
+      *
+      *    未登録受付パラメタデータ
+           03  UKEPARA-REC.
+               05  UKEPAR-REC              PIC X(200).
+      *
+      *    労災保険パラメタデータ
+           03  SPA-RSPAR-FLG                PIC X(01).
+      *API 労災保険処理
+           03  SPA-RSIAPI-FLG               PIC X(01).
+      *
+      *    ＱＲ情報有無
+           03  SPA-QRFLG                    PIC 9(01).
+      *
+      *    ＱＲ選択情報
+           03  SPA-QRDATA-AREA.
+               05  SPA-QR-FLG                  PIC 9(01).
+               05  SPA-QR-SYORI                PIC X(01).
+               05  SPA-QR-REGISTID             PIC 9(05).
+               05  SPA-QR-REGISTYMD            PIC X(08).
+               05  SPA-QR-PTID                 PIC 9(10).
+               05  SPA-QR-PTNUM                PIC X(20).
+               05  SPA-QR-HKNID                PIC 9(10).
+      *

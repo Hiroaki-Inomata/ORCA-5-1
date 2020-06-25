@@ -1,0 +1,7 @@
+XA03 {
+  fixed1 {
+    DAY {
+      numdata number(2);
+    };
+  };
+};

@@ -1,0 +1,344 @@
+tbl_recekanri	{
+	HOSPNUM				number(2,0);
+        PRTID               char(4);
+        SYOKBN              char(1);
+        CREYMD              char(8);
+        CREHMS              char(6);
+        TEISYUTUSAKI        char(1);
+        SRYKA               char(2);
+        PREFKBN_SRT         char(2);
+        HKNJANUM_SRT        char(1);
+        HKNJANUM            char(8);
+        RECESYUBETU         char(4);
+        RECESYUBETU_SRT     char(3);
+        ZAITAKU             char(1);
+        CHOUKI              char(1);
+        KOUGAKU             char(1);
+        NYUGAIKBN           char(1);
+        SRYYM               char(6);
+        PAGE                number(5);
+        PAGE_ZAITAKU        number(5);
+        PAGE_CHOUKI         number(5);
+        PAGE_KOUGAKU        number(5);
+        PAGE_DUP            number(5);
+        KENSU               number(5);
+        RECEKBN             char(1);
+        SYORISBT            char(1);
+        STYMD               char(8);
+        EDYMD               char(8);
+        HSEQNUM             number(8);
+        SYUBETU_SRT1        char(4);
+        PREFKBN             char(1);
+        ZAITAKU_KBN         char(1);
+        CHOUKI_KBN          char(1);
+        SRT_LAST            char(1);
+        KOUGAKU_TEN         number(7);
+        PRTKBN              char(1);
+        TERMID              varchar(64);
+        OPID                varchar(16);
+};
+
+primary	{
+	HOSPNUM,PRTID,SYOKBN,CREYMD,CREHMS,TEISYUTUSAKI,SRYKA,PREFKBN_SRT,HKNJANUM_SRT,HKNJANUM,RECESYUBETU_SRT,RECESYUBETU,ZAITAKU,CHOUKI;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     RECESYUBETU  =   :RECESYUBETU
+                    AND     HKNJANUM     =   :HKNJANUM
+                    AND     SRYKA        =   :SRYKA
+                    AND     HKNJANUM_SRT =   :HKNJANUM_SRT
+                    AND     PREFKBN_SRT  =   :PREFKBN_SRT
+                    AND     ZAITAKU      =   :ZAITAKU
+                    AND     CHOUKI       =   :CHOUKI
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    ORDER BY  CREYMD DESC,CREHMS DESC,TEISYUTUSAKI,RECESYUBETU
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI like :TEISYUTUSAKI
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     SRYKA        like :SRYKA
+                    AND     RECESYUBETU  <>  '0000'
+                    AND     RECESYUBETU  <>  '8888'
+                    AND     RECESYUBETU  <>  '6666'
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SRYYM        =   :SRYYM
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     RECESYUBETU  =   :RECESYUBETU
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     HKNJANUM     =   :HKNJANUM
+                    AND     SRYKA        =   :SRYKA
+                    AND     HKNJANUM_SRT =   :HKNJANUM_SRT
+                    AND     PREFKBN_SRT  =   :PREFKBN_SRT
+                    AND     RECESYUBETU_SRT  =   :RECESYUBETU_SRT
+                    AND     ZAITAKU      =   :ZAITAKU
+                    AND     CHOUKI       =   :CHOUKI
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    ORDER BY  CREYMD DESC,CREHMS DESC,TEISYUTUSAKI,RECESYUBETU
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SRYYM        =   :SRYYM
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     RECESYUBETU  <>  '0000'
+                    AND     RECESYUBETU  <>  '6666'
+                    AND     RECESYUBETU  <>  '8888'
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    ORDER BY  SRYKA DESC
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     SRYYM        =   :SRYYM
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     RECEKBN      =   :RECEKBN
+                    ORDER BY  CREYMD DESC,CREHMS DESC,TEISYUTUSAKI,RECESYUBETU
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     RECEKBN      =   :RECEKBN
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   '2'
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_recekanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key8_csr CURSOR FOR
+		SELECT  SRYKA,PREFKBN_SRT,HKNJANUM,SYUBETU_SRT1,PREFKBN,SUM(PAGE) AS PAGE,SUM(KENSU) AS KENSU,SUM(PAGE_CHOUKI) AS PAGE_CHOUKI,SUM(PAGE_ZAITAKU) AS PAGE_ZAITAKU,SUM(PAGE_KOUGAKU) AS PAGE_KOUGAKU
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     RECESYUBETU  <>  '0000'
+                    AND     RECESYUBETU  <>  '8888'
+                    AND     RECESYUBETU  <>  '6666'
+                    AND     SRYKA        like :SRYKA
+                    GROUP BY PREFKBN_SRT,HKNJANUM_SRT,HKNJANUM,SYUBETU_SRT1,PREFKBN,SRYKA
+                    ORDER BY PREFKBN_SRT,HKNJANUM_SRT,HKNJANUM,SRYKA
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key9_csr CURSOR FOR
+		SELECT  RECESYUBETU,SRYKA,SUM(PAGE) AS PAGE,SUM(KENSU) AS KENSU
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     RECESYUBETU  =   :RECESYUBETU
+                    AND     SRYKA        like :SRYKA
+                    AND     HKNJANUM     like :HKNJANUM
+                    GROUP BY RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     RECESYUBETU  =   :RECESYUBETU
+                    AND     SRYKA        like :SRYKA
+		;
+	};
+};
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SRYYM        =   :SRYYM
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    ORDER BY  SRYKA DESC
+		;
+	};
+};
+
+path	key12		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SRYYM        =   :SRYYM
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     RECESYUBETU  <>  '0000'
+                    AND     RECESYUBETU  <>  '6666'
+                    AND     RECESYUBETU  <>  '8888'
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     PREFKBN      =   :PREFKBN
+                    ORDER BY  SRYKA DESC
+		;
+	};
+};
+
+path	key13		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SYOKBN       =   :SYOKBN
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI like   :TEISYUTUSAKI
+                    AND     RECESYUBETU  like   :RECESYUBETU
+                    AND     SRYKA        like   :SRYKA
+		;
+	};
+};
+
+path	key14		{ 	
+	DBSELECT	{
+		DECLARE tbl_recekanri_key14_csr CURSOR FOR
+		SELECT HKNJANUM,HKNJANUM_SRT
+		FROM tbl_recekanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     PRTID        =   :PRTID
+                    AND     SRYYM        =   :SRYYM
+                    AND     CREYMD       =   :CREYMD
+                    AND     CREHMS       =   :CREHMS
+                    AND     TEISYUTUSAKI =   :TEISYUTUSAKI
+                    AND     NYUGAIKBN    =   :NYUGAIKBN
+                    AND     RECESYUBETU  <>  '0000'
+                    AND     RECESYUBETU  <>  '6666'
+                    AND     RECESYUBETU  <>  '8888'
+                    GROUP BY  HKNJANUM_SRT,HKNJANUM
+                    ORDER BY  HKNJANUM_SRT,HKNJANUM
+		;
+	};
+};

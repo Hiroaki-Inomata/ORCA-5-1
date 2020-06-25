@@ -1,0 +1,23 @@
+C501 {
+  fixed1 {
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      BUNREILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(400);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

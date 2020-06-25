@@ -1,0 +1,37 @@
+tbl_material_k {
+	SRYCD				char(9);
+	RENNUM1				number(3,0);
+	RENNUM2				number(2,0);
+	SCD				varchar(9);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	SRYCD,RENNUM1,RENNUM2;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_k_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_material_k
+		WHERE 	SRYCD	= :SRYCD
+			AND   RENNUM1    =   :RENNUM1
+			AND   RENNUM2    =   :RENNUM2
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_material_k_key2_csr CURSOR FOR
+		SELECT *
+		FROM  tbl_material_k
+		WHERE SRYCD	LIKE :SRYCD
+		ORDER BY RENNUM1,
+		         RENNUM2
+		;
+	};
+};
+

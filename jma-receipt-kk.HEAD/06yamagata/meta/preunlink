@@ -1,0 +1,21 @@
+#!/bin/bash
+echo $0 | logger
+echo `pwd`  | logger
+
+JMARECEIPT_ENV="/etc/jma-receipt/jma-receipt.env"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+umask 022
+
+# syskanri 3004 del
+if ! test $3 = "upgrade" ; then
+  cp -rp ../scripts/syskanri ${MCP_TEMPDIR}
+  bash ${MCP_TEMPDIR}/syskanri/sys3004del.sh
+  rm -r ${MCP_TEMPDIR}/syskanri
+
+  echo -n "syskanri 3004 del......done" | logger
+fi

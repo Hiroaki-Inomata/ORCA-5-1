@@ -1,0 +1,13 @@
+K052 {
+  fixed1 {
+    INPUTCD1 {
+      textdata varchar(6);
+    };
+    INPUTCD2 {
+      textdata varchar(6);
+    };
+    KEIKAYMD {
+      textdata varchar(13);
+    };
+  };
+};

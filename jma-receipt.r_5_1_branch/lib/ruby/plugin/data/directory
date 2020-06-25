@@ -1,0 +1,24 @@
+name    dbtest;
+
+base    "./";
+ddir    "=/rec";
+record  "=/rec";
+
+multiplex_level no;
+
+linkage link;
+
+wfc {
+    port      ":9001";
+};
+
+sysdata {
+    space   "=/blob";
+    port    "/tmp/sysdata";
+};
+
+db_group {
+ type "PostgreSQL";
+ port "";
+ name "testplugin";
+};

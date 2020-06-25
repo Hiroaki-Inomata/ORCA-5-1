@@ -1,0 +1,11 @@
+      *01  DPCBYOTAI-REC.
+           03  DPCBYOTAI-YUKOSTYMD   PIC X(8).
+           03  DPCBYOTAI-YUKOEDYMD   PIC X(8).
+           03  DPCBYOTAI-MDC-CD      PIC X(2).
+           03  DPCBYOTAI-BUNRUI-CD   PIC X(4).
+           03  DPCBYOTAI-BYOTAI-CD   PIC X(1).
+           03  DPCBYOTAI-BYOTAI-FLG  PIC 9(1).
+           03  DPCBYOTAI-AGE-MIN     PIC 9(3).
+           03  DPCBYOTAI-AGE-MAX     PIC 9(3).
+           03  DPCBYOTAI-HAIEN-KBN   PIC X(1).
+           03  DPCBYOTAI-HAIEN-NAME  PIC X(20).

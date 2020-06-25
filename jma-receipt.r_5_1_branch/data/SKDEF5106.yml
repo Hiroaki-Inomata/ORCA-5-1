@@ -1,0 +1,23 @@
+kanri_cd    : "5106"
+name        : "Ìë´Ö¶ÐÌ³´Ç¸î²Ã»»"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "BTU-YAKANKNGKSN-NM"
+  item_jp   : "Ìë´Ö¶ÐÌ³Åù´Ç¸î²Ã»»"
+  type      : "X"
+  start     : 1
+  length    : 20
+- item_no   : 2
+  item      : "BTU-YAKANKNGKSN-NM2"
+  item_jp   : "Ìë´Ö¶ÐÌ³Åù´Ç¸î²Ã»»£²"
+  type      : "X"
+  start     : 21
+  length    : 10
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 31
+  length    : 470

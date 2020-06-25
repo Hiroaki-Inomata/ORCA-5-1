@@ -1,0 +1,10 @@
+MDAS {
+  fixed1 {
+    label4 {
+      textdata varchar(5);
+    };
+    pandatimer1 {
+      duration int;
+    };
+  };
+};

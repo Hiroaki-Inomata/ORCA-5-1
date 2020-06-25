@@ -1,0 +1,20 @@
+name	tokushima;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU3600"	"OpenCOBOL";
+bind	"SOKATU3620"	"OpenCOBOL";
+bind	"SEIKYU3603"	"OpenCOBOL";
+bind	"SEIKYU3605"	"OpenCOBOL";
+bind	"SEIKYU3607"	"OpenCOBOL";
+bind	"SEIKYU3609"	"OpenCOBOL";
+bind	"SEIKYU3611"	"OpenCOBOL";
+bind	"SEIKYU3613"	"OpenCOBOL";
+bind	"SOKATU3625"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

@@ -1,0 +1,123 @@
+R01 {
+  fixed6 {
+    B02 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    B05 {
+      state int;
+      label varchar(8);
+    };
+    B08 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B22 {
+      state int;
+    };
+    SYORI_COMBO {
+      state int;
+      SYORI {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    TEISEIYM {
+      state int;
+      textdata varchar(7);
+    };
+    STJYUSINYMD {
+      state int;
+      textdata varchar(10);
+    };
+    EDJYUSINYMD {
+      state int;
+      textdata varchar(10);
+    };
+    RENNUM {
+      state int;
+      numdata number(4);
+    };
+    SRYYM {
+      state int;
+      textdata varchar(7);
+    };
+    PTNUM {
+      state int;
+      textdata varchar(20);
+    };
+    NYUGAIKBN {
+      state int;
+      textdata varchar(1);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    scrolledwindow1 {
+      RECELST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(20);
+            column4 varchar(50);
+            column5 varchar(7);
+            column6 varchar(1);
+            column7 varchar(2);
+            column8 varchar(4);
+            column9 varchar(4);
+            column10 varchar(4);
+            column11 varchar(4);
+            column12 varchar(4);
+          }[2000];
+          selectdata bool[2000];
+      };
+    };
+    SYOKBN {
+      style varchar(20);
+      textdata varchar(68);
+    };
+    LABEL {
+      textdata varchar(10);
+    };
+    LABEL1 {
+      textdata varchar(12);
+    };
+    LABEL2 {
+      textdata varchar(14);
+    };
+    CREYMD {
+      textdata varchar(22);
+    };
+    HYODAI {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    JYOKEN1 {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    SRYYMH {
+      style varchar(20);
+      textdata varchar(22);
+    };
+    NYUGAIKBNH {
+      style varchar(20);
+      textdata varchar(12);
+    };
+    CREYMDH {
+      style varchar(20);
+      textdata varchar(13);
+    };
+    KENSU {
+      textdata varchar(9);
+    };
+  };
+};

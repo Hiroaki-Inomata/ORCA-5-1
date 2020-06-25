@@ -1,0 +1,20 @@
+J01	{
+	fixed4	{
+		PTNUM	{
+			value	varchar(21);
+		};
+		SRYYM	{
+			value	varchar(8);
+		};
+		NAME	{
+			value	varchar(31);
+		};
+		SRYKACOMBO	{
+			SRYKA	{
+				value	varchar(22);
+			};
+			count	int;
+			item	varchar(21)[10];
+		};
+	};
+};

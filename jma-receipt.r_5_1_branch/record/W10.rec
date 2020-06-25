@@ -1,0 +1,226 @@
+W10 {
+  fixed12 {
+    B03 {
+      state int;
+    };
+    B06 {
+      label varchar(8);
+    };
+    B07 {
+      label varchar(8);
+    };
+    B12 {
+      state int;
+    };
+    LBLTITLE {
+      textdata varchar(20);
+    };
+    LBLKANRICD {
+      style varchar(20);
+      textdata varchar(8);
+    };
+    LBLKIKAN {
+      style varchar(20);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    CHK_SAVEPARA {
+      isactive bool;
+      state int;
+    };
+    PROGNAME {
+      textdata varchar(24);
+    };
+    LBLREPOS_NAME {
+      textdata varchar(20);
+    };
+    REPOS_NAME {
+      textdata varchar(128);
+      visible  bool;
+    };
+    HCNAME {
+      textdata varchar(80);
+    };
+    LBLHCNUM {
+      textdata varchar(20);
+    };
+    HCNUM {
+      numdata number(3);
+    };
+    LBLPARA09 {
+      textdata varchar(20);
+    };
+    LBLPARA10 {
+      textdata varchar(20);
+    };
+    PARAHYOJI01 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA01 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI02 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA02 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI03 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA03 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI04 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA04 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI05 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA05 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI06 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA06 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI07 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA07 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI08 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA08 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI09 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA09 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    PARAHYOJI10 {
+      textdata varchar(20);
+      visible  bool;
+    };
+    PARA10 {
+      textdata varchar(10);
+      visible  bool;
+    };
+    OPTHISSU01 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI01 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU02 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI02 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU03 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI03 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU04 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI04 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU05 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI05 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU06 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI06 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU07 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI07 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU08 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI08 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU09 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI09 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTHISSU10 {
+      isactive bool;
+      visible  bool;
+    };
+    OPTNINI10 {
+      isactive bool;
+      visible  bool;
+    };
+    scrolledwindow1 {
+      MEMO {
+        textdata varchar(6000);
+      };
+    };
+  };
+};

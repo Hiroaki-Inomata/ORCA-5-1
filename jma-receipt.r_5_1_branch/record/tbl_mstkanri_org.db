@@ -1,0 +1,38 @@
+tbl_mstkanri_org {
+	HOSPNUM				number(2,0);
+	KANRICD				char(8);
+	NAME				varchar(64);
+	DBRVERSION1     		varchar(64);
+	DBRVERSION2     		varchar(64);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+primary	{
+	HOSPNUM,KANRICD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_mstkanri_org_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mstkanri_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =   :KANRICD
+                ;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_mstkanri_org_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mstkanri_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+                   ORDER BY  KANRICD
+		;
+	};
+};

@@ -1,0 +1,338 @@
+#!%RUBY%
+# coding : euc-jp
+
+Encoding.default_external = "ascii-8bit" if defined?(Encoding) && Encoding.respond_to?("default_external")
+
+$:.unshift(File.dirname(__FILE__))
+require 'yaml'
+require "securerandom"
+require 'daily/print_parent_common'
+
+# 引数指定方法
+#   引数1         設定ファイル名
+
+# 設定ファイル内容 (yaml)
+#   医療機関番号 (hospnum)
+#   redファイル名 (red_file)
+#   form ディレクトリ (form_dir)
+#   site form ディレクトリ (site_form_dir)
+#   patch form ディレクトリ (patch_form_dir)
+#   mcp_temp ディレクトリ (mcp_temp_dir)
+#   クライアント印刷時帳票タイトル (report_title)
+#   ダイアログ (show_dialog)
+
+# dataファイルフォーマット
+#   +-------------------+------------+---------------+---------------+---------------+---------------+-----------------------+
+#   |redファイル(30Byte)|LP名(20Byte)|offset-x(5byte)|offset-y(5byte)|site区分(1Byte)|出力区分(1Byte)|出力先フォルダ(165byte)|
+#   +-------------------+------------+---------------+---------------+---------------+---------------+-----------------------+
+#   +-------------------+-----------+----------------+-----------------+-------------+------------+--------------------+--------------------------+
+#   |tbl_key情報(8byte) |連番(4byte)|グループ(14byte)|処理内連番(4byte)|ページ(5byte)|UUID(36byte)|データの種類(16Byte)|帳票データ(Max20000バイト)|
+#   +-------------------+-----------+----------------+-----------------+-------------+------------+--------------------+--------------------------+
+#   ファイル名に、拡張子とディレクトリ名を付加したものを子プロセスの引数に渡す
+#      site区分
+#        1 : orca標準
+#        2 : site-libのカスタマイズ帳票
+#      データの種類
+#        空白 : red埋め込み用テキストデータ
+#        pdf  : pdfファイル export用uuid
+#
+
+# ============================================================
+
+class Jma_print
+
+  def initialize(yaml_file)
+
+    yaml = YAML.load_file(yaml_file)
+    @hospnum = yaml["hospnum"]
+    @data_file = yaml["data_file"]
+    @form_dir = format_dir(yaml["form_dir"])
+    @site_form_dir = format_dir(yaml["site_form_dir"])
+    @patch_form_dir = format_dir(yaml["patch_form_dir"])
+    @mcp_temp_dir = yaml["mcp_temp_dir"]
+    @report_title = (yaml["report_title"].blank? ? "no_title" : yaml["report_title"])
+    @show_dialog = (yaml["show_dialog"]  == "1" ? true : false)
+    @keep_pdf = (yaml["keep_pdf"]  == "1" ? true : false)
+    @pdf_name = (yaml["pdf_name"].blank? ? "unknown" : yaml["pdf_name"])
+    @orca_version = yaml["orca_version"]
+
+    @print_order = ""
+    @print_data = Array.new
+
+    @items = Array.new
+    @uuid = SecureRandom.uuid
+    @sequence = 0
+  end
+
+  def main
+    open(@data_file, "r") do |fp|
+      fp.each_line do |report_info|
+        item = set_item(report_info)
+        unless item.empty?
+          @items << item
+          @print_data << item.select{|k,v| [:lp_name, :data_type, :pdf_file].include?(k)}
+
+          if @items.size == 1
+            @print_order = item[:print_order]
+            puts "print_order #{@print_order}"
+          end
+
+          if ( @print_order == "5" and @show_dialog == false ) or ( @print_order == "8" )
+            if @items.size >= MAX_PAGES
+              print_reports
+            end
+          end
+        end
+      end
+    end
+
+    unless @items.empty?
+      print_reports
+    end
+
+    return 0
+  end
+
+  private
+
+  def format_dir(dir_name)
+    dir_name.strip.sub(/\/$/,'')
+  end
+
+  def stop_program?(stop_file)
+    if File.exists?(stop_file)
+      File.delete(stop_file)
+      true
+    else
+      false
+    end
+  end
+
+  def proper_dir(red_file, site_program)
+    directory = @form_dir
+
+    directory = @site_form_dir if site_program
+
+    site_red_file = "#{@site_form_dir}/#{red_file}"
+    patch_red_file = "#{@patch_form_dir}/#{red_file}"
+    standard_red_file = "#{@form_dir}/#{red_file}"
+
+    if File.exist?(site_red_file)
+    elsif File.exist?(patch_red_file)
+      directory = @patch_form_dir
+    end
+
+    directory
+  end
+
+  def timestamp
+    Time.now.instance_eval { '%s%03d' % [strftime('%Y%m%d%H%M%S'),
+      (usec / 1000.0).round] }
+  end
+
+  def set_item(report_info)
+    item=Hash.new
+
+    red_file = report_info[0, 30].strip
+    return item.clear unless red_file =~ /.red$/
+
+    item[:layeroption] = report_info.scan(/MonpeLayerIn(.*)MonpeLayerOut/).join.gsub(/ *-L */,",").sub(/,/,"-H ")
+    item[:lp_name] = DEFAULT_LP
+    item[:offset_x] = '0'
+    item[:offset_y] = '0'
+    item[:site_program] = false
+
+
+    item[:red_file] = red_file
+
+    item[:lp_name]  = "#{report_info[30, 20]}".strip unless "#{report_info[30, 20]}".strip.empty?
+    item[:offset_x] = "#{report_info[50, 5]}".strip unless "#{report_info[50, 5]}".strip.empty?
+    item[:offset_y] = "#{report_info[55, 5]}".strip unless "#{report_info[55, 5]}".strip.empty?
+    item[:site_program] = true if "#{report_info[60, 1]}" == '2'
+
+    item[:out_dir] = format_dir("#{report_info[62, 165]}")
+    item[:tbl_key] = "#{report_info[227, 8]}".strip
+    item[:seq] = "#{report_info[235, 4]}".strip
+    item[:tbl_group] = "#{report_info[239, 14]}".strip
+    item[:subseq] = "#{report_info[253, 4]}".strip
+    item[:page] = "#{report_info[257, 5]}".strip
+    item[:uuid] = "#{report_info[262,36]}".strip
+    item[:data_type] = "#{report_info[298,16]}".strip
+    item[:data] = "#{report_info[314..-1]}".rstrip
+
+
+    item[:print_order] = "#{report_info[61, 1]}".strip
+    item[:print_order] = "8" if "#{ENV['MCP_MIDDLEWARE_NAME']}" == "ginbee" and ["1", "2"].include?(item[:print_order])
+
+    item[:offset]= "-x #{item[:offset_x]} -y #{item[:offset_y]}"
+
+    item[:pdf_file] = "#{item[:out_dir]}/#{@hospnum}#{item[:tbl_key]}"
+    item[:pdf_file] << "#{item[:seq]}#{item[:tbl_group]}#{item[:subseq]}"
+    item[:pdf_file] << "#{item[:page]}#{item[:uuid]}.pdf"
+
+    if ["3", "4"].include?(item[:print_order])
+      item[:red_file] = REPLACED_FORMS[item[:red_file]] if REPLACED_FORMS.key?(item[:red_file])
+    end
+
+    item[:red_file] = "#{proper_dir(item[:red_file],item[:site_program])}/#{item[:red_file]}"
+
+    file_name = "#{@mcp_temp_dir}/#{@hospnum}#{item[:tbl_key]}#{item[:tbl_group]}"
+    file_name << "#{@uuid}#{sprintf("%05d",sequence)}"
+
+    item[:temp_pdf_file] = "#{file_name}.pdf"
+    item[:temp_file] = "#{file_name}.tmp"
+    item[:temp_red_file] = "#{file_name}.tmp.red"
+
+    item
+  end
+
+  def execute(cmd)
+#    puts "command [#{cmd}]"
+    system(cmd)
+  end
+
+  def create_pdf(item)
+
+    stop_file = "#{@mcp_temp_dir}/#{item[:tbl_key]}#{item[:tbl_group]}.tmp"
+    if stop_program?(stop_file)
+      puts "Print Cancelled"
+      exit 1
+    end
+
+    case item[:data_type]
+    when 'pdf'
+       execute_monblob(item)
+    else
+       execute_monpe(item)
+    end
+
+    if ["1", "2"].include?(@print_order)
+      execute("lpr -P #{item[:lp_name]} #{item[:temp_pdf_file]}") if ["1", "2"].include?(@print_order)
+    end
+
+    if @print_order == "1"
+      File.delete(item[:temp_pdf_file]) if File.exist?(item[:temp_pdf_file])
+    else
+      execute("mv #{item[:temp_pdf_file]} #{item[:pdf_file]}")
+    end
+
+  end
+
+  def execute_monblob(item)
+    execute("#{ENV['MONBLOB']} -dir #{ENV['LDDIRECTORY']} -export #{item[:data]} -output #{item[:temp_pdf_file]}")
+  end
+
+  def execute_monpe(item)
+
+    open(item[:temp_file], "w") do |fp|
+      fp.print item[:data]
+      fp.print " " * 20000
+    end
+
+    execute("red2embed #{item[:red_file]} #{item[:temp_file]} -o #{item[:temp_red_file]}")
+    # pdfファイルはテンポラリを作成した後、プレビュー用に後でリネームする。
+    # 日レセでプレビューする際にタイミングが悪いとプレビューデータ(glclientのキャッシュ）が壊れるのを回避する為。
+    execute("monpe #{item[:temp_red_file]} #{item[:offset]} #{item[:layeroption]} -e #{item[:temp_pdf_file]} > /dev/null")
+
+    File.delete(item[:temp_red_file]) if File.exist?(item[:temp_red_file])
+    File.delete(item[:temp_file]) if File.exist?(item[:temp_file])
+
+  end
+
+  def print_reports
+
+    if ["1", "2"].include?(@print_order)
+      @items.each {|item| create_pdf(item)}
+    end
+
+    if ["3", "4", "5", "6", "7", "8", "9" ].include?(@print_order)
+      threads=[]
+      MAX_THREADS.times.each_with_index do |index|
+        threads << Thread.start do
+          index.step(@items.count - 1, MAX_THREADS){|i| create_pdf(@items[i])}
+        end
+      end
+      threads.each {|t| t.join}
+    end
+
+    concatenate_pdf if ["5", "6", "7", "8", "9"].include?(@print_order)
+
+    @items.clear
+    @print_data.clear
+
+  end
+
+  def execute_qpdf(in_pdfs, out_pdf)
+    execute("qpdf --empty --pages #{in_pdfs.join(' ')} -- #{out_pdf}")
+  end
+
+  def execute_concat(pdf_files,printer)
+    out_file = "#{@mcp_temp_dir}/#{File.basename(pdf_files[0]).sub(/.pdf$/,'')}#{timestamp}.pdf"
+
+    if @orca_version < "050100-1"
+      execute("pdftk #{pdf_files.join(' ')} cat output #{out_file}")
+    else
+      out_pdfs=[]
+      pdf_files.each_slice(500).with_index do |in_pdfs , i|
+        out_pdf = "#{out_file}.#{i}"
+        execute_qpdf(in_pdfs, out_pdf)
+        out_pdfs << out_pdf
+      end
+
+      if out_pdfs.size > 1
+         execute_qpdf(out_pdfs, out_file)
+         execute("rm #{out_pdfs.join(' ')}")
+      else
+         execute("mv #{out_pdfs.first} #{out_file}")
+      end
+
+    end
+
+    case @print_order
+    when "5"
+      monupload_options = (@show_dialog ? "-s" : "-p #{printer}")
+      execute("#{ENV['MONUPLOAD']} -t report -T \"#{@report_title}\" #{monupload_options} #{out_file}")
+    when "6", "8"
+      execute("lpr -P #{printer} #{out_file}")
+    when "7"
+      item = @items.first
+      execute("mv #{out_file} #{@mcp_temp_dir}/#{item[:tbl_key]}#{item[:tbl_group]}.pdf")
+    when "9"
+      item = @items.first
+      execute("mv #{out_file} #{@mcp_temp_dir}/#{item[:uuid]}_#{@pdf_name}.pdf")
+    end
+
+    File.delete(out_file) if File.exist?(out_file)
+    unless @keep_pdf == true
+      pdf_files.each do |pdf_file|
+        File.delete(pdf_file) if File.exist?(pdf_file)
+      end
+    end
+  end
+
+  def concatenate_pdf
+    printer = @print_data.first[:lp_name]
+    pdf_files=Array.new
+
+    @print_data.each do |data|
+      unless @show_dialog == true or ["7", "9"].include?(@print_order)
+        unless printer == data[:lp_name]
+          execute_concat(pdf_files,printer)
+          pdf_files.clear
+          printer = data[:lp_name]
+        end
+      end
+      pdf_files << data[:pdf_file]
+    end
+
+    execute_concat(pdf_files,printer) unless pdf_files.empty?
+  end
+  
+  def sequence
+    @sequence += 1
+  end
+end
+
+jma_print = Jma_print.new(ARGV[0])
+
+jma_print.main

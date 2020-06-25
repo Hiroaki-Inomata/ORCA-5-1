@@ -1,0 +1,82 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this licence along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ******************************************************************
+      *    ＡＰＩジョブ一覧返却 (xml2)
+      *                             COPY (CPPJOBMANAGEV3RES.INC)
+      ******************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  XML-LSTRES.
+           03  LSTRES-CONTEXT              PIC S9(9)   BINARY.
+           03  LSTRES-OBJECT               PIC X(36).
+           03  LSTRES-MODE                 PIC S9(9)   BINARY.
+           03  LSTRES-RECORDNAME           PIC X(128).
+           03  LSTRES-MEDICALRES.
+      *        リクエスト番号
+               05  LSTRES-REQUEST-NUMBER   PIC X(2).
+      *        レスポンス番号
+               05  LSTRES-RESPONS-NUMBER   PIC X(2).
+      *        UID（電子カルテ）
+               05  LSTRES-KARTE-UID        PIC X(36).
+      *        オルカUID
+               05  LSTRES-ORCA-UID         PIC X(36).
+      *        実施日
+               05  LSTRES-INFORMATION-DATE PIC X(10).
+      *        実施時間
+               05  LSTRES-INFORMATION-TIME PIC X(8).
+      *        返却コード
+               05  LSTRES-API-RESULT       PIC X(03).
+      *        返却メッセージ
+               05  LSTRES-API-RESULT-MSG   PIC X(100).
+      *        ワーニング
+               05  LSTRES-API-WARNING      PIC X(3).
+      *        ワーニングメッセージ
+               05 LSTRES-API-WARNING-MSG   PIC X(100).
+      *
+               05  LSTRES-RESKEY           PIC X(100).
+      *        処理選択キー
+               05  LSTRES-JOBMANAGE-SELECT PIC X(08).
+      *        処理名称
+               05  LSTRES-JOBMANAGE-SELECT-NAME
+                                           PIC X(40).
+      *        開始日付
+               05  LSTRES-JOBMANAGE-STARTDATE
+                                           PIC X(10).
+      *        開始時間
+               05  LSTRES-JOBMANAGE-STARTTIME
+                                           PIC X(08).
+      *        処理一覧
+               05  LSTRES-JOBMANAGE-G.
+                   07  LSTRES-JOBMANAGE-INFO   OCCURS  100.
+                       09  LSTRES-JOBMANAGE-TNUM       PIC X(03).
+                       09  LSTRES-JOBMANAGE-TSHELLMSG  PIC X(40).
+                       09  LSTRES-JOBMANAGE-TJOBID     PIC X(07).
+                       09  LSTRES-JOBMANAGE-TSTARTYMD  PIC X(10).
+                       09  LSTRES-JOBMANAGE-TSTARTTIME PIC X(08).
+                       09  LSTRES-JOBMANAGE-TENDYMD    PIC X(10).
+                       09  LSTRES-JOBMANAGE-TENDTIME   PIC X(08).
+                       09  LSTRES-JOBMANAGE-TSTEPSTARTTIME
+                                                       PIC X(08).
+                       09  LSTRES-JOBMANAGE-TSTEPENDTIME
+                                                       PIC X(08).
+                       09  LSTRES-JOBMANAGE-TERRCD     PIC X(04).
+                       09  LSTRES-JOBMANAGE-TYOBI      PIC X(500).
+                       09  LSTRES-JOBMANAGE-TSELECT-MODE-O
+                                                       PIC X(05).

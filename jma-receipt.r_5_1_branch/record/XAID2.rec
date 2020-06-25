@@ -1,0 +1,13 @@
+XAID2 {
+  fixed1 {
+    B10 {
+      visible bool;
+    };
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(70);
+    };
+  };
+};

@@ -1,0 +1,25 @@
+#!/bin/bash
+PATH=/usr/bin:/usr/sbin:/bin:/sbin
+BACKUP_DIR=/var/lib/jma-receipt/dbbackup
+FILENAME=orca_db_dump.gz
+DUMPFILE=${BACKUP_DIR}/${FILENAME}
+BACKUPGEN=6
+
+umask 077
+
+[ -d ${BACKUP_DIR}  ] || exit 403
+[ -f @jma-receipt-env@ ] || exit 404
+. @jma-receipt-env@
+
+COUNT=$BACKUPGEN
+
+while [ ${COUNT} -gt 0 ];
+do
+  [ -f ${DUMPFILE}.${COUNT} ] && mv ${DUMPFILE}.${COUNT} ${DUMPFILE}.`expr ${COUNT} + 1`
+  COUNT=`expr ${COUNT} - 1`
+done
+
+[ -f ${DUMPFILE}.`expr ${BACKUPGEN} + 1` ] && rm -f  ${DUMPFILE}.`expr ${BACKUPGEN} + 1`
+create_pgpass
+pg_dump ${DBCONNOPTION} -cO ${DBNAME} | gzip > ${DUMPFILE}.1
+delete_pgpass

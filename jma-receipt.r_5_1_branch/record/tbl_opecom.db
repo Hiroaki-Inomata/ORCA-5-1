@@ -1,0 +1,131 @@
+tbl_opecom {
+	HOSPNUM  			number(2,0);
+	PTID    			number(10);
+	SRYYMD  			char(8);
+	SRYCD   			char(9);
+	RENNUM  			number(3);
+	OPENAME 			varchar(100);
+	OPECOMMENT 			varchar(100);
+	NYUGAIKBN			char(1);
+	SRYKA   			char(2);
+	HKNNUM  			char(3);
+	HKNKBN  			char(1);
+	HKNID   			number(10);
+	HKNCOMBI  			number(4);
+	TEKSTYM  			char(6);
+	TEKEDYM  			char(6);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,PTID,SRYYMD,SRYCD,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYMD    =   :SRYYMD
+			AND     SRYCD     =   :SRYCD
+			AND     RENNUM    =   :RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			ORDER   BY     SRYYMD DESC,SRYCD DESC,RENNUM DESC
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYMD    =   :SRYYMD
+			AND     SRYCD     =   :SRYCD
+			ORDER   BY     RENNUM DESC
+		;
+	};
+};
+
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      =   :SRYYMD
+			AND   SRYCD       =   :SRYCD
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     TEKSTYM   <=  :TEKSTYM
+			AND     TEKEDYM   >=  :TEKEDYM
+			AND     NYUGAIKBN IN  (' ',:NYUGAIKBN)
+			AND     SRYYMD    <>  ''
+			ORDER   BY     SRYYMD,SRYCD,RENNUM
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_opecom_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     TEKSTYM   <=  :TEKSTYM
+			AND     TEKEDYM   >=  :TEKEDYM
+			AND     NYUGAIKBN IN  (' ',:NYUGAIKBN)
+			AND     SRYYMD    =   ''
+			ORDER   BY     RENNUM
+		;
+	};
+};
+
+path	del2	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_opecom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};

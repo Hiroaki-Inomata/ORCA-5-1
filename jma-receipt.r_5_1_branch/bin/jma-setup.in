@@ -1,0 +1,75 @@
+#!/bin/bash
+
+usage_ja(){
+    cat <<EOF  >&2
+Usage:
+    $0 [<opions>]
+
+Options:
+    --dbgroup, -d     dbgroup.incファイルの作成をおこなう
+    --noinstall, -n   データベースのインストールはしない
+                      (createdbをして終了する)
+    --dbsync, -s      dbsyncを実行する
+    --help, -h        このヘルプを表示
+EOF
+    exit 1
+}
+
+usage(){
+    cat <<EOF  >&2
+Usage:
+    $0 [<opions>]
+
+Options:
+    --dbgroup, -d     create file dbgroup.inc
+    --noinstall, -n   not to install the database
+                      (exit only createdb)
+    --dbsync, -s      run the dbsync
+    --help, -h        print this
+EOF
+    exit 1
+}
+
+run() {
+    /bin/bash "$@"
+    result=$?
+    if [ $result -ne 0 ] ; then
+	exit $result
+    fi
+    return 0
+}
+
+DBSYNC="false"
+
+GETOPT=`getopt -o dnsh -l dbgroup,noinstall,dbsync,help -- "$@"`
+if [ "$?" -ne 0 ] ; then
+    usage
+fi
+
+SETUPOPT=""
+eval set -- "$GETOPT"
+while true
+do
+    case $1 in
+	-d|--dbgroup) @bindir@/create_dbgroup.sh ; shift
+	    ;;
+	-n|--noinstall) SETUPOPT="$SETUPOPT --noinstall" ; shift
+	    ;;
+	-s|--dbsync) DBSYNC="true" ; shift
+	    ;;
+	-h|--help) usage
+	    ;;
+	--)
+	    shift ; break
+	    ;;
+	*)
+	    exit 2
+	    ;;
+    esac
+done
+
+run @bindir@/jma-receipt-db-setup.sh -y $SETUPOPT
+
+if [ "$DBSYNC" = "true" ] ; then
+    run @bindir@/jma-dbsync.sh
+fi

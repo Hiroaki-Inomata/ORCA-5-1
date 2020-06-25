@@ -1,0 +1,255 @@
+#!%RUBY%
+# coding : euc-jp
+
+# ======================================================================
+# シーケンシャルファイル => XMLファイル 作成スクリプト
+
+# バージョン情報
+#
+# ☆ver001 2001/8/3
+# ・テンプレートXMLファイルに対して、テンプレートXMLファイルの
+#   内部パラメータ情報とレイアウトファイル情報を使用し、
+#   シーケンシャルファイルを元に置換する処理の作成
+#
+# ☆ver002 2001/8/?
+# ・テンプレートXMLファイルの内部パラメータ情報を使用する方式をなくし、
+#   置換情報はレイアウト定義ファイルで一括管理するように修正
+
+
+# Thanks!!
+#
+# 正規化表現は、coco氏の助けによって実現できました
+
+# ======================================================================
+
+
+# 共通ライブラリの取り込み
+require_relative 'orca_lib.rb'
+
+
+if __FILE__ == $0
+	# このスクリプトを単独で起動した
+
+	# ファイル名のセット
+#	lay_fname = 'orca_layout_front.def'	# レイアウト定義ファイル名
+#	seq_fname = 'claim0000000000.txt'	# シーケンシャルデータのファイル名
+#	in_fname = 'base_yoyaku.xml'	# テンプレートXMLファイル名
+#	out_fname = 'kekka.xml'	# 出力XMLファイル名
+	lay_fname = ARGV.shift	# レイアウト定義ファイル名
+	seq_fname = ARGV.shift	# シーケンシャルデータのファイル名
+	in_fname = ARGV.shift	# テンプレートXMLファイル名
+#	out_fname = ARGV.shift	# 出力XMLファイル名
+
+#	$stderr.puts lay_fname
+#	$stderr.puts seq_fname
+
+
+
+
+	# 第１引数が「--help」か「/?」の場合、ヘルプ表示
+	if lay_fname==nil or lay_fname=='--help' or lay_fname=='/?'
+		puts	'シーケンシャルファイル => XMLファイル埋め込みスクリプト'
+		puts	''
+		puts	'make_xml.rb [file1] [file2] [file3] >[file4]'
+		puts	'   [file1] <= レイアウト定義ファイル'
+		puts	'   [file2] <= シーケンシャルファイル名'
+		puts	'   [file3] <= テンプレートXMLファイル名'
+		puts	'   [file4] <= 出力XMLファイル名'
+		puts	''
+		exit
+	end
+
+end
+
+
+
+# ======================================================================
+# 呼び出し関数部
+
+
+# XMLの変換関数
+#    引数
+# template   - テンプレートXMLデータ [IN / String型]
+# seq        - 変換前シーケンシャルデータ [IN / String型]
+# layout     - レイアウト定義データ [IN / String型]
+# debug_mode - デバッグ用エラーメッセージ出力(0 = 出力しない, 1 = 出力する) [IN / String型]
+#    戻り値
+# 配列型(2項目固定)
+# [0] = ステータスコード(0 = 正常終了)
+# [1] = 変換後のXMLデータ
+def conversion_seq_to_xml(template, seq, layout, debug_mode)
+	# 引数の内容のクローンを作って、内容を変更してもいいようにする
+	xml = template.clone
+	seq_data = seq.clone
+	rec_layout = layout.clone
+
+	# **********
+	deb_counter = 0		# デバッグ用カウンタ領域
+	# **********
+
+  unless RUBY_VERSION.to_s <= "1.8.7"
+    seq_data = seq_data.encode("UTF-16BE", "EUC-JP", :invalid => :replace, :undef => :replace, :replace => '?').encode("EUC-JP")
+    xml = xml.encode("UTF-16BE", "EUC-JP", :invalid => :replace, :undef => :replace, :replace => '?').encode("EUC-JP")
+  end
+
+	# シーケンシャルデータの改行を削除(複数レコードになった場合は、行別に改行削除)
+	begin
+	  seq_data.gsub! "\n" , ''
+	end  while  /#{"\n"}/ =~ seq_data
+
+	# ----------
+	$stderr.puts	'equalマクロの展開中です'		if debug_mode!=0
+	# レイアウト定義データのうち、equalマクロ情報を展開
+	macro_execute_equal(rec_layout)
+	$stderr.puts	'equalマクロの展開が終了しました'		if debug_mode!=0
+	# ----------
+	# レイアウト定義情報のコメントと空白行と行頭・行末・項目間の空白除去
+	record_del_comment_space(rec_layout)
+	# ----------
+	$stderr.puts	'ifdefマクロの解析中です'		if debug_mode!=0
+	# IFDEFマクロの実行
+	macro_execute_ifdefl(rec_layout, seq_data)
+	$stderr.puts	'ifdefマクロの解析が終了しました'		if debug_mode!=0
+	# ----------
+
+
+	# ----------
+	$stderr.puts	'メイン処理(1)の実行中です'		if debug_mode!=0
+	# ----------
+
+	# レイアウト定義データを行単位で配列にする
+	rec_layout2 = get_record_layout_linediv(rec_layout)
+	rec_layout = nil
+	# ----------
+	$stderr.puts	'メイン処理(2)の実行中です'		if debug_mode!=0
+	# ----------
+#	rec_layout2.each do |e|
+#		$stderr.puts '['+e+']'
+#	end
+	# 行数分置換処理を行う
+	rec_layout2.each do |e|
+		# シーケンシャルデータとレイアウト定義データから、
+		# パラメータ名と置換内容の取得
+		cdata = get_record_data(e, seq_data)
+
+		if cdata!=nil
+#			while  /#{cdata[0]}/ =~ xml
+			if cdata[1] != ''
+				xml.gsub!(/#{cdata[0]}/, cdata[1])
+				# **********
+				deb_counter += 1	# カウンタのカウントアップ
+				# **********
+			end
+#			end
+			cdata=nil
+		end
+		e = nil
+	end
+	# **********
+	$stderr.puts 'gsub回数 = [' + String(deb_counter) + ']'
+	# **********
+
+
+	# ----------
+	$stderr.puts	'メイン処理(3)の実行中です'		if debug_mode!=0
+	# ----------
+
+	# コメントの削除処理
+	while  /^\s*<!--[\s\S]*?-->\s*\n/ =~ xml
+		xml.gsub!(/^\s*<!--[\s\S]*?-->\s*\n/ , '')
+	end
+
+
+	# 空白行の削除処理
+	while  /^\s*?\n/ =~ xml
+		xml.gsub!(/^\s*?\n/ , '')
+	end
+
+	while  /\n\s*?\n/ =~ xml
+		xml.gsub!(/\n\s*?\n/ , "\n")
+	end
+
+
+	# タブを半角空白4文字に変換
+	while  /#{"\t"}/ =~ xml
+		xml.gsub!(/#{"\t"}/ , '    ')
+	end
+
+	# del %______%
+
+	xml.gsub!(/%(.)+?%/ , '')
+
+	# 空白のエレメントの削除処理
+	while  /^\s*<([\w:]+)[^>]*>\s*<\/\1>\s*\n/ =~ xml
+		xml.gsub!(/^\s*<([\w:]+)[^>]*>\s*<\/\1>\s*\n/ , '')
+	end
+
+
+	# エレメント最後の余分な空白の削除処理
+	# ----------
+	$stderr.puts	'メイン処理が終了しました'		if debug_mode!=0
+	# ----------
+
+
+	return [0, xml]
+end
+
+
+# ======================================================================
+# main部
+
+
+if __FILE__ == $0
+	# このスクリプトを単独で起動した
+
+#	xml = ARGF.read
+#	if xml==nil
+#		$stderr.puts '標準入力から読み込めませんでした'
+#		exit 2
+#	end
+
+	xml=''
+	open(in_fname, 'r') do |fp_i|
+		xml = fp_i.read
+	end
+	if xml==nil or xml==''
+		$stderr.puts 'テンプレートXMLファイルが読み込めませんでした'
+		exit 2
+	end
+
+
+
+
+	# レイアウト定義情報を元に、置換処理
+
+	# シーケンシャルデータの読み込み
+	rec_layout = ''
+	seq_data = ''
+	open(seq_fname, 'r') do |fp_s|
+		seq_data = fp_s.read
+	end
+	# レイアウトデータの読み込み
+	open(lay_fname, 'r') do |fp_l|
+		rec_layout = fp_l.read
+	end
+
+
+
+	xml_o = ''
+	ret = []
+	# XMLへの変換処理
+	ret = conversion_seq_to_xml(xml, seq_data, rec_layout, 1)
+#	ret = conversion_seq_to_xml(xml, seq_data, rec_layout, 0)
+
+	ret_cd = ret[0]
+	xml_o = ret[1]
+
+
+
+#	open (out_fname, 'w') do |fp_o|
+#		fp_o.print xml_o
+#	end
+	print xml_o
+
+
+end

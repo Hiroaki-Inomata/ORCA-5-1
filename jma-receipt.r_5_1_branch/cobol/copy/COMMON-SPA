@@ -1,0 +1,333 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      * 01.00.01     MCC-多々納   01/05/22  調基の追加
+      * 01.00.02     MCC-多々納   01/05/23  患者番号構成管理の追加
+      * 01.00.03     MCC-多々納   01/06/15  前回患者番号の追加
+      * 01.00.04     MCC-多々納   01/08/27  院外区分、診療日の桁数変更
+      * 01.00.05     MCC-多々納   01/09/13  旧姓氏名の桁数を30にした
+      * 01.00.06     MCC-多々納   01/10/03  レコード長を2100 へ変更
+      *                                     自由構成桁数の追加
+      * 01.00.07     MCC-多々納   01/11/05  診療科、診療日、入外区分を
+      *                                     移動
+      * 01.00.08     MCC-多々納   01/11/27  自由構成区分の追加
+      *                                     待ち受け画面の追加
+      *                                     端末ＩＤの桁数を16→36へ
+      * 01.00.09     MCC-多々納   01/12/04  旧姓の削除
+      *                                     拡張構成の追加
+      *                                     受付時間を受付ＩＤへ
+      * 01.00.10     MCC-多々納   02/04/09  労災用追加
+      * 01.00.11     MCC-藤原　   02/05/17  ジョブ管理・帳票管理ＤＢのＫＥＹ追加
+      * 01.00.12     MCC-多々納   02/05/17  労災用発生日＋３月追加
+      * 01.00.13     NACL-多々納  02/10/22  病床数追加
+      * 01.00.14     NACL-多々納  03/02/10  病床数（一般）、排他フラグ追加
+      * 01.00.15     NACL-多々納  03/03/10  １０００バイト増やす
+      *                                     端末ＩＤを６４バイトへ修正
+      * 01.00.16     NACL-多々納  03/06/27  職員番号追加
+      * 01.00.17     NACL-多々納  03/08/25  県番号追加
+      * 01.00.18     NACL-多々納  03/09/26  業務権限追加（９バイト）
+      * 01.00.19     NACL-多々納  04/01/16  数量ゼロ入力フラグ追加（１バイト）
+      * 01.00.20     NACL-多々納  04/01/30  時間外区分追加
+      * 01.00.21     NACL-多々納  04/03/10  システム日付曜日追加
+      * 01.00.22     NACL-多々納  04/04/07  3100 増やす
+      * 01.00.23     NACL-多々納  05/05/17  病床数フラグ追加
+      * 01.00.24     NACL-多々納  05/10/07  処理フラグ追加
+      * 01.00.25     NACL-多々納  05/10/14  データ収集作成フラグ、
+      *                                     データ収集提出方法区分追加
+      * 01.00.26     NACL-多々納  06/02/24  処方区分等削除（移動）
+      *                                     主科領域追加
+      * 01.00.27     NACL-多々納  06/06/27  点数マスタ更新区分追加
+      * 03.04.00     NACL-多々納  06/11/13  検査正式名称表示フラグ追加
+      * 03.04.01     NACL-多々納  06/01/23  6200バイト追加
+      *                                     排他中フラク追加
+      * 03.04.01     NACL-多々納  06/01/24  消費税端数設定追加
+      * 03.05.00     NACL-多々納  07/04/26  医療機関識別番号追加
+      * 03.05.00     NACL-多々納  07/07/04  スーパーバイザー区分追加
+      * 03.05.00     NACL-太田    07/07/11  医療機関識別番号未チェック区分追加
+      * 04.00.00     NACL-多々納  07/09/XX  診療行為処理最大行追加
+      * 04.01.00     NACL-多々納  07/10/22  健保準拠区分追加
+      * 04.01.00     NACL-太田    07/10/26  処理フラグ（Ｕ・Ｐ起動）桁数変更
+      * 04.03.01     NACL-藤原    08/07/02  12400 から 20000 に変更
+      * 04.04.00     NACL-多々納  09/01/26  本院・分院対応追加
+      * 04.05.00     NACL-多々納  09/12/14  エンコーディング追加
+      * 04.05.00     NACL-多々納  10/01/06  治験区分追加
+      * 04.06.00     NACL-伊藤    10/02/13  データ感染症区分追加
+      * 04.07.00     NACL-竹田    11/03/13  クライアント印刷パラメタ追加
+      * 04.07.00     NACL-多々納  12/01/20  クライアント印刷追加
+      *****************************************************************
+      *
+      *     共通ＳＰＡ     (RL=20000)
+       01  SPA-AREA.
+      *
+           02  SPA-KYOUTU.
+      *端末ＩＤ
+             03  SPA-TERMID-G.
+                 05  SPA-TERMID        PIC X(64).
+      *オペレーターＩＤ
+             03  SPA-OPID              PIC X(16).
+      *職員情報
+             03  SPA-STAFFCD           PIC X(05).
+      *システム日付西暦
+             03  SPA-SYSYMD            PIC X(08).
+      *システム日付和暦
+             03  SPA-SYSYMDW           PIC X(07).
+      *システム日付和暦(編集済み）
+             03  SPA-SYSYMDWH          PIC X(09).
+      *システム日付（曜日）
+             03  SPA-SYSYMD-YOBI       PIC X(01).
+      *待ち受け画面
+             03  SPA-MACHIPG           PIC X(08).
+      *元プログラム
+             03  SPA-MOTOPG            PIC X(08).
+      *元の元プログラム
+             03  SPA-MOTOPG2           PIC X(08).
+      *予約元プログラム
+             03  SPA-MOTOPG3           PIC X(08).
+      *先プログラム
+             03  SPA-SAKIPG            PIC X(08).
+      *医療機関識別番号
+             03  SPA-HOSPNUM           PIC 9(2).
+      *医療機関ＩＤ
+             03  SPA-HOSPID            PIC X(24).
+      *病院種別
+             03  SPA-HOSPSBT           PIC 9(01).
+      *県番号
+             03  SPA-PREFNUM           PIC 9(02).
+      *外来時間外区分
+             03  SPA-GAI-JIKANKBN      PIC 9(01).
+      *点数マスタ更新区分
+             03  SPA-DBUPDKBN          PIC 9(01).
+      *スーパーバイザー
+             03  SPA-SUPERVISOR        PIC  X(01).
+      *エンコーディング
+             03  SPA-ENCODING          PIC  9(01).
+      *
+      *医療機関名称
+             03  SPA-HOSPNAME          PIC X(60).
+      *本院・分院識別区分
+             03  SPA-GRPHOSPKBN        PIC 9(01).
+      *他院医療機関識別番号
+             03  SPA-GRPHOSPNUM-G.
+                 05  SPA-GRPHOSPNUM-TBL    OCCURS   9.
+                     07  SPA-GRPHOSPNUM        PIC 9(02).
+                     07  SPA-GRPHOSPNAME       PIC X(10).
+                     07  SPA-GRPHOSPUSERID     PIC X(16).
+      *
+      *業務処理権限
+             03  SPA-GSRAUTH-G.
+                 05  SPA-GSRAUTH-11        PIC X(01).
+                 05  SPA-GSRAUTH-12        PIC X(01).
+                 05  SPA-GSRAUTH-14        PIC X(01).
+                 05  SPA-GSRAUTH-21        PIC X(01).
+                 05  SPA-GSRAUTH-22        PIC X(01).
+                 05  SPA-GSRAUTH-23        PIC X(01).
+                 05  SPA-GSRAUTH-24        PIC X(01).
+                 05  SPA-GSRAUTH-31        PIC X(01).
+                 05  SPA-GSRAUTH-32        PIC X(01).
+      *検査正式名称表示
+             03  SPA-FORMALFLG         PIC X(01).
+      *
+      *老人支払区分
+             03  SPA-ROUPAYKBN         PIC X(01).
+      *病床数
+             03  SPA-BEDSU             PIC 9(04).
+      *病床数（一般）
+             03  SPA-BEDSUIPN          PIC 9(04).
+      *消費税端数設定
+             03  SPA-TAX-HASU-KBN      PIC X(01).
+      *排他フラグ
+             03  SPA-HAITAFLG          PIC 9(01).
+      *無床・有床区分（０：無床版、１：有床版）
+             03  SPA-BEDKBN            PIC 9(01).
+      *病床数フラグ（０：病床無し、１：病床有り）
+             03  SPA-BEDFLG            PIC 9(01).
+      *データ作成フラグ
+             03  SPA-DATACREATEFLG     PIC  9(01).
+      *データ提出方法区分
+             03  SPA-DATATEISYUTUKBN   PIC  9(01).
+      *データ感染症区分
+             03  SPA-DATAINFECTIONKBN  PIC  9(01).
+      *
+      *----(01.00.02) LINE ADD START ----------------------------------
+      *患者番号構成管理情報
+             03  SPA-1009-TBL.
+      *患者番号構成区分
+               05  SPA-1009-PTNUMKSIKBN             PIC X(01).
+      *自由構成
+               05  SPA-1009-JIYKSI.
+      *    自由構成区分
+                   07  SPA-1009-JIYKSIKBN           PIC X(01).
+      *    自由構成桁数
+                   07  SPA-1009-JIYKSIKETA          PIC 9(02).
+      *標準構成区分
+               05  SPA-1009-HJNKSI.
+      *    標準構成区分
+                   07  SPA-1009-HJNKSIKBN           PIC X(01).
+      *    標準構成年区分
+                   07  SPA-1009-HJNKSINENKBN        PIC X(01).
+      *    標準構成連番初期化区分
+                   07  SPA-1009-HJNKSIRENNUMKBN     PIC X(01).
+      *    標準構成連番号桁数
+                   07  SPA-1009-HJNKSIRENNUMKETA    PIC 9(02).
+      *拡張構成区分
+               05  SPA-1009-KKCYKSI.
+      *    拡張構成区分
+                   07  SPA-1009-KKCKSIKBN           PIC X(01).
+      *    拡張構成前桁数
+                   07  SPA-1009-KKCKSIMAEKETA       PIC 9(02).
+      *    拡張構成連番号桁数
+                   07  SPA-1009-KKCKSIRENNUMKETA    PIC 9(02).
+      *    拡張構成後桁数
+                   07  SPA-1009-KKCKSIATOKETA       PIC 9(02).
+      *----(01.00.02) LINE ADD END   ----------------------------------
+      *主科対応領域
+             03  SPA-SYUKA-INFO.
+      *主科設定フラグ
+                 05  SPA-SYUKA-KBN       PIC  X(01).
+      *主科設定情報（入院）
+                 05  SPA-SYUKA-NYUIN     PIC  X(01).
+      *主科設定情報（入院外）
+                 05  SPA-SYUKA-GAIRAI    PIC  X(01).
+      *主科情報取得フラグ
+                 05  SPA-SYUKA-MODE      PIC  X(01).
+      *複数科同一選択
+                 05  SPA-SYUKA-SELECT    PIC  X(01).
+      *----(01.00.03) LINE ADD START ----------------------------------
+      *前回患者ＩＤ
+             03  SPA-LAST-PTID            PIC 9(10).
+      *前回患者番号
+             03  SPA-LAST-PTNUM           PIC X(20).
+      *----(01.00.03) LINE ADD END   ----------------------------------
+      *数量０入力フラグ
+             03  SPA-SURYOZERO-FLG        PIC  9(01).
+      *処理フラグ（Ｕ・Ｐ起動）
+             03  SPA-SYORI-FLG            PIC  9(02).
+      *共通内容
+             03  SPA-KYOTU-SET.
+      *診療日
+                 05  SPA-SRYYMD            PIC X(08).
+      *診療日（和暦編集済）
+                 05  SPA-SRYYMDW           PIC X(14).
+      *診療科
+                 05  SPA-SRYKA             PIC X(02).
+      *診療科名
+                 05  SPA-SRYKAMEI          PIC X(30).
+      *入外区分
+                 05  SPA-NYUGAIKBN         PIC X(01).
+      *
+             03  SPA-KYOTUKEY.
+      *排他中
+                 05  SPA-LOCK              PIC 9(01).
+      *患者ＩＤ
+                 05  SPA-PTID              PIC 9(10).
+      *患者番号
+                 05  SPA-PTNUM             PIC X(20).
+      *患者カナ氏名
+                 05  SPA-KANANAME          PIC X(50).
+      *患者漢字氏名
+                 05  SPA-NAME              PIC X(50).
+      *患者性別
+                 05  SPA-SEX               PIC X(02).
+      *患者生年月日
+                 05  SPA-BIRTHDAY          PIC X(08).
+      *患者生年月日（和暦編集）
+                 05  SPA-BIRTHDAYW         PIC X(09).
+      *ドクターコード
+                 05  SPA-DRCD              PIC X(05).
+      *保険組合番号
+                 05  SPA-HKNCOMBINUM       PIC X(04).
+      *保険組合せ内容
+                 05  SPA-HKNCOMBIMEI       PIC X(40).
+      *負担率
+                 05  SPA-FTNRATE           PIC 9(03).
+      *負担率名称
+                 05  SPA-FTNRATEMEI        PIC X(10).
+      *受付時間ＩＤ
+                 05  SPA-P02-UKEID         PIC 9(05).
+      *受付選択番号
+                 05  SPA-P02-U02           PIC 9(04).
+      *保険区分（０：一般、１：労災・自賠責）
+                 05  SPA-HKNKBN            PIC 9(01).
+      *労災・自賠責保険区分（1:短期、2:傷病、3:アフター、4:自賠責
+      *                      5:公務災害）
+                 05  SPA-RSI-HKNKBN        PIC X(01).
+      *公務災害・自賠責健保準拠区分（1:健保準拠）
+                 05  SPA-RSI-JUNKYO        PIC X(01).
+      *四肢区分（労災用）
+                 05  SPA-RSI-SISIKBN       PIC 9(01).
+      *印刷管理ＤＢのキー値  
+                 05  SPA-PRTKANRI-TBL-KEY  PIC X(08).
+      *ジョブ管理ＤＢのキー値  
+                 05  SPA-JOB-SHELLID       PIC X(08).
+                 05  SPA-JOB-JOBID         PIC 9(07).
+      *発生年月日＋３月（労災・自賠責用）
+                 05  SPA-RSI-HASSYOYMD3    PIC  X(08).
+      *傷病年月日＋３月（労災・自賠責用）
+                 05  SPA-RSI-SHOBYOYMD3    PIC  X(08).
+      *治験区分（１：治験保険）
+                 05  SPA-CHIKENKBN         PIC  X(01).
+      *オンライン帳票用キーエリア
+             03  SPA-PRT-GROUP             PIC X(14).
+             03  SPA-PRT-UUID              PIC X(36).
+             03  SPA-PRT-FLG               PIC X(02).
+      *HOSPNUMチェック回避区分
+             03  SPA-NOCHK-HOSPNUM         PIC X(01).
+      *エラーコード
+             03  SPA-ERRCD                 PIC X(04).
+             03  SPA-ERRMSG                PIC X(80).
+      *診療行為処理最大行
+             03  SPA-MAX-LINE              PIC 9(03).
+      *クライアント印刷指示フラグ
+             03  SPA-CLIENT-PRT-FLG        PIC 9(01).
+      *クライアント印刷指示フラグ
+             03  SPA-CLIENT-TEMP-FLG       PIC 9(01).
+      *クライアント印刷ダイアログ表示フラグ
+             03  SPA-CLIENT-SHOWDIALOG     PIC 9(01).
+      *クライアント印刷後遷移
+             03  SPA-PUTTYPE               PIC X(08).
+      *ミドルウェア
+             03  SPA-MW                    PIC 9(01).
+      *API処理フラグ
+             03  SPA-API-FLG               PIC 9(01).
+      *印刷設定
+             03  SPA-PRTCONF               PIC X(01).
+      *パッチ用
+             03  SPA-PATCH                 PIC X(20).
+      *
+      *ここまで 1,069 bytes
+      *
+      *----(01.00.02) LINE UPD START ----------------------------------
+      *******03  SPA-WORK                  PIC X(2460).
+      ****** 03  SPA-WORK                  PIC X(5552).
+      ****** 03  SPA-WORK                  PIC X(5550).
+      *******03  SPA-WORK                  PIC X(5549).
+      ****** 03  SPA-WORK                  PIC X(5545).
+      *****  03  SPA-WORK                  PIC X(5543).
+      ****** 03  SPA-WORK                  PIC X(11741).
+      ****** 03  SPA-WORK                  PIC X(11739).
+      *****  03  SPA-WORK                  PIC X(11685).
+      *****  03  SPA-WORK                  PIC X(11680).
+      *****  03  SPA-WORK                  PIC X(19280).
+      *****  03  SPA-WORK                  PIC X(19027).
+      ****   03  SPA-WORK                  PIC X(18964).
+      *****  03  SPA-WORK                  PIC X(18961).
+             03  SPA-WORK                  PIC X(18930).
+      *----(01.00.02) LINE UPD END   ----------------------------------
+      *

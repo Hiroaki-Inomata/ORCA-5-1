@@ -1,0 +1,56 @@
+name	migv51;
+
+arraysize	20;
+textsize	400;
+
+bind	"ORCBJOB2"	"OpenCOBOL";
+bind	"ORCXRMST1MIGV51"	"OpenCOBOL";
+bind	"ORCXRMST2"	"OpenCOBOL";
+bind	"ORCXRMST2MIGV51"	"OpenCOBOL";
+bind	"ORCXRMST3MIGV51"	"OpenCOBOL";
+bind	"ORCXRMST4"	"OpenCOBOL";
+bind	"ORCXRMST4MIGV51"	"OpenCOBOL";
+bind	"ORCBMIGADRS"	"OpenCOBOL";
+bind	"ORCBMIGCHK"	"OpenCOBOL";
+bind	"ORCBMIGHKNJAINF"	"OpenCOBOL";
+bind	"ORCBMIGSRYCDCHG"	"OpenCOBOL";
+bind	"ORCBMIGTENSU"	"OpenCOBOL";
+bind	"ORCBMIGTENSUPLUS"	"OpenCOBOL";
+bind	"ORCMUP0006MIGV51"	"OpenCOBOL";
+bind	"ORCMUP0042MIGV51"	"OpenCOBOL";
+bind	"ORCMUP0052MIGV51"	"OpenCOBOL";
+bind	"ORCMUP0092MIGV51"	"OpenCOBOL";
+bind	"ORCMUP0102MIGV51"	"OpenCOBOL";
+bind	"ORCBFILEMIS"	"OpenCOBOL";
+
+db	{
+	tbl_dbkanri;
+	tbl_jobkanri;
+	tbl_syskanri;
+	tbl_prtkanri;
+	tbl_prtdata;
+	tbl_tensu;
+	tbl_mstkanri;
+	tbl_mstkanri_public;
+	tbl_mstkanri_master;
+	tbl_mstkanri_org;
+	tbl_adrs_org;
+	tbl_adrs_user;
+	tbl_adrs_master;
+	tbl_chk_org;
+	tbl_chk_user;
+	tbl_chk_master;
+	tbl_hknjainf_org;
+	tbl_hknjainf_user;
+	tbl_hknjainf_master;
+	tbl_srycdchg_org;
+	tbl_srycdchg_user;
+	tbl_srycdchg_master;
+	tbl_tensu_org;
+	tbl_tensu_user;
+	tbl_tensu_master;
+	tbl_tensu_price;
+	tbl_tensuplus;
+	tbl_file_mis;
+	exec_sql;
+};

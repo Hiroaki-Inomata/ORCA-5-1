@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GTK-Interface>
+
+<project>
+  <name>MDAS</name>
+  <program_name>MDAS</program_name>
+  <directory></directory>
+  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <gnome_support>True</gnome_support>
+  <gtkpanda_support>False</gtkpanda_support>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>MDAS</name>
+  <width>840</width>
+  <height>600</height>
+  <signal>
+    <name>map_event</name>
+    <handler>map_event</handler>
+    <last_modification_time>Fri, 26 Jan 2001 04:22:31 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>set_focus</name>
+    <handler>set_focus</handler>
+    <last_modification_time>Fri, 26 Jan 2001 04:22:42 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_true</handler>
+    <last_modification_time>Mon, 25 Nov 2002 06:01:39 GMT</last_modification_time>
+  </signal>
+  <title>(MDAS)参加同意</title>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_CENTER</position>
+  <modal>True</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <wmclass_class>jma-receipt.dialog</wmclass_class>
+
+  <widget>
+    <class>GtkFixed</class>
+    <name>fixed1</name>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B08</name>
+      <x>520</x>
+      <y>552</y>
+      <width>184</width>
+      <height>32</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F8</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Wed, 14 Feb 2001 00:38:53 GMT</last_modification_time>
+      </signal>
+      <label>F8 同意して参加する</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label4</name>
+      <x>32</x>
+      <y>352</y>
+      <width>42</width>
+      <height>16</height>
+      <label></label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B01</name>
+      <x>32</x>
+      <y>552</y>
+      <width>80</width>
+      <height>32</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F1</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Fri, 09 Oct 2009 07:50:13 GMT</last_modification_time>
+      </signal>
+      <label>F1 戻る</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B05</name>
+      <x>240</x>
+      <y>552</y>
+      <width>144</width>
+      <height>32</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F5</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Wed, 21 Oct 2009 04:38:57 GMT</last_modification_time>
+      </signal>
+      <label>F5 同意しない</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label6</name>
+      <x>32</x>
+      <y>8</y>
+      <width>872</width>
+      <height>24</height>
+      <label>定点調査研究事業（定点調査）およびＯＲＣＡサーベイランスに参加される場合は、下記の内容をお読みいただき、</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label8</name>
+      <x>32</x>
+      <y>32</y>
+      <width>664</width>
+      <height>24</height>
+      <label>同意した上でご参加をお願いします。</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkScrolledWindow</class>
+      <name>scrolledwindow1</name>
+      <x>32</x>
+      <y>72</y>
+      <width>780</width>
+      <height>456</height>
+      <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+      <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
+      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+      <widget>
+	<class>GtkPandaText</class>
+	<name>text1</name>
+	<width>780</width>
+	<height>456</height>
+	<can_focus>True</can_focus>
+	<editable>False</editable>
+	<text>■ 定点調査研究事業の参加同意 ■
+
+　定点調査研究事業（以下本研究事業）では、個人情報を削除したレセプトデータを定点医療機関から継続的に収集、分析しま
+　す。受療や罹患の状況をモニタリングし、広く国民に提供できる仕組みの提供を目指します。
+
+　現在、収集対象の異なる以下の2つの調査を実施しています。医療機関は個別に参加いただくことが可能です。
+ 　・月次データ（月次レセプト）の収集（以下「定点調査」）
+ 　　日レセで月次請求処理を終えた時点で生成され、医療機関による承認後、日本医師会に電送されます。
+ 　・日次データ（感染症等のデータ）の収集（以下「ORCAサーベイランス」）
+ 　　日レセで収集対象の症例等のレセプトが確定した時点で生成され、利用者が指定したタイミング（即時／毎日一回／ネット
+ 　　ワーク接続時のみ）で自動的に日本医師会に電送されます。
+
+　　ご参加いただく場合は、この画面の下部で「同意して参加する」をクリックして下さい。 
+　　本研究事業に参加していただく医療機関から送られるデータは、以下の「本研究事業における情報の保護方針」に従って収集
+　　・管理されます。
+
+□ 本研究事業における情報の保護方針
+
+（共通事項）
+ 　◆ 総則
+ 　　本研究事業で取得した情報はすべて日本医師会の規定する個人情報保護ポリシーに法り管理されます。
+ 　　　日本医師会個人情報保護について
+ 　　　http://www.med.or.jp/jma/about/privacy.html
+
+　◆ 適用範囲
+ 　　当セキュリティポリシーは、ユーザが本研究事業に参加する間適用されます。また、ユーザが本研究事業に参加される際に
+ 　　当方がお預かりした情報及び収集したデータは、当ポリシーに従って管理されます。
+
+　◆ 情報収集の方針
+ 　　本研究事業に参加していただく医療機関から送られるデータは、以下の方針に従って収集・管理されます。
+
+　　・患者個人が特定できる情報は収集しません。
+ 　　・電子認証の仕組みを利用して、電送時のセキュリティを確保します。
+ 　　・収集されたデータがどこの医療機関に由来するかなど、医療機関に関する情報は調査に参加されていることも含めて他に
+ 　　　漏れることが無いよう、厳しく管理されます。
+
+　◆ ID申請情報の利用
+ 　　本研究事業に参加していただく医療機関は、医療機関ID申請時に登録した情報の一部が統計処理に利用されます。統計処理
+ 　　は、統計データの公表、および、本システムを改善するためと当事業に資する研究を目的とします。
+ 　　また、トラブル・問い合わせの際に、迅速なサポートを実現する為に利用する場合があります。
+
+　◆ 情報の管理
+ 　　本研究事業で利用する各種情報及び収集データへの不正アクセスや漏洩、滅失、き損その他医療機関の個人情報の安全管理
+ 　　のために必要かつ適切と考えられる対策を講じます。
+
+　◆ SSLについて
+ 　　安全な通信を確保して、収集データの送信を行っていただくために、「ORCAプロジェクト認証局」より発行された「SSL
+ 　　サーバ証明書」を利用しています。
+
+　　日レセの導入時に、設置しているコンピュータに「ORCAプロジェクト認証局CA証明書」がインストールされます。
+
+　　「SSLサーバ証明書」利用して、以下のネットワーク上の危険性を防ぎ、安全な通信がおこなえる環境を提供しています。
+
+　　□　成りすましの防止
+ 　　SSLサーバ証明書を認証する事により、通信先のサーバが実在する当方のサーバに間違いないことを確認しています。
+
+　　□　盗聴の防止
+ 　　証明書の中の公開鍵を使用して暗号化した通信（SSL通信）によって、外部からデータを読み取れないようにいたします。
+
+　◆ ポリシーの改訂
+ 　　当セキュリティポリシーの改定の必要が生じた場合には、事前に連絡の上、当Webサイトにて通知いたします。
+
+（ORCAサーベイランス）
+ 　◆ 収集情報の変更
+ 　　最新の収集対象（感染症データ）および収集項目の変更についてはORCAサーベイランスのwebサイトで公開します。
+
+
+（定点調査）
+ 　◆ 申請情報の収集と利用
+ 　　参加申請時に収集した情報は、以下の目的の範囲内で利用いたします。
+
+　　・本研究事業における統計処理（地域情報及び申請書の「各種情報」欄に記載された情報（診療科、設置主体、病床数、病院
+　　　種別）のみ）
+ 　　・本研究事業参加ユーザに対するプロジェクトの普及状況・傾向の報告
+ 　　・トラブル・問い合わせの際に、迅速なサポートを実現する為
+
+　　収集の対象（収集データ）は日レセに保存された情報のうち、医療機関のプロフィール（施設基準）と月次レセプト情報から
+　　患者個人が特定できる部分が削除されていますが、これらの一次情報は統計処理にのみ利用されます。
+
+　◆ 申請情報の変更
+ 　　申請内に設けている項目で、申請情報の管理を「委任」を選択されている場合、登録されているサポート事業所権限による
+ 　　変更を許可します。
+
+以上</text>
+	<xim_enabled>False</xim_enabled>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkPandaTimer</class>
+      <name>pandatimer1</name>
+      <x>120</x>
+      <y>552</y>
+      <width>21</width>
+      <height>21</height>
+      <signal>
+	<name>timeout</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Thu, 04 Sep 2008 08:10:17 GMT</last_modification_time>
+      </signal>
+      <duration>5</duration>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>

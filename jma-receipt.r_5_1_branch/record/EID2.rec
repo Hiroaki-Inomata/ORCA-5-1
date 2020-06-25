@@ -1,0 +1,10 @@
+EID2 {
+  fixed1 {
+    ID2CODE {
+      textdata varchar(11);
+    };
+    ID2MSG {
+      textdata varchar(71);
+    };
+  };
+};

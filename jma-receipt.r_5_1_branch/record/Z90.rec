@@ -1,0 +1,40 @@
+Z90 {
+  fixed1 {
+    SRYNAME {
+      textdata varchar(100);
+    };
+    SRYCDCHG1 {
+      textdata varchar(20);
+    };
+    SRYCDCHG2 {
+      textdata varchar(20);
+    };
+    SRYCDCHG3 {
+      textdata varchar(20);
+    };
+    SRYCDCHG4 {
+      textdata varchar(20);
+    };
+    SRYCDCHG5 {
+      textdata varchar(20);
+    };
+    SRYCDNAME1 {
+      textdata varchar(100);
+    };
+    SRYCDNAME2 {
+      textdata varchar(100);
+    };
+    SRYCDNAME3 {
+      textdata varchar(100);
+    };
+    SRYCDNAME4 {
+      textdata varchar(100);
+    };
+    SYRCDNAME5 {
+      textdata varchar(100);
+    };
+    SRYCD {
+      textdata varchar(20);
+    };
+  };
+};

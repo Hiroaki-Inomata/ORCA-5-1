@@ -1,0 +1,73 @@
+xml_hsconfroomv2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date varchar(10);
+		Information_Time varchar(8);
+		Api_Result       varchar(2);
+		Api_Result_Message varchar(100);
+		Room_Configuration {
+			Start_Date       varchar(10);
+			End_Date         varchar(10);
+			Ward_Number{
+				Label	varchar(20);
+				Data	varchar(02);
+			};
+			Ward_Name{
+				Label	varchar(20);
+				Data	varchar(20);
+			};
+			Room_Number{
+				Label	varchar(20);
+				Data	varchar(06);
+			};
+			Room_Type{
+				Label	varchar(20);
+				Data	varchar(02);
+				Name	varchar(30);
+			};
+			Bed_Numbers{
+				Label	varchar(20);
+				Data	varchar(02);
+				Name	varchar(10);
+			};
+			Room_Charge{
+				Label	varchar(20);
+				Data	varchar(07);
+				Name	varchar(10);
+			};
+			Sex{
+				Label	varchar(20);
+				Data	varchar(01);
+				Name	varchar(20);
+			};
+			Extension_Number{
+				Label	varchar(20);
+				Data	varchar(05);
+				Name	varchar(10);
+			};
+			Department_Code{
+				Label	varchar(20);
+				Data	varchar(02);
+				Name	varchar(30);
+			};
+			Specific_Hospital_Charge{
+				Label	varchar(20);
+				Data	varchar(09);
+				Name	varchar(100);
+			};
+			Hospital_Charge{
+				Label	varchar(20);
+				Data	varchar(09);
+				Name	varchar(100);
+			};
+			Additional_Hospital_Charge{
+				Label	varchar(20);
+				Data	varchar(9);
+				Name	varchar(50);
+			}[12];
+		}[200];
+	};
+};

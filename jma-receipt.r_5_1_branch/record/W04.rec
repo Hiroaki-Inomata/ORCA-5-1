@@ -1,0 +1,65 @@
+W04 {
+  fixed2 {
+    NEN {
+      textdata varchar(4);
+    };
+    RENNUM {
+      state int;
+      textdata varchar(10);
+    };
+    PTID {
+      textdata varchar(10);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    PTNUMKSIKBN {
+      textdata varchar(1);
+    };
+    NENTUKI {
+      textdata varchar(2);
+    };
+    not1 {
+      pageno int;
+      fixed5 {
+        JIYKSIKBN {
+          textdata varchar(1);
+        };
+        JIYKSIKETA {
+          numdata number(2);
+        };
+      };
+      fixed4 {
+        HJNKSIKBN {
+          textdata varchar(1);
+        };
+        HJNKSINENKBN {
+          textdata varchar(1);
+        };
+        HJNKSIRENNUMKBN {
+          textdata varchar(1);
+        };
+        HJNKSIRENNUMKETA {
+          numdata number(2);
+        };
+      };
+      fixed3 {
+        KKCKSIKBN {
+          textdata varchar(1);
+        };
+        KKCKSIMAEKETA {
+          numdata number(2);
+        };
+        KKCKSIRENNUMKETA {
+          numdata number(2);
+        };
+        KKCKSIATOKETA {
+          numdata number(2);
+        };
+      };
+    };
+  };
+};

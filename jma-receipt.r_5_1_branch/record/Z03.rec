@@ -1,0 +1,526 @@
+Z03 {
+  fixed8 {
+    not1 {
+      pageno int;
+      fixed9 {
+        KANANAME {
+          textdata varchar(100);
+        };
+        NAME {
+          textdata varchar(100);
+        };
+        TEN {
+          numdata number(10,2);
+        };
+        OLDTEN {
+          numdata number(10,2);
+        };
+        BYOSYOKBN {
+          numdata number(1);
+        };
+        YUKOSTYMD {
+          textdata varchar(10);
+        };
+        YUKOEDYMD {
+          textdata varchar(10);
+        };
+        TSUSOKUAGE {
+          numdata number(1);
+        };
+        KGNAGE {
+          textdata varchar(2);
+        };
+        JGNAGE {
+          textdata varchar(2);
+        };
+        FORMALNAME {
+          textdata varchar(200);
+        };
+        SHONAME {
+          textdata varchar(200);
+        };
+        INPCHKKBN {
+          numdata number(1);
+        };
+        HOSPSRYKBNCOMB {
+          HOSPSRYKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[70];
+        };
+        TANICDCOB {
+          TANICD {
+            textdata varchar(28);
+          };
+          count int;
+            item varchar(28)[200];
+        };
+        SRYKBNCOB {
+          SRYKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[200];
+        };
+        TENSIKIBETUCOB {
+          TENSIKIBETU {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[10];
+        };
+        OLDTENSKBCOB {
+          OLDTENSKB {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[10];
+        };
+        SRYSYUKBNCOB {
+          SRYSYUKBN {
+            textdata varchar(74);
+          };
+          count int;
+            item varchar(74)[200];
+        };
+        DATAKBNCOB {
+          DATAKBN {
+            textdata varchar(16);
+          };
+          count int;
+            item varchar(16)[3];
+        };
+        BYOKANRENKBNCOB {
+          BYOKANRENKBN {
+            textdata varchar(50);
+          };
+          count int;
+            item varchar(50)[20];
+        };
+        SDOKNRYOCOB {
+          SDOKNRYO {
+            textdata varchar(50);
+          };
+          count int;
+            item varchar(50)[100];
+        };
+        HKNTEKKBNCOB {
+          HKNTEKKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        OSINKBNCOB {
+          OSINKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[8];
+        };
+        SAIKETUCOMB {
+          SAIKETUKBN {
+            textdata varchar(16);
+          };
+          count int;
+            item varchar(16)[4];
+        };
+        YKZKNRKBNCOB {
+          YKZKNRKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        TIMEKSNKBNCOB {
+          TIMEKSNKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[10];
+        };
+        SANTEIRRKKBNCOB {
+          SANTEIRRKKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        GAIKANRIKBNCOB {
+          GAIKANRIKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[3];
+        };
+        NYUGAITEKKBNCOMB {
+          NYUGAITEKKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[3];
+        };
+        ROUTEKKBNCOMB {
+          ROUTEKKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[3];
+        };
+        IRYOKAN_COMB {
+          IRYOKAN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[9];
+        };
+        ZENKNSKBN_COMB {
+          ZENKNSKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        DPCKBN {
+          numdata number(1);
+        };
+        ROSAIKBN { #GtkNumberEntry
+          numdata number(1);
+        };
+      };
+      fixed10 {
+        JITUDAY {
+          numdata number(1);
+        };
+        DAYCNT {
+          numdata number(1);
+        };
+        JGNCNTERR {
+          numdata number(1);
+        };
+        KZMCOMPSIKIBETU {
+          numdata number(1);
+        };
+        KZMERR {
+          numdata number(1);
+        };
+        CHUKSNCD {
+          textdata varchar(4);
+        };
+        CHUKSNTSUBAN {
+          textdata varchar(1);
+        };
+        AGEKSNKGN1 {
+          textdata varchar(2);
+        };
+        AGEKSNJGN1 {
+          textdata varchar(2);
+        };
+        AGEKSNSRYCD1 {
+          textdata varchar(9);
+        };
+        AGEKSNKGN2 {
+          textdata varchar(2);
+        };
+        AGEKSNKGN4 {
+          textdata varchar(2);
+        };
+        AGEKSNKGN3 {
+          textdata varchar(2);
+        };
+        AGEKSNJGN4 {
+          textdata varchar(2);
+        };
+        AGEKSNJGN3 {
+          textdata varchar(2);
+        };
+        AGEKSNJGN2 {
+          textdata varchar(2);
+        };
+        AGEKSNSRYCD4 {
+          textdata varchar(9);
+        };
+        AGEKSNSRYCD3 {
+          textdata varchar(9);
+        };
+        AGEKSNSRYCD2 {
+          textdata varchar(9);
+        };
+        JGNCNT {
+          numdata number(3);
+        };
+        JGNCNT1D {
+          numdata number(3);
+        };
+        JGNCNT1W {
+          numdata number(3);
+        };
+        JGNCNTETCM {
+          numdata number(2);
+        };
+        JGNCNTETC {
+          numdata number(3);
+        };
+        KZMTEN {
+          numdata number(10,2);
+        };
+        KZMKGN {
+          numdata number(8);
+        };
+        KZMJGN {
+          numdata number(8);
+        };
+        KZM {
+          numdata number(8);
+        };
+        PLUS_JGNCNT {
+          numdata number(3);
+        };
+        PLUS_JGNCNT1D {
+          numdata number(3);
+        };
+        PLUS_JGNCNT1W {
+          numdata number(3);
+        };
+        PLUS_JGNCNTERR {
+          numdata number(1);
+        };
+        PLUS_SANTEIRRKCOMB {
+          PLUS_SANTEIRRK {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[3];
+        };
+        PLUS_JGNCNTETCM {
+          numdata number(2);
+        };
+        PLUS_JGNCNTETC {
+          numdata number(3);
+        };
+      };
+      fixed11 {
+        TUSOKUGAIKBN {
+          numdata number(1);
+        };
+        SHORTSTAYOPE {
+          numdata number(1);
+        };
+        CHPGYOKOSOTIKSN {
+          numdata number(1);
+        };
+        AUTOFUNGO {
+          numdata number(1);
+        };
+        AUTOHOUGO {
+          numdata number(1);
+        };
+        KEIBUJYUTU {
+          numdata number(1);
+        };
+        SEKIZUISOKUTEI {
+          numdata number(1);
+        };
+        DONORKBN {
+          numdata number(1);
+        };
+        CHPMESUKSN {
+          numdata number(1);
+        };
+        LASERKSN {
+          numdata number(1);
+        };
+        KNSJISKBN {
+          numdata number(1);
+        };
+        KNSJISGRPKBN {
+          numdata number(2);
+        };
+        CHPNAISIKSN {
+          numdata number(1);
+        };
+        HOUKNSKBN {
+          numdata number(2);
+        };
+        HOKATUTEIGENKBN {
+          numdata number(3);
+        };
+        TEIGENKBN {
+          numdata number(1);
+        };
+        KENTAICOMMENT {
+          numdata number(1);
+        };
+        NYUKHNKBN {
+          numdata number(2);
+        };
+        KANGOKSN {
+          numdata number(2);
+        };
+        CHIIKIKSN {
+          numdata number(1);
+        };
+        NYUKHNKSNKBN {
+          numdata number(3);
+        };
+        KIJUNTEIGENKBN {
+          numdata number(1);
+        };
+        KIJUNTEIGENCD {
+          numdata number(4);
+        };
+        MICMESUKSN {
+          numdata number(1);
+        };
+        GAZOOPESUP {
+          numdata number(1);
+        };
+        MASUISKBKBN {
+          numdata number(1);
+        };
+        FUKUBIKUNAIKBN {
+          numdata number(1);
+        };
+        FUKUBIKUKOTUKBN {
+          numdata number(1);
+        };
+        TIMEMASUIKBN {
+          numdata number(1);
+        };
+        HISINSYUMONKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        TOUKETUHOZONKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        SISIKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        AKUSEIBYORIKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        SOGAIKOTEIKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        CHPSESSAKUKSN { #GtkNumberEntry
+          numdata number(1);
+        };
+        SASINJIHEISIKBN { #GtkNumberEntry
+          numdata number(1);
+        };
+      };
+      fixed12 {
+        SSTKIJUNCD1 {
+          numdata number(4);
+        };
+        SSTKIJUNCD5 {
+          numdata number(4);
+        };
+        SSTKIJUNCD4 {
+          numdata number(4);
+        };
+        SSTKIJUNCD3 {
+          numdata number(4);
+        };
+        SSTKIJUNCD2 {
+          numdata number(4);
+        };
+        SSTKIJUNCD10 {
+          numdata number(4);
+        };
+        SSTKIJUNCD9 {
+          numdata number(4);
+        };
+        SSTKIJUNCD8 {
+          numdata number(4);
+        };
+        SSTKIJUNCD7 {
+          numdata number(4);
+        };
+        SSTKIJUNCD6 {
+          numdata number(4);
+        };
+        NYUTENTTLSKB {
+          numdata number(3);
+        };
+        GAITENTTLKBN {
+          numdata number(3);
+        };
+        CDKBN_KOUBAN {
+          numdata number(2);
+        };
+        CDKBN_BU {
+          numdata number(2);
+        };
+        CDKBN_SYO {
+          numdata number(1);
+        };
+        CDKBN_KBN {
+          textdata varchar(1);
+        };
+        KOKUCHI_KBN {
+          textdata varchar(1);
+        };
+        KOKUCHI_SYO {
+          numdata number(1);
+        };
+        KOKUCHI_BU {
+          numdata number(2);
+        };
+        CDKBN_KBNNUM {
+          numdata number(3);
+        };
+        CDKBN_KBNNUM_EDA {
+          numdata number(2);
+        };
+        KOKUCHI_KBNNUM {
+          numdata number(3);
+        };
+        KOKUCHI_KBNNUM_EDA {
+          numdata number(2);
+        };
+        KOKUCHI_KOUBAN {
+          numdata number(2);
+        };
+        KOKUJISKBKBN2 {
+          numdata number(1);
+        };
+        KOKUJISKBKBN1 {
+          numdata number(1);
+        };
+        KOUHYOJYUNNUM {
+          numdata number(9);
+        };
+        KUBUNBANGOU { #GtkPandaEntry
+          textdata varchar(30);
+        };
+      };
+    };
+    SRYCDH {
+      textdata varchar(9);
+    };
+    NAMEH {
+      textdata varchar(100);
+    };
+    YUKOSTYMDH {
+      textdata varchar(9);
+    };
+    YUKOEDYMDH {
+      textdata varchar(9);
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    B03 { #GtkButton
+      state int;
+    };
+    B10 { #GtkButton
+      state int;
+    };
+    B12 { #GtkButton
+      state int;
+    };
+  };
+};

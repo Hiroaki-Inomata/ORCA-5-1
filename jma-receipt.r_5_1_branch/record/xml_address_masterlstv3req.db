@@ -1,0 +1,14 @@
+xml_address_masterlstv3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	address_masterlstv3req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Prefecture_Code_Information {
+			Prefecture_Code	varchar(2);
+		} [10];
+	};
+};

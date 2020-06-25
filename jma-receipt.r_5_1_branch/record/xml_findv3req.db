@@ -1,0 +1,143 @@
+xml_findv3req{
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  findv3req  {
+    Request_Number                 varchar(2);
+    Karte_Uid                      varchar(36);
+    Orca_Uid                       varchar(36);
+    Selection{
+      First                        varchar(7);
+      Last                         varchar(7);
+    };
+    Result_Class                   varchar(1);
+    Perform_Date{
+      First                        varchar(10);
+      Last                         varchar(10);
+    };
+    Patient_Information{
+      BirthDate{
+        First                      varchar(10);
+        Last                       varchar(10);
+      };
+      Birth_Month                  varchar(2);
+      Sex                          varchar(1);
+      LastVisit_Date{
+        First                      varchar(10);
+        Last                       varchar(10);
+      };
+      Doctor_Code			             varchar(05);
+      InOut                        varchar(1);
+      Department_Code              varchar(2);
+      Death_Class                  varchar(1);
+      Patient_ID{
+        First                      varchar(20);
+        Last                       varchar(20);
+      };
+      Regional_Partnership_Class   varchar(1);
+      TestPatient_Class            varchar(1);
+      WholeName                    varchar(100)[5];
+      WholeAddress                 varchar(100)[5];
+      PhoneNumber_Class            varchar(1);
+      PhoneNumber                  varchar(15)[3];
+      Condition1_Code              varchar(02)[3];
+      Condition2_Code              varchar(02)[3];
+      Condition3_Code              varchar(02)[3];
+      Comment_Class                varchar(1);
+      Comment                      varchar(40)[3];
+      Discount_Reason_Code         varchar(2)[3];
+      Low_Income_Information{
+        Low_Income_Class           varchar(1);
+        Effective_Period_Class     varchar(1);
+        Effective_Period{
+          Year_Month               varchar(7);
+          First                    varchar(10);
+          Last                     varchar(10);
+        };
+      };
+      Special_Notes_Receipt_Code   varchar(02);
+      Special_Notes_Receipt_Code_Name varchar(12);
+      Point  {
+        First                      varchar(7);
+        Last                       varchar(7);
+      };
+      Disaster_Class               varchar(1);
+      Inspection_Receipt_Class      varchar(1);
+    };
+    HealthInsurance_Information{
+      Certificate_Expired_Year_Month varchar(7);
+      RelationToInsuredPerson        varchar(1);
+      Insurance_Rate_Class           varchar(1);
+      InsuranceProvider_Number_Logic_Type  varchar(1);
+      InsuranceProvider_Number       varchar(8)[5];
+      InsuranceProvider_Class_Logic_Type   varchar(01);
+      InsuranceProvider_Class        varchar(03)[5];
+      HealthInsuredPerson_Symbol     varchar(40)[5];
+      HealthInsuredPerson_Number     varchar(40)[5];
+    };
+    PublicInsurance_Information{
+      PublicInsurance_Expired_Year_Month    varchar(7);
+      PublicInsurance_Class_Logic_Type     varchar(01);
+      PublicInsurance_Class          varchar(03)[5];
+      PublicInsurer_Number           varchar(08)[5];
+    };
+    Insurance_Logic_Type                   varchar(1);
+    Desease_Information{
+      StartDate  {
+        First                        varchar(10);
+        Last                         varchar(10);
+      };
+      OutCome_Class                  varchar(1);
+      EndDate  {
+        First                        varchar(10);
+        Last                         varchar(10);
+      };
+      Suspected_Class                varchar(1);
+      Acute_Class                    varchar(1);
+      Category_Class                 varchar(1);
+      Desease_Logic_Type             varchar(1);
+      Desease{
+        Name                         varchar(80);
+      }[5];
+    };
+    Medical_Action_Information{
+      Medical_Class                  varchar(02);
+      Medical_Class2                 varchar(02);
+      Inclusion_Class                varchar(01);
+      Medical_Number_Class           varchar(01);
+      Medical_Action_Logic_Type      varchar(01);
+      Medical_Action{
+        Medication_Code              varchar(20);
+        Negative_Class               varchar(01);
+        Medical_Number               varchar(11);
+        Comparison_Class             varchar(1);
+      }[5];
+      Receipt_Comment                varchar(50)[3];
+    };
+    Care_Information  {
+      Care_Insurance_Information  {
+        Effective_Period_Class       varchar(1);
+        Effective_Period{
+          Year_Month                 varchar(10);
+          First                      varchar(10);
+          Last                       varchar(10);
+        };
+        Provider_Number              varchar(6);
+      };
+      Care_Certification_Information  {
+        Effective_Period_Class       varchar(1);
+        Effective_Period{
+          Year_Month                 varchar(10);
+          First                      varchar(10);
+          Last                       varchar(10);
+        };
+        Condition_Class              varchar(02);
+      };
+    };
+    Sort_Key{
+      Key_Class                      varchar(1);
+      Order_Class                    varchar(1);
+    }[3];
+  };
+};

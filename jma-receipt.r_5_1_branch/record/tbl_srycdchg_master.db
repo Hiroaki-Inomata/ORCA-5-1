@@ -1,0 +1,103 @@
+tbl_srycdchg_master {
+	HOSPNUM			number(2,0);
+	IPNSRYCD   		varchar(9);
+	RJNSRYCD  		varchar(9);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		varchar(8);
+	UPYMD   		varchar(8);
+	UPHMS			varchar(6);
+#-----> 主キー更新用
+	UPHOSPNUM		number(2,0),virtual;
+	UPIPNSRYCD   		varchar(9),virtual;
+	UPRJNSRYCD  		varchar(9),virtual;
+};
+primary	{
+	HOSPNUM,IPNSRYCD,RJNSRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_srycdchg_master
+		WHERE	HOSPNUM	= :HOSPNUM
+			AND IPNSRYCD = :IPNSRYCD
+			AND RJNSRYCD = :RJNSRYCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_srycdchg_master
+			VALUES(
+				:IPNSRYCD,
+				:RJNSRYCD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS,
+				:HOSPNUM
+			)
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_srycdchg_master
+			WHERE	HOSPNUM = :HOSPNUM
+				AND IPNSRYCD = :IPNSRYCD
+				AND RJNSRYCD = :RJNSRYCD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_srycdchg_master
+		WHERE	HOSPNUM = :HOSPNUM
+			AND IPNSRYCD = :IPNSRYCD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_master_key3_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_srycdchg_master
+		WHERE	HOSPNUM = :HOSPNUM
+			AND RJNSRYCD = :RJNSRYCD
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	master.tbl_srycdchg_master
+		SET
+			HOSPNUM  = :HOSPNUM,
+			IPNSRYCD = :IPNSRYCD,
+			RJNSRYCD = :RJNSRYCD,
+			TERMID   = :TERMID,
+			OPID     = :OPID,
+			CREYMD   = :CREYMD,
+			UPYMD    = :UPYMD,
+			UPHMS    = :UPHMS
+		WHERE 	HOSPNUM  = :UPHOSPNUM
+			AND IPNSRYCD = :UPIPNSRYCD
+			AND RJNSRYCD = :UPRJNSRYCD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_master_all_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_srycdchg_master
+		WHERE	HOSPNUM = :HOSPNUM
+ 		;
+	};
+};

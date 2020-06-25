@@ -1,0 +1,171 @@
+W61 {
+  fixed6 {
+    scrolledwindow28 {
+      TOKKILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(3);
+            column3 varchar(50);
+            column4 varchar(10);
+            column5 varchar(8);
+            column6 varchar(10);
+            column7 varchar(6);
+            column8 varchar(10);
+            column9 varchar(10);
+            column10 varchar(10);
+            column11 varchar(9);
+            column12 varchar(9);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    HKNNUM {
+      textdata varchar(3);
+    };
+    SEIDONAME {
+      textdata varchar(50);
+    };
+    TEISYUTUSAKI_COMBO {
+      TEISYUTUSAKI {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    HKNJANUM {
+      textdata varchar(8);
+    };
+    HKNJANAME {
+      textdata varchar(100);
+    };
+    FTNJANUMKBN_JYOKEN_COMBO {
+      FTNJANUMKBN_JYOKEN {
+        textdata varchar(32);
+      };
+      count int;
+        item varchar(32)[5];
+    };
+    FTNJANUM_JYOKEN {
+      textdata varchar(8);
+    };
+    NYUGAIKBN_COMBO {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[5];
+    };
+    SYOTOKUKBN_COMBO {
+      SYOTOKUKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    ZAITAKU_COMBO {
+      ZAITAKU {
+        textdata varchar(44);
+      };
+      count int;
+        item varchar(44)[5];
+    };
+    RJNKBN_COMBO {
+      RJNKBN {
+        textdata varchar(52);
+      };
+      count int;
+        item varchar(52)[5];
+    };
+    TOKKI {
+      textdata varchar(12);
+    };
+    KYURATE {
+      numdata number(3);
+    };
+    FTNJANUMKBN_COMBO {
+      FTNJANUMKBN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[5];
+    };
+    FTNJANUM {
+      textdata varchar(8);
+    };
+    JKYSNUMKBN_COMBO {
+      JKYSNUMKBN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[5];
+    };
+    JKYSNUM {
+      textdata varchar(7);
+    };
+    TEKIYOU_COMMENT1 {
+      textdata varchar(52);
+    };
+    TEKIYOU_COMMENT1KBN_COMBO {
+      TEKIYOU_COMMENT1KBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    TEKIYOU_COMMENT2 {
+      textdata varchar(52);
+    };
+    TEKIYOU_COMMENT2KBN_COMBO {
+      TEKIYOU_COMMENT2KBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    RECEDEN_TOKKI {
+      textdata varchar(2);
+    };
+    RECEDEN_KYURATE {
+      numdata number(3);
+    };
+    RECEDEN_KORECKBN_COMBO {
+      RECEDEN_KORECKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    RECEDEN_FTNJANUMKBN_COMBO {
+      RECEDEN_FTNJANUMKBN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[5];
+    };
+    RECEDEN_FTNJANUM {
+      textdata varchar(8);
+    };
+    RECEDEN_JKYSNUMKBN_COMBO {
+      RECEDEN_JKYSNUMKBN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[5];
+    };
+    RECEDEN_JKYSNUM {
+      textdata varchar(7);
+    };
+  };
+};

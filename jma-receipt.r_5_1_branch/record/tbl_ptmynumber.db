@@ -1,0 +1,61 @@
+tbl_ptmynumber {
+	HOSPNUM			number(2,0);
+	PTID			number(10);
+	ID_KEY			varchar(10);
+	MY_NUMBER		varchar(20);
+	DESCRIPTION		varchar(100);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,ID_KEY;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptmynumber_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmynumber
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   ID_KEY       =   :ID_KEY
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptmynumber_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmynumber
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			ORDER BY ID_KEY
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptmynumber_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptmynumber
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptmynumber
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+

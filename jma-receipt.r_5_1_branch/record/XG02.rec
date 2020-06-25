@@ -1,0 +1,21 @@
+XG02 {
+  fixed1 {
+    FILENAME {
+      textdata varchar(100);
+    };
+    FILE_COMBO {
+      FILE {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[6];
+    };
+    CDKBN_COMBO {
+      CDKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[5];
+    };
+  };
+};

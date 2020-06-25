@@ -1,0 +1,119 @@
+tbl_teikiprt	{
+        HOSPNUM              number(2,0);
+        BTUNUM              char(2);
+        DENPNUM             number(7);
+        PTID                number(10);
+        PTNUM               char(20);
+        NAME                char(100);
+};
+
+primary	{
+	HOSPNUM,BTUNUM,DENPNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikiprt_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        WHERE   HOSPNUM     =   :HOSPNUM
+        AND	BTUNUM      =   :BTUNUM
+		AND	DENPNUM     =   :DENPNUM
+		;
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_teikiprt_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		ORDER   BY BTUNUM,NAME
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikiprt_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		ORDER   BY BTUNUM,PTNUM
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikiprt_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		ORDER   BY NAME
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikiprt_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		ORDER   BY PTNUM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_teikiprt_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		;
+	};
+};
+
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+        AND   DENPNUM     =   :DENPNUM
+		AND		PTID        =   :PTID
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_teikiprt
+		SET	PTNUM       =   :PTNUM
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_teikiprt
+        	WHERE   HOSPNUM     =   :HOSPNUM
+		AND	PTID        =   :PTID
+		;
+	};
+};

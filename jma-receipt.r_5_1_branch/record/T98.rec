@@ -1,0 +1,34 @@
+T98 {
+  fixed1 {
+    ID1MSG {
+      textdata varchar(80);
+    };
+    PRTKBN_COMBO {
+      PRTKBN {
+        textdata varchar(32);
+      };
+      count int;
+        item varchar(32)[5];
+    };
+    DATA_COMBO {
+      DATA {
+        textdata varchar(38);
+      };
+      count int;
+        item varchar(38)[6];
+    };
+    B10 {
+      visible bool;
+    };
+    B11 {
+      visible bool;
+    };
+    B12 {
+      label varchar(14);
+    };
+    LABEL {
+      style varchar(20);
+      textdata varchar(40);
+    };
+  };
+};

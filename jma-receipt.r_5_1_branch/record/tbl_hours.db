@@ -1,0 +1,92 @@
+tbl_hours {
+	HOSPNUM				number(2,0);
+	SRYYMD				char(8);
+	TIME				char(4);
+	ID					char(12);
+	HOURSKBN			char(1);
+	TERMID   			varchar(32);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+	STSRYYMD			char(8),virtual;
+	EDSRYYMD			char(8),virtual;
+	LIMIT				number(5,0),virtual;
+};
+
+primary	{
+	HOSPNUM,SRYYMD,TIME;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_hours_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND SRYYMD      =   :SRYYMD
+			AND   TIME        =   :TIME
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_hours_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND SRYYMD      >=   :SRYYMD
+			ORDER BY   ID     DESC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_hours_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+			 AND  ID           <   :ID
+			 AND  HOURSKBN     =   :HOURSKBN
+			ORDER BY   ID     DESC
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_hours_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND SRYYMD      >=   :SRYYMD
+			 AND  HOURSKBN     =   '1'
+			ORDER BY   ID      DESC
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_hours_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_hours_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hours
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND	HOURSKBN     LIKE   :HOURSKBN
+		ORDER	BY   ID      DESC
+		LIMIT	:LIMIT
+		;
+	};
+};

@@ -1,0 +1,302 @@
+W97 {
+  fixed1 {
+    SHELL01 {
+      textdata varchar(100);
+    };
+    SHELL02 {
+      textdata varchar(100);
+    };
+    SHELL03 {
+      textdata varchar(100);
+    };
+    SHELL04 {
+      textdata varchar(100);
+    };
+    SHELL05 {
+      textdata varchar(100);
+    };
+    SHELL06 {
+      textdata varchar(100);
+    };
+    SHELL07 {
+      textdata varchar(100);
+    };
+    SHELL08 {
+      textdata varchar(100);
+    };
+    SHELL09 {
+      textdata varchar(100);
+    };
+    SHELL10 {
+      textdata varchar(100);
+    };
+    SYORINM01 {
+      textdata varchar(30);
+    };
+    SYORINM02 {
+      textdata varchar(30);
+    };
+    SYORINM03 {
+      textdata varchar(30);
+    };
+    SYORINM04 {
+      textdata varchar(30);
+    };
+    SYORINM05 {
+      textdata varchar(30);
+    };
+    SYORINM06 {
+      textdata varchar(30);
+    };
+    SYORINM07 {
+      textdata varchar(30);
+    };
+    SYORINM08 {
+      textdata varchar(30);
+    };
+    SYORINM09 {
+      textdata varchar(30);
+    };
+    SYORINM10 {
+      textdata varchar(30);
+    };
+    LBLREPOS_NAME01 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME02 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME03 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME04 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME05 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME06 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME07 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME08 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME09 {
+      textdata varchar(20);
+    };
+    LBLREPOS_NAME10 {
+      textdata varchar(20);
+    };
+    REPOS_NAME01 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME02 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME03 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME04 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME05 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME06 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME07 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME08 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME09 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    REPOS_NAME10 {
+      visible  bool;
+      textdata varchar(128);
+    };
+    PRTNM01 {
+      textdata varchar(16);
+    };
+    PRTNM02 {
+      textdata varchar(16);
+    };
+    PRTNM03 {
+      textdata varchar(16);
+    };
+    PRTNM04 {
+      textdata varchar(16);
+    };
+    PRTNM05 {
+      textdata varchar(16);
+    };
+    PRTNM06 {
+      textdata varchar(16);
+    };
+    PRTNM07 {
+      textdata varchar(16);
+    };
+    PRTNM08 {
+      textdata varchar(16);
+    };
+    PRTNM09 {
+      textdata varchar(16);
+    };
+    PRTNM10 {
+      textdata varchar(16);
+    };
+    GYOUMUMEI_COMB {
+      GYOUMUMEI {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[25];
+    };
+    TYPE01_COMB {
+      TYPE01 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE02_COMB {
+      TYPE02 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE03_COMB {
+      TYPE03 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE04_COMB {
+      TYPE04 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE05_COMB {
+      TYPE05 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE06_COMB {
+      TYPE06 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE07_COMB {
+      TYPE07 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE08_COMB {
+      TYPE08 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE09_COMB {
+      TYPE09 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    TYPE10_COMB {
+      TYPE10 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    EXECUTE01 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE02 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE03 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE04 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE05 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE06 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE07 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE08 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE09 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    EXECUTE10 {
+      isactive bool;
+      state int;
+      label varchar(10);
+    };
+    GYOUMUFLG_COMB {
+      GYOUMUFLG {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    LBLMSG01 {
+      style varchar(20);
+      textdata varchar(80);
+    };
+  };
+};

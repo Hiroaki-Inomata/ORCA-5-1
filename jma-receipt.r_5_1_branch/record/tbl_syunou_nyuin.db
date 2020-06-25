@@ -1,0 +1,274 @@
+tbl_syunou_nyuin {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	DENPNUM          		number(7,0);
+	ROOMNUM 			char(8);
+	BYOTONUM			char(2);
+	RMSAGAKU  			number(7,0);
+	RMSAGAKU_TAX_SAI		number(7,0);
+	SHOKUJI1_NISSU                  number(2,0);
+	SHOKUJI1  			number(7,0);
+	SHOKUJI2_NISSU                  number(2,0);
+	SHOKUJI2  			number(7,0);
+	SHOKUJI3_NISSU                  number(2,0);
+	SHOKUJI3  			number(7,0);
+	SHOKUJI4_NISSU                  number(2,0);
+	SHOKUJI4  			number(7,0);
+	SHOKUJI5_NISSU                  number(2,0);
+	SHOKUJI5  			number(7,0);
+	SHOKUJI6_NISSU                  number(2,0);
+	SHOKUJI6  			number(7,0);
+	SHOKUJI7_NISSU                  number(2,0);
+	SHOKUJI7  			number(7,0);
+	SHOKUJI8_NISSU                  number(2,0);
+	SHOKUJI8  			number(7,0);
+	SHOKUJI9_NISSU                  number(2,0);
+	SHOKUJI9  			number(7,0);
+	SHOKUJI10_NISSU                  number(2,0);
+	SHOKUJI10  			number(7,0);
+        SHOKUJI11_NISSU                 number(2,0);
+        SHOKUJI11                       number(7,0);
+        SHOKUJI12_NISSU                 number(2,0);
+        SHOKUJI12                       number(7,0);
+        SHOKUJI13_NISSU                 number(2,0);
+        SHOKUJI13                       number(7,0);
+        SHOKUJI14_NISSU                 number(2,0);
+        SHOKUJI14                       number(7,0);
+        SYUSKJ_NISSU                    number(2,0);
+        SYUSKJ_RYOYOHI                  number(7,0);
+        SYUSKJ_FTN                      number(7,0);
+        SYUSKJ_FTN_RECE                 number(7,0);
+	SYUSKJ_FTNKBN   		char(1);
+        KOH1SKJ_NISSU                   number(2,0);
+        KOH1SKJ_RYOYOHI                 number(7,0);
+        KOH1SKJ_FTN                     number(7,0);
+        KOH1SKJ_FTN_RECE                number(7,0);
+	KOH1SKJ_FTNKBN  		char(1);
+        KOH2SKJ_NISSU                   number(2,0);
+        KOH2SKJ_RYOYOHI                 number(7,0);
+        KOH2SKJ_FTN                     number(7,0);
+        KOH2SKJ_FTN_RECE                number(7,0);
+	KOH2SKJ_FTNKBN  		char(1);
+        KOH3SKJ_NISSU                   number(2,0);
+        KOH3SKJ_RYOYOHI                 number(7,0);
+        KOH3SKJ_FTN                     number(7,0);
+        KOH3SKJ_FTN_RECE                number(7,0);
+	KOH3SKJ_FTNKBN  		char(1);
+        KOH4SKJ_NISSU                   number(2,0);
+        KOH4SKJ_RYOYOHI                 number(7,0);
+        KOH4SKJ_FTN                     number(7,0);
+        KOH4SKJ_FTN_RECE                number(7,0);
+	KOH4SKJ_FTNKBN  		char(1);
+        RYOYOHI_SKJ                     number(7,0);
+        SKYMONEY_SKJ                    number(7,0);
+        SKYMONEY_SKJ_TAX                number(7,0);
+        SKYMONEY_SKJ_KEI                number(7,0);
+        RYOYOHI_SKJ_JIHI                number(7,0);
+        SKYMONEY_SKJ_JIHI               number(7,0);
+        SKYMONEY_SKJ_JIHI_TAX           number(7,0);
+        SKYMONEY_SKJ_JIHI_KEI           number(7,0);
+        RYOYOHI_LIFE                    number(7,0);
+        SKYMONEY_LIFE                   number(7,0);
+        SKYMONEY_LIFE_TAX               number(7,0);
+        SKYMONEY_LIFE_KEI               number(7,0);
+        RYOYOHI_LIFE_JIHI               number(7,0);
+        SKYMONEY_LIFE_JIHI              number(7,0);
+        SKYMONEY_LIFE_JIHI_TAX          number(7,0);
+        SKYMONEY_LIFE_JIHI_KEI          number(7,0);
+        DAY_1                           char(1);
+        DAY_2                           char(1);
+        DAY_3                           char(1);
+        DAY_4                           char(1);
+        DAY_5                           char(1);
+        DAY_6                           char(1);
+	DAY_7                           char(1);
+        DAY_8                           char(1);
+        DAY_9                           char(1);
+        DAY_10                          char(1);
+        DAY_11                          char(1);
+        DAY_12                          char(1);
+	DAY_13                          char(1);
+        DAY_14                          char(1);
+        DAY_15                          char(1);
+        DAY_16                          char(1);
+        DAY_17                          char(1);
+        DAY_18                          char(1);
+        DAY_19                          char(1);
+        DAY_20                          char(1);
+        DAY_21                          char(1);
+        DAY_22                          char(1);
+        DAY_23                          char(1);
+        DAY_24                          char(1);
+        DAY_25                          char(1);
+        DAY_26                          char(1);
+        DAY_27                          char(1);
+        DAY_28                          char(1);
+        DAY_29                          char(1);
+        DAY_30                          char(1);
+        DAY_31                          char(1);
+        NYUIN_RRKNUM                    number(3,0);
+        NYUINETC1                       number(7,0);
+        NYUINETC2                       number(7,0);
+        NYUINETC3                       number(7,0);
+        NYUINETC4                       number(7,0);
+        NYUINETC5                       number(7,0);
+#--
+	SELCREATEKBN			char(1),virtual;
+	SELSRYYMD			char(8),virtual;
+	SELNYUGAIKBN			char(1),virtual;
+};
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,DENPNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_syunou_nyuin_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syunou_nyuin
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   DENPNUM     =   :DENPNUM
+		;
+	};
+};
+
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     CREATEKBN    =   :SELCREATEKBN
+		);
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     PTID         =   :PTID
+			AND     CREATEKBN    =   :SELCREATEKBN
+		);
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     PTID         =   :PTID
+			AND     SRYYMD      LIKE :SELSRYYMD
+			AND     CREATEKBN    =   :SELCREATEKBN
+		);
+	};
+};
+
+path	del5 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   '1'
+			AND     DENPNUM      >=   9000000
+			AND     DENPNUM      <    9100000
+			AND     CREATEKBN    =   '3'
+		);
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_syunou_nyuin_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syunou_nyuin
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del6 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syunou_nyuin
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+		WHERE   HOSPNUM         =    :HOSPNUM
+		AND     NYUGAIKBN       =    :NYUGAIKBN
+		AND     PTID            =    :PTID
+		AND     CREATEKBN       <>   '3'
+		AND     DENPNUM		>=   :DENPNUM
+		);
+	};
+};
+
+path	upd1 	{
+	DBUPDATE	{
+		UPDATE	tbl_syunou_nyuin
+                SET	NYUGAIKBN	=    :NYUGAIKBN
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+		WHERE   HOSPNUM         =    :HOSPNUM
+		AND     NYUGAIKBN       =    :SELNYUGAIKBN
+		AND     PTID            =    :PTID
+		AND     CREATEKBN       =    :SELCREATEKBN
+		AND     SRYYMD		LIKE :SELSRYYMD
+		);
+	};
+};
+
+path	upd3 	{
+	DBUPDATE	{
+		UPDATE	tbl_syunou_nyuin
+                SET	NYUGAIKBN	=    :NYUGAIKBN
+		WHERE (HOSPNUM,NYUGAIKBN,PTID,DENPNUM) in (
+		SELECT HOSPNUM,NYUGAIKBN,PTID,DENPNUM
+		FROM tbl_syunou_main
+		WHERE   HOSPNUM         =    :HOSPNUM
+		AND     NYUGAIKBN       =    :SELNYUGAIKBN
+		AND     PTID            =    :PTID
+		AND     DENPNUM         =    :DENPNUM
+		);
+	};
+};
+
+path	abort 	{
+	DBSELECT	{
+		error	
+		;
+	};
+};
+

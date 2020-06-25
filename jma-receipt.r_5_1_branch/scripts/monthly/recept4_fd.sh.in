@@ -1,0 +1,73 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    レセ電ファイル作成処理（複数枚作成時のみ）
+#        ${1} レセ電ファイル出力先
+#        ${2} JOBID 
+#        ${3} SHELLID
+#        ${4} エラーファイル名 
+#        ${5} 端末ｉｐアドレス
+#        ${6} ファイルNO
+#        ${7} HOSPNUM
+#        ${8} レセプト作成区分
+#            1:提出用レセ、2:点検用レセ
+#-------------------------------------------#
+
+    rennum=0
+##  エラーファイル削除
+	echo $#
+	echo "echo " ${4}
+    if  [ -e ${4} ]; then
+        rm ${4}
+    fi
+
+        rm -r /home/orca/recept4_fd.log
+        LOG_FILE="/var/log/jma-receipt/${7}recept4_fd.log"
+        [ -e "${LOGFILE}"] && rm ${LOGFILE}
+
+
+        echo "arg1 = [" ${1} "]" 
+        echo "arg5 = [" ${5} "]" 
+        echo "arg8 = [" ${8} "]" 
+#        echo "hostname =  [" `hostname`  "]" 
+
+        RECEFILE1="RECEIPTC"
+
+        if  [ ${8} -eq '2' ]; then
+	RECEFILE1="TENKENRC"
+	echo "file name change!" 
+    fi
+
+    if  [ -e ${1}${7}${RECEFILE1}${6}.UKE ]; then
+        echo "--- RECEIPTC.UKE exist ---" 
+    fi
+    FDDHOST=`echo ${5}|tr \[\] "  "`
+    echo "FDDHOST = " $FDDHOST
+##
+		    echo "２番目以降のファイルの処理(fdw処理)" ${1}${7}${RECEFILE1}${6}.UKE
+##    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${2}${3},${7} >> /home/orca/recept4_fd.log
+##    exit 
+##
+        echo "--- fdw-> fd start ---" 
+	$FDW -host $FDDHOST -command fd-write.sh ${1}${7}${RECEFILE1}${6}.UKE ${RECEFILE1}.UKE
+	RC=$?
+        echo "--- fdw-> fd end   ---[" $RC  "]" 
+	if  [ $RC -ne '0' ]; then
+	    ERRCD='0000'$RC
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${2}${3}'  '${ERRCD:${#ERRCD}-4:4},${7} 
+        echo "--- fdw-> fd err   ---" 
+            exit
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${2}${3},${7}
+
+    exit 

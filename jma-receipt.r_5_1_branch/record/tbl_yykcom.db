@@ -1,0 +1,65 @@
+tbl_yykcom {
+	HOSPNUM				number(2,0);
+	SRYNAIYO			char(2);
+	DRCD    			char(5);
+	YYKYMD  			char(8);
+	KEYYYKTIME          		number(4,0);
+	YYKID   			number(2,0);
+	RENNUM        			number(1,0);
+	COMMENT  			varchar(100);
+	TERMID  		  	varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,SRYNAIYO,DRCD,YYKYMD,KEYYYKTIME,YYKID,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_yykcom_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykcom
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND	SRYNAIYO      =   :SRYNAIYO
+			AND	DRCD          =   :DRCD
+			AND	YYKYMD        =   :YYKYMD
+			AND	KEYYYKTIME    =   :KEYYYKTIME
+			AND	YYKID         =   :YYKID
+			AND	RENNUM        =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_yykcom_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykcom
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND	SRYNAIYO      =   :SRYNAIYO
+			AND	DRCD          =   :DRCD
+			AND 	YYKYMD        =   :YYKYMD
+			AND	KEYYYKTIME    =   :KEYYYKTIME
+			AND	YYKID         =   :YYKID
+			ORDER   BY        RENNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_yykcom
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND	SRYNAIYO      =   :SRYNAIYO
+			AND	DRCD          =   :DRCD
+			AND 	YYKYMD        =   :YYKYMD
+			AND	KEYYYKTIME    =   :KEYYYKTIME
+			AND	YYKID         =   :YYKID
+		;
+	};
+};
+

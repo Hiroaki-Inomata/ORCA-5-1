@@ -1,0 +1,14 @@
+xml_karte_no1v2req {
+  context                   int;
+  object                    object;
+  mode                      int;
+  recordname                varchar(128);
+  karte_no1v2req {
+    Request_Number                  varchar(2);
+    Print_Mode                      varchar(10);
+    Order_Class                     varchar(1);
+    Patient_ID                      varchar(20);
+    Department_Code                 varchar(02);
+    Insurance_Combination_Number    varchar(04);
+  };
+};

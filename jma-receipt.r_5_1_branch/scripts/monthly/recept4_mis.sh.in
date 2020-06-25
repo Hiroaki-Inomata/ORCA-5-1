@@ -1,0 +1,147 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    診療情報システム提供用
+#    recept4.sh を複写
+#    留意事項
+#      ${22} 症状詳記作成区分
+#      を毎日と確定の処理区分として流用する
+#      0:毎日、1:確定
+#-------------------------------------------#
+#    レセ電ファイル作成処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        $12 提出先
+#        $13 レセ電ファイル出力先
+#        $14 JOBID 
+#        $15 SHELLID
+#        $16 エラーファイル名 
+#        $17 ファイル出力先区分
+#        $18 端末ｉｐアドレス
+#        $19 入外区分
+#        ${20} HOSPNUM
+#        ${21} レセプト作成区分
+#            1:提出用レセ、2:点検用レセ
+#            6:連携基盤用、7:連携基盤用（当日）
+#        ${22} 症状詳記作成区分
+#            1:作成する
+#        ${23} 光ディスク等送付書作成区分
+#            0:作成する
+#        ${24} レセ電データ履歴保存設定区分
+#            1:履歴保存する
+#        ${25} 直接請求する保険者番号
+#            99999999:設定なし
+#        ${26} レセ電データチェックの有無
+#            1:チェックする
+#        ${27}-  ${28}医療機関コード別の処理指定時
+#            該当診療年月の開始、終了
+#-------------------------------------------#
+
+echo "arg3 =  [" ${3} "]"
+echo "arg5 =  [" ${5} "]"
+echo "arg12 = [" ${12} "]"
+echo "arg13 = [" ${13} "]"
+echo "arg16 = [" ${16} "]"
+echo "arg17 = [" ${17} "]"
+echo "arg19 = [" ${19} "]"
+echo "arg20 = [" ${20} "]"
+echo "arg21 = [" ${21} "]"
+echo "arg22 = [" ${22} "]"
+echo "arg23 = [" ${23} "]"
+echo "arg24 = [" ${24} "]"
+echo "arg25 = [" ${25} "]"
+echo "arg26 = [" ${26} "]"
+echo "arg27 = [" ${27} "]"
+echo "arg28 = [" ${28} "]"
+#    echo "hostname =  [" `hostname`  "]"
+
+rennum=0
+##  2HD flesize
+fixedsize=1441500
+
+##  エラーファイル削除
+echo "errfile = [" ${MCP_TEMPDIR}/${16}  "]"
+rm  -f ${MCP_TEMPDIR}/${16}
+
+if  [ ${22} -eq '1' ]; then
+    DCKBN="C"
+else
+    DCKBN="D"
+fi
+if  [ ${12} -eq '1' ]; then
+    SKKBN="S"
+else
+    SKKBN="K"
+fi
+#if  [ ${19} -eq '1' ]; then
+#    NGKBN="N"
+#else
+#    NGKBN="G"
+#fi
+#RECEFILE1="RECEIPTC${DCKBN}${SKKBN}${NGKBN}"
+RECEFILE1="RECEIPTC${DCKBN}${SKKBN}"
+RECEFILE2="TENKENT"
+
+#   該当ファイル削除
+rm  ${MCP_TEMPDIR}/${20}${RECEFILE1}*.UKE
+rm  ${MCP_TEMPDIR}/${20}${RECEFILE2}*.txt
+
+echo "file name change![ ${RECEFILE1} ${RECEFILE2} ]"
+
+#   レセ電ファイル作成
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM501 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${19},${17},$fixedsize,${21},${25},${20},${27},${28},${16}
+if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+    echo "--- BM501 err file exist ---"
+    exit 
+fi
+
+echo "--- file name  [ ${MCP_TEMPDIR}/${20}${RECEFILE2}01.txt => ${MCP_TEMPDIR}/${20}${RECEFILE1}${5}${3}.UKE ]"
+nkf -s ${MCP_TEMPDIR}/${20}${RECEFILE2}01.txt > ${MCP_TEMPDIR}/${20}${RECEFILE1}${5}${3}.UKE
+
+if ! [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ]; then
+  if ! test -d  "${13}"; then
+       mkdir ${13}
+       RC=$?
+       echo "--- mkdir end   ---[ $RC ]"
+       if  [ $RC -ne '0' ]; then
+           ERRCD='0077'
+           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD},${20}
+           echo "--- mkdir  err   ---"
+           exit
+       fi
+       chmod -R g+rw ${13}
+       echo "--- mkdir data mining holder ---"
+  fi
+  echo "--- folder name  [ ${13} ]"
+
+  echo "--- file name  [ ${MCP_TEMPDIR}/${20}${RECEFILE1}${5}${3}.UKE => ${13}${RECEFILE1}${5}${3}.UKE ]"
+  cp ${MCP_TEMPDIR}/${20}${RECEFILE1}${5}${3}.UKE ${13}${RECEFILE1}${5}${3}.UKE
+  chmod -R g+rw ${13}${RECEFILE1}${5}${3}.UKE
+
+  if ! [ -s ${13}${RECEFILE1}${5}${3}.UKE ]; then
+    rm ${13}${RECEFILE1}${5}${3}.UKE
+  fi
+else
+  if [ "${18}" = "cron" ]; then
+    CSVFILE="${RECEFILE1}${5}${3}.UKE"
+    if [ -s ${MCP_TEMPDIR}/${20}${CSVFILE} ]; then
+      RECCNT="$(wc -l ${MCP_TEMPDIR}/${20}${CSVFILE} | awk '{i=split($0,arr," ");printf("%06d",arr[1])}')"
+      ${MONBLOB} -dir ${LDDIRECTORY} -import ${MCP_TEMPDIR}/${20}${CSVFILE} > ${MCP_TEMPDIR}/blobid-$$
+      MONBLOBID=`cat ${MCP_TEMPDIR}/blobid-$$`
+
+      PARAM="${1},${2},${3},${4},${5},${3:0:8},${7},1,${9},${10},${11},${12},${14},${15},${20},${19},${MCP_TEMPDIR},${CSVFILE},${RECCNT},${MONBLOBID}"
+
+      ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBFILEMIS -parameter "${PARAM}"
+    fi
+  fi
+fi
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20}
+
+exit

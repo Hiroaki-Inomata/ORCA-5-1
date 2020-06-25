@@ -1,0 +1,199 @@
+X06 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    SRYCD {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    LBLTITLE {
+      style varchar(20);
+    };
+    NO01 {
+      numdata number(3);
+    };
+    NO02 {
+      numdata number(3);
+    };
+    NO03 {
+      numdata number(3);
+    };
+    NO04 {
+      numdata number(3);
+    };
+    NO05 {
+      numdata number(3);
+    };
+    NO06 {
+      numdata number(3);
+    };
+    NO07 {
+      numdata number(3);
+    };
+    NO08 {
+      numdata number(3);
+    };
+    NO09 {
+      numdata number(3);
+    };
+    NO10 {
+      numdata number(3);
+    };
+    NO11 {
+      numdata number(3);
+    };
+    NO12 {
+      numdata number(3);
+    };
+    NO13 {
+      numdata number(3);
+    };
+    NO14 {
+      numdata number(3);
+    };
+    NO15 {
+      numdata number(3);
+    };
+    NO16 {
+      numdata number(3);
+    };
+    NO17 {
+      numdata number(3);
+    };
+    NO18 {
+      numdata number(3);
+    };
+    NO19 {
+      numdata number(3);
+    };
+    NO20 {
+      numdata number(3);
+    };
+    TEKCD01 {
+      textdata varchar(20);
+    };
+    TEKCD02 {
+      textdata varchar(20);
+    };
+    TEKCD03 {
+      textdata varchar(20);
+    };
+    TEKCD04 {
+      textdata varchar(20);
+    };
+    TEKCD05 {
+      textdata varchar(20);
+    };
+    TEKCD06 {
+      textdata varchar(20);
+    };
+    TEKCD07 {
+      textdata varchar(20);
+    };
+    TEKCD08 {
+      textdata varchar(20);
+    };
+    TEKCD09 {
+      textdata varchar(20);
+    };
+    TEKCD10 {
+      textdata varchar(20);
+    };
+    TEKCD11 {
+      textdata varchar(20);
+    };
+    TEKCD12 {
+      textdata varchar(20);
+    };
+    TEKCD13 {
+      textdata varchar(20);
+    };
+    TEKCD14 {
+      textdata varchar(20);
+    };
+    TEKCD15 {
+      textdata varchar(20);
+    };
+    TEKCD16 {
+      textdata varchar(20);
+    };
+    TEKCD17 {
+      textdata varchar(20);
+    };
+    TEKCD18 {
+      textdata varchar(20);
+    };
+    TEKCD19 {
+      textdata varchar(20);
+    };
+    TEKCD20 {
+      textdata varchar(20);
+    };
+    TEKNAME01 {
+      textdata varchar(100);
+    };
+    TEKNAME02 {
+      textdata varchar(100);
+    };
+    TEKNAME03 {
+      textdata varchar(100);
+    };
+    TEKNAME04 {
+      textdata varchar(100);
+    };
+    TEKNAME05 {
+      textdata varchar(100);
+    };
+    TEKNAME06 {
+      textdata varchar(100);
+    };
+    TEKNAME07 {
+      textdata varchar(100);
+    };
+    TEKNAME08 {
+      textdata varchar(100);
+    };
+    TEKNAME09 {
+      textdata varchar(100);
+    };
+    TEKNAME10 {
+      textdata varchar(100);
+    };
+    TEKNAME11 {
+      textdata varchar(100);
+    };
+    TEKNAME12 {
+      textdata varchar(100);
+    };
+    TEKNAME13 {
+      textdata varchar(100);
+    };
+    TEKNAME14 {
+      textdata varchar(100);
+    };
+    TEKNAME15 {
+      textdata varchar(100);
+    };
+    TEKNAME16 {
+      textdata varchar(100);
+    };
+    TEKNAME17 {
+      textdata varchar(100);
+    };
+    TEKNAME18 {
+      textdata varchar(100);
+    };
+    TEKNAME19 {
+      textdata varchar(100);
+    };
+    TEKNAME20 {
+      textdata varchar(100);
+    };
+  };
+};

@@ -1,0 +1,78 @@
+M95 {
+  bgcolor varchar(20);
+  fixed1 {
+    nt1 {
+      pageno int;
+      fixed2 {
+        SYSYMD {
+          textdata varchar(10);
+        };
+        CALENDAR1 {
+          year int;
+          month int;
+          day int;
+        };
+        JIKANKBN_COMB {
+          JIKANKBN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[9];
+        };
+      };
+      fixed3 {
+        SRYKA {
+          textdata varchar(2);
+        };
+        RENNUM {
+          textdata varchar(4);
+        };
+        DRCD_COMB {
+          DRCD {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[99];
+        };
+        SYORIMEI {
+          style varchar(20);
+          textdata varchar(30);
+        };
+        scrolledwindow1 {
+          hpos int;
+          vpos int;
+          SYSLIST {
+            count int;
+            row int;
+            rowattr int;
+              item {
+                column1 varchar(2);
+                column2 varchar(20);
+                column3 varchar(4);
+                column4 varchar(50);
+              }[100];
+              selectdata bool[100];
+          };
+        };
+      };
+      fixed4 {
+        TAINLIST {
+          count int;
+          row int;
+          rowattr int;
+            item {
+              column1 varchar(1);
+              column2 varchar(13);
+            }[9];
+            selectdata bool[9];
+        };
+        TAINNUM {
+          textdata varchar(1);
+        };
+      };
+      N03 {
+        state int;
+      };
+    };
+  };
+};

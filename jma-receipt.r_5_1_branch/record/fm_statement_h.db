@@ -1,0 +1,45 @@
+fm_statement_h {
+  context                 int;
+  object                  object;
+  mode                    int;
+  recordname              varchar(128);
+  data {
+    Form_ID             varchar(30);
+    Custom_ID             varchar(30);
+    Printer               varchar(20);
+    Patient  {
+      ID                  varchar(20);
+      Name                varchar(50);
+      KanaName            varchar(50);
+    };
+    Hospital  {
+      Name                varchar(120)[3];
+      ZipCode             varchar(7);
+      Address             varchar(200)[3];
+      PhoneNumber         varchar(15);
+    };
+    Perform_Date          varchar(10);
+    Perform_End_Date      varchar(10);
+    IssuedDate            varchar(10);
+    Ward_Number           varchar(02);
+    Ward_Name             varchar(20);
+    Room_Number           varchar(6);
+    Department_Name       varchar(30);
+    Insurance_Name        varchar(40);
+    Insurance_Rate        varchar(6);
+    Invoice_Number        varchar(7);
+    Statement{
+      Group_Head_Flg      varchar(01);
+      Group_Number        varchar(3);
+      Medical_Class_Name  varchar(10);
+      Description         varchar(150);
+      Yen_Flg             varchar(01);
+      Point               varchar(09);
+      Count               varchar(3);
+      Total_Point         varchar(11);
+      End_Flg             varchar(01);
+    }[2000];
+    Yen_Flg               varchar(1);
+    Caution               varchar(100);
+  };
+};

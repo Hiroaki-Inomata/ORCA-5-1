@@ -1,0 +1,140 @@
+tbl_chkreigai	{
+	HOSPNUM			number(2,0);
+	PTID			number(10,0);
+	RENNUM			number(8,0);
+	CHKNUM			char(2);
+	NYUGAIKBN   	char(1);
+	CHKKBN			char(1);
+	SRYCD   		char(9);
+	BYOMEI   		varchar(160);
+	COMPKBN   		char(1);
+	TEKCD   		char(9);
+	TEKBYOMEI   	varchar(160);
+	TEKCOMPKBN      char(1);
+	TANICD   		number(3,0);
+	TANINAME   		varchar(12);
+	ERRCD   		char(6);
+	ERRMSG   		varchar(200);
+	STYUKYMD	  	char(8);
+	EDYUKYMD  		char(8);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+#-----> 検索キー用項目
+	SELLIMIT		number(8,0),virtual;
+	SELOFFSET		number(8,0),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_chkreigai_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chkreigai
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	PTID	=	:PTID
+			AND	RENNUM	=	:RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_chkreigai_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chkreigai
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	NYUGAIKBN LIKE	:NYUGAIKBN
+			AND	STYUKYMD <=	:STYUKYMD
+			AND	EDYUKYMD >=	:EDYUKYMD
+			ORDER BY PTID,RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_chkreigai_key3_csr CURSOR FOR
+		SELECT a.* 
+		FROM tbl_chkreigai a join tbl_ptinf b using (HOSPNUM,PTID)
+		WHERE	a.HOSPNUM  =	:HOSPNUM
+		AND	a.NYUGAIKBN =  :NYUGAIKBN
+		AND	a.STYUKYMD <=	:STYUKYMD
+		AND	a.EDYUKYMD >=	:EDYUKYMD
+		ORDER BY b.KANANAME,b.PTID,a.CHKNUM,a.ERRCD,a.RENNUM
+		LIMIT    :SELLIMIT
+		OFFSET   :SELOFFSET
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_chkreigai_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chkreigai
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	PTID	=	:PTID
+			ORDER BY  RENNUM DESC
+			LIMIT 1
+		;
+	};
+};
+
+path	key5		{
+	DBSELECT	{
+		DECLARE tbl_chkreigai_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chkreigai
+		WHERE HOSPNUM    =  :HOSPNUM
+		AND PTID	 =  :PTID
+		AND CHKNUM	 =  :CHKNUM
+		AND NYUGAIKBN    =  :NYUGAIKBN
+		AND ( SRYCD      = :SRYCD  OR  :SRYCD = '')
+		AND ( ERRCD      = :ERRCD  OR  :ERRCD = '')
+		AND ( BYOMEI     = :BYOMEI OR  :BYOMEI = '')
+		AND ( TEKCD      = :TEKCD  OR  :TEKCD  = '')
+		AND ( TEKBYOMEI  = :TEKBYOMEI  OR  :TEKBYOMEI  = '')
+		AND ( TEKCOMPKBN = :TEKCOMPKBN OR  :TEKCOMPKBN = '')
+		AND STYUKYMD	<=  :STYUKYMD
+		AND EDYUKYMD	>=  :EDYUKYMD
+		;
+	};
+};
+
+path	del1		{
+	DBDELETE	{
+		DELETE
+		FROM tbl_chkreigai
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	PTID	=	:PTID
+		;
+	};
+};
+
+path	del2		{
+	DBDELETE	{
+		DELETE
+		FROM tbl_chkreigai
+		WHERE HOSPNUM    =  :HOSPNUM
+		AND PTID	 =  :PTID
+		AND CHKNUM	 =  :CHKNUM
+		AND ( SRYCD      = :SRYCD  OR  :SRYCD = '')
+		AND ( ERRCD      = :ERRCD  OR  :ERRCD = '')
+		AND ( BYOMEI     = :BYOMEI OR  :BYOMEI = '')
+		AND ( TEKCD      = :TEKCD  OR  :TEKCD  = '')
+		AND ( TEKBYOMEI  = :TEKBYOMEI  OR  :TEKBYOMEI  = '')
+		AND ( TEKCOMPKBN = :TEKCOMPKBN OR  :TEKCOMPKBN = '')
+		AND ( TANICD     = :TANICD  OR  :TANICD = 0 )
+		AND NYUGAIKBN	 =  :NYUGAIKBN
+		AND STYUKYMD	<=  :STYUKYMD
+		AND EDYUKYMD	>=  :EDYUKYMD
+		;
+	};
+};
+

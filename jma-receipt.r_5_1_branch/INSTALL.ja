@@ -1,0 +1,114 @@
+            日医標準レセプトソフトインストール方法
+-----------------------------------------------------------------------------
+$ autoreconf
+$./configure
+
+$ make
+$ su
+Passowrd: [パスワードを入力]
+# make install
+
+(ユーザの作成・DBの作成)
+(権限の調整)
+
+----------------------------------------------------------------------------
+必要なソフト
+
+・MONTSUQI(panda)
+  ・libfixed
+  ・Gtk+1.2.x
+  ・gtk+panda
+  ・libglade-panda
+・OpenCOBOL
+・PostgreSQL
+・MONPE
+・dia-orca
+・GNUmake
+・wget
+・pkg-config
+・libjconv
+・libqrencode
+・Ruby
+   - uconv
+   - xmlparser 
+     ・expat
+
+開発に必要なソフト
+・glade-panda / monsia0
+
+----------------------------------------------------------------------------
+configure オプション
+
+  --prefix=PREFIX
+    デフォルト(/usr/local/orca)
+    日医標準レセプトソフトのインストール先を指定します。
+
+  --libdir=DIRECTORY
+     デフォルト(/usr/local/orca/lib)
+    COBOLライブラリのインストール先を指定します。
+
+  --sysconfdir=DIRECTORY
+     デフォルト(/usr/local/orca/etc)
+     設定ファイルのインストール先を指定します。
+
+  --with-sitedir=DIRRECTORY
+    デフォルト(/usr/local/orca)
+     独自ソフトのインストール先
+
+  --with-sitesrcdir=DIRRECTORY
+     独自ソフトのソースがあるディレクトリを指定します。
+
+  --with-sitelibdir=DIRRECTORY
+     デフォルト(/usr/local/orca/lib)
+     独自ソフトのCOBOLライブラリのインストール先を指定します。
+
+  --with-open-cobol-prefix=DIRECTORY
+  --with-open-cobol-exec-prefix=DIRECTORY
+    OpenCOBOLのcobcのインストール先を指定します。
+    パスが通っている所にインストールされている場合は指定する
+    必要はありません。
+
+  --with-panda-dir=DIRECTORY
+    MONTSUQI(panda)のインストール先を指定します。
+    /usr local/local/panda /usr/lib/panda の[sbin|bin]
+    のいずれかにインストールされている場合は指定する必要は
+    ありません。
+
+  --enable-debug
+    デフォルト(yes)
+    デバッグ用にコンパイルするときに指定します。現在は wfcの前に
+    apsを立ち上げたい(tools/monitor.shを使用)場合に指定します。
+
+  --enable-hosp
+    デフォルト(yes)
+    入院用プログラムの ld 起動をサポートします。
+
+----------------------------------------------------------------------------
+
+例1)
+# for sarge deb package
+$ autoreconf
+$ ./configure \
+           --prefix=/usr/lib/jma-receipt \
+           --libdir=/usr/lib/jma-receipt \
+           --sysconfdir=/etc/jma-receipt \
+           --with-sitedir=/usr/lib/jma-receipt/site-lib \
+           --with-sitesrcdir=/usr/local/site-jma-receipt \
+           --with-sitelibdir=/usr/lib/jma-receipt/site-lib
+$ make install 
+
+例2)
+# その場で実行する場合
+$ autoreconf
+$ ./configure \
+           --prefix=`pwd` \
+           --libdir=`pwd` \
+           --sysconfdir=`pwd`/etc \
+           --with-sitesrcdir=`pwd`/site-src/ \
+           --with-sitedir=`pwd`/site-lib/ \
+           --with-sitelibdir=`pwd`/site-lib/
+$ make 
+$ ./tools/monitor.sh
+別の端末で 
+$ glclient
+----------------------------------------------------------------------------

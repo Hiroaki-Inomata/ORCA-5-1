@@ -1,0 +1,27 @@
+J025 {
+  knmino {
+    scrolledwindow1 {
+      SYUNOULIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(7);
+            column2 varchar(6);
+            column3 varchar(50);
+            column4 varchar(3);
+            column5 varchar(10);
+            column6 varchar(10);
+            column7 varchar(10);
+            column8 varchar(10);
+            column9 varchar(6);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    ERRMSG {
+      style varchar(20);
+      textdata varchar(100);
+    };
+  };
+};

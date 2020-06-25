@@ -1,0 +1,25 @@
+xml_master_exportv3res {
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  master_exportv3res {
+    Request_Number                 varchar(02);
+    Response_Number                varchar(02);
+    Karte_Uid                      varchar(36);
+    Orca_Uid                       varchar(36);
+    Information_Date               varchar(10);
+    Information_Time               varchar(08);
+    Api_Result                     varchar(03);
+    Api_Result_Message             varchar(100);
+    Master_Information {
+      Master_Id                    varchar(50);
+      Master_Name                  varchar(50);
+      Exists_Update_Date           varchar(1);
+    }[100];
+    Data_Id_Information {
+      Data_Id                      varchar(37);
+    };
+    Output_Count                   varchar(10);
+  };
+};

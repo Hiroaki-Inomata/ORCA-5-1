@@ -1,0 +1,50 @@
+tbl_material_h_n_master {
+	SNAMECD				number(5,0);
+	SNAME				varchar(200);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	SNAMECD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_h_n_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_material_h_n
+		WHERE 	SNAMECD = :SNAMECD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_material_h_n
+			VALUES(
+				:SNAMECD,
+				:SNAME,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_material_h_n
+			SET
+				SNAMECD = :SNAMECD,
+				SNAME   = :SNAME,
+				CREYMD  = :CREYMD,
+				UPYMD   = :UPYMD,
+				UPHMS   = :UPHMS
+			WHERE 	SNAMECD = :SNAMECD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_material_h_n
+			WHERE 	SNAMECD = :SNAMECD
+		;
+	};
+};

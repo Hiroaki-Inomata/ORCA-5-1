@@ -1,0 +1,17 @@
+kanri_cd    : "4002"
+name        : "Ï«ºÒÊÝ¸±¡¡Â»½ý¶èÊ¬Ì¾¾Î"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "SONSHOUNAME"
+  item_jp   : "Â»½ý¶èÊ¬Ì¾¾Î"
+  type      : "X"
+  start     : 1
+  length    : 120
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 121
+  length    : 380

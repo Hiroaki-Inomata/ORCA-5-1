@@ -1,0 +1,244 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#  ${1} : 医療機関識別番号(HOSPNUM)
+#  ${2} : 診療年月
+#  ${3} : 処理起動日時
+#  ${4} : データ出力ディレクトリ
+#  ${5} : 処理区分（0:毎日・1:確定）
+#-------------------------------------------#
+
+HOSPNUM=${1}
+RUNDATE=${3}
+EXYM=${2}
+EXYMD=${RUNDATE:0:8}
+EXTIME=${RUNDATE:8:6}
+
+create_pgpass
+
+# TODO:
+#  点検用レセのシステム管理の設定によりレセプト作成区分が決まる
+#  ORCBJOBCHK1 で吸収するようにするか？
+#  とりあえずこのスクリプトでは５で指定している
+
+RESULTF=${MCP_TEMPDIR}/${HOSPNUM}orcbjobchk1-${RUNDATE}.$$
+PARAM="${HOSPNUM},0000001,RECEPT1,receipt,${RESULTF}"
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+if [ -e ${RESULTF} ] ; then
+  RES=`cat ${RESULTF}`
+  JOBEXCHK="${RES:0:1}"
+  RECESYSR="${RES:4:1}"
+  rm ${RESULTF}
+else
+  JOBEXCHK="0"
+  RECESYSR="0"
+fi
+# システム管理 2005 レセ電 労災 出力区分チェック
+if [ ${RECESYSR} -eq 0 ]; then
+  delete_pgpass
+  exit 0 
+fi
+
+# レセプト作成処理のみジョブ管理をチェック
+# 他プロセスで実行中の場合は10分間を３回待つ
+
+WAITTIME=600 # 10 minutes
+
+#-------------------------------------------#
+# 外来分作成
+#-------------------------------------------#
+
+WAITCNT=0
+
+until [ ${WAITCNT} -eq 3 ]
+do
+  if [ ${JOBEXCHK} -eq 1 ]; then
+    echo "0000001+RECEPT1 is already running. waiting at 10 minutes."
+    sleep ${WAITTIME}
+    WAITCNT=$(expr ${WAITCNT} + 1)
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+    if [ -e ${RESULTF} ] ; then
+      RES=`cat ${RESULTF}`
+      JOBEXCHK="${RES:0:1}"
+      rm ${RESULTF}
+    else
+      JOBEXCHK="0"
+    fi
+  else
+    #-------------------------------------------#
+    #    労災請求書用ファイル作成
+    #    $18 レセプト作成区分 5 で処理起動
+    #    スクリプト中でＢとするステップあり
+    #-------------------------------------------#
+    ARG08=${EXYM}
+    ARG09=${EXYMD}
+    ARG10="${EXTIME}00"
+    ARG16=${HOSPNUM}
+    ARG01="${ARG08}AAAABBBBCCCCDDDD${ARG09}"
+    ARG04="${ARG16}00OR042ERRAAAABBBBCCCCDDDD.dat"
+ 
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001RECEPT1,${ARG16}"
+ 
+    export MON_BATCH_ID=$(uuidgen)
+    export MON_BATCH_NAME="recept6_mis.sh"
+    export MON_BATCH_GROUPNAME="${ARG16}"
+    export MON_BATCH_EXTRA="0000001RECEPT1"
+    export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+    export MCP_TENANT=1
+ 
+    PARAM="\"${ARG01}\" 1 3 \"${ARG04}\" 0000001 RECEPT1 \
+           \"\" \"${ARG08}\" \"${ARG09}\" \"${ARG10}\" \"\" 3 3 \
+           \"\" \"\" \"${ARG16}\" 0 4 0"
+ 
+    ${MONBATCH} "recept6_mis.sh ${PARAM}"
+    R1RC=$?
+ 
+    if [ ${R1RC} -ne 0 ] ; then
+      delete_pgpass
+      exit ${R1RC}
+    fi
+
+    break
+  fi
+done
+
+if [ ${WAITCNT} -eq 3 ]; then
+  echo "Processing aborts because RECEPT1 is running."
+  delete_pgpass
+  exit 0
+fi
+
+#-------------------------------------------#
+# 入院分作成
+#-------------------------------------------#
+# システム管理 2005 レセ電 労災 出力区分チェック
+if [ ${RECESYSR} -ne 2 ] && [ ${RECESYSR} -ne 3 ]; then
+  echo "NYUIN skip."
+else
+  RESULTF=${MCP_TEMPDIR}/${HOSPNUM}orcbjobchk1-${RUNDATE}.$$
+  PARAM="${HOSPNUM},0000001,RECEPT1,receipt,${RESULTF}"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+  if [ -e ${RESULTF} ] ; then
+    RES=`cat ${RESULTF}`
+    JOBEXCHK="${RES:0:1}"
+    rm ${RESULTF}
+  else
+    JOBEXCHK="0"
+  fi
+
+  # レセプト作成処理のみジョブ管理をチェック
+  # 他プロセスで実行中の場合は10分間を３回待つ
+
+  WAITCNT=0
+
+  until [ ${WAITCNT} -eq 3 ]
+  do
+    if [ ${JOBEXCHK} -eq 1 ]; then
+      echo "RECEPT1 is already running. waiting at 10 minutes."
+      sleep ${WAITTIME}
+      WAITCNT=$(expr ${WAITCNT} + 1)
+      ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+      if [ -e ${RESULTF} ] ; then
+        RES=`cat ${RESULTF}`
+        JOBEXCHK="${RES:0:1}"
+        rm ${RESULTF}
+      else
+        JOBEXCHK="0"
+      fi
+    else
+      #-------------------------------------------#
+      #    労災（入院）請求書用ファイル作成
+      #    $18 レセプト作成区分 5 で処理起動
+      #    スクリプト中でＢとするステップあり
+      #-------------------------------------------#
+      ARG08=${EXYM}
+      ARG09=${EXYMD}
+      ARG10="${EXTIME}00"
+      ARG16=${HOSPNUM}
+      ARG01="${ARG08}AAAABBBBCCCCDDDD${ARG09}"
+      ARG04="${ARG16}00OR042ERRAAAABBBBCCCCDDDD.dat"
+ 
+      $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001RECEPT1,${ARG16}"
+ 
+      export MON_BATCH_ID=$(uuidgen)
+      export MON_BATCH_NAME="recept10_mis.sh"
+      export MON_BATCH_GROUPNAME="${ARG16}"
+      export MON_BATCH_EXTRA="0000001RECEPT1"
+      export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+      export MCP_TENANT=1
+ 
+      PARAM="\"${ARG01}\" 1 3 \"${ARG04}\" 0000001 RECEPT1 \
+             \"\" \"${ARG08}\" \"${ARG09}\" \"${ARG10}\" \"\" 3 3 \
+             \"\" \"\" \"${ARG16}\" 0 4 0"
+
+      ${MONBATCH} "recept10_mis.sh ${PARAM}"
+      R1RC=$?
+ 
+      if [ ${R1RC} -ne 0 ] ; then
+        delete_pgpass
+        exit ${R1RC}
+      fi
+
+      break
+    fi
+  done
+
+  if [ ${WAITCNT} -eq 3 ]; then
+    echo "Processing aborts because RECEPT1 is running."
+    delete_pgpass
+    exit 0
+  fi
+fi
+
+#-------------------------------------------#
+#    レセ電ファイル作成処理
+#    ${22} 症状詳記作成区分
+#    を毎日と確定の処理区分として流用する
+#    0:毎日、1:確定
+#-------------------------------------------#
+if [ ${5} -eq 0 ]; then
+  SYORINO="0101"
+else
+  SYORINO="0102"
+fi
+
+ARG05=${EXYM}
+ARG06=${EXYMD}
+ARG13="$4/"
+ARG18="127.0.0.1"
+ARG20=${HOSPNUM}
+ARG16="${ARG20}00OR044ERRAAAABBBBCCCCDDDD.dat"
+STIME=${EXTIME}
+ 
+export MON_BATCH_ID=$(uuidgen)
+export MON_BATCH_NAME="recept41_mis.sh"
+export MON_BATCH_GROUPNAME="${ARG20}"
+export MON_BATCH_EXTRA="0000001SOKATU"
+export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+export MCP_TENANT=1
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001SOKATU,${ARG20}"
+
+PARAM="${SYORINO} MISRECE1 \"${ARG06}${STIME}\" 0001 \"${ARG05}\" \"${ARG06}\" \
+       recept41_mis.sh 0000 AAAABBBBCCCCDDDD orcacron prt 1 \
+       \"${ARG13}\" 0000001 SOKATU \"${ARG16}\" 4 cron \
+       0 \"${ARG20}\" 2 ${5} 0 0 99999999 0"
+
+${MONBATCH} "recept41_mis.sh ${PARAM}"
+R4RC=$?
+
+if [ ${R4RC} -ne 0 ] ; then
+  delete_pgpass
+  exit ${R4RC}
+fi
+
+delete_pgpass
+
+exit ${R4RC}

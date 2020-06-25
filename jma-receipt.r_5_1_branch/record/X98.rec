@@ -1,0 +1,61 @@
+X98 {
+  fixed32 {
+    B09 {
+      state int;
+    };
+    INPUT {
+      textdata varchar(22);
+    };
+    SENTAKU {
+      textdata varchar(30);
+    };
+    SELNUM1 {
+      textdata varchar(3);
+    };
+    SELNUM2 {
+      textdata varchar(3);
+    };
+    SELNUM3 {
+      textdata varchar(3);
+    };
+    SELNUM4 {
+      textdata varchar(3);
+    };
+    SELNUM5 {
+      textdata varchar(3);
+    };
+    scrolledwindow26 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(70);
+            column3 varchar(6);
+            column4 varchar(10);
+            column5 varchar(2);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    JIINCOB {
+      JIIN {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[10];
+    };
+    USERCOB {
+      USER {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[10];
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

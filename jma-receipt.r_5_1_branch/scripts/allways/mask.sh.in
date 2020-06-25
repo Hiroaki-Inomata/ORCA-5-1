@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+LANG=ja_JP.eucJP
+sed -s "s/[^\x01-\x7E]/<!>/g" | sed -s "s/<!><!>/¡û/g"
+

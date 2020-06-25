@@ -1,0 +1,71 @@
+C10 {
+  fixed6 {
+    B08 {
+      state int;
+    };
+    TENKICOMBO {
+      TENKIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[6];
+    };
+    TENKIYMD {
+      textdata varchar(10);
+    };
+    UTAGAIFLGCOMBO {
+      UTAGAIFLG {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[4];
+    };
+    MANSEIFLGCOMBO {
+      MANSEIFLG {
+        textdata varchar(46);
+      };
+      count int;
+        item varchar(46)[6];
+    };
+    HKNCOMBICOMBO {
+      HKNCOMBI {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[201];
+    };
+    KOHIDCOMBO {
+      state int;
+      KOHID {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[101];
+    };
+    NYUGAIKBNCOMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[3];
+    };
+    SYUBYOFLGCOMBO {
+      SYUBYOFLG {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[2];
+    };
+    SRYYMD {
+      textdata varchar(10);
+    };
+    SRYKA_COMBO {
+      state int;
+      SRYKA {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+  };
+};

@@ -1,0 +1,26 @@
+XA99 {
+  fixed6 {
+    B12 {
+      state int;
+    };
+    MSG {
+      textdata varchar(80);
+    };
+    scrolledwindow28 {
+      JOBKANRILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(7);
+            column2 varchar(20);
+            column3 varchar(8);
+            column4 varchar(8);
+            column5 varchar(10);
+            column6 varchar(100);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+  };
+};

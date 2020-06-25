@@ -1,0 +1,253 @@
+Q98 {
+  fixed1 {
+    POST {
+      textdata varchar(7);
+    };
+    ADRS {
+      textdata varchar(100);
+    };
+    TADRSCHK01 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK02 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK03 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK04 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK05 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK06 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK07 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK08 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK09 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK10 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK11 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK12 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK13 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK14 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK15 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK16 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK17 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK18 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK19 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK20 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK21 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK22 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK23 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK24 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK25 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK26 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK27 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK28 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK29 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK30 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK31 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK32 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK33 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK34 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK35 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK36 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK37 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK38 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK39 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK40 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK41 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK42 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK43 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK44 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK45 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK46 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK47 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK48 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK49 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK50 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK51 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK52 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK53 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK54 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK55 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK56 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK57 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK58 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK59 {
+      style varchar(20);
+      label varchar(20);
+    };
+    TADRSCHK60 {
+      style varchar(20);
+      label varchar(20);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+  };
+};

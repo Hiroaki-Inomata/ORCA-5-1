@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#        ${1} ¥¸¥ç¥Ö£É£Ä
+#        ${2} ¥·¥§¥ë£É£Ä
+#        ${3} HOSPNUM
+#-------------------------------------------#
+#
+           LOG_FILE="/var/log/jma-receipt/${3}prtdbdel.log"
+        
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPRTDBDEL -parameter ${1},${2},${3}
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+########$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${1}${2},${3}
+
+        exit 

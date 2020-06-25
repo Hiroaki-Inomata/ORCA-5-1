@@ -1,0 +1,186 @@
+KT03 {
+  fixed5 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    KANANAME {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    MEISYO {
+      textdata varchar(70);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    DAY01 {
+      numdata number(2);
+    };
+    DAY02 {
+      numdata number(2);
+    };
+    DAY03 {
+      numdata number(2);
+    };
+    DAY04 {
+      numdata number(2);
+    };
+    DAY05 {
+      numdata number(2);
+    };
+    DAY06 {
+      numdata number(2);
+    };
+    DAY07 {
+      numdata number(2);
+    };
+    DAY08 {
+      numdata number(2);
+    };
+    DAY09 {
+      numdata number(2);
+    };
+    DAY10 {
+      numdata number(2);
+    };
+    DAY11 {
+      numdata number(2);
+    };
+    DAY12 {
+      numdata number(2);
+    };
+    DAY13 {
+      numdata number(2);
+    };
+    DAY14 {
+      numdata number(2);
+    };
+    DAY15 {
+      numdata number(2);
+    };
+    DAY16 {
+      numdata number(2);
+    };
+    DAY17 {
+      numdata number(2);
+    };
+    DAY18 {
+      numdata number(2);
+    };
+    DAY19 {
+      numdata number(2);
+    };
+    DAY20 {
+      numdata number(2);
+    };
+    DAY21 {
+      numdata number(2);
+    };
+    DAY22 {
+      numdata number(2);
+    };
+    DAY23 {
+      numdata number(2);
+    };
+    DAY24 {
+      numdata number(2);
+    };
+    DAY25 {
+      numdata number(2);
+    };
+    DAY26 {
+      numdata number(2);
+    };
+    DAY27 {
+      numdata number(2);
+    };
+    DAY28 {
+      numdata number(2);
+    };
+    DAY29 {
+      numdata number(2);
+    };
+    DAY30 {
+      numdata number(2);
+    };
+    DAY31 {
+      numdata number(2);
+    };
+    SRYCD {
+      textdata varchar(9);
+    };
+    NYUGAIKBN {
+      numdata number(1);
+    };
+    FSANTEIYMD {
+      textdata varchar(10);
+    };
+    NAME {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    MSANTEID {
+      numdata number(2);
+    };
+    MSANTEICNT {
+      numdata number(3);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SRYKA {
+      numdata number(2);
+    };
+    HKNCOMBI {
+      numdata number(4);
+    };
+    SRYKAMEI {
+      textdata varchar(7);
+    };
+    HKNCOMBIMEI {
+      textdata varchar(15);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      SANTEILST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(9);
+            column3 varchar(2);
+            column4 varchar(10);
+            column5 varchar(20);
+            column6 varchar(60);
+            column7 varchar(10);
+            column8 varchar(2);
+            column9 varchar(4);
+            column10 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    B02 {
+      state int;
+    };
+    B03 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+  };
+};

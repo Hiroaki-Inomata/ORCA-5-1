@@ -1,0 +1,407 @@
+W96 {
+  fixed1 {
+    LBLJMASCRIPTS {
+      style varchar(20);
+    };
+    NAME01 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT01 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON01 {
+      MON01 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM01 {
+      DOM01 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW01 {
+      DOW01 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR01 {
+      HOUR01 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC01 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME02 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT02 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON02 {
+      MON02 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM02 {
+      DOM02 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW02 {
+      DOW02 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR02 {
+      HOUR02 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC02 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME03 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT03 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON03 {
+      MON03 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM03 {
+      DOM03 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW03 {
+      DOW03 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR03 {
+      HOUR03 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC03 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME04 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT04 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON04 {
+      MON04 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM04 {
+      DOM04 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW04 {
+      DOW04 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR04 {
+      HOUR04 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC04 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME05 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT05 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON05 {
+      MON05 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM05 {
+      DOM05 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW05 {
+      DOW05 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR05 {
+      HOUR05 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC05 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME06 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT06 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON06 {
+      MON06 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM06 {
+      DOM06 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW06 {
+      DOW06 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR06 {
+      HOUR06 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC06 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME07 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT07 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON07 {
+      MON07 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM07 {
+      DOM07 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW07 {
+      DOW07 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR07 {
+      HOUR07 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC07 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME08 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT08 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON08 {
+      MON08 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM08 {
+      DOM08 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW08 {
+      DOW08 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR08 {
+      HOUR08 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC08 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME09 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT09 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON09 {
+      MON09 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM09 {
+      DOM09 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW09 {
+      DOW09 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR09 {
+      HOUR09 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC09 {
+      label varchar(10);
+      isactive bool;
+    };
+    NAME10 {
+      state int;
+      textdata varchar(30);
+    };
+    SCRIPT10 {
+      state int;
+      textdata varchar(100);
+    };
+    CMB_MON10 {
+      MON10 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[13];
+    };
+    CMB_DOM10 {
+      DOM10 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[32];
+    };
+    CMB_DOW10 {
+      DOW10 {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[8];
+    };
+    CMB_HOUR10 {
+      HOUR10 {
+        textdata varchar(2);
+      };
+      count int;
+        item varchar(2)[25];
+    };
+    EXEC10 {
+      label varchar(10);
+      isactive bool;
+    };
+  };
+};

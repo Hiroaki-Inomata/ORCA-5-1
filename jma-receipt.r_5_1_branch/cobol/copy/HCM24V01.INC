@@ -1,0 +1,15 @@
+        01  HCM24V01.
+            02  HCM24V01-PTKANANAME PIC X(30).
+            02  HCM24V01-PTNAME PIC X(26).
+            02  HCM24V01-HOSPNAME   PIC X(60).
+            02  HCM24V01-HOSPNUM    PIC X(30).
+            02  HCM24V01-PTAGE  PIC X(3).
+            02  HCM24V01-TEKIYO PIC X(52)       OCCURS  118 TIMES.
+            02  HCM24V01-SRYKBN PIC X(2)        OCCURS  118 TIMES.
+            02  HCM24V01-SAIGAIKBN  PIC X(8).
+            02  HCM24V01-PTNUM  PIC X(30).
+            02  HCM24V01-NENNUM.
+              03  HCM24V01-NENNUM-S   PIC X(1)    OCCURS  9 TIMES.
+            02  HCM24V01-HKNNUM.
+              03  HCM24V01-HKNNUM-S   PIC X(1)    OCCURS  14 TIMES.
+            02  HCM24V01-RENNUM PIC X(7).

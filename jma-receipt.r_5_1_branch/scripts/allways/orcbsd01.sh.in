@@ -1,0 +1,73 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    データチェク処理
+#        $1    テナント番号
+#        $2    医療機関番号
+#        $3-${13} 印刷ＤＢ用固定引数
+#        ${14} ジョブＩＤ
+#        ${15} シェルＩＤ
+#        ${16} 医療機関番号
+#        ${17} エラーファイル名 
+#        ${18} BLOBID(データチェック実行パラメタ取得用）
+#        ${19} パラメタファイル名
+#        ${20} 大容量APIPUSHイベント名（大容量ファイル名）
+#-------------------------------------------#
+
+LOG_FILE="/var/log/jma-receipt/${16}orcb041.log"
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+ERR_FILE_BASE=${17}
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+FILE_UUID=$(echo "${11}" | xargs echo)
+PARA_FILE_FULL=${MCP_TEMPDIR}/${16}00${19}${FILE_UUID}
+
+KARTE_UID=$(echo "${MON_BATCH_COMMENT}" | xargs )
+XML_DATA=${MCP_TEMPDIR}/${20}_${KARTE_UID}.xml
+XML_TEMP=${MCP_TEMPDIR}/$4$5.*.xml
+
+echo "MCP_TERM[${MCP_TERM}]"
+
+##      エラーファイル削除
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            rm  ${ERR_FILE_FULL}
+        fi
+
+        if ls ${XML_TEMP} > /dev/null 2>&1 ; then
+            rm ${XML_TEMP}
+        fi
+
+        ${MONBLOB} -dir ${LDDIRECTORY} -export ${18} -output ${PARA_FILE_FULL} && ${MONBLOB} -dir ${LDDIRECTORY} -delete  ${18}
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCDTCHK000 -parameter "$3,$4,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16},${17},${18},${19},"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            exit
+        fi
+
+        if ls ${XML_TEMP} > /dev/null 2>&1 ; then
+            echo "${XML_TEMP}"
+            XML_BASE=$(ls ${XML_TEMP} | head -n 1)
+            head -n 3 ${XML_BASE} > ${XML_DATA}
+            ls ${XML_TEMP} | xargs -L1 -I{}  bash  -c "head -n -2 {} | tail -n +4" >> ${XML_DATA}
+            tail -n 2 ${XML_BASE} >> ${XML_DATA}
+            zip -j ${XML_DATA%%.xml}.zip  ${XML_DATA}
+        fi
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${16}
+
+##      作業ファイル削除
+        rm ${MCP_TEMPDIR}/${16}00DTCHK*${FILE_UUID}*
+        rm ${MCP_TEMPDIR}/${16}00DCACCT*${FILE_UUID}*
+        rm ${MCP_TEMPDIR}/${16}00DCSRY*${FILE_UUID}*
+        rm ${MCP_TEMPDIR}/${16}00DCSANTEI*${FILE_UUID}*
+
+exit

@@ -1,0 +1,140 @@
+W30 {
+  fixed2 {
+    B03 {
+      state int;
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    SYOHOUHEAD1 {
+      textdata varchar(30);
+    };
+    SYOHOUHEAD2 {
+      textdata varchar(30);
+    };
+    SYOHOUHEAD3 {
+      textdata varchar(30);
+    };
+    SYOHOUHEAD4 {
+      textdata varchar(30);
+    };
+    CHUSYAHEAD1 {
+      textdata varchar(30);
+    };
+    CHUSYAHEAD2 {
+      textdata varchar(30);
+    };
+    CHUSYAHEAD3 {
+      textdata varchar(30);
+    };
+    CHUSYAHEAD4 {
+      textdata varchar(30);
+    };
+    SIJISENHEAD1 {
+      textdata varchar(30);
+    };
+    SIJISENHEAD2 {
+      textdata varchar(30);
+    };
+    SIJISENHEAD3 {
+      textdata varchar(30);
+    };
+    SIJISENHEAD4 {
+      textdata varchar(30);
+    };
+    MAYAKUHEAD1 {
+      textdata varchar(30);
+    };
+    MAYAKUHEAD2 {
+      textdata varchar(30);
+    };
+    MAYAKUHEAD3 {
+      textdata varchar(30);
+    };
+    MAYAKUHEAD4 {
+      textdata varchar(30);
+    };
+    SYOHOUPRT1 {
+      numdata number(2);
+    };
+    SYOHOUPRT2 {
+      numdata number(2);
+    };
+    SYOHOUPRT3 {
+      numdata number(2);
+    };
+    SYOHOUPRT4 {
+      numdata number(2);
+    };
+    CHUSYAPRT1 {
+      numdata number(2);
+    };
+    CHUSYAPRT2 {
+      numdata number(2);
+    };
+    CHUSYAPRT3 {
+      numdata number(2);
+    };
+    CHUSYAPRT4 {
+      numdata number(2);
+    };
+    SIJISENPRT1 {
+      numdata number(2);
+    };
+    SIJISENPRT2 {
+      numdata number(2);
+    };
+    SIJISENPRT3 {
+      numdata number(2);
+    };
+    SIJISENPRT4 {
+      numdata number(2);
+    };
+    MAYAKUPRT1 {
+      numdata number(2);
+    };
+    MAYAKUPRT2 {
+      numdata number(2);
+    };
+    MAYAKUPRT3 {
+      numdata number(2);
+    };
+    MAYAKUPRT4 {
+      numdata number(2);
+    };
+    SIJISENKBN_COMB {
+      SIJISENKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    CHUMAYAHEAD1 {
+      textdata varchar(30);
+    };
+    CHUMAYAHEAD2 {
+      textdata varchar(30);
+    };
+    CHUMAYAHEAD3 {
+      textdata varchar(30);
+    };
+    CHUMAYAHEAD4 {
+      textdata varchar(30);
+    };
+    CHUMAYAPRT1 {
+      numdata number(2);
+    };
+    CHUMAYAPRT2 {
+      numdata number(2);
+    };
+    CHUMAYAPRT3 {
+      numdata number(2);
+    };
+    CHUMAYAPRT4 {
+      numdata number(2);
+    };
+  };
+};

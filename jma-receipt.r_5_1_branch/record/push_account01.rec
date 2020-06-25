@@ -1,0 +1,15 @@
+push_account01	{
+	event				varchar(50);
+	body	{
+#		Patient_Mode		varchar(10);
+		Send_Character_Code	varchar(01);
+		Patient_ID		varchar(20);
+		Perform_Date		varchar(10);
+		Department_Code		varchar(02);
+		Physician_Code		varchar(05);
+		Insurance_Combination_Number	varchar(04);
+		Invoice_Number		varchar(07);
+		Update_Code		varchar(01);
+	};
+};
+

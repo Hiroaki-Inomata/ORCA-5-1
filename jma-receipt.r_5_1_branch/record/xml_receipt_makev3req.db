@@ -1,0 +1,30 @@
+xml_receipt_makev3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	receipt_makev3req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+    		Perform_Date		varchar(10);
+#---     診療年月(2016-09)
+		Perform_Month		varchar(07);
+#---     入外区分(O :外来 I :入院)
+		InOut			varchar(01);
+#---     処理区分(All :一括 All以外:個別)
+		Receipt_Mode		varchar(10);
+#---     印刷モード(Check:点検用 Ckeck以外:提出用)
+		Print_Mode		varchar(6);
+#---     提出先(医保 01:全件 02:社保 03:国保 04:広域
+#---            労災 05
+#---            自賠責 06:新様式 07:従来様式 08:第三者行為
+#---            公害 09)
+		Submission_Mode		varchar(2);
+#---     個別対象患者一覧
+		Patient_Information {
+			Patient_ID	varchar(20);
+			Patient_Perform_Month	varchar(07);
+		} [100];
+	};
+};

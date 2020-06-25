@@ -1,0 +1,75 @@
+XA02 {
+  fixed32 {
+    B06S {
+      state int;
+    };
+    B07S {
+      state int;
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    SKYYMD {
+      textdata varchar(10);
+    };
+    RENNUM {
+      numdata number(4);
+    };
+    SHORI_RENNUM {
+      numdata number(4);
+    };
+    STPAGE {
+      numdata number(5);
+    };
+    EDPAGE {
+      numdata number(5);
+    };
+    scrolledwindow26 {
+      LIST {
+        HEAD1 {
+          textdata varchar(8);
+        };
+        HEAD2 {
+          textdata varchar(10);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(12);
+            column3 varchar(20);
+            column4 varchar(50);
+            column5 varchar(60);
+            column6 varchar(9);
+            column7 varchar(8);
+            column8 varchar(9);
+            column9 varchar(4);
+            column10 varchar(4);
+            column11 varchar(5);
+          }[300];
+          selectdata bool[300];
+      };
+    };
+    GYOMU_COMBO {
+      GYOMUCD {
+        textdata varchar(35);
+      };
+      count int;
+        item varchar(35)[100];
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    PTNAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    CREYMD {
+      textdata varchar(10);
+    };
+    PRT_TITLE {
+      textdata varchar(60);
+    };
+  };
+};

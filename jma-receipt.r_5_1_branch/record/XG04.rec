@@ -1,0 +1,39 @@
+XG04 {
+  fixed32 {
+    SELNUM {
+      numdata number(3);
+    };
+    TBL_GROUP {
+      textdata varchar(14);
+    };
+    RENNUM {
+      numdata number(4);
+    };
+    SHORI_RENNUM {
+      numdata number(4);
+    };
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(14);
+            column3 varchar(4);
+            column4 varchar(4);
+            column5 varchar(5);
+            column6 varchar(6);
+            column7 varchar(9);
+            column8 varchar(2);
+            column9 varchar(20);
+            column10 varchar(60);
+            column11 varchar(2);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

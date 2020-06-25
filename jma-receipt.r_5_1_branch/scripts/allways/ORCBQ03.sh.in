@@ -1,0 +1,77 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+LOG_FILE=/var/log/jma-receipt/"$2"orcb013_3.log
+[ -e "${LOG_FILE}" ] &&  rm ${LOG_FILE}
+
+
+#-------------------------------------------#
+#        検索結果データ作成
+#        $1  TERMID
+#        $2  HOSPNUM
+#        $3  パラメータファイル名
+#        $4  処理日
+#        $5  処理時間
+#        $6  OPID
+#        $7  KARTE_UID (API Only)
+#        $8  Pushファイル名(API Only)
+#        $9  ID(for MONBLOB)
+#-------------------------------------------#
+
+MONPUSHEVENT="/usr/lib/panda/bin/monpushevent"
+RECFILE=push_find.db
+RECDIR=${RECORDDIR}
+if [ -e ${PATCHRECORDDIR}/${RECFILE} ]; then
+  RECDIR=${PATCHRECORDDIR}
+fi
+
+echo PUSHREC=${RECFILE}
+
+PARA_FILE_BASE=$3
+PARA_FILE_FULL=${MCP_TEMPDIR}/${PARA_FILE_BASE}
+
+
+${MONBLOB} -dir ${LDDIRECTORY} -export $9 -output ${PARA_FILE_FULL} && ${MONBLOB} -dir ${LDDIRECTORY} -delete $9
+
+
+PUSH_FILE_BASE=$8
+PUSH_FILE_FULL=${MCP_TEMPDIR}/${PUSH_FILE_BASE}
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+        if  [ "${MCP_WINDOW}" == "findv3" ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+        fi
+}
+
+trap cleanup EXIT
+
+
+if  [ "${MCP_WINDOW}" == "findv3" ]; then
+  [ -e "${PUSH_FILE_FULL}" ] && rm ${PUSH_FILE_FULL}
+fi
+
+n=1
+while [ $n -lt 3 ] ; do
+    n=$(expr $n + 1)
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ03 -parameter "$1,$2,${PARA_FILE_BASE},$4,$5,$6,$7,$8"  
+    [ $? -eq 0 ] && break
+    sleep 3
+done
+
+if  [ "${MCP_WINDOW}" == "findv3" ]; then
+  [ -e "${PUSH_FILE_FULL}" ] && echo "push!!" &&  ${MONPUSHEVENT} ${RECDIR}/${RECFILE} ${PUSH_FILE_FULL}  
+fi
+        exit
+

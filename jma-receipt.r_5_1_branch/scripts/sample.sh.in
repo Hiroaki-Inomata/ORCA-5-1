@@ -1,0 +1,39 @@
+#! /bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+echo ORCADATADIR = $ORCADATADIR
+echo DOCDIR = $DOCDIR
+echo FORMDIR = $FORMDIR
+echo INITDIR = $INITDIR
+echo LDDEFDIR = $LDDEFDIR
+echo LDDIRECTORY = $LDDIRECTORY
+echo RECORDDIR = $RECORDDIR
+echo SCREENDIR = $SCREENDIR
+echo SCRIPTSDIR = $SCRIPTSDIR
+echo ORCALIBDIR  = $ORCALIBDIR
+echo SITEDIR = $SITEDIR
+echo SITESRCDIR = $SITESRCDIR
+echo SITELIBDIR = $SITELIBDIR
+
+echo SITERECORDDIR = $SITERECORDDIR
+echo SITELDDEFDIR = $SITELDDEFDIR
+
+echo DBSTUB = $DBSTUB
+
+echo DataBaseName = $DBNAME
+
+# example
+echo $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ01 -parameter
+
+# CHIHOUKOUHI example
+echo $DBSTUB -dir $LDDIRECTORY -bd shimane ORCBS321 -parameter $1
+
+exit 0

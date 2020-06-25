@@ -1,0 +1,83 @@
+Z08 {
+  fixed1 {
+    SRYCDH {
+      textdata varchar(9);
+    };
+    YUKOSTYMDH {
+      textdata varchar(9);
+    };
+    YUKOEDYMDH {
+      textdata varchar(9);
+    };
+    NAMEH {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    KANANAME {
+      textdata varchar(100);
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+    FORMALNAME {
+      textdata varchar(200);
+    };
+    IDOKANREN {
+      textdata varchar(9);
+    };
+    IDOKANRENNAME {
+      textdata varchar(100);
+    };
+    IDOKIKAN {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    COPYCD {
+      textdata varchar(9);
+    };
+    TEN {
+      numdata number(10,2);
+    };
+    TANICD_COMB {
+      TANICD {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[200];
+    };
+    MSGLBEL {
+      textdata varchar(100);
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    scrolledwindow1 { #GtkScrolledWindow
+      SHONAMELIST { #GtkPandaCList
+        count int;
+        row int;
+        selectdata bool[200];
+        item {
+          column1 varchar(03);
+          column2 varchar(200);
+          column3 varchar(120);
+        }[200];
+      };
+    };
+    SELNUM { #GtkPandaEntry
+      textdata varchar(3);
+    };
+    MNEXT { #GtkLabel
+      style varchar(20);
+      textdata varchar(30);
+    };
+    B03 {
+      state int;
+    };
+  };
+};

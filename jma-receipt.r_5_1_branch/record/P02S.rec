@@ -1,0 +1,14 @@
+P02S {
+  fixed10 {
+    SRYYM {
+      textdata varchar(7);
+    };
+    SYUKA_COMB {
+      SYUKA {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[99];
+    };
+  };
+};

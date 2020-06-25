@@ -1,0 +1,427 @@
+xml_claim_frontv2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	claim_frontv2res {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+	        Api_Result			varchar(2);
+	        Api_Result_Message		varchar(100);
+# 患者番号
+		Patient_ID			varchar(20);
+# 実施日(CCYY-MM-DDTHH:MM:SS形式) const
+		M_RH_CD1		varchar(19);
+# 患者主ID
+       		M_RH_PID		varchar(20);
+# IDの種類コード
+		M_RH_PIDSTYLE		varchar(08);
+# 作成者 個人ID [必須]
+		M_RX001_A		varchar(20);
+# 作成者 個人フルネーム [条件付き必須]
+       		M_RX001_B11		varchar(100);
+# 作成者 個人姓 [条件付き必須]
+		M_RX001_B12		varchar(50);
+# 作成者 個人名 [条件付き必須]
+		M_RX001_B13		varchar(50);
+# 作成者 ミドルネーム
+		M_RX001_B14		varchar(50);
+# 作成者 肩書きなど
+		M_RX001_B15		varchar(50);
+# 作成者 学位
+		M_RX001_B16		varchar(50);
+# 作成者 施設情報名
+		M_RX001_C11		varchar(50);
+# 作成者 施設ID
+		M_RX001_C2		varchar(20);
+# 作成者 診療科名称
+		M_RX001_D11		varchar(50);
+# 作成者 診療科ID
+		M_RX001_D2		varchar(20);
+# 作成者 住所 [条件付き必須]
+		M_RX001_E11		varchar(400);
+# 作成者 住所の種類
+		M_RX001_E18		varchar(10);
+# 作成者 都道府県 [条件付き必須]
+		M_RX001_E12		varchar(20);
+# 作成者 市、区、郡 [条件付き必須]
+		M_RX001_E13		varchar(20);
+# 作成者 町、村 [条件付き必須]
+		M_RX001_E14		varchar(20);
+# 作成者 番地、丁目等 [条件付き必須]
+		M_RX001_E15		varchar(200);
+# 作成者 郵便番号
+		M_RX001_E16		varchar(08);
+# 作成者 国コード
+		M_RX001_E17		varchar(10);
+# 作成者 メールアドレス
+		M_RX001_F1		varchar(100);
+# 作成者 市外局番 [必須]
+		M_RX001_G11		varchar(10);
+# 作成者 局番 [必須]
+		M_RX001_G12		varchar(10);
+# 作成者 加入番号 [必須]
+		M_RX001_G13		varchar(10);
+# 作成者 内線番号
+		M_RX001_G14		varchar(10);
+# 作成者 国番号
+		M_RX001_G15		varchar(10);
+# 作成者 使用時間帯などを記載
+		M_RX001_G16		varchar(100);
+# 作成者 装置の種類コード
+		M_RX001_G17		varchar(10);
+# 作成者 生成者の資格 [必須]
+		M_RX001_H1		varchar(20);
+###### コンスタント値 (<extRefs />)                  const
+		M_RX001_I1		varchar(20);
+###### コンスタント値 (<accessRight permit="all" />) const
+		M_RI101_ACC1		varchar(50);
+###### コンスタント値 (Data of Regist)               const
+		M_RI101_TITLE		varchar(20);
+# [患者情報]
+# 文書ユニークID
+		M_RI101_UI		varchar(36);
+# カルテ電子保存確定日
+		M_RI101_KD		varchar(10);
+# 作成者 個人ID [必須]
+		M_RX101_A		varchar(20);
+# 作成者 個人フルネーム [条件付き必須]
+		M_RX101_B11		varchar(100);
+# 作成者 個人姓 [条件付き必須]
+		M_RX101_B12		varchar(50);
+# 作成者 個人名 [条件付き必須]
+		M_RX101_B13		varchar(50);
+# 作成者 ミドルネーム
+		M_RX101_B14		varchar(50);
+# 作成者 肩書きなど
+		M_RX101_B15		varchar(50);
+# 作成者 学位
+		M_RX101_B16		varchar(50);
+# 作成者 施設情報名
+		M_RX101_C11		varchar(50);
+# 作成者 施設ID
+		M_RX101_C2		varchar(20);
+# 作成者 診療科名称
+		M_RX101_D11		varchar(50);
+# 作成者 診療科ID
+		M_RX101_D2		varchar(20);
+# 作成者 住所 [条件付き必須]
+		M_RX101_E11		varchar(400);
+# 作成者 住所の種類
+		M_RX101_E18		varchar(10);
+# 作成者 都道府県 [条件付き必須]
+		M_RX101_E12		varchar(20);
+# 作成者 市、区、郡 [条件付き必須]
+		M_RX101_E13		varchar(20);
+# 作成者 町、村 [条件付き必須]
+		M_RX101_E14		varchar(20);
+# 作成者 番地、丁目等 [条件付き必須]
+		M_RX101_E15		varchar(200);
+# 作成者 郵便番号
+		M_RX101_E16		varchar(08);
+# 作成者 国コード
+		M_RX101_E17		varchar(10);
+# 作成者 メールアドレス
+		M_RX101_F1		varchar(100);
+# 作成者 市外局番 [必須]
+		M_RX101_G11		varchar(10);
+# 作成者 局番 [必須]
+		M_RX101_G12		varchar(10);
+# 作成者 加入番号 [必須]
+		M_RX101_G13		varchar(10);
+# 作成者 内線番号
+		M_RX101_G14		varchar(10);
+# 作成者 国番号
+		M_RX101_G15		varchar(10);
+# 作成者 使用時間帯などを記載
+		M_RX101_G16		varchar(100);
+# 作成者 装置の種類コード
+		M_RX101_G17		varchar(10);
+# 作成者 生成者の資格
+		M_RX101_H1		varchar(20);
+###### コンスタント値 (<extRefs />)                const
+		M_RX101_I1		varchar(20);
+# 患者主ID
+		D_A1		varchar(20);
+# 患者主IDのテーブル名
+		D_A2		varchar(08);
+# 氏名(カナ)の表記法
+		D_B1		varchar(01);
+# 氏名(カナ)のフルネーム
+		D_B2		varchar(100);
+# 氏名(漢字)の表記法
+		D_C1		varchar(01);
+# 氏名(漢字)のフルネーム
+		D_C2		varchar(100);
+# 生年月日
+		D_D1		varchar(10);
+# 性別
+		D_D2		varchar(07);
+# 住所(自宅)
+		D_EA1		varchar(400);
+# 住所(自宅) 種類コード
+		D_EA2		varchar(09);
+# 住所(自宅) 郵便番号
+		D_EA3		varchar(08);
+# 住所(連絡先)
+		D_EB1		varchar(400);
+# 住所(連絡先) 種類コード
+		D_EB2		varchar(09);
+# 住所(連絡先) 郵便番号
+		D_EB3		varchar(08);
+# 住所(勤務先)
+		D_EC1		varchar(400);
+# 住所(勤務先) 種類コード
+		D_EC2		varchar(09);
+# 住所(勤務先) 郵便番号
+		D_EC3		varchar(08);
+# 住所(帰省先)
+		D_ED1		varchar(400);
+# 住所(帰省先) 種類コード
+		D_ED2		varchar(09);
+# 住所(帰省先) 郵便番号
+		D_ED3		varchar(08);
+# 市外局番
+		D_PH1_AREA	varchar(10);
+# 局番
+		D_PH1_CITY	varchar(10);
+# 加入番号
+		D_PH1_NUM	varchar(10);
+# 内線局番
+		D_PH1_EXT	varchar(10);
+# 国局番
+		D_PH1_COUNTRY	varchar(10);
+# 使用時間帯などを記載
+		D_PH1_MEMO	varchar(100);
+# 装置の種類コード [省略可能・属性] (PH)
+		D_PH1_EQUIP	varchar(10);
+# 死亡フラグ
+		D_F1		varchar(05);
+# 健康保険情報( ii が配列20)
+		HealthInsurance_Information     {
+###### コンスタント値 (<accessRight permit="all" />) const
+			M_RI2ii_ACC1	varchar(30);
+###### コンスタント値 (Data of Regist)               const
+			M_RI2ii_TITLE	varchar(30);
+# 文書ユニークID
+			M_RI2ii_UI	varchar(36);
+# カルテ電子保存の確定日
+			M_RI2ii_KD	varchar(10);
+# 作成者 個人ID [必須]
+			M_RX2ii_A	varchar(20);
+# 作成者 個人フルネーム [条件付き必須] 
+			M_RX2ii_B11	varchar(100);
+# 作成者 個人姓 [条件付き必須]
+			M_RX2ii_B12	varchar(50);
+# 作成者 個人名 [条件付き必須]
+			M_RX2ii_B13	varchar(50);
+# 作成者 ミドルネーム
+			M_RX2ii_B14	varchar(50);
+# 作成者 肩書きなど
+			M_RX2ii_B15	varchar(50);
+# 作成者 学位
+			M_RX2ii_B16	varchar(50);
+# 作成者 施設情報名
+			M_RX2ii_C11	varchar(50);
+# 作成者 施設ID
+			M_RX2ii_C2	varchar(20);
+# 作成者 診療科名称
+			M_RX2ii_D11	varchar(50);
+# 作成者 診療科名称
+			M_RX2ii_D2	varchar(20);
+# 作成者 住所 [条件付き必須]
+			M_RX2ii_E11	varchar(400);
+# 作成者 住所の種類
+			M_RX2ii_E18	varchar(10);
+# 作成者 都道府県 [条件付き必須]
+			M_RX2ii_E12	varchar(20);
+# 作成者 市、区、郡 [条件付き必須]
+			M_RX2ii_E13	varchar(20);
+# 作成者 町、村 [条件付き必須]
+			M_RX2ii_E14	varchar(20);
+# 作成者 番地、丁目等 [条件付き必須]
+			M_RX2ii_E15	varchar(200);
+# 作成者 郵便番号
+			M_RX2ii_E16	varchar(08);
+# 作成者 国コード
+			M_RX2ii_E17	varchar(10);
+# 作成者 メールアドレス
+			M_RX2ii_F1	varchar(100);
+# 作成者 市外局番 [必須]
+			M_RX2ii_G11	varchar(10);
+# 作成者 局番 [必須]
+			M_RX2ii_G12	varchar(10);
+# 作成者 加入番号 [必須]
+			M_RX2ii_G13	varchar(10);
+# 作成者 内線番号
+			M_RX2ii_G14	varchar(10);
+# 作成者 国番号
+			M_RX2ii_G15	varchar(10);
+# 作成者 使用時間帯などを記載
+			M_RX2ii_G16	varchar(100);
+# 作成者 装置の種類コード
+			M_RX2ii_G17	varchar(10);
+# 作成者 生成者の資格 [必須]
+			M_RX2ii_H1	varchar(20);
+###### コンスタント値 (<extRefs />)                  const
+			M_RX2ii_I1	varchar(20);
+# 健康保険種別名称
+			I_ii_A1		varchar(20);
+# 健康保険種別コード
+			I_ii_A2		varchar(02);
+# 健康保険種別コードテーブル名
+			I_ii_A3		varchar(07);
+# 保険者番号
+			I_ii_B1		varchar(08);
+# 記号
+			I_ii_C1		varchar(80);
+# 番号
+			I_ii_C2		varchar(80);
+# 本人家族区分
+			I_ii_D1		varchar(05);
+# 適用開始年月日
+			I_ii_E1		varchar(10);
+# 適用終了年月日
+			I_ii_E2		varchar(10);
+# 入院時の負担率
+			I_ii_INRATIO	varchar(05);
+# 外来時の負担率
+			I_ii_OUTRATIO	varchar(05);
+# 公費情報
+		PublicInsurance_Information   {
+# 優先順位
+			I_ii_Fjj1	varchar(01);
+# 公費名称
+			I_ii_Fjj2	varchar(50);
+# 負担者番号
+			I_ii_Fjj3	varchar(08);
+# 受給者番号
+			I_ii_Fjj4	varchar(20);
+# 適用開始年月日
+			I_ii_Fjj5	varchar(10);
+# 適用終了年月日
+			I_ii_Fjj6	varchar(10);
+# 負担金または負担率
+			I_ii_Fjj7	varchar(10);
+# 負担金または負担率
+			I_ii_Fjj8	varchar(10);
+                } [6];
+                } [20];
+###### コンスタント値 (<accessRight permit="all" />)  const
+		M_RI301_ACC1		varchar(50);
+###### コンスタント値 (Data of Regist)                const
+		M_RI301_TITLE		varchar(20);
+# 文書ユニークID
+		M_RI301_UI		varchar(36);
+# カルテ電子保存の確定日
+		M_RI301_KD		varchar(10);
+# 作成者 個人ID [必須]
+		M_RX301_A		varchar(20);
+# 作成者 個人フルネーム [条件付き必須]
+		M_RX301_B11		varchar(100);
+# 作成者 個人姓 [条件付き必須]
+		M_RX301_B12		varchar(50);
+# 作成者 個人名 [条件付き必須]
+		M_RX301_B13		varchar(50);
+# 作成者 ミドルネーム
+		M_RX301_B14		varchar(50);
+# 作成者 肩書きなど
+		M_RX301_B15		varchar(50);
+# 作成者 学位
+		M_RX301_B16		varchar(50);
+# 作成者 施設情報名
+		M_RX301_C11		varchar(50);
+# 作成者 施設ID
+		M_RX301_C2		varchar(20);
+# 作成者 診療科名称
+		M_RX301_D11		varchar(50);
+# 作成者 診療科ID
+		M_RX301_D2		varchar(20);
+# 作成者 住所 [条件付き必須]
+		M_RX301_E11		varchar(400);
+# 作成者 住所の種類
+		M_RX301_E18		varchar(10);
+# 作成者 都道府県 [条件付き必須]
+		M_RX301_E12		varchar(20);
+# 作成者 市、区、郡 [条件付き必須]
+		M_RX301_E13		varchar(20);
+# 作成者 町、村 [条件付き必須]
+		M_RX301_E14		varchar(20);
+# 作成者 番地、丁目等 [条件付き必須]
+		M_RX301_E15		varchar(200);
+# 作成者 郵便番号
+		M_RX301_E16		varchar(08);
+# 作成者 国コード
+		M_RX301_E17		varchar(10);
+# 作成者 メールアドレス
+		M_RX301_F1		varchar(100);
+# 作成者 市外局番 [必須]
+		M_RX301_G11		varchar(10);
+# 作成者 局番 [必須]
+		M_RX301_G12		varchar(10);
+# 作成者 加入番号 [必須]
+		M_RX301_G13		varchar(10);
+# 作成者 内線番号
+		M_RX301_G14		varchar(10);
+# 作成者 国番号
+		M_RX301_G15		varchar(10);
+# 作成者 使用時間帯などを記載
+		M_RX301_G16		varchar(100);
+# 作成者 装置の種類コード
+		M_RX301_G17		varchar(10);
+# 作成者 生成者の資格 [必須]
+		M_RX301_H1		varchar(20);
+###### コンスタント値 (<extRefs />)                  const
+		M_RX301_I1		varchar(20);
+#---> 予約請求モジュール
+# 予約請求モジュールの状態 (claim:status)
+		C_A1			varchar(07);
+# オーダー発行日時 (claim:oderTime)
+		C_A2			varchar(19);
+# 受付日時 (claim:registTime)
+		C_A3			varchar(19);
+# 入院外来区分 (claim:admitFlag)
+		C_A4			varchar(05);
+# 使用保険 (claim:insuranceUid)
+		C_A5			varchar(36);
+# 共通医事請求コード体系
+		C_A6			varchar(100);
+# 予約
+		C_B1			varchar(20);
+# 予約コード
+		C_B2			varchar(14);
+###### コンスタント値 (claim:appCodeId="Claim009"")  const
+		C_B3			varchar(30);
+# 予約メモ
+		C_B4			varchar(100);
+# 診療科名称
+		C_C1			varchar(12);
+# 診療科表記
+		C_C2			varchar(01);
+# 診療科ID
+		C_C3			varchar(02);
+# 診療科IDのテーブル名
+		C_C4			varchar(07);
+# 病棟診療科名称
+		C_D1			varchar(12);
+# 病棟診療科 表記法
+		C_D2			varchar(01);
+# 病棟診療科名称
+		C_D3			varchar(02);
+# 病棟診療科 IDの種類コード
+		C_D4			varchar(07);
+# 診療種別コード (claim:classCode)
+		C_E1			varchar(03);
+# 医事請求コード
+		C_E2			varchar(10);
+# 医事請求コード体系名
+		C_E3			varchar(20);
+# 医事請求名称
+		C_E4			varchar(40);
+# 受付メモ
+		C_F1			varchar(1000);
+   	};
+};
+
+
+

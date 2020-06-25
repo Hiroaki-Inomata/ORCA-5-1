@@ -1,0 +1,82 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+RENNUM=0
+#-------------------------------------------#
+#    点数マスタ一覧作成
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} プログラム名
+#        ${15} 抽出条件(CPHCMLSHELL.INC)
+#        ${16} エラーファイル名 
+#        ${17} HOSPNUM
+#        ${18} ＣＳＶフラグ
+#        ${19} クライアント保存
+#        ${20} 漢字コード 1:euc 2:s-jis 3:utf8
+#        ${21} ＣＳＶフォルダ名
+#        ${22} ＣＳＶファイル名
+#-------------------------------------------#
+#
+##      エラーファイル削除
+	echo $#
+	echo "echo " ${16}
+        if  [ -e ${16} ]; then
+            rm  ${16}
+        fi
+        
+        RENNUM=$(expr $RENNUM + 1) 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ${14} -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${15},${17},${16},${18},${19},${21},${22},
+        if  [ -e ${16} ]; then
+            exit
+        fi
+#       ＣＳＶ出力指定のとき
+        if   [ ${18} = '1' ]; then
+            if  [ -e ${MCP_TEMPDIR}/${22}.wk ]; then
+                awk ' {
+                #     行頭の空白を取り除く
+                      sub(/^ */,"");
+                #     行末の空白を取り除く
+                      sub(/ *$/,"");
+                #     カンマの後の空白を取り除く
+                      gsub(/, */,",");
+                #     カンマの前の空白を取り除く
+                      gsub(/ *,/,",");
+                      print $0
+                }'  ${MCP_TEMPDIR}/${22}.wk > ${MCP_TEMPDIR}/${22}.tmp
+            fi
+            if   [ ${19} = '1' ]; then
+#             クライアント保存のとき固定ファイルに文字コード変換
+              case ${20} in
+                2)
+#                 EUC => SJIS
+                  nkf -s -Lw ${MCP_TEMPDIR}/${22}.tmp > ${MCP_TEMPDIR}/${22}.wk
+                  rm  ${MCP_TEMPDIR}/${22}.tmp
+                  ;;
+                3)
+#                 EUC => UTF8
+                  nkf --ic=EUC-JIS-2004 --oc=UTF-8 ${MCP_TEMPDIR}/${22}.tmp  | tru8.rb > ${MCP_TEMPDIR}/${22}.wk
+                  rm  ${MCP_TEMPDIR}/${22}.tmp
+                  ;;
+                *)
+                    mv  ${MCP_TEMPDIR}/${22}.tmp ${MCP_TEMPDIR}/${22}.wk
+              esac
+            else
+#           ディレクトリがない場合は作成する
+                if ! [ -d ${21} ]; then
+                    mkdir ${21}
+                fi
+                mv  ${MCP_TEMPDIR}/${22}.tmp ${21}/${22}
+                rm  ${MCP_TEMPDIR}/${22}.wk
+            fi 
+        fi 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${17}
+        exit 

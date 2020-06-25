@@ -1,0 +1,31 @@
+        01  HCG017.
+            02  HCG017-SRYKBN
+                        PIC X(20).
+            02  HCG017-SRYYM
+                        PIC X(46).
+            02  HCG017-SAKYMD
+                        PIC X(22).
+            02  HCG017-PAGE
+                        PIC X(3).
+            02  HCG017-NYUGAIKBN
+                        PIC X(8).
+            02  HCG017-SRYKA
+                        PIC X(50).
+            02  HCG017-SRYAREA
+                                        OCCURS 80 TIMES.
+              03  HCG017-RENNUM
+                        PIC X(5).
+              03  HCG017-SRYCD
+                        PIC X(9).
+              03  HCG017-NAME
+                        PIC X(50).
+              03  HCG017-TEN
+                        PIC X(18).
+              03  HCG017-SURYO
+                        PIC X(21).
+              03  HCG017-KENSU
+                        PIC X(6).
+            02  HCG017-SRYAREA2
+                                        OCCURS 80 TIMES.
+              03  HCG017-KEI
+                        PIC X(18).

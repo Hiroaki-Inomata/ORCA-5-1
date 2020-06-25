@@ -1,0 +1,114 @@
+Y04 {
+  fixed1 {
+    TYYKYMD1 {
+      textdata varchar(20);
+    };
+    TYYKYMD2 {
+      textdata varchar(20);
+    };
+    TYYKYMD3 {
+      textdata varchar(20);
+    };
+    TYYKYMD4 {
+      textdata varchar(20);
+    };
+    TYYKYMD5 {
+      textdata varchar(20);
+    };
+    TYYKYMD6 {
+      textdata varchar(20);
+    };
+    DRNAME_COMBO {
+      DRNAME {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    SRYNAIYO_COMBO {
+      SRYNAIYO {
+        textdata varchar(27);
+      };
+      count int;
+        item varchar(27)[100];
+    };
+    KANJA_LIST1 {
+      PT_LIST1 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KANJA_LIST2 {
+      PT_LIST2 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KANJA_LIST3 {
+      PT_LIST3 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KANJA_LIST4 {
+      PT_LIST4 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KANJA_LIST5 {
+      PT_LIST5 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KANJA_LIST6 {
+      PT_LIST6 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(5);
+            column3 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+# API PUSH start
+#-------------------------------------------#
+PUSH_FILE="push_account01.rec"
+CLAIM_PUSH=""
+MONPUSHEVENT="/usr/lib/panda/bin/monpushevent"
+UUID=`uuidgen`
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCL0050 -parameter $1,$2,$3,$4,$5,$6,$9,${10},${11},${12},$UUID,END > /tmp/L0020.log 
+#       ${MCP_TEMPDIR}/${Uid}
+#
+        echo "MCP_MIDDLEWARE_NAME = " ${MCP_MIDDLEWARE_NAME}
+        if  test -e $PATCHRECORDDIR/$PUSH_FILE; then
+                CLAIM_PUSH="$PATCHRECORDDIR/$PUSH_FILE"
+                echo "patch hit!!"
+        else
+          if  test -e $RECORDDIR/$PUSH_FILE; then
+                CLAIM_PUSH="$RECORDDIR/$PUSH_FILE"
+                echo "org hit!!"
+          fi
+        fi
+#
+        $MONPUSHEVENT $CLAIM_PUSH ${MCP_TEMPDIR}/${UUID}
+#-------------------------------------------#
+# API PUSH end
+#-------------------------------------------#
+        exit 

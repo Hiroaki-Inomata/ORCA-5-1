@@ -1,0 +1,65 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ************************************************************
+      *    業務選択 共通ＳＰＡ     (SPA-WORK の内容  最大RL=1555)
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      ************************************************************
+      *
+       01  SPA-M00KYOUTU.
+           03  SPA-MID1-AREA.
+      *警告メッセージ
+               05  SPA-MIDCD               PIC  X(04).
+      *警告画面より
+               05  SPA-MID1-AREA.
+                   07  SPA-MID1-FLG        PIC  X(02).
+      *
+      *    システム管理 職員情報 
+           03  SPA-SYS-1010-REC            PIC X(500).
+      *
+      *日付変更画面
+      *    背景色保存
+           03  SPA-M00-BGCOLORS        PIC X(20).
+      *
+           03  SPA-M95GMN-AREA.
+               05  SPA-M95-CUR         PIC 9(02).
+               05  SPA-GMN-SYSYMD      PIC X(10).
+               05  SPA-NAI-SYSYMD      PIC X(08).
+      *
+               05  SPA-GMN-JIKANKBN-G.
+                   07  SPA-GMN-JIKANKBN        PIC X(01).
+                   07  SPA-GMN-JIKANKBN-F      PIC X(01).
+                   07  SPA-GMN-JIKANKBN-MEI    PIC X(28).
+               05  SPA-GMN-JIKANKBN-LIST       OCCURS   9.
+                   07  SPA-GMN-JIKANKBN-LST    PIC X(30).
+               05  SPA-JIKANKBN-MAX            PIC 9(02).
+      *
+               05  SPA-NAI-SYSYMDW     PIC X(07).
+               05  SPA-M95-MOTOPG      PIC X(08).
+      *
+               05  SPA-M95-PAGE        PIC 9(01).
+               05  SPA-M95-SYORI       PIC 9(01).
+               05  SPA-M95-INIT        PIC 9(01).
+               05  SPA-M95-INIT-P3     PIC 9(01).
+      *        背景色保存
+               05  SPA-M95-BGCOLORS        PIC X(20).
+      *
+           03  SPA-NAI-KADO-LEVEL      PIC  9(01).
+           03  SPA-NAI-CONTRACT-COND   PIC  9(01).
+           03  SPA-NAI-CONTRACT-YMD    PIC  X(08).

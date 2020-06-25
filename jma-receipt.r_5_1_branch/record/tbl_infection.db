@@ -1,0 +1,116 @@
+tbl_infection {
+	HOSPNUM			number(2,0);
+	SENDYMD			char(8);
+	PTID			number(10);
+	DISEASE			number(2,0);
+	SRYYMD			char(8);
+	SRYCD			varchar(9);
+	MEDSRYCD		varchar(9);
+	SYOSAI			number(1,0);
+	SYOSINYMD		varchar(8);
+	BYOMEICD		varchar(7);
+	BYOSRYYMD		varchar(8);
+	TENKIKBN		varchar(1);
+	TENKIYMD		varchar(8);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+primary	{
+	HOSPNUM,SENDYMD,PTID,DISEASE,SRYYMD;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_infection_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  SENDYMD  =  :SENDYMD
+			AND  PTID     =  :PTID
+			AND  DISEASE  =  :DISEASE
+			AND  SRYYMD   =  :SRYYMD
+		;
+	};
+};
+
+path	key2		{
+	DBSELECT	{
+		DECLARE tbl_infection_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  SENDYMD  =  :SENDYMD
+		ORDER   BY   DISEASE,SRYYMD
+		;
+	};
+};
+
+path	key3		{
+	DBSELECT	{
+		DECLARE tbl_infection_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE         HOSPNUM   =  :HOSPNUM
+			AND ((SRYYMD    =  :SRYYMD)
+	                OR   (BYOSRYYMD =  :SRYYMD))
+		ORDER   BY    SENDYMD,DISEASE
+		;
+	};
+};
+
+path	key4		{
+	DBSELECT	{
+		DECLARE tbl_infection_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  PTID     =  :PTID
+			AND  DISEASE  =  :DISEASE
+			AND  SRYYMD   =  :SRYYMD
+		;
+	};
+};
+
+path	del1		{
+	DBDELETE	{
+		DELETE
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  SENDYMD  =  :SENDYMD
+		;
+	};
+};
+
+path	del2		{
+	DBDELETE	{
+		DELETE
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  SRYYMD   =  :SRYYMD
+		;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE tbl_infection_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+		;
+	};
+};
+
+path	key5		{
+	DBSELECT	{
+		DECLARE tbl_infection_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection
+		WHERE        HOSPNUM  =  :HOSPNUM
+			AND  SENDYMD  >= :SENDYMD
+		;
+	};
+};

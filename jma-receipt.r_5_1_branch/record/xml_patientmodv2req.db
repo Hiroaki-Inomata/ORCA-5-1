@@ -1,0 +1,80 @@
+xml_patientmodv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodreq {
+		Mod_Key			varchar(1);
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		HouseHolder_WholeName	varchar(100);
+		Relationship 		varchar(60);
+		Occupation     		varchar(40);
+		CellularNumber		varchar(15);
+		FaxNumber		varchar(15);
+		EmailAddress		varchar(50);
+		Home_Address_Information	{
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(200);
+			WholeAddress2		varchar(200);
+			PhoneNumber1		varchar(15);
+			PhoneNumber2		varchar(15);
+        	};
+		WorkPlace_Information	{
+			WholeName		varchar(100);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(200);
+			WholeAddress2		varchar(200);
+			PhoneNumber		varchar(15);
+        	};
+		Contraindication1		varchar(200);
+		Contraindication2		varchar(200);
+		Allergy1		varchar(200);
+		Allergy2		varchar(200);
+		Infection1		varchar(200);
+		Infection2		varchar(200);
+		Comment1		varchar(200);
+		Comment2		varchar(200);
+		HealthInsurance_Information	{
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Branch_Number	varchar(2);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	RelationToInsuredPerson			varchar(01);
+            	Rate_Class				varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	Certificate_GetDate			varchar(10);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+            	} [4];
+        	};
+#---    ä≥é“å¬ï èÓïÒ
+		Personally_Information	{
+#---            îDïwê›íË
+        	    	Pregnant_Class			varchar(05);
+            	};
+#---    éxï•èÓïÒ
+		Payment_Information	{
+#---            å∏ñ∆éñóR
+			Reduction_Reason	varchar(02);
+#---            äÑà¯ó¶
+			Discount		varchar(02);
+#---            ì¸ã‡ï˚ñ@ãÊï™
+			Ic_Code			varchar(02);
+            	};
+    	};
+};

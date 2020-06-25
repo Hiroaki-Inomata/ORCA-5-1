@@ -1,0 +1,30 @@
+tbl_sysuser {
+	USERID				varchar(16);
+	HOSPNUM				number(2,0);
+	SUPERVISOR			char(1);
+	UPYMD    			char(8);
+};
+
+primary	{
+	USERID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sysuser_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sysuser
+			WHERE   USERID    =   :USERID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sysuser_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sysuser
+		;
+	};
+};
+

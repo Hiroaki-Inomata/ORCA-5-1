@@ -1,0 +1,24 @@
+W981 {
+  fixed32 {
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow28 {
+      hpos int;
+      vpos int;
+      MEILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(16);
+            column3 varchar(20);
+            column4 varchar(20);
+            column5 varchar(20);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

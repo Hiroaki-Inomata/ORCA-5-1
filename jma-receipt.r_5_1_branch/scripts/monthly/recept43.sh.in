@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    ¼«ÇåÀÕ£Ð£Ä£Æ¥Õ¥¡¥¤¥ëºîÀ®½èÍý
+#        $1-${11} °õºþ£Ä£ÂÍÑ¸ÇÄê°ú¿ô
+#        ${12} JOBID
+#        ${13} SHELLID
+#        ${14} Æþ³°¶èÊ¬
+#        ${15} HOSPNUM
+#        ${16} ¥¨¥é¡¼¥Õ¥¡¥¤¥ëÌ¾
+#-------------------------------------------#
+
+    LOG_FILE="/var/log/jma-receipt/${15}recept43.log"
+    [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+    echo "arg5 =  [" ${5} "]"  
+    echo "arg12 = [" ${12} "]" 
+    echo "arg13 = [" ${13} "]" 
+    echo "arg14 = [" ${14} "]" 
+    echo "arg15 = [" ${15} "]" 
+    echo "arg16 = [" ${16} "]" 
+
+    rennum=0
+
+#   ¥¨¥é¡¼¥Õ¥¡¥¤¥ëºï½ü
+    echo "errfile = [" ${MCP_TEMPDIR}/${16}  "]" 
+    rm  -f ${MCP_TEMPDIR}/${16}
+
+#   ³ºÅö¥Õ¥¡¥¤¥ëºï½ü
+    PDFFILE="JIBAI"
+    echo "pdffile = [" ${MCP_TEMPDIR}/${15}${PDFFILE}  "]" 
+    rm  ${MCP_TEMPDIR}/${15}${PDFFILE}*.dat
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM400 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16}
+    if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+        exit 
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${15}
+
+    exit 

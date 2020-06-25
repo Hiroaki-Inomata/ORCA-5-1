@@ -1,0 +1,19 @@
+This Text Character is EUC-JP Code.
+
+必要なパッケージ一覧
+
+woody版
+  ruby
+  libnkf-ruby
+  libxml-parser-ruby
+  libuconv-ruby
+
+
+sarge版
+  ruby
+  ruby1.8
+  libxml-parser-ruby1.8
+  libuconv-ruby1.8
+
+
+

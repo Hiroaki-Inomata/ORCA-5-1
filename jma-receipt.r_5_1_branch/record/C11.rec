@@ -1,0 +1,113 @@
+C11 {
+  fixed9 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    SYSYMD {
+      textdata varchar(9);
+    };
+    KANANAME {
+      textdata varchar(30);
+    };
+    NAME {
+      textdata varchar(30);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(12);
+    };
+    AGE {
+      textdata varchar(6);
+    };
+    SELNUM1 {
+      numdata number(3);
+    };
+    OPENAME {
+      textdata varchar(50);
+    };
+    SRYYMD {
+      textdata varchar(9);
+    };
+    TEKSTYM {
+      textdata varchar(6);
+    };
+    TEKEDYM {
+      textdata varchar(6);
+    };
+    SELNUM2 {
+      numdata number(3);
+    };
+    OPECOMMENT {
+      textdata varchar(50);
+    };
+    SRYKA_COMBO {
+      SRYKA {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[100];
+    };
+    DSPYM_COMBO {
+      DSPYM {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[6];
+    };
+    NYUGAIKBN_COMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[2];
+    };
+    HKNNUM_COMBO {
+      HKNNUM {
+        textdata varchar(18);
+      };
+      count int;
+        item varchar(18)[5];
+    };
+    BSRYKA_COMBO {
+      BSRYKA {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[100];
+    };
+    scrolledwindow1 {
+      OPELIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(9);
+            column5 varchar(40);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow2 {
+      COMMENTLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(9);
+            column5 varchar(6);
+            column6 varchar(14);
+            column7 varchar(16);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

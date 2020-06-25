@@ -1,0 +1,3496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GTK-Interface>
+
+<project>
+  <name>X02</name>
+  <program_name>X02</program_name>
+  <directory></directory>
+  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <gnome_support>True</gnome_support>
+  <gtkpanda_support>False</gtkpanda_support>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>X02</name>
+  <width>1024</width>
+  <height>768</height>
+  <signal>
+    <name>map_event</name>
+    <handler>map_event</handler>
+    <last_modification_time>Thu, 04 Jan 2001 03:25:57 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>set_focus</name>
+    <handler>set_focus</handler>
+    <last_modification_time>Thu, 04 Jan 2001 03:26:09 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_true</handler>
+    <last_modification_time>Mon, 25 Nov 2002 06:01:39 GMT</last_modification_time>
+  </signal>
+  <title>(X02)チェックマスタ設定−適用コード設定</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_CENTER</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkFixed</class>
+    <name>fixed2</name>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>NAME</name>
+      <x>112</x>
+      <y>88</y>
+      <width>570</width>
+      <height>24</height>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Thu, 08 Feb 2001 23:30:58 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Thu, 08 Feb 2001 23:31:39 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B01</name>
+      <x>8</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F1</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Mon, 25 Dec 2000 04:55:00 GMT</last_modification_time>
+      </signal>
+      <label>戻る</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B02</name>
+      <x>88</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F2</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <label></label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B03</name>
+      <x>168</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F3</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Fri, 09 Feb 2001 02:54:52 GMT</last_modification_time>
+      </signal>
+      <label>削除</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B04</name>
+      <x>248</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F4</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Fri, 09 Feb 2001 02:55:26 GMT</last_modification_time>
+      </signal>
+      <label></label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B05</name>
+      <x>344</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F5</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <label></label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B06</name>
+      <x>424</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F6</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Thu, 08 Feb 2001 23:57:24 GMT</last_modification_time>
+      </signal>
+      <label>前頁</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B07</name>
+      <x>504</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F7</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Thu, 08 Feb 2001 23:57:06 GMT</last_modification_time>
+      </signal>
+      <label>次頁</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B08</name>
+      <x>584</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F8</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Wed, 28 Feb 2001 04:20:29 GMT</last_modification_time>
+      </signal>
+      <label>複写</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B09</name>
+      <x>680</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F9</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Wed, 28 Feb 2001 04:20:29 GMT</last_modification_time>
+      </signal>
+      <label>検索</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B10</name>
+      <x>760</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F10</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <label></label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B11</name>
+      <x>840</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F11</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Fri, 26 Apr 2002 07:18:04 GMT</last_modification_time>
+      </signal>
+      <label>印刷</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>B12</name>
+      <x>920</x>
+      <y>718</y>
+      <width>80</width>
+      <height>24</height>
+      <can_focus>True</can_focus>
+      <accelerator>
+	<modifiers>0</modifiers>
+	<key>GDK_F12</key>
+	<signal>clicked</signal>
+      </accelerator>
+      <signal>
+	<name>clicked</name>
+	<handler>send_event</handler>
+	<data>CLICKED</data>
+	<last_modification_time>Mon, 25 Dec 2000 05:01:47 GMT</last_modification_time>
+      </signal>
+      <label>確定</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD01</name>
+      <x>45</x>
+      <y>155</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD02</name>
+      <x>45</x>
+      <y>175</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD03</name>
+      <x>45</x>
+      <y>195</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD04</name>
+      <x>45</x>
+      <y>215</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD05</name>
+      <x>45</x>
+      <y>235</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD06</name>
+      <x>45</x>
+      <y>255</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD07</name>
+      <x>45</x>
+      <y>275</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD08</name>
+      <x>45</x>
+      <y>295</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD09</name>
+      <x>45</x>
+      <y>315</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD10</name>
+      <x>45</x>
+      <y>335</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD11</name>
+      <x>45</x>
+      <y>355</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD12</name>
+      <x>45</x>
+      <y>375</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD13</name>
+      <x>45</x>
+      <y>395</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD14</name>
+      <x>45</x>
+      <y>415</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD15</name>
+      <x>45</x>
+      <y>435</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD16</name>
+      <x>45</x>
+      <y>455</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD17</name>
+      <x>45</x>
+      <y>475</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD18</name>
+      <x>45</x>
+      <y>495</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD19</name>
+      <x>45</x>
+      <y>515</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>TEKCD20</name>
+      <x>45</x>
+      <y>535</y>
+      <width>213</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>20</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME01</name>
+      <x>260</x>
+      <y>155</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME02</name>
+      <x>260</x>
+      <y>175</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME03</name>
+      <x>260</x>
+      <y>195</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME04</name>
+      <x>260</x>
+      <y>215</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME05</name>
+      <x>260</x>
+      <y>235</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME06</name>
+      <x>260</x>
+      <y>255</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME07</name>
+      <x>260</x>
+      <y>275</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME08</name>
+      <x>260</x>
+      <y>295</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME09</name>
+      <x>260</x>
+      <y>315</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME10</name>
+      <x>260</x>
+      <y>335</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME11</name>
+      <x>260</x>
+      <y>355</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME12</name>
+      <x>260</x>
+      <y>375</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME13</name>
+      <x>260</x>
+      <y>395</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME14</name>
+      <x>260</x>
+      <y>415</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME15</name>
+      <x>260</x>
+      <y>435</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME16</name>
+      <x>260</x>
+      <y>455</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME17</name>
+      <x>260</x>
+      <y>475</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME18</name>
+      <x>260</x>
+      <y>495</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME19</name>
+      <x>260</x>
+      <y>515</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>DSPNAME20</name>
+      <x>260</x>
+      <y>535</y>
+      <width>573</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>100</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>SRYCD</name>
+      <x>576</x>
+      <y>16</y>
+      <width>100</width>
+      <height>25</height>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>9</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>STYUKYMD</name>
+      <x>112</x>
+      <y>52</y>
+      <width>158</width>
+      <height>24</height>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>9</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>EDYUKYMD</name>
+      <x>300</x>
+      <y>52</y>
+      <width>158</width>
+      <height>24</height>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>9</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkPandaEntry</class>
+      <name>CHKKBN</name>
+      <x>112</x>
+      <y>16</y>
+      <width>348</width>
+      <height>24</height>
+      <editable>False</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>50</text_max_length>
+      <text></text>
+      <input_mode>XIM</input_mode>
+      <xim_enabled>False</xim_enabled>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO01</name>
+      <x>10</x>
+      <y>155</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO02</name>
+      <x>10</x>
+      <y>175</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO03</name>
+      <x>10</x>
+      <y>195</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO04</name>
+      <x>10</x>
+      <y>215</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO05</name>
+      <x>10</x>
+      <y>235</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO06</name>
+      <x>10</x>
+      <y>255</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO07</name>
+      <x>10</x>
+      <y>275</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO08</name>
+      <x>10</x>
+      <y>295</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO09</name>
+      <x>10</x>
+      <y>315</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO10</name>
+      <x>10</x>
+      <y>335</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO11</name>
+      <x>10</x>
+      <y>355</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO12</name>
+      <x>10</x>
+      <y>375</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO13</name>
+      <x>10</x>
+      <y>395</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO14</name>
+      <x>10</x>
+      <y>415</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO15</name>
+      <x>10</x>
+      <y>435</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO16</name>
+      <x>10</x>
+      <y>455</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO17</name>
+      <x>10</x>
+      <y>475</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO18</name>
+      <x>10</x>
+      <y>495</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO19</name>
+      <x>10</x>
+      <y>515</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NO20</name>
+      <x>10</x>
+      <y>535</y>
+      <width>33</width>
+      <height>20</height>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>ZZ9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN01</name>
+      <x>835</x>
+      <y>155</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label153</name>
+      <x>40</x>
+      <y>130</y>
+      <width>155</width>
+      <height>20</height>
+      <label>適用コード</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN02</name>
+      <x>835</x>
+      <y>175</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN03</name>
+      <x>835</x>
+      <y>195</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN04</name>
+      <x>835</x>
+      <y>215</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN05</name>
+      <x>835</x>
+      <y>235</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN06</name>
+      <x>835</x>
+      <y>255</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN07</name>
+      <x>835</x>
+      <y>275</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN08</name>
+      <x>835</x>
+      <y>295</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN09</name>
+      <x>835</x>
+      <y>315</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN10</name>
+      <x>835</x>
+      <y>335</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN11</name>
+      <x>835</x>
+      <y>355</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN12</name>
+      <x>835</x>
+      <y>375</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN13</name>
+      <x>835</x>
+      <y>395</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN14</name>
+      <x>835</x>
+      <y>415</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN15</name>
+      <x>835</x>
+      <y>435</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN16</name>
+      <x>835</x>
+      <y>455</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN17</name>
+      <x>835</x>
+      <y>475</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN18</name>
+      <x>835</x>
+      <y>495</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN19</name>
+      <x>835</x>
+      <y>515</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>NGBNDKBN20</name>
+      <x>835</x>
+      <y>535</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>Z</format>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label162</name>
+      <x>8</x>
+      <y>52</y>
+      <width>100</width>
+      <height>24</height>
+      <label>有効期間</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR01</name>
+      <x>875</x>
+      <y>155</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR02</name>
+      <x>875</x>
+      <y>175</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR11</name>
+      <x>875</x>
+      <y>355</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR12</name>
+      <x>875</x>
+      <y>375</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR10</name>
+      <x>875</x>
+      <y>335</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR09</name>
+      <x>875</x>
+      <y>315</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR08</name>
+      <x>875</x>
+      <y>295</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR07</name>
+      <x>875</x>
+      <y>275</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR06</name>
+      <x>875</x>
+      <y>255</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR05</name>
+      <x>875</x>
+      <y>235</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR04</name>
+      <x>875</x>
+      <y>215</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR03</name>
+      <x>875</x>
+      <y>195</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR16</name>
+      <x>875</x>
+      <y>455</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR15</name>
+      <x>875</x>
+      <y>435</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR17</name>
+      <x>875</x>
+      <y>475</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR18</name>
+      <x>875</x>
+      <y>495</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR19</name>
+      <x>875</x>
+      <y>515</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR20</name>
+      <x>875</x>
+      <y>535</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR14</name>
+      <x>875</x>
+      <y>415</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkNumberEntry</class>
+      <name>CHKERR13</name>
+      <x>875</x>
+      <y>395</y>
+      <width>38</width>
+      <height>20</height>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>activate</name>
+	<handler>send_event</handler>
+	<data>ACTIVATE</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:15 GMT</last_modification_time>
+      </signal>
+      <signal>
+	<name>changed</name>
+	<handler>entry_changed</handler>
+	<data>CHANGED</data>
+	<last_modification_time>Fri, 22 Dec 2000 06:15:36 GMT</last_modification_time>
+      </signal>
+      <editable>True</editable>
+      <format>9</format>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label154</name>
+      <x>220</x>
+      <y>130</y>
+      <width>445</width>
+      <height>20</height>
+      <label>名                                称</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLDM</name>
+      <x>835</x>
+      <y>130</y>
+      <width>38</width>
+      <height>20</height>
+      <label>入外</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label163</name>
+      <x>268</x>
+      <y>52</y>
+      <width>32</width>
+      <height>24</height>
+      <label>〜</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLSRYCD</name>
+      <x>472</x>
+      <y>16</y>
+      <width>105</width>
+      <height>24</height>
+      <label>診療行為コード</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label161</name>
+      <x>8</x>
+      <y>16</y>
+      <width>100</width>
+      <height>24</height>
+      <label>チェック区分</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label160</name>
+      <x>8</x>
+      <y>88</y>
+      <width>100</width>
+      <height>24</height>
+      <label>漢字名称</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label168</name>
+      <x>672</x>
+      <y>632</y>
+      <width>270</width>
+      <height>20</height>
+      <label>エラー　０：エラー</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label169</name>
+      <x>672</x>
+      <y>652</y>
+      <width>270</width>
+      <height>20</height>
+      <label>　　　　９：警告</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label170</name>
+      <x>672</x>
+      <y>672</y>
+      <width>300</width>
+      <height>20</height>
+      <label>　　　　８：チェックしない</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLPAGE</name>
+      <x>792</x>
+      <y>560</y>
+      <width>88</width>
+      <height>24</height>
+      <label> </label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label164</name>
+      <x>768</x>
+      <y>560</y>
+      <width>24</width>
+      <height>24</height>
+      <label>頁</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCAUTION</name>
+      <x>44</x>
+      <y>560</y>
+      <width>564</width>
+      <height>24</height>
+      <label>※マスタ提供適用コードは削除できません。入外、エラーの区分変更は可能です。</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label166</name>
+      <x>672</x>
+      <y>588</y>
+      <width>270</width>
+      <height>20</height>
+      <label>入外　空白：入院・外来の区別をしない</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label167</name>
+      <x>672</x>
+      <y>608</y>
+      <width>270</width>
+      <height>20</height>
+      <label>　　　　１：入院・外来の区別をする</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label165</name>
+      <x>875</x>
+      <y>130</y>
+      <width>50</width>
+      <height>20</height>
+      <label>エラー</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR01</name>
+      <x>916</x>
+      <y>156</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR02</name>
+      <x>916</x>
+      <y>176</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR03</name>
+      <x>916</x>
+      <y>196</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR04</name>
+      <x>916</x>
+      <y>216</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR05</name>
+      <x>916</x>
+      <y>236</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR06</name>
+      <x>916</x>
+      <y>256</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR07</name>
+      <x>916</x>
+      <y>276</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR08</name>
+      <x>916</x>
+      <y>296</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR09</name>
+      <x>916</x>
+      <y>316</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR10</name>
+      <x>916</x>
+      <y>336</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR11</name>
+      <x>916</x>
+      <y>356</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR12</name>
+      <x>916</x>
+      <y>376</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR13</name>
+      <x>916</x>
+      <y>396</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR14</name>
+      <x>916</x>
+      <y>416</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR15</name>
+      <x>916</x>
+      <y>436</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR16</name>
+      <x>916</x>
+      <y>456</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR17</name>
+      <x>916</x>
+      <y>476</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR18</name>
+      <x>916</x>
+      <y>496</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR19</name>
+      <x>916</x>
+      <y>516</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>LBLCHKERR20</name>
+      <x>916</x>
+      <y>536</y>
+      <width>20</width>
+      <height>20</height>
+      <label>0</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>

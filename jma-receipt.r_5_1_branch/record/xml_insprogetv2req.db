@@ -1,0 +1,10 @@
+xml_insprogetv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	insprogetreq {
+		InsuranceProvider_Number	varchar(8);
+		Insurance_Number		varchar(3);
+   	};
+};

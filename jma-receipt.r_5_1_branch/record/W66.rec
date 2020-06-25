@@ -1,0 +1,23 @@
+W66 {
+  fixed1 {
+    B03 {
+      state int;
+    };
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    KGIIRYOCD {
+      textdata varchar(20);
+    };
+    CMB_KGISKYKBN {
+      KGISKYKBN {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[20];
+    };
+  };
+};

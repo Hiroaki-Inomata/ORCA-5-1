@@ -1,0 +1,8 @@
+---
+:root: /tmp/test-jma-plugin
+:list:
+ - http://localhost:3000/list1.yml
+ - http://localhost:3000/list2.yml
+ - http://localhost:3000/list3.yml
+:linkprefix: /tmp/test-jma-plugin/link
+:verify: true

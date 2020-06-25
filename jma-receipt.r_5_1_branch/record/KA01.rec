@@ -1,0 +1,144 @@
+KA01 {
+  fixed1 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SELNUM1 {
+      numdata number(3);
+    };
+    SRYYMD {
+      textdata varchar(9);
+    };
+    SELNUM2 {
+      numdata number(3);
+    };
+    INPUT01 {
+      textdata varchar(80);
+    };
+    INPUT02 {
+      textdata varchar(80);
+    };
+    INPUT03 {
+      textdata varchar(80);
+    };
+    INPUT04 {
+      textdata varchar(80);
+    };
+    INPUT05 {
+      textdata varchar(80);
+    };
+    INPUT06 {
+      textdata varchar(80);
+    };
+    NISUU {
+      numdata number(3);
+    };
+    SRYKA {
+      textdata varchar(12);
+    };
+    scrolledwindow1 {
+      RRKLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(16);
+            column3 varchar(6);
+            column4 varchar(4);
+          }[40];
+          selectdata bool[40];
+      };
+    };
+    scrolledwindow2 {
+      MEILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(2);
+            column3 varchar(2);
+            column4 varchar(200);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    HKNCOMBI_COMB {
+      HKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[30];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[99];
+    };
+    INNAI {
+      style varchar(20);
+      textdata varchar(16);
+    };
+    SUURYO1 {
+      textdata varchar(12);
+    };
+    SUURYO2 {
+      textdata varchar(12);
+    };
+    SUURYO3 {
+      textdata varchar(12);
+    };
+    SUURYO4 {
+      textdata varchar(12);
+    };
+    SUURYO5 {
+      textdata varchar(12);
+    };
+    SUURYO6 {
+      textdata varchar(12);
+    };
+    KOUFUYMD {
+      textdata varchar(9);
+    };
+    KEISUURYO1 {
+      textdata varchar(12);
+    };
+    KEISUURYO2 {
+      textdata varchar(12);
+    };
+    KEISUURYO3 {
+      textdata varchar(12);
+    };
+    KEISUURYO4 {
+      textdata varchar(12);
+    };
+    KEISUURYO5 {
+      textdata varchar(12);
+    };
+    KEISUURYO6 {
+      textdata varchar(12);
+    };
+    B12S {
+      state int;
+    };
+  };
+};

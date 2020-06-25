@@ -1,0 +1,10 @@
+push_patient01	{
+	event				varchar(50);
+	body	{
+		Patient_Mode		varchar(10);
+		Patient_ID		varchar(20);
+		Information_Date	varchar(10);
+		Information_Time	varchar(08);
+	};
+};
+

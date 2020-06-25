@@ -1,0 +1,130 @@
+W15 {
+  fixed2 {
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    HKNJANUM01 {
+      textdata varchar(8);
+    };
+    HKNJANUM02 {
+      textdata varchar(8);
+    };
+    HKNJANUM03 {
+      textdata varchar(8);
+    };
+    HKNJANUM04 {
+      textdata varchar(8);
+    };
+    HKNJANUM05 {
+      textdata varchar(8);
+    };
+    HKNJANUM06 {
+      textdata varchar(8);
+    };
+    HKNJANUM07 {
+      textdata varchar(8);
+    };
+    HKNJANUM08 {
+      textdata varchar(8);
+    };
+    HKNJANUM09 {
+      textdata varchar(8);
+    };
+    HKNJANUM10 {
+      textdata varchar(8);
+    };
+    HKNJANUM11 {
+      textdata varchar(8);
+    };
+    HKNJANUM12 {
+      textdata varchar(8);
+    };
+    HKNJANUM13 {
+      textdata varchar(8);
+    };
+    HKNJANUM14 {
+      textdata varchar(8);
+    };
+    HKNJANUM15 {
+      textdata varchar(8);
+    };
+    HKNJANUM16 {
+      textdata varchar(8);
+    };
+    HKNJANUM17 {
+      textdata varchar(8);
+    };
+    HKNJANUM18 {
+      textdata varchar(8);
+    };
+    HKNJANUM19 {
+      textdata varchar(8);
+    };
+    HKNJANUM20 {
+      textdata varchar(8);
+    };
+    HKNJAMEI01 {
+      textdata varchar(40);
+    };
+    HKNJAMEI02 {
+      textdata varchar(40);
+    };
+    HKNJAMEI03 {
+      textdata varchar(40);
+    };
+    HKNJAMEI04 {
+      textdata varchar(40);
+    };
+    HKNJAMEI05 {
+      textdata varchar(40);
+    };
+    HKNJAMEI06 {
+      textdata varchar(40);
+    };
+    HKNJAMEI07 {
+      textdata varchar(40);
+    };
+    HKNJAMEI08 {
+      textdata varchar(40);
+    };
+    HKNJAMEI09 {
+      textdata varchar(40);
+    };
+    HKNJAMEI10 {
+      textdata varchar(40);
+    };
+    HKNJAMEI11 {
+      textdata varchar(40);
+    };
+    HKNJAMEI12 {
+      textdata varchar(40);
+    };
+    HKNJAMEI13 {
+      textdata varchar(40);
+    };
+    HKNJAMEI14 {
+      textdata varchar(40);
+    };
+    HKNJAMEI15 {
+      textdata varchar(40);
+    };
+    HKNJAMEI16 {
+      textdata varchar(40);
+    };
+    HKNJAMEI17 {
+      textdata varchar(40);
+    };
+    HKNJAMEI18 {
+      textdata varchar(40);
+    };
+    HKNJAMEI19 {
+      textdata varchar(40);
+    };
+    HKNJAMEI20 {
+      textdata varchar(40);
+    };
+  };
+};

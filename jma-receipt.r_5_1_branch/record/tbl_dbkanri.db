@@ -1,0 +1,30 @@
+tbl_dbkanri {
+	KANRICD				char(8);
+	VERSION				varchar(64);
+	DBSVERSION1     		varchar(64);
+	DBSVERSION2     		varchar(64);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dbkanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dbkanri
+			WHERE	KANRICD	=	:KANRICD
+                ;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_dbkanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dbkanri
+;
+	};
+};

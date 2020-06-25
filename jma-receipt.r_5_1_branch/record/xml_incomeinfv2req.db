@@ -1,0 +1,12 @@
+xml_incomeinfv2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Patient_ID			varchar(20);
+		Perform_Date		varchar(10);
+		Perform_Month		varchar(7);
+		Perform_Year		varchar(4);
+	};
+};

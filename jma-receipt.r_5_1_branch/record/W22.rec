@@ -1,0 +1,38 @@
+W22 {
+  fixed6 {
+    SELNUM {
+      numdata number(2);
+    };
+    KJNYMD {
+      textdata varchar(10);
+    };
+    KBNCD {
+      textdata varchar(2);
+      state int;
+    };
+    SAGAKU {
+      textdata varchar(6);
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    scrolledwindow29 {
+        SAGAKULST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(2);
+            column3 varchar(7);
+            column4 varchar(10);
+            column5 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

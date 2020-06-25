@@ -1,0 +1,83 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+umask 022
+
+HOSPNUM=$1
+PTID=$2
+NYUGAI=$3
+SRYYMD=$4
+JMAMRVER=$5
+DRCD=$6
+OPID=$7
+DOUJITU=$8
+#１日１ファイルとして
+DOUJITU="A"
+OUTDIR="$9/"
+EXYMD="${10}"
+EXTIME="${11}"
+
+PTLISTF=""
+HOSPCDF=""
+
+VERSIONFL=${DOCDIR}/version
+VERLIST=`awk '/version/{gsub(/\t| |;/,""); print} ' $VERSIONFL`
+VERDATA=`echo $VERLIST | awk '{i=split($0,arr,"("); print arr[1]} ' `
+ORCAVER=`echo $VERDATA | awk '{gsub(/[version]/,""); print } ' `
+
+if [ "${PTID}" = "9999999999" ]; then
+  TEMPPTLIST=$(mktemp -p ${MCP_TEMPDIR})
+  PTLISTF=$(basename ${TEMPPTLIST})
+  TEMPSRYYMD=$(mktemp -p ${MCP_TEMPDIR})
+  SRYYMDF=$(basename ${TEMPSRYYMD})
+  PARAM="${HOSPNUM},${NYUGAI},${SRYYMD},${PTLISTF},${SRYYMDF},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBMRCSV10B -parameter "${PARAM}"
+  rennum=0
+  for dataymd in `cat ${TEMPSRYYMD}`
+  do
+    TEMPMRCSV=$(mktemp -p ${MCP_TEMPDIR})
+    MRCSVF=$(basename ${TEMPMRCSV})
+    TEMPHOSPCD=$(mktemp -p ${MCP_TEMPDIR})
+    HOSPCDF=$(basename ${TEMPHOSPCD})
+    PARAM="${HOSPNUM},${PTID},${NYUGAI},${dataymd},${JMAMRVER},${DRCD},${OPID},${DOUJITU},${ORCAVER},${MRCSVF},${PTLISTF},${HOSPCDF},"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBMRCSV -parameter "${PARAM}"
+    HOSPCD=`cat ${TEMPHOSPCD}`
+    if [ -s ${TEMPMRCSV} ]; then
+      TEMPSJISMRCSV=$(mktemp -p ${MCP_TEMPDIR})
+      nkf -EsLw ${TEMPMRCSV} > ${TEMPSJISMRCSV}
+      if [ ${NYUGAI} -eq 1 ]; then
+        CSVFILE="JMAMR${HOSPCD}N${dataymd}${EXYMD}${EXTIME}.csv"
+      else
+        CSVFILE="JMAMR${HOSPCD}G${dataymd}${EXYMD}${EXTIME}.csv"
+      fi
+      if ! [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ]; then
+        cp ${TEMPSJISMRCSV} ${9}/${CSVFILE}
+        chmod g+rw ${9}/${CSVFILE}
+      else
+        rennum=$(expr ${rennum} + 1) 
+        RECCNT="$(wc -l ${TEMPSJISMRCSV} | awk '{i=split($0,arr," ");printf("%06d",arr[1])}')"
+        ${MONBLOB} -dir ${LDDIRECTORY} -import ${TEMPSJISMRCSV} > ${MCP_TEMPDIR}/blobid-$$
+        MONBLOBID=`cat ${MCP_TEMPDIR}/blobid-$$`
+        PARAM="${NYUGAI},MISJMAMR,${EXYMD}${EXTIME},${rennum},${dataymd:0:6},${dataymd},jmamr.sh,1,,,,,,,${HOSPNUM},${NYUGAI},${MCP_TEMPDIR},${CSVFILE},${RECCNT},${MONBLOBID}"
+
+        ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBFILEMIS -parameter "${PARAM}"
+      fi
+    fi
+  done
+else
+  TEMPMRCSV=$(mktemp -p ${MCP_TEMPDIR})
+  MRCSVF=$(basename ${TEMPMRCSV})
+  # store_mnote.sh でファイル削除
+  PARAM="${HOSPNUM},${PTID},${NYUGAI},${SRYYMD},${JMAMRVER},${DRCD},${OPID},${DOUJITU},${ORCAVER},${MRCSVF},${PTLISTF},${HOSPCDF},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBMRCSV -parameter "${PARAM}"
+fi
+
+exit 0

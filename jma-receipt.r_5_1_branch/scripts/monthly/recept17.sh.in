@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+RENNUM=0
+#-------------------------------------------#
+#    労災診療報酬請求書作成
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} HOSPNUM
+#        ${15} エラーファイル名 
+#        ${16} 様式区分
+#           0:ＯＣＲ様式
+#        ${17} 枠記載区分（ＯＣＲ様式のみ）
+#           0:枠なし  2:枠あり
+#        ${18} 新元号様式区分
+#            0:元号なし、1:新元号様式
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${14}recept17.log"
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+        
+
+        echo "arg5   = [" ${5}   "]"
+        echo "arg15  = [" ${15}  "]"
+        echo "arg16  = [" ${16}  "]"
+        echo "arg17  = [" ${17}  "]"
+        echo "arg18  = [" ${18}  "]"
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${15}  "]"
+        rm  -f ${MCP_TEMPDIR}/${15}
+
+        if [ ${16} -eq  '0' ]; then
+            if [ ${18} -eq  '0' ]; then
+                $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM043 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${17},${15}
+            else
+                $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM044 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${17},${15}
+            fi
+        else
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM042 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15}
+        fi
+        if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+            exit 
+        else
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${14}
+        fi
+	
+        exit 

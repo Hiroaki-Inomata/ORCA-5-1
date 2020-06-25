@@ -1,0 +1,33 @@
+R99 {
+  fixed6 {
+    MSG {
+      style varchar(20);
+      textdata varchar(200);
+    };
+    scrolledwindow28 {
+      JOBKANRILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(7);
+            column2 varchar(34);
+            column3 varchar(8);
+            column4 varchar(8);
+            column5 varchar(100);
+          }[2];
+          selectdata bool[2];
+      };
+    };
+    B12 {
+      state int;
+      label varchar(14);
+    };
+    B21 {
+      state int;
+    };
+    PROGRESSBAR {
+      value int;
+    };
+  };
+};

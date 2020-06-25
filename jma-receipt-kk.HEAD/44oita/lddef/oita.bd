@@ -1,0 +1,19 @@
+name	oita;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU4401"	"OpenCOBOL";
+bind	"SEIKYU4403"	"OpenCOBOL";
+bind	"SEIKYU4405"	"OpenCOBOL";
+bind	"SEIKYU4407"	"OpenCOBOL";
+bind	"SEIKYU4409"	"OpenCOBOL";
+bind	"SOKATU4400"	"OpenCOBOL";
+bind	"SOKATU4410"	"OpenCOBOL";
+bind	"SOKATU4415"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

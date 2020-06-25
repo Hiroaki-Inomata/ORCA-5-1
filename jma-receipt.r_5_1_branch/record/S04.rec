@@ -1,0 +1,90 @@
+S04 {
+  fixed2 {
+    B10 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    LBLKARA {
+      textdata varchar(2);
+    };
+    LBLSUMKBN {
+      textdata varchar(30);
+    };
+    LBLSYORIKBN {
+      textdata varchar(22);
+    };
+    SIHARAICOMBO {
+      SIHARAIKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    NYUGAICOMBO {
+      NYUGAIKBN {
+        textdata varchar(6);
+      };
+      count int;
+        item varchar(6)[5];
+    };
+    SRYCOMBO {
+      SRYKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[5];
+    };
+    STRSRYYMD {
+      textdata varchar(10);
+    };
+    ENDSRYYMD {
+      textdata varchar(10);
+      state int;
+    };
+    KIKANCOMBO {
+      KIKANKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[5];
+    };
+    DSPCOMBO {
+      DSPKBN {
+        textdata varchar(20);
+        state int;
+      };
+      count int;
+       item varchar(20)[5];
+      state int;
+    };
+    SUMKBNCOMBO {
+      SUMKBN {
+        textdata varchar(18);
+        state int;
+      };
+      count int;
+        item varchar(18)[5];
+      state int;
+    };
+    SYORICOMBO {
+      SYORIKBN {
+        textdata varchar(18);
+        state int;
+      };
+      count int;
+        item varchar(18)[5];
+      state int;
+    };
+    JIHICOMBO {
+      JIHIKBN {
+        textdata varchar(12);
+        state int;
+      };
+      count int;
+        item varchar(12)[5];
+      state int;
+    };
+  };
+};

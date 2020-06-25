@@ -1,0 +1,17 @@
+xml_subjectiveslstv2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	subjectiveslstreq {
+		Request_Number			varchar(2);
+		Patient_ID			varchar(20);
+    		Perform_Date			varchar(07);
+		InOut				varchar(1);
+		Department_Code			varchar(2);
+		Insurance_Combination_Number	varchar(4);
+		Perform_Day			varchar(2);
+		Subjectives_Detail_Record	varchar(2);
+	        Subjectives_Number		varchar(2);
+	};
+};

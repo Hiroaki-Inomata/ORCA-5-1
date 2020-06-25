@@ -1,0 +1,103 @@
+#!%RUBY%
+# coding : utf-8
+
+require "tempfile"
+
+module OrcaDAS
+  class FormData
+    CRLF = "\x0d\x0a"
+
+    class Content
+      attr_accessor :name, :body, :filename, :content_type, :encoding
+
+      def initialize(name, body=nil, filename=nil, content_type=nil)
+        @name = name
+        @body = body
+        @filename = filename
+        @encoding = nil
+        @content_type ||= "application/octet-stream"
+      end
+
+      def output(outdev)
+        outdev << "Content-Disposition: form-data; name=\"#{@name}\""
+        outdev << "; filename=\"#{@filename}\"" if @filename
+        outdev << CRLF
+        outdev << "Content-Type: #{@content_type}" << CRLF
+        if @encoding
+          outdev << "Content-Transfer-Encoding: #{@encoding}" << CRLF
+        end
+        outdev << CRLF
+        case @encoding
+        when "base64"
+          outdev << [ @body ].pack("m")
+        when "quoted-printable"
+          outdev << [ @body ].pack("M")
+        when "uuencode", "BinHex"
+          raise "111", NotImplementedError, @encoding
+        when nil
+          @body.each{|line| outdev << line } if @body
+        else
+          raise "111 unknown transfer encoding: #{@encoding}"
+        end
+        outdev << CRLF
+      end
+    end
+
+    attr_accessor :content_type, :name
+    attr_reader  :boundary
+
+    def initialize
+      @content_type = "multipart/form-data"
+      @boundary = "#{Time.now.to_f}-#{$$}"
+      @name = nil
+      @body = Tempfile.new("ORCA_DAS_FORMDATA")
+      @trailer = "--#{@boundary}--" + CRLF
+    end
+
+    def close
+    	@body.close(true)
+    end
+
+    def add(content)
+      @body << "--#{@boundary}" << CRLF
+      content.output(@body)
+    end
+
+    def add_data(tar_data, tar_path)
+      form = Content.new("data", tar_data, File.basename(tar_path))
+      form.encoding = "base64"
+      self.add(form)
+      form = OrcaDAS::FormData::Content.new("sha1", Digest::SHA1.hexdigest(tar_data), tar_path)
+      form.encoding = "quoted-printable"
+      self.add(form)
+    end
+
+    def header
+      hash = Hash.new
+      hash["Content-Type"] = "#{@content_type}; boundary=#{@boundary}"
+      hash["Content-Length"] = (@body.pos + @trailer.size).to_s
+      if @name
+        hash["Content-Disposition"] = "form-data; name=\"#{@name}\""
+      end
+      hash
+    end
+
+    def body(outdev=nil)
+      @body.rewind
+      if outdev
+        @body.each{|line| outdev << line }
+        outdev << @trailer
+      else
+        @body.read << @trailer
+      end
+    end
+
+    def output(outdev)
+      self.header.each{|key, val|
+        outdev << "#{key}: #{val}" << CRLF
+      }
+      outdev << CRLF
+      self.body(outdev)
+    end
+  end
+end

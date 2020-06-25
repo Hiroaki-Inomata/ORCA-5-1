@@ -1,0 +1,83 @@
+tbl_etensu_4 {
+	N_GROUP				number(3,0);
+	SRYCD				char(9);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	KASAN				number(2,0);
+	CHGYMD   			char(8);
+#-----> 主キー更新用項目
+	UPN_GROUP			number(3,0),virtual;
+	UPSRYCD				char(9),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD 			char(8),virtual;
+};
+primary	{
+	N_GROUP,SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_4_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_etensu_4
+		WHERE   N_GROUP  =   :N_GROUP
+		AND     SRYCD    =   :SRYCD
+ 		AND   YUKOSTYMD  <=  :YUKOSTYMD
+		AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_4_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_etensu_4
+		WHERE   N_GROUP  =   :N_GROUP
+			ORDER   BY  SRYCD,
+				    YUKOSTYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_etensu_4_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_etensu_4
+			ORDER   BY  N_GROUP,
+				    SRYCD,
+				    YUKOSTYMD
+ 		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_4_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_etensu_4
+		WHERE   N_GROUP  =   :N_GROUP
+		AND     SRYCD    =   :SRYCD
+			ORDER   BY  YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_etensu_4
+				SET
+				N_GROUP      = :N_GROUP,
+				SRYCD      = :SRYCD,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				KASAN      = :KASAN,
+				CHGYMD      = :CHGYMD
+			WHERE 	N_GROUP      = :UPN_GROUP
+			AND	SRYCD      =  :UPSRYCD
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

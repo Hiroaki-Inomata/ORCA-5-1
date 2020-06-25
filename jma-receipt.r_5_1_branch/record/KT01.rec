@@ -1,0 +1,636 @@
+KT01 {
+  fixed2 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    KANANAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    NAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    RATE {
+      textdata varchar(6);
+    };
+    LASTYMD {
+      textdata varchar(24);
+    };
+    SYOSINYMD {
+      textdata varchar(24);
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    GOKEITEN {
+      textdata varchar(15);
+    };
+    SRYKBN01 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN02 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN03 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN04 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN05 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN06 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN07 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN08 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN09 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN10 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN11 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN12 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN13 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN14 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN15 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN16 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN17 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN18 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN19 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN20 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN21 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN22 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    SRYKBN23 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    INPUTCD01 {
+      textdata varchar(54);
+    };
+    INPUTCD02 {
+      textdata varchar(54);
+    };
+    INPUTCD03 {
+      textdata varchar(54);
+    };
+    INPUTCD04 {
+      textdata varchar(54);
+    };
+    INPUTCD05 {
+      textdata varchar(54);
+    };
+    INPUTCD06 {
+      textdata varchar(54);
+    };
+    INPUTCD07 {
+      textdata varchar(54);
+    };
+    INPUTCD08 {
+      textdata varchar(54);
+    };
+    INPUTCD09 {
+      textdata varchar(54);
+    };
+    INPUTCD10 {
+      textdata varchar(54);
+    };
+    INPUTCD11 {
+      textdata varchar(54);
+    };
+    INPUTCD12 {
+      textdata varchar(54);
+    };
+    INPUTCD13 {
+      textdata varchar(54);
+    };
+    INPUTCD14 {
+      textdata varchar(54);
+    };
+    INPUTCD15 {
+      textdata varchar(54);
+    };
+    INPUTCD16 {
+      textdata varchar(54);
+    };
+    INPUTCD17 {
+      textdata varchar(54);
+    };
+    INPUTCD18 {
+      textdata varchar(54);
+    };
+    INPUTCD19 {
+      textdata varchar(54);
+    };
+    INPUTCD20 {
+      textdata varchar(54);
+    };
+    INPUTCD21 {
+      textdata varchar(54);
+    };
+    INPUTCD22 {
+      textdata varchar(54);
+    };
+    INPUTCD23 {
+      textdata varchar(54);
+    };
+    MEISYO01 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO02 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO03 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO04 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO05 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO06 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO07 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO08 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO09 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO10 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO11 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO12 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO13 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO14 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO15 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO16 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO17 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO18 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO19 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO20 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO21 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO22 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    MEISYO23 {
+      style varchar(20);
+      textdata varchar(140);
+    };
+    SURYO01 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO02 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO03 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO04 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO05 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO06 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO07 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO08 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO09 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO10 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO11 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO12 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO13 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO14 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO15 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO16 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO17 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO18 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO19 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO20 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO21 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO22 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SURYO23 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    INGAI {
+      isactive bool;
+      label varchar(10);
+    };
+    TEISEI {
+      value bool;
+      label varchar(10);
+    };
+    TABOOCOB {
+      TABOO {
+        textdata varchar(62);
+      };
+      count int;
+        item varchar(62)[40];
+    };
+    HKNCOMBICOMB {
+      HKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[30];
+    };
+    MODE {
+      textdata varchar(10);
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      BYOMEILST {
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(22);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    LASTMID {
+      textdata varchar(20);
+    };
+    SRYDD {
+      textdata varchar(2);
+    };
+    JIKANMSG {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    KOHMSG {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    SRYKACOMB {
+      SRYKA {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[99];
+    };
+    DRNAME_COMB {
+      DRNAME {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[99];
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(12);
+    };
+    GRPMEI {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    B12 {
+      state int;
+    };
+    B01S {
+      state int;
+    };
+    B08S {
+      state int;
+    };
+    B09S {
+      state int;
+    };
+    B05S {
+      state int;
+    };
+    BD01 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD02 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD03 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD04 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD05 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD06 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD07 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD08 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD09 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD10 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD11 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD12 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD13 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD14 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD15 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD16 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD17 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD18 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD19 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD20 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD21 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD22 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD23 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD24 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD25 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD26 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD27 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD28 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD29 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD30 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    BD31 {
+      state int;
+      style varchar(20);
+      label varchar(4);
+    };
+    MODE2 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    MODE3 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+  };
+};

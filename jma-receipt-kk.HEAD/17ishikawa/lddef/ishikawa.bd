@@ -1,0 +1,17 @@
+name	ishikawa;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU1703"	"OpenCOBOL";
+bind	"SEIKYU1705"	"OpenCOBOL";
+bind	"SEIKYU1707"	"OpenCOBOL";
+bind	"SEIKYU1709"	"OpenCOBOL";
+bind	"SOKATU1700"	"OpenCOBOL";
+bind	"SOKATU1710"	"OpenCOBOL";
+bind	"SOKATU1715"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

@@ -1,0 +1,50 @@
+MLOG {
+  fixed32 {
+    MESSAGE {
+      textdata varchar(200);
+    };
+    SELNUM01 {
+      numdata number(3);
+    };
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(2);
+            column3 varchar(2);
+            column4 varchar(16);
+            column5 varchar(30);
+            column6 varchar(64);
+            column7 varchar(40);
+            column8 varchar(20);
+            column9 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    IRYO_NO_CMB {
+      IRYO_NO {
+        textdata varchar(100);
+      };
+      state int;
+      count int;
+        item varchar(100)[200];
+    };
+    B05 {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B10 {
+      state int;
+    };
+  };
+};

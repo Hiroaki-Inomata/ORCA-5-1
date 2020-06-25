@@ -1,0 +1,472 @@
+R98 {
+  fixed2 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B09 {
+      state int;
+      label varchar(8);
+    };
+    RENNUM01 {
+      numdata number(5);
+    };
+    PTNUM01 {
+      textdata varchar(21);
+    };
+    NAME01 {
+      textdata varchar(31);
+    };
+    FTNJANUM01 {
+      textdata varchar(9);
+    };
+    JKYSNUM01 {
+      textdata varchar(21);
+    };
+    TEKSTYMD01 {
+      textdata varchar(9);
+    };
+    RENNUM02 {
+      numdata number(5);
+    };
+    PTNUM02 {
+      textdata varchar(21);
+    };
+    NAME02 {
+      textdata varchar(31);
+    };
+    FTNJANUM02 {
+      textdata varchar(9);
+    };
+    JKYSNUM02 {
+      textdata varchar(21);
+    };
+    TEKSTYMD02 {
+      textdata varchar(9);
+    };
+    RENNUM03 {
+      numdata number(5);
+    };
+    PTNUM03 {
+      textdata varchar(21);
+    };
+    NAME03 {
+      textdata varchar(31);
+    };
+    FTNJANUM03 {
+      textdata varchar(9);
+    };
+    JKYSNUM03 {
+      textdata varchar(21);
+    };
+    TEKSTYMD03 {
+      textdata varchar(9);
+    };
+    RENNUM04 {
+      numdata number(5);
+    };
+    PTNUM04 {
+      textdata varchar(21);
+    };
+    NAME04 {
+      textdata varchar(31);
+    };
+    FTNJANUM04 {
+      textdata varchar(9);
+    };
+    JKYSNUM04 {
+      textdata varchar(21);
+    };
+    TEKSTYMD04 {
+      textdata varchar(9);
+    };
+    RENNUM05 {
+      numdata number(5);
+    };
+    PTNUM05 {
+      textdata varchar(21);
+    };
+    NAME05 {
+      textdata varchar(31);
+    };
+    FTNJANUM05 {
+      textdata varchar(9);
+    };
+    JKYSNUM05 {
+      textdata varchar(21);
+    };
+    TEKSTYMD05 {
+      textdata varchar(9);
+    };
+    RENNUM06 {
+      numdata number(5);
+    };
+    PTNUM06 {
+      textdata varchar(21);
+    };
+    NAME06 {
+      textdata varchar(31);
+    };
+    FTNJANUM06 {
+      textdata varchar(9);
+    };
+    JKYSNUM06 {
+      textdata varchar(21);
+    };
+    TEKSTYMD06 {
+      textdata varchar(9);
+    };
+    RENNUM07 {
+      numdata number(5);
+    };
+    PTNUM07 {
+      textdata varchar(21);
+    };
+    NAME07 {
+      textdata varchar(31);
+    };
+    FTNJANUM07 {
+      textdata varchar(9);
+    };
+    JKYSNUM07 {
+      textdata varchar(21);
+    };
+    TEKSTYMD07 {
+      textdata varchar(9);
+    };
+    RENNUM08 {
+      numdata number(5);
+    };
+    PTNUM08 {
+      textdata varchar(21);
+    };
+    NAME08 {
+      textdata varchar(31);
+    };
+    FTNJANUM08 {
+      textdata varchar(9);
+    };
+    JKYSNUM08 {
+      textdata varchar(21);
+    };
+    TEKSTYMD08 {
+      textdata varchar(9);
+    };
+    RENNUM09 {
+      numdata number(5);
+    };
+    PTNUM09 {
+      textdata varchar(21);
+    };
+    NAME09 {
+      textdata varchar(31);
+    };
+    FTNJANUM09 {
+      textdata varchar(9);
+    };
+    JKYSNUM09 {
+      textdata varchar(21);
+    };
+    TEKSTYMD09 {
+      textdata varchar(9);
+    };
+    RENNUM10 {
+      numdata number(5);
+    };
+    PTNUM10 {
+      textdata varchar(21);
+    };
+    NAME10 {
+      textdata varchar(31);
+    };
+    FTNJANUM10 {
+      textdata varchar(9);
+    };
+    JKYSNUM10 {
+      textdata varchar(21);
+    };
+    TEKSTYMD10 {
+      textdata varchar(9);
+    };
+    RENNUM11 {
+      numdata number(5);
+    };
+    PTNUM11 {
+      textdata varchar(21);
+    };
+    NAME11 {
+      textdata varchar(31);
+    };
+    FTNJANUM11 {
+      textdata varchar(9);
+    };
+    JKYSNUM11 {
+      textdata varchar(21);
+    };
+    TEKSTYMD11 {
+      textdata varchar(9);
+    };
+    RENNUM12 {
+      numdata number(5);
+    };
+    PTNUM12 {
+      textdata varchar(21);
+    };
+    NAME12 {
+      textdata varchar(31);
+    };
+    FTNJANUM12 {
+      textdata varchar(9);
+    };
+    JKYSNUM12 {
+      textdata varchar(21);
+    };
+    TEKSTYMD12 {
+      textdata varchar(9);
+    };
+    RENNUM13 {
+      numdata number(5);
+    };
+    PTNUM13 {
+      textdata varchar(21);
+    };
+    NAME13 {
+      textdata varchar(31);
+    };
+    FTNJANUM13 {
+      textdata varchar(9);
+    };
+    JKYSNUM13 {
+      textdata varchar(21);
+    };
+    TEKSTYMD13 {
+      textdata varchar(9);
+    };
+    RENNUM14 {
+      numdata number(5);
+    };
+    PTNUM14 {
+      textdata varchar(21);
+    };
+    NAME14 {
+      textdata varchar(31);
+    };
+    FTNJANUM14 {
+      textdata varchar(9);
+    };
+    JKYSNUM14 {
+      textdata varchar(21);
+    };
+    TEKSTYMD14 {
+      textdata varchar(9);
+    };
+    RENNUM15 {
+      numdata number(5);
+    };
+    PTNUM15 {
+      textdata varchar(21);
+    };
+    NAME15 {
+      textdata varchar(31);
+    };
+    FTNJANUM15 {
+      textdata varchar(9);
+    };
+    JKYSNUM15 {
+      textdata varchar(21);
+    };
+    TEKSTYMD15 {
+      textdata varchar(9);
+    };
+    RENNUM16 {
+      numdata number(5);
+    };
+    PTNUM16 {
+      textdata varchar(21);
+    };
+    NAME16 {
+      textdata varchar(31);
+    };
+    FTNJANUM16 {
+      textdata varchar(9);
+    };
+    JKYSNUM16 {
+      textdata varchar(21);
+    };
+    TEKSTYMD16 {
+      textdata varchar(9);
+    };
+    RENNUM17 {
+      numdata number(5);
+    };
+    PTNUM17 {
+      textdata varchar(21);
+    };
+    NAME17 {
+      textdata varchar(31);
+    };
+    FTNJANUM17 {
+      textdata varchar(9);
+    };
+    JKYSNUM17 {
+      textdata varchar(21);
+    };
+    TEKSTYMD17 {
+      textdata varchar(9);
+    };
+    RENNUM18 {
+      numdata number(5);
+    };
+    PTNUM18 {
+      textdata varchar(21);
+    };
+    NAME18 {
+      textdata varchar(31);
+    };
+    FTNJANUM18 {
+      textdata varchar(9);
+    };
+    JKYSNUM18 {
+      textdata varchar(21);
+    };
+    TEKSTYMD18 {
+      textdata varchar(9);
+    };
+    RENNUM19 {
+      numdata number(5);
+    };
+    PTNUM19 {
+      textdata varchar(21);
+    };
+    NAME19 {
+      textdata varchar(31);
+    };
+    FTNJANUM19 {
+      textdata varchar(9);
+    };
+    JKYSNUM19 {
+      textdata varchar(21);
+    };
+    TEKSTYMD19 {
+      textdata varchar(9);
+    };
+    RENNUM20 {
+      numdata number(5);
+    };
+    PTNUM20 {
+      textdata varchar(21);
+    };
+    NAME20 {
+      textdata varchar(31);
+    };
+    FTNJANUM20 {
+      textdata varchar(9);
+    };
+    JKYSNUM20 {
+      textdata varchar(21);
+    };
+    TEKSTYMD20 {
+      textdata varchar(9);
+    };
+    RENNUM21 {
+      numdata number(5);
+    };
+    PTNUM21 {
+      textdata varchar(21);
+    };
+    NAME21 {
+      textdata varchar(31);
+    };
+    FTNJANUM21 {
+      textdata varchar(9);
+    };
+    JKYSNUM21 {
+      textdata varchar(21);
+    };
+    TEKSTYMD21 {
+      textdata varchar(9);
+    };
+    RENNUM22 {
+      numdata number(5);
+    };
+    PTNUM22 {
+      textdata varchar(21);
+    };
+    NAME22 {
+      textdata varchar(31);
+    };
+    FTNJANUM22 {
+      textdata varchar(9);
+    };
+    JKYSNUM22 {
+      textdata varchar(21);
+    };
+    TEKSTYMD22 {
+      textdata varchar(9);
+    };
+    RENNUM23 {
+      numdata number(5);
+    };
+    PTNUM23 {
+      textdata varchar(21);
+    };
+    NAME23 {
+      textdata varchar(31);
+    };
+    FTNJANUM23 {
+      textdata varchar(9);
+    };
+    JKYSNUM23 {
+      textdata varchar(21);
+    };
+    TEKSTYMD23 {
+      textdata varchar(9);
+    };
+    RENNUM24 {
+      numdata number(5);
+    };
+    PTNUM24 {
+      textdata varchar(21);
+    };
+    NAME24 {
+      textdata varchar(31);
+    };
+    FTNJANUM24 {
+      textdata varchar(9);
+    };
+    JKYSNUM24 {
+      textdata varchar(21);
+    };
+    TEKSTYMD24 {
+      textdata varchar(9);
+    };
+    RENNUM25 {
+      numdata number(5);
+    };
+    PTNUM25 {
+      textdata varchar(21);
+    };
+    NAME25 {
+      textdata varchar(31);
+    };
+    FTNJANUM25 {
+      textdata varchar(9);
+    };
+    JKYSNUM25 {
+      textdata varchar(21);
+    };
+    TEKSTYMD25 {
+      textdata varchar(9);
+    };
+    SRYYMH {
+      style varchar(20);
+      textdata varchar(27);
+    };
+    HYOUJIKBN {
+      style varchar(20);
+      textdata varchar(8);
+    };
+  };
+};

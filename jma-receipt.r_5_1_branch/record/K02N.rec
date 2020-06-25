@@ -1,0 +1,183 @@
+K02N {
+  title varchar(120);
+  popup_summary varchar(256);
+  popup_body varchar(1024);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed2 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    KANANAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    NAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    HKNCOMBICOMB {
+      HKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[30];
+    };
+    RATE {
+      textdata varchar(6);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SRYYMD {
+      textdata varchar(14);
+    };
+    DOSELNUM {
+      textdata varchar(4);
+    };
+    NYUINKA {
+      textdata varchar(10);
+    };
+    NYUINKIKAN {
+      style varchar(20);
+      textdata varchar(22);
+    };
+    TEISEI {
+      isactive bool;
+      label varchar(10);
+    };
+    SRYKACOMB {
+      SRYKA {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[99];
+    };
+    TABOOCOB {
+      TABOO {
+        textdata varchar(62);
+      };
+      count int;
+        item varchar(62)[40];
+    };
+    scrolledwindow1 {
+      RRKLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(13);
+            column3 varchar(2);
+            column4 varchar(4);
+          }[150];
+          selectdata bool[150];
+      };
+    };
+    CONTKBN {
+      style varchar(20);
+      textdata varchar(6);
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(12);
+    };
+    MODE {
+      textdata varchar(10);
+    };
+    JIKANKBNCOMB {
+      JIKANKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[5];
+    };
+    GRPMEI {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    B04S {
+      state int;
+    };
+    B05S {
+      state int;
+    };
+    B07S {
+      state int;
+    };
+    B08S {
+      state int;
+    };
+    B09S {
+      state int;
+    };
+    KENSA {
+      isactive bool;
+      label varchar(10);
+    };
+    B12 {
+      state int;
+    };
+    B06S {
+      state int;
+    };
+    B11S {
+      state int;
+    };
+    B12S {
+      state int;
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      PANDATABLE1 {
+        state int;
+        style varchar(20);
+        trow int;
+        trowattr int;
+        tcolumn int;
+        tvalue varchar(256);
+          rowdata {
+            column1 {
+              celldata varchar(2);
+              fgcolor varchar(20);
+              bgcolor varchar(20);
+            };
+            column2 {
+              celldata varchar(54);
+              fgcolor varchar(20);
+              bgcolor varchar(20);
+            };
+            column3 {
+              celldata varchar(140);
+              fgcolor varchar(20);
+              bgcolor varchar(20);
+            };
+            column4 {
+              celldata varchar(60);
+              fgcolor varchar(20);
+              bgcolor varchar(20);
+            };
+          }[400];
+      };
+    };
+    KOHMSG { #GtkLabel
+      style varchar(20);
+      textdata varchar(50);
+    };
+    MODE3 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    BSH2 { #GtkButton
+      style varchar(20);
+      label varchar(8);
+    };
+  };
+};

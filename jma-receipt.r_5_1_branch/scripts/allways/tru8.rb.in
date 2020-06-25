@@ -1,0 +1,5 @@
+#!%RUBY%
+# coding : utf-8
+Encoding.default_external = "utf-8"
+
+puts STDIN.read.tr("\u{301C 2016 2212 00A2 00A3 00AC 2014 00A6 00A5 203E}","\u{FF5E 2225 FF0D FFE0 FFE1 FFE2 2015 FFE4 FFE5 FFE3}")

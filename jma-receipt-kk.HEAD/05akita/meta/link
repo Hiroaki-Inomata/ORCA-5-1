@@ -1,0 +1,12 @@
+---
+ - [cobol/SOKATU0520.CBL , cobol/]
+ - [cobol/SOKATU0525.CBL , cobol/]
+ - [cobol/copy/CPSKT0520TMP.INC , cobol/copy/]
+ - [cobol/copy/SKT0520.INC , cobol/copy/]
+ - [cobol/copy/SKT0525.INC , cobol/copy/]
+ - [form/SKT0520.red , form/]
+ - [form/SKT0520o.red , form/]
+ - [form/SKT0525.red , form/]
+ - [lddef/akita.bd , lddef/]
+ - [scripts/kentan/sokatu0520.sh , scripts/kentan/]
+ - [scripts/kentan/sokatu0525.sh , scripts/kentan/]

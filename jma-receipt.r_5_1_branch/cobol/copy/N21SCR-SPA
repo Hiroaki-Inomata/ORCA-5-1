@@ -1,0 +1,190 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *    ÌôºÞ¾ðÊóÅÐÏ¿ ¶¦ÄÌ²èÌÌ£Ó£Ð£Á  
+      *****************************************************************
+      *****************************************************************
+      *  ¥×¥í¥°¥é¥à½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      *****************************************************************
+       01  SPA-N21SCRAREA.
+      *
+      *  ÌôºÞ¾ðÊóÅÐÏ¿¡Ê£Î£²£±¡Ë
+         03  SPA-N21-AREA.
+             05  SPA-GMN-FOLDER        PIC X(128).
+             05  SPA-GMN-JYOTAIFLG     PIC 9(01).
+      *
+             05  SPA-GMN-CUR           PIC 9(02).
+             05  SPA-GMN-EVENT         PIC X(01).
+      *
+      *      É½¼¨ÍÑ
+             05  SPA-GMN-AREA.
+               07  SPA-GMN-KENCD       PIC X(21).
+               07  SPA-GMN-KENNAIYO    PIC X(27).
+               07  SPA-GMN-KENNAME     PIC X(101).
+               07  SPA-GMN-SELNUM      PIC 9(03).
+               07  SPA-GMN-MAX         PIC 9(05).
+               07  SPA-GMN-TBL.
+                 09  SPA-GMN-TBL-G     OCCURS  200.
+                   11  SPA-GMN-TNO     PIC X(05).
+                   11  SPA-GMN-TSEL    PIC X(05).
+                   11  SPA-GMN-TNAME   PIC X(100).
+                 09  SPA-GMN-TCD       PIC X(09)  OCCURS  200.
+                 09  SPA-GMN-TKJNCD    PIC X(12)  OCCURS  200.
+                 09  SPA-GMN-TYKZKBN   PIC 9(01)  OCCURS  200.
+      *
+               07  SPA-GMN-ENTRY.
+                 09  SPA-GMN-NAME      PIC X(100).
+                 09  SPA-GMN-EFFECT    PIC X(2000).
+                 09  SPA-GMN-COLOR     PIC X(360).
+                 09  SPA-GMN-SHAPE     PIC X(360).
+                 09  SPA-GMN-MARK      PIC X(360).
+                 09  SPA-GMN-CAUTION   PIC X(4000).
+                 09  SPA-GMN-PHOTO     PIC X(256).
+                 09  SPA-GMN-OBJECT    PIC X(36).
+      *
+      *    ÆâÉôÍÑ
+           05  SPA-NAI-AREA.
+               07  SPA-NAI-KENCD       PIC X(21).
+               07  SPA-NAI-KENNAIYO    PIC X(26).
+               07  SPA-NAI-SELNUM      PIC 9(03).
+               07  SPA-NAI-SRYCD       PIC X(09).
+               07  SPA-NAI-YAKKAKJNCD  PIC X(12).
+               07  SPA-NAI-YAKUJYO     PIC 9(01).
+               07  SPA-NAI-YKZKBN      PIC 9(01).
+      *
+               07  SPA-NAI-ENTRY.
+                 09  SPA-NAI-NAME      PIC X(100).
+                 09  SPA-NAI-EFFECT    PIC X(2000).
+                 09  SPA-NAI-COLOR     PIC X(360).
+                 09  SPA-NAI-SHAPE     PIC X(360).
+                 09  SPA-NAI-MARK      PIC X(360).
+                 09  SPA-NAI-CAUTION   PIC X(4000).
+                 09  SPA-NAI-PHOTO     PIC X(256).
+                 09  SPA-NAI-OBJECT    PIC X(36).
+      *
+      *    ¥«¥Ê¸¡º÷ÍÑ
+           05    SPA-NAI-PIN-AREA.
+             07  SPA-NAI-PIN         PIC 9(02).
+             07  SPA-NAI-PED.
+               09  SPA-NAI-PEDX      PIC X(02)   OCCURS  13.
+             07  SPA-NAI-PKANA       PIC X(02).
+             07  SPA-NAI-PMAX        PIC 9(02).
+      *
+      *    Ê£¼ÌÍÑ
+           05  SPA-COPY-AREA.
+               07  SPA-COPY-KENCD      PIC X(21).
+               07  SPA-COPY-SELNUM     PIC 9(03).
+               07  SPA-COPY-SRYCD      PIC X(09).
+               07  SPA-COPY-YAKKAKJNCD PIC X(12).
+               07  SPA-COPY-EFFECT     PIC X(2000).
+               07  SPA-COPY-CAUTION    PIC X(4000).
+               07  SPA-COPY-YKZKBN     PIC 9(01).
+      *
+      *  ÌôºÞ¾ðÊóÅÐÏ¿¡Ê£Î£²£²¡Ë
+           03  SPA-N22-AREA.
+             05  SPA-N22-MAX           PIC 9(05).
+             05  SPA-N22-CUR           PIC 9(02).
+             05  SPA-N22-JYOKYOFLG     PIC 9(01).
+      *
+             05  SPA-N22-DURATION      PIC S9(09) BINARY.
+             05  SPA-N22-KENCD         PIC X(9).
+             05  SPA-N22-KENNAME       PIC X(101).
+             05  SPA-N22-SELNUM        PIC 9(03).
+             05  SPA-N22-MESSAGE-STYLE PIC X(20).
+             05  SPA-N22-MESSAGE       PIC X(100).
+             05  SPA-N22-OBJECTAREA.
+               07  SPA-N22-OBJECT-G    OCCURS   3.
+                 09  SPA-N22-OBJECT    PIC X(36).
+                 09  SPA-N22-LABEL     PIC X(14).
+             05  SPA-N22-ENTRY.
+               07  SPA-N22-EFFECT      PIC X(2000).
+               07  SPA-N22-COLOR       PIC X(360).
+               07  SPA-N22-SHAPE       PIC X(360).
+               07  SPA-N22-MARK        PIC X(360).
+               07  SPA-N22-CAUTION     PIC X(4000).
+      *
+             05  SPA-N22-GAZOCOMBO.
+               07  SPA-N22-GAZOKBNLST      OCCURS  4.
+                 09  SPA-N22-GAZOKBNL      PIC X(01).
+                 09  SPA-N22-F1L           PIC X(01).
+                 09  SPA-N22-GAZOKBNMEIL   PIC X(12).
+               07  SPA-N22-GAZOKBN-MAX     PIC 9(02).
+      *
+               07  SPA-N22-GAZOKBN-G.
+                 09  SPA-N22-GAZOKBN       PIC X(01).
+                 09  SPA-N22-F1            PIC X(01).
+                 09  SPA-N22-GAZOKBNMEI    PIC X(12).
+      *
+             05  SPA-N22-COPYCOMBO.
+               07  SPA-N22-COPYKBNLST      OCCURS  3.
+                 09  SPA-N22-COPYKBNL      PIC X(01).
+                 09  SPA-N22-F1L           PIC X(01).
+                 09  SPA-N22-COPYKBNMEIL   PIC X(12).
+               07  SPA-N22-COPYKBN-MAX     PIC 9(02).
+      *
+               07  SPA-N22-COPYKBN-G.
+                 09  SPA-N22-COPYKBN       PIC X(01).
+                 09  SPA-N22-F1            PIC X(01).
+                 09  SPA-N22-COPYKBNMEI    PIC X(12).
+      *
+             05  SPA-N22-TBL.
+               07  SPA-N22-TBL-G       OCCURS  40.
+                 09  SPA-N22-TNO       PIC X(05).
+                 09  SPA-N22-TYJCD     PIC X(12).
+                 09  SPA-N22-TGAZO     PIC X(5).
+                 09  SPA-N22-TMAKER    PIC X(50).
+                 09  SPA-N22-TSELLER   PIC X(50).
+                 09  SPA-N22-TEFFECT   PIC X(2000).
+                 09  SPA-N22-TCOLOR    PIC X(360).
+                 09  SPA-N22-TSHAPE    PIC X(360).
+                 09  SPA-N22-TMARK     PIC X(360).
+                 09  SPA-N22-TCAUTION  PIC X(4000).
+                 09  SPA-N22-PHOTO1    PIC X(256).
+                 09  SPA-N22-PHOTO2    PIC X(256).
+                 09  SPA-N22-PHOTO3    PIC X(256).
+      *
+      *    °õºþ¾ò·ïÀßÄê²èÌÌ
+           03  SPA-N23-AREA.
+               05  SPA-N23-MAX     PIC 9(05).
+               05  SPA-N23-CUR     PIC 9(02).
+               05  SPA-N23-CHK     PIC X     OCCURS  3.
+               05  SPA-N23-JYO     PIC X.
+               05  SPA-N23-KBN     PIC X     OCCURS  4.
+               05  SPA-N23-NAME    PIC X(30).
+               05  SPA-N23-SRYCD   PIC X(9).
+               05  SPA-N23-INPUTCD PIC X(10).
+               05  SPA-N23-IYK     PIC X     OCCURS  3.
+               05  SPA-N23-KIANCOMBO.
+                 07  SPA-N23-KIKANLST        OCCURS  3.
+                   09  SPA-N23-KIKANL        PIC X(01).
+                   09  SPA-N23-F1L           PIC X(01).
+                   09  SPA-N23-KIKANMEIL     PIC X(08).
+                 07  SPA-N23-KIKAN-MAX       PIC 9(02).
+      *
+                 07  SPA-N23-KIKAN-G.
+                   09  SPA-N23-KIKAN         PIC X(01).
+                   09  SPA-N23-F1            PIC X(01).
+                   09  SPA-N23-KIKANMEI      PIC X(08).
+               05  SPA-N23-CYU     PIC X.
+               05  SPA-N23-PRT     PIC X.
+               05  SPA-N23-SYU     PIC X     OCCURS  2.
+      *
+           03  SPA-N21FIL-AREA.
+               05  SPA-N21FIL-PHOTO    PIC X(256).
+               05  SPA-N21FIL-OBJECT   PIC X(36).

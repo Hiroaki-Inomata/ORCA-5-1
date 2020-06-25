@@ -1,0 +1,462 @@
+W06 {
+  fixed1 {
+    nt1 {
+      pageno int;
+      TG1 {
+        ISEKINUM {
+          textdata varchar(8);
+        };
+        HKNDRNUMS {
+          textdata varchar(8);
+        };
+        HKNDRNUMK {
+          textdata varchar(12);
+        };
+        MAYAKULICENSE {
+          textdata varchar(40);
+        };
+        SEMONKACD1_COMB {
+          SEMONKACD1 {
+            textdata varchar(17);
+          };
+          count int;
+            item varchar(17)[99];
+        };
+        SEMONKACD2_COMB {
+          SEMONKACD2 {
+            textdata varchar(17);
+          };
+          count int;
+            item varchar(17)[99];
+        };
+        SEMONKACD3_COMB {
+          SEMONKACD3 {
+            textdata varchar(17);
+          };
+          count int;
+            item varchar(17)[99];
+        };
+        SEMONKACD4_COMB {
+          SEMONKACD4 {
+            textdata varchar(17);
+          };
+          count int;
+            item varchar(17)[99];
+        };
+        SEMONKACD5_COMB {
+          SEMONKACD5 {
+            textdata varchar(17);
+          };
+          count int;
+            item varchar(17)[99];
+        };
+        CHK33 {
+          isactive bool;
+          state int;
+          label varchar(20);
+        };
+        CHK36 {
+          isactive bool;
+          state int;
+        };
+        CHK11 {
+          isactive bool;
+          state int;
+        };
+        CHK01 {
+          isactive bool;
+          state int;
+        };
+        CHK10 {
+          isactive bool;
+          state int;
+        };
+        CHK14 {
+          isactive bool;
+          state int;
+        };
+        CHK24 {
+          isactive bool;
+          state int;
+        };
+        CHK20 {
+          isactive bool;
+          state int;
+        };
+        CHK18 {
+          isactive bool;
+          state int;
+        };
+        CHK19 {
+          isactive bool;
+          state int;
+        };
+        CHK03 {
+          isactive bool;
+          state int;
+        };
+        CHK04 {
+          isactive bool;
+          state int;
+        };
+        CHK05 {
+          isactive bool;
+          state int;
+        };
+        CHK02 {
+          isactive bool;
+          state int;
+        };
+        CHK06 {
+          isactive bool;
+          state int;
+        };
+        CHK07 {
+          isactive bool;
+          state int;
+        };
+        CHK08 {
+          isactive bool;
+          state int;
+        };
+        CHK09 {
+          isactive bool;
+          state int;
+        };
+        CHK27 {
+          isactive bool;
+          state int;
+        };
+        CHK28 {
+          isactive bool;
+          state int;
+        };
+        CHK29 {
+          isactive bool;
+          state int;
+        };
+        CHK30 {
+          isactive bool;
+          state int;
+        };
+        CHK31 {
+          isactive bool;
+          state int;
+        };
+        CHK32 {
+          isactive bool;
+          state int;
+        };
+        CHK12 {
+          isactive bool;
+          state int;
+        };
+        CHK13 {
+          isactive bool;
+          state int;
+        };
+        CHK15 {
+          isactive bool;
+          state int;
+        };
+        CHK16 {
+          isactive bool;
+          state int;
+          label varchar(20);
+        };
+        CHK17 {
+          isactive bool;
+          state int;
+          label varchar(20);
+        };
+        CHK26 {
+          isactive bool;
+          state int;
+        };
+        CHK25 {
+          isactive bool;
+          state int;
+        };
+        CHK21 {
+          isactive bool;
+          state int;
+        };
+        CHK22 {
+          isactive bool;
+          state int;
+        };
+        CHK23 {
+          isactive bool;
+          state int;
+        };
+        CHK34 {
+          isactive bool;
+          state int;
+        };
+        CHK35 {
+          isactive bool;
+          state int;
+        };
+        KKANRIAUTHFLG_COMB {
+          KANRIAUTHFLG {
+            textdata varchar(12);
+          };
+          state int;
+          count int;
+            item varchar(12)[2];
+        };
+        ORCA21FLG_COMB {
+          ORCA21FLG {
+            textdata varchar(12);
+          };
+          count int;
+            item varchar(12)[2];
+        };
+        HYOJIFLG_COMB {
+          HYOJIFLG  {
+            textdata varchar(10);
+          };
+          count int;
+            item varchar(10)[2];
+        };
+      };
+      TG2 {
+        SKYPRTFLG_COMB {
+          SKYPRTFLG {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[9];
+        };
+        SYOHOPRTFLG_COMB {
+          SYOHOPRTFLG {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        YAKUJYOFLG_COMB {
+          YAKUJYOFLG {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        MEIPRTFLG_COMB {
+          MEIPRTFLG {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[9];
+        };
+        FORMALFLG_COMB {
+          FORMALFLG {
+            textdata varchar(40);
+          };
+          count int;
+            item varchar(40)[5];
+        };
+        CLIENT_SAVE_COMB {
+          CLIENT_SAVE {
+            textdata varchar(40);
+          };
+          count int;
+            item varchar(40)[2];
+        };
+        USER_KANRI_COMB {
+          USER_KANRI {
+            textdata varchar(40);
+          };
+          state int;
+          count int;
+            item varchar(40)[5];
+        };
+        PRTCONF_COMB {
+          PRTCONF {
+            textdata varchar(40);
+          };
+          state int;
+          count int;
+            item varchar(40)[2];
+        };
+        CLIENT_PRT_COMB {
+          CLIENT_PRT {
+            textdata varchar(40);
+          };
+          state int;
+          count int;
+            item varchar(40)[2];
+        };
+        DIALOGFLG_COMB {
+          DIALOGFLG {
+            textdata varchar(40);
+          };
+          count int;
+            item varchar(40)[2];
+        };
+        ICCARDRW_COMB {
+          ICCARDRW {
+            textdata varchar(40);
+          };
+          count int;
+            item varchar(40)[2];
+        };
+        GLINECNT {
+          numdata number(2);
+        };
+        NLINECNT {
+          numdata number(2);
+        };
+      };
+      TGN3 {
+        state int;
+      };
+      TG3 {
+        GRPHOSPNUM01 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM02 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM03 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM04 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM05 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM06 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM07 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM08 {
+          textdata varchar(2);
+        };
+        GRPHOSPNUM09 {
+          textdata varchar(2);
+        };
+        GRPHOSPNAME01 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME02 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME03 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME04 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME05 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME06 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME07 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME08 {
+          textdata varchar(10);
+        };
+        GRPHOSPNAME09 {
+          textdata varchar(10);
+        };
+        GRPUSERID01 {
+          textdata varchar(16);
+        };
+        GRPUSERID02 {
+          textdata varchar(16);
+        };
+        GRPUSERID03 {
+          textdata varchar(16);
+        };
+        GRPUSERID04 {
+          textdata varchar(16);
+        };
+        GRPUSERID05 {
+          textdata varchar(16);
+        };
+        GRPUSERID06 {
+          textdata varchar(16);
+        };
+        GRPUSERID07 {
+          textdata varchar(16);
+        };
+        GRPUSERID08 {
+          textdata varchar(16);
+        };
+        GRPUSERID09 {
+          textdata varchar(16);
+        };
+      };
+    };
+    STYUKYMD {
+      textdata varchar(10);
+      state int;
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+      state int;
+    };
+    USERID {
+      textdata varchar(16);
+      state int;
+    };
+    PASSWORD1 {
+      textdata varchar(16);
+    };
+    PASSWORD2 {
+      textdata varchar(16);
+    };
+    KANANAME {
+      textdata varchar(80);
+    };
+    NAME {
+      textdata varchar(80);
+    };
+    SELNUM {
+      numdata number(2);
+    };
+    SYOKUKBN_COMB {
+      SYOKUKBN {
+        textdata varchar(20);
+      };
+      state int;
+      count int;
+      item varchar(20)[10];
+    };
+    SYOKUCOD_COMB {
+      SYOKUCOD {
+        textdata varchar(35);
+      };
+      state int;
+      count int;
+      item varchar(35)[100];
+    };
+    scrolledwindow1 {
+      KIKAN_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(10);
+            column3 varchar(10);
+          }[10];
+          selectdata bool[10];
+      };
+    };
+    B03 {
+      state int;
+    };
+    B05 {
+      state int;
+      label varchar(10);
+    };
+  };
+};

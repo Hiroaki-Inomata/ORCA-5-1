@@ -1,0 +1,175 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      *****************************************************************
+       01  SPA-S08FREE.
+      *
+      *  出産育児一時金画面
+         02  SPA-S08.
+           03  SPA-GMN-CUR                     PIC 9(03).
+           03  SPA-GMN-AREA.
+               05  SPA-GMN-PTNUM               PIC X(20).
+               05  SPA-GMN-NAME                PIC X(60).
+               05  SPA-GMN-KANANAME            PIC X(60).
+               05  SPA-GMN-BIRTHDAY-MOM        PIC X(09).
+               05  SPA-GMN-AGE                 PIC 9(03).
+               05  SPA-GMN-NYUINYMD            PIC X(09).
+               05  SPA-GMN-TAIINYMD            PIC X(09).
+               05  SPA-GMN-SYAKOK              PIC X(01).
+               05  SPA-GMN-HONKZK              PIC X(01).
+               05  SPA-GMN-HKNJANUM            PIC X(08).
+               05  SPA-GMN-KIGO                PIC X(80).
+               05  SPA-GMN-NUM                 PIC X(80).
+               05  SPA-GMN-RIYOUKBN-G.
+                   07  SPA-GMN-RIYOUKBN        PIC X(01).
+                   07  SPA-GMN-RIYOUKBNF       PIC X(01).
+                   07  SPA-GMN-RIYOUKBNMEI     PIC X(20).
+               05  SPA-GMN-SKYYM               PIC X(10).
+               05  SPA-GMN-TEISYUTUBIKBN-G.
+                   07  SPA-GMN-TEISYUTUBIKBN   PIC X(01).
+                   07  SPA-GMN-TEISYUTUBIKBNF  PIC X(01).
+                   07  SPA-GMN-TEISYUTUBIKBNMEI PIC X(20).
+               05  SPA-GMN-SKYKBN-G.
+                   07  SPA-GMN-SKYKBN          PIC X(01).
+                   07  SPA-GMN-SKYKBNF         PIC X(01).
+                   07  SPA-GMN-SKYKBNMEI       PIC X(20).
+               05  SPA-GMN-BUNBENKBN-G.
+                   07  SPA-GMN-BUNBENKBN       PIC X(01).
+                   07  SPA-GMN-BUNBENKBNF      PIC X(01).
+                   07  SPA-GMN-BUNBENKBNMEI    PIC X(20).
+               05  SPA-GMN-TEISYUTUSAKI-G.
+                   07  SPA-GMN-TEISYUTUSAKI    PIC X(01).
+                   07  SPA-GMN-TEISYUTUSAKIF   PIC X(01).
+                   07  SPA-GMN-TEISYUTUSAKIMEI PIC X(20).
+               05  SPA-GMN-ZAIWEEK             PIC 9(02).
+               05  SPA-GMN-BIRTHDAY-BABY       PIC X(10).
+               05  SPA-GMN-SIZANKBN-G.
+                   07  SPA-GMN-SIZANKBN        PIC X(01).
+                   07  SPA-GMN-SIZANKBNF       PIC X(01).
+                   07  SPA-GMN-SIZANKBNMEI     PIC X(20).
+               05  SPA-GMN-BIRTHCNT            PIC 9(01).
+               05  SPA-GMN-NYUIN-DAY           PIC 9(03).
+               05  SPA-GMN-SANKAKBN-G.
+                   07  SPA-GMN-SANKAKBN        PIC X(01).
+                   07  SPA-GMN-SANKAKBNF       PIC X(01).
+                   07  SPA-GMN-SANKAKBNMEI     PIC X(20).
+               05  SPA-GMN-NYU-MONEY           PIC 9(07).
+               05  SPA-GMN-RMSGK-MONEY         PIC 9(07).
+               05  SPA-GMN-KAIJO-MONEY         PIC 9(07).
+               05  SPA-GMN-BUNBEN-MONEY        PIC 9(07).
+               05  SPA-GMN-SHIN-MONEY          PIC 9(07).
+               05  SPA-GMN-KNS-MONEY           PIC 9(07).
+               05  SPA-GMN-SYC-MONEY           PIC 9(07).
+               05  SPA-GMN-SNK-MONEY           PIC 9(07).
+               05  SPA-GMN-ETC-MONEY           PIC S9(07).
+               05  SPA-GMN-ICBFTN-MONEY        PIC 9(07).
+               05  SPA-GMN-NINPUFTN-MONEY      PIC 9(07).
+               05  SPA-GMN-DAIRI-MONEY         PIC 9(07).
+               05  SPA-GMN-BIKOU               PIC X(60).
+               05  SPA-GMN-MEIPRTKBN-G.
+                   07  SPA-GMN-MEIPRTKBN       PIC X(01).
+                   07  SPA-GMN-MEIPRTKBNF      PIC X(01).
+                   07  SPA-GMN-MEIPRTKBNMEI    PIC X(20).
+               05  SPA-GMN-CMB-AREA.
+                   07  SPA-GMN-RIYOUKBNLST-G.
+                       09  SPA-GMN-RIYOUKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-RIYOUKBNLST OCCURS 5.
+                           11  SPA-GMN-RIYOUKBNL       PIC X(01).
+                           11  SPA-GMN-RIYOUKBNFL      PIC X(01).
+                           11  SPA-GMN-RIYOUKBNMEIL    PIC X(20).
+                   07  SPA-GMN-TEISYUTUBIKBNLST-G.
+                       09  SPA-GMN-TEISYUTUBIKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-TEISYUTUBIKBNLST OCCURS 5.
+                           11  SPA-GMN-TEISYUTUBIKBNL         PIC X(01).
+                           11  SPA-GMN-TEISYUTUBIKBNFL        PIC X(01).
+                           11  SPA-GMN-TEISYUTUBIKBNMEIL      PIC X(20).
+                   07  SPA-GMN-SKYKBNLST-G.
+                       09  SPA-GMN-SKYKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-SKYKBNLST OCCURS 5.
+                           11  SPA-GMN-SKYKBNL         PIC X(01).
+                           11  SPA-GMN-SKYKBNFL        PIC X(01).
+                           11  SPA-GMN-SKYKBNMEIL      PIC X(20).
+                   07  SPA-GMN-BUNBENKBNLST-G.
+                       09  SPA-GMN-BUNBENKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-BUNBENKBNLST OCCURS 5.
+                           11  SPA-GMN-BUNBENKBNL      PIC X(01).
+                           11  SPA-GMN-BUNBENKBNFL     PIC X(01).
+                           11  SPA-GMN-BUNBENKBNMEIL   PIC X(20).
+                   07  SPA-GMN-TEISYUTUSAKILST-G.
+                       09  SPA-GMN-TEISYUTUSAKI-MAX        PIC 9(03).
+                       09  SPA-GMN-TEISYUTUSAKILST OCCURS 5.
+                           11  SPA-GMN-TEISYUTUSAKIL      PIC X(01).
+                           11  SPA-GMN-TEISYUTUSAKIFL     PIC X(01).
+                           11  SPA-GMN-TEISYUTUSAKIMEIL   PIC X(20).
+                   07  SPA-GMN-SIZANKBNLST-G.
+                       09  SPA-GMN-SIZANKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-SIZANKBNLST OCCURS 5.
+                           11  SPA-GMN-SIZANKBNL       PIC X(01).
+                           11  SPA-GMN-SIZANKBNFL      PIC X(01).
+                           11  SPA-GMN-SIZANKBNMEIL    PIC X(20).
+                   07  SPA-GMN-SANKAKBNLST-G.
+                       09  SPA-GMN-SANKAKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-SANKAKBNLST OCCURS 5.
+                           11  SPA-GMN-SANKAKBNL       PIC X(01).
+                           11  SPA-GMN-SANKAKBNFL      PIC X(01).
+                           11  SPA-GMN-SANKAKBNMEIL    PIC X(20).
+                   07  SPA-GMN-MEIPRTKBNLST-G.
+                       09  SPA-GMN-MEIPRTKBN-MAX        PIC 9(03).
+                       09  SPA-GMN-MEIPRTKBNLST OCCURS 5.
+                           11  SPA-GMN-MEIPRTKBNL       PIC X(01).
+                           11  SPA-GMN-MEIPRTKBNFL      PIC X(01).
+                           11  SPA-GMN-MEIPRTKBNMEIL    PIC X(20).
+           03  SPA-NAI-AREA.
+               05  SPA-NAI-LOCK                PIC 9(01).
+               05  SPA-NAI-GHKNNUM             PIC X(03).
+               05  SPA-NAI-GNEW                PIC 9(01).
+               05  SPA-NAI-NNEW                PIC 9(01).
+               05  SPA-NAI-SLOCK-MSG           PIC X(32).
+               05  SPA-NAI-SANKANUM            PIC 9(10).
+               05  SPA-NAI-SRYYMD              PIC X(08).
+               05  SPA-NAI-SKYYM               PIC X(06).
+               05  SPA-NAI-BIRTHDAY-BABY       PIC X(08).
+               05  SPA-NAI-HKNJANUM-S          PIC X(08).
+               05  SPA-NAI-RECESAKI            PIC X(01).
+               05  SPA-NAI-CHGNAME             PIC 9(01).
+         02  SPA-S09.
+           03  SPA-GMN-S09-CUR                 PIC 9(03).
+           03  SPA-GMN-S09-AREA.
+               05  SPA-GMN-S09-HKNJANUM        PIC X(8).
+               05  SPA-GMN-S09-HKNJANAME       PIC X(40).
+               05  SPA-GMN-S09-SYAKOK-G.
+                   07  SPA-GMN-S09-SYAKOK      PIC X(1).
+                   07  SPA-GMN-S09-SYAKOKFL    PIC X(1).
+                   07  SPA-GMN-S09-SYAKOKMEI   PIC X(8).
+               05  SPA-GMN-S09-HONKZK-G.
+                   07  SPA-GMN-S09-HONKZK      PIC X(1).
+                   07  SPA-GMN-S09-HONKZKFL    PIC X(1).
+                   07  SPA-GMN-S09-HONKZKMEI   PIC X(8).
+               05  SPA-GMN-S09-KIGO            PIC X(80).
+               05  SPA-GMN-S09-NUM             PIC X(80).
+               05  SPA-GMN-S09-CMB-AREA.
+                   07  SPA-GMN-S09-SYAKOKLST-G.
+                       09  SPA-GMN-S09-SYAKOK-MAX          PIC 9(03).
+                       09  SPA-GMN-S09-SYAKOKLST OCCURS 5.
+                           11  SPA-GMN-S09-SYAKOKL         PIC X(01).
+                           11  SPA-GMN-S09-SYAKOKFL        PIC X(01).
+                           11  SPA-GMN-S09-SYAKOKMEIL      PIC X(08).
+                   07  SPA-GMN-S09-HONKZKLST-G.
+                       09  SPA-GMN-S09-HONKZK-MAX          PIC 9(03).
+                       09  SPA-GMN-S09-HONKZKLST OCCURS 5.
+                           11  SPA-GMN-S09-HONKZKL         PIC X(01).
+                           11  SPA-GMN-S09-HONKZKFL        PIC X(01).
+                           11  SPA-GMN-S09-HONKZKMEIL      PIC X(08).

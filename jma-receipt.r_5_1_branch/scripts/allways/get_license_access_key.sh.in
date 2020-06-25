@@ -1,0 +1,64 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : 医療機関ID(HOSPID)
+# $3 : ジョブＩＤ
+# $4 : シェルＩＤ
+#------------------------------------
+
+HOSPNUM=${1}
+HOSPID=${2}
+JOBID=${3}
+SHELLID=$(printf "%-8s" ${4})
+REMSG=""
+ERRCD="0001"
+
+if [ -n "${ACCESSKEYPATH}" ]; then
+  export ACCESSKEYPATH
+  RESULT=`get_license_access_key.rb ${HOSPID} 2>&1`
+else
+  RESULT="999"
+fi
+
+case "${RESULT:0:3}" in
+  200)
+    AKEY=${RESULT:4:64}
+    SQLSTR="INSERT INTO tbl_access_key VALUES (${HOSPNUM},'${AKEY}',to_char(now(),'yyyymmdd'),to_char(now(),'hh24miss'),'',0,0,'','');"
+    ${MONSQL} -r -dir ${LDDIRECTORY} -c "${SQLSTR}"
+    REMSG="アクセスキーを取得しました"
+    ERRCD="0000"
+    ;;
+  401)
+    REMSG="アクセスキーは発行済みです(401)"
+    ;;
+  402)
+    REMSG="アクセスキーを発行できません(402)"
+    ;;
+  500)
+    REMSG="サーバ内部エラーが発生しました(500)"
+    ;;
+  503)
+    REMSG="サービス利用ができませんでした(503)"
+    ;;
+  404|998)
+    REMSG="ページが見つかりませんでした(${RESULT:0:3})"
+    ;;
+  999)
+    REMSG="環境変数の設定がありません(999)"
+    ;;
+  *)
+    REMSG="その他のエラーが発生しました(${RESULT:0:3})"
+    ;;
+esac
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}${ERRCD},${HOSPNUM},,,${REMSG}"
+
+exit 0

@@ -1,0 +1,29 @@
+XF01X {
+  fixed32 {
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(22);
+            column3 varchar(22);
+            column4 varchar(22);
+          }[20];
+          selectdata bool[20];
+      };
+    };
+    SCODE_COMBO {
+      SCODE {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[10];
+    };
+  };
+};

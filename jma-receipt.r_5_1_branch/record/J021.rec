@@ -1,0 +1,43 @@
+J021 {
+  knmino {
+    MAE_HKNCOMBI {
+      textdata varchar(4);
+    };
+    MAE_HKNCOMBIMEI {
+      textdata varchar(60);
+    };
+    ATO_HKNCOMBI {
+      textdata varchar(4);
+    };
+    ATO_HKNCOMBIMEI {
+      textdata varchar(60);
+    };
+    MAE_FTNRATE {
+      textdata varchar(8);
+    };
+    ATO_FTNRATE {
+      textdata varchar(8);
+    };
+    scrolledwindow1 {
+      HKNLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(60);
+            column3 varchar(10);
+            column4 varchar(10);
+            column5 varchar(8);
+          }[40];
+          selectdata bool[40];
+      };
+    };
+    DAY1 {
+      numdata number(2);
+    };
+    DAY2 {
+      numdata number(2);
+    };
+  };
+};

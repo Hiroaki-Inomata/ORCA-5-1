@@ -1,0 +1,80 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    定期請求データ作成
+#
+#        $1 SRYYM TERID SYSYMD
+#        $2 SYOKBN
+#           1:一括作成  2:個別作成
+#        $3 KIKANST KIKANED KBN (1)
+#           定期請求の期間開始日,終了日
+#           有効区分（区分='1'の期間が処理対象）
+#        $4 KIKANST KIKANED KBN (2)
+#        $5 KIKANST KIKANED KBN (3)
+#        $6 伝票発行日
+#        $7 JOBID 
+#        $8 SHELLID
+#        $9 HOSPNUM
+#        ${10} エラーファイル
+#        ${11}処理対象の期別
+#        ${12}処理日
+#        ${13}処理時間
+#-------------------------------------------#
+
+export ORCA_TEMPDIR=orcb033-$$
+HOSPNUM=$9
+LOG_FILE=/var/log/jma-receipt/${HOSPNUM}orcb033.log
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+ERR_FILE_BASE=$(basename ${10})
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+
+
+cleanup () {
+	rm -f ${MCP_TEMPDIR}/${HOSPNUM}00TEIKI*
+}
+
+trap "cleanup" 1 2 3 15 
+
+
+[ -e ${ERR_FILE_FULL} ] && rm  ${ERR_FILE_FULL} 
+
+BATCH_PARAM=$1,$2,$3,$4,$5,$6,$7,$8,$9,${ERR_FILE_BASE},${11},${12},${13}
+
+##   -- ORCT0010 START --  
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0010 -parameter "${BATCH_PARAM}"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            exit  
+        fi
+
+##   -- ORCT0030 START --  
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0030 -parameter "${BATCH_PARAM}"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            exit  
+        fi 
+
+##   -- ORCT0060 START --  
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0060 -parameter "${BATCH_PARAM}"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            exit  
+        fi 
+
+##   -- ORCT0040 START --  
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0040 -parameter "${BATCH_PARAM}"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0050 -parameter "$9,$7,$8,${ERR_FILE_BASE}"
+            exit  
+        fi 
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$7$8,$9
+
+        exit

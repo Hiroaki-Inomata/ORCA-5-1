@@ -1,0 +1,97 @@
+      *******************************************************************
+      * Project code name "ORCA" 
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    レセプト作成 画面ＳＰＡ     (SPA-FREE の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-R03.
+           03  SPA-R03-AREA.
+               05  SPA-GMN-MAX                     PIC 9(04).
+               05  SPA-GMN-PAGE                    PIC 9(02).
+               05  SPA-GMN-CUR                     PIC 9(02).
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-SYOKBN              PIC X(01).
+                   07  SPA-GMN-SYOKBN-LABEL        PIC X(20).
+      *----(01.00.01) LINE UPD START ----------------------------------
+      ********     07  SPA-GMN-SRYYM               PIC X(06).
+                   07  SPA-GMN-SRYYM               PIC X(07).
+      *----(01.00.01) LINE UPD END   ----------------------------------
+                   07  SPA-GMN-IKKATU              PIC X(01).
+                   07  SPA-GMN-KOBETU              PIC X(01).
+      *                         
+                   07  SPA-GMN-NYUGAIKBNLST        OCCURS  2.
+                       09  SPA-GMN-NYUGAIKBNL      PIC X(01).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-NYUGAIKBNMEIL   PIC X(06).    
+                   07  SPA-GMN-NYUGAIKBN-MAX       PIC 9(02).
+      *             
+                   07  SPA-GMN-NYUGAIKBN-G.
+                       09  SPA-GMN-NYUGAIKBN       PIC X(01).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-NYUGAIKBNMEI    PIC X(06).
+      *                         
+                   07  SPA-GMN-PRTKBNLST           OCCURS  10.
+                       09  SPA-GMN-PRTKBNL         PIC X(01).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PRTKBNMEIL      PIC X(30).    
+                   07  SPA-GMN-PRTKBN-MAX          PIC 9(02).
+      *             
+                   07  SPA-GMN-PRTKBN-G.
+                       09  SPA-GMN-PRTKBN          PIC X(01).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PRTKBNMEI       PIC X(30).
+      *             
+                   07  SPA-GMN-PRTKBN-LABEL        PIC X(36).
+      *
+                   07  SPA-DATAKBN.         
+                       09  SPA-DATAKBN1-VALUE      PIC X(01).
+                       09  SPA-DATAKBN2-VALUE      PIC X(01).
+                       09  SPA-DATAKBN3-VALUE      PIC X(01).
+                       09  SPA-DATAKBN5-VALUE      PIC X(01).
+                       09  SPA-DATAKBN4-VALUE      PIC X(01).
+                       09  SPA-DATAKBN11-VALUE     PIC X(01).
+                       09  SPA-DATAKBN21-VALUE     PIC X(01).
+                       09  SPA-DATAKBN22-VALUE     PIC X(01).
+                       09  SPA-DATAKBN23-VALUE     PIC X(01).
+                       09  SPA-DATAKBN24-VALUE     PIC X(01).
+                       09  SPA-DATAKBN25-VALUE     PIC X(01).
+                       09  SPA-DATAKBN26-VALUE     PIC X(01).
+                       09  SPA-DATAKBN31-VALUE     PIC X(01).
+                       09  SPA-DATAKBN32-VALUE     PIC X(01).
+                       09  SPA-DATAKBN33-VALUE     PIC X(01).
+     *
+               05  SPA-NAIB-R03-AREA.
+                   07  SPA-NAI-SMCNDATE-12         PIC 9(06).
+                   07  SPA-NAI-SRYYM               PIC 9(06).
+                   07  SPA-NAI-SRYYMH              PIC X(16).
+                   07  SPA-NAI-NYUGAIKBN           PIC X(06).
+      *
+                   07  SPA-NAI-2005-AUTODSPKBN     PIC X(01).
+                   07  SPA-NAI-200501-INSPECT-ZERO-KBN
+                                                   PIC X(01).
+                   07  SPA-NAI-200501-RECEIPT-MAKE-KBN
+                                                   PIC X(01).
+                   07  SPA-NAI-200505-HKNJANUM     PIC X(08).
+                   07  SPA-NAI-200501-INSPECT-INCLUDE
+                                                   PIC X(01).
+                   07  SPA-NAI-9101-COOPBASE       PIC X(01).
+                   07  SPA-NAI-9102-EFOUT          PIC X(01).

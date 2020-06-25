@@ -1,0 +1,19 @@
+name	mie;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU2410"	"OpenCOBOL";
+bind	"SOKATU2415"	"OpenCOBOL";
+bind	"SOKATU2420"	"OpenCOBOL";
+bind	"SEIKYU2403"	"OpenCOBOL";
+bind	"SEIKYU2405"	"OpenCOBOL";
+bind	"SEIKYU2407"	"OpenCOBOL";
+bind	"SEIKYU2409"	"OpenCOBOL";
+bind	"SEIKYU2411"	"OpenCOBOL";
+bind	"SEIKYU2413"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

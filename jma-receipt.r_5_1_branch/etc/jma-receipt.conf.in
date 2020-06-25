@@ -1,0 +1,25 @@
+#
+# http protocol
+#
+#DBUPGRADEPATH=http://ftp.orca.med.or.jp/pub/orca_data
+#PGUPGRADEPATH=http://ftp.orca.med.or.jp/pub/bugfix/ubuntu/@ARCHITECTURE@/@DISTCODENAME@
+#MSTUPDATEPATH=http://ftp.orca.med.or.jp/pub/orca_data
+#DBLICENSEPATH=http://lmaster.orca.med.or.jp/pub/orca_data/license_master
+
+#
+# ftp protocol
+#
+#DBUPGRADEPATH=ftp://ftp.orca.med.or.jp/pub/orca_data
+#PGUPGRADEPATH=ftp://ftp.orca.med.or.jp/pub/bugfix/ubuntu/@ARCHITECTURE@/@DISTCODENAME@
+#MSTUPDATEPATH=ftp://ftp.orca.med.or.jp/pub/orca_data
+#DBLICENSEPATH=ftp://lmaster.orca.med.or.jp/pub/orca_data/license_master
+
+#WGETOPTION=--passive-ftp
+
+#
+# file protocol
+#
+#DBUPGRADEPATH=file:///cdrom/pub/orca_data
+#PGUPGRADEPATH=file:///cdrom/pub/bugfix/ubuntu/@ARCHITECTURE@/@DISTCODENAME@
+#MSTUPDATEPATH=file:///cdrom/pub/orca_data
+#DBLICENSEPATH=file:///cdrom/pub/orca_data/license_master

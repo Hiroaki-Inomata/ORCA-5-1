@@ -1,0 +1,25 @@
+U02Q {
+  fixed1 {
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      QRLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(10);
+            column5 varchar(2);
+            column6 varchar(20);
+            column7 varchar(5);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+  };
+};

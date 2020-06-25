@@ -1,0 +1,76 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+umask 022
+
+HOSPNUM=$1
+JOBID=$2
+SHELLID=$3
+COMMAND=$4
+PACKAGE=$5
+VERSION=$6
+
+PLUGIN_SHELL=${ORCA_DIR}/bin/jma-plugin
+JPPINFO=${SYSCONFDIR}/jppinfo.list
+PKGLIST=${MCP_TEMPDIR}/pluginlist
+COND_FILE=/var/lib/jma-receipt/plugin/plugin_condition_error
+
+list4cobol () {
+  ${PLUGIN_SHELL} -c ${JPPINFO} list4cobol | nkf -e > ${PKGLIST}
+
+  ERRCNT=`cat ${PKGLIST} | tr -d ' ' | grep -c "link:ERROR"`
+  if [ ${ERRCNT} -gt 0 ]; then
+    echo "$(date +'%Y-%m-%d %T')" > ${COND_FILE}
+  else
+    rm -f ${COND_FILE}
+  fi
+}
+
+echo $JPPINFO
+
+case "${COMMAND}" in
+  update|upgrade)
+    ${PLUGIN_SHELL} -c ${JPPINFO} ${COMMAND}
+    list4cobol
+    ;;
+  list)
+    if [ "${MCP_MIDDLEWARE_NAME}" = "panda" ]; then
+      ${PLUGIN_SHELL} -c ${JPPINFO} update
+      if [ $? -ne 0 ]; then
+        exit $?
+      fi
+    fi
+    list4cobol
+    ;;
+  install|uninstall|enable|disable|upgrade2|restore|force_restore)
+    ${PLUGIN_SHELL} -c ${JPPINFO} ${COMMAND} ${PACKAGE}-${VERSION}
+    list4cobol
+    ;;
+  install+enable)
+    ${PLUGIN_SHELL} -c ${JPPINFO} install ${PACKAGE}-${VERSION}
+    ${PLUGIN_SHELL} -c ${JPPINFO} enable  ${PACKAGE}-${VERSION}
+    list4cobol
+    ;;
+  reinstall)
+    ${PLUGIN_SHELL} -c ${JPPINFO} uninstall ${PACKAGE}-${VERSION}
+    ${PLUGIN_SHELL} -c ${JPPINFO} install ${PACKAGE}-${VERSION}
+    ${PLUGIN_SHELL} -c ${JPPINFO} enable  ${PACKAGE}-${VERSION}
+    list4cobol
+    ;;
+  *)
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "JBE${JOBID}${SHELLID},${HOSPNUM},,,command error"
+    exit 1
+    ;;
+esac
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "JBE${JOBID}${SHELLID},${HOSPNUM},,,"
+
+exit 0

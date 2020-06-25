@@ -1,0 +1,271 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#    労災（入院）請求書用ファイル作成
+#        CPCOMMONSHELL1.INC  
+#        $1 SRYYM TERID SYSYMD
+#        $2 SYOKBN
+#           1:一括作成  2:個別作成
+#        $3 RECEKBN
+#           3:全体  
+#        $4 エラーファイル名 
+#        $5 JOBID 
+#        $6 SHELLID
+#        $8 処理年月
+#        $9  作成年月日
+#        $10 作成時間
+#        $12 レセ電出力区分
+#        $13 指定医療機関
+#        $14 コメント記載記載区分
+#        $15 枠記載区分
+#        $16 HOSPNUM 
+#        $17 様式区分
+#        $18 レセプト作成区分
+#            1:提出用レセ、2:点検用レセ、3:点検用レセ（０点公費記載）
+#            4:点検用レセ（包括算定分記載）、5:点検用レセ（０点公費・包括算定分記載）
+#        $19 請求データ削除区分
+#            0:削除しない、2:削除する
+#        $20 新元号様式区分
+#            0:元号なし、1:新元号様式
+#-------------------------------------------#
+
+        echo "window  ${MCP_WINDOW}"
+
+        if  [ "${MCP_WINDOW}" == "receiptmakev3" ]; then
+            mkdir -p  ${MCP_TEMPDIR}
+        fi
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+##      MCP_WINDOW がAPI のとき、一時ディレクトリを削除
+        if  [ "${MCP_WINDOW}" == "receiptmakev3" ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+        fi
+}
+trap cleanup EXIT
+
+        if [ ${2} -eq  '1' ]; then
+           LOG_FILE="/var/log/jma-receipt/${16}recept10a.log"
+        else
+           LOG_FILE="/var/log/jma-receipt/${16}recept10b.log"
+        fi
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+        echo $(basename ${LOG_FILE})
+
+        echo "arg1 =  [" ${1}  "]" 
+        echo "arg2 =  [" ${2}  "]" 
+        echo "arg3 =  [" ${3}  "]" 
+        echo "arg4 =  [" ${4}  "]" 
+        echo "arg8 =  [" ${8}  "]" 
+        echo "arg9  = [" ${9}  "]" 
+        echo "arg10 = [" ${10} "]" 
+        echo "arg12 = [" ${12} "]" 
+        echo "arg13 = [" ${13} "]" 
+        echo "arg14 = [" ${14} "]" 
+        echo "arg15 = [" ${15} "]" 
+        echo "arg16 = [" ${16} "]" 
+        echo "arg17 = [" ${17} "]" 
+        echo "arg18 = [" ${18} "]" 
+        echo "arg19 = [" ${19} "]" 
+        echo "arg20 = [" ${20} "]" 
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${4}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${4}
+        
+        
+        rm  -f ${MCP_TEMPDIR}/${16}00RECE8*
+        rm  -f ${MCP_TEMPDIR}/${16}00RECEYMD*
+
+    	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0800 -parameter $1$2$3$5$6,${17},${18},${16},${4}   
+	
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit  
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0810 -parameter $1$2$3$5$6,${17},${18},${16},${4}    
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit  
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0820 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi 
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+     	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0830 -parameter $1$3$5$6,${17},${16},${4}      
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+     	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0840 -parameter $1$3$5$6,${17},${18},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0850 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0860 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0870 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0880 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0890 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+           exit 
+        else 
+       	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0900 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+       	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0910 -parameter $1$3$5$6,${17},${18},${16},${4}    
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+       	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0920 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+       	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0930 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+       	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0940 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit
+        else
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0936 -parameter $1$3$5$6,${17},${16},${4}      
+
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+            if  [ $8 -lt '200610' ]; then
+                $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0950 -parameter $9${10}$1$2$3$8$5$6,${16},${4}   
+                if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                    exit 
+                else 
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0951 -parameter $9${10}$1$3$8$5$6,${16},${4}   
+                fi
+            else    
+                if [ ${17} -eq  '0' ]; then
+                    if [ ${20} -eq  '0' ]; then
+                        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0960 -parameter $9${10}$1$2$3$8$5$6,${14},${15},${18},${19},${16},${4}   
+                        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                           exit 
+                        else 
+                           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0961 -parameter $9${10}$1$3$8$5$6,${14},${15},${18},${16},${4}   
+                        fi
+                    else
+                        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0968 -parameter $9${10}$1$2$3$8$5$6,${14},${15},${18},${19},${16},${4}   
+                        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                           exit 
+                        else 
+                           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0969 -parameter $9${10}$1$3$8$5$6,${14},${15},${18},${16},${4}   
+                        fi
+                    fi
+                else
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0963 -parameter $9${10}$1$2$3$8$5$6,${14},${18},${19},${16},${4}   
+                    if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                       exit 
+                    else 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0964 -parameter $9${10}$1$3$8$5$6,${14},${18},${16},${4}   
+                    fi
+                fi
+                if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                   exit 
+                else 
+                   $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0962 -parameter $9${10}$1$3$8$5$6,${18},${16},${4}   
+                fi
+            fi
+        fi
+##
+##      レセ電作成        
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else
+            if  [ ${12} -eq '2' ] || [ ${12} -eq '3' ] ; then
+                if  [ ${13} -eq '0' ]; then
+                    echo "no receden " ${13}  
+                else
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0980 -parameter $1,$5,$6,${16},${4} 
+                    if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                        exit 
+                    fi
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0981 -parameter $1$3$5$6,${17},${16},${4}  
+                    if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                        exit 
+                    fi
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0982 -parameter $1,$5,$6,${16},${4} 
+                    if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+                        exit 
+                    fi
+                    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0985 -parameter $1,$5,$6,${16},${9},${10},${18},${4} 
+                fi
+            fi
+        fi
+        
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$5$6,${16}  
+
+            rm  -f ${MCP_TEMPDIR}/${16}00RECE8*
+            rm  -f ${MCP_TEMPDIR}/${16}00RECEYMD*
+	fi
+
+        exit

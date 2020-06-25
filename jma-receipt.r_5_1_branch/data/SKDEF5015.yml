@@ -1,0 +1,23 @@
+kanri_cd    : "5015"
+name        : "°åÎÅ¶èÊ¬¡¦£Á£Ä£ÌÅÀ¿ô¾ğÊó"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "ADLINPUTKBN"
+  item_jp   : "£Á£Ä£ÌÅÀ¿ôÆşÎÏ"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "SETMEDKBN"
+  item_jp   : "°åÎÅ¶èÊ¬°ú·Ñ¤®"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 3
+  length    : 498

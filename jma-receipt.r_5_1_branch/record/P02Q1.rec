@@ -1,0 +1,88 @@
+P02Q1 {
+  fixed1 {
+    SELNUM {
+      numdata number(3);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    ADRS {
+      textdata varchar(100);
+    };
+    TEL {
+      textdata varchar(15);
+    };
+    HKNJANUM {
+      textdata varchar(8);
+    };
+    KIGONUM {
+      textdata varchar(20);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    KIKAN {
+      textdata varchar(20);
+    };
+    QR_HKNJANUM {
+      textdata varchar(8);
+    };
+    QR_KIGONUM {
+      textdata varchar(50);
+    };
+    QR_BIRTHDAY {
+      textdata varchar(10);
+    };
+    QR_SEX {
+      textdata varchar(2);
+    };
+    QR_KANANAME {
+      textdata varchar(50);
+    };
+    QR_NAME {
+      textdata varchar(50);
+    };
+    HONKZKKBN {
+      textdata varchar(4);
+    };
+    QR_HONKZKKBN {
+      textdata varchar(4);
+    };
+    HKNNUMMEI {
+      textdata varchar(16);
+    };
+    QR_HKNNUMMEI {
+      textdata varchar(16);
+    };
+    HKNJANAME {
+      textdata varchar(50);
+    };
+    QR_HKNJANAME {
+      textdata varchar(50);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      DUALLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(9);
+            column5 varchar(2);
+            column6 varchar(100);
+            column7 varchar(15);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+  };
+};

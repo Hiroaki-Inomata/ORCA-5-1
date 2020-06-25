@@ -1,0 +1,18 @@
+name	saga;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU4103"	"OpenCOBOL";
+bind	"SEIKYU4105"	"OpenCOBOL";
+bind	"SEIKYU41BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU41BYOMEI2"	"OpenCOBOL";
+bind	"SOKATU4100"	"OpenCOBOL";
+bind	"SOKATU4110"	"OpenCOBOL";
+bind	"SOKATU4130"	"OpenCOBOL";
+bind	"SOKATU4115"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

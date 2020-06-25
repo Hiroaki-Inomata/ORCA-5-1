@@ -1,0 +1,50 @@
+tbl_material_h_c_master {
+	COMPANYCD			number(5,0);
+	NAME				varchar(100);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	COMPANYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_h_c_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_material_h_c
+		WHERE 	COMPANYCD = :COMPANYCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_material_h_c
+			VALUES(
+				:COMPANYCD,
+				:NAME,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_material_h_c
+			SET
+				COMPANYCD = :COMPANYCD,
+				NAME      = :NAME,
+				CREYMD    = :CREYMD,
+				UPYMD     = :UPYMD,
+				UPHMS     = :UPHMS
+			WHERE 	COMPANYCD = :COMPANYCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_material_h_c
+			WHERE 	COMPANYCD = :COMPANYCD
+		;
+	};
+};

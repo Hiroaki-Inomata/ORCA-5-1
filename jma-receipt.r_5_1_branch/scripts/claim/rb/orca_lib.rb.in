@@ -1,0 +1,656 @@
+#!%RUBY%
+# coding : euc-jp
+
+# ======================================================================
+# 共通 スクリプト
+
+# 2001/9/19 - debian linuxで「class」メソッドが動作しなかったため、
+#             その部分を削除
+
+# 2001/10/11 - ifdefの処理で、１個のみの時に正常な判定をしていなかった
+#              原因は、インデックスの指定方法にあり、０番目から指定すべきものを
+#              １番目から指定していたために、不具合が発生していた
+
+# 2001/10/12 - equalマクロを高速化した(10倍以上を確認)
+
+
+# ======================================================================
+# 関数定義部
+
+
+# 項目の前後にある空白の除去処理
+#    引数
+# word - 空白を除去する文字列
+#    備考
+# 引数に対して空白の除去処理を行うので、
+# 内容を保存したい場合は、別領域にデータを退避してから実行してください
+def item_trim(word)
+	# 行頭・行末・項目間の空白除去
+	while  /^\s+?/ =~ word
+		word.gsub!(/^\s+?/ , '')
+	end
+	while  /\s+?\n/ =~ word
+		word.gsub!(/\s+?\n/ , "\n")
+	end
+	while  /\s+?$/ =~ word
+		word.gsub!(/\s+?$/ , '')
+	end
+	while  /,[^\S\n]+?/ =~ word
+		word.gsub!(/,[^\S\n]+?/ , ',')
+	end
+	while  /\s+?,/ =~ word
+		word.gsub!(/\s+?,/ , ",")
+	end
+end
+
+
+# =========================================================
+
+# コメントや空白の行、行頭・行末・項目間の空白の削除
+#    引数
+# word - 空白等の削除をする文字列
+def record_del_comment_space(word)
+	# コメントの削除
+	while  /#[\s\S]*?\n/ =~ word
+		word.gsub!(/#[\s\S]*?\n/ , "\n")
+	end
+	# 空白行の削除処理
+	while  /^\s*?\n/ =~ word
+		word.gsub!(/^\s*?\n/ , '')
+	end
+	# 行頭・行末・項目間の空白除去
+	item_trim word
+end
+
+
+# ======================================================================
+
+
+# レコードレイアウト情報行区切り処理
+#    引数
+# layout_data - 行区切りをするレイアウトデータ
+#    戻り値
+# レコードレイアウト情報区切り処理後配列(nilの場合、取得に失敗した)
+#    備考
+# この処理の中で、コメントの削除や、空白行の削除等をします
+def get_record_layout_linediv(layout_data)
+	wd = layout_data
+	# コメントと空白行と行頭・行末・項目間の空白除去
+	record_del_comment_space(wd)
+#	# コメントの削除
+#	begin
+#		wd.gsub! /#[\s\S]*?\n/ , "\n"
+##		wd.gsub! /#[\s\S]*?\n/ , ''
+#	end  while  /#[\s\S]*?\n/ =~ wd
+#	# 空白行の削除処理
+#	begin
+#		wd.gsub! /^\s*?\n/ , ''
+#	end  while  /^\s*?\n/ =~ wd
+#	# 行頭・行末・項目間の空白除去
+#	item_trim wd
+
+#	$stderr.puts wd
+#	wd
+	ad = wd.split("\n")
+#	ad.each do |e|
+#		$stderr.puts "["+e+"]"
+#	end
+	ad
+end
+
+
+# =========================================================
+
+# マクロ命令情報の実行
+#    備考
+# マクロ命令は、レイアウト定義ファイル自身の内容を変更するものです
+# 「equal」は、定数をセットするものです
+# 「typestart」は、構造体配列をセットするものです
+
+
+# ※「equal」を、すべて実行してから、typestartを実行してください
+# ※マクロを実行しましたら、マクロの行を削除してください
+# ※「baserepeat」マクロは、この関数とは別の関数で実行してください
+
+
+# =====================================
+
+
+# 「equal」マクロの定義情報配列の取得
+#    引数
+# layout - レイアウト定義データ [IN/OUT]
+#    戻り値
+# equalマクロ定義情報配列(nilの場合、定数マクロなし)
+#   [パラメータ],[equal],[値]
+#    備考
+# この関数は、equalマクロを定義した情報を取得するための関数です
+# 将来的に、equalマクロを使わなくなった場合や、デバッグ等に、
+# equalマクロで定義した値を取得して、画面等に出力できるように用意したものです
+# エラーが発生した場合、例外が発生します
+# なお、加減算等の計算ミスについては、スクリプト側の例外が発生して、
+# 強制終了してしまいますので、例外の捕捉はできません
+# 項目の前後にある空白やコメント・空白行を削除してから、実行してください
+def macro_get_equal_data(layout)
+	ret = nil
+	wd1 = ''
+	wd1 = layout.clone	# 本当の意味での内容の複製
+	                  	# (cloneとしないと、ポインタのみの複製)
+	# コメントと空白行と行頭・行末・項目間の空白除去
+	record_del_comment_space(wd1)
+	wd1 = wd1+"\n"
+	# マクロ以外の削除
+	begin
+		wd1.gsub!(/(?!^.*?,equal,)^.*?\n/ , '')
+	end  while  /(?!^.*?,equal,)^.*?\n/ =~ wd1
+
+# [文字列][,][equal][,][内容][#文字列][\n]
+
+	if wd1.to_s !=''
+		# 定数マクロあり
+		# 重複パラメータの検索
+		wd2 = wd1.split "\n"	# 行単位で配列にする
+		wd2.each_with_index do |x, i|
+			wd2.each_with_index do |y, j|
+				if i!=j
+					wx1=x.split ','
+					wy1=y.split ','
+					# 別のレコードである
+					if wx1[0]==wy1[0]
+						raise '定数定義マクロ(equal)において、重複するパラメータがあります('+wx1[0]+")\n"
+					end
+				end
+			end
+		end
+		# 定数に定数がセットされていた場合への配慮
+		flg1=1	# 終了判定フラグ
+		while flg1==1
+			# すべて数字がセットされたかを確認
+			flg2=1
+			flg1=0
+			wd2.each_with_index do |x, i|
+				wx1=x.split ','
+				wx1[2]=''		if wx1[2]==nil
+				wx1[2].strip!	# 空白除去
+				# 代入する文字のチェック
+#				if /[^0-9+*\/\-()]/ =~ wx1[2]
+#				if /[^0-9+*\/\-()]|^.*?\".*?\"\s*?$/ =~ wx1[2]
+#				if /#{'\"'}[^\"]*?#{'\"'}/ =~ wx1[2]
+# 				if /\"[^\"]*?\"/ =~ wx1[2]
+# $stderr.puts '対象...'
+# 				else
+# $stderr.puts '対象外!!!'
+# 				end
+
+				if /[^0-9+*\/\-()]/ =~ wx1[2] or /\"[^\"]*?\"/ !~ wx1[2]
+# 				if /[^0-9+*\/\-()]/ =~ wx1[2] and /\"[^\"]*?\"/ !~ wx1[2]
+					# 数字以外である
+					flg2=0	# まだのものがあるので、フラグのクリア
+					flg1=1
+				else
+					# すべて数値化した時点で、演算処理(evalを使用)
+					# 演算式にエラーがあった場合、evalの文法エラーという形で、
+					# 異常終了する
+					num1=(eval(wx1[2]))
+#					num1=Integer(wx1[2])
+					wx1[2]=String(num1)
+					x=wx1.join ','
+					wd2[i]=x
+				end
+			end
+			# 数字以外が入っていれば、置換処理を行う
+			if flg2==0
+				wd2.each do |x|
+					wx1=x.split ','
+					wx2=wx1[0]
+					wd2.each do |e|
+						wy1=e.split ','
+						wy2=wy1[2]
+						while /#{wx2}/ =~ wy2
+							e.gsub! wx2, wx1[2]
+							wy1=e.split ','
+							wy2=wy1[2]
+							flg2=1
+						end
+					end
+					wx1=nil
+				end
+			end
+
+# 2001/08/13 文字の代入に対応するため、エラー扱いにしない
+			if flg2==0
+				flg1=0
+			end
+
+#			# 変化がなければ、エラー扱いする
+#			if flg2==0
+#				raise "定数定義マクロ(equal)において、定数に定数をセットしているもので不正な指定をしているものがあります\n"
+#			end
+#			flg1=0
+		end
+		ret=wd2
+	else
+		# 定数マクロなし
+		ret=nil
+	end
+	ret
+end
+
+
+# =====================================
+
+
+# 「equal」マクロ命令の実行
+#    引数
+# layout - レイアウト定義データ [IN/OUT]
+#    戻り値
+# なし
+#    備考
+# 項目の前後にある空白やコメント・空白行を削除してから、実行してください
+def macro_execute_equal(layout)
+#	# コメントと空白行と行頭・行末・項目間の空白除去
+#	record_del_comment_space(layout)
+
+
+	# **********
+	$stderr.print '  equalマクロ情報の取得中です  ... '
+	# **********
+	wd2 = macro_get_equal_data(layout)
+	# **********
+	$stderr.puts 'complete'
+	# **********
+	if wd2!=nil
+		# 定数マクロを取得した
+
+		# **********
+		$stderr.print '  不要な行の削除中です　　　　 ... '
+		# **********
+
+		# 定数マクロの行の削除
+#		wd2 = wd1.split "\n"	# 行単位で配列にする
+#		reg1 = Regexp.new ""	# 高速化のため、正規表現型の生成
+#		wd2.each do |x|
+#			wx1=x.split ','
+#			reg1 = "^.*?#{wx1[0]}.*?,\s*?equal.*?\n"
+#			while layout =~ reg1
+#				layout.gsub! reg1, ''
+#			end
+# #			while  /^.*?#{wx1[0]}.*?,\s*?equal.*?\n/ =~ layout
+# #				layout.gsub! /^.*?#{wx1[0]}.*?,\s*?equal.*?\n/, ''
+# #			end
+#			wx1=[]
+#		end
+		layout.gsub!(/^.+?equal.+?\n/, '')
+
+		# **********
+		$stderr.puts 'complete'
+		# **********
+
+
+
+
+		# **********
+		$stderr.print '  レイアウト情報の置換中です　 ... '
+		# **********
+		# レイアウト情報の置換処理
+		wd2.each do |x|
+			wx1=x.split ','
+			wx1[2]=''		if wx1[2]==nil
+# **********
+#$stderr.print '[+'
+# **********
+			layout.gsub! wx1[0], wx1[2]
+# 			layout.gsub! /(^.+?,.*?)#{wx1[0]}(.*?\n)/, '\1'+wx1[2]+'\2'
+# **********
+#$stderr.print '-] '
+# **********
+# 			while  /(^.+?,.*?)#{wx1[0]}(.*?\n)/ =~ layout
+# # #				layout.gsub! /(^.+?,.*?)#{wx1[0]}(.*?\n)/, $1+wx1[2]+$2
+# #				layout.gsub! /^.+?,.*?#{wx1[0]}.*?\n/, $1+wx1[2]+$2
+# #				# ↑バックリファレンスを使用している
+# 				layout.gsub! /(^.+?,.*?)#{wx1[0]}(.*?\n)/, '\1'+wx1[2]+'\2'
+# 			end
+			wx1=[]
+		end
+		# **********
+		$stderr.puts 'complete'
+		# **********
+	else
+		# 定数マクロなし
+		$stderr.puts '定数マクロなし'
+	end
+
+	wd2=nil
+
+	nil
+end
+
+
+# =========================================================
+
+
+# 該当項目の項目内容取得関数(マクロ処理向け)
+#    引数
+# layout - レイアウト定義データ [IN]
+# rdata  - １レコードのシーケンシャルデータ [IN]
+# item_l - 取得対象項目配列 [IN]
+#    戻り値
+# 引数の「item_l」のインデックス順に並んだ、内容の配列
+#    備考
+# 引数のレイアウト定義データ「layout」は、前後の空白等を削除してあること
+# 日付のパラメータを指定した場合、その領域は空白扱いされます
+#
+def get_layout_seqitem(layout, rdata, item_l)
+	item_size = 0 ; idx1 = 0 ; ret = []
+	param1 = '' ; param2a = ''
+	wd1 = [] ; sp = 0 ; wbyte = 0 ; ins = '' ; wd2 = ''
+	item_size = item_l.size	# 項目配列の大きさの取得
+	for idx1 in 0..(item_size-1) do
+		# 内容の初期化
+		ret[idx1] = ''
+		if layout =~ /^#{item_l[idx1]},(.+?),(.+?)$/
+			# レイアウトデータが見つかった
+			param1 = $1
+			param2a = $2
+			param1.strip!
+			param2a.strip!
+			# パラメータ領域から、内容の取得
+			case	param1
+			when	nil		# データが入っていない
+			when	'nowdate1'		# 今日の日付のセット(パターン1)
+			when	'nowdate2'		# 今日の日付のセット(パターン2)
+			when	'const'			# 固定データのセット
+				if param2a!=nil
+					param2a.gsub!(/^\"/, '')
+					param2a.gsub!(/\"$/, '')
+					ret[idx1] = param2a
+				end
+#			else			# 素直に項目のセット
+			when	'0'		# 素直に項目のセット
+#			when	'0', 'attribute'		# 素直に項目のセット
+				wd1 = param2a.split(',')	# 項目で配列に分ける
+				sp = wd1[0]		# 開始位置
+#				sp = Integer(wd1[0])	# 開始位置(StartPoint)
+# 				if sp.class.name!='Fixnum'
+#					$stderr.puts '数値以外です'+sp.class.name
+					sp = eval(sp)
+#					sp = sp.to_i
+# 				end
+				wbyte = Integer(wd1[1])		# 文字バイト数
+				sp = Integer(sp)
+				ins = wd1[2]		# 挿入情報
+        if RUBY_VERSION.to_s <= "1.8.7"
+          wd2 = rdata[sp, wbyte]
+        else
+          wd2 = rdata.byteslice(sp, wbyte) # 指定された文字の抽出
+        end
+				wd2=''		if wd2==nil		# 抽出した文字がnilなら、空白文字にする
+				# 前後の空白の削除
+				item_trim wd2
+				if sp==0 and wbyte==0
+					# 開始位置・バイト数とも０なので、挿入情報をそのままセット
+					ins.gsub!(/^\"/, '')
+					ins.gsub!(/\"$/, '')
+					ret[idx1] = ins
+				else
+					if ins==nil or ins==''
+						# 挿入情報なしである
+						ret[idx1] = wd2
+					else
+#						$stderr.puts "["+ins+"]"
+						ins.gsub!(/^\"/, '')
+						ins.gsub!(/\"$/, '')
+#						$stderr.puts "["+ins+"]"
+						if nil == ins.index('%s')
+							# %sが含まれていないが、挿入情報は入っている(前にセット)
+							ret[idx1] = ins+wd2
+						else
+							# %sが含まれている
+							if wd2==''
+								ret[idx1] = ''
+#								ret[idx1] = sprintf(ins, ' ')
+							else
+								ret[idx1] = sprintf(ins, wd2)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	ret
+end
+
+
+# =========================================================
+
+
+# ifdefマクロ命令の実行
+#    引数
+# layout - レイアウト定義データ [IN/OUT]
+# rdata  - １レコードのシーケンシャルデータ [IN]
+#    戻り値
+# なし
+#    備考
+# 実行前に、コメントと空白行と行頭・行末・項目間の空白除去を行ってください
+# 現在、入れ子対応はしていません
+def macro_execute_ifdefl(layout, rdata)
+	tag1 = ''
+	wd1 = [] ; wd2 = [] ; wd3 = [] ; wd4 = [] ; wd5 = ''
+	wsize1 = 0 ; idx1 = 0 ; wflg1 = 0
+	rec_layout = layout
+#	rec_layout = layout.clone
+	# コメントと空白行と行頭・行末・項目間の空白除去
+#	record_del_comment_space(rec_layout)
+
+
+	# ifdefマクロが見つかった場合、次のendifまでを判定する
+	while /^(.+?),ifdef,.+?/ =~ rec_layout
+		tag1 = $1
+#		if /(^(.+?),ifdef,.+?$)([\s\S]*?)(^.+?,endif.*?$)/ =~ rec_layout
+#		if /((^(.+?),ifdef,.+?$)([\s\S]*?)(^\3,endif.*?$))/ =~ rec_layout
+		if /((^(.+?),ifdef,.+?\n)([\s\S]*?)(^\3,endif.*?$))/ =~ rec_layout
+			# 対象が見つかった
+# 			$stderr.puts '対象が見つかりました $1=['+$1+'],  $2=['+$2+'],  $3=['+$3+'],  $4=['+$4+'],  $5=['+$5+']'
+# 			exit
+			wd1 = [$1, $2, $3, $4, $5]	# 上記IF文の括弧に属する内容の取得
+			# wd1[0], $1 <= 全体の文字列
+			# wd1[1], $2 <= 開始行の文字列(最後尾の改行を含む)
+			# wd1[2], $3 <= ifdefマクロの識別子
+			# wd1[3], $4 <= マクロの内容
+			# wd1[4], $5 <= 終了行の文字列(先頭の改行を含まない)
+			wd2 = $2.strip.split(',')
+			wd3 = []
+			wsize1 = wd2.size - 3	# 判定項目数は、ifdef行の項目数-3
+			idx1 = 0
+			wflg1 = 0	# 有効判定フラグ(0 = 内容を無効にする, 1 = 内容を有効にする)
+			case	wd2[2]
+			when	'or'
+				# ３番目以降の項目のどれかが空白以外なら、中身を有効にする
+				# 逆に、３番目以降の項目のすべてが空白なら、中身を無効にする
+				# 対象項目の列挙
+				for idx1 in 0..(wsize1 - 1) do
+					wd3.concat [String(wd2[3+idx1])]
+				end
+				# 項目の値の取得
+				wd4 = get_layout_seqitem(rec_layout, rdata, wd3)
+				# or判定処理
+				wflg1 = 0	# 存在しないとして初期化
+				wd4.each do |e|
+					if e!=nil and e!=''
+						# 内容が存在するものがでてきた
+						wflg1 = 1
+					end
+				end
+			when	'and'
+				# ３番目以降の項目のどれかが空白なら、中身を無効にする
+				# 逆に、３番目以降の項目のすべてが空白以外なら、中身を有効にする
+				# 対象項目の列挙
+				for idx1 in 0..(wsize1 - 1) do
+					wd3.concat [wd2[3+idx1]]
+				end
+				# 項目の値の取得
+				wd4 = get_layout_seqitem(rec_layout, rdata, wd3)
+				# and判定処理
+				wflg1 = 1	# 存在するとして初期化
+				wd4.each do |e|
+					if e==nil or e==''
+						# 内容が存在しないものがでてきた
+						wflg1 = 0
+					end
+				end
+			else
+				# 第３項目に「and」「or」以外の指定をしている
+				$stderr.puts 'ifdefの３番目の項目に「and」「or」以外を指定しています (識別子)> ['+tag1+']'
+				exit 2
+			end
+# 			# 置換元を、正規表現で支障のない形に直す
+ 			w_arg1 = [['\(', '\\('], ['\)', '\\)'], ['\+', '\\\+'], ['\*', '\\\*'], ['\/', '\\/'], ['\"', '\\"']]
+ 			w_arg1.each do |e|
+ 				wd1[0].gsub!(/#{e[0]}/, e[1])
+ 			end
+			# 実際の項目内容の置換処理
+			if wflg1 == 1
+				# 内容を有効にする
+				rec_layout.gsub!(/#{wd1[0]}/, wd1[3])
+			else
+				# 内容を無効にする
+				wd5 = ''
+				# 領域の複製を作成し、置換後の内容を作成する
+				wd5 = wd1[3].clone
+				wd5.gsub!(/^([^\s,]*?),.*?$/, '\1,const,')
+				# 実際の置換処理
+				rec_layout.gsub!(/#{wd1[0]}/, wd5)
+				wd5 = ''
+			end
+		else
+			# 終了行が見つからなかったので、エラー扱いにする
+			$stderr.puts 'ifdefに対する、endif文が見つかりません (識別子)> ['+tag1+']'
+			exit 2
+		end
+	end
+
+
+
+# # ++++++++++++++++++++
+# dbg_lst1 = []
+# dbg_lst1 = ['%M_RA1%', '%M_RX002%', '%D_C2%']
+# dbg_mes1 = get_layout_seqitem(rec_layout, rdata, dbg_lst1)
+# dbg_lst1.each_index do |dbg_idx1|
+# 	$stderr.puts '['+dbg_lst1[dbg_idx1]+'] = ['+dbg_mes1[dbg_idx1]+']'
+# end
+# # ++++++++++++++++++++
+
+	nil
+end
+
+
+# =========================================================
+
+# 該当行のレイアウト情報の取得
+#    引数
+# line_ldata - 行区切り後レイアウトデータ
+# rdata      - １レコードのシーケンシャルデータ
+#    戻り値
+# レコードデータ配列(ただし、nilの場合、取得失敗)
+# ret[0] : パラメータ名
+# ret[1] : パラメータにセットする内容
+#    備考
+# スタート位置については、演算処理の記述をしたものについても、
+# 処理が行われることを確認
+def get_record_data(line_ldata, rdata)
+	wd1 = line_ldata.split(',')	# 項目で配列に分ける
+	case	wd1[1]
+	when	nil		# データが入っていない
+		ret = nil
+	when	'nowdate1'		# 今日の日付のセット(パターン1)
+		ret = [wd1[0], Time.now.strftime("%Y-%m-%d")]
+	when	'nowdate2'		# 今日の日付のセット(パターン2)
+		ret = [wd1[0], Time.now.strftime("%Y-%m-%dT%H:%M:%S")]
+	when	'const'			# 固定データのセット
+		if wd1[2]==nil
+			ret = [wd1[0], '']
+		else
+			wd2 = wd1[2]
+			wd2.gsub!(/^\"/, '')
+			wd2.gsub!(/\"$/, '')
+			ret = [wd1[0], wd2]
+		end
+#	else			# 素直に項目のセット
+	when	'0'		# 素直に項目のセット
+#	when	'0', 'attribute'		# 素直に項目のセット
+		# [パラメータ], [データ型の識別子], [開始位置], [バイト数], [挿入情報]
+		# [挿入情報]は、省略したりすることがある
+		# [データ型の識別子]は、現在は予約状態だが、
+		# Ruby側でデータの変換をかける必要がでてきたときに、
+		# レイアウトデータの変更を不要にするためにもうけた
+		if wd1[0]==nil or wd1[2]==nil or wd1[3]==nil
+			ret = nil
+		else
+			param = String(wd1[0])	# パラメータ名
+			sp = wd1[2]	# 開始位置(StartPoint)
+#			sp = Integer(wd1[2])	# 開始位置(StartPoint)
+# 			if sp.class.name!='Fixnum'
+#				$stderr.puts '数値以外です'+sp.class.name
+				sp = eval(sp)
+#				sp = sp.to_i
+# 			end
+			wbyte = Integer(wd1[3])	# 文字バイト数(WordBytevalue)
+			ins = String(wd1[4])	# 挿入情報
+			atr = String(wd1[5])	# 属性名
+      if RUBY_VERSION.to_s <= "1.8.7"
+        wd2 = rdata[sp, wbyte]
+      else
+        wd2 = rdata.byteslice(sp, wbyte) # 指定された文字の抽出
+      end
+			wd2=''		if wd2==nil
+			ins=''		if ins==nil
+			atr=''		if atr==nil
+			# 前後の空白の削除
+			item_trim wd2
+			if sp==0 and wbyte==0
+				# 開始位置・バイト数とも０なので、挿入情報をそのままセット
+				ins.gsub!(/^\"/, '')
+				ins.gsub!(/\"$/, '')
+				ret = [param, ins]
+			else
+				if ins==nil or ins==''
+					# 挿入情報なしである
+					ret = [param, wd2]
+				else
+#					$stderr.puts "["+ins+"]"
+					ins.gsub!(/^\"/, '')
+					ins.gsub!(/\"$/, '')
+#					$stderr.puts "["+ins+"]"
+					if nil == ins.index('%s')
+						# %sが含まれていないが、挿入情報は入っている(前にセット)
+						ret = [param, ins+wd2]
+					else
+						# %sが含まれている
+						if wd2==''
+							ret = [param, '']
+#							ret = [param, sprintf(ins, ' ')]
+						else
+							ret = [param, sprintf(ins, wd2)]
+						end
+					end
+				end
+			end
+			# 属性情報があれば、属性名で追加
+			if atr!=nil and atr!='' and ret[1]!=nil and ret[1]!=''
+				ret[1]=' '+atr+'="'+(ret[1])+'"'
+			end
+		end
+	end
+	ret
+end
+
+
+# ======================================================================
+
+if __FILE__ == $0
+	# このスクリプトを単独で起動した
+
+	puts 'このスクリプトは、単独で動作させるスクリプトではありません'
+	puts '    他のスクリプトから呼び出すスクリプト群のファイルです'
+
+end

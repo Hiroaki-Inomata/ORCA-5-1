@@ -1,0 +1,5 @@
+:baseurl: http://ftp.orca.med.or.jp/pub/receipt/plugin/(version)/package  <== (version) : 4.7.0
+:distdir: dist
+:list: jpplist1.yml
+:keyuser: plugintest
+:passphrase: test

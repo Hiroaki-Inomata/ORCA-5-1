@@ -1,0 +1,69 @@
+#!/bin/bash
+
+usage_ja(){
+    cat <<EOF  >&2
+Usage:
+    $0 [<opions>]
+
+Options:
+    --dbsync, -s      dbsyncを実行する
+    --help, -h        このヘルプを表示
+EOF
+    exit 1
+}
+
+usage(){
+    cat <<EOF  >&2
+Usage:
+    $0 [<opions>]
+
+Options:
+    --dbsync, -s      run the dbsync
+    --help, -h        print this
+EOF
+    exit 1
+}
+
+run() {
+    /bin/bash "$@"
+    result=$?
+    if [ $result -ne 0 ] ; then
+	exit $result
+    fi
+    return 0
+}
+
+DBSYNC="false"
+
+GETOPT=`getopt -o acsh -l noaccesskey,noconv,dbsync,help -- "$@"`
+if [ "$?" -ne 0 ] ; then
+    usage
+fi
+
+SETUPOPT=""
+eval set -- "$GETOPT"
+while true
+do
+    case $1 in
+	-a|--noaccesskey) SETUPOPT="$SETUPOPT noaccesskey" ; shift
+	    ;;
+	-c|--noconv) SETUPOPT="$SETUPOPT noconv" ; shift
+	    ;;
+	-s|--dbsync) DBSYNC="true" ; shift
+	    ;;
+	-h|--help) usage
+	    ;;
+	--)
+	    shift ; break
+	    ;;
+	*)
+	    exit 2
+	    ;;
+    esac
+done
+
+run @bindir@/jma-migrate-v51.sh ${SETUPOPT}
+
+if [ "$DBSYNC" = "true" ] ; then
+    run @bindir@/jma-dbsync.sh
+fi

@@ -1,0 +1,59 @@
+tbl_interact_master {
+	DRUGCD				char(9);
+	DRUGCD2				char(9);
+	SYOJYOUCD			char(7);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_interact_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_interact
+			WHERE	DRUGCD 	 =   :DRUGCD
+			AND	DRUGCD2	 =   :DRUGCD2
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_interact
+			VALUES(
+				:DRUGCD,
+				:DRUGCD2,
+				:SYOJYOUCD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_interact
+			SET	
+				DRUGCD	  = :DRUGCD,
+				DRUGCD2	  = :DRUGCD2,
+				SYOJYOUCD = :SYOJYOUCD,
+				TERMID	  = :TERMID,
+				OPID	  = :OPID,
+				CREYMD	  = :CREYMD,
+				UPYMD	  = :UPYMD,
+				UPHMS	  = :UPHMS
+			WHERE   DRUGCD	  = :DRUGCD
+			AND     DRUGCD2	  = :DRUGCD2
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_interact
+			WHERE   DRUGCD    =   :DRUGCD
+			AND     DRUGCD2   =   :DRUGCD2
+		;
+	};
+};

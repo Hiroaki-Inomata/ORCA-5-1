@@ -1,0 +1,394 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    レセ電ファイル作成処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        $12 提出先
+#        $13 レセ電ファイル出力先
+#        $14 JOBID 
+#        $15 SHELLID
+#        $16 エラーファイル名 
+#        $17 ファイル出力先区分
+#            9:haori
+#        $18 端末ｉｐアドレス
+#        $19 入外区分
+#        ${20} HOSPNUM
+#        ${21} レセプト作成区分
+#            1:提出用レセ、2:点検用レセ
+#            6:連携基盤用、7:連携基盤用（当日）
+#        ${22} 症状詳記作成区分
+#            1:作成する
+#        ${23} 光ディスク等送付書作成区分
+#            0:作成する
+#        ${24} レセ電データ履歴保存設定区分
+#            1:履歴保存する
+#        ${25} 直接請求する保険者番号
+#            99999999:設定なし
+#        ${26} レセ電データチェックの有無
+#            1:チェックする
+#        ${27}-  ${28}医療機関コード別の処理指定時
+#            該当診療年月の開始、終了
+#        ${29} MONBLOB-ID(data-id)
+#-------------------------------------------#
+
+        echo "window  ${MCP_WINDOW}"
+
+        if  [ "${MCP_WINDOW}" == "receiptdatamakev3" ]; then
+            mkdir -p  ${MCP_TEMPDIR}
+        fi
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+}
+trap cleanup EXIT
+
+
+    if  [ ${21} -eq '6' ] || [ ${21} -eq '7' ]; then
+        LOG_FILE="/var/log/jma-receipt/${20}recept4_renkei.log"
+    else
+        LOG_FILE="/var/log/jma-receipt/${20}recept4.log"
+    fi
+    [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+    echo $(basename ${LOG_FILE})
+
+    echo "arg3 =  [" ${3} "]"  
+    echo "arg5 =  [" ${5} "]"  
+    echo "arg12 = [" ${12} "]" 
+    echo "arg13 = [" ${13} "]" 
+    echo "arg16 = [" ${16} "]" 
+    echo "arg17 = [" ${17} "]" 
+    echo "arg19 = [" ${19} "]" 
+    echo "arg20 = [" ${20} "]" 
+    echo "arg21 = [" ${21} "]" 
+    echo "arg22 = [" ${22} "]" 
+    echo "arg23 = [" ${23} "]" 
+    echo "arg24 = [" ${24} "]" 
+    echo "arg25 = [" ${25} "]" 
+    echo "arg26 = [" ${26} "]" 
+    echo "arg27 = [" ${27} "]" 
+    echo "arg28 = [" ${28} "]" 
+    echo "arg29 = [" ${29} "]" 
+#    echo "hostname =  [" `hostname`  "]"
+
+    rennum=0
+##  2HD flesize  
+    fixedsize=1441500
+
+##  エラーファイル削除
+    echo "errfile = [" ${MCP_TEMPDIR}/${16}  "]"
+    rm  -f ${MCP_TEMPDIR}/${16}
+
+    RECEFILE1="RECEIPTC"
+    RECEFILE2="RECEDEN"
+
+    if  [ ${21} -eq '2' ]; then
+	RECEFILE1="TENKENRC"
+	RECEFILE2="TENKENT"
+	echo "file name change!"
+    fi
+
+#   該当ファイル削除
+	rm  ${MCP_TEMPDIR}/${20}${RECEFILE1}*.UKE
+	rm  ${MCP_TEMPDIR}/${20}${RECEFILE2}*.txt
+
+#   連携基盤ファイル作成
+    if  [ ${21} -eq '6' ] || [ ${21} -eq '7' ]; then
+        if  [ ${12} -eq '1' ]; then
+            if  [ ${19} -eq '1' ]; then
+                RECEFILE1="RECEIPTCS3"
+                RECEFILE2="RECEDENS2"
+                if  [ ${21} -eq '7' ]; then
+                    RECEFILE1="RECEIPTCS2"
+                fi
+            else
+                RECEFILE1="RECEIPTCS1"
+                RECEFILE2="RECEDENS1"
+            fi
+        else
+            if  [ ${19} -eq '1' ]; then
+                RECEFILE1="RECEIPTCK3"
+                RECEFILE2="RECEDENK2"
+                if  [ ${21} -eq '7' ]; then
+                    RECEFILE1="RECEIPTCK2"
+                fi
+            else 
+                RECEFILE1="RECEIPTCK1"
+                RECEFILE2="RECEDENK1"
+            fi 
+        fi
+	echo "file name change![" ${RECEFILE1} ${RECEFILE2} "]"
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM580 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${19},${17},$fixedsize,${21},${25},${20},${16}
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+            echo "--- BM580 err file exist ---"
+            exit 
+        fi
+
+        echo "--- file name  [" ${MCP_TEMPDIR}/${20}${RECEFILE2}${3}.txt "=>" ${MCP_TEMPDIR}/${20}${RECEFILE1}${3}.UKE "]"
+        nkf -s ${MCP_TEMPDIR}/${20}${RECEFILE2}${3}.txt > ${MCP_TEMPDIR}/${20}${RECEFILE1}${3}.UKE
+
+        if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ] && [ "${18}" = "cron" ]; then
+          CSVFILE="${RECEFILE1}${3}.UKE"
+          if [ -s ${MCP_TEMPDIR}/${20}${CSVFILE} ]; then
+            RECCNT="$(wc -l ${MCP_TEMPDIR}/${20}${CSVFILE} | awk '{i=split($0,arr," ");printf("%06d",arr[1])}')"
+            ${MONBLOB} -dir ${LDDIRECTORY} -import ${MCP_TEMPDIR}/${20}${CSVFILE} > ${MCP_TEMPDIR}/blobid-$$
+            MONBLOBID=`cat ${MCP_TEMPDIR}/blobid-$$`
+
+            PARAM="${1},${2},${3},${4},${6},${3:0:8},${7},1,${9},${10},${11},${12},${14},${15},${20},${19},${MCP_TEMPDIR},${CSVFILE},${RECCNT},${MONBLOBID}"
+
+            ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBFILEMIS -parameter "${PARAM}"
+          fi
+        else
+#         システム管理場所出力のとき
+          if  [ ${17} -eq '3' ]|| [ ${17} -eq '4' ]; then
+              if ! test -d  "${13}"; then
+                   mkdir ${13}
+                   RC=$?
+                   echo "--- mkdir end   ---[" $RC  "]"
+                   if  [ $RC -ne '0' ]; then
+                       ERRCD='0077'
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD},${20}
+                       echo "--- mkdir  err   ---"
+                       exit
+                   fi
+                   chmod -R g+rw ${13}
+                   echo "--- mkdir rireki holder ---"
+#             else
+#                  rm ${13}${RECEFILE1}*.UKE
+#                  echo "--- rm holder file ---" ${13}${RECEFILE1}*.UKE "]"
+              fi
+              echo "--- folder name  [" ${13} "]"
+
+              echo "--- file name  [" ${MCP_TEMPDIR}/${20}${RECEFILE1}${3}.UKE "=>" ${13}${RECEFILE1}${3}.UKE "]"
+              cp  ${MCP_TEMPDIR}/${20}${RECEFILE1}${3}.UKE ${13}${RECEFILE1}${3}.UKE
+              chmod -R g+rw ${13}${RECEFILE1}${3}.UKE
+
+              if ! [ -s ${13}${RECEFILE1}${3}.UKE ]; then
+                rm ${13}${RECEFILE1}${3}.UKE
+              fi
+          fi
+        fi
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20}
+        exit 
+    fi     
+
+#   レセ電ファイル作成
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM500 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${19},${17},$fixedsize,${21},${25},${20},${27},${28},${16}
+    if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+        echo "--- BM500 err file exist ---"
+        exit 
+    fi
+
+    rennum=1
+
+#   症状詳記作成
+    if  [ ${22} -eq '1' ]; then
+        rennum=$(expr $rennum + 1) 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM510 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${14},${15},${19},${25},${20},${27},${28},${16}
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+            echo "--- BM510 err file exist ---"
+            exit 
+        fi
+    fi 
+
+#   光ディスク等送付書（提出用レセのときのみ）
+    if  [ ${23} -eq '1' ] && [ ${21} -eq '1' ]; then
+        rennum=$(expr $rennum + 1) 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM540 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${17},${14},${15},${20},${27},${28},${16}
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+            echo "--- BM530 err file exist ---"
+            exit 
+        fi
+    fi
+
+#   レセ電データチェック
+    if  [ ${26} -eq '1' ]; then
+
+        cleanup(){
+	    rm -f ${TMPFILEBASE}*
+        }
+
+	SHNAME=$(basename $0)
+	TMPFILEBASE="${MCP_TEMPDIR}/${20}ORCB44RECEDENCHK"
+	ERRFILE="${TMPFILEBASE}${SHNAME%%.sh}.ERR"
+	ERRFILE="${ERRFILE// /X}"
+	ERRLOG="${TMPFILEBASE}${SHNAME%%.sh}.log"
+	INFILE="${MCP_TEMPDIR}/${20}${RECEFILE2}01.txt"
+	UTF8FILE="${TMPFILEBASE}$(basename ${INFILE}).euc"
+	PRM="${20},$(basename ${UTF8FILE}),$(basename ${ERRFILE}),$(basename ${ERRLOG}),${21}"
+
+	export  RUBYLIB=$SITESCRIPTSDIR:$PATCHSCRIPTSDIR:$SCRIPTSDIR:$RUBYLIB
+	export  APS_EXEC_PATH=$(dirname $0)
+	export  LDDIRECTORY
+	export  MONSQL=$PANDALIB/bin/monsql
+
+	cleanup
+
+	[ -e ${ERRLOG}  ] && rm -f ${ERRLOG}
+	[ -e ${INFILE}  ] && nkf -I --ic=EUC-JP --oc=CP932 ${INFILE} | nkf --ic=CP932 --oc=UTF-8 > ${UTF8FILE}
+
+    echo "--- receden check start $(LANG=C date) ---"
+	receden_check.rb "$PRM"
+	if [ $? -ne 0 ]; then
+      cat ${ERRLOG}
+	    ERRCD='0099'
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD:${#ERRCD}-4:4},${20}
+	    exit
+	fi
+    echo "--- receden check end   $(LANG=C date) ---"
+
+        rennum=1
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM560 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${21},'0',${14},${15},${25},$(basename ${ERRFILE}),${20},${27},${28},${16}
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+            echo "--- BM560 err file exist ---"
+            exit 
+        fi
+    fi
+        
+
+#   漢字コード変換（ＥＵＣからシフトＪＩＳ）	
+
+	NUM=0
+    while [ $NUM -lt 100 ]
+    do
+        NUM=`expr $NUM + 1`
+        FILENUM='0'$NUM
+    	    echo "filenum"
+            echo  ${FILENUM:${#FILENUM}-2:2}
+	    if  test -s "${MCP_TEMPDIR}/${20}${RECEFILE2}${FILENUM:${#FILENUM}-2:2}.txt"; then
+    	    echo ${FILENUM:${#FILENUM}-2:2}
+	    else
+    	    echo ${FILENUM:${#FILENUM}-2:2} "nothing"
+		    break
+	    fi
+	    if  test "${FILENUM:${#FILENUM}-2:2}"	=	"01"; then
+		    echo "先頭ファイルの処理(sjis変換)"
+		    nkf -s ${MCP_TEMPDIR}/${20}${RECEFILE2}${FILENUM:${#FILENUM}-2:2}.txt > ${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE
+#		    RC=$?
+#		    echo "--- nkf end   ---[" $RC  "]"
+#		    if  [ $RC -ne '0' ]; then
+#			ERRCD='0000'$RC
+#			$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD:${#ERRCD}-4:4},${20}
+#			echo "--- nkf err   ---"
+#			exit
+#		    fi
+	    else
+		    echo "２番目以降のファイルの処理(sjis変換)"
+		    nkf -s ${MCP_TEMPDIR}/${20}${RECEFILE2}${FILENUM:${#FILENUM}-2:2}.txt > ${MCP_TEMPDIR}/${20}${RECEFILE1}${FILENUM:${#FILENUM}-2:2}.UKE
+#		    RC=$?
+#		    echo "--- nkf end   ---[" $RC  "]"
+#		    if  [ $RC -ne '0' ]; then
+#			ERRCD='0000'$RC
+#			$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD:${#ERRCD}-4:4},${20}
+#			echo "--- nkf err   ---"
+#			exit
+#		    fi
+	    fi
+    done
+
+
+#   システム管理場所出力のとき
+    if  [ ${17} -eq '3' ]|| [ ${17} -eq '4' ]; then
+        if  [ ${24} -eq '1' ]; then
+#           履歴保存先のフォルダへファイル作成
+            if  [ ${12} -eq '1' ]; then
+                OUT_FOLDER="${13}${20}_Shaho_${5}/"
+            else
+                OUT_FOLDER="${13}${20}_Kokuho_${5}/"
+            fi
+            if ! test -d  "$OUT_FOLDER"; then
+                 mkdir $OUT_FOLDER
+                 RC=$?
+                 echo "--- mkdir end   ---[" $RC  "]"
+                 if  [ $RC -ne '0' ]; then
+                     ERRCD='0077'
+                     $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD},${20}
+                     echo "--- mkdir  err   ---"
+                     exit
+                 fi
+                 chmod -R g+r ${OUT_FOLDER}
+                 echo "--- mkdir rireki holder ---"
+            else
+                 rm $OUT_FOLDER/${RECEFILE1}.UKE*
+                 echo "--- rm rireki holder file ---"
+            fi
+            echo "--- folder name  [" $OUT_FOLDER "]"
+
+            NUM=0
+            while [ $NUM -lt 100 ]
+            do
+                NUM=`expr $NUM + 1`
+                FILENUM='0'$NUM
+                echo "filenum" ${FILENUM:${#FILENUM}-2:2}
+                if  test "${FILENUM:${#FILENUM}-2:2}"	=	"01"; then
+		    echo "先頭ファイルの処理(履歴保存)"
+                    if  test -e "${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE"; then
+                        cp ${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE ${OUT_FOLDER}${RECEFILE1}.UKE               
+                        chmod -R g+r ${OUT_FOLDER}${RECEFILE1}.UKE
+	            else
+    	                echo ${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE "nothing"
+		        break
+	            fi
+                else     
+		    echo "２番目以降のファイルの処理(履歴保存)"
+	           if  test -e "${MCP_TEMPDIR}/${20}${RECEFILE1}${FILENUM:${#FILENUM}-2:2}.UKE"; then
+                       cp ${MCP_TEMPDIR}/${20}${RECEFILE1}${FILENUM:${#FILENUM}-2:2}.UKE ${OUT_FOLDER}${RECEFILE1}.UKE_$NUM              
+                       chmod -R g+r ${OUT_FOLDER}${RECEFILE1}.UKE_$NUM
+                    else
+    	                echo ${MCP_TEMPDIR}/${20}${RECEFILE1}${FILENUM:${#FILENUM}-2:2}.UKE "nothing"
+		        break
+	            fi
+                fi
+            done 
+        else
+#           履歴保存を行わないとき
+            cp ${MCP_TEMPDIR}/${20}${RECEFILE1}*.UKE ${13}
+            chmod -R g+r ${13}${20}${RECEFILE1}*.UKE
+        fi
+    fi
+
+
+#   ＣＤ−Ｒ出力のときisoファイル作成
+    if  [ ${17} -eq '6' ]; then
+        echo "--- iso start ---"
+        DIR=`mktemp -d`
+        cp ${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE ${DIR}/${RECEFILE1}.UKE
+        mkisofs --input-charset cp437 -l -o ${MCP_TEMPDIR}/${20}${RECEFILE1}.iso ${DIR}/
+	RC=$?
+        echo "--- iso end   ---[" $RC  "]"
+	if  [ $RC -ne '0' ]; then
+	    ERRCD='0000'$RC
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD:${#ERRCD}-4:4},${20}
+            echo "--- iso err   ---"
+            exit
+	fi
+    fi
+
+
+#   大容量ＡＰＩ作成
+    if  [ ${17} -eq '9' ]; then
+        cp ${MCP_TEMPDIR}/${20}${RECEFILE1}.UKE ${MCP_TEMPDIR}/${RECEFILE1}.UKE
+        FILENM="${RECEFILE1}.UKE"
+        echo "filenm=[" $FILENM "]"
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter ${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${14},${15},${20},${16},$FILENM,"csv",${29}
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+             exit
+        fi
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20}
+    exit 

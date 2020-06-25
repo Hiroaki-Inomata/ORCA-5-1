@@ -1,0 +1,57 @@
+tbl_adrs_org {
+	HOSPNUM				number(2,0);
+	LPUBCD				char(5);
+	POST				char(7);
+	RENNUM				number(2);
+	PREFKANA			varchar(40);
+	CITYKANA			varchar(200);
+	TOWNKANA			varchar(400);
+	PREFNAME			varchar(20);
+	CITYNAME			varchar(100);
+	TOWNNAME			varchar(200);
+	EDITADRS_KANA		varchar(640);
+	EDITADRS_NAME		varchar(320);
+	TOWNDIVFLG			char(1);
+	MANYTOWNFLG			char(1);
+	TOWNNAME2			varchar(1200);
+};
+
+primary	{
+	HOSPNUM,LPUBCD,POST,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_org_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_org
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   LPUBCD    =   :LPUBCD
+			AND   POST        =   :POST
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_org_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_org
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND ( POST        =   :POST   )   AND
+                  ( LPUBCD      =   :LPUBCD )
+			ORDER   BY  RENNUM  DESC;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_org_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_org
+			WHERE   HOSPNUM      =   :HOSPNUM
+			ORDER   BY  POST,RENNUM
+		;
+	};
+};

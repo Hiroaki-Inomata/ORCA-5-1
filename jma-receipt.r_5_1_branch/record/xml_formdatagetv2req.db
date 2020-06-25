@@ -1,0 +1,9 @@
+xml_formdatagetv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	data {
+		Data_ID			varchar(80);
+	};
+};

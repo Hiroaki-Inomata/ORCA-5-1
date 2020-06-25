@@ -1,0 +1,424 @@
+tbl_seikyu_koh	{
+HOSPNUM				number(2,0);
+SRYYM				number(6);
+NYUGAIKBN			char(1);
+PTID				number(10);
+RECEKA				char(2);
+TEISYUTUSAKI			number(1,0);
+RECESYUBETU			char(4);
+HKNJANUM			char(8);
+HOJOKBN_KEY     		char(1);
+KOHID_KEY       		number(10);
+TEKSTYMD			char(8);
+RECEIPT_KBN			char(10);
+RENNUM				number(2,0);
+KOHNUM          		char(3);
+KOHID	          		number(10);
+JNISSU	        		number(2,0);
+TENSU1	        	number(8,0);
+TENSU2        		number(8,0);
+TENSU3        		number(8,0);
+TENSU4        		number(8,0);
+TENSU5        		number(8,0);
+TENSU6        		number(8,0);
+TENSU7        		number(8,0);
+TENSU8        		number(8,0);
+TENSU9        		number(8,0);
+TENSU10        		number(8,0);
+TENSU11        		number(8,0);
+TENSU12        		number(8,0);
+TENSU13        		number(8,0);
+TENSU14        		number(8,0);
+TENSU15        		number(8,0);
+TENSU16        		number(8,0);
+TENSU17        		number(8,0);
+TENSU18        		number(8,0);
+TENSU19        		number(8,0);
+TENSU20        		number(8,0);
+TENSU21        		number(8,0);
+TENSU22        		number(8,0);
+TENSU23        		number(8,0);
+TENSU24        		number(8,0);
+TENSU25        		number(8,0);
+TENSU26        		number(8,0);
+TENSU27        		number(8,0);
+TENSU28        		number(8,0);
+TENSU29        		number(8,0);
+TENSU30        		number(8,0);
+TENSU31        		number(8,0);
+TENSU32        		number(8,0);
+TENSU33        		number(8,0);
+TENSU34        		number(8,0);
+TENSU35        		number(8,0);
+TENSU36        		number(8,0);
+TENSU37        		number(8,0);
+TENSU38        		number(8,0);
+TENSU39        		number(8,0);
+TENSU40        		number(8,0);
+TENSU41        		number(8,0);
+TENSU42        		number(8,0);
+TENSU43        		number(8,0);
+TENSU44        		number(8,0);
+TENSU45        		number(8,0);
+TOTALTEN        	number(8,0);
+FTNMONEY        	number(9,0);
+FTNMONEY_FTN        	number(9,0);
+FTNMONEY_KOJ        	number(9,0);
+SHOKUJINISSU       	number(2,0);
+SHOKUJIRYOYOHI       	number(9,0);
+SHOKUJIFTN 		number(9,0);
+YKZFTN 			number(5,0);
+#-----> 検索用項目
+XXTEISYUTUSAKI			number(1,0),virtual;
+XXHKNNUM			char(3),virtual;
+XXHKNKBN_RSI			char(1),virtual;
+};
+
+primary	{
+	HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_koh_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_koh
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   RECEKA      =   :RECEKA 
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   RECESYUBETU =   :RECESYUBETU
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   KOHID_KEY   =   :KOHID_KEY 
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+                  AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_koh_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_koh
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   RECEKA      =   :RECEKA 
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   RECESYUBETU =   :RECESYUBETU
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY 
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+                  ORDER BY  RENNUM
+		;
+	};
+};
+
+path	del		{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   RECEKA      =   :RECEKA 
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   RECESYUBETU =   :RECESYUBETU
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY 
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                );
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+		);
+	};
+};
+
+path	del6 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+		);
+	};
+};
+path    del7    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_koh
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                ;
+        };
+};
+
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_koh_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_koh
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_koh_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_koh
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM    =   :SRYYM
+		;
+	};
+};
+
+path	del8 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :XXHKNNUM
+		);
+	};
+};
+
+path	del9 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   HKNNUM       =   :XXHKNNUM
+		);
+	};
+};
+
+path    del10    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   HKNNUM       =   :XXHKNNUM
+		);
+        };
+};
+
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND ( HKNKBN_RSI   =   :XXHKNKBN_RSI OR
+                        HKNKBN_RSI   =   '' )
+		);
+	};
+};
+
+path    del12    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   PTID         =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND   KOHID_KEY    =   :KOHID_KEY
+		);
+        };
+};
+
+path	del13 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND ( HKNKBN_RSI   =   :XXHKNKBN_RSI OR
+                        HKNKBN_RSI   =   '' )
+		);
+	};
+};
+
+path    del14    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND ( HKNKBN_RSI   =   :XXHKNKBN_RSI OR
+                        HKNKBN_RSI   =   '' )
+		);
+        };
+};
+
+path	del15 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   SKYKBN      <>  '0' 
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND   HKNKBN_RSI   =   :XXHKNKBN_RSI
+		);
+	};
+};
+
+path	del16 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   PTID         =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND   HKNKBN_RSI   =   :XXHKNKBN_RSI
+		);
+	};
+};
+
+path    del17    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_koh
+		WHERE (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) in (
+		SELECT HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :XXHKNNUM
+                  AND   HKNKBN_RSI   =   :XXHKNKBN_RSI
+		);
+        };
+};
+

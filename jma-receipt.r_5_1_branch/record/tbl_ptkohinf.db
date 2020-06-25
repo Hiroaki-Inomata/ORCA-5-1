@@ -1,0 +1,258 @@
+tbl_ptkohinf {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	KOHID				number(10);
+	KOHNUM				char(3);
+	PAYKBN				char(2);
+	FTNJANUM			char(8);
+	JKYSNUM 			char(20);
+	TEKSTYMD			char(8);
+	TEKEDYMD			char(8);
+	KAKUNINYMD			char(8);
+	SAKJOKBN			char(1);
+	TEKEDCHKKBN			char(1);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,KOHID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY  TEKEDYMD DESC,
+			            TEKSTYMD DESC,
+			            KOHID
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   TEKSTYMD    <=  :TEKSTYMD
+			AND   TEKEDYMD    >=  :TEKEDYMD
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHNUM      =   :KOHNUM
+			ORDER   BY      KOHID
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   KOHNUM      =   :KOHNUM
+			AND   TEKSTYMD    <   :TEKSTYMD
+			AND   TEKEDYMD    >=  :TEKEDYMD
+			AND   SAKJOKBN    <>   "1"
+			ORDER   BY      KOHID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHNUM      =   :KOHNUM
+			AND   TEKSTYMD    <=  :TEKSTYMD
+			AND   TEKEDYMD    >=  :TEKEDYMD
+			AND   SAKJOKBN    <>   '1'
+			ORDER   BY      KOHID
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key7_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_ptkohinf a,tbl_ptnum b
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.KOHNUM      =   :KOHNUM
+			AND   a.TEKSTYMD    <   :TEKSTYMD
+			AND   a.TEKEDYMD    >=  :TEKEDYMD
+			AND   a.SAKJOKBN    <>   '1'
+			AND   a.PTID      =   b.PTID
+			ORDER   BY      a.FTNJANUM,b.PTNUM
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SAKJOKBN    <>   '1'
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   TEKEDYMD     >=  :TEKEDYMD
+			AND   SAKJOKBN     <>   "1"
+			ORDER   BY      KOHID
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key10_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_ptkohinf a,tbl_ptnum b
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND ( a.KOHNUM      =   '012'  OR
+			      a.KOHNUM      =   '025'     )
+			AND   a.TEKSTYMD    <   :TEKSTYMD
+			AND   a.TEKEDYMD    >=  :TEKEDYMD
+			AND   a.SAKJOKBN    <>   '1'
+			AND ( a.PTID      =   b.PTID   AND
+                              b.HOSPNUM   =   :HOSPNUM     )
+			ORDER   BY      b.PTNUM,a.FTNJANUM
+		;
+	};
+};
+
+path	key11 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key11_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_ptkohinf a,tbl_ptnum b
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND ( a.KOHNUM      =   '012'  OR
+			      a.KOHNUM      =   '025'     )
+			AND   a.TEKSTYMD    <   :TEKSTYMD
+			AND   a.TEKEDYMD    >=  :TEKEDYMD
+			AND   a.SAKJOKBN    <>   '1'
+			AND ( a.PTID      =   b.PTID   AND
+                              b.HOSPNUM   =   :HOSPNUM     )
+			ORDER   BY      a.FTNJANUM,b.PTNUM
+		;
+	};
+};
+
+path	key12 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key12_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_ptkohinf a,tbl_ptnum b,tbl_ptinf c
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND ( a.KOHNUM      =   '012'  OR
+			      a.KOHNUM      =   '025'     )
+			AND   a.TEKSTYMD    <   :TEKSTYMD
+			AND   a.TEKEDYMD    >=  :TEKEDYMD
+			AND   a.SAKJOKBN    <>   '1'
+			AND ( a.PTID      =   b.PTID   AND
+                              b.HOSPNUM   =   :HOSPNUM     )
+			AND ( a.PTID      =   c.PTID   AND
+                              c.HOSPNUM   =   :HOSPNUM     )
+			ORDER   BY      c.KANANAME
+		;
+	};
+};
+
+path	key13 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   TEKSTYMD    <=  :TEKSTYMD
+			AND   TEKEDYMD    >=  :TEKEDYMD
+			AND   SAKJOKBN    <>   '1'
+			ORDER   BY      KOHNUM,
+					KOHID
+		;
+	};
+};
+
+path	key14 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohinf_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHNUM      =   :KOHNUM
+			ORDER   BY  TEKSTYMD DESC,
+			            KOHID
+		;
+	};
+};
+

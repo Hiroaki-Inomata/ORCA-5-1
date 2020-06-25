@@ -1,0 +1,72 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    薬剤情報マスタ医薬品しおりダウンロード処理
+#
+#	引数より
+#        $1  SRYCD 医薬品コード（９桁）
+#        $2  TERMID
+#        $3  JOBID 
+#        $4  SHELLID
+#        $5  HOSPNUM
+#-------------------------------------------#
+
+SRYCD=${1}
+TERMID=${2}
+JOBID=${3}
+SHELLID=$(printf "%-8s" ${4})
+HOSPNUM=${5}
+
+# MCP_TEMPDIRをTMPDIRとする
+TMPDIR=${MCP_TEMPDIR}
+
+MEDPHOTOPATH="${MSTSRVPATH}/siori/image"
+MEDIMAGEDIR="${MCP_TEMPDIR}/medimage"
+
+# 画像ファイル格納ディレクトリの作成
+
+if ! [ -d ${MEDIMAGEDIR} ]; then
+  mkdir ${MEDIMAGEDIR}
+fi
+
+# 取り込む前にレコードを削除
+
+TEMP=$(mktemp)
+trap "rm -f ${TEMP}" EXIT
+echo "delete from tbl_yakujyo_temp where termid='${TERMID}' and hospnum=${HOSPNUM};" > ${TEMP}
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBSQL1 \
+          -parameter ${HOSPNUM},${TEMP}
+if [ $? -ne 0 ] ; then 
+  MSG="レコード削除でエラーが発生しました"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 \
+            -parameter "JBE${JOBID}${SHELLID}0000,${HOSPNUM},,,${MSG}"
+  exit 0
+fi
+
+# センターサーバより雛型を取り込む
+
+master_get.sh ${HOSPNUM} ${TERMID} ${JOBID} ${SHELLID} SIORI ${SRYCD}
+if [ $? -ne 0 ] ; then
+  exit $?
+fi
+FLIST=`/usr/lib/panda/bin/monsql -dir ${LDDIRECTORY} -c "select photo1_filename || ' ' || photo2_filename || ' ' || photo3_filename from tbl_yakujyo_temp where termid='${TERMID}' and srycd='${SRYCD}' and hospnum=${HOSPNUM};" -o CSV2`
+#echo $FLIST
+
+for file in $FLIST
+do
+  wget -q -O ${MEDIMAGEDIR}/${file} ${MEDPHOTOPATH}/${file}
+done
+
+MSG="参照処理が終了しました"
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 \
+          -parameter "JBE${JOBID}${SHELLID}0000,${HOSPNUM},,,${MSG}"
+
+exit 0

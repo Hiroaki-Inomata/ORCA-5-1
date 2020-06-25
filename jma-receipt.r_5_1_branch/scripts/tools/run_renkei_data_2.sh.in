@@ -1,0 +1,367 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+export PATH=${SITESCRIPTSDIR}/monthly:${PATCHSCRIPTSDIR}/monthly:${SCRIPTSDIR}/monthly:$PATH
+export COB_LIBRARY_PATH=${PATCHLIBDIR}:${ORCALIBDIR}:/usr/lib/panda
+
+if [ `whoami` != "${ORCAUSER}" ]; then
+  echo "${ORCAUSER}ユーザーで実行してください。"
+  exit 1
+fi
+if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ]; then
+  if [ $# -ne 1 ]; then
+    echo "オプション不正"
+    exit 1
+  fi
+  DATADIR="monblob"
+else
+  if [ $# -ne 2 ]; then
+    echo "オプション不正"
+    exit 1
+  fi
+  if ! [ -d $2 ]; then 
+    echo "連携基盤用データ出力ディレクトリが見つかりません"
+    exit 1
+  fi
+  DATADIR="$2/"
+fi
+
+RUNDATE=$(date  '+%Y%m%d%H%M%S')
+FLG_TEMPDIR_GEN=0
+if [ -z "${MCP_TEMPDIR}" ]; then
+  export MCP_TEMPDIR=/tmp/orca_root/$(uuidgen)
+  mkdir -p ${MCP_TEMPDIR}
+  FLG_TEMPDIR_GEN=1
+fi
+
+delete_tempdir(){
+  if [ ${FLG_TEMPDIR_GEN} -eq 1 ]; then
+     rm -R ${MCP_TEMPDIR}
+  fi
+}
+
+create_pgpass
+
+HOSPNUM=`printf "%02d" $1`
+RNKERRFS=${HOSPNUM}RENKEI-${RUNDATE}.$$
+RNKERRFL=${MCP_TEMPDIR}/${RNKERRFS}
+
+if [ -e ${RNKERRFL} ]; then
+  rm ${RNKERRFL}
+fi
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBCHECKREDL -parameter "${RNKERRFS}"
+if [ -e ${RNKERRFL} ]; then
+  cat ${RNKERRFL}
+  delete_tempdir 
+  delete_pgpass
+  exit 0
+fi
+
+# システム管理連携基盤情報よりデータ作成設定の確認
+JOBID="0000001"
+SHELLID="RECEPT1"
+RESULTF=${MCP_TEMPDIR}/${HOSPNUM}orcbjobchk1-${RUNDATE}.$$
+
+# 当日受診設定の確認
+RENKEI2=0
+JOBNAME="renkei2"
+
+PARAM="${HOSPNUM},${JOBID},${SHELLID},${JOBNAME},${RESULTF}"
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+if [ -e ${RESULTF} ] ; then
+  RES=`cat ${RESULTF}`
+  RENKEI2="${RES:1:1}"
+fi
+
+# 通常処理設定の確認
+RENKEI1=0
+JOBNAME="renkei1"
+
+JOBEXCHK=0
+
+PARAM="${HOSPNUM},${JOBID},${SHELLID},${JOBNAME},${RESULTF}"
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+if [ -e ${RESULTF} ] ; then
+  RES=`cat ${RESULTF}`
+  RENKEI1="${RES:1:1}"
+  JOBEXCHK="${RES:0:1}"
+fi
+
+if [ ${RENKEI1} -eq 0 ] && [ ${RENKEI2} -eq 0 ]; then
+  delete_tempdir
+  delete_pgpass
+  exit 0 
+fi
+
+# レセプト作成処理のみジョブ管理をチェック
+# 他プロセスで実行中の場合は10分間を３回待つ
+
+WAITTIME=600 # 10 minutes
+WAITCNT=0
+
+until [ ${WAITCNT} -eq 3 ]
+do
+  if [ ${JOBEXCHK} -eq 1 ]; then
+    echo "RECEPT1 is already running. waiting at 10 minutes."
+    sleep ${WAITTIME}
+    WAITCNT=$(expr ${WAITCNT} + 1)
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+    if [ -e ${RESULTF} ] ; then
+      RES=`cat ${RESULTF}`
+      JOBEXCHK="${RES:0:1}"
+    fi
+  else
+    #-------------------------------------------#
+    # 連携基盤用レセプト一括処理（外来）
+    #    $1  SRYYM TERID SYSYMD
+    #    $2  SYOKBN
+    #        1:一括作成  2:個別作成
+    #    $3  RECEKBN
+    #        0:全体  1:社保  2:国保
+    #    $4  エラーファイル名 
+    #    $5  JOBID 
+    #    $6  SHELLID
+    #    $7  県単用項目編集プログラム名
+    #    $8  処理年月
+    #    $9  作成年月日
+    #    $10 作成時間
+    #    $11 県番号（個別作成のときは"00"）
+    #    $12 社保レセ電出力区分
+    #    $13 国保レセ電出力区分
+    #    $14 県区分（個別作成のとき山形、福岡のみ設定
+    #    $16 HOSPNUM 
+    #    $18 レセプト作成区分
+    #        1:提出用レセ、2:点検用レセ、3:点検用レセ（０点公費記載）
+    #        9:連係基盤用
+    #    $19 請求データ削除区分
+    #        0:削除しない、2:削除する
+    #    $20 業務区分
+    #        0:レセプト 1:会計照会 2:入院会計照会 3:診療行為
+    #-------------------------------------------#
+
+    EXYM=$(date  '+%Y%m')
+    EXYMD=$(date  '+%Y%m%d')
+    EXTIME="$(date  '+%H%M%S')"
+ 
+    ARG08=${EXYM}
+    ARG09=${EXYMD}
+    ARG10="${EXTIME}00"
+    ARG16=`printf "%02d" $1`
+    ARG01="${ARG08}AAAABBBBCCCCDDDD${ARG09}"
+    ARG04="/tmp/${ARG16}00OR042ERRAAAABBBBCCCCDDDD.dat"
+ 
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001RECEPT1,${ARG16}"
+ 
+    export MON_BATCH_ID=$(uuidgen)
+    export MON_BATCH_NAME="recept1.sh"
+    export MON_BATCH_GROUPNAME="${ARG16}"
+    export MON_BATCH_EXTRA="0000001RECEPT1"
+    export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+    export MCP_TENANT=1
+ 
+    PARAM="\"${ARG01}\" 1 0 \"${ARG04}\" 0000001 RECEPT1 \
+           NOPG \"${ARG08}\" \"${ARG09}\" \"${ARG10}\" \"\" 3 3 \
+           \"\" \"\" \"${ARG16}\" \"\" 9 0 0"
+ 
+    /usr/lib/panda/bin/monbatch "recept1.sh ${PARAM}"
+    R1RC=$?
+ 
+    if [ ${R1RC} -ne 0 ] ; then
+      delete_tempdir 
+      delete_pgpass
+      exit ${R1RC}
+    fi
+
+    break
+  fi
+done
+
+if [ ${WAITCNT} -eq 3 ]; then
+  echo "Processing aborts because RECEPT1 is running."
+  delete_tempdir 
+  delete_pgpass
+  exit 0
+fi
+
+if [ ${RENKEI1} -ne 0 ]; then
+  #-------------------------------------------#
+  # 連携基盤用CSVデータ作成処理（外来）
+  #   $1-${11} 印刷ＤＢ用固定引数
+  #   $12 提出先
+  #   $13 レセ電ファイル出力先
+  #   $14 JOBID 
+  #   $15 SHELLID
+  #   $16 エラーファイル名 
+  #   $17 ファイル出力先区分
+  #   $18 端末ｉｐアドレス
+  #   $19 入外区分
+  #   ${20} HOSPNUM
+  #   ${21} レセプト作成区分
+  #       1:提出用レセ、2:点検用レセ
+  #       6:連携基盤用、7:連携基盤用（当日）
+  #   ${22} 症状詳記作成区分
+  #       1:作成する
+  #   ${23} 光ディスク等送付書作成区分
+  #       0:作成する
+  #   ${24} レセ電データ履歴保存設定区分
+  #       1:履歴保存する
+  #   ${25} 直接請求する保険者番号
+  #       99999999:設定なし
+  #   ${26} レセ電データチェックの有無
+  #       1:チェックする
+  #-------------------------------------------#
+ 
+  ARG05=${EXYM}
+  ARG06=${EXYMD}
+  ARG13=${DATADIR}
+  ARG18="127.0.0.1"
+  ARG20=`printf "%02d" $1`
+  ARG16="/tmp/${ARG20}00OR044ERRAAAABBBBCCCCDDDD.dat"
+  STIME=${EXTIME}
+ 
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="recept4.sh"
+  export MON_BATCH_GROUPNAME="${ARG20}"
+  export MON_BATCH_EXTRA="0000001SOKATU"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+ 
+  # 社保
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001SOKATU,${ARG20}"
+
+  PARAM="0001 RENKEI1 \"${ARG06}${STIME}\" 0001 \"${ARG05}\" \"${ARG06}\" \
+         recept4.sh 0000 AAAABBBBCCCCDDDD orcacron prt 1 \
+         \"${ARG13}\" 0000001 SOKATU \"${ARG16}\" 4 cron \
+         2 \"${ARG20}\" 6 0 0 0 99999999 0"
+
+  /usr/lib/panda/bin/monbatch "recept4.sh ${PARAM}"
+  R4RC=$?
+
+  if [ ${R4RC} -ne 0 ] ; then
+    delete_tempdir 
+    delete_pgpass
+    exit ${R4RC}
+  fi
+
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="recept4.sh"
+  export MON_BATCH_GROUPNAME="${ARG20}"
+  export MON_BATCH_EXTRA="0000001SOKATU"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+ 
+  # 国保・広域
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001SOKATU,${ARG20}"
+ 
+  PARAM="0001 RENKEI1 \"${ARG06}${STIME}\" 0002 \"${ARG05}\" \"${ARG06}\" \
+         recept4.sh 0000 AAAABBBBCCCCDDDD orcacron prt 4 \
+         \"${ARG13}\" 0000001 SOKATU \"${ARG16}\" 4 cron \
+         2 \"${ARG20}\" 6 0 0 0 99999999 0"
+ 
+  /usr/lib/panda/bin/monbatch "recept4.sh ${PARAM}"
+  R4RC=$?
+ 
+  if [ ${R4RC} -ne 0 ] ; then
+    delete_tempdir 
+    delete_pgpass
+    exit ${R4RC}
+  fi
+fi
+
+if [ ${RENKEI2} -ne 0 ]; then
+  #-------------------------------------------#
+  # 連携基盤用CSVデータ作成処理（外来）
+  #   $1-${11} 印刷ＤＢ用固定引数
+  #   $12 提出先
+  #   $13 レセ電ファイル出力先
+  #   $14 JOBID 
+  #   $15 SHELLID
+  #   $16 エラーファイル名 
+  #   $17 ファイル出力先区分
+  #   $18 端末ｉｐアドレス
+  #   $19 入外区分
+  #   ${20} HOSPNUM
+  #   ${21} レセプト作成区分
+  #       1:提出用レセ、2:点検用レセ
+  #       6:連携基盤用、7:連携基盤用（当日）
+  #   ${22} 症状詳記作成区分
+  #       1:作成する
+  #   ${23} 光ディスク等送付書作成区分
+  #       0:作成する
+  #   ${24} レセ電データ履歴保存設定区分
+  #       1:履歴保存する
+  #   ${25} 直接請求する保険者番号
+  #       99999999:設定なし
+  #   ${26} レセ電データチェックの有無
+  #       1:チェックする
+  #-------------------------------------------#
+
+  ARG05=${EXYM}
+  ARG06=${EXYMD}
+  ARG13=${DATADIR}
+  ARG18="127.0.0.1"
+  ARG20=`printf "%02d" $1`
+  ARG16="/tmp/${ARG20}00OR044ERRAAAABBBBCCCCDDDD.dat"
+  STIME=${EXTIME}
+ 
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="recept4_renkei2.sh"
+  export MON_BATCH_GROUPNAME="${ARG20}"
+  export MON_BATCH_EXTRA="0000001SOKATU"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+ 
+  # 社保
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001SOKATU,${ARG20}"
+ 
+  PARAM="0002 RENKEI1 \"${ARG06}${STIME}\" 0001 \"${ARG05}\" \"${ARG06}\" \
+         recept4_renkei2.sh 0000 AAAABBBBCCCCDDDD orcacron prt 1 \
+         \"${ARG13}\" 0000001 SOKATU \"${ARG16}\" 4 cron \
+         2 \"${ARG20}\" 6 0 0 0 99999999 0"
+ 
+  /usr/lib/panda/bin/monbatch "recept4_renkei2.sh ${PARAM}"
+  R4RC=$?
+
+  if [ ${R4RC} -ne 0 ] ; then
+    delete_tempdir 
+    delete_pgpass
+    exit ${R4RC}
+  fi
+ 
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="recept4_renkei2.sh"
+  export MON_BATCH_GROUPNAME="${ARG20}"
+  export MON_BATCH_EXTRA="0000001SOKATU"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+
+  # 国保・広域
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBS0000001SOKATU,${ARG20}"
+ 
+  PARAM="0002 RENKEI1 \"${ARG06}${STIME}\" 0002 \"${ARG05}\" \"${ARG06}\" \
+         recept4_renkei2.sh 0000 AAAABBBBCCCCDDDD orcacron prt 4 \
+         \"${ARG13}\" 0000001 SOKATU \"${ARG16}\" 4 cron \
+         2 \"${ARG20}\" 6 0 0 0 99999999 0"
+ 
+  /usr/lib/panda/bin/monbatch "recept4_renkei2.sh ${PARAM}"
+  R4RC=$?
+ 
+  if [ ${R4RC} -ne 0 ] ; then
+    delete_tempdir 
+    delete_pgpass
+    exit ${R4RC}
+  fi
+fi
+
+delete_tempdir
+delete_pgpass
+
+exit ${R4RC}

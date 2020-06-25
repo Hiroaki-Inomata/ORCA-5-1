@@ -1,0 +1,31 @@
+KT013 {
+  fixed32 {
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(14);
+            column3 varchar(4);
+            column4 varchar(4);
+            column5 varchar(4);
+            column6 varchar(4);
+            column7 varchar(4);
+            column8 varchar(4);
+            column9 varchar(4);
+            column10 varchar(4);
+            column11 varchar(4);
+            column12 varchar(4);
+            column13 varchar(4);
+          }[150];
+          selectdata bool[150];
+      };
+    };
+    SELNUM {
+      numdata number(4);
+    };
+  };
+};

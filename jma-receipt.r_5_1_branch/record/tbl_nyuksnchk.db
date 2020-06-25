@@ -1,0 +1,77 @@
+tbl_nyuksnchk	{
+	NYUINKBN		char(3);
+	KSNKBN  		char(3);
+	YUKOSTYMD  		char(8);
+	YUKOEDYMD  		char(8);
+	CHKKBN			char(1);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+#-----> 主キー更新用項目
+	UPNYUINKBN		char(3),virtual;
+	UPKSNKBN   		char(3),virtual;
+	UPYUKOSTYMD 		char(8),virtual;
+	UPYUKOEDYMD 		char(8),virtual;
+};
+
+primary	{
+	NYUINKBN,KSNKBN,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_nyuksnchk_key_csr	CURSOR FOR
+		SELECT *
+		FROM tbl_nyuksnchk
+			WHERE NYUINKBN    =   :NYUINKBN
+			AND   KSNKBN      =   :KSNKBN
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_nyuksnchk_all_csr	CURSOR FOR
+		SELECT *
+		FROM tbl_nyuksnchk
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_nyuksnchk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuksnchk
+			WHERE NYUINKBN        = :NYUINKBN
+			AND   KSNKBN          = :KSNKBN
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_nyuksnchk
+				SET
+				NYUINKBN      = :NYUINKBN,
+				KSNKBN      = :KSNKBN,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				CHKKBN      = :CHKKBN,
+				TERMID      = :TERMID,
+				OPID      = :OPID,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE 	NYUINKBN      =  :UPNYUINKBN
+			AND	KSNKBN	=	:UPKSNKBN
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

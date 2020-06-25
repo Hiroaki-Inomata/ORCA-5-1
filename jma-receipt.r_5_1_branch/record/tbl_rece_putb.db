@@ -1,0 +1,130 @@
+tbl_rece_putb {
+	HOSPNUM				number(2,0);
+	PREFKBN				char(1);
+	SYUBETU_SRT1			integer;
+	GRP_NO1				char(3);
+	SYUBETU_SRT2			integer;
+	GRP_NO2				char(3);
+	SYUBETU_GAI			char(4);
+	SYUBETU_NYU			char(4);
+	SYUBETU_UNDER_NO1		char(2);
+	SYUBETU_UNDER_NO2		char(2);
+	KOUHI_NO			number(3);
+	KOUHI_NUM			char(3);
+	SYUBETU_GAI_SRT1		char(4);
+	SYUBETU_NYU_SRT1		char(4);
+	STYUKYMD			char(8);
+	EDYUKYMD			char(8);
+	TERMID   			varchar(64);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPSTYUKYMD			char(8),virtual;
+	UPEDYUKYMD			char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,PREFKBN,SYUBETU_SRT1,GRP_NO1,SYUBETU_SRT2,GRP_NO2,KOUHI_NO,STYUKYMD,EDYUKYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_rece_putb_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_putb
+			WHERE HOSPNUM		=   :HOSPNUM
+			AND   PREFKBN		=   :PREFKBN
+			AND   SYUBETU_SRT1	=   :SYUBETU_SRT1
+			AND   GRP_NO1		=   :GRP_NO1
+			AND   SYUBETU_SRT2	=   :SYUBETU_SRT2
+			AND   GRP_NO2		=   :GRP_NO2
+			AND   KOUHI_NO		=   :KOUHI_NO
+			AND   STYUKYMD		<=  :STYUKYMD
+			AND   EDYUKYMD		>=  :EDYUKYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_rece_putb_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_putb
+			WHERE   HOSPNUM		=   :HOSPNUM
+			AND   PREFKBN		=   :PREFKBN
+			AND   STYUKYMD		=   :STYUKYMD
+			AND   EDYUKYMD		=   :EDYUKYMD
+			ORDER BY SYUBETU_SRT2,KOUHI_NO
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_rece_putb_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_putb
+			WHERE   HOSPNUM		=   :HOSPNUM
+			AND   PREFKBN		=   :PREFKBN
+			AND   SYUBETU_SRT2	=   :SYUBETU_SRT2
+			AND   STYUKYMD		=   :STYUKYMD
+			AND   EDYUKYMD		=   :EDYUKYMD
+			ORDER BY KOUHI_NO
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_rece_putb_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_putb
+			WHERE   HOSPNUM		=   :HOSPNUM
+			AND   PREFKBN		=   :PREFKBN
+			AND   STYUKYMD		<=  :STYUKYMD
+			AND   EDYUKYMD		>=  :EDYUKYMD
+			ORDER BY SYUBETU_SRT2,KOUHI_NO
+		;
+	};
+};
+
+path    del1   {
+        DBDELETE        {
+                DELETE
+                FROM tbl_rece_putb
+			WHERE   HOSPNUM		=   :HOSPNUM
+			AND     STYUKYMD	=   :STYUKYMD
+			AND     EDYUKYMD	=   :EDYUKYMD
+                ;
+        };
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_rece_putb_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_putb
+		WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+
+path    upd1    {
+	DBUPDATE        {
+		UPDATE  tbl_rece_putb
+			SET
+			STYUKYMD         =   :STYUKYMD,
+			EDYUKYMD         =   :EDYUKYMD,
+			TERMID           =   :TERMID,
+			OPID             =   :OPID,
+			UPYMD            =   :UPYMD,
+			UPHMS            =   :UPHMS
+		WHERE   STYUKYMD         =   :UPSTYUKYMD
+		AND     EDYUKYMD         =   :UPEDYUKYMD
+		AND     HOSPNUM          =   :HOSPNUM
+		;
+	};
+};

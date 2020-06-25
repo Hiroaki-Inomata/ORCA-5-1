@@ -1,0 +1,10 @@
+YERR {
+  fixed1 {
+    ERRCODE {
+      textdata varchar(10);
+    };
+    ERRMSG {
+      textdata varchar(80);
+    };
+  };
+};

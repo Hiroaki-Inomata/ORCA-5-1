@@ -1,0 +1,26 @@
+xml_physicianv2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	physicianres {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Base_Date		varchar(10);
+	Physician_Information	{
+		Code			varchar(5);
+		WholeName		varchar(80);
+		WholeName_inKana	varchar(80);
+		Physician_Permission_Id		varchar(8);
+		Drug_Permission_Id		varchar(40);
+		Department_Code1		varchar(2);
+		Department_Code2		varchar(2);
+		Department_Code3		varchar(2);
+		Department_Code4		varchar(2);
+		Department_Code5		varchar(2);
+    	} [100];
+   	};
+};

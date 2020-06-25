@@ -1,0 +1,94 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+RUBY = @RUBY@
+
+shell_sources = \
+	jma-receipt-db-setup.sh.in \
+	jma-receipt-db-check.sh.in \
+	jma-receipt-sysbase-setup.sh.in \
+	jma-dbsync.sh.in \
+	jma-dbconvert.sh.in \
+	jma-backupcluster.sh.in \
+	jma-restorecluster.sh.in \
+	jma-receipt-program-upgrade-check.sh.in \
+	jma-receipt-program-upgrade.sh.in \
+	orcvt_exec.sh.in \
+	create_dbgroup.sh.in \
+	passwd_store.sh.in \
+	medphoto_store.sh.in \
+	dasconf_store.sh.in \
+	plugin_check.sh.in \
+	jma-migrate-v51.sh.in \
+	master_convert_check.sh.in
+
+ruby_sources = \
+	jma-receipt-plugin-db-convert.rb.in \
+	orcvt_euc.rb.in \
+	orcvt_euc_kananame.rb.in \
+	convu8.rb.in
+
+shell_scripts = $(shell_sources:.sh.in=.sh)
+
+ruby_scripts = $(ruby_sources:.rb.in=.rb)
+
+.SUFFIXES: .sh.in .sh .rb.in .rb
+
+all: $(shell_scripts) $(ruby_scripts) jma-plugin jma-setup jma-passwd jma-migrate jma-setaptauth
+
+.sh.in.sh:
+	sed -e 's,\@jma-receipt-env\@,$(sysconfdir)\/jma-receipt\.env,g' \
+	    -e 's,\@VERSION\@,$(VERSION),g' \
+	    -e 's,%RUBY%,$(RUBY),g' \
+	$< > $@
+	chmod +x $@
+
+jma-plugin: jma-plugin.in
+	sed -e 's,%RUBY%,$(RUBY),' $< > $@
+	chmod +x $@
+
+jma-setup: jma-setup.in
+	sed -e 's,\@bindir\@,$(bindir),g' $< > $@
+	chmod +x $@
+
+jma-passwd: jma-passwd.in
+	sed -e 's,\@jma-receipt-env\@,$(sysconfdir)\/jma-receipt\.env,g' \
+	    -e 's,\@VERSION\@,$(VERSION),g' \
+	    -e 's,%RUBY%,$(RUBY),g' \
+	$< > $@
+	chmod +x $@
+
+jma-migrate: jma-migrate.in
+	sed -e 's,\@bindir\@,$(bindir),g' $< > $@
+	chmod +x $@
+
+jma-setaptauth: jma-setaptauth.in
+	cp -p $< $@
+	chmod +x $@
+
+.rb.in.rb: 
+	sed -e 's,%RUBY%,$(RUBY),' $< > $@
+	chmod +x $@
+
+filecheck:
+
+clean:
+	-rm -f $(shell_scripts)
+	-rm -f $(ruby_scripts)
+	-rm -f jma-plugin
+	-rm -f jma-setup
+	-rm -f jma-passwd
+	-rm -f jma-migrate
+	-rm -f jma-setaptauth
+
+distclean: clean
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(bindir)
+	$(INSTALL_SCRIPT) \
+		$(shell_scripts) $(ruby_scripts) jma-plugin jma-setup jma-passwd jma-migrate jma-setaptauth\
+		$(bindir)

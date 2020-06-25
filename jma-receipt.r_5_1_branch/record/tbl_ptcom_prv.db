@@ -1,0 +1,100 @@
+tbl_ptcom_prv {
+	HOSPNUM				number(2,0);
+	PTID				number(10);
+	ZAINUM  			number(8);
+	SRYCD  				char(9) ;
+	RENNUM				number(3);
+	INPUTCOMENT  			varchar(140);
+	INPUTCHI1			char(10);
+	INPUTCHI2			char(10);
+	INPUTCHI3			char(10);
+	INPUTCHI4			char(10);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+
+
+primary	{
+	HOSPNUM,PTID,ZAINUM,SRYCD,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptcom_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+			AND   SRYCD       =   :SRYCD
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptcom_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+			ORDER BY INPUTCOMENT
+		;
+	};
+};
+
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptcom_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del12 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path	delprv 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptcom_prv_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptcom_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER BY ZAINUM
+		;
+	};
+};
+

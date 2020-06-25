@@ -1,0 +1,37 @@
+xml_job_managev3res {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	job_managev3res {
+		Request_Number		varchar(2);
+		Response_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Information_Date	varchar(10);
+		Information_Time	varchar(8);
+		Api_Result		varchar(3);
+		Api_Result_Message	varchar(100);
+		Api_Result_Warning	varchar(3);
+		Api_Result_Warning_Message	varchar(100);
+		Reskey			varchar(100);
+		Job_Manage_Select	varchar(8);
+		Job_Manage_Select_Name	varchar(40);
+		Job_Manage_StartDate	varchar(10);
+		Job_Manage_StartTime	varchar(8);
+		Job_Manage_Information {
+			Job_Manage_No		varchar(3);
+			Job_Manage_Program_Label	varchar(40);
+			Job_Manage_Job_Id	varchar(7);
+			Job_Manage_StartDate	varchar(10);
+			Job_Manage_StartTime	varchar(8);
+			Job_Manage_EndDate	varchar(10);
+			Job_Manage_EndTime	varchar(8);
+			Job_Manage_Step_StartTime	varchar(8);
+			Job_Manage_Step_EndTime	varchar(8);
+			Job_Manage_Error_Code	varchar(4);
+			Job_Manage_Error_Message	varchar(500);
+			Job_Processing		varchar(5);
+		} [50];
+	};
+};

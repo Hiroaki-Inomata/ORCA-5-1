@@ -1,0 +1,13 @@
+CERR {
+  fixed1 {
+    ERRCODE {
+      textdata varchar(10);
+    };
+    ERRMSG {
+      textdata varchar(88);
+    };
+    BYOMEI {
+      textdata varchar(80);
+    };
+  };
+};

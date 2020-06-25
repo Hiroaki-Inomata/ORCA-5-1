@@ -1,0 +1,78 @@
+tbl_hktsantei_master {
+	KANRICD   			number(3);
+	YUKOSTYMD  			char(8);
+	YUKOEDYMD	  		char(8);
+	SRYCD				char(9);
+	SANTEIKBN			char(1);
+	KENTAIKBN			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	KANRICD,YUKOSTYMD,YUKOEDYMD,SRYCD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsantei_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hktsantei
+			WHERE   KANRICD   =  :KANRICD
+			AND     YUKOSTYMD <= :YUKOSTYMD
+			AND     YUKOEDYMD >= :YUKOEDYMD
+			AND     SRYCD     =  :SRYCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_hktsantei
+			VALUES(
+				:KANRICD,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:SRYCD,
+				:SANTEIKBN,
+				:KENTAIKBN,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_hktsantei
+			SET
+				KANRICD   = :KANRICD,
+				YUKOSTYMD = :YUKOSTYMD,
+				YUKOEDYMD = :YUKOEDYMD,
+				SRYCD     = :SRYCD,
+				SANTEIKBN = :SANTEIKBN,
+				KENTAIKBN = :KENTAIKBN,
+				TERMID    = :TERMID,
+				OPID      = :OPID,
+				CREYMD    = :CREYMD,
+				UPYMD     = :UPYMD,
+				UPHMS     = :UPHMS
+			WHERE   KANRICD   =  :KANRICD
+			AND     YUKOSTYMD <= :YUKOSTYMD
+			AND     YUKOEDYMD >= :YUKOEDYMD
+			AND     SRYCD     =  :SRYCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_hktsantei
+			WHERE   KANRICD   =  :KANRICD
+			AND     YUKOSTYMD <= :YUKOSTYMD
+			AND     YUKOEDYMD >= :YUKOEDYMD
+			AND     SRYCD     =  :SRYCD
+		;
+	};
+};

@@ -1,0 +1,18 @@
+xml_data_check {
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  Data_Check {
+    Sequential_Number              varchar(05);
+    Patient_ID                     varchar(20);
+    WholeName                      varchar(100);
+    WholeName_inKana               varchar(100);
+    BirthDate                      varchar(10);
+    Sex                            varchar(1);
+    Insurance_Name                 varchar(20);
+    Error_Code                     varchar(06);
+    Error_Message                  varchar(220);
+  }[1000] ;
+};
+

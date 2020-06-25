@@ -1,0 +1,11 @@
+name	sys3004;
+
+arraysize	20;
+textsize	400;
+
+bind	"SYS3004"		"OpenCOBOL";
+bind	"SYS3004DEL"	"OpenCOBOL";
+
+db {
+        tbl_syskanri;
+};

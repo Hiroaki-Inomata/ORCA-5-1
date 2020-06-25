@@ -1,0 +1,79 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者    日付      内容
+      *  01.00.01    吉川      08/12/24  特別療養費国保対応
+      *  01.00.02    吉川      09/05/15  帳票様式の変更に伴う修正
+      *  01.00.03    萩野      17/04/14  点数の桁数増加
+      *  01.00.04    萩野      19/02/07  修正履歴コメント削除
+      *****************************************************************
+       01  SKT4100.
+      *診療年月
+           03  SKT4100-SRYYM               PIC  X(16).
+      *診療科名
+           03  SKT4100-SRYKA               PIC  X(20) OCCURS 3.
+      *医療機関所在地
+           03  SKT4100-ADRS                PIC  X(100).
+      *医療機関名称
+           03  SKT4100-HOSPNAME            PIC  X(100).
+      *医療機関電話番号
+           03  SKT4100-TEL                 PIC  X(15).
+      *開設者氏名
+           03  SKT4100-KAISETUNAME         PIC  X(30).
+      *医療機関コード
+           03  SKT4100-HOSPCDN             PIC  X(20).
+      *特別療養費
+           03  SKT4100-TOKUBETU            PIC  X(10).
+      *請求一覧
+           03  SKT4100-SEIKYU  OCCURS 10.
+      *保険者名
+               05  SKT4100-HKNJANAME       PIC  X(20).
+      *給付割合
+               05  SKT4100-KYURATE         PIC  X(08).
+      *国保・退職者・老人テーブル
+               05  SKT4100-HKN-TBL  OCCURS  3.
+      *入院・外来テーブル
+                   07  SKT4100-NYUGAIKBN   OCCURS  2.
+      *件数
+                       09  SKT4100-KENSU   PIC  X(05).
+      *日数
+                       09  SKT4100-NISSU   PIC  X(05).
+      *点数
+                       09  SKT4100-TENSU   PIC  X(10).
+      *合計
+           03  SKT4100-SUM-TBL  OCCURS  2.
+      *入院・外来テーブル
+               05  SKT4100-GNYUGAI-TBL  OCCURS  2.
+      *件数
+                   07  SKT4100-GKENSU      PIC  X(05).
+      *日数
+                   07  SKT4100-GNISSU      PIC  X(05).
+      *点数
+                   07  SKT4100-GTENSU      PIC  X(10).
+      *１件あたり
+           03  SKT4100-AVG-TBL  OCCURS  2.
+      *入院・外来テーブル
+               05  SKT4100-ANYUGAI-TBL  OCCURS  2.
+      *点数
+                   07  SKT4100-ATENSU      PIC  X(10).
+      *県外・県外総件数
+           03  SKT4100-GKENGAI             PIC  X(06).
+           03  SKT4100-GKENNAI             PIC  X(06).
+      *後期高齢 県内・県外総件数
+           03  SKT4100-GKOUKENGAI          PIC  X(06).
+           03  SKT4100-GKOUKENNAI          PIC  X(06).

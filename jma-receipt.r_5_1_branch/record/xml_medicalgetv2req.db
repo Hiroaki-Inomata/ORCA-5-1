@@ -1,0 +1,34 @@
+xml_medicalgetv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	medicalgetreq {
+		InOut			varchar(1);
+		Patient_ID		varchar(20);
+    		Perform_Date		varchar(10);
+		For_Months		varchar(2);
+		Medical_Information  {
+		Department_Code		varchar(2);
+		Sequential_Number		varchar(1);
+		Insurance_Combination_Number	varchar(4);
+		HealthInsurance_Information  {
+			InsuranceProvider_Class		varchar(03);
+			InsuranceProvider_WholeName	varchar(20);
+			InsuranceProvider_Number	varchar(08);
+			HealthInsuredPerson_Symbol	varchar(80);
+			HealthInsuredPerson_Number	varchar(80);
+			PublicInsurance_Information   {
+				PublicInsurance_Class	varchar(03);
+				PublicInsurance_Name	varchar(20);
+				PublicInsurer_Number	varchar(08);
+				PublicInsuredPerson_Number	varchar(20);
+			} [4];
+		} ;
+#---     伝票番号
+		Invoice_Number		varchar(07);
+#---     レセ電移行データ対象
+		Contain_Migration	varchar(05);
+		};
+   	};
+};

@@ -1,0 +1,105 @@
+tbl_yakujyo_temp	{
+	HOSPNUM				number(2,0);
+	termid  		char(64);
+	srycd			char(9);
+	yjcd			char(12);
+	rennum			number(2,0);
+	shape			varchar(360);
+	color			varchar(360);
+	mark			varchar(360);
+	effect			varchar(2000);
+	caution			varchar(4000);
+	make_company		varchar(400);
+	sale_company		varchar(400);
+	photo1_filename		varchar(256);
+	photo2_filename		varchar(256);
+	photo3_filename		varchar(256);
+	creymd   		char(8);
+	name			varchar(200);
+};
+
+primary	{
+	HOSPNUM,termid,srycd,yjcd,rennum;
+};
+
+path	srycd	{
+	operation	DBSELECT	{
+		DECLARE	tbl_yakujyo_temp_srycd_csr	CURSOR	FOR
+		SELECT	*
+			FROM
+				tbl_yakujyo_temp
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND
+				srycd = :srycd
+			ORDER  BY  yjcd,rennum
+		;
+	};
+	operation	DBFETCH	{
+		FETCH FROM tbl_yakujyo_temp_srycd_csr
+			INTO
+				:termid,
+				:srycd,
+				:yjcd,
+				:rennum,
+				:shape,
+				:color,
+				:mark,
+				:effect,
+				:caution,
+				:make_company,
+				:sale_company,
+				:photo1_filename,
+				:photo2_filename,
+				:photo3_filename,
+				:creymd,
+				:HOSPNUM,
+				:name
+			;
+	};
+	operation	DBCLOSECURSOR	{
+		CLOSE	tbl_yakujyo_temp_srycd_csr;
+	};
+	operation	DBINSERT	{
+		INSERT INTO 	tbl_yakujyo_temp
+			VALUES( :termid,
+				:srycd,
+				:yjcd,
+				:rennum,
+				:shape,
+				:color,
+				:mark,
+				:effect,
+				:caution,
+				:make_company,
+				:sale_company,
+				:photo1_filename,
+				:photo2_filename,
+				:photo3_filename,
+				:creymd,
+				:HOSPNUM,
+				:name
+			);
+	};
+};
+
+path	termid	{
+	operation	DBDELETE	{
+		DELETE	FROM
+				tbl_yakujyo_temp
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND
+				termid = :termid
+		;
+	};
+};
+
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_yakujyo_temp_all_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_yakujyo_temp
+		WHERE		HOSPNUM	= :HOSPNUM
+		;
+	};
+};

@@ -1,0 +1,57 @@
+        01  HCM50.
+            02  HCM50-NYUGAI
+                        PIC X(8).
+            02  HCM50-STRSRYYMD
+                        PIC X(22).
+            02  HCM50-ENDSRYYMD
+                        PIC X(22).
+            02  HCM50-NAME
+                        PIC X(30).
+            02  HCM50-PTNUM
+                        PIC X(20).
+            02  HCM50-SRYKANAME
+                        PIC X(20).
+            02  HCM50-HAKYMD
+                        PIC X(22).
+            02  HCM50-HOKEN
+                        PIC X(20).
+            02  HCM50-FUTAN
+                        PIC X(3).
+            02  HCM50-PAGE
+                        PIC X(3).
+            02  HCM50-LBLSRYYMD
+                        PIC X(10).
+            02  HCM50-NAIYO-TBL
+                                        OCCURS 70 TIMES.
+              03  HCM50-SRYYMD-OLD
+                        PIC X(12).
+              03  HCM50-SRYKBN
+                        PIC X(10).
+              03  HCM50-SRYMEI
+                        PIC X(80).
+              03  HCM50-TANI
+                        PIC X(10).
+              03  HCM50-SURYO
+                        PIC X(8).
+              03  HCM50-KAISU
+                        PIC X(6).
+              03  HCM50-KINGAKU
+                        PIC X(11).
+            02  HCM50-IRYOADRS2
+                        PIC X(60).
+            02  HCM50-IRYOMEI2
+                        PIC X(40).
+            02  HCM50-IRYOTEL
+                        PIC X(15).
+            02  HCM50-IRYOMEI-OLD
+                        PIC X(60).
+            02  HCM50-IRYOADRS-OLD
+                        PIC X(100).
+            02  HCM50-LOPTION
+                        PIC X(500).
+            02  HCM50-IRYOMEI
+                        PIC X(80)       OCCURS 2 TIMES.
+            02  HCM50-IRYOADRS
+                        PIC X(100)      OCCURS 2 TIMES.
+            02  HCM50-SRYYMD
+                        PIC X(22)       OCCURS 70 TIMES.

@@ -1,0 +1,91 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        ＴＯＵＫＥＩＣＳＶ＿Ｂからのファイル作成
+#        ${1} HOSPNUM
+#        ${2} TBL-KEY
+#        ${3} TBL-GROUP
+#        ${4} SHORI-RENNUM
+#        ${5} RENNUM
+#        ${6} 保存場所
+#        ${7} TO-FOLDER
+#        ${8} TO-DATA
+#        ${10} ジョブＩＤ
+#        ${11} シェルＩＤ
+#        ${12} エラーファイル名 
+#        ${13} ファイル出力先
+#        ${14} コード区分（1:EUC 2:S-jis 3:utf8）
+#        ${15} TITLE
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${1}orcputcsv.log"
+        [ -e "${LOG_FILE}" ] && rm ${LOG_FILE}
+#
+##      エラーファイル削除
+        echo "errfile = [" ${MCP_TEMPDIR}/${12}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${12}
+
+        FILE_1=${MCP_TEMPDIR}/${1}"PUTCSV01.txt"
+        FILE_3=${MCP_TEMPDIR}/${1}${8}
+
+        echo "arg6  = [" ${6} "]"   
+        echo "arg7  = [" ${7} "]"   
+        echo "arg8  = [" ${8} "]"   
+        echo "arg13 = [" ${13} "]"  
+        echo "arg14 = [" ${14} "]"  
+#        echo "hostname =  [" `hostname`  "]" 
+        echo "file1= [" $FILE_1 "]"  
+        echo "file3= [" $FILE_3 "]"  
+
+#       該当ファイル削除
+	rm -f $FILE_1
+	rm -f $FILE_3
+
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPUTCSV -parameter ${1},${2},${3},${4},${5},${8},${10},${11},${15},${12} 
+        if  [ -e ${MCP_TEMPDIR}/${12} ]; then
+            exit
+        fi
+
+        if   [ ${6} != '1' ]; then
+          CSVFILE=${13}
+        else
+          CSVFILE=$FILE_3
+        fi
+
+        case ${14} in
+          2)
+#           EUC => SJIS
+            nkf -Esx -Lw $FILE_1 > ${CSVFILE}
+            RC=$?
+            ;;
+          3)
+#           EUC => UTF8
+            nkf --ic=EUC-JIS-2004 --oc=UTF-8 $FILE_1 | tru8.rb > ${CSVFILE}
+            RC=$?
+            ;;
+          *)
+            cp $FILE_1 ${CSVFILE}
+            RC=$?
+        esac
+
+        echo "--- convert_${14} end ---[" $RC  "]" 
+        if  [ $RC -ne '0' ]; then
+          ERRCD='0000'$RC
+          $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${10}${11}'  '${ERRCD:${#ERRCD}-4:4},${1} 
+          echo "--- convert err   ---" 
+          exit
+        fi
+         
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${10}${11},${1} 
+
+        exit 

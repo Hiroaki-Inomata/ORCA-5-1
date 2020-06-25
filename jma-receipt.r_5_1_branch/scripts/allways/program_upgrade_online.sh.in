@@ -1,0 +1,218 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+umask 022
+
+#--------------------------
+# $1 : method (update / check)
+# $2 : HOSPNUM
+# $3 : supervisor (not use)
+#--------------------------
+
+METHOD=$1
+HOSPNUM=$2
+
+PRGDIR=/var/tmp/orca-prg@VERSION@
+PATCHDIR=/var/lib/jma-receipt/patch
+PACKAGEFILE=patch@VERSION@.gz
+PRGPATH=$PGUPGRADEPATH/@VERSION@
+PATCHLIST=$PATCHDIR/patch-file-list
+PATCHMD5=$PATCHDIR/patchmd5.yml
+MONINFO=/usr/lib/panda/bin/moninfo
+
+PGUP_WORK_DIR=/tmp/jma-receipt-patch-work
+
+if [ "$METHOD" = "update" ]; then
+  LOG="$LOGDIR"/program_upgrade_online.log
+else
+  LOG="$LOGDIR"/program_upgrade_check.log
+fi
+
+echo ${LOG}
+
+# echo message (default character-code EUC)
+echomsg() {
+  if [ "${LANG}" = "ja_JP.UTF-8" ] || [ "${LANG}" = "ja_JP.utf8" ]; then
+    echo `echo $1 | nkf -wE`
+  else
+    echo $1
+  fi
+}
+
+jobend97() {
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  9700,$HOSPNUM,,,${1}"
+  rm -rf $PRGDIR
+  exit 97
+}
+
+#rm -f ${LOG}
+
+# disk space check
+VOLSIZE=`df -m /var | tail -1 | sed 's/\s\{1,\}/ /g' | cut -d' ' -f4`
+if [ -z "$MINSIZE" ]; then
+#set default 500MB
+  MINSIZE=500
+fi
+if [ $VOLSIZE -lt $MINSIZE ]; then
+  ERRMSG="[ERROR] The space capacity of the disk is insufficient. [ ${VOLSIZE}MB ]"
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  9700,$HOSPNUM,,,${ERRMSG}"
+  echomsg "${ERRMSG}" ${LOG}
+  exit 1
+fi
+
+OFFLINEPATH=`echo $PRGPATH | sed -ne 's#file://##p'`
+if [ -z $OFFLINEPATH ]; then
+  OFFLINE="online"
+else
+  OFFLINE="offline"
+  PRGPATH=$OFFLINEPATH
+fi
+echomsg "${OFFLINE}" ${LOG}
+
+if ! [ -d $PRGDIR ]; then 
+  mkdir $PRGDIR
+fi
+rm -rf $PRGDIR/*
+
+echomsg "${PACKAGEFILE}" ${LOG}
+echomsg "${PRGPATH}" ${LOG}
+
+export PACKAGEFILE
+export PATCHDIR
+export PRGPATH
+export CACERTFILE
+export PATCHLIST
+
+LOGMSG=`cachedl.rb 2>&1`
+RC=$?
+RESULT=`echo "$LOGMSG" | head -1`
+if [ "[ERROR]" = "${RESULT:0:7}" ] ; then
+  echomsg "faild in the download of the patch program." ${LOG}
+  echomsg "${LOGMSG}" ${LOG}
+  jobend97 "${RESULT}"
+else
+  if [ $RC -ne 0 ]; then
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  0100,$HOSPNUM,,,"
+    exit 0
+  fi
+fi
+
+rm -f $PATCHMD5
+touch $PATCHMD5
+
+export PRGDIR
+export PATCHMD5
+
+if [ ! -e $PATCHLIST ]; then
+  RESULT="[ERROR] $PATCHLIST not found" 
+  jobend97 "${RESULT}"
+fi
+
+for file in `cat $PATCHLIST`
+do
+  echomsg "$file Execute." ${LOG}
+  rm -rf $PRGDIR/*
+  if [ -e $PATCHDIR/$file ]; then
+    tar zxf $PATCHDIR/$file -C $PRGDIR 
+    if [ $? -ne 0 ]; then
+      RESULT="[ERROR] tar zxf $file" 
+      jobend97 "${RESULT}"
+    fi
+    mv $PRGDIR/patch/* $PRGDIR 
+    rmdir $PRGDIR/patch 
+    if [ "$METHOD" = "update" ]; then
+      bash $PRGDIR/PROCEDURE $PRGDIR 
+    else
+      bash $PRGDIR/INITIATOR $PRGDIR 
+    fi
+    if [ $? -ne 0 ]; then
+      RESULT="[ERROR] $file/Execute Error" 
+      jobend97 "${RESULT}"
+    fi
+    LOGMSG=`program_upgrade_patchmd5.rb 2>&1`
+    RESULT=`echo "$LOGMSG" | head -1`
+    if [ "[ERROR]" = "${RESULT:0:7}" ] ; then
+      echomsg "faild in the md5 list." ${LOG}
+      echomsg "${LOGMSG}" ${LOG}
+      jobend97 "${RESULT}"
+    fi
+  fi
+done
+
+rm -rf $PRGDIR
+
+LOGMSG=`program_upgrade_verify.rb 2>&1`
+RESULT=`echo "$LOGMSG" | head -1`
+if [ "[ERROR]" = "${RESULT:0:7}" ] ; then
+  echomsg "faild in the verify." ${LOG}
+  echomsg "${LOGMSG}" ${LOG}
+  jobend97 "${RESULT}"
+fi
+
+if [ "$METHOD" = "update" ]; then
+  echomsg "site-upgrade start." ${LOG}
+  site-upgrade.sh >> ${LOG}
+  echomsg "site-upgrade end." ${LOG}
+fi
+
+if [ "$METHOD" = "update" ]; then
+  #monitor restart (SIGHUP)
+  if [ -e /var/run/jma-receipt/monitor.pid ]; then
+    if [ -z "$PGUPGRADE_RESTART_LIMIT" ]; then
+      #set default 30 second
+      PGUPGRADE_RESTART_LIMIT=31
+    fi
+
+    if [ $PGUPGRADE_RESTART_LIMIT -ne 0 ]; then
+      CONN_NUMBER=`$MONINFO who | wc -l`
+      if [ $CONN_NUMBER -gt 1 ]; then
+         disp_sec=`printf "%02d" ${PGUPGRADE_RESTART_LIMIT}`
+         $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  51${disp_sec},${HOSPNUM},,,"
+      fi
+    fi
+
+    limit_sec=0
+    while [ $limit_sec -ne $PGUPGRADE_RESTART_LIMIT ]
+    do
+      sleep 1
+      CONN_NUMBER=`$MONINFO who | wc -l`
+      if [ $CONN_NUMBER = 1 ]; then
+        echomsg "there is no terminal under the connection." ${LOG}
+        break
+      fi
+      limit_sec=`expr $limit_sec + 1`
+      work_sec=`expr ${PGUPGRADE_RESTART_LIMIT} - $limit_sec`
+      disp_sec=`printf "%02d" $work_sec`
+      $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  51${disp_sec},${HOSPNUM},,,"
+    done
+
+    if [ $CONN_NUMBER -gt 1 ]; then
+      NOTICE_MSG="端末は強制終了しました。"
+      echomsg "moninfo abortall go! $NOTICE_MSG" ${LOG}
+      $MONINFO abort-all $NOTICE_MSG
+      sleep 4
+    fi
+    echomsg "monitor restart." ${LOG}
+    if [ -d ${PGUP_WORK_DIR}/record ]; then 
+      cp -rp ${PGUP_WORK_DIR}/record ${PATCHLIBDIR}
+    fi
+    kill -HUP `cat /var/run/jma-receipt/monitor.pid`
+    cp -rp ${PGUP_WORK_DIR}/* ${PATCHLIBDIR}
+    rm -rf ${PGUP_WORK_DIR}
+  else
+    RESULT="[ERROR] monitor.pid is not found. don't start again."
+    echomsg "${RESULT}" ${LOG}
+    jobend97 "${RESULT}"
+  fi
+fi
+
+echomsg "patch program processing succeeded." ${LOG}
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "JBE0000001PRGMNT  0000,${HOSPNUM},,,"
+
+exit 0

@@ -1,0 +1,49 @@
+xml_patient_disease_all {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	Patient_Disease_All {
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		Patient_Message_Information {
+			Patient_Result	varchar(3);
+		}; 
+		Disease_Base_Month		varchar(7);
+		Disease_Information_Overflow	varchar(5);
+		Disease_Information  {
+			Disease_Message_Information {
+				Disease_Result		varchar(3);
+			};
+			Disease_InOut			varchar(1);
+			Department_Code			varchar(2);
+			Insurance_Combination_Number	varchar(4);
+			Disease_Name			varchar(80);
+			Disease_Single	{
+				Disease_Single_Code	varchar(07);
+				Disease_Single_Name	varchar(80);
+				Disease_Single_Condition	varchar(01);
+			}[21] ;
+			Disease_Category		varchar(2);
+			Disease_SuspectedFlag		varchar(2);
+			Disease_StartDate		varchar(10);
+			Disease_EndDate			varchar(10);
+			Disease_OutCome			varchar(2);
+			Disease_Supplement_Name		varchar(40);
+			Disease_Supplement_Single	{
+				Disease_Supplement_Single_Code	varchar(10);
+			}[3] ;
+			Disease_Karte_Name		varchar(80);
+			Disease_Class			varchar(02);
+			Disease_Receipt_Print		varchar(01);
+			Disease_Receipt_Print_Period	varchar(02);
+			Insurance_Disease		varchar(05);
+			Classification_Number_Mater	varchar(02);
+			Classification_Number_Servant	varchar(02);
+			Discharge_Certificate		varchar(5);
+		}[50] ;
+	}[28] ;
+};

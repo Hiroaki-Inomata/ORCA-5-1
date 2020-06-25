@@ -1,0 +1,42 @@
+tbl_push_info {
+	HOSPNUM				number(2,0);
+	PUSH_UID			varchar(37);
+	EVENT				varchar(50);
+	PATIENT_MODE			varchar(10);
+	PTNUM      	 		varchar(20);
+	PTID     			number(10,0);
+	INFORMATION_DATE	        varchar(10);
+	INFORMATION_TIME	        varchar(08);
+	PERFORM_DATE          		varchar(10);
+	PUSH_INFO			varchar(50);
+	SRYYMD                		varchar(8);
+	OPID    			varchar(16);
+	CREYMD  			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	HOSPNUM,PUSH_UID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_push_info_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_push_info
+			WHERE	HOSPNUM	=   :HOSPNUM
+			AND	PUSH_UID    =   :PUSH_UID
+		;
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_push_info_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_push_info
+			WHERE	HOSPNUM	=   :HOSPNUM
+		;
+	};
+};
+

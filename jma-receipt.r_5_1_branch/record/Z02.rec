@@ -1,0 +1,134 @@
+Z02 {
+  fixed1 {
+    SRYCDH {
+      textdata varchar(9);
+    };
+    YUKOSTYMDH {
+      textdata varchar(9);
+    };
+    YUKOEDYMDH {
+      textdata varchar(9);
+    };
+    NAMEH {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    KANANAME {
+      textdata varchar(100);
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+    COLUMN1 {
+      numdata number(3);
+    };
+    DIGIT4 {
+      numdata number(3);
+    };
+    DIGIT3 {
+      numdata number(3);
+    };
+    DIGIT2 {
+      numdata number(3);
+    };
+    DIGIT1 {
+      numdata number(3);
+    };
+    COLUMN4 {
+      numdata number(3);
+    };
+    COLUMN3 {
+      numdata number(3);
+    };
+    COLUMN2 {
+      numdata number(3);
+    };
+    TEN {
+      numdata number(9);
+    };
+    HKNTEKKBN_COMBO {
+      HKNTEKKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[3];
+    };
+    GAITENTTLKBN {
+      numdata number(3);
+    };
+    NYUTENTTLKBN {
+      numdata number(3);
+    };
+    BUIKBN_COMBO {
+      BUIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[9];
+    };
+    FORMALNAME {
+      textdata varchar(200);
+    };
+    LABEL1 {
+      textdata varchar(20);
+    };
+    GAIJIBAIKBN_COMB {
+      GAIJIBAIKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[10];
+    };
+    NYUJIBAIKBN_COMB {
+      NYUJIBAIKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[10];
+    };
+    COPYCD {
+      state int;
+      textdata varchar(9);
+    };
+    JIHINAME1 {
+      textdata varchar(30);
+    };
+    JIHINAME2 {
+      textdata varchar(30);
+    };
+    B06 {
+      state int;
+      label varchar(10);
+    };
+    B09 {
+      state int;
+      label varchar(10);
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    B03 {
+      state int;
+    };
+    TANICD_COMBO { #GtkPandaCombo
+      count int;
+      item varchar(28)[200];
+      TANICD { #GtkPandaEntry
+        textdata varchar(28);
+      };
+    };
+    YKZKBN_COMBO { #GtkPandaCombo
+      count int;
+      item varchar(12)[5];
+      YKZKBN { #GtkPandaEntry
+        textdata varchar(12);
+      };
+    };
+  };
+};

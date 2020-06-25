@@ -1,0 +1,92 @@
+xml_hsacctmodv2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date 			varchar(10);
+		Information_Time 			varchar(08);
+		Api_Results{
+			Api_Result	     		varchar(04);
+			Api_Result_Message 		varchar(100);
+		}[10];
+		Request_Number	{
+			Label			varchar(20);
+			Data			varchar(02);
+			Name			varchar(30);
+		};
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate			varchar(10);
+			Sex					varchar(01);
+		};
+		Admission_Discharge_Date {
+			Admission_Date		varchar(10);
+			Discharge_Date		varchar(10);
+		}[5];
+		Perform_Month			varchar(07);
+		Monthly_Information	{
+			Perform_Date		varchar(10);
+			Department_Code	{
+				Label				varchar(20);
+				Data				varchar(02);
+				Name				varchar(30);
+			};
+			Ward_Number	{
+				Label				varchar(20);
+				Data				varchar(02);
+			};
+			Ward_Name	{
+				Label				varchar(20);
+				Data				varchar(20);
+			};
+			Room_Number	{
+				Label				varchar(10);
+				Data				varchar(06);
+			};
+		 	Insurance_Combination_Number	varchar(04);
+			Patient_Status	{
+				Label			varchar(40);
+				Data			varchar(02);
+				Name			varchar(50);
+			};
+			Morning_Meal	{
+				Label			varchar(20);
+				Data			varchar(02);
+				Name			varchar(30);
+			};
+			Lunch_Meal	{
+				Label			varchar(20);
+				Data			varchar(02);
+				Name			varchar(30);
+			};
+			Evening_Meal	{
+				Label			varchar(20);
+				Data			varchar(02);
+				Name			varchar(30);
+			};
+			Room_Charge	{
+				Label			varchar(20);
+				Data			varchar(07);
+				Name			varchar(10);
+			};
+		}[31];
+		Insurance_Information	{
+		 	Insurance_Combination_Number	varchar(04);
+			InsuranceProvider_Class			varchar(03);
+			InsuranceProvider_Number		varchar(08);
+			InsuranceProvider_WholeName		varchar(20);
+			HealthInsuredPerson_Symbol		varchar(80);
+			HealthInsuredPerson_Number		varchar(80);
+			PublicInsurance_Information	{
+				PublicInsurance_Class		varchar(03);
+				PublicInsurance_Name		varchar(20);
+				PublicInsurer_Number		varchar(08);
+				PublicInsuredPerson_Number	varchar(20);
+			}[4];
+		}[10];
+	};
+};
+

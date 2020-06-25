@@ -1,0 +1,62 @@
+tbl_dpc_act1 {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+	ACT1_CD				char(1);
+	ACT1_FLG			number(2,0);
+	K_CD				char(20);
+	J_NAME1				char(200);
+	J_CD1				char(20);
+	J_NAME2				char(200);
+	J_CD2				char(20);
+	SEL_DPC_CD			varchar(14),virtual;
+};
+
+primary	{
+	MDC_CD,BUNRUI_CD,ACT1_CD,ACT1_FLG,K_CD,J_CD1,J_CD2,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_act1_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_act1
+		WHERE MDC_CD        =   :MDC_CD
+		 AND  BUNRUI_CD     =   :BUNRUI_CD
+	     AND  ACT1_CD       =   :ACT1_CD
+	     AND  ACT1_FLG      =   :ACT1_FLG
+	     AND  K_CD          =   :K_CD
+	     AND  J_CD1         =   :J_CD1
+	     AND  J_CD2         =   :J_CD2
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_act1_key2_csr CURSOR FOR
+		SELECT  a.*
+		FROM tbl_dpc_act1 a,
+          ( SELECT ACT1_CD FROM tbl_dpc_tensu
+              WHERE DPC_CD     LIKE   :SEL_DPC_CD
+               AND  YUKOSTYMD     <=  :YUKOSTYMD
+               AND  YUKOEDYMD     >=  :YUKOEDYMD
+            GROUP   BY ACT1_CD
+          ) b
+		WHERE
+		     A.MDC_CD     = :MDC_CD
+		 AND A.BUNRUI_CD  = :BUNRUI_CD
+		 AND A.ACT1_CD    =  B.ACT1_CD
+	   	 AND A.YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND A.YUKOEDYMD     >=  :YUKOEDYMD
+	    ORDER BY A.ACT1_CD DESC,A.ACT1_FLG DESC,
+                 TRANSLATE(A.K_CD,'-','~'),
+                 TRANSLATE(A.J_CD1,'-','~'),
+                 TRANSLATE(A.J_CD2,'-','~')
+		;
+	};
+};
+

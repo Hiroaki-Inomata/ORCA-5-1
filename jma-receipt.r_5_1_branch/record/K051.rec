@@ -1,0 +1,19 @@
+K051 {
+  fixed1 {
+    INPUTCD1 {
+      textdata varchar(20);
+    };
+    INPUTCD2 {
+      textdata varchar(20);
+    };
+    INPUTCD3 {
+      textdata varchar(20);
+    };
+    INPUTCD4 {
+      textdata varchar(20);
+    };
+    INPUTCD5 {
+      textdata varchar(20);
+    };
+  };
+};

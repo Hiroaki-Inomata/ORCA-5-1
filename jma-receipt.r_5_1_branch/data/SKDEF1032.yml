@@ -1,0 +1,35 @@
+kanri_cd    : "1032"
+name        : "帳票プログラム選択情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "ORCAORGNM"
+  item_jp   : "ＯＲＣＡ標準プログラム名"
+  type      : "X"
+  start     : 1
+  length    : 20
+- item_no   : 2
+  item      : "ORCAORGCHK"
+  item_jp   : "ＯＲＣＡ標準プログラムチェック状態"
+  type      : "X"
+  start     : 21
+  length    : 1
+- item_no   : 3
+  item      : "ORCACSTNM"
+  item_jp   : "独自開発プログラム名"
+  type      : "X"
+  start     : 22
+  length    : 20
+- item_no   : 4
+  item      : "ORCACSTCHK"
+  item_jp   : "独自開発プログラムチェック状態"
+  type      : "X"
+  start     : 42
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 43
+  length    : 458

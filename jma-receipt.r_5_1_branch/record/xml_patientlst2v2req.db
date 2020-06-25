@@ -1,0 +1,11 @@
+xml_patientlst2v2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientlst2req {
+		Patient_ID_Information	{
+		Patient_ID		varchar(20);
+       		} [100];
+	};
+};

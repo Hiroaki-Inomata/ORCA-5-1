@@ -1,0 +1,52 @@
+P97 {
+  fixed1 {
+    SELNO {
+      numdata number(4);
+    };
+    NAMEKEN {
+      textdata varchar(30);
+    };
+    KBIRTHDAY {
+      textdata varchar(10);
+    };
+    KSEXCOMB {
+      KSEX {
+        textdata varchar(6);
+      };
+      count int;
+        item varchar(6)[3];
+    };
+    NYUGAIKBNCOMB {
+      KNYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[3];
+    };
+    scrolledwindow1 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(2);
+            column5 varchar(10);
+            column6 varchar(10);
+            column7 varchar(10);
+            column8 varchar(4);
+            column9 varchar(6);
+            column10 varchar(2);
+            column11 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

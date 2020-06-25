@@ -1,0 +1,17 @@
+name	osaka;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU2703"	"OpenCOBOL";
+bind	"SEIKYU2705"	"OpenCOBOL";
+bind	"SEIKYU2706"	"OpenCOBOL";
+bind	"SOKATU2700"	"OpenCOBOL";
+bind	"SOKATU2705"	"OpenCOBOL";
+bind	"SOKATU2710"	"OpenCOBOL";
+bind	"SOKATU2715"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

@@ -1,0 +1,23 @@
+kanri_cd    : "5020"
+name        : "°åÎÅµ¡´Ø¾ğÊó¡İÆş±¡´ğËÜ¾ğÊó¡Ê£²¡Ë"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "REKI-JITAKBN"
+  item_jp   : "¼«±¡Îò¡¿Â¾±¡Îò¶èÊ¬"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "REKI-TAIINKBN"
+  item_jp   : "Âà±¡¶èÊ¬"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 3
+  length    : 498

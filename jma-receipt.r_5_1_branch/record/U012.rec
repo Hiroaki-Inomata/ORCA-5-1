@@ -1,0 +1,59 @@
+U012 {
+  fixed1 {
+    SRYYMD {
+      textdata varchar(30);
+    };
+    SRYNAIYO_COMB {
+      SRYNAIYO {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+    SRYKA_COMB {
+      SRYKA {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(6);
+            column5 varchar(50);
+            column6 varchar(6);
+            column7 varchar(6);
+            column8 varchar(8);
+            column9 varchar(24);
+            column10 varchar(50);
+            column11 varchar(8);
+            column12 varchar(6);
+            column13 varchar(6);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    MIDASI {
+      textdata varchar(12);
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

@@ -1,0 +1,60 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+HOSPNUM=${1}
+HOSPID=${2}
+ACCESSKEY=${3}
+JOBID=${4}
+SHELLID=$(printf "%-8s" ${5})
+export ORCAIDPATH
+
+jobkanri() {
+  echo "${1}"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 \
+          -parameter "JBE${JOBID}${SHELLID}0000,${HOSPNUM},,,${1}"
+}
+
+echo "契約情報を参照します。"
+echo "  サイト     [ ${ORCAIDPATH} ]"
+echo "  識別番号   [ ${HOSPNUM} ]"
+echo "  医療機関ID [ ${HOSPID} ]"
+
+RESULT=`get_license_info.rb ${HOSPID} ${ACCESSKEY} 2>&1`
+
+if [ "${RESULT:0:3}" = "200" ]; then
+  CONTRACT_COND="${RESULT:4:1}"
+  CONTRACT_YMD="${RESULT:6:8}"
+  KADO_LEVEL="${RESULT:15:1}"
+  KADO_YM="${RESULT:17:6}"
+
+  SETACKEYSQL="update tbl_access_key set kado_ym='${KADO_YM}',kado_level=${KADO_LEVEL},contract_cond=${CONTRACT_COND},contract_ymd='${CONTRACT_YMD}',inquire_ymd=to_char(now(),'yyyymmdd'),uphms=to_char(now(),'hh24miss') where hospnum=${HOSPNUM};"
+  ${MONSQL} -r -dir ${LDDIRECTORY} -c "${SETACKEYSQL}"
+  if [ $? -ne 0 ]; then
+    MSG="契約情報の設定に失敗しました。"
+    jobkanri "${MSG}"
+    exit 1
+  else
+    MSG="契約情報を設定しました。"
+    jobkanri "${MSG}"
+  fi
+else
+  if [ "${RESULT:0:3}" != "500" ]; then
+    SETACKEYSQL="update tbl_access_key set inquire_ymd=to_char(now(),'yyyymmdd'),uphms=to_char(now(),'hh24miss') where hospnum=${HOSPNUM};"
+    ${MONSQL} -r -dir ${LDDIRECTORY} -c "${SETACKEYSQL}"
+    if [ $? -ne 0 ]; then
+      echo "契約情報参照エラー時の照会日時設定に失敗しました。"
+    fi
+  fi
+  MSG="契約情報参照でエラーが発生しました。 [ ${RESULT:0:3} ]"
+  jobkanri "${MSG}"
+  echo "get_license_info [ ${RESULT} ]"
+  exit 1
+fi
+
+exit 0

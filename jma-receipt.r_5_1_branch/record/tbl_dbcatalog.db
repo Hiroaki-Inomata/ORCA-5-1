@@ -1,0 +1,45 @@
+tbl_dbcatalog {
+	INFO_1			varchar(128);
+	INFO_2			varchar(128);
+	INFO_3			varchar(128);
+	INFO_4			varchar(128);
+	INFO_5			varchar(128);
+	INFO_6			varchar(128);
+	INFO_7			varchar(128);
+	INFO_8			varchar(128);
+	INFO_9			varchar(128);
+	INFO_10			varchar(128);
+};
+#primary	{
+#	GRPNUM;
+#};
+
+path	enc 	{
+	DBSELECT	{
+		DECLARE tbl_dbcatalog_enc_csr CURSOR FOR
+			select pg_encoding_to_char(encoding) as INFO_1
+			from pg_database where datname = current_database()
+		;
+	};
+};
+
+path	lcl 	{
+	DBSELECT	{
+		DECLARE tbl_dbcatalog_lcl_csr CURSOR FOR
+			select setting as INFO_1  FROM pg_settings WHERE name = 'lc_collate'
+		;
+	};
+};
+
+path	redl 	{
+	DBSELECT	{
+		DECLARE tbl_dbcatalog_redl_csr CURSOR FOR
+		SELECT c.relname AS INFO_1
+		FROM pg_class AS c,pg_namespace AS n
+		WHERE c.relkind = 'r'
+		AND c.relnamespace = n.oid
+		AND n.nspname LIKE 'pg_temp%'
+		AND c.relname = 'montsuqi_redirector_lock_table'
+		;
+	};
+};

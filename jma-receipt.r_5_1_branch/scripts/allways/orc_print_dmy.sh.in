@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#        ${1} 削除用ファイル名 
+#-------------------------------------------#
+#
+##      エラーファイル削除
+	echo "------------------- print dmy start ------------"
+	echo "echo rennum  = " ${1}
+	echo "echo tbl_key  = " ${2}
+	echo "echo tbl_group  = " ${3}
+	echo "echo shori_rennum  = " ${4}
+	echo "echo hospnum  = " ${5}
+	echo "echo 6  = " ${6}
+	echo "echo 7  = " ${7}
+	echo "echo 8  = " ${8}
+	echo "echo 9  = " ${9}
+	echo "echo 10 = " ${10}
+	echo "echo 11 = " ${11}
+	echo "echo 12 = " ${12}
+	touch /tmp/${5}${2}"9999"${3}"0099""99999""00001".api
+#	touch /tmp/${5}${2}"9999"${3}"0099"${6}${7}.api
+	echo "------------------- print dmy end   ------------"
+	exit 

@@ -1,0 +1,10 @@
+CID5 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    MSG {
+      textdata varchar(80);
+    };
+  };
+};

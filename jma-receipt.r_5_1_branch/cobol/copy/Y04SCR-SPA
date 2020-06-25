@@ -1,0 +1,70 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this licence along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    予約者一覧 画面ＳＰＡ
+      *
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-Y04.
+           03  SPA-Y04-AREA.
+               05  SPA-GMN-PAGE            PIC 9(02).
+               05  SPA-GMN-LINE            PIC 9(02).
+               05  SPA-GMN-CUR             PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-SINRYO.
+                       09  SPA-GMN-SINRYOCD    PIC X(02).
+                       09  SPA-GMN-SK1         PIC X(01).
+                       09  SPA-GMN-SINRYOMEI   PIC X(18).
+                   07  SPA-GMN-SINRYOLST       PIC X(21)   OCCURS  100.
+                   07  SPA-SINRYO-MAX          PIC 9(04).
+      *
+                   07  SPA-GMN-DRNAME.
+                       09  SPA-GMN-DRNCD       PIC X(04).
+                       09  SPA-GMN-D1          PIC X(01).
+                       09  SPA-GMN-DRNAMEMEI   PIC X(24).
+                   07  SPA-GMN-DRNAMELST       PIC X(29)   OCCURS  100.
+                   07  SPA-DRCD-MAX            PIC 9(04).
+      *
+                   07  SPA-GMN-TBL.
+                       09  SPA-GMN-TBLO    OCCURS  6.
+                           11  SPA-GMN-YYKYMD      PIC X(20).
+                           11  SPA-GMN-TBLO2   OCCURS  200.
+                               13  SPA-GMN-TSINRYO     PIC X(02).
+                               13  SPA-GMN-TYYKTIME    PIC X(05).
+                               13  SPA-GMN-TKNJNAME    PIC X(20).
+                           11  SPA-GMN-MAX         PIC 9(04).
+                   07  SPA-GMN-SELBAN          PIC 9(04).
+      *
+               05  SPA-NAIB-AREA.
+                   07  SPA-NAI-DRNCD           PIC X(05).
+                   07  SPA-NAI-TBL.
+                       09  SPA-NAI-TBLO    OCCURS  6.
+                           11  SPA-NAI-YYKYMD      PIC X(08).
+                           11  SPA-NAI-TBLO2   OCCURS  200.
+                               13  SPA-NAI-TBANGO      PIC 9(03).
+                               13  SPA-NAI-TYYKID      PIC 9(03).
+                               13  SPA-NAI-TKYYKTIME   PIC 9(04).
+                               13  SPA-NAI-TYYKTIME    PIC 9(04).
+                               13  SPA-NAI-TSINRYO     PIC X(10).
+      *
+                   07  SPA-NAI-NEXT            PIC 9(01).
+      *

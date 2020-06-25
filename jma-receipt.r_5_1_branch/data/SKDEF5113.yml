@@ -1,0 +1,18 @@
+kanri_cd    : "5113"
+name        : "¼¼ÎÁº¹³Û"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "BRM-SAGAKU-NM"
+  item_jp   : "¼¼ÎÁº¹³Û"
+  type      : "9"
+  start     : 1
+  length    : 6
+  precision : 0
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 7
+  length    : 494

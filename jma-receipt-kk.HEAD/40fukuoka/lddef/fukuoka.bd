@@ -1,0 +1,26 @@
+name	fukuoka;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU4007"	"OpenCOBOL";
+bind	"SEIKYU40BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU40BYOMEI2"	"OpenCOBOL";
+bind	"SEIKYU4011"	"OpenCOBOL";
+bind	"SEIKYU4013"	"OpenCOBOL";
+bind	"SEIKYU4015"	"OpenCOBOL";
+bind	"SEIKYU4017"	"OpenCOBOL";
+bind	"SEIKYU4019"	"OpenCOBOL";
+bind	"SEIKYU4021"	"OpenCOBOL";
+bind	"SEIKYU4023"	"OpenCOBOL";
+bind	"SOKATU4000"	"OpenCOBOL";
+bind	"SOKATU4010"	"OpenCOBOL";
+bind	"SOKATU4020"	"OpenCOBOL";
+bind	"SOKATU4025"	"OpenCOBOL";
+bind	"SOKATU4030"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

@@ -1,0 +1,28 @@
+TID2 {
+  fixed1 {
+    B10 {
+      state int;
+      visible bool;
+      label varchar(14);
+    };
+    B11 {
+      state int;
+      visible bool;
+      label varchar(14);
+    };
+    B12 {
+      label varchar(14);
+    };
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      style varchar(20);
+      textdata varchar(144);
+    };
+    LABEL {
+      style varchar(20);
+      textdata varchar(120);
+    };
+  };
+};

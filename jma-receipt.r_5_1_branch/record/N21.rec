@@ -1,0 +1,96 @@
+N21 {
+  fixed17 {
+    B04 {
+      state int;
+    };
+    B08 {
+      label varchar(4);
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B11 {
+      state int;
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      KEKKALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(5);
+            column3 varchar(100);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    KENCD {
+      textdata varchar(20);
+    };
+    KENNAIYO {
+      textdata varchar(26);
+    };
+    KENNAME {
+      textdata varchar(100);
+    };
+    JYOTAI {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      NAME {
+        textdata varchar(100);
+      };
+    };
+    scrolledwindow3 {
+      hpos int;
+      vpos int;
+      EFFECT {
+        textdata varchar(2000);
+      };
+    };
+    scrolledwindow4 {
+      hpos int;
+      vpos int;
+      COLOR {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow5 {
+      hpos int;
+      vpos int;
+      SHAPE {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow6 {
+      hpos int;
+      vpos int;
+      MARK {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow7 {
+      hpos int;
+      vpos int;
+      CAUTION {
+        textdata varchar(4000);
+      };
+    };
+    PHOTO {
+      textdata varchar(256);
+    };
+    PHOTOAREA {
+      objectdata object;
+    };
+  };
+};

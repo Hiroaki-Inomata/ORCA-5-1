@@ -1,0 +1,22 @@
+W29 {
+  fixed6 {
+    B03 {
+      state int;
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    TAIIN_KBNCD {
+      textdata varchar(2);
+    };
+    TAIIN_NAME {
+      textdata varchar(20);
+    };
+    TAIIN_TANNAME {
+      textdata varchar(10);
+    };
+  };
+};

@@ -1,0 +1,245 @@
+X04 {
+  fixed2 {
+    B03 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    B05 {
+      label varchar(10);
+      state int;
+    };
+    B06 {
+      label varchar(10);
+    };
+    B07 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B10 {
+      state int;
+    };
+    LBLREIGAIYKZ {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    BTN_INS {
+      state int;
+    };
+    BTN_ALLINS {
+      state int;
+    };
+    BTN_ALLDEL {
+      state int;
+    };
+    CHKKBN {
+      textdata varchar(50);
+    };
+    SRYCD {
+      textdata varchar(9);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    CMB_NYUGAIKBN {
+      NYUGAIKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[5];
+    };
+    LBLTEKBYOKBN {
+        textdata varchar(40);
+    };
+    CMB_TEKBYOKBN {
+      TEKBYOKBN {
+        textdata varchar(100);
+      };
+      count int;
+      item varchar(100)[5];
+	  visible    bool;
+    };
+    LBLMSG01 {
+        style varchar(20);
+        textdata varchar(20);
+    };
+    SELNUM {
+      textdata varchar(50);
+    };
+    BYOSTATUS {
+      textdata varchar(10);
+    };
+    BYOMEICD1 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEICD2 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEICD3 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEICD4 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEICD5 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEICD6 {
+      textdata varchar(20);
+      state int;
+    };
+    BYOMEI {
+      textdata varchar(400);
+      state int;
+    };
+    CMB_JYKNKBN {
+      JYKNKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    LBLHOSOKU {
+      textdata varchar(12);
+    };
+    LBLHOSOKU_KAKKO_L {
+      textdata varchar(2);
+    };
+    LBLHOSOKU_KAKKO_R {
+      textdata varchar(2);
+    };
+    HOSOKU {
+      textdata varchar(40);
+      state int;
+	  visible  bool;
+    };
+    LBLHOSOKU_JYKNKBN {
+      textdata varchar(8);
+    };
+    CMB_HOSOKU_JYKNKBN {
+      HOSOKU_JYKNKBN {
+        textdata varchar(12);
+        state int;
+      };
+      count int;
+        item varchar(12)[5];
+      state int;
+	  visible  bool;
+    };
+    LBLUTAGAIKBN {
+      textdata varchar(10);
+    };
+    CMB_UTAGAIKBN {
+      UTAGAIKBN {
+        textdata varchar(80);
+        state int;
+      };
+      count int;
+        item varchar(80)[5];
+      state int;
+	  visible  bool;
+    };
+    SEL_BYOMEI {
+      textdata varchar(100);
+    };
+    CMB_SRCBYOKBN {
+      SRCBYOKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[5];
+    };
+    CMB_SRTKBN {
+      SRTKBN {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[50];
+    };
+    CMB_SRCJYKNKBN {
+      SRCJYKNKBN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    CMB_SRCUTAGAIKBN {
+      SRCUTAGAIKBN {
+        textdata varchar(32);
+      };
+      count int;
+        item varchar(32)[5];
+    };
+    LBLGRPID {
+      textdata varchar(8);
+    };
+    CMB_GRPID {
+      GRPID {
+        textdata varchar(10);
+        state int;
+      };
+      count int;
+        item varchar(10)[26];
+      state int;
+	  visible  bool;
+    };
+    scrolledwindow1 {
+      BYOLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(2);
+            column3 varchar(150);
+            column4 varchar(12);
+            column5 varchar(4);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    scrolledwindow3 {
+      SRCBYOLST {
+        LBLSRCBYOCD {
+          textdata varchar(10);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(100);
+            column3 varchar(12);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow2 {
+      CDLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(7);
+            column3 varchar(40);
+          }[150];
+          selectdata bool[150];
+      };
+    };
+  };
+};

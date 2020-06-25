@@ -1,0 +1,151 @@
+xml_system1001v2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	system1001res {
+	Information_Date	varchar(10);
+	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+	Reskey			varchar(100);
+#  指定された基準日
+	Base_Date		varchar(10);
+#  医療機関情報
+	Medical_Information	{
+#  都道府県番号
+		Prefectures_Number	varchar(2);
+#  点数表
+		Point_list		varchar(1);
+#  医療機関コード
+		Institution_Code	varchar(7);
+#  医療機関種別
+		Institution_Speciation	varchar(1);
+#  医療機関ID
+		Institution_Id		varchar(24);
+#  医療機関名称
+		Institution_WholeName	varchar(120);
+#  短縮医療機関名称
+		Short_Institution_WholeName	varchar(20);
+#  開設者名称
+		Establisher_WholeName	varchar(120);
+#  管理者名称
+		Administrator_WholeName	varchar(80);
+#  病床数
+		Hospital_bed_Capacity	varchar(4);
+#  病床数（一般）
+		Hospital_bed_Capacity_General	varchar(4);
+#  老人支払区分
+		Om_Payment_Class	varchar(1);
+		Om_Payment_Class_Name	varchar(6);
+#  旧総合病院
+		Old_General_Hospital_Class	varchar(1);
+		Old_General_Hospital_Class_Name	varchar(18);
+#  院外処方区分
+		Outside_Class		varchar(1);
+		Outside_Class_Name	varchar(6);
+#  医療機関コード
+		Institution_Code_Kanji	varchar(40);
+#  分娩機関管理番号
+		Delivery_Organization_Control_Number	varchar(10);
+#  請求書発行フラグ
+		Print_Invoice_Receipt_Class	varchar(1);
+		Print_Invoice_Receipt_Class_Name	varchar(28);
+#  院外処方せん発行フラグ
+		Print_Prescription_Class	varchar(1);
+		Print_Prescription_Class_Name	varchar(28);
+#  前回処方表示フラグ
+		Last_Prescription_Display_Class	varchar(1);
+		Last_Prescription_Display_Class_Name	varchar(12);
+#  薬剤情報発行フラグ
+		Print_Medicine_Information_Class	varchar(1);
+		Print_Medicine_Information_Class_Name	varchar(28);
+#  診療費明細書発行区分
+		Print_Statement_Class		varchar(1);
+		Print_Statement_Class_Name		varchar(30);
+#  お薬手帳発行フラグ
+		Print_Medication_Note_Class	varchar(1);
+		Print_Medication_Note_Class_Name	varchar(34);
+#  予約票発行フラグ
+		Print_Appointment_Form_Class	varchar(1);
+		Print_Appointment_Form_Class_Name	varchar(18);
+#  データ作成フラグ
+		Data_Collection_Creation_Class	varchar(1);
+		Data_Collection_Creation_Class_Name	varchar(12);
+#  データ提出方法区分
+		Data_Collection_Submission_Method_Class	varchar(1);
+		Data_Collection_Submission_Method_Class_Name	varchar(12);
+#  データ感染症区分
+		Orca_Surveillance_Class		varchar(1);
+		Orca_Surveillance_Class_Name	varchar(12);
+#  減免計算対象区分
+		Reduction_Calculation_Object_Class	varchar(1);
+		Reduction_Calculation_Object_Class_Name	varchar(20);
+#  請求額端数設定（減免有）
+		Ac_Money_Rounding_Reduction_Class	varchar(1);
+		Ac_Money_Rounding_Reduction_Class_Name	varchar(30);
+#  請求額端数設定（減免無・保険分）
+		Ac_Money_Rounding_No_Reduction_Information {
+#  請求額端数設定医保（減免無・保険分）
+			Medical_Insurance_Class			varchar(1);
+			Medical_Insurance_Class_Name		varchar(30);
+#  請求額端数設定医保（減免無・自費分）
+			Medical_Insurance_Oe_Class		varchar(1);
+			Medical_Insurance_Oe_Class_Name		varchar(30);
+#  請求額端数設定労災（減免無・保険分）
+			Accident_Insurance_Class		varchar(1);
+			Accident_Insurance_Class_Name		varchar(30);
+#  請求額端数設定労災（減免無・自費分）
+			Accident_Insurance_Oe_Class		varchar(1);
+			Accident_Insurance_Oe_Class_Name	varchar(30);
+#  請求額端数設定自賠責（減免無・保険分）
+			Liability_Insurance_Class		varchar(1);
+			Liability_Insurance_Class_Name		varchar(30);
+#  請求額端数設定自賠責（減免無・自費分）
+			Liability_Insurance_Oe_Class		varchar(1);
+			Liability_Insurance_Oe_Class_Name	varchar(30);
+#  請求額端数設定公害（減免無・自費分）
+			Pollution_Oe_Class			varchar(1);
+			Pollution_Oe_Class_Name			varchar(30);
+#  請求額端数設定第三者行為（減免無・保険分）
+			Third_Party_Class			varchar(1);
+			Third_Party_Class_Name			varchar(30);
+#  請求額端数設定第三者行為（減免無・自費分）
+			Third_Party_Oe_Class			varchar(1);
+			Third_Party_Oe_Class_Name		varchar(30);
+		};
+#  第三者行為（医療費）負担金額計算区分
+		Third_Party_Money_Calculation_Class	varchar(1);
+		Third_Party_Money_Calculation_Class_Name	varchar(30);
+#  消費税端数設定
+		Tax_Rounding_Class		varchar(1);
+		Tax_Rounding_Class_Name		varchar(30);
+#  自費保険集計先区分
+		Self_Insurance_Total_Class	varchar(1);
+		Self_Insurance_Total_Class_Name	varchar(38);
+#  地方公費保険番号タブ区分
+		Local_Public_Expenses_Insurance_Number_Tab_Class	varchar(1);
+		Local_Public_Expenses_Insurance_Number_Tab_Class_Name	varchar(8);
+#  更正・育成限度額日割計算区分
+		Rehabilitation_Nurture_Credit_Limit_Calculate_Daily_Rate_Class	varchar(1);
+		Rehabilitation_Nurture_Credit_Limit_Calculate_Daily_Rate_Class_Name	varchar(18);
+#  自費コード端数設定区分
+		Oe_Rounding_Class	varchar(1);
+		Oe_Rounding_Class_Name	varchar(38);
+		Address_Information	{
+#  所在地
+			WholeAddress	varchar(200);
+#  郵便番号
+			Address_ZipCode	varchar(7);
+#  電話番号
+			PhoneNumber	varchar(15);
+#  FAX番号
+			FaxNumber	varchar(15);
+#  eメールアドレス
+			E_mail_Address	varchar(100);
+#  ホームページアドレス
+			Homepage_Address	varchar(100);
+			} ;
+		};
+	};
+};

@@ -1,0 +1,175 @@
+tbl_skysrh {
+	HOSPNUM				number(2,0);
+	TERMID				char(64);
+	PTID				number(10,0);
+	NYUGAIKBN			char(1);
+	SRYYM				char(6);
+	RECEKA				char(2);
+	TEISYUTUSAKI			number(1,0);
+	RECESYUBETU			char(4);
+	HKNJANUM			char(8);
+	HOJOKBN_KEY     		char(1);
+	KOHID_KEY       		number(10);
+	TEKSTYMD			char(8);
+	RECEIPT_KBN			char(10);
+	HKNID				number(10,0);
+	HKNNUM				char(3);
+	KOHID1				number(10,0);
+	KOHNUM1				char(3);
+	KOHID2				number(10,0);
+	KOHNUM2				char(3);
+	KOHID3				number(10,0);
+	KOHNUM3				char(3);
+	KOHID4				number(10,0);
+	KOHNUM4				char(3);
+	TOTALTEN			number(10,0);
+	TOKKI1				varchar(2);
+	TOKKI2				varchar(2);
+	TOKKI3				varchar(2);
+	TOKKI4				varchar(2);
+	TOKKI5				varchar(2);
+	TOKKINM1			varchar(12);
+	TOKKINM2			varchar(12);
+	TOKKINM3			varchar(12);
+	TOKKINM4			varchar(12);
+	TOKKINM5			varchar(12);
+	ETC_YKZFTN1 			number(5,0);
+	SKYKBN_RECEDEN		char(1);
+	ETCCREATEFLG			number(1,0);
+	DATAKBN						char(1);
+	SEQNUM				number(7,0);
+	CREYMD			    char(8);
+	UPYMD			    char(8);
+	UPHMS			    char(6);
+	STSRYYM				varchar(6),virtual;
+	EDSRYYM				varchar(6),virtual;
+	YMDHMS				varchar(14),virtual;
+	TOTALTEN_MAX	    number(10,0),virtual;
+};
+
+primary	{
+	HOSPNUM,TERMID,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN;
+};
+
+path	key	{
+	DBSELECT	{
+		DECLARE tbl_skysrh_key csr CURSOR FOR
+		SELECT *
+		FROM tbl_skysrh
+	        WHERE	HOSPNUM    =    :HOSPNUM
+		AND	TERMID	   =	:TERMID		
+		AND	PTID	   =	:PTID	
+		AND	NYUGAIKBN  =	:NYUGAIKBN	
+		AND	SRYYM	   =	:SRYYM	
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_skysrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+ 		;
+	};
+};
+
+path	ins1 	{
+	DBINSERT	{
+		INSERT	
+		INTO    tbl_skysrh
+		(
+		HOSPNUM,
+		TERMID,
+ 		PTID,
+		NYUGAIKBN,
+		SRYYM,
+		RECEKA,
+		TEISYUTUSAKI,
+		RECESYUBETU,
+		HKNJANUM,
+		HOJOKBN_KEY,
+		KOHID_KEY,
+		TEKSTYMD,
+		RECEIPT_KBN,
+		SKYKBN_RECEDEN,
+		ETCCREATEFLG,
+		ETC_YKZFTN1,
+		DATAKBN,
+        SEQNUM,
+	    CREYMD,
+	    UPYMD,
+	    UPHMS
+		)
+		SELECT 
+		t1.HOSPNUM,
+		:TERMID,
+ 		t1.PTID,
+		t1.NYUGAIKBN,
+		t1.SRYYM,
+		t1.RECEKA,
+		t1.TEISYUTUSAKI,
+		t1.RECESYUBETU,
+		t1.HKNJANUM,
+		t1.HOJOKBN_KEY,
+		t1.KOHID_KEY,
+		t1.TEKSTYMD,
+		t1.RECEIPT_KBN,
+		t1.SKYKBN_RECEDEN,
+		t1.ETCCREATEFLG,
+		coalesce(t2.ETC_YKZFTN1,0),
+		'1',
+        0,
+        :CREYMD,
+        :UPYMD,
+        :UPHMS
+		FROM tbl_seikyu_main t1  LEFT JOIN tbl_seikyu_etc t2
+		 USING (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+		WHERE 	HOSPNUM   =	:HOSPNUM
+		AND	NYUGAIKBN LIKE :NYUGAIKBN
+		AND	SRYYM	 >=     :STSRYYM
+		AND	SRYYM	 <=     :EDSRYYM
+		AND	HKNNUM   NOT IN ('971','973' )  
+		AND	SKYIRYO_TOTALTEN >=     :TOTALTEN
+		AND	SKYIRYO_TOTALTEN <=     :TOTALTEN_MAX
+		AND  (( :TOKKI1   IN (:TOKKI2,TOKKI1,TOKKI2,TOKKI3,TOKKI4,TOKKI5 ))
+		  OR  ( :TOKKINM1 IN (:TOKKINM2,TOKKINM1,TOKKINM2,TOKKINM3,TOKKINM4,TOKKINM5)))
+		AND	SKYKBN_RECEDEN LIKE :SKYKBN_RECEDEN
+	  AND ( :ETCCREATEFLG = 0 OR ETCCREATEFLG = :ETCCREATEFLG)
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_skysrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     CREYMD     <    :CREYMD
+ 		;
+	};
+};
+
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_skysrh_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_skysrh
+		WHERE	HOSPNUM    =  :HOSPNUM
+		AND	TERMID	     =	:TERMID
+		AND	( :DATAKBN   =  "0" OR DATAKBN = :DATAKBN )
+		;
+	};
+} ;
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_skysrh
+		WHERE  HOSPNUM      =   :HOSPNUM
+		AND    UPYMD||UPHMS <   :YMDHMS
+   ;
+	};
+};

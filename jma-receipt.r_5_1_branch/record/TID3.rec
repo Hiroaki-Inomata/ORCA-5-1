@@ -1,0 +1,18 @@
+TID3 {
+  fixed1 {
+    B12 {
+      label varchar(14);
+    };
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    LABEL {
+      style varchar(20);
+      textdata varchar(80);
+    };
+  };
+};

@@ -1,0 +1,81 @@
+M00 {
+  title varchar(120);
+  bgcolor varchar(20);
+  fixed1 {
+    G01 {
+      state int;
+    };
+    G03 {
+      state int;
+      visible bool;
+    };
+    SELNUM {
+      numdata number(2);
+    };
+    LBLMSG {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    LBLMSG2 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    LBLMSG3 {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    MNTTITLE {
+      textdata varchar(20);
+    };
+    MNTYMD {
+      textdata varchar(20);
+    };
+    MNTMSG {
+      style varchar(20);
+      textdata varchar(70);
+    };
+    MLITITLE {
+      textdata varchar(20);
+    };
+    MLIYMD {
+      textdata varchar(20);
+    };
+    MLIMSG {
+      style varchar(20);
+      textdata varchar(70);
+    };
+    HTML1 {
+      uri varchar(200);
+    };
+    B04 {
+      state int;
+    };
+    B05 {
+      label varchar(10);
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B09 {
+      label varchar(10);
+      state int;
+    };
+    B10 {
+      label varchar(10);
+      state int;
+    };
+    B11 {
+      label varchar(10);
+      state int;
+    };
+    HOSPID {
+      style varchar(20);
+      textdata varchar(24);
+    };
+    CONTRACTMSG {
+      style varchar(20);
+      textdata varchar(60);
+    };
+  };
+};

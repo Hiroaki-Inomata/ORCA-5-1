@@ -1,0 +1,36 @@
+        01  HCGS140G2.
+            02  HCGS140G2-PAGE
+                        PIC X(3).
+            02  HCGS140G2-SRYYM
+                        PIC X(16).
+            02  HCGS140G2-SYSYMD
+                        PIC X(22).
+            02  HCGS140G2-NYUGAI
+                        PIC X(4).
+            02  HCGS140G2-SRYKANAME
+                        PIC X(20).
+            02  HCGS140G2-HKNJA-AREA.
+              03  HCGS140G2-HKNJA-TBL
+                                        OCCURS 55 TIMES.
+                04  HCGS140G2-HKNJANAME
+                        PIC X(50).
+                04  HCGS140G2-KENSU
+                        PIC X(4).
+                04  HCGS140G2-NISSU
+                        PIC X(4).
+                04  HCGS140G2-TENSU
+                        PIC X(9).
+                04  HCGS140G2-FTNMONEY
+                        PIC X(9).
+                04  HCGS140G2-HKNMONEY
+                        PIC X(9).
+                04  HCGS140G2-KOHMONEY
+                        PIC X(9).
+                04  HCGS140G2-TTLMONEY
+                        PIC X(9).
+            02  HCGS140G2-SKYSBT
+                        PIC X(50).
+            02  HCGS140G2-HKNJANUM
+                        PIC X(8)        OCCURS 55 TIMES.
+            02  HCGS140G2-HKNKBNNAME
+                        PIC X(20)       OCCURS 55 TIMES.

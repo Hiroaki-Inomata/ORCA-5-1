@@ -1,0 +1,42 @@
+L02 {
+  fixed6 {
+    B12 {
+      state int;
+    };
+    SRYYMD {
+      textdata varchar(10);
+    };
+    FILE1_COMBO {
+      FILE1 {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[6];
+    };
+    KOJINKBN1 {
+      isactive bool;
+    };
+    KOJINKBN2 {
+      isactive bool;
+    };
+    NYUGAIKBNCOMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[2];
+    };
+    CDKBN1 {
+      isactive bool;
+    };
+    CDKBN2 {
+      isactive bool;
+    };
+    CDKBN3 {
+      isactive bool;
+    };
+    FILENM1 {
+      textdata varchar(150);
+    };
+  };
+};

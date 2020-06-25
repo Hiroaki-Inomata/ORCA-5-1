@@ -1,0 +1,19 @@
+W33 {
+  fixed1 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    MONTHLY {
+      numdata number(3);
+    };
+    DAILY {
+      numdata number(3);
+    };
+    NORDER {
+      numdata number(3);
+    };
+  };
+};

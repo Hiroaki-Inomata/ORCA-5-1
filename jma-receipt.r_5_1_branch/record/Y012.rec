@@ -1,0 +1,33 @@
+Y012 {
+  fixed1 {
+    BUNNUM {
+      numdata number(3);
+    };
+    MIDASI {
+      textdata varchar(17);
+    };
+    HYOJUN {
+      numdata number(1);
+    };
+    COMMENT {
+      textdata varchar(80);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      BUNLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(1);
+            column3 varchar(80);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    B12 {
+      state int;
+    };
+  };
+};

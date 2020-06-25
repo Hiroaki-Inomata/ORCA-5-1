@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--***************************************************-->
+<!-- MML¶¦ÄÌ·Á¼°                                       -->
+<!--***************************************************-->
+
+
+<!--***************************************************-->
+<!-- ½»½êÉ½¸½·Á¼°                                      -->
+<!-- Address DTD Version 1.0                           -->
+<!--***************************************************-->
+<!ELEMENT mmlAd:Address  ( (mmlAd:full? |  (mmlAd:prefecture? , mmlAd:city? , mmlAd:town? , mmlAd:homeNumber? ) ) , mmlAd:zip? , mmlAd:countryCode? )>
+<!ATTLIST mmlAd:Address  mmlAd:repCode       (A | I | P )  #REQUIRED
+                         mmlAd:addressClass  (current | 
+                                              permanent | 
+                                              mailing | 
+                                              business | 
+                                              office | 
+                                              home | 
+                                              birth | 
+                                              county )  #IMPLIED
+                         mmlAd:tableId      CDATA  #IMPLIED >
+<!ELEMENT mmlAd:countryCode  (#PCDATA )>
+<!ELEMENT mmlAd:zip  (#PCDATA )>
+<!ELEMENT mmlAd:homeNumber  (#PCDATA )>
+<!ELEMENT mmlAd:town  (#PCDATA )>
+<!ELEMENT mmlAd:city  (#PCDATA )>
+<!ELEMENT mmlAd:prefecture  (#PCDATA )>
+<!ELEMENT mmlAd:full  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- ÅÅÏÃÈÖ¹æÉ½¸½·Á¼°                                  -->
+<!-- Phone DTD Version 1.0                             -->
+<!--***************************************************-->
+<!ELEMENT mmlPh:Phone  (mmlPh:area , mmlPh:city , mmlPh:number , mmlPh:extension? , mmlPh:country? , mmlPh:memo? )>
+<!ATTLIST mmlPh:Phone  mmlPh:telEquipType  (PH | 
+                                            FX | 
+                                            MD | 
+                                            CP | 
+                                            BP | 
+                                            Internet | 
+                                            X.400 )  #IMPLIED >
+<!ELEMENT mmlPh:memo  (#PCDATA )>
+<!ELEMENT mmlPh:country  (#PCDATA )>
+<!ELEMENT mmlPh:extension  (#PCDATA )>
+<!ELEMENT mmlPh:number  (#PCDATA )>
+<!ELEMENT mmlPh:city  (#PCDATA )>
+<!ELEMENT mmlPh:area  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- Id·Á¼°¡¤³°Éô»²¾È·Á¼°¤ª¤è¤ÓEmail                   -->
+<!-- MML Common DTD Version 1.0                        -->
+<!--***************************************************-->
+<!ELEMENT mmlCm:Id  (#PCDATA )>
+<!ATTLIST mmlCm:Id  mmlCm:type             CDATA  #REQUIRED
+                    mmlCm:checkDigitSchema  (M10 | M11 )  #IMPLIED
+                    mmlCm:checkDigit       CDATA  #IMPLIED
+                    mmlCm:tableId          CDATA  #REQUIRED >
+<!ELEMENT mmlCm:extRef EMPTY>
+<!ATTLIST mmlCm:extRef  mmlCm:contentType CDATA  #IMPLIED
+                        mmlCm:medicalRole CDATA  #IMPLIED
+                        mmlCm:title       CDATA  #IMPLIED
+                        mmlCm:href        CDATA  #REQUIRED >
+<!ELEMENT mmlCm:email  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- ¿ÍÌ¾É½¸½·Á¼°                                      -->
+<!-- Name DTD Version 1.0                              -->
+<!--***************************************************-->
+<!ELEMENT mmlNm:Name  ( ( (mmlNm:family , mmlNm:given , mmlNm:middle? ) | mmlNm:fullname ) , 
+                        mmlNm:prefix? , mmlNm:degree? )>
+<!ATTLIST mmlNm:Name  mmlNm:repCode  (I | A | P )  #REQUIRED
+                      mmlNm:tableId CDATA  #IMPLIED >
+<!ELEMENT mmlNm:degree  (#PCDATA )>
+<!ELEMENT mmlNm:prefix  (#PCDATA )>
+<!ELEMENT mmlNm:fullname  (#PCDATA )>
+<!ELEMENT mmlNm:middle  (#PCDATA )>
+<!ELEMENT mmlNm:given  (#PCDATA )>
+<!ELEMENT mmlNm:family  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- »ÜÀß¾ðÊó·Á¼°                                      -->
+<!-- Facility DTD Version 1.0                          -->
+<!--***************************************************-->
+<!ELEMENT mmlFc:Facility  (mmlFc:name+ , mmlCm:Id? )>
+<!ELEMENT mmlFc:name  (#PCDATA )>
+<!ATTLIST mmlFc:name  mmlFc:repCode  (I | A | P )  #REQUIRED
+                      mmlFc:tableId CDATA  #IMPLIED >
+
+<!--***************************************************-->
+<!-- ¿ÇÎÅ²Ê¾ðÊó·Á¼°                                    -->
+<!-- Department DTD Version 1.0                        -->
+<!--***************************************************-->
+<!ELEMENT mmlDp:Department  (mmlDp:name+ , mmlCm:Id? )>
+<!ELEMENT mmlDp:name  (#PCDATA )>
+<!ATTLIST mmlDp:name  mmlDp:repCode  (I | A | P )  #REQUIRED
+                      mmlDp:tableId CDATA  #IMPLIED >
+
+<!--***************************************************-->
+<!-- ¸Ä¿Í¾ðÊó·Á¼°                                      -->
+<!-- PersonalizedInfo DTD  Version 1.0                 -->
+<!--***************************************************-->
+<!ELEMENT mmlPsi:PersonalizedInfo  (mmlCm:Id , mmlPsi:personName , mmlFc:Facility? , mmlDp:Department? ,
+                                    mmlPsi:addresses? , mmlPsi:emailAddresses? , mmlPsi:phones? )>
+<!ELEMENT mmlPsi:phones  (mmlPh:Phone+ )>
+<!ELEMENT mmlPsi:emailAddresses  (mmlCm:email* )>
+<!ELEMENT mmlPsi:addresses  (mmlAd:Address+ )>
+<!ELEMENT mmlPsi:personName  (mmlNm:Name+ )>
+
+<!--***************************************************-->
+<!-- ºîÀ®¼Ô¾ðÊó·Á¼°                                    -->
+<!-- CreatorInfo DTD  Version 1.0                      -->
+<!--***************************************************-->
+<!ELEMENT mmlCi:CreatorInfo  (mmlPsi:PersonalizedInfo , mmlCi:creatorLicense+ )>
+<!ELEMENT mmlCi:creatorLicense  (#PCDATA )>
+<!ATTLIST mmlCi:creatorLicense  mmlCi:tableId CDATA  #IMPLIED >
+
+<!--***************************************************-->
+<!-- MML´ðËÜ¹½Â¤                                       -->
+<!-- Medical Markup Language DTD Version 2.3           -->
+<!--***************************************************-->
+<!ELEMENT Mml  (MmlHeader , MmlBody )>
+<!ATTLIST Mml  version      CDATA  #FIXED '2.3'
+       createDate   CDATA  #REQUIRED
+       xmlns:xhtml  CDATA  #FIXED 'http://www.w3.org/1999/xhtml'
+       xmlns:mmlCm  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Common/1.0'
+       xmlns:mmlNm  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Name/1.0'
+       xmlns:mmlFc  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Facility/1.0'
+       xmlns:mmlDp  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Department/1.0'
+       xmlns:mmlAd  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Address/1.0'
+       xmlns:mmlPh  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Phone/1.0'
+       xmlns:mmlPsi CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/PersonalizedInfo/1.0'
+       xmlns:mmlCi  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/CreatorInfo/1.0'
+       xmlns:mmlPi  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/PatientInfo/1.0'
+       xmlns:mmlBc  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/BaseClinic/1.0'
+       xmlns:mmlFcl CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/FirstClinic/1.0'
+       xmlns:mmlHi  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/HealthInsurance/1.1'
+       xmlns:mmlLs  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/Lifestyle/1.0'
+       xmlns:mmlPc  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/ProgressCourse/1.0'
+       xmlns:mmlRd  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/RegisteredDiagnosis/1.0'
+       xmlns:mmlSg  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/Surgery/1.0'
+       xmlns:mmlSm  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/Summary/1.0'
+       xmlns:mmlLb  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/test/1.0'
+       xmlns:mmlRp  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/report/1.0'
+       xmlns:mmlRe  CDATA  #FIXED 'http://www.medxml.net/MML/ContentModule/Referral/1.0'
+       xmlns:mmlSc  CDATA  #FIXED 'http://www.medxml.net/MML/SharedComponent/Security/1.0'
+       xmlns:claim  CDATA  #FIXED 'http://www.medxml.net/claim/claimModule/2.1'
+       xmlns:claimA CDATA  #FIXED 'http://www.medxml.net/claim/claimAmountModule/2.1'>
+<!ELEMENT MmlHeader  (mmlCi:CreatorInfo , masterId , toc , scopePeriod? , encryptInfo? )>
+<!ELEMENT MmlBody  (MmlModuleItem+ )>
+<!ELEMENT docInfo  (securityLevel , title , docId , confirmDate , mmlCi:CreatorInfo , extRefs )>
+<!ATTLIST docInfo  contentModuleType  (patientInfo | 
+                                       healthInsurance | 
+                                       registeredDiagnosis | 
+                                       lifestyle | 
+                                       baseClinic | 
+                                       firstClinic | 
+                                       progressCourse | 
+                                       surgery | 
+                                       summary | 
+                                       referral |
+                                       test |
+                                       report |
+                                       claim |
+                                       claimAmount )  #REQUIRED
+                                       moduleVersion   CDATA  #IMPLIED >
+<!ELEMENT encryptInfo  (#PCDATA )>
+<!ELEMENT title  (#PCDATA )>
+<!ATTLIST title  generationPurpose  CDATA  #IMPLIED >
+<!ELEMENT docId  (uid , parentId*, groupId* )>
+<!ELEMENT masterId  (mmlCm:Id )>
+<!ELEMENT content  (mmlPi:PatientModule | mmlHi:HealthInsuranceModule | mmlRd:RegisteredDiagnosisModule | 
+                    mmlLs:LifestyleModule | mmlBc:BaseClinicModule | mmlFcl:FirstClinicModule | 
+                    mmlPc:ProgressCourseModule | mmlSg:SurgeryModule | mmlSm:SummaryModule | 
+                    mmlLb:TestModule | mmlRp:ReportModule | mmlRe:ReferralModule | claim:ClaimModule | 
+                    claimA:ClaimAmountModule )>
+<!ELEMENT toc  (tocItem+ )>
+<!ELEMENT tocItem  (#PCDATA )>
+<!ELEMENT extRefs  (mmlCm:extRef* )>
+<!ELEMENT scopePeriod EMPTY>
+<!ATTLIST scopePeriod  start         CDATA  #IMPLIED
+                       end           CDATA  #IMPLIED
+                       hasOtherInfo   (true | false )  #IMPLIED
+                       isExtract      (true | false )  #IMPLIED
+                       extractPolicy CDATA  #IMPLIED >
+<!ELEMENT MmlModuleItem  (docInfo? , content? )>
+<!ATTLIST MmlModuleItem  type      CDATA  #IMPLIED>
+<!ELEMENT uid  (#PCDATA )>
+<!ELEMENT parentId  (#PCDATA )>
+<!ATTLIST parentId  relation  CDATA  #IMPLIED >
+<!ELEMENT groupId  (#PCDATA )>
+<!ATTLIST groupId  groupClass  CDATA  #IMPLIED >
+
+<!ELEMENT confirmDate  (#PCDATA )>
+<!ATTLIST confirmDate  start CDATA  #IMPLIED
+                       end   CDATA  #IMPLIED >
+
+<!--***************************************************-->
+<!-- Security DTD Version 1.0                          -->
+<!--***************************************************-->
+<!ELEMENT securityLevel ( accessRight* ) >
+<!ELEMENT accessRight ( mmlSc:facility?, mmlSc:person?, mmlSc:licence?, mmlSc:department? ) >
+<!ATTLIST accessRight permit ( none | 
+                               read | 
+                              write | 
+                             delete | 
+                                all ) #REQUIRED
+                      startDate CDATA #IMPLIED
+                      endDate   CDATA #IMPLIED >
+<!ELEMENT mmlSc:facility ( mmlSc:facilityName+ ) >
+<!ELEMENT mmlSc:facilityName ( #PCDATA )>
+<!ATTLIST mmlSc:facilityName mmlSc:facilityCode ( all | 
+                                              creator | 
+                                           experience | 
+                                           individual ) #REQUIRED
+                             mmlSc:tableId        CDATA #IMPLIED
+                             mmlSc:facilityId     CDATA #IMPLIED
+                             mmlSc:facilityIdType CDATA #IMPLIED >
+<!ELEMENT mmlSc:person ( mmlSc:personName+ ) >
+<!ELEMENT mmlSc:personName ( #PCDATA ) >
+<!ATTLIST mmlSc:personName mmlSc:personCode ( all | 
+                                          creator | 
+                                          patient | 
+                                       individual ) #REQUIRED
+                           mmlSc:tableId      CDATA #IMPLIED
+                           mmlSc:personId     CDATA #IMPLIED
+                           mmlSc:personIdType CDATA #IMPLIED >
+<!ELEMENT mmlSc:licence ( mmlSc:licenceName+ ) >
+<!ELEMENT mmlSc:licenceName EMPTY>
+<!ATTLIST mmlSc:licenceName mmlSc:licenceCode CDATA #REQUIRED
+                            mmlSc:tableId     CDATA #IMPLIED >
+<!ELEMENT mmlSc:department ( mmlSc:departmentName+ ) >
+<!ELEMENT mmlSc:departmentName EMPTY>
+<!ATTLIST mmlSc:departmentName mmlSc:departmentCode CDATA #REQUIRED
+                               mmlSc:tableId        CDATA #IMPLIED >
+
+<!--***************************************************-->
+<!-- MML¥â¥¸¥å¡¼¥ë                                     -->
+<!--***************************************************-->
+
+<!--***************************************************-->
+<!-- ´µ¼Ô¾ðÊó                                          -->
+<!-- PatientModule DTD Version 1.0                     -->
+<!--***************************************************-->
+<!ELEMENT mmlPi:PatientModule  (mmlPi:uniqueInfo , mmlPi:personName , mmlPi:birthday , mmlPi:sex , 
+                                mmlPi:nationality? , mmlPi:marital? , mmlPi:addresses? , 
+                                mmlPi:emailAddresses? , mmlPi:phones? , mmlPi:accountNumber? , 
+                                mmlPi:socialIdentification? , mmlPi:death? )>
+<!ELEMENT mmlPi:otherId  (mmlCm:Id )>
+<!ATTLIST mmlPi:otherId  mmlPi:type  (temporaryPatientId | 
+                                      motherId | 
+                                      fatherId | 
+                                      childId | 
+                                      relativeId | 
+                                      roommateId | 
+                                      friendId | 
+                                      representativeId | 
+                                      emergencyContactId | 
+                                      coWorkerId )  #REQUIRED >
+<!ELEMENT mmlPi:masterId  (mmlCm:Id )>
+<!ELEMENT mmlPi:uniqueInfo  (mmlPi:masterId , mmlPi:otherId* )>
+<!ELEMENT mmlPi:death  (#PCDATA )>
+<!ATTLIST mmlPi:death  mmlPi:date CDATA  #IMPLIED >
+<!ELEMENT mmlPi:socialIdentification  (#PCDATA )>
+<!ELEMENT mmlPi:accountNumber  (#PCDATA )>
+<!ELEMENT mmlPi:phones  (mmlPh:Phone* )>
+<!ELEMENT mmlPi:emailAddresses  (mmlCm:email* )>
+<!ELEMENT mmlPi:addresses  (mmlAd:Address* )>
+<!ELEMENT mmlPi:marital  (#PCDATA )>
+<!ELEMENT mmlPi:nationality  (#PCDATA )>
+<!ATTLIST mmlPi:nationality  mmlPi:subtype CDATA  #IMPLIED >
+<!ELEMENT mmlPi:sex  (#PCDATA )>
+<!ELEMENT mmlPi:birthday  (#PCDATA )>
+<!ELEMENT mmlPi:personName  (mmlNm:Name+ )>
+
+<!--***************************************************-->
+<!-- ·ò¹¯ÊÝ¸±¾ðÊó¡ÊÆüËÜÈÇ¡Ë                            -->
+<!-- HealthInsuranceModule DTD Version 1.1             -->
+<!--***************************************************-->
+<!ELEMENT mmlHi:HealthInsuranceModule  (mmlHi:insuranceClass?, mmlHi:insuranceNumber, 
+               mmlHi:clientId, mmlHi:familyClass, mmlHi:clientInfo?, mmlHi:continuedDiseases?, mmlHi:startDate, 
+               mmlHi:expiredDate, mmlHi:paymentInRatio?, mmlHi:paymentOutRatio?, mmlHi:insuredInfo?, 
+               mmlHi:workInfo?, mmlHi:publicInsurance?) >
+<!ATTLIST mmlHi:HealthInsuranceModule  mmlHi:countryType  CDATA  #IMPLIED >
+<!ELEMENT mmlHi:insuranceClass  (#PCDATA )>
+<!ATTLIST mmlHi:insuranceClass  mmlHi:ClassCode CDATA  #REQUIRED
+                                mmlHi:tableId  CDATA  #REQUIRED>
+<!ELEMENT mmlHi:insuranceNumber   (#PCDATA )>
+<!ELEMENT mmlHi:clientId  (mmlHi:group, mmlHi:number)>
+<!ELEMENT mmlHi:group  (#PCDATA )>
+<!ELEMENT mmlHi:number  (#PCDATA )>
+<!ELEMENT mmlHi:familyClass   (#PCDATA )>
+<!ELEMENT mmlHi:clientInfo  (mmlHi:personName?, mmlHi:addresses?, mmlHi:phones?)>
+<!ELEMENT mmlHi:personName  (mmlNm:Name*)>
+<!ELEMENT mmlHi:addresses  (mmlAd:Address*)>
+<!ELEMENT mmlHi:phones  (mmlPh:Phone*)>
+<!ELEMENT mmlHi:continuedDiseases  (mmlHi:diseases+)>
+<!ELEMENT mmlHi:diseases   (#PCDATA )>
+<!ELEMENT mmlHi:startDate   (#PCDATA )>
+<!ELEMENT mmlHi:expiredDate   (#PCDATA )>
+<!ELEMENT mmlHi:paymentInRatio   (#PCDATA )>
+<!ELEMENT mmlHi:paymentOutRatio   (#PCDATA )>
+<!ELEMENT mmlHi:insuredInfo  (mmlHi:facility?, mmlHi:addresses?, mmlHi:phones?)>
+<!ELEMENT mmlHi:facility  (mmlFc:Facility?)>
+<!ELEMENT mmlHi:workInfo  (mmlHi:facility?, mmlHi:addresses?, mmlHi:phones?)>
+<!ELEMENT mmlHi:publicInsurance  (mmlHi:publicInsuranceItem+)>
+<!ELEMENT mmlHi:publicInsuranceItem  (mmlHi:providerName?, mmlHi:provider, mmlHi:recipient, 
+                                      mmlHi:startDate, mmlHi:expiredDate, mmlHi:paymentRatio?)>
+<!ATTLIST mmlHi:publicInsuranceItem  mmlHi:priority  CDATA    #REQUIRED>
+<!ELEMENT mmlHi:providerName   (#PCDATA )>
+<!ELEMENT mmlHi:provider   (#PCDATA )>
+<!ELEMENT mmlHi:recipient   (#PCDATA )>
+<!ELEMENT mmlHi:paymentRatio  (#PCDATA )>
+<!ATTLIST mmlHi:paymentRatio  mmlHi:ratioType  CDATA    #REQUIRED>
+
+<!--***************************************************-->
+<!-- ¿ÇÃÇÍúÎò¾ðÊó                                      -->
+<!-- RegisteredDiagnosisModule DTD Version 1.0         -->
+<!--***************************************************-->
+<!ELEMENT mmlRd:RegisteredDiagnosisModule  ( (mmlRd:diagnosis | mmlRd:diagnosisContents) , mmlRd:categories? ,
+                                             mmlRd:startDate? , mmlRd:endDate? , mmlRd:outcome? , mmlRd:InOutPatient? ,
+                                             mmlRd:firstEncounterDate? , mmlRd:relatedHealthInsurance? )>
+<!ELEMENT mmlRd:diagnosis  (#PCDATA )>
+<!ATTLIST mmlRd:diagnosis  mmlRd:code   CDATA  #IMPLIED
+                           mmlRd:system CDATA  #IMPLIED >
+<!ELEMENT mmlRd:diagnosisContents  (mmlRd:dxItem+ )>
+<!ELEMENT mmlRd:dxItem  (mmlRd:name )>
+<!ELEMENT mmlRd:name  (#PCDATA )>
+<!ATTLIST mmlRd:name  mmlRd:code   CDATA  #IMPLIED
+                      mmlRd:system CDATA  #IMPLIED >
+<!ELEMENT mmlRd:category  (#PCDATA )>
+<!ATTLIST mmlRd:category  mmlRd:tableId CDATA  #REQUIRED >
+<!ELEMENT mmlRd:startDate  (#PCDATA )>
+<!ELEMENT mmlRd:endDate  (#PCDATA )>
+<!ELEMENT mmlRd:outcome  (#PCDATA )>
+<!ELEMENT mmlRd:InOutPatient  (#PCDATA )>
+<!ELEMENT mmlRd:firstEncounterDate  (#PCDATA )>
+<!ELEMENT mmlRd:relatedHealthInsurance EMPTY>
+<!ATTLIST mmlRd:relatedHealthInsurance  mmlRd:uid CDATA  #IMPLIED >
+<!ELEMENT mmlRd:categories  (mmlRd:category+ )>
+
+<!--***************************************************-->
+<!-- À¸³è½¬´·¾ðÊó                                      -->
+<!-- LifestyleModule DTD Version 1.0                   -->
+<!--***************************************************-->
+<!ELEMENT mmlLs:LifestyleModule  (mmlLs:occupation , mmlLs:tobacco , mmlLs:alcohol , mmlLs:other? )>
+<!ELEMENT mmlLs:occupation  (#PCDATA )>
+<!ELEMENT mmlLs:tobacco  (#PCDATA )>
+<!ELEMENT mmlLs:alcohol  (#PCDATA )>
+<!ELEMENT mmlLs:other  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- ´ðÁÃÅª¿ÇÎÅ¾ðÊó                                    -->
+<!-- BaseClinicModule DTD Version 1.0                  -->
+<!--***************************************************-->
+<!ELEMENT mmlBc:BaseClinicModule  (mmlBc:allergy? , mmlBc:bloodtype? , mmlBc:infection? )>
+<!ELEMENT mmlBc:allergy  (mmlBc:allergyItem+ )>
+<!ELEMENT mmlBc:allergyItem  (mmlBc:factor , mmlBc:severity? , mmlBc:identifiedDate? , mmlBc:memo? )>
+<!ELEMENT mmlBc:factor  (#PCDATA )>
+<!ELEMENT mmlBc:severity  (#PCDATA )>
+<!ELEMENT mmlBc:identifiedDate  (#PCDATA )>
+<!ELEMENT mmlBc:memo  (#PCDATA )>
+<!ELEMENT mmlBc:bloodtype  (mmlBc:abo , mmlBc:rh? , mmlBc:others? , mmlBc:memo? )>
+<!ELEMENT mmlBc:rh  (#PCDATA )>
+<!ELEMENT mmlBc:abo  (#PCDATA )>
+<!ELEMENT mmlBc:other  (mmlBc:typeName , mmlBc:typeJudgement , mmlBc:description? )>
+<!ELEMENT mmlBc:typeName  (#PCDATA )>
+<!ELEMENT mmlBc:typeJudgement  (#PCDATA )>
+<!ELEMENT mmlBc:description  (#PCDATA )>
+<!ELEMENT mmlBc:infection  (mmlBc:infectionItem+ )>
+<!ELEMENT mmlBc:infectionItem  (mmlBc:factor , mmlBc:examValue , mmlBc:identifiedDate? , mmlBc:memo? )>
+<!ELEMENT mmlBc:examValue  (#PCDATA )>
+<!ELEMENT mmlBc:others  (mmlBc:other* )>
+
+<!--***************************************************-->
+<!-- ½é¿Ç»þÆÃÍ­¾ðÊó                                    -->
+<!-- FirstClinicModule DTD Version 1.0                 -->
+<!--***************************************************-->
+<!ELEMENT mmlFcl:FirstClinicModule  (mmlFcl:familyHistory? , mmlFcl:childhood? , mmlFcl:pastHistory? , 
+                                     mmlFcl:chiefComplaints? , mmlFcl:presentIllnessNotes? )>
+<!ELEMENT mmlFcl:familyHistory  (mmlFcl:familyHistoryItem+ )>
+<!ELEMENT mmlFcl:familyHistoryItem  (mmlFcl:relation , mmlRd:RegisteredDiagnosisModule , mmlFcl:age? , 
+                                     mmlFcl:memo? )>
+<!ELEMENT mmlFcl:relation  (#PCDATA )>
+<!ELEMENT mmlFcl:age  (#PCDATA )>
+<!ELEMENT mmlFcl:memo  (#PCDATA )>
+<!ELEMENT mmlFcl:childhood  (mmlFcl:birthInfo? , mmlFcl:vaccination? )>
+<!ELEMENT mmlFcl:birthInfo  (mmlFc:Facility? , mmlFcl:deliveryWeeks? , mmlFcl:deliveryMethod? , 
+                             mmlFcl:bodyWeight? , mmlFcl:bodyHeight? , mmlFcl:chestCircumference? , 
+                             mmlFcl:headCircumference? , mmlFcl:memo? )>
+<!ELEMENT mmlFcl:deliveryWeeks  (#PCDATA )>
+<!ELEMENT mmlFcl:deliveryMethod  (#PCDATA )>
+<!ELEMENT mmlFcl:bodyWeight  (#PCDATA )>
+<!ATTLIST mmlFcl:bodyWeight  mmlFcl:unit CDATA  #REQUIRED >
+<!ELEMENT mmlFcl:bodyHeight  (#PCDATA )>
+<!ATTLIST mmlFcl:bodyHeight  mmlFcl:unit CDATA  #REQUIRED >
+<!ELEMENT mmlFcl:chestCircumference  (#PCDATA )>
+<!ATTLIST mmlFcl:chestCircumference  mmlFcl:unit CDATA  #REQUIRED >
+<!ELEMENT mmlFcl:headCircumference  (#PCDATA )>
+<!ATTLIST mmlFcl:headCircumference  mmlFcl:unit CDATA  #REQUIRED >
+<!ELEMENT mmlFcl:vaccination  (mmlFcl:vaccinationItem+ )>
+<!ELEMENT mmlFcl:vaccinationItem  (mmlFcl:vaccine , mmlFcl:injected , mmlFcl:age? , mmlFcl:memo? )>
+<!ELEMENT mmlFcl:vaccine  (#PCDATA )>
+<!ELEMENT mmlFcl:injected  (#PCDATA )>
+<!ELEMENT mmlFcl:pastHistory  (mmlFcl:freeNotes | mmlFcl:pastHistoryItem* )>
+<!ELEMENT mmlFcl:pastHistoryItem  (mmlFcl:timeExpression , mmlFcl:eventExpression* )>
+<!ELEMENT mmlFcl:timeExpression  (#PCDATA )>
+<!ELEMENT mmlFcl:eventExpression  (#PCDATA )>
+<!ELEMENT mmlFcl:chiefComplaints  (#PCDATA )>
+<!ELEMENT mmlFcl:presentIllnessNotes  (#PCDATA )>
+<!ELEMENT mmlFcl:freeNotes  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- ·Ð²áµ­Ï¿¾ðÊó                                      -->
+<!-- ProgressCourseModule DTD Version 1.0              -->
+<!--***************************************************-->
+<!ELEMENT mmlPc:ProgressCourseModule  (mmlPc:FreeExpression | mmlPc:structuredExpression )>
+<!ELEMENT mmlPc:problem  (#PCDATA )>
+<!ATTLIST mmlPc:problem  mmlPc:dxUid CDATA  #IMPLIED >
+<!ELEMENT mmlPc:subjective  (mmlPc:freeNotes | mmlPc:subjectiveItem*)>
+<!ELEMENT mmlPc:subjectiveItem  ( (mmlPc:timeExpression, mmlPc:eventExpression+ ) )>
+<!ELEMENT mmlPc:timeExpression  (#PCDATA )>
+<!ELEMENT mmlPc:eventExpression  (#PCDATA )>
+<!ELEMENT mmlPc:objective  (mmlPc:objectiveNotes? , mmlPc:physicalExam? , mmlPc:testResult? , 
+                            mmlPc:rxRecord? , mmlPc:txRecord? )>
+<!ELEMENT mmlPc:physicalExam  (mmlPc:physicalExamItem+ )>
+<!ELEMENT mmlPc:physicalExamItem  (mmlPc:title , mmlPc:result , mmlPc:interpretation? , mmlPc:referenceInfo? )>
+<!ELEMENT mmlPc:title  (#PCDATA )>
+<!ELEMENT mmlPc:result  (#PCDATA )>
+<!ELEMENT mmlPc:interpretation  (#PCDATA )>
+<!ELEMENT mmlPc:referenceInfo  (mmlCm:extRef* )>
+<!ELEMENT mmlPc:testResult  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:rxRecord  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:txRecord  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:planNotes  (#PCDATA )>
+<!ELEMENT mmlPc:assessment  (mmlPc:assessmentItem+ )>
+<!ELEMENT mmlPc:assessmentItem  (#PCDATA )>
+<!ELEMENT mmlPc:plan  (mmlPc:testOrder? , mmlPc:rxOrder? , mmlPc:txOrder? , mmlPc:planNotes? )>
+<!ELEMENT mmlPc:testOrder  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:rxOrder  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:txOrder  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:objectiveNotes  (#PCDATA )>
+<!ELEMENT mmlPc:FreeExpression  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlPc:structuredExpression  (mmlPc:problemItem* )>
+<!ELEMENT mmlPc:problemItem  (mmlPc:problem? , mmlPc:subjective? , mmlPc:objective? , mmlPc:assessment? , 
+                              mmlPc:plan? )>
+<!ELEMENT mmlPc:freeNotes  (#PCDATA )>
+
+<!--***************************************************-->
+<!-- ¼ê½Ñµ­Ï¿¾ðÊó                                      -->
+<!-- SurgeryModule DTD Version 1.0                     -->
+<!--***************************************************-->
+<!ELEMENT mmlSg:SurgeryModule  (mmlSg:surgeryItem+ )>
+<!ELEMENT mmlSg:surgeryItem  (mmlSg:surgicalInfo , mmlSg:surgicalDiagnosis , mmlSg:surgicalProcedure , 
+                              mmlSg:surgicalStaffs? , mmlSg:anesthesiaProcedure? , mmlSg:anesthesiologists? ,
+                              mmlSg:anesthesiaDuration? , mmlSg:operativeNotes? , mmlSg:referenceInfo? , 
+                              mmlSg:memo? )>
+<!ELEMENT mmlSg:surgicalInfo  (mmlSg:date , mmlSg:startTime? , mmlSg:duration? , mmlSg:surgicalDepartment? , 
+                               mmlSg:patientDepartment? )>
+<!ATTLIST mmlSg:surgicalInfo  mmlSg:type  (elective | emergent )  #IMPLIED >
+<!ELEMENT mmlSg:surgicalDepartment  (mmlDp:Department+ )>
+<!ELEMENT mmlSg:patientDepartment  (mmlDp:Department+ )>
+<!ELEMENT mmlSg:date  (#PCDATA )>
+<!ELEMENT mmlSg:startTime  (#PCDATA )>
+<!ELEMENT mmlSg:duration  (#PCDATA )>
+<!ELEMENT mmlSg:surgicalDiagnosis  (mmlRd:RegisteredDiagnosisModule+ )>
+<!ELEMENT mmlSg:title  (#PCDATA )>
+<!ATTLIST mmlSg:title  mmlSg:code   CDATA  #IMPLIED
+                       mmlSg:system CDATA  #IMPLIED >
+<!ELEMENT mmlSg:memo  (#PCDATA )>
+<!ELEMENT mmlSg:surgicalProcedure  (mmlSg:procedureItem+ )>
+<!ELEMENT mmlSg:procedureItem ( (mmlSg:operation | mmlSg:operationElement) , mmlSg:procedureMemo? )>
+<!ELEMENT mmlSg:operationElement  (mmlSg:operationElementItem+ )>
+<!ELEMENT mmlSg:operationElementItem  (mmlSg:title )>
+<!ELEMENT mmlSg:surgicalStaffs  (mmlSg:staff+ )>
+<!ELEMENT mmlSg:staff  (mmlSg:staffInfo )>
+<!ATTLIST mmlSg:staff  mmlSg:superiority CDATA  #IMPLIED
+                       mmlSg:staffClass  CDATA  #IMPLIED >
+<!ELEMENT mmlSg:staffInfo  (mmlPsi:PersonalizedInfo+ )>
+<!ELEMENT mmlSg:anesthesiaProcedure  (mmlSg:title )>
+<!ELEMENT mmlSg:anesthesiologists  (mmlSg:staff* )>
+<!ELEMENT mmlSg:operativeNotes  (#PCDATA )>
+<!ELEMENT mmlSg:referenceInfo  (mmlCm:extRef+ )>
+<!ELEMENT mmlSg:operation  (#PCDATA )>
+<!ELEMENT mmlSg:procedureMemo  (#PCDATA )>
+<!ELEMENT mmlSg:anesthesiaDuration  (#PCDATA )>
+
+<!--***************************************************-->
+<!--  Î×¾²¥µ¥Þ¥ê¡¼¾ðÊó                                 -->
+<!--  SummaryModule DTD Version 1.0                    -->
+<!--***************************************************-->
+<!ELEMENT mmlSm:SummaryModule  (mmlSm:serviceHistory, mmlRd:RegisteredDiagnosisModule*, 
+                                mmlSm:deathInfo? , mmlSg:SurgeryModule* , mmlSm:chiefComplaints?, 
+                                mmlSm:patientProfile? , mmlSm:history? , mmlSm:physicalExam? , 
+                                mmlSm:clinicalCourse? , mmlSm:dischargeFindings? , mmlSm:medication? , 
+                                mmlSm:testResults? , mmlSm:plan? , mmlSm:remarks? )>
+<!ELEMENT mmlSm:serviceHistory  (mmlSm:outPatient? , mmlSm:inPatient? )>
+<!ATTLIST mmlSm:serviceHistory  mmlSm:start CDATA  #IMPLIED
+                                mmlSm:end   CDATA  #IMPLIED >
+<!ELEMENT mmlSm:outPatient  (mmlSm:outPatientItem* )>
+<!ELEMENT mmlSm:inPatient  (mmlSm:inPatientItem* )>
+<!ELEMENT mmlSm:outPatientItem  (mmlSm:date , mmlSm:outPatientCondition? , mmlSm:staffs? )>
+<!ELEMENT mmlSm:inPatientItem  (mmlSm:admission , mmlSm:discharge , mmlSm:staffs? )>
+<!ELEMENT mmlSm:date  (#PCDATA )>
+<!ELEMENT mmlSm:outPatientCondition  (#PCDATA )>
+<!ATTLIST mmlSm:outPatientCondition  mmlSm:first     CDATA  #IMPLIED
+                                     mmlSm:emergency  (true | false )  #IMPLIED >
+<!ELEMENT mmlSm:staffs  (mmlSm:staffInfo+ )>
+<!ELEMENT mmlSm:admission  (mmlSm:date , mmlSm:admissionCondition? , mmlSm:referFrom? )>
+<!ELEMENT mmlSm:discharge  (mmlSm:date , mmlSm:dischargeCondition? , mmlSm:referTo? )>
+<!ELEMENT mmlSm:admissionCondition  (#PCDATA )>
+<!ATTLIST mmlSm:admissionCondition  mmlSm:emergency  (true | false )  #IMPLIED >
+<!ELEMENT mmlSm:referFrom  (mmlPsi:PersonalizedInfo )>
+<!ELEMENT mmlSm:dischargeCondition  (#PCDATA )>
+<!ATTLIST mmlSm:dischargeCondition  mmlSm:outcome  (died | 
+                                                    worsening | 
+                                                    unchanged | 
+                                                    recovering | 
+                                                    fullyRecovered | 
+                                                    sequelae | 
+                                                    end | 
+                                                    pause | 
+                                                    continued | 
+                                                    transfer | 
+                                                    transferAcute | 
+                                                    transferChronic | 
+                                                    home | 
+                                                    delete | 
+                                                    unknown )  #IMPLIED >
+<!ATTLIST mmlSm:dischargeCondition  mmlSm:InOutPatient  (outpatient | 
+                                                    inpatient )  #IMPLIED >
+<!ELEMENT mmlSm:referTo  (mmlPsi:PersonalizedInfo )>
+<!ELEMENT mmlSm:staffInfo  (mmlPsi:PersonalizedInfo , mmlCi:creatorLicense+ )>
+<!ELEMENT mmlSm:deathInfo  (#PCDATA )>
+<!ATTLIST mmlSm:deathInfo  mmlSm:date    CDATA  #IMPLIED
+                           mmlSm:autopsy  (true | false )  #IMPLIED >
+<!ELEMENT mmlSm:chiefComplaints  (#PCDATA )>
+<!ELEMENT mmlSm:patientProfile  (#PCDATA )>
+<!ELEMENT mmlSm:history  (#PCDATA )>
+<!ELEMENT mmlSm:physicalExam   (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlSm:clinicalCourse  (mmlSm:clinicalRecord+ )>
+<!ELEMENT mmlSm:dischargeFindings  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlSm:medication  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlSm:testResults  (mmlSm:testResult+ )>
+<!ELEMENT mmlSm:plan  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlSm:remarks  (#PCDATA )>
+<!ELEMENT mmlSm:clinicalRecord   (#PCDATA | mmlCm:extRef | mmlSm:relatedDoc )*>
+<!ATTLIST mmlSm:clinicalRecord  mmlSm:date  CDATA  #IMPLIED >
+<!ELEMENT mmlSm:testResult  (#PCDATA | mmlCm:extRef )*>
+<!ATTLIST mmlSm:testResult  mmlSm:date  CDATA  #IMPLIED >
+<!ELEMENT mmlSm:relatedDoc  (#PCDATA )>
+<!ATTLIST mmlSm:relatedDoc  mmlSm:relation   CDATA  #IMPLIED >
+
+<!--***************************************************-->
+<!--  ¸¡Îò¾ðÊó                                         -->
+<!--  TestModule DTD Version 1.0                       -->
+<!--***************************************************-->
+<!ELEMENT mmlLb:TestModule (mmlLb:information, mmlLb:laboTest+)>
+<!ELEMENT mmlLb:information (mmlLb:reportStatus, mmlLb:set?, mmlLb:facility, 
+                             mmlLb:department?, mmlLb:ward?, mmlLb:client?, 
+                             mmlLb:laboratoryCenter, mmlLb:technician?, mmlLb:repMemo*, 
+                             mmlLb:repMemoF?)>
+<!ELEMENT mmlLb:laboTest (mmlLb:specimen, mmlLb:item+)>
+<!ATTLIST mmlLb:information  mmlLb:registId    CDATA  #REQUIRED
+                             mmlLb:sampleTime  CDATA  #IMPLIED
+                             mmlLb:registTime  CDATA  #REQUIRED
+                             mmlLb:reportTime  CDATA  #REQUIRED>
+<!ELEMENT mmlLb:reportStatus   (#PCDATA )>
+<!ATTLIST mmlLb:reportStatus  mmlLb:statusCode     CDATA  #REQUIRED
+                              mmlLb:statusCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlLb:set   (#PCDATA )>
+<!ATTLIST mmlLb:set   mmlLb:setCode    CDATA  #IMPLIED
+                      mmlLb:setCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlLb:facility   (#PCDATA )>
+<!ATTLIST mmlLb:facility  mmlLb:facilityCode     CDATA  #REQUIRED
+                          mmlLb:facilityCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlLb:department   (#PCDATA )>
+<!ATTLIST mmlLb:department  mmlLb:depCode    CDATA  #IMPLIED
+                            mmlLb:depCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlLb:ward  (#PCDATA )>
+<!ATTLIST mmlLb:ward  mmlLb:wardCode    CDATA  #IMPLIED
+                      mmlLb:wardCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlLb:client  (#PCDATA )>
+<!ATTLIST mmlLb:client  mmlLb:clientCode    CDATA  #IMPLIED
+                        mmlLb:clientCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlLb:laboratoryCenter  (#PCDATA )>
+<!ATTLIST mmlLb:laboratoryCenter  mmlLb:centerCode     CDATA  #REQUIRED
+                                  mmlLb:centerCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlLb:technician  (#PCDATA )>
+<!ATTLIST mmlLb:technician  mmlLb:techCode    CDATA  #IMPLIED
+                            mmlLb:techCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlLb:repMemo   (#PCDATA )>
+<!ATTLIST mmlLb:repMemo  mmlLb:repCodeName  CDATA  #IMPLIED
+                         mmlLb:repCode      CDATA  #IMPLIED
+                         mmlLb:repCodeId    CDATA  #IMPLIED>
+<!ELEMENT mmlLb:repMemoF   (#PCDATA )>
+<!ELEMENT mmlLb:specimen  (mmlLb:specimenName, mmlLb:spcMemo*, mmlLb:spcMemoF?)>
+<!ELEMENT mmlLb:specimenName   (#PCDATA )>
+<!ATTLIST mmlLb:specimenName  mmlLb:spCode   CDATA  #REQUIRED
+                              mmlLb:spCodeId  CDATA  #REQUIRED>
+<!ELEMENT mmlLb:spcMemo   (#PCDATA )>
+<!ATTLIST mmlLb:spcMemo  mmlLb:smCodeName  CDATA  #IMPLIED
+                         mmlLb:smCode      CDATA  #IMPLIED
+                         mmlLb:smCodeId    CDATA  #IMPLIED>
+<!ELEMENT mmlLb:spcMemoF   (#PCDATA )>
+<!ELEMENT mmlLb:item  (mmlLb:itemName, mmlLb:value, mmlLb:numValue?, mmlLb:unit?, 
+                       mmlLb:referenceInfo?, mmlLb:itemMemo*, mmlLb:itemMemoF?)>
+<!ELEMENT mmlLb:itemName   (#PCDATA )>
+<!ATTLIST mmlLb:itemName  mmlLb:itCode   CDATA  #REQUIRED
+                          mmlLb:itCodeId   CDATA  #REQUIRED
+                          mmlLb:Acode   CDATA  #IMPLIED
+                          mmlLb:Icode   CDATA  #IMPLIED
+                          mmlLb:Scode   CDATA  #IMPLIED
+                          mmlLb:Mcode   CDATA  #IMPLIED
+                          mmlLb:Rcode   CDATA  #IMPLIED>
+<!ELEMENT mmlLb:value  (#PCDATA )>
+<!ELEMENT mmlLb:numValue  (#PCDATA )>
+<!ATTLIST mmlLb:numValue  mmlLb:up      CDATA  #IMPLIED
+                          mmlLb:low     CDATA  #IMPLIED
+                          mmlLb:normal  CDATA  #IMPLIED
+                          mmlLb:out     CDATA  #IMPLIED>
+<!ELEMENT mmlLb:unit  (#PCDATA )>
+<!ATTLIST mmlLb:unit  mmlLb:uCode     CDATA  #IMPLIED
+                      mmlLb:uCodeId   CDATA  #IMPLIED>
+<!ELEMENT mmlLb:referenceInfo  (mmlCm:extRef*)>
+<!ELEMENT mmlLb:itemMemo  (#PCDATA )>
+<!ATTLIST mmlLb:itemMemo mmlLb:imCodeName   CDATA  #IMPLIED
+                         mmlLb:imCode       CDATA  #IMPLIED
+                         mmlLb:imCodeId     CDATA  #IMPLIED>
+<!ELEMENT mmlLb:itemMemoF  (#PCDATA )>
+
+<!--***************************************************-->
+<!--  Êó¹ð½ñ¾ðÊó                                       -->
+<!--  ReportModule DTD Version 1.0                     -->
+<!--***************************************************-->
+<!ELEMENT mmlRp:ReportModule  (mmlRp:information, mmlRp:reportBody)>
+<!ELEMENT mmlRp:information  (mmlRp:reportStatus, mmlRp:testClass, mmlRp:testSubclass?, 
+                              mmlRp:organ?, mmlRp:consultFrom?, mmlRp:perform)>
+<!ATTLIST mmlRp:information  mmlRp:performTime   CDATA  #REQUIRED
+                             mmlRp:reportTime    CDATA  #REQUIRED>
+<!ELEMENT mmlRp:reportStatus  (#PCDATA )>
+<!ATTLIST mmlRp:reportStatus  mmlRp:statusCode     CDATA  #REQUIRED
+                              mmlRp:statusCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlRp:testClass  (#PCDATA )>
+<!ATTLIST mmlRp:testClass  mmlRp:testClassCode     CDATA  #REQUIRED
+                           mmlRp:testClassCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlRp:testSubclass  (#PCDATA )>
+<!ATTLIST mmlRp:testSubclass  mmlRp:testSubclassCode     CDATA  #IMPLIED
+                              mmlRp:testSubclassCodeId   CDATA  #IMPLIED>
+<!ELEMENT mmlRp:organ  (#PCDATA )>
+<!ELEMENT mmlRp:consultFrom  (mmlRp:conFacility?, mmlRp:conDepartment?, mmlRp:conWard?, 
+                              mmlRp:client?)>
+<!ELEMENT mmlRp:conFacility  (#PCDATA )>
+<!ATTLIST mmlRp:conFacility   mmlRp:facilityCode    CDATA  #IMPLIED
+                              mmlRp:facilityCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:conDepartment  (#PCDATA )>
+<!ATTLIST mmlRp:conDepartment  mmlRp:depCode    CDATA  #IMPLIED
+                               mmlRp:depCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:conWard  (#PCDATA )>
+<!ATTLIST mmlRp:conWard  mmlRp:wardCode    CDATA  #IMPLIED
+                         mmlRp:wardCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:client  (#PCDATA )>
+<!ATTLIST mmlRp:client   mmlRp:clientCode    CDATA  #IMPLIED
+                         mmlRp:clientCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:perform  (mmlRp:pFacility, mmlRp:pDepartment?, mmlRp:pWard?, mmlRp:performer, 
+                         mmlRp:supervisor?)>
+<!ELEMENT mmlRp:pFacility  (#PCDATA )>
+<!ATTLIST mmlRp:pFacility  mmlRp:facilityCode     CDATA  #REQUIRED
+                           mmlRp:facilityCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlRp:pDepartment  (#PCDATA )>
+<!ATTLIST mmlRp:pDepartment  mmlRp:depCode    CDATA  #IMPLIED
+                             mmlRp:depCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:pWard  (#PCDATA )>
+<!ATTLIST mmlRp:pWard  mmlRp:wardCode    CDATA  #IMPLIED
+                       mmlRp:wardCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:performer  (#PCDATA )>
+<!ATTLIST mmlRp:performer  mmlRp:peroformerCode    CDATA  #REQUIRED
+                           mmlRp:performerCodeId   CDATA  #REQUIRED>
+<!ELEMENT mmlRp:supervisor  (#PCDATA )>
+<!ATTLIST mmlRp:supervisor  mmlRp:supervisorCode    CDATA  #IMPLIED
+                            mmlRp:supervisorCodeId  CDATA  #IMPLIED>
+<!ELEMENT mmlRp:reportBody  (mmlRp:chiefComplaints?, mmlRp:testPurpose?, mmlRp:testDx?, 
+                             mmlRp:testNotes?, mmlRp:testMemo*, mmlRp:testMemoF?)>
+<!ELEMENT mmlRp:chiefComplaints  (#PCDATA )>
+<!ELEMENT mmlRp:testPurpose  (#PCDATA )>
+<!ELEMENT mmlRp:testDx  (#PCDATA )>
+<!ELEMENT mmlRp:testNotes  (#PCDATA | mmlCm:extRef )*>
+<!ELEMENT mmlRp:testMemo  (#PCDATA )>
+<!ATTLIST mmlRp:testMemo  mmlRp:tmCodeName  CDATA  #IMPLIED
+                          mmlRp:tmCode      CDATA  #IMPLIED
+                          mmlRp:tmCodeId    CDATA  #IMPLIED>
+<!ELEMENT mmlRp:testMemoF  (#PCDATA )>
+
+<!--***************************************************-->
+<!--  ¾Ò²ð¾õ¾ðÊó                                       -->
+<!--  ReferralModule DTD Version 1.0                   -->
+<!--***************************************************-->
+<!ELEMENT mmlRe:ReferralModule (mmlPi:PatientModule, mmlRe:occupation?, mmlRe:referFrom, 
+                         mmlRe:title, mmlRe:greeting?,mmlRe:chiefComplaints, 
+                         mmlRe:clinicalDiagnosis?, mmlFcl:pastHistory, mmlFcl:familyHistory?, 
+                         mmlRe:presentIllness, mmlRe:testResults?, mmlSm:clinicalCourse?, 
+                         mmlRe:medication?, mmlRe:referPurpose, mmlRe:remarks?, 
+                         mmlRe:referToFacility, mmlRe:referToPerson?, 
+                         mmlRe:referToUnknownName?)>
+<!ELEMENT mmlRe:occupation (#PCDATA) >
+<!ELEMENT mmlRe:referFrom (mmlPsi:PersonalizedInfo)>
+<!ELEMENT mmlRe:title (#PCDATA) >
+<!ELEMENT mmlRe:greeting (#PCDATA) >
+<!ELEMENT mmlRe:chiefComplaints (#PCDATA) >
+<!ELEMENT mmlRe:clinicalDiagnosis (#PCDATA) >
+<!ELEMENT mmlRe:presentIllness (#PCDATA) >
+<!ELEMENT mmlRe:testResults (#PCDATA) >
+<!ELEMENT mmlRe:medication (#PCDATA) >
+<!ELEMENT mmlRe:referPurpose (#PCDATA) >
+<!ELEMENT mmlRe:remarks (#PCDATA) >
+<!ELEMENT mmlRe:referToFacility (mmlFc:Facility) >
+<!ELEMENT mmlRe:referToPerson (mmlNm:Name) >
+<!ELEMENT mmlRe:referToUnknownName (#PCDATA) >
+
+<!--***************************************************-->
+<!--  Í½ÌóÀÁµá¥â¥¸¥å¡¼¥ë                                -->
+<!--  ClaimModule DTD Version 2.1                      -->
+<!--***************************************************-->
+<!ELEMENT claim:ClaimModule  (claim:information, claim:bundle+) >
+<!ELEMENT claim:information  (claim:appoint?, claim:patientDepartment?, claim:patientWard?, 
+                         mmlHi:insuranceClass?) >
+<!ATTLIST claim:information  claim:status          CDATA    #REQUIRED
+                             claim:orderTime       CDATA    #IMPLIED
+                             claim:appointTime     CDATA    #IMPLIED
+                             claim:registTime      CDATA    #IMPLIED
+                             claim:performTime     CDATA    #IMPLIED
+                             claim:admitFlag       CDATA    #REQUIRED
+                             claim:timeClass       CDATA    #IMPLIED
+                             claim:insuranceUid    CDATA    #IMPLIED
+                             claim:defaultTableId  CDATA    #IMPLIED >
+<!ELEMENT claim:bundle  (claim:className?, claim:administration?, 
+                         claim:admMemo?, claim:bundleNumber?, claim:item+, claim:memo?) >
+<!ATTLIST claim:bundle   claim:classCode    CDATA    #IMPLIED
+                         claim:classCodeId  CDATA    #IMPLIED  >
+<!ELEMENT claim:appoint  (claim:appName*, claim:memo? )>
+<!ELEMENT claim:appName  (#PCDATA) >
+<!ATTLIST claim:appName  claim:appCode    CDATA    #IMPLIED
+                         claim:appCodeId  CDATA    #IMPLIED  >
+<!ELEMENT claim:patientDepartment  (mmlDp:Department) >
+<!ELEMENT claim:patientWard  (mmlDp:Department) >
+<!ELEMENT claim:className  (#PCDATA) >
+<!ELEMENT claim:administration  (#PCDATA) >
+<!ATTLIST claim:administration  claim:adminCode   CDATA    #IMPLIED
+                                claim:adminCodeId CDATA    #IMPLIED >
+<!ELEMENT claim:admMemo  (#PCDATA) >
+<!ELEMENT claim:bundleNumber  (#PCDATA) >
+<!ELEMENT claim:item  (claim:name, claim:number*, claim:duration?, claim:location*,
+                       claim:film*, claim:event?, claim:memo?) >
+<!ATTLIST claim:item  claim:subclassCode    CDATA    #IMPLIED
+                      claim:subclassCodeId  CDATA    #IMPLIED
+                      claim:code            CDATA    #REQUIRED
+                      claim:tableId         CDATA    #IMPLIED
+                      claim:aliasCode       CDATA    #IMPLIED
+                      claim:aliasTableId    CDATA    #IMPLIED  >
+<!ELEMENT claim:name  (#PCDATA) >
+<!ELEMENT claim:number  (#PCDATA) >
+<!ATTLIST claim:number  claim:numberCode    CDATA    #REQUIRED
+                        claim:numberCodeId  CDATA    #REQUIRED
+                        claim:unit          CDATA    #IMPLIED  >
+<!ELEMENT claim:duration  (#PCDATA) >
+<!ELEMENT claim:location  (#PCDATA) >
+<!ELEMENT claim:film  (claim:filmSize, claim:filmNumber) >
+<!ELEMENT claim:event  (#PCDATA) >
+<!ATTLIST claim:event  claim:eventStart  CDATA    #IMPLIED
+                       claim:eventEnd    CDATA    #IMPLIED  >
+<!ELEMENT claim:memo  (#PCDATA) >
+<!ELEMENT claim:filmSize  (#PCDATA) >
+<!ATTLIST claim:filmSize   claim:sizeCode    CDATA    #IMPLIED
+                           claim:sizeCodeId  CDATA    #IMPLIED  >
+<!ELEMENT claim:filmNumber  (#PCDATA) >
+
+
+<!--***************************************************-->
+<!--  ÅÀ¿ô¶â³Û¥â¥¸¥å¡¼¥ë                               -->
+<!--  ClaimAmountModule DTD Version 2.1                -->
+<!--***************************************************-->
+<!ELEMENT claimA:ClaimAmountModule  (claimA:amountInformation, claimA:bundle+) >
+<!ELEMENT claimA:amountInformation  (claimA:patientDepartment?, claimA:patientWard?, 
+                         mmlHi:insuranceClass?) >
+<!ATTLIST claimA:amountInformation  claimA:status          CDATA    #REQUIRED
+                                    claimA:oderTime        CDATA    #IMPLIED
+                                    claimA:appointTime     CDATA    #IMPLIED
+                                    claimA:registTime      CDATA    #IMPLIED
+                                    claimA:performTime     CDATA    #IMPLIED
+                                    claimA:accountTime     CDATA    #IMPLIED
+                                    claimA:admitFlag       CDATA    #REQUIRED
+                                    claimA:timeClass       CDATA    #IMPLIED
+                                    claimA:insuranceUid    CDATA    #IMPLIED
+                                    claimA:defaultTableId  CDATA    #IMPLIED  >
+<!ELEMENT claimA:bundle  (claimA:className?, claimA:claimBundlePoint, 
+                          claimA:claimBundleRate, claimA:administration?, 
+                          claimA:admMemo?, claimA:bundleNumber?, 
+                          claimA:methodPoint?, claimA:materialPoint?, claimA:drugPoint?, 
+                          claimA:ppsClass?, claimA:item+, claimA:memo?) >
+<!ATTLIST claimA:bundle  claimA:classCode    CDATA    #IMPLIED
+                         claimA:classCodeId  CDATA    #IMPLIED  >
+<!ELEMENT claimA:patientDepartment  (mmlDp:Department) >
+<!ELEMENT claimA:patientWard  (mmlDp:Department) >
+<!ELEMENT claimA:className  (#PCDATA) >
+<!ELEMENT claimA:claimBundlePoint  (#PCDATA) >
+<!ELEMENT claimA:claimBundleRate  (#PCDATA) >
+<!ELEMENT claimA:administration  (#PCDATA) >
+<!ATTLIST claimA:administration  claimA:adminCode    CDATA    #IMPLIED
+                                 claimA:adminCodeId  CDATA    #IMPLIED >
+<!ELEMENT claimA:admMemo  (#PCDATA) >
+<!ELEMENT claimA:bundleNumber  (#PCDATA) >
+<!ELEMENT claimA:methodPoint  (#PCDATA) >
+<!ELEMENT claimA:materialPoint  (#PCDATA) >
+<!ELEMENT claimA:drugPoint  (#PCDATA) >
+<!ELEMENT claimA:ppsClass  (#PCDATA) >
+<!ELEMENT claimA:item  (claimA:name, claimA:number*, claimA:claimPoint?, 
+                        claimA:claimRate, claimA:duration?, 
+                        claimA:location*, claimA:film*, claimA:event?, claimA:memo?) >
+<!ATTLIST claimA:item  claimA:subclassCode    CDATA    #IMPLIED
+                       claimA:subclassCodeId  CDATA    #IMPLIED
+                       claimA:code            CDATA    #REQUIRED
+                       claimA:tableId         CDATA    #IMPLIED
+                       claimA:aliasCode       CDATA    #IMPLIED
+                       claimA:aliasTableId    CDATA    #IMPLIED  >
+<!ELEMENT claimA:name  (#PCDATA) >
+<!ELEMENT claimA:number  (#PCDATA) >
+<!ATTLIST claimA:number  claimA:numberCode    CDATA    #REQUIRED
+                         claimA:numberCodeId  CDATA    #REQUIRED
+                         claimA:unit          CDATA    #IMPLIED  >
+<!ELEMENT claimA:claimPoint  (#PCDATA) >
+<!ELEMENT claimA:claimRate  (#PCDATA) >
+<!ELEMENT claimA:duration  (#PCDATA) >
+<!ELEMENT claimA:location  (#PCDATA) >
+<!ELEMENT claimA:film  (claimA:filmSize, claimA:filmNumber) >
+<!ELEMENT claimA:event  (#PCDATA) >
+<!ATTLIST claimA:event  claimA:eventStart  CDATA    #IMPLIED
+                        claimA:eventEnd    CDATA    #IMPLIED  >
+<!ELEMENT claimA:memo  (#PCDATA) >
+<!ELEMENT claimA:filmSize  (#PCDATA) >
+<!ATTLIST claimA:filmSize  claimA:sizeCode    CDATA    #IMPLIED
+                           claimA:sizeCodeId  CDATA    #IMPLIED  >
+<!ELEMENT claimA:filmNumber  (#PCDATA) >
+

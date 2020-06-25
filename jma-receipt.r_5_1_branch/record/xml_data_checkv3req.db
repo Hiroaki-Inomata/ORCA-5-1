@@ -1,0 +1,27 @@
+xml_data_checkv3req {
+  context                                          int;
+  object                                           object;
+  mode                                             int;
+  recordname                                       varchar(128);
+  data_checkv3req {
+    Request_Number                                 varchar(02);
+    Karte_Uid                                      varchar(36);
+    Orca_Uid                                       varchar(36);
+    Perform_Month                                  varchar(07);
+    Start_Day                                      varchar(02);
+    End_Day                                        varchar(02);
+    InOut                                          varchar(01);
+    Check_Insurance_Information {
+      Id                                           varchar(50);
+    }[6];
+    Check_Item_Information {
+      Id                                           varchar(50);
+    }[21];
+    Outside_Processing_Class                       varchar(01);
+    Print_Order_Class                              varchar(01);
+    Patient_Information {
+      Patient_ID                                   varchar(20);
+    }[100];
+  };
+};
+

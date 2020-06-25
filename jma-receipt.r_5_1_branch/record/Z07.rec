@@ -1,0 +1,93 @@
+Z07 {
+  fixed1 {
+    OLDSRYCD {
+      textdata varchar(9);
+    };
+    YUKOYMD {
+      textdata varchar(10);
+    };
+    SRYCD {
+      textdata varchar(20);
+    };
+    OLDNAME {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    INPUTCD01 {
+      textdata varchar(20);
+    };
+    INPUTCD02 {
+      textdata varchar(20);
+    };
+    INPUTCD03 {
+      textdata varchar(20);
+    };
+    INPUTCD04 {
+      textdata varchar(20);
+    };
+    INPUTCD05 {
+      textdata varchar(20);
+    };
+    INPUTCD06 {
+      textdata varchar(20);
+    };
+    INPUTCD07 {
+      textdata varchar(20);
+    };
+    INPUTCD08 {
+      textdata varchar(20);
+    };
+    INPUTCD09 {
+      textdata varchar(20);
+    };
+    INPUTCD10 {
+      textdata varchar(20);
+    };
+    CMB_CHKCHG {
+      CHKCHG {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    CMB_YKJCHG {
+      YKJCHG {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    CMB_PTKINKICHG {
+      PTKINKICHG {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      TENSU_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(9);
+            column4 varchar(100);
+            column5 varchar(10);
+            column6 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    NEXT_MSG {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

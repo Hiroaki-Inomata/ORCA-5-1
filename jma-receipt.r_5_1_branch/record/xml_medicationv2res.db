@@ -1,0 +1,37 @@
+xml_medicationv2res {
+	context	   int;
+	object	   object;
+	mode	   int;
+	recordname	varchar(128);
+	medicationres {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+	Medication_Code				varchar(09);
+        Medication_Name				varchar(100);
+        Medication_Name_inKana			varchar(100);
+	StartDate				varchar(10);
+	EndDate					varchar(10);
+	Amount_Money				varchar(09);
+	Content_Amount_Money			varchar(1);
+	Total_Destination_Out			varchar(3);
+	Total_Destination_In			varchar(3);
+	Liability_Insurance_Total_Destination_Out	varchar(1);
+	Liability_Insurance_Total_Destination_In	varchar(1);
+	Location_Category			varchar(1);
+	Comment_Information   {
+		Column_Position			varchar(3);
+		Digit_Number			varchar(3);
+		} [5];
+	Medication_Information   {
+		Medication_Point		varchar(1);
+		} [5];
+	Medication_Category			varchar(1);
+	Unit_Code				varchar(3);
+	Data_Category				varchar(1);
+        CommercialName				varchar(200);
+        Specific_Equipment_Code			varchar(09);
+	};
+};

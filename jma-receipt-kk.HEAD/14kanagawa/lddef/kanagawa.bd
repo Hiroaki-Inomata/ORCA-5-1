@@ -1,0 +1,21 @@
+name	kanagawa;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU1403"	"OpenCOBOL";
+bind	"SEIKYU1405"	"OpenCOBOL";
+bind	"SEIKYU1407"	"OpenCOBOL";
+bind	"SEIKYU1409"	"OpenCOBOL";
+bind	"SEIKYU14BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU14BYOMEI2"	"OpenCOBOL";
+bind	"SEIKYU1411"	"OpenCOBOL";
+bind	"SEIKYU1413"	"OpenCOBOL";
+bind	"SOKATU1400"	"OpenCOBOL";
+bind	"SOKATU1410"	"OpenCOBOL";
+bind	"SOKATU1415"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

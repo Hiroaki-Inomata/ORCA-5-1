@@ -1,0 +1,75 @@
+tbl_genericname {
+	YAKKAKJNCD			char(12);
+	YUKOKETA			number(2,0);
+	GENERICNAME			char(200);
+	TANICD				char(3);
+	TANINAME			char(24);
+	KANZANCHI			number(10,5);
+	TERMID   			char(16);
+	OPID     			char(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	YAKKAKJNCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_genericname_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_genericname
+		WHERE	YAKKAKJNCD    =  (
+			SELECT
+			    CASE
+				WHEN EXISTS ( SELECT * FROM tbl_genericname WHERE yakkakjncd = :YAKKAKJNCD )
+				    THEN :YAKKAKJNCD
+				ELSE SUBSTR(:YAKKAKJNCD,1,9)
+			    END
+			)
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_genericname_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_genericname
+ 		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_genericname_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_genericname
+		WHERE   GENERICNAME    LIKE :GENERICNAME
+			ORDER	BY	GENERICNAME
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_genericname_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_genericname
+		WHERE	YAKKAKJNCD    =  :YAKKAKJNCD
+		;
+	};
+};
+
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_genericname_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_genericname
+		WHERE   GENERICNAME    = :GENERICNAME
+			ORDER	BY	YAKKAKJNCD
+		;
+	};
+};

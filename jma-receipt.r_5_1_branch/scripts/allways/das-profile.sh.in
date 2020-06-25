@@ -1,0 +1,92 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+HOSPNUM=$1
+HOSPID=$2
+
+PROFILE_COMMAND=das-profile.rb
+if [ -e ${PATCHSCRIPTSDIR}/monthly/das-upload.rb ]; then 
+  UPLOAD_COMMAND=$PATCHSCRIPTSDIR/monthly/das-upload.rb
+else
+  UPLOAD_COMMAND=$SCRIPTSDIR/monthly/das-upload.rb
+fi
+
+FILE_PROFILE=${DASDIR}/${HOSPNUM}/profile.tar.gz
+CSV_PROFILE=${MCP_TEMPDIR}/profile.csv
+LOG_FILE=${LOGDIR}/${HOSPNUM}das-profile.log
+[ -e "${LOG_FILE}"] && rm ${LOG_FILE}
+
+if [ -e ${PATCHLIBDIR}/etc/das-upload.conf ]; then 
+  DASCONF_HEAD="${PATCHLIBDIR}/etc/das-upload.conf"
+else
+  DASCONF_HEAD="${SYSCONFDIR}/das-upload.conf"
+fi
+
+DASCONFIG=${MCP_TEMPDIR}/das-upload$$.conf
+CLIENT_CONFIG_FILE="${DASCONFIG}"
+DAS_CHECK_HOSPID=${HOSPID}
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBDASCONF \
+          -parameter "M,${HOSPNUM},${HOSPID},,${DASCONFIG},${DASCONF_HEAD},"
+
+if [ ! -f ${CLIENT_CONFIG_FILE} ]; then
+  exit
+fi
+
+if ! [ -d ${DASDIR}/${HOSPNUM} ]; then 
+  mkdir ${DASDIR}/${HOSPNUM}
+fi
+
+# delete login check log
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+          -parameter "das-profile,D,,,,$HOSPNUM,"
+
+trap "rm -f ${DASCONFIG}" EXIT
+
+export CLIENT_CONFIG_FILE
+export CSV_PROFILE
+
+RESULT=`$PROFILE_COMMAND`
+if [ -e $CSV_PROFILE ]; then
+  tar cvzf $FILE_PROFILE -C${MCP_TEMPDIR} profile.csv
+  rm -f $CSV_PROFILE
+else
+  echo "$CSV_PROFILE not found"
+fi
+
+export DAS_CHECK_HOSPID
+
+if [ -e $FILE_PROFILE ]; then
+  UPTARGEFILE=1
+  RESULT=`$UPLOAD_COMMAND -p $FILE_PROFILE 2>&1|head -1`
+  echo ${RESULT}
+  if [ "UP $FILE_PROFILE" = "$RESULT" ]; then
+    echo "000" $RESULT
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBDASCONF \
+              -parameter "R,${HOSPNUM},${HOSPID},000,,,"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+              -parameter "das-profile,2,0,,000,$HOSPNUM,Upload success"
+  else
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBDASCONF \
+              -parameter "R,${HOSPNUM},${HOSPID},${RESULT:0:3},,,"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+              -parameter "das-profile,2,1,,${RESULT:0:3},$HOSPNUM,${RESULT:4:200}"
+    echo "${RESULT:0:3}","${RESULT:4}"
+  fi
+  rm $FILE_PROFILE
+fi
+
+if [ x$UPTARGEFILE != "x1" ]; then
+  RESULT="900 No file"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBDASCONF \
+            -parameter "R,${HOSPNUM},${HOSPID},${RESULT:0:3},,,"
+  echo "${RESULT:0:3}","${RESULT:4}"
+fi
+
+exit

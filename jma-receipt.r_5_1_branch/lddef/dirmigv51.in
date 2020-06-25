@@ -1,0 +1,11 @@
+name	orca;
+
+base	"@ORCA_DIR@";
+
+ddir	"@patchlddefdir@:@lddefdir@";
+record	"@patchrecorddir@:@recorddir@";
+
+#include	<./dbgroup.inc>
+bd	{
+        migv51;
+};

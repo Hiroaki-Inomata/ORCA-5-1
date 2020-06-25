@@ -1,0 +1,45 @@
+W92 {
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(1024);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed1 {
+    FILEDIR {
+      textdata varchar(200);
+    };
+    EFOUT_COMB {
+      EFOUT {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[10];
+    };
+    SRYCD1 {
+      textdata varchar(9);
+    };
+    NAME1 {
+      textdata varchar(100);
+    };
+    SRYCD2 {
+      textdata varchar(9);
+    };
+    NAME2 {
+      textdata varchar(100);
+    };
+    NUMBER_COMB {
+      NUMBER {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    KOH_RECEIPT_COMB {
+      KOH_RECEIPT {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+  };
+};

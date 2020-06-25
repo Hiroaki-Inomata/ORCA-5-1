@@ -1,0 +1,31 @@
+tbl_tekiou_medicine {
+	SRYCD		varchar(9);
+	KONOCD		varchar(5);
+	KAITEIYM	varchar(6);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+};
+primary	{
+	SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_medicine_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tekiou_medicine
+			WHERE SRYCD	=	:SRYCD
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_medicine_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tekiou_medicine
+		ORDER   BY  SRYCD
+		;
+	};
+};

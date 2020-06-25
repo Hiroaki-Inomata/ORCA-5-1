@@ -1,0 +1,42 @@
+Q100 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(80);
+    };
+    LBLFILENAME {
+      textdata varchar(14);
+    };
+    FILENAME {
+      textdata varchar(100);
+      state int;
+    };
+    LBLNUMSEL {
+      textdata varchar(10);
+    };
+    STNUM {
+      numdata number(9);
+    };
+    EDNUM {
+      numdata number(9);
+    };
+    FILE_COMBO {
+      state int;
+      FILE {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[6];
+    };
+    CDKBN_COMBO {
+      state int;
+      CDKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[5];
+    };
+  };
+};

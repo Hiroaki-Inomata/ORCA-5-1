@@ -1,0 +1,7 @@
+# name: MONBLOB操作用データ領域
+monblob {
+    id	    varchar(37);
+    blobid  object;
+    filename  varchar(400);
+    content_type varchar(100);
+}

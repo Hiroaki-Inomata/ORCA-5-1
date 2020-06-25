@@ -1,0 +1,334 @@
+tbl_onrece_body   {
+        HOSPNUM			number(2,0);
+	TEISYUTUSAKI		char(1);
+	HOSPCD			char(7);
+	SRYYM			char(6);
+	UCNT			number(3);
+	SCNT			number(3);
+	RENNUM			number(3);
+	RECEIPT_NO		number(6);
+#---> キー部
+	SYORIYMD		char(8);
+	UKEYMD			char(8);
+	SKYYMD			char(8);
+	RECV_FLG		number(1);
+	AMOUNT_FLG		number(1);
+	NYUGAIKBN		char(1);
+	RECESYUBETU		char(4);
+	SRYYM_B			char(6);
+	NAME			varchar(40);
+	SEX			char(1);
+	BIRTHDAY		char(8);
+	PTNUM			char(20);
+	PTID			number(10);
+	HKNJANUM		char(8);
+	KIGO			varchar(40);
+	NUM			varchar(40);
+	HKNNUM  		char(3);
+	TEISYUTUSAKI_B		char(1);
+	RECEKA  		char(2);
+	HOJOKBN			char(1);
+	KOHID			number(10);
+	TEKSTYMD        	char(8);
+	RECEIPT_KBN     	char(10);
+	H_TTL_TEN		number(8);
+	FTNNUM_1		varchar(8);
+	JKYNUM_1		varchar(7);
+	K_TTL_TEN_1		number(8);
+	FTNNUM_2		varchar(8);
+	JKYNUM_2		varchar(7);
+	K_TTL_TEN_2		number(8);
+	FTNNUM_3		varchar(8);
+	JKYNUM_3		varchar(7);
+	K_TTL_TEN_3		number(8);
+	FTNNUM_4		varchar(8);
+	JKYNUM_4		varchar(7);
+	K_TTL_TEN_4		number(8);
+	KAKUTEI_KBN		char(1);
+	ERR_KBN			char(2);
+	SEIKYU_INFO		varchar(40);
+#---> 受付・事務点検固有情報
+	U_ERR_CODE		char(4);
+	U_ERR_MSG_1		varchar(400);
+	U_ERR_MSG_2		varchar(512);
+	U_ERR_SRYKBN		char(2);
+	U_ERR_INFO		varchar(400);
+	U_TEN_NG		number(8);
+	U_TEN_OK		number(8);
+	U_HENREI_FLG		char(1);
+	U_YOBI1			varchar(10);
+	U_YOBI2			varchar(10);
+	END_FLG			number(1);
+#-----
+	TERMID			varchar(64);
+	OPID  			varchar(16);
+	CREYMD			char(8);
+	UPYMD 			char(8);
+	UPHMS 			char(6);
+#-----> 検索用項目
+	UCNT_V			number(3),virtual;
+	SCNT_V			number(3),virtual;
+	XXTEISYUTUSAKI		char(1),virtual;
+};
+
+primary {
+        HOSPNUM,TEISYUTUSAKI,HOSPCD,SRYYM,UCNT,SCNT,RENNUM,RECEIPT_NO;
+};
+
+path    key             {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND HOSPCD          = :HOSPCD
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+                    AND	RECEIPT_NO	= :RECEIPT_NO
+                ;
+        };
+};
+
+path    key1            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key1_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND HOSPCD          = :HOSPCD
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+                    AND	KAKUTEI_KBN	= '2'
+		ORDER	BY	RECEIPT_NO
+                ;
+        };
+};
+
+path    key2            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key2_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	NYUGAIKBN	= :NYUGAIKBN
+                    AND	SRYYM_B		= :SRYYM_B
+                    AND	PTID		= :PTID 
+                    AND	KAKUTEI_KBN	like :KAKUTEI_KBN
+                    AND	RENNUM		= 0
+		ORDER	BY	SYORIYMD DESC
+                ;
+        };
+};
+
+path    key3            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key3_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                    AND	SRYYM		= :SRYYM
+                    AND	NYUGAIKBN	= :NYUGAIKBN
+                    AND	SRYYM_B		= :SRYYM_B
+                    AND	PTID		= :PTID 
+                    AND	RENNUM		= 0
+		ORDER	BY	SYORIYMD DESC,UCNT DESC
+                ;
+        };
+};
+
+path    key4            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key4_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+		ORDER	BY	RECEIPT_NO
+                ;
+        };
+};
+
+path    key5            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key5_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	NYUGAIKBN	= :NYUGAIKBN
+                    AND	SRYYM_B		= :SRYYM_B
+                    AND	PTID		= :PTID 
+                    AND	RECESYUBETU     = :RECESYUBETU
+                    AND	HKNJANUM	= :HKNJANUM
+                    AND	KAKUTEI_KBN	like :KAKUTEI_KBN
+                    AND	RENNUM		= 0
+		ORDER	BY	SYORIYMD DESC
+                ;
+        };
+};
+
+path    key6            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key6_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	RENNUM		> 0
+                    ORDER BY RENNUM DESC,RECEIPT_NO
+                ;
+        };
+};
+
+path    upd1    {
+        DBUPDATE        {
+                UPDATE  tbl_onrece_body
+                                SET
+        HOSPNUM		=	:HOSPNUM,
+	TEISYUTUSAKI	=	:TEISYUTUSAKI,
+	SRYYM		=	:SRYYM,
+	UCNT		=	:UCNT,
+	SCNT		=	:SCNT,
+	RENNUM		=	:RENNUM,
+	RECEIPT_NO	=	:RECEIPT_NO,
+	SYORIYMD	=	:SYORIYMD,
+	UKEYMD		=	:UKEYMD,
+	SKYYMD		=	:SKYYMD,
+	RECV_FLG	=	:RECV_FLG,
+	AMOUNT_FLG	=	:AMOUNT_FLG,
+	NYUGAIKBN	=	:NYUGAIKBN,
+	RECESYUBETU	=	:RECESYUBETU,
+	SRYYM_B		=	:SRYYM_B,
+	NAME		=	:NAME,
+	SEX		=	:SEX,
+	BIRTHDAY	=	:BIRTHDAY,
+	PTNUM		=	:PTNUM,
+	PTID		=	:PTID,
+	HKNJANUM	=	:HKNJANUM,
+	KIGO		=	:KIGO,
+	NUM		=	:NUM,
+	TEISYUTUSAKI_B	=	:TEISYUTUSAKI_B,
+	RECEKA		=	:RECEKA,
+	HOJOKBN		=	:HOJOKBN,
+	KOHID		=	:KOHID,
+	TEKSTYMD	=	:TEKSTYMD,
+	RECEIPT_KBN	=	:RECEIPT_KBN,
+	H_TTL_TEN	=	:H_TTL_TEN,
+	FTNNUM_1	=	:FTNNUM_1,
+	JKYNUM_1	=	:JKYNUM_1,
+	K_TTL_TEN_1	=	:K_TTL_TEN_1,
+	FTNNUM_2	=	:FTNNUM_2,
+	JKYNUM_2	=	:JKYNUM_2,
+	K_TTL_TEN_2	=	:K_TTL_TEN_2,
+	FTNNUM_3	=	:FTNNUM_3,
+	JKYNUM_3	=	:JKYNUM_3,
+	K_TTL_TEN_3	=	:K_TTL_TEN_3,
+	FTNNUM_4	=	:FTNNUM_4,
+	JKYNUM_4	=	:JKYNUM_4,
+	K_TTL_TEN_4	=	:K_TTL_TEN_4,
+	KAKUTEI_KBN	=	:KAKUTEI_KBN,
+	ERR_KBN		=	:ERR_KBN,
+	SEIKYU_INFO	=	:SEIKYU_INFO,
+	U_ERR_CODE	=	:U_ERR_CODE,
+	U_ERR_MSG_1	=	:U_ERR_MSG_1,
+	U_ERR_MSG_2	=	:U_ERR_MSG_2,
+	U_ERR_SRYKBN	=	:U_ERR_SRYKBN,
+	U_ERR_INFO	=	:U_ERR_INFO,
+	U_TEN_NG	=	:U_TEN_NG,
+	U_TEN_OK	=	:U_TEN_OK,
+	U_HENREI_FLG	=	:U_HENREI_FLG,
+	U_YOBI1		=	:U_YOBI1,
+	U_YOBI2		=	:U_YOBI2,
+	UPYMD 		=	:UPYMD,
+	UPHMS 		=	:UPHMS
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT_V
+                    AND	SCNT		= :SCNT_V
+                    AND	RENNUM		= :RENNUM
+                    AND	RECEIPT_NO	= :RECEIPT_NO
+                ;
+        };
+};
+
+path    upd2    {
+        DBUPDATE        {
+                UPDATE  tbl_onrece_body
+                                SET
+	UKEYMD		=	:UKEYMD,
+	RECV_FLG	=	:RECV_FLG,
+	UPYMD 		=	:UPYMD,
+	UPHMS 		=	:UPHMS
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT_V
+                    AND	SCNT		= :SCNT_V
+                    AND	RENNUM		= :RENNUM
+                ;
+        };
+};
+path    key7            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key7_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+		ORDER	BY	U_YOBI1 DESC,U_YOBI2,PTNUM
+                ;
+        };
+};
+
+path    key8            {
+        DBSELECT        {
+                DECLARE tbl_onrece_body_key8_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_body
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND HOSPCD          = :HOSPCD
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+		ORDER	BY	RECEIPT_NO
+                ;
+        };
+};
+
+path	del1	{
+	DBDELETE	{
+		DELETE
+                FROM tbl_onrece_body
+		WHERE	HOSPNUM		= :HOSPNUM
+		    AND	UCNT		= :UCNT
+		    AND	SCNT		= :SCNT
+		    AND	substring(CREYMD,1,6) < :SRYYM
+		;
+	};
+};
+
+
+

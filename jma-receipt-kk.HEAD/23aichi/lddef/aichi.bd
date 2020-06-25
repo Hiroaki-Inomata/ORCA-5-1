@@ -1,0 +1,19 @@
+name	aichi;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU2303"	"OpenCOBOL";
+bind	"SEIKYU2304"	"OpenCOBOL";
+bind	"SEIKYU2305"	"OpenCOBOL";
+bind	"SEIKYU2306"	"OpenCOBOL";
+bind	"SEIKYU2307"	"OpenCOBOL";
+bind	"SEIKYU2309"	"OpenCOBOL";
+bind	"SOKATU2300"	"OpenCOBOL";
+bind	"SOKATU2310"	"OpenCOBOL";
+bind	"SOKATU2315"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

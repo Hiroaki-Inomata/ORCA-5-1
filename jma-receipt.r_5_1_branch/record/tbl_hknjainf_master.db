@@ -1,0 +1,141 @@
+tbl_hknjainf_master {
+	HOSPNUM				number(2,0);
+	HKNJANUM			varchar(8);
+	HKNJANAME			varchar(200);
+	HKNJANAME_TAN1		varchar(100);
+	HKNJANAME_TAN2		varchar(40);
+	HKNJANAME_TAN3		varchar(40);
+	HKNNUM  			varchar(3);
+	HON_GAIKYURATE 			number(3);
+	HON_NYUKYURATE 			number(3);
+	KZK_GAIKYURATE 			number(3);
+	KZK_NYUKYURATE 			number(3);
+	POST        		varchar(7);
+	ADRS			    varchar(200);
+	BANTI 		    	varchar(200);
+	TEL 			    varchar(15);
+	KIGO    			varchar(80);
+	IDOKBN  			varchar(1);
+	IDOYMD  			varchar(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+
+primary	{
+	HOSPNUM,HKNJANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hknjainf_master
+		WHERE	HOSPNUM  = :HOSPNUM  AND
+			HKNJANUM = :HKNJANUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_hknjainf_master
+			VALUES(
+				:HKNJANUM,
+				:HKNJANAME,
+				:HKNJANAME_TAN1,
+				:HKNJANAME_TAN2,
+				:HKNJANAME_TAN3,
+				:HKNNUM,
+				:HON_GAIKYURATE,
+				:HON_NYUKYURATE,
+				:KZK_GAIKYURATE,
+				:KZK_NYUKYURATE,
+				:POST,
+				:ADRS,
+				:BANTI,
+				:TEL,
+				:KIGO,
+				:IDOKBN,
+				:IDOYMD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS,
+				:HOSPNUM
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_hknjainf_master
+			SET
+				HKNJANUM =  :HKNJANUM,
+				HKNJANAME = :HKNJANAME,
+				HKNJANAME_TAN1 = :HKNJANAME_TAN1,
+				HKNJANAME_TAN2 = :HKNJANAME_TAN2,
+				HKNJANAME_TAN3 = :HKNJANAME_TAN3,
+				HKNNUM = :HKNNUM,
+				HON_GAIKYURATE = :HON_GAIKYURATE,
+				HON_NYUKYURATE = :HON_NYUKYURATE,
+				KZK_GAIKYURATE = :KZK_GAIKYURATE,
+				KZK_NYUKYURATE = :KZK_NYUKYURATE,
+				POST = :POST,
+				ADRS = :ADRS,
+				BANTI = :BANTI,
+				TEL = :TEL,
+				KIGO = :KIGO,
+				IDOKBN = :IDOKBN,
+				IDOYMD = :IDOYMD,
+				TERMID = :TERMID,
+				OPID = :OPID,
+				CREYMD = :CREYMD,
+				UPYMD = :UPYMD,
+				UPHMS = :UPHMS,
+				HOSPNUM = :HOSPNUM
+		WHERE	HOSPNUM  = :HOSPNUM  AND
+			HKNJANUM = :HKNJANUM
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_hknjainf_master
+		WHERE	HOSPNUM  = :HOSPNUM  AND
+			HKNJANUM = :HKNJANUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hknjainf_master
+		WHERE   HOSPNUM = :HOSPNUM  AND
+			SUBSTR(HKNJANUM,1,5) = SUBSTR(:HKNJANUM,1,5)
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_master_all_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hknjainf_master
+		WHERE	HOSPNUM = :HOSPNUM
+ 		;
+	};
+};
+
+path	key3		{ 
+	DBSELECT	{
+		DECLARE tbl_hknjainf_master_key3_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hknjainf_master
+		WHERE	HOSPNUM = :HOSPNUM  AND
+			HKNNUM  = :HKNNUM
+                ORDER BY HKNJANUM
+		;
+	};
+};

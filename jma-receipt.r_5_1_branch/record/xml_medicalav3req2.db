@@ -1,0 +1,75 @@
+xml_medicalav3req2 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3req2 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Patient_ID		varchar(20);
+    		Perform_Date		varchar(10);
+		Perform_Time		varchar(8);
+		Orca_Uid		varchar(36);
+#--- 処理区分
+		Patient_Mode		varchar(06);
+#---   同日再入院区分（連番）
+		Sequential_Number	varchar(1);
+		Modify_Information  {
+#--- 訂正対象診療科
+			Modify_Department_Code		varchar(02);
+			Modify_Insurance_Combination_Number	varchar(04);
+		};
+		Select_Mode		varchar(01);
+		Select_Answer		varchar(03);
+		Diagnosis_Information  {
+			Department_Code		varchar(2);
+			HealthInsurance_Information  {
+				Insurance_Combination_Number	varchar(04);
+				InsuranceProvider_Class		varchar(03);
+				InsuranceProvider_Number	varchar(08);
+				InsuranceProvider_WholeName	varchar(20);
+				HealthInsuredPerson_Symbol	varchar(80);
+				HealthInsuredPerson_Number	varchar(80);
+				HealthInsuredPerson_Continuation	varchar(01);
+				HealthInsuredPerson_Assistance	varchar(01);
+				RelationToInsuredPerson		varchar(01);
+				Certificate_StartDate		varchar(10);
+				Certificate_ExpiredDate		varchar(10);
+				PublicInsurance_Information   {
+					PublicInsurance_Class	varchar(03);
+					PublicInsurance_Name	varchar(20);
+					PublicInsurer_Number	varchar(08);
+					PublicInsuredPerson_Number	varchar(20);
+					Certificate_IssuedDate	varchar(10);
+					Certificate_ExpiredDate	varchar(10);
+				} [4];
+				};
+		Medical_OffTime		varchar(1);
+		Medical_Information  {
+			Medical_Info  {
+				Medical_Class		varchar(03);
+				Medical_Class_Name	varchar(40);
+				Medical_Class_Number	varchar(03);
+#-----  算定日
+				Medical_Calendar        varchar(31);
+				Medication_Info   {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(140);
+				Medication_Number	varchar(11);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info  {
+					Medication_Input_Code	varchar(10);
+					} [5] ;
+#----->                         フィルム分画数
+				Medication_Film_Comp_Number	varchar(03);
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_No_Addition_Class	varchar(03);
+				Medication_Auto_Addition	varchar(01);
+				} [50] ;
+			} [110] ;
+		};
+		};
+	};
+};

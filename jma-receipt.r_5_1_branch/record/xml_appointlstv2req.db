@@ -1,0 +1,11 @@
+xml_appointlstv2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	appointlstreq {
+		Appointment_Date		varchar(10);
+		Medical_Information		varchar(2);
+		Physician_Code			varchar(5);
+	};
+};

@@ -1,0 +1,7 @@
+W141 {
+  fixed6 {
+    NAME {
+      textdata varchar(128);
+    };
+  };
+};

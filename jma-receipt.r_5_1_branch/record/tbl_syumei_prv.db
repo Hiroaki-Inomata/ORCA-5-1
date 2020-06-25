@@ -1,0 +1,219 @@
+tbl_syumei_prv {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	DENPNUM          		number(7,0);
+	DENPEDANUM			number(2,0);
+	NYUKINRENNUM			number(3,0);
+	SRYKA				char(2);
+	MEISAIJOUTAIKBN                 char(1);
+	SKY_PRINTYMD			char(8);
+	SKY_REPRINTYMD			char(8);
+	RYOSYU_PRINTYMD			char(8);
+	RYOSYU_REPRINTYMD		char(8);
+	SKYMONEY			number(7,0);
+	NYUHEN_KBN			char(1);
+	NYUHEN_MONEY			number(7,0);
+	NYUHEN_YMD			char(8);
+	NYUKIN_HOHO			char(2);
+	JOUTAIKBN			char(1);
+	DAILYKEY			char(12);
+	SYURRKNUM			number(2,0);
+	SYUEDANUM			number(2,0);
+	SYURRKUPDKBN			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	CREHMS				char(6);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#--
+	UPNYUHEN_YMD			char(8),virtual;
+};
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,DENPNUM,DENPEDANUM,CREYMD ;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+			AND   DENPNUM         =  :DENPNUM
+			AND   DENPEDANUM      =  :DENPEDANUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+			ORDER   BY CREYMD DESC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+			AND   DENPNUM         =  :DENPNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key4_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syumei_prv a,tbl_ptnum b,tbl_ptinf c
+			WHERE   a.HOSPNUM        =  :HOSPNUM
+			AND     a.NYUGAIKBN     =  :NYUGAIKBN
+			AND     a.NYUHEN_YMD    =  :NYUHEN_YMD
+			AND     a.HOSPNUM        =  b.HOSPNUM
+			AND     a.PTID          =  b.PTID
+			AND     a.HOSPNUM        =  c.HOSPNUM
+			AND     a.PTID          =  c.PTID
+			AND     c.TSTPTNUMKBN  <> '1'
+			ORDER   BY a.SRYKA,b.PTNUM,a.DENPNUM,a.DENPEDANUM
+		;
+	};
+};
+
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+                        AND     NYUGAIKBN     =  :NYUGAIKBN
+			AND   DENPNUM         =  :DENPNUM
+			AND   DENPEDANUM      <  :DENPEDANUM
+                        ORDER BY	DENPEDANUM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+			AND   DENPNUM         =  :DENPNUM
+                        ORDER BY	DENPEDANUM
+		;
+	};
+};
+
+#sitekey
+path	st_key1 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_st_key1_csr CURSOR FOR
+        SELECT *
+		FROM tbl_syumei_prv
+        		WHERE   HOSPNUM        =  :HOSPNUM
+                AND     NYUHEN_YMD    =  :NYUHEN_YMD
+        ORDER BY	NYUGAIKBN,SRYKA,DENPNUM,DENPEDANUM
+		;
+	};
+};
+
+#sitekey
+path	st_key2 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_st_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+            AND     NYUHEN_YMD    =  :NYUHEN_YMD
+            ORDER BY	NYUGAIKBN,SRYKA,PTID,DENPNUM,DENPEDANUM
+		;
+	};
+};
+
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND   NYUGAIKBN       =  :NYUGAIKBN
+			AND   PTID            =  :PTID
+			AND   DENPNUM         =  :DENPNUM
+            ORDER BY	DENPEDANUM DESC
+		;
+	};
+};
+
+
+#sitekey
+path	st_key3 	{
+	DBSELECT	{
+		DECLARE tbl_syumei_prv_st_key3_csr CURSOR FOR
+		SELECT a.* FROM tbl_syumei_prv a,tbl_ptinf b
+		WHERE    a.HOSPNUM  =   :HOSPNUM 
+		AND   (a.NYUHEN_YMD    >= :NYUHEN_YMD
+		AND    a.NYUHEN_YMD    <= :UPNYUHEN_YMD)
+		AND   a.HOSPNUM  =  b.HOSPNUM
+		AND   a.PTID    =  b.PTID
+		AND   b.TSTPTNUMKBN <> '1'
+		;
+	};
+};
+path	delprv 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syumei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =  :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};

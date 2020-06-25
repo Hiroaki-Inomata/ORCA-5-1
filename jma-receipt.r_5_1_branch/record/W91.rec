@@ -1,0 +1,59 @@
+W91 {
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(1024);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed1 {
+    FILEDIR {
+      textdata varchar(200);
+    };
+    COOPBASE_COMB {
+      COOPBASE {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[10];
+    };
+    LABEL1 {
+      textdata varchar(50);
+    };
+    LABEL2 {
+      textdata varchar(50);
+    };
+    CHKSYREC {
+      isactive bool;
+      state int;
+    };
+    CHKJIHI {
+      isactive bool;
+      state int;
+    };
+    CHKPTNUM {
+      isactive bool;
+      state int;
+    };
+    CHKSYBYO {
+      isactive bool;
+      state int;
+    };
+    CHKNMREC {
+      isactive bool;
+      state int;
+    };
+    COOPBASE2_COMB {
+      COOPBASE2 {
+        textdata varchar(20);
+      };
+      state int;
+      count int;
+        item varchar(20)[10];
+    };
+    LABEL3 {
+      state int;
+    };
+    LABEL4 {
+      state int;
+    };
+  };
+};

@@ -1,0 +1,60 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    再印刷画面 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-XA02KYOUTU.
+      *
+      *警告メッセージ
+           03  SPA-XAIDCD                   PIC  X(04).
+           03  SPA-XAIDCD2                  PIC  X(04).
+      *警告画面より
+           03  SPA-XAID1-AREA. 
+               07  SPA-XAID1-FLG            PIC  X(02).
+               07  SPA-XA99-FLG             PIC  X(02).
+      *
+      **** 03  SPA-XA02-MOTOPG             PIC X(8).
+           03  SPA-XA02-LN-AREA.
+            05  SPA-XA02-LN-KEY.
+                07  SPA-XA02-LN-TBL-KEY    PIC X(8).
+                07  SPA-XA02-LN-RENNUM     PIC 9(4).
+                07  SPA-XA02-LN-TBL-GROUP  PIC X(14).
+                07  SPA-XA02-LN-SHORI-RENNUM
+                                           PIC 9(4).
+            05  SPA-XA02-LN-ST-PAGE        PIC 9(5).
+            05  SPA-XA02-LN-ED-PAGE        PIC 9(5).
+      *
+           03  SPA-XA02-JOB-PARAM.
+               05  SPA-XA02-JOB-ORCA-UID   PIC X(36).
+               05  SPA-XA02-JOB-KARTE-UID  PIC X(36).
+      *
+      *
+           03  SPA-XA02-MONBLOB-OCC        OCCURS  10.
+               05  SPA-XA02-MONBLOB-PRINT-ID   PIC X(37).
+               05  SPA-XA02-MONBLOB-DATA-ID    PIC X(37).
+      *
+           03  SPA-XA02-PUSHBA01-EVENT     PIC X(50).
+      *
+           03  SPA-XA02-TBL-GROUP          PIC X(14).
+           03  SPA-XA02-JOB-JOBID          PIC 9(07).
+

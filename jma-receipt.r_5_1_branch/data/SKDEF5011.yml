@@ -1,0 +1,23 @@
+kanri_cd    : "5011"
+name        : "定期請求作成指示コード"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "SYOKBN"
+  item_jp   : "処理区分"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "SRYYM"
+  item_jp   : "請求年月"
+  type      : "X"
+  start     : 2
+  length    : 6
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 8
+  length    : 493

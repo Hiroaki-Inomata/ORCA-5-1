@@ -1,0 +1,83 @@
+tbl_tekiou_disease_master {
+	KONOCD		varchar(5);
+	BYOMEI		varchar(200);
+	BEFORE_BYOMEI	varchar(100);
+	AFTER_BYOMEI	varchar(100);
+	BYOMEICD	varchar(7);
+	BEFORE_BYOMEICD	varchar(4);
+	AFTER_BYOMEICD	varchar(4);
+	ICD		varchar(5);
+	KAITEIYM	varchar(6);
+	HOJYOKBN	number(2);
+	KONOMEINO	number(6);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+#-----> virtual
+	SELSRYCD	varchar(9),virtual;
+	SELBYOMEI	varchar(200),virtual;
+};
+primary	{
+	KONOCD, BYOMEICD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_disease_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_tekiou_disease
+			WHERE   KONOCD   = :KONOCD
+			AND     BYOMEICD = :BYOMEICD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_tekiou_disease
+			VALUES(
+				:KONOCD,
+				:BYOMEI,
+				:BEFORE_BYOMEI,
+				:AFTER_BYOMEI,
+				:BYOMEICD,
+				:BEFORE_BYOMEICD,
+				:AFTER_BYOMEICD,
+				:ICD,
+				:KAITEIYM,
+				:HOJYOKBN,
+				:KONOMEINO,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_tekiou_disease
+			SET
+				KONOCD          = :KONOCD,
+				BYOMEI          = :BYOMEI,
+				BEFORE_BYOMEI   = :BEFORE_BYOMEI,
+				AFTER_BYOMEI    = :AFTER_BYOMEI,
+				BYOMEICD        = :BYOMEICD,
+				BEFORE_BYOMEICD = :BEFORE_BYOMEICD,
+				AFTER_BYOMEICD  = :AFTER_BYOMEICD,
+				ICD             = :ICD,
+				KAITEIYM        = :KAITEIYM,
+				HOJYOKBN        = :HOJYOKBN,
+				KONOMEINO       = :KONOMEINO,
+				CREYMD          = :CREYMD,
+				UPYMD           = :UPYMD,
+				UPHMS           = :UPHMS
+			WHERE   KONOCD   = :KONOCD
+			AND     BYOMEICD = :BYOMEICD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_tekiou_disease
+			WHERE   KONOCD   = :KONOCD
+			AND     BYOMEICD = :BYOMEICD
+		;
+	};
+};

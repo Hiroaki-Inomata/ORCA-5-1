@@ -1,0 +1,128 @@
+W17 {
+  fixed1 {
+    B06 {
+      state int;
+    };
+    CLISTSCROLL {
+      CHECKLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(4);
+            column3 varchar(21);
+            column4 varchar(15);
+            column5 varchar(15);
+            column6 varchar(10);
+            column7 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    SELNUM {
+      numdata number(2);
+    };
+    KOUHICOMBO {
+      KOUHI {
+        textdata varchar(24);
+      };
+      count int;
+        item varchar(24)[99];
+    };
+    FTSNUMCOMBO {
+      FTSNUM {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[2];
+    };
+    JKSNUMCOMBO {
+      JKSNUM {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[2];
+    };
+    FTSHANKAKUCOMBO {
+      FTSHANKAKU {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    FTSZENKAKUCOMBO {
+      FTSZENKAKU {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    FTSNUMERICCOMBO {
+      FTSNUMERIC {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    FTSKETACOMBO {
+      FTSKETA {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    FTSKETAMINCOMBO {
+      FTSKETAMIN {
+        textdata varchar(19);
+        state int;
+      };
+      count int;
+        item varchar(19)[10];
+      state int;
+    };
+    JKSHANKAKUCOMBO {
+      JKSHANKAKU {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    JKSZENKAKUCOMBO {
+      JKSZENKAKU {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    JKSNUMERICCOMBO {
+      JKSNUMERIC {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    JKSKETACOMBO {
+      JKSKETA {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    JKSKETAMINCOMBO {
+      JKSKETAMIN {
+        textdata varchar(19);
+        state int;
+      };
+      count int;
+        item varchar(19)[20];
+      state int;
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+  };
+};

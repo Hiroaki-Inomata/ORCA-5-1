@@ -1,0 +1,110 @@
+tbl_csv_info	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			char(8);
+	SRYYM			varchar(06);
+	SHELLID			varchar(20);
+	RENNUM  		number(3);
+	SHORI_RENNUM		number(3);
+	SEQ_NO  		number(6);
+	NYUGAIKBN		char(1);
+	SKYYMD   		varchar(08);
+	TEISYUTUSAKI		char(1);
+	PTID			number(10);
+	CSVDATA			varchar(2000);
+	CREYMD 			varchar(8);
+	CREHMS			varchar(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,SRYYM,SHELLID,RENNUM,SHORI_RENNUM,SEQ_NO;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_csv_info_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_csv_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                    AND   SRYYM 	=   :SRYYM
+                    AND   SHELLID	=   :SHELLID
+                    AND   RENNUM	=   :RENNUM
+                    AND   SHORI_RENNUM	=   :SHORI_RENNUM 
+                    AND   SEQ_NO	=   :SEQ_NO
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_csv_info_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_csv_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                    AND   SRYYM 	=   :SRYYM
+                    AND   SHELLID	=   :SHELLID
+                    AND   RENNUM	=   :RENNUM
+                    AND   SHORI_RENNUM	=   :SHORI_RENNUM 
+                    ORDER BY SEQ_NO
+		;
+	};
+};
+
+path    del1    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_csv_info
+		WHERE   HOSPNUM =   :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+                ;
+        };
+};
+
+path    del2    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_csv_info
+		WHERE   HOSPNUM =   :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+		AND     SRYYM	=   :SRYYM
+                ;
+        };
+};
+
+path    del3    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_csv_info
+		WHERE   HOSPNUM =   :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+		AND     SHELLID	=   :SHELLID
+		AND     SRYYM	=   :SRYYM
+                ;
+        };
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_csv_info_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_csv_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+		;
+	};
+};
+
+path    del4    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_csv_info
+		WHERE   HOSPNUM	 	=   :HOSPNUM
+		AND     TBL_KEY	 	=   :TBL_KEY
+		AND     SRYYM	 	=   :SRYYM
+		AND     SHELLID  	=   :SHELLID
+		AND   SHORI_RENNUM	=   :SHORI_RENNUM 
+                ;
+        };
+};
+
+

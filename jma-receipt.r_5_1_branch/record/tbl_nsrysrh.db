@@ -1,0 +1,124 @@
+tbl_nsrysrh {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	ZAINUM				number(9);
+	SRYYM				char(6);
+	SRYKA				char(2);
+	HKNCOMBINUM			char(4);
+	SRYKBN				char(2);
+	SRYCD				char(9);
+	SRYSURYO			number(10,5);
+	BRMNUM				char(8);
+	RM_SAGAKU			char(2);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#--
+	SELRRKNUM		    number(3,0),virtual;
+	SELSRYYMD    	    char(8),virtual;
+};
+primary	{
+	HOSPNUM,PTID,ZAINUM,SRYYM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_nsrysrh_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nsrysrh
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nsrysrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nsrysrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nsrysrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       >   :SRYYM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_nsrysrh_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nsrysrh
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM      >=   :SRYYM
+			AND   SRYYM      <=   :CREYMD
+			AND   SRYCD       =   :SRYCD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_nsrysrh_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nsrysrh
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+            AND   ZAINUM IN
+        ( SELECT  ZAINUM
+		  FROM tbl_nrrksrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+		 	  AND   PTID      =   :PTID
+              AND   RRKNUM    =   :SELRRKNUM
+			  AND   SRYYMD    =   :SELSRYYMD
+        )
+		;
+	};
+};
+
+path	key4 	{
+  DBSELECT	{
+    DECLARE tbl_nsrysrh_key4_csr CURSOR FOR
+    SELECT a.*
+    FROM tbl_nsrysrh a, tbl_nrrksrh b
+    WHERE   a.HOSPNUM   =  :HOSPNUM
+      AND   a.PTID      =  :PTID
+      AND   a.SRYYM     =  substr(b.SRYYMD , 1, 6)
+      AND   a.SRYCD     =  :SRYCD
+      AND   b.HOSPNUM   =  a.HOSPNUM
+      AND   b.PTID      =  a.PTID
+      AND   b.ZAINUM    =  a.ZAINUM
+      AND   b.RRKNUM    =  :SELRRKNUM
+      AND   b.SRYYMD   <=  :SELSRYYMD
+        ORDER BY  b.SRYYMD DESC
+        ;
+  };
+};
+

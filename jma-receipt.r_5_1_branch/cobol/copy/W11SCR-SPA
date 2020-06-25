@@ -1,0 +1,260 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    システム管理情報設定  出力先プリンタ名割り当てＳＰＡ
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+      *    画面用ＳＰＡ
+       01  SPA-W11.
+           03  SPA-W11-AREA.
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-LINE        PIC 9(02).
+               05  SPA-GMN-MAX         PIC 9(04).
+               05  SPA-GMN-CUR         PIC 9(04).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-STYUKYMD    PIC X(09).
+                   07  SPA-GMN-EDYUKYMD    PIC X(09).
+                   07  SPA-GMN-USE-PRINT-SERVER    PIC X(01).
+      *
+                   07  SPA-GMN-PAGENO      PIC 9(01).
+      *            出力先プリンタ割り当て情報
+                   07  SPA-GMN-1031-AREA.
+                       09  SPA-GMN-USERKBN-G.
+                           11  SPA-GMN-USERKBN     PIC X(01).
+                           11  SPA-GMN-U1          PIC X(01).
+                           11  SPA-GMN-USERKBNMEI  PIC X(18).
+      *
+                       09  SPA-GMN-USERKBNLST      OCCURS  5.
+                           11  SPA-GMN-USERKBNL    PIC X(01).
+                           11  SPA-GMN-U1L         PIC X(01).
+                           11  SPA-GMN-USERKBNMEIL PIC X(18).
+                       09  SPA-GMN-USERKBN-MAX     PIC 9(01).
+      *                有効判定
+                       09  SPA-GMN-YUKOKBN-G.
+                           11  SPA-GMN-YUKOKBN     PIC X(01).
+                           11  SPA-GMN-Y1          PIC X(01).
+                           11  SPA-GMN-YUKOKBNMEI  PIC X(18).
+      *
+                       09  SPA-GMN-YUKOKBNLST      OCCURS  2.
+                           11  SPA-GMN-YUKOKBNL    PIC X(01).
+                           11  SPA-GMN-Y1L         PIC X(01).
+                           11  SPA-GMN-YUKOKBNMEIL PIC X(18).
+                       09  SPA-GMN-YUKOKBN-MAX     PIC 9(01).
+      *
+                       09  SPA-GMN-USERLSTSCROLLE.
+                           11  SPA-GMN-USERLST         OCCURS  100.
+                               13  SPA-GMN-USERNUML.
+                                   15  SPA-GMN-UNUM    PIC X(03).
+                                   15  SPA-GMN-UMARK   PIC X(01).
+                               13  SPA-GMN-USERMEIL    PIC X(16).
+                           11  SPA-GMN-USERLST-MAX     PIC 9(03).
+      *
+                       09  SPA-GMN-SELNUM          PIC 9(03).
+                       09  SPA-GMN-TBL.
+      *                    外来・プリンタ名
+                           11  SPA-GMN-TBL01       OCCURS  20.
+                               13  SPA-GMN-TNAME   PIC X(30).
+                               13  SPA-GMN-TPRTNM  PIC X(16).
+      *                    外来・プログラム名
+                           11  SPA-GMN-TBL02       OCCURS  12.
+                               13  SPA-GMN-TORGPGNM
+                                                   PIC X(20).
+                               13  SPA-GMN-TORGPGCHK
+                                                   PIC X(01).
+                               13  SPA-GMN-TCSTPGNM
+                                                   PIC X(20).
+                               13  SPA-GMN-TCSTPGCHK
+                                                   PIC X(01).
+                           11  SPA-GPGNM-MAX       PIC 9(04).
+      *
+                       09  SPA-GMN-ORGPGNM03LST-G.
+                           11  SPA-GMN-ORGPGNM03MEIL  PIC X(20)
+                                                   OCCURS  6.
+                           11  SPA-GMN-ORGPGNM03-MAX
+                                                   PIC 9(04).
+      *                    入院帳票
+      *                    入院・プリンタ名
+                           11  SPA-GMN-TBL01-N         OCCURS  20.
+                               13  SPA-GMN-TNAME-N     PIC X(30).
+                               13  SPA-GMN-TPRTNM-N    PIC X(16).
+      *                    入院・プログラム名
+                           11  SPA-GMN-TBL02-N         OCCURS  10.
+                               13  SPA-GMN-TORGPGNM-N
+                                                       PIC X(20).
+                               13  SPA-GMN-TORGPGCHK-N
+                                                       PIC X(01).
+                               13  SPA-GMN-TCSTPGNM-N
+                                                       PIC X(20).
+                               13  SPA-GMN-TCSTPGCHK-N
+                                                       PIC X(01).
+                           11  SPA-NPGNM-MAX           PIC 9(04).
+                           11  SPA-NPGNM-MAX2          PIC 9(04).
+      *
+                       09  SPA-GMN-ORGPGNMLST-G.
+                           11  SPA-GMN-ORGPGNMLST          OCCURS 12.
+                               13  SPA-GMN-ORGPGNMLST-MAX  PIC 9(04).
+                               13  SPA-GMN-ORGPGNMMEIL PIC X(20)
+                                                       OCCURS  10.
+                       09  SPA-GMN-CSTPGNMLST-G.
+                           11  SPA-GMN-CSTPGNMLST          OCCURS 12.
+                               13  SPA-GMN-CSTPGNMLST-MAX  PIC 9(04).
+                               13  SPA-GMN-CSTPGNMMEIL PIC X(20)
+                                                       OCCURS  10.
+                       09  SPA-GMN-ORGPGNM-NLST-G.
+                           11  SPA-GMN-ORGPGNM-NLST          OCCURS 10.
+                               13  SPA-GMN-ORGPGNM-NLST-MAX  PIC 9(04).
+                               13  SPA-GMN-ORGPGNM-NMEIL PIC X(20)
+                                                       OCCURS  10.
+      *
+                       09  SPA-GMN-CSTPGNM-NLST-G.
+                           11  SPA-GMN-CSTPGNM-NLST          OCCURS 10.
+                               13  SPA-GMN-CSTPGNM-NLST-MAX  PIC 9(04).
+                               13  SPA-GMN-CSTPGNM-NMEIL PIC X(20)
+                                                       OCCURS  10.
+      *            帳票編集区分情報
+                   07  SPA-GMN-1030-AREA.
+                       09  SPA-GMN-SYOHOGEPRTFLG-G.
+                           11  SPA-GMN-SYOHOGEPRTFLG
+                                                  PIC X(01).
+                           11  SPA-GMN-F1         PIC X(01).
+                           11  SPA-GMN-SYOHOGEPRTFLGMEI
+                                                  PIC X(10).
+      *
+                       09  SPA-GMN-SYOHOGEPRTFLGLST    OCCURS  2.
+                           11  SPA-GMN-SYOHOGEPRTFLGL
+                                              PIC X(01).
+                           11  SPA-GMN-F1L        PIC X(01).
+                           11  SPA-GMN-SYOHOGEPRTFLGMEIL
+                                                  PIC X(10).
+                       09  SPA-GMN-SYOHOGEPRTFLG-MAX
+                                                  PIC 9(02).
+      *
+                       09  SPA-GMN-SYOHODSPNAME   PIC X(10).
+      *                カルテ３号紙様式
+                       09  SPA-GMN-KARUTE3KBN-G.
+                           11  SPA-GMN-KARUTE3KBN      PIC X(01).
+                           11  SPA-GMN-KARUTE3KBNF1    PIC X(01).
+                           11  SPA-GMN-KARUTE3KBN-MEI     PIC X(18).
+                       09  SPA-GMN-KARUTE3KBNLST-G  OCCURS  2.
+                           11  SPA-GMN-KARUTE3KBNLST      PIC X(20).
+                       09  SPA-GMN-KARUTE3KBN-MAX
+                                                  PIC 9(02).
+                       09  SPA-GMN-GAZOFOLDER     PIC X(128).
+      *
+      *                後発医薬品への変更可署名
+                       09  SPA-GMN-KOUHATUKA-G.
+                           11  SPA-GMN-KOUHATUKA       PIC X(01).
+                           11  SPA-GMN-KOUHATUKAF1     PIC X(01).
+                           11  SPA-GMN-KOUHATUKA-MEI   PIC X(20).
+                       09  SPA-GMN-KOUHATUKALST-G  OCCURS  3.
+                           11  SPA-GMN-KOUHATUKALST    PIC X(22).
+                       09  SPA-GMN-KOUHATUKA-MAX
+                                                  PIC 9(02).
+      *
+               05  SPA-NAIB-AREA.
+                   07  SPA-NAI-TBL.
+                       09  SPA-NAI-TBLO           OCCURS  100.
+                           11  SPA-NAI-USERCD     PIC 9(5).
+      *
+      *        出力先プリンタ割り当て 標準情報
+               05  SPA-HYOJUN-AREA.
+                   07  SPA-NAI-TBL01           OCCURS  20.
+                       09  SPA-NAI-TNAME       PIC X(30).
+                       09  SPA-NAI-TPRTNM      PIC X(16).
+      *
+                   07  SPA-NAI-TBL02           OCCURS  12.
+                       09  SPA-NAI-TORGPGNM    PIC X(20).
+                       09  SPA-NAI-TORGPGCHK   PIC X(01).
+                       09  SPA-NAI-TCSTPGNM    PIC X(20).
+                       09  SPA-NAI-TCSTPGCHK   PIC X(01).
+      *
+                   07  SPA-NAI-TBL01-N         OCCURS  20.
+                       09  SPA-NAI-TNAME-N     PIC X(30).
+                       09  SPA-NAI-TPRTNM-N    PIC X(16).
+      *
+                   07  SPA-NAI-TBL02-N         OCCURS  10.
+                       09  SPA-NAI-TORGPGNM-N  PIC X(20).
+                       09  SPA-NAI-TORGPGCHK-N PIC X(01).
+                       09  SPA-NAI-TCSTPGNM-N  PIC X(20).
+                       09  SPA-NAI-TCSTPGCHK-N PIC X(01).
+      *
+      *    出力先プリンタ割り当て コピー情報
+           03  SPA-COPY-AREA.
+               05  SPA-COPY-TBL             OCCURS  20.
+                   07  SPA-COPY-TNAME       PIC X(30).
+                   07  SPA-COPY-TPRTNM      PIC X(16).
+      *        05  SPA-COPY-TBL02           OCCURS  12.
+                   07  SPA-COPY-TORGPGNM    PIC X(20).
+                   07  SPA-COPY-TORGPGCHK   PIC X(01).
+                   07  SPA-COPY-TCSTPGNM    PIC X(20).
+                   07  SPA-COPY-TCSTPGCHK   PIC X(01).
+      *
+               05  SPA-COPY-TBL01-N         OCCURS  20.
+                   07  SPA-COPY-TNAME-N     PIC X(30).
+                   07  SPA-COPY-TPRTNM-N    PIC X(16).
+      *
+               05  SPA-COPY-TBL02-N         OCCURS  10.
+                   07  SPA-COPY-TORGPGNM-N  PIC X(20).
+                   07  SPA-COPY-TORGPGCHK-N PIC X(01).
+                   07  SPA-COPY-TCSTPGNM-N  PIC X(20).
+                   07  SPA-COPY-TCSTPGCHK-N PIC X(01).
+      *
+      *    帳票オフセット登録（Ｗ１１１）
+           03  SPA-W111-AREA.
+               05  SPA-W111-PAGE           PIC 9(02).
+               05  SPA-W111-CUR            PIC 9(02).
+      *
+               05  SPA-W111-LIST-G.
+                   07  SPA-W111-LIST       OCCURS  100.
+                       09  SPA-W111-TRENNUM         PIC 9(03).
+                       09  SPA-W111-TFORMID         PIC X(20).
+                       09  SPA-W111-TPRTNM          PIC X(16).
+                       09  SPA-W111-TOFFSET-X       PIC X(05).
+                       09  SPA-W111-TOFFSET-Y       PIC X(05).
+                       09  SPA-W111-NAI-KBNCD       PIC X(08).
+                   07  SPA-W111-LIST-MAX           PIC 9(03).
+      *
+               05  SPA-W111-GMN-G.
+                   07  SPA-W111-SELNUM             PIC 9(03).
+                   07  SPA-W111-FORMID             PIC X(20).
+                   07  SPA-W111-PRTNM              PIC X(16).
+                   07  SPA-W111-OFFSET-X           PIC X(05).
+                   07  SPA-W111-OFFSET-Y           PIC X(05).
+               05  SPA-W111-NAI-G.
+                   07  SPA-W111-KBNCD-MAX          PIC 9(08).
+                   07  SPA-W111-MAE-SELNUM         PIC 9(03).
+      *    テスト印刷（Ｗ６２）
+           03  SPA-W62-AREA.
+               05  SPA-W62-CUR            PIC 9(02).
+               05  SPA-W62-PRTNUM-G.
+                   07  SPA-W62-PRTKBN     PIC X(02).
+                   07  SPA-W62-PRTF       PIC X(01).
+                   07  SPA-W62-PRTNUM     PIC X(17).
+               05  SPA-W62-PRTNUMLST      OCCURS  20.
+                   07  SPA-W62-PRTKBNL    PIC X(02).
+                   07  SPA-W62-PRTFL      PIC X(01).
+                   07  SPA-W62-PRTNUML    PIC X(17).
+               05  SPA-W62-PRTNUM-MAX     PIC 9(02).
+               05  SPA-W62-OBJECT         PIC X(36).
+      *

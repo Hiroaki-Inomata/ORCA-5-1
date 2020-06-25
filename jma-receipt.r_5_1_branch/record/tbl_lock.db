@@ -1,0 +1,541 @@
+tbl_lock	{
+	HOSPNUM				number(2,0);
+#--> 端末ＩＤ
+	LOCK_TERMID		char(64);
+	LOCK_OPID		varchar(16);
+	KARTE_UID		varchar(36);
+	LOCKTABLE	{
+		LDNAME1		varchar(20);
+		LDNAME2		varchar(20);
+		LDNAME3		varchar(20);
+		LDNAME4		varchar(20);
+		LDNAME5		varchar(20);
+		LDNAME6		varchar(20);
+		LDNAME7		varchar(20);
+		LDNAME8		varchar(20);
+		LDNAME9		varchar(20);
+		LDNAME10	varchar(20);
+		LDNAME11	varchar(20);
+		LDNAME12	varchar(20);
+		LDNAME13	varchar(20);
+		LDNAME14	varchar(20);
+		LDNAME15	varchar(20);
+		LDNAME16	varchar(20);
+		LDNAME17	varchar(20);
+		LDNAME18	varchar(20);
+		LDNAME19	varchar(20);
+		LDNAME20	varchar(20);
+		LDNAME21	varchar(20);
+		LDNAME22	varchar(20);
+		LDNAME23	varchar(20);
+		LDNAME24	varchar(20);
+		LDNAME25	varchar(20);
+		LDNAME26	varchar(20);
+		LDNAME27	varchar(20);
+		LDNAME28	varchar(20);
+		LDNAME29	varchar(20);
+		LDNAME30	varchar(20);
+		LDNAME31	varchar(20);
+		LDNAME32	varchar(20);
+		LDNAME33	varchar(20);
+		LDNAME34	varchar(20);
+		LDNAME35	varchar(20);
+		LDNAME36	varchar(20);
+		LDNAME37	varchar(20);
+		LDNAME38	varchar(20);
+		LDNAME39	varchar(20);
+		LDNAME40	varchar(20);
+		LDNAME41	varchar(20);
+		LDNAME42	varchar(20);
+		LDNAME43	varchar(20);
+		LDNAME44	varchar(20);
+		LDNAME45	varchar(20);
+		LDNAME46	varchar(20);
+		LDNAME47	varchar(20);
+		LDNAME48	varchar(20);
+		LDNAME49	varchar(20);
+		LDNAME50	varchar(20);
+		PTID1		char(10);
+		PTID2		char(10);
+		PTID3		char(10);
+		PTID4		char(10);
+		PTID5		char(10);
+		PTID6		char(10);
+		PTID7		char(10);
+		PTID8		char(10);
+		PTID9		char(10);
+		PTID10		char(10);
+		PTID11		char(10);
+		PTID12		char(10);
+		PTID13		char(10);
+		PTID14		char(10);
+		PTID15		char(10);
+		PTID16		char(10);
+		PTID17		char(10);
+		PTID18		char(10);
+		PTID19		char(10);
+		PTID20		char(10);
+		PTID21		char(10);
+		PTID22		char(10);
+		PTID23		char(10);
+		PTID24		char(10);
+		PTID25		char(10);
+		PTID26		char(10);
+		PTID27		char(10);
+		PTID28		char(10);
+		PTID29		char(10);
+		PTID30		char(10);
+		PTID31		char(10);
+		PTID32		char(10);
+		PTID33		char(10);
+		PTID34		char(10);
+		PTID35		char(10);
+		PTID36		char(10);
+		PTID37		char(10);
+		PTID38		char(10);
+		PTID39		char(10);
+		PTID40		char(10);
+		PTID41		char(10);
+		PTID42		char(10);
+		PTID43		char(10);
+		PTID44		char(10);
+		PTID45		char(10);
+		PTID46		char(10);
+		PTID47		char(10);
+		PTID48		char(10);
+		PTID49		char(10);
+		PTID50		char(10);
+		SRYYM1		char(8);
+		SRYYM2		char(8);
+		SRYYM3		char(8);
+		SRYYM4		char(8);
+		SRYYM5		char(8);
+		SRYYM6		char(8);
+		SRYYM7		char(8);
+		SRYYM8		char(8);
+		SRYYM9		char(8);
+		SRYYM10		char(8);
+		SRYYM11		char(8);
+		SRYYM12		char(8);
+		SRYYM13		char(8);
+		SRYYM14		char(8);
+		SRYYM15		char(8);
+		SRYYM16		char(8);
+		SRYYM17		char(8);
+		SRYYM18		char(8);
+		SRYYM19		char(8);
+		SRYYM20		char(8);
+		SRYYM21		char(8);
+		SRYYM22		char(8);
+		SRYYM23		char(8);
+		SRYYM24		char(8);
+		SRYYM25		char(8);
+		SRYYM26		char(8);
+		SRYYM27		char(8);
+		SRYYM28		char(8);
+		SRYYM29		char(8);
+		SRYYM30		char(8);
+		SRYYM31		char(8);
+		SRYYM32		char(8);
+		SRYYM33		char(8);
+		SRYYM34		char(8);
+		SRYYM35		char(8);
+		SRYYM36		char(8);
+		SRYYM37		char(8);
+		SRYYM38		char(8);
+		SRYYM39		char(8);
+		SRYYM40		char(8);
+		SRYYM41		char(8);
+		SRYYM42		char(8);
+		SRYYM43		char(8);
+		SRYYM44		char(8);
+		SRYYM45		char(8);
+		SRYYM46		char(8);
+		SRYYM47		char(8);
+		SRYYM48		char(8);
+		SRYYM49		char(8);
+		SRYYM50		char(8);
+		STARTDATE1	char(8);
+		STARTDATE2	char(8);
+		STARTDATE3	char(8);
+		STARTDATE4	char(8);
+		STARTDATE5	char(8);
+		STARTDATE6	char(8);
+		STARTDATE7	char(8);
+		STARTDATE8	char(8);
+		STARTDATE9	char(8);
+		STARTDATE10	char(8);
+		STARTDATE11	char(8);
+		STARTDATE12	char(8);
+		STARTDATE13	char(8);
+		STARTDATE14	char(8);
+		STARTDATE15	char(8);
+		STARTDATE16	char(8);
+		STARTDATE17	char(8);
+		STARTDATE18	char(8);
+		STARTDATE19	char(8);
+		STARTDATE20	char(8);
+		STARTDATE21	char(8);
+		STARTDATE22	char(8);
+		STARTDATE23	char(8);
+		STARTDATE24	char(8);
+		STARTDATE25	char(8);
+		STARTDATE26	char(8);
+		STARTDATE27	char(8);
+		STARTDATE28	char(8);
+		STARTDATE29	char(8);
+		STARTDATE30	char(8);
+		STARTDATE31	char(8);
+		STARTDATE32	char(8);
+		STARTDATE33	char(8);
+		STARTDATE34	char(8);
+		STARTDATE35	char(8);
+		STARTDATE36	char(8);
+		STARTDATE37	char(8);
+		STARTDATE38	char(8);
+		STARTDATE39	char(8);
+		STARTDATE40	char(8);
+		STARTDATE41	char(8);
+		STARTDATE42	char(8);
+		STARTDATE43	char(8);
+		STARTDATE44	char(8);
+		STARTDATE45	char(8);
+		STARTDATE46	char(8);
+		STARTDATE47	char(8);
+		STARTDATE48	char(8);
+		STARTDATE49	char(8);
+		STARTDATE50	char(8);
+		ENDDATE1	char(8);
+		ENDDATE2	char(8);
+		ENDDATE3	char(8);
+		ENDDATE4	char(8);
+		ENDDATE5	char(8);
+		ENDDATE6	char(8);
+		ENDDATE7	char(8);
+		ENDDATE8	char(8);
+		ENDDATE9	char(8);
+		ENDDATE10	char(8);
+		ENDDATE11	char(8);
+		ENDDATE12	char(8);
+		ENDDATE13	char(8);
+		ENDDATE14	char(8);
+		ENDDATE15	char(8);
+		ENDDATE16	char(8);
+		ENDDATE17	char(8);
+		ENDDATE18	char(8);
+		ENDDATE19	char(8);
+		ENDDATE20	char(8);
+		ENDDATE21	char(8);
+		ENDDATE22	char(8);
+		ENDDATE23	char(8);
+		ENDDATE24	char(8);
+		ENDDATE25	char(8);
+		ENDDATE26	char(8);
+		ENDDATE27	char(8);
+		ENDDATE28	char(8);
+		ENDDATE29	char(8);
+		ENDDATE30	char(8);
+		ENDDATE31	char(8);
+		ENDDATE32	char(8);
+		ENDDATE33	char(8);
+		ENDDATE34	char(8);
+		ENDDATE35	char(8);
+		ENDDATE36	char(8);
+		ENDDATE37	char(8);
+		ENDDATE38	char(8);
+		ENDDATE39	char(8);
+		ENDDATE40	char(8);
+		ENDDATE41	char(8);
+		ENDDATE42	char(8);
+		ENDDATE43	char(8);
+		ENDDATE44	char(8);
+		ENDDATE45	char(8);
+		ENDDATE46	char(8);
+		ENDDATE47	char(8);
+		ENDDATE48	char(8);
+		ENDDATE49	char(8);
+		ENDDATE50	char(8);
+		STARTTIME1	char(8);
+		STARTTIME2	char(8);
+		STARTTIME3	char(8);
+		STARTTIME4	char(8);
+		STARTTIME5	char(8);
+		STARTTIME6	char(8);
+		STARTTIME7	char(8);
+		STARTTIME8	char(8);
+		STARTTIME9	char(8);
+		STARTTIME10	char(8);
+		STARTTIME11	char(8);
+		STARTTIME12	char(8);
+		STARTTIME13	char(8);
+		STARTTIME14	char(8);
+		STARTTIME15	char(8);
+		STARTTIME16	char(8);
+		STARTTIME17	char(8);
+		STARTTIME18	char(8);
+		STARTTIME19	char(8);
+		STARTTIME20	char(8);
+		STARTTIME21	char(8);
+		STARTTIME22	char(8);
+		STARTTIME23	char(8);
+		STARTTIME24	char(8);
+		STARTTIME25	char(8);
+		STARTTIME26	char(8);
+		STARTTIME27	char(8);
+		STARTTIME28	char(8);
+		STARTTIME29	char(8);
+		STARTTIME30	char(8);
+		STARTTIME31	char(8);
+		STARTTIME32	char(8);
+		STARTTIME33	char(8);
+		STARTTIME34	char(8);
+		STARTTIME35	char(8);
+		STARTTIME36	char(8);
+		STARTTIME37	char(8);
+		STARTTIME38	char(8);
+		STARTTIME39	char(8);
+		STARTTIME40	char(8);
+		STARTTIME41	char(8);
+		STARTTIME42	char(8);
+		STARTTIME43	char(8);
+		STARTTIME44	char(8);
+		STARTTIME45	char(8);
+		STARTTIME46	char(8);
+		STARTTIME47	char(8);
+		STARTTIME48	char(8);
+		STARTTIME49	char(8);
+		STARTTIME50	char(8);
+		ENDTIME1	char(8);
+		ENDTIME2	char(8);
+		ENDTIME3	char(8);
+		ENDTIME4	char(8);
+		ENDTIME5	char(8);
+		ENDTIME6	char(8);
+		ENDTIME7	char(8);
+		ENDTIME8	char(8);
+		ENDTIME9	char(8);
+		ENDTIME10	char(8);
+		ENDTIME11	char(8);
+		ENDTIME12	char(8);
+		ENDTIME13	char(8);
+		ENDTIME14	char(8);
+		ENDTIME15	char(8);
+		ENDTIME16	char(8);
+		ENDTIME17	char(8);
+		ENDTIME18	char(8);
+		ENDTIME19	char(8);
+		ENDTIME20	char(8);
+		ENDTIME21	char(8);
+		ENDTIME22	char(8);
+		ENDTIME23	char(8);
+		ENDTIME24	char(8);
+		ENDTIME25	char(8);
+		ENDTIME26	char(8);
+		ENDTIME27	char(8);
+		ENDTIME28	char(8);
+		ENDTIME29	char(8);
+		ENDTIME30	char(8);
+		ENDTIME31	char(8);
+		ENDTIME32	char(8);
+		ENDTIME33	char(8);
+		ENDTIME34	char(8);
+		ENDTIME35	char(8);
+		ENDTIME36	char(8);
+		ENDTIME37	char(8);
+		ENDTIME38	char(8);
+		ENDTIME39	char(8);
+		ENDTIME40	char(8);
+		ENDTIME41	char(8);
+		ENDTIME42	char(8);
+		ENDTIME43	char(8);
+		ENDTIME44	char(8);
+		ENDTIME45	char(8);
+		ENDTIME46	char(8);
+		ENDTIME47	char(8);
+		ENDTIME48	char(8);
+		ENDTIME49	char(8);
+		ENDTIME50	char(8);
+		FLG1		char(1);
+		FLG2		char(1);
+		FLG3		char(1);
+		FLG4		char(1);
+		FLG5		char(1);
+		FLG6		char(1);
+		FLG7		char(1);
+		FLG8		char(1);
+		FLG9		char(1);
+		FLG10		char(1);
+		FLG11		char(1);
+		FLG12		char(1);
+		FLG13		char(1);
+		FLG14		char(1);
+		FLG15		char(1);
+		FLG16		char(1);
+		FLG17		char(1);
+		FLG18		char(1);
+		FLG19		char(1);
+		FLG20		char(1);
+		FLG21		char(1);
+		FLG22		char(1);
+		FLG23		char(1);
+		FLG24		char(1);
+		FLG25		char(1);
+		FLG26		char(1);
+		FLG27		char(1);
+		FLG28		char(1);
+		FLG29		char(1);
+		FLG30		char(1);
+		FLG31		char(1);
+		FLG32		char(1);
+		FLG33		char(1);
+		FLG34		char(1);
+		FLG35		char(1);
+		FLG36		char(1);
+		FLG37		char(1);
+		FLG38		char(1);
+		FLG39		char(1);
+		FLG40		char(1);
+		FLG41		char(1);
+		FLG42		char(1);
+		FLG43		char(1);
+		FLG44		char(1);
+		FLG45		char(1);
+		FLG46		char(1);
+		FLG47		char(1);
+		FLG48		char(1);
+		FLG49		char(1);
+		FLG50		char(1);
+	};
+#-----> 主キー更新用項目
+#	UPSHELLID	char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,LOCK_TERMID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_lock_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_lock
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   LOCK_TERMID		=   :LOCK_TERMID 
+			ORDER   BY        LOCK_TERMID 
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_lock_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_lock
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND  (LOCK_TERMID 		<>   :LOCK_TERMID)
+            AND    (LOCKTABLE_FLG1 = '1'  OR
+                    LOCKTABLE_FLG2 = '1'  OR
+                    LOCKTABLE_FLG3 = '1'  OR
+                    LOCKTABLE_FLG4 = '1'  OR
+                    LOCKTABLE_FLG5 = '1'  OR
+                    LOCKTABLE_FLG6 = '1'  OR
+                    LOCKTABLE_FLG7 = '1'  OR
+                    LOCKTABLE_FLG8 = '1'  OR
+                    LOCKTABLE_FLG9 = '1'  OR
+                    LOCKTABLE_FLG10 = '1' OR
+                    LOCKTABLE_FLG11 = '1' OR
+                    LOCKTABLE_FLG12 = '1' OR
+                    LOCKTABLE_FLG13 = '1' OR
+                    LOCKTABLE_FLG14 = '1' OR
+                    LOCKTABLE_FLG15 = '1' OR
+                    LOCKTABLE_FLG16 = '1' OR
+                    LOCKTABLE_FLG17 = '1' OR
+                    LOCKTABLE_FLG18 = '1' OR
+                    LOCKTABLE_FLG19 = '1' OR
+                    LOCKTABLE_FLG20 = '1' OR
+                    LOCKTABLE_FLG21 = '1' OR
+                    LOCKTABLE_FLG22 = '1' OR
+                    LOCKTABLE_FLG23 = '1' OR
+                    LOCKTABLE_FLG24 = '1' OR
+                    LOCKTABLE_FLG25 = '1' OR
+                    LOCKTABLE_FLG26 = '1' OR
+                    LOCKTABLE_FLG27 = '1' OR
+                    LOCKTABLE_FLG28 = '1' OR
+                    LOCKTABLE_FLG29 = '1' OR
+                    LOCKTABLE_FLG30 = '1' OR
+                    LOCKTABLE_FLG31 = '1' OR
+                    LOCKTABLE_FLG32 = '1' OR
+                    LOCKTABLE_FLG33 = '1' OR
+                    LOCKTABLE_FLG34 = '1' OR
+                    LOCKTABLE_FLG35 = '1' OR
+                    LOCKTABLE_FLG36 = '1' OR
+                    LOCKTABLE_FLG37 = '1' OR
+                    LOCKTABLE_FLG38 = '1' OR
+                    LOCKTABLE_FLG39 = '1' OR
+                    LOCKTABLE_FLG40 = '1' OR
+                    LOCKTABLE_FLG41 = '1' OR
+                    LOCKTABLE_FLG42 = '1' OR
+                    LOCKTABLE_FLG43 = '1' OR
+                    LOCKTABLE_FLG44 = '1' OR
+                    LOCKTABLE_FLG45 = '1' OR
+                    LOCKTABLE_FLG46 = '1' OR
+                    LOCKTABLE_FLG47 = '1' OR
+                    LOCKTABLE_FLG48 = '1' OR
+                    LOCKTABLE_FLG49 = '1' OR
+                    LOCKTABLE_FLG50 = '1')
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_lock
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+#path	key3	{
+#	DBSELECT	{
+#		DECLARE tbl_lock_key3_csr CURSOR FOR
+#		SELECT *
+#		FROM tbl_lock
+#		WHERE 	HOSPNUM	= :HOSPNUM
+#			AND		JOBID		=  :JOBID
+#			AND		LOCK_TERMID		=  :LOCK_TERMID
+#		;
+#	};
+#};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_lock_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_lock
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+path  key4  {
+  DBSELECT  {
+    DECLARE tbl_lock_key4_csr CURSOR FOR
+    SELECT *
+    FROM tbl_lock
+    WHERE   LOCK_TERMID   =   :LOCK_TERMID
+      ORDER   BY        LOCK_TERMID
+    ;
+  };
+};
+
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_lock_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_lock
+		WHERE 	HOSPNUM	= :HOSPNUM
+		      ORDER   BY        LOCKTABLE_STARTDATE1,
+                                        LOCKTABLE_STARTTIME1
+		;
+	};
+};
+

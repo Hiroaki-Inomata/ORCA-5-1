@@ -1,0 +1,57 @@
+xml_patientmodv3req2 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3req2 {
+	Request_Number		varchar(2);
+	Karte_Uid		varchar(36);
+	Orca_Uid		varchar(36);
+	Base_Date		varchar(10);
+	Select_Answer		varchar(03);
+	Continue_Mode		varchar(05);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        };
+#---    ÊÝ¸±¾ðÊó
+	HealthInsurance_Information	{
+	    HealthInsurance_Info 	{
+            	InsuranceProvider_Mode			varchar(6);
+		InsuranceProvider_Id			varchar(10);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Branch_Number	varchar(2);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	Certificate_GetDate			varchar(10);
+            	Certificate_CheckDate			varchar(10);
+            	Rate_Class				varchar(01);
+            	} [40];
+        };
+#---    ¸øÈñ¾ðÊó
+ 	PublicInsurance_Information   {
+            PublicInsurance_Info      {
+                PublicInsurance_Mode			varchar(6);
+                PublicInsurance_Id			varchar(10);
+                PublicInsurance_Class			varchar(03);
+                PublicInsurance_Name			varchar(20);
+                PublicInsurer_Number			varchar(08);
+                PublicInsuredPerson_Number		varchar(20);
+                Certificate_IssuedDate			varchar(10);
+                Certificate_ExpiredDate			varchar(10);
+                Certificate_CheckDate			varchar(10);
+        	} [60];
+        };
+    };
+};

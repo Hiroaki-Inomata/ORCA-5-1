@@ -1,0 +1,59 @@
+O01 {
+  fixed17 {
+    B04 {
+      label varchar(10);
+      state int;
+    };
+    B13 {
+      state int;
+    };
+    LBLSRYYM {
+      textdata varchar(10);
+    };
+    LBLDENPPRTYMD {
+      textdata varchar(10);
+    };
+    LBLINFO01 {
+      textdata varchar(80);
+    };
+    CMB_PRTKBN {
+      PRTKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    SRYYM {
+      textdata varchar(7);
+      state int;
+    };
+    DENPPRTYMD {
+      textdata varchar(10);
+      state int;
+    };
+    IKKATU {
+      isactive bool;
+    };
+    KOBETU {
+      isactive bool;
+    };
+    CHK_KIKAN01 {
+      isactive bool;
+    };
+    CHK_KIKAN02 {
+      isactive bool;
+    };
+    CHK_KIKAN03 {
+      isactive bool;
+    };
+    KIKAN01 {
+      textdata varchar(20);
+    };
+    KIKAN02 {
+      textdata varchar(20);
+    };
+    KIKAN03 {
+      textdata varchar(20);
+    };
+  };
+};

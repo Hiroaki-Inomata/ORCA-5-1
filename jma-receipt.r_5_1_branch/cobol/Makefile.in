@@ -1,0 +1,83 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+
+SUBDIRS = \
+	common \
+	orca00 \
+	orca01 \
+	orca02 \
+	orca03 \
+	orca04 \
+	orca06 \
+	orca07 \
+	orca11 \
+	orca12 \
+	orca13 \
+	orca14 \
+	orca18 \
+	orca19 \
+	orca21 \
+	orca22 \
+	orca23 \
+	orca24 \
+	orca25 \
+	orca29 \
+	orca31 \
+	orca32 \
+	orca33 \
+	orca34 \
+	orca36 \
+	orca41 \
+	orca42 \
+	orca43 \
+	orca44 \
+	orca51 \
+	orca52 \
+	orca61 \
+	orca71 \
+	orca82 \
+	orca101 \
+	orca102 \
+	orca103 \
+	orca104 \
+	orca105 \
+	orca106 \
+	orca107 \
+	orca108 \
+	orca109 \
+	orca901 \
+	orcabt \
+	claim \
+	cutils \
+	api21 \
+	api01rv2 \
+	session 
+
+BINDIRS = bin
+
+COPYDIRS = copy
+
+all filecheck:   
+	@failcom='exit 1'; \
+	for f in x $$MAKEFLAGS; do \
+	  case $$f in \
+	    *=* | --[!k]*);; \
+	    *k*) failcom='fail=yes';; \
+	  esac; \
+	done; \
+	for i in $(COPYDIRS) $(SUBDIRS) $(BINDIRS); \
+	  do $(MAKE) -C $$i $@ || eval $$failcom; \
+	done
+clean: 
+	for i in $(COPYDIRS) $(SUBDIRS) $(BINDIRS); do $(MAKE) -C $$i $@; done
+distclean: 
+	for i in $(COPYDIRS) $(SUBDIRS) $(BINDIRS); do $(MAKE) -C $$i $@; done
+	-rm -f Makefile Makefile.global
+
+install installdirs:
+	for i in $(COPYDIRS) $(SUBDIRS) $(BINDIRS); do $(MAKE) -C $$i $@; done
+
+install-copys install-copydirs: 
+	for i in $(COPYDIRS); do $(MAKE) -C $$i $@ ; done

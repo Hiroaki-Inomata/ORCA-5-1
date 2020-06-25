@@ -1,0 +1,29 @@
+xml_medicalv3req6 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3req6 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Patient_ID		varchar(20);
+#---    診療年月
+		Perform_Date		varchar(7);
+#---    診療科
+		Department_Code		varchar(2);
+#---    入外区分
+		InOut			varchar(1);
+		Change_Information  {
+#---    前保険組合せ番号
+			Bf_Insurance_Combination_Number	varchar(04);
+#---    後保険組合せ番号
+			Af_Insurance_Combination_Number	varchar(04);
+#---    変更期間
+			Md_Start_Day	varchar(02);
+			Md_End_Day	varchar(02);
+#---   収納一括更新区分
+			Income_Change	varchar(03);
+		};
+	};
+};

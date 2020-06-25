@@ -1,0 +1,59 @@
+tbl_shoukaidata {
+	HOSPNUM		number(2,0);
+	UID		char(36);
+	ITEMID		number(5,0);
+	ITEM 		varchar(100);
+	TERMID		varchar(32);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+};
+
+primary	{
+	HOSPNUM,UID,ITEMID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaidata_key_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaidata
+		WHERE		HOSPNUM	= :HOSPNUM
+		AND			UID			=	:UID
+		AND			ITEMID	=	:ITEMID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaidata_key2_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaidata
+		WHERE		HOSPNUM	= :HOSPNUM
+		AND			UID			=	:UID
+		ORDER		BY	 ITEMID
+		;
+	};
+};
+
+path	del1		{ 	
+	DBDELETE	{
+		DELETE	FROM		tbl_shoukaidata
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND			UID			=	:UID
+		;
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaidata_all_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaidata
+		WHERE		HOSPNUM	= :HOSPNUM
+		;
+	};
+};

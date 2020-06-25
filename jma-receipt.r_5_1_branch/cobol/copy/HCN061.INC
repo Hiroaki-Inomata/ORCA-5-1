@@ -1,0 +1,36 @@
+        01  HCN061.
+            02  HCN061-TEISYUTUSAKI PIC X(6).
+            02  HCN061-PTNUM    PIC X(20).
+            02  HCN061-SRYY PIC X(2).
+            02  HCN061-SRYM PIC X(2).
+            02  HCN061-PREFNUM  PIC X(2).
+            02  HCN061-HOSPCDN  PIC X(20).
+            02  HCN061-NAIYO-TBL        OCCURS  140 TIMES.
+              03  HCN061-SRYKBN   PIC X(2).
+              03  HCN061-TEKIYO   PIC X(52).
+            02  HCN061-RJNFTNJANUM.
+              03  HCN061-RJNFTNJANUMS PIC X(1)    OCCURS  8 TIMES.
+            02  HCN061-KOHFTNJANUM1.
+              03  HCN061-KOHFTNJANUM1S    PIC X(1)    OCCURS  8 TIMES.
+            02  HCN061-KOHFTNJANUM2.
+              03  HCN061-KOHFTNJANUM2S    PIC X(1)    OCCURS  8 TIMES.
+            02  HCN061-KOHFTNJANUM1N    PIC X(20).
+            02  HCN061-KOHFTNJANUM2N    PIC X(20).
+            02  HCN061-HKNJANUM.
+              03  HCN061-HKNJANUMS    PIC X(1)    OCCURS  8 TIMES.
+            02  HCN061-KYURATE  PIC X(8).
+            02  HCN061-RJNJKYSNUM.
+              03  HCN061-RJNJKYSNUMS  PIC X(1)    OCCURS  7 TIMES.
+            02  HCN061-KOHJKYSNUM1.
+              03  HCN061-KOHJKYSNUM1S PIC X(1)    OCCURS  7 TIMES.
+            02  HCN061-KOHJKYSNUM2.
+              03  HCN061-KOHJKYSNUM2S PIC X(1)    OCCURS  7 TIMES.
+            02  HCN061-KOHJKYSNUM1N PIC X(20).
+            02  HCN061-KOHJKYSNUM2N PIC X(20).
+            02  HCN061-HKNSBT1  PIC X(6).
+            02  HCN061-HKNSBT2  PIC X(6).
+            02  HCN061-HONKZK   PIC X(10).
+            02  HCN061-KIGO PIC X(34).
+            02  HCN061-NUM  PIC X(34).
+            02  HCN061-RENNUM   PIC X(7).
+            02  HCN061-NAME PIC X(44).

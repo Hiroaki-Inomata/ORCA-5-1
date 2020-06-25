@@ -1,0 +1,6 @@
+---
+ - :name: foo
+   :version: "1.2"
+   :vendor: test
+   :date: "20090102"
+   :url: http://localhost:3000/foo-1.2.jpp

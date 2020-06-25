@@ -1,0 +1,93 @@
+tbl_infection_judgment {
+	ID		number(5,0);
+	DISEASE		number(2,0);
+	JUDGMENT_CODE	varchar(9);
+	CODE_KBN	number(1,0);
+	SRYKBN		varchar(2);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+};
+primary	{
+	ID;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection_judgment
+		WHERE        DISEASE  =  :DISEASE
+		;
+	};
+};
+
+path	key2		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection_judgment
+		WHERE        DISEASE  =  :DISEASE
+			AND  CODE_KBN =  :CODE_KBN
+		;
+	};
+};
+
+path	key3		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection_judgment
+		WHERE        ID  =  :ID
+		;
+	};
+};
+
+path	key4		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_key4_csr CURSOR FOR
+		SELECT DISEASE
+		FROM tbl_infection_judgment
+		WHERE JUDGMENT_CODE != '0000000'
+		  AND JUDGMENT_CODE != '000000000'
+		GROUP BY DISEASE
+		ORDER BY DISEASE
+		;
+	};
+};
+
+path	del1		{
+	DBDELETE	{
+		DELETE
+		FROM tbl_infection_judgment
+		WHERE        ID  =  :ID
+		;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_infection_judgment
+		ORDER BY DISEASE,CODE_KBN,JUDGMENT_CODE
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_infection_judgment
+				SET
+				ID      = :ID,
+				DISEASE      = :DISEASE,
+				JUDGMENT_CODE      = :JUDGMENT_CODE,
+				CODE_KBN      = :CODE_KBN,
+				SRYKBN      = :SRYKBN,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE        ID  =  :ID
+		;
+	};
+};

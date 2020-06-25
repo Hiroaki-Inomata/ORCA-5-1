@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    °õºþÃæ»ß½èÍý
+#        $1
+#        $2
+#-------------------------------------------#
+#
+        touch ${MCP_TEMPDIR}/$1$2.tmp
+
+        exit 

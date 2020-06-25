@@ -1,0 +1,9 @@
+xml_hsconfbasev2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Base_Date			varchar(10);
+	};
+};

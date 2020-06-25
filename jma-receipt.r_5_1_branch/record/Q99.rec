@@ -1,0 +1,20 @@
+Q99 {
+  fixed1 {
+    SELNUM {
+      numdata number(4);
+    };
+    scrolledwindow1 {
+      ADRSLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(7);
+            column3 varchar(50);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

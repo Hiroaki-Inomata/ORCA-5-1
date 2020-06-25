@@ -1,0 +1,172 @@
+W64 {
+  fixed6 {
+    scrolledwindow28 {
+      KOHNUMLST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(44);
+            column3 varchar(9);
+            column4 varchar(9);
+            column5 varchar(3);
+            column6 varchar(3);
+            column7 varchar(3);
+            column8 varchar(3);
+            column9 varchar(3);
+            column10 varchar(3);
+            column11 varchar(3);
+            column12 varchar(3);
+            column13 varchar(3);
+            column14 varchar(3);
+            column15 varchar(3);
+            column16 varchar(3);
+            column17 varchar(3);
+            column18 varchar(3);
+            column19 varchar(3);
+            column20 varchar(3);
+            column21 varchar(3);
+            column22 varchar(3);
+            column23 varchar(3);
+            column24 varchar(3);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    MEISYO {
+      textdata varchar(44);
+    };
+    MEISYO2 {
+      textdata varchar(44);
+    };
+    KOHNUM1 {
+      textdata varchar(3);
+    };
+    SEIDONAME1 {
+      textdata varchar(50);
+    };
+    KOHNUM2 {
+      textdata varchar(3);
+    };
+    SEIDONAME2 {
+      textdata varchar(50);
+    };
+    KOHNUM3 {
+      textdata varchar(3);
+    };
+    SEIDONAME3 {
+      textdata varchar(50);
+    };
+    KOHNUM4 {
+      textdata varchar(3);
+    };
+    SEIDONAME4 {
+      textdata varchar(50);
+    };
+    KOHNUM5 {
+      textdata varchar(3);
+    };
+    SEIDONAME5 {
+      textdata varchar(50);
+    };
+    KOHNUM6 {
+      textdata varchar(3);
+    };
+    SEIDONAME6 {
+      textdata varchar(50);
+    };
+    KOHNUM7 {
+      textdata varchar(3);
+    };
+    SEIDONAME7 {
+      textdata varchar(50);
+    };
+    KOHNUM8 {
+      textdata varchar(3);
+    };
+    SEIDONAME8 {
+      textdata varchar(50);
+    };
+    KOHNUM9 {
+      textdata varchar(3);
+    };
+    SEIDONAME9 {
+      textdata varchar(50);
+    };
+    KOHNUM10 {
+      textdata varchar(3);
+    };
+    SEIDONAME10 {
+      textdata varchar(50);
+    };
+    KOHNUM11 {
+      textdata varchar(3);
+    };
+    SEIDONAME11 {
+      textdata varchar(50);
+    };
+    KOHNUM12 {
+      textdata varchar(3);
+    };
+    SEIDONAME12 {
+      textdata varchar(50);
+    };
+    KOHNUM13 {
+      textdata varchar(3);
+    };
+    SEIDONAME13 {
+      textdata varchar(50);
+    };
+    KOHNUM14 {
+      textdata varchar(3);
+    };
+    SEIDONAME14 {
+      textdata varchar(50);
+    };
+    KOHNUM15 {
+      textdata varchar(3);
+    };
+    SEIDONAME15 {
+      textdata varchar(50);
+    };
+    KOHNUM16 {
+      textdata varchar(3);
+    };
+    SEIDONAME16 {
+      textdata varchar(50);
+    };
+    KOHNUM17 {
+      textdata varchar(3);
+    };
+    SEIDONAME17 {
+      textdata varchar(50);
+    };
+    KOHNUM18 {
+      textdata varchar(3);
+    };
+    SEIDONAME18 {
+      textdata varchar(50);
+    };
+    KOHNUM19 {
+      textdata varchar(3);
+    };
+    SEIDONAME19 {
+      textdata varchar(50);
+    };
+    KOHNUM20 {
+      textdata varchar(3);
+    };
+    SEIDONAME20 {
+      textdata varchar(50);
+    };
+  };
+};

@@ -1,0 +1,80 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#------------------------------------
+# TBL_FILE_MIS で管理されたファイル情報より
+# monblob からファイルを出力する 
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : monblob.id (UUID)
+# $3 : 保存場所
+# $4 : 出力ファイル
+# $5 : TO-DATA
+# $6 : ジョブＩＤ
+# $7 : シェルＩＤ
+# $8 : コード区分（1:EUC 2:S-jis 3:utf8）
+# $9 : TBL-KEY（RENKEI1 等）
+
+echo "arg1 [ " ${1} " ]"   
+echo "arg2 [ " ${2} " ]"   
+echo "arg3 [ " ${3} " ]"   
+echo "arg4 [ " ${4} " ]"   
+echo "arg5 [ " ${5} " ]"   
+echo "arg6 [ " ${6} " ]"   
+echo "arg7 [ " ${7} " ]"   
+echo "arg8 [ " ${8} " ]"   
+echo "arg9 [ " ${9} " ]"   
+
+HOSPNUM=`printf "%02d" $1`
+UUID="$2"
+
+if [ ${3} != '1' ]; then
+  OUTPUTFILE="${4}"
+else
+  OUTPUTFILE=${MCP_TEMPDIR}/${HOSPNUM}${5}
+fi
+
+#-------------------------------------------#
+#        ＴＯＵＫＥＩＣＳＶ＿Ｂからのファイル作成
+#        ${13} ファイル出力先
+#        ${15} TITLE
+#-------------------------------------------#
+
+${MONBLOB} -dir ${LDDIRECTORY} -export ${UUID} -output ${OUTPUTFILE}
+RC=$?
+
+#case ${14} in
+#  2)
+##   EUC => SJIS
+#    nkf -Esx -Lw $FILE_1 > ${CSVFILE}
+#    RC=$?
+#    ;;
+#  3)
+##   EUC => UTF8
+#    nkf --ic=EUC-JIS-2004 --oc=UTF-8 $FILE_1 | tru8.rb > ${CSVFILE}
+#    RC=$?
+#    ;;
+#  *)
+#    cp $FILE_1 ${CSVFILE}
+#    RC=$?
+#esac
+
+if  [ $RC -ne '0' ]; then
+  ERRCD='0000'$RC
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB -parameter JBE${6}${7}'  '${ERRCD:${#ERRCD}-4:4},${HOSPNUM} 
+  echo "--- convert err   ---" 
+  exit
+fi
+         
+SQLSTR="UPDATE tbl_file_mis SET putflg='1' WHERE tbl_uuid='${UUID}';"
+${MONSQL} -dir ${LDDIRECTORY} -c "${SQLSTR}"
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB -parameter JBE${6}${7},${HOSPNUM} 
+
+exit 0

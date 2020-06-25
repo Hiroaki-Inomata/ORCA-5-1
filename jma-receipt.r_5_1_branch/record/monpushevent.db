@@ -1,0 +1,40 @@
+monpushevent {
+  uuid         varchar(37);
+  id           integer;
+  event        varchar(64);
+  user_        varchar(32);
+  pushed_at    varchar(19);
+  data         varchar(4096);
+  pushed_from  varchar(32),virtual;
+  pushed_to    varchar(32),virtual;
+};
+
+primary  {
+    uuid;
+};
+
+path  key    {
+  DBSELECT  {
+    DECLARE monpushevent_key_csr CURSOR FOR
+    SELECT *
+    FROM monpushevent
+    WHERE id = :id
+    ;
+  };
+};
+
+path  key2    {
+  DBSELECT  {
+    DECLARE monpushevent_key2_csr CURSOR FOR
+    SELECT *
+    FROM monpushevent
+    WHERE
+        (CASE WHEN :event  <> ''       THEN event = :event ELSE true end)
+    AND (CASE WHEN :user_  <> ''       THEN user_ = :user_ ELSE true end)
+    AND (CASE WHEN :pushed_from  <> '' THEN pushed_at >= timestamp with time zone :pushed_from else true end)
+    AND (CASE WHEN :pushed_to    <> '' THEN pushed_at <= timestamp with time zone :pushed_to   else true end)
+    ORDER BY pushed_at,user_,event
+    ;
+  };
+};
+

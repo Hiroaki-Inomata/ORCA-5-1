@@ -1,0 +1,81 @@
+tbl_tensuplus2 {
+	HOSPNUM				number(2,0);
+	SRYCD				char(9);
+	CHOKINISSU 			number(3,0);
+	CHOKIKIGEN			char(8);
+	CHOKIERR  			number(1,0);
+	TOUYOKGNAGE1			char(2);
+	TOUYOJGNAGE1			char(2);
+	TOUYORYO11			number(10,5);
+	TOUYORYO21			number(10,5);
+	TOUYOKGNAGE2			char(2);
+	TOUYOJGNAGE2			char(2);
+	TOUYORYO12			number(10,5);
+	TOUYORYO22			number(10,5);
+	TOUYOKGNAGE3			char(2);
+	TOUYOJGNAGE3			char(2);
+	TOUYORYO13			number(10,5);
+	TOUYORYO23			number(10,5);
+	TOUYOKGNAGE4			char(2);
+	TOUYOJGNAGE4			char(2);
+	TOUYORYO14			number(10,5);
+	TOUYORYO24			number(10,5);
+	TOUYOKGNAGE5			char(2);
+	TOUYOJGNAGE5			char(2);
+	TOUYORYO15			number(10,5);
+	TOUYORYO25			number(10,5);
+	TOUYOKGNAGE6			char(2);
+	TOUYOJGNAGE6			char(2);
+	TOUYORYO16			number(10,5);
+	TOUYORYO26			number(10,5);
+	TOUYOKGNAGE7			char(2);
+	TOUYOJGNAGE7			char(2);
+	TOUYORYO17			number(10,5);
+	TOUYORYO27			number(10,5);
+	TOUYOKGNAGE8			char(2);
+	TOUYOJGNAGE8			char(2);
+	TOUYORYO18			number(10,5);
+	TOUYORYO28			number(10,5);
+	TOUYOKGNAGE9			char(2);
+	TOUYOJGNAGE9			char(2);
+	TOUYORYO19			number(10,5);
+	TOUYORYO29			number(10,5);
+	TOUYOKGNAGE10			char(2);
+	TOUYOJGNAGE10			char(2);
+	TOUYORYO110			number(10,5);
+	TOUYORYO210			number(10,5);
+	TOUYOERR 			number(1,0);
+	NAIFUKUKBN 			number(1,0);
+	TUKIJGNKAISU			number(3,0);
+	TUKIJGNTOUYORYO			number(10,5);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus2_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus2
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus2_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus2
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+

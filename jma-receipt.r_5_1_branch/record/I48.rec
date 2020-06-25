@@ -1,0 +1,27 @@
+I48 {
+  fixed32 {
+    INPUT {
+      textdata varchar(22);
+    };
+    SENTAKU {
+      textdata varchar(30);
+    };
+    SELNUM {
+      textdata varchar(3);
+    };
+    scrolledwindow26 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(70);
+            column3 varchar(6);
+            column4 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

@@ -1,0 +1,35 @@
+kanri_cd    : "5110"
+name        : "特定入院料（病棟）"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "SRYCD"
+  item_jp   : "診療コード"
+  type      : "X"
+  start     : 1
+  length    : 9
+- item_no   : 2
+  item      : "BTU-TOKUTEINYUIN-NM"
+  item_jp   : "特定入院料名称"
+  type      : "X"
+  start     : 10
+  length    : 60
+- item_no   : 3
+  item      : "BTU-TOKUTEINYUIN-NM2"
+  item_jp   : "特定入院料名称２"
+  type      : "X"
+  start     : 70
+  length    : 24
+- item_no   : 4
+  item      : "SEIKATU-RYOKBN"
+  item_jp   : "生活療養区分"
+  type      : "X"
+  start     : 94
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 95
+  length    : 406

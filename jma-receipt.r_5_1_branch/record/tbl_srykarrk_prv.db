@@ -1,0 +1,84 @@
+tbl_srykarrk_prv {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	SRYKA				char(2);
+	SYOSINYMD1			char(8);
+	SYOSINYMD2			char(8);
+	LASTYMD				char(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SRYKA;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_srykarrk_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_srykarrk_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY        SRYKA
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_srykarrk_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_srykarrk_prv_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   LASTYMD     <>  :LASTYMD
+			ORDER   BY        LASTYMD DESC
+		;
+	};
+};
+path	delprv 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_srykarrk_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};

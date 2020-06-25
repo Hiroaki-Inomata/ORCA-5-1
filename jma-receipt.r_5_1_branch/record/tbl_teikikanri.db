@@ -1,0 +1,58 @@
+tbl_teikikanri	{
+	HOSPNUM				number(2,0);
+        BTUNUM              char(2);
+        SYOKBN              char(1);
+        CREYMD              char(8);
+        CREHMS              char(6);
+        SRYYM               char(6);
+        PAGE                number(5);
+        KENSU               number(5);
+        TERMID              varchar(16);
+};
+
+primary	{
+	HOSPNUM,BTUNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikikanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikikanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+        AND   BTUNUM     =   :BTUNUM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_teikikanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikikanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_teikikanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikikanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikikanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+        AND   CREYMD     = :CREYMD
+	AND	CREHMS     = :CREHMS
+		;
+	};
+};
+

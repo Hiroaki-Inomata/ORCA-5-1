@@ -1,0 +1,95 @@
+xml_medicalv3res5 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3res5 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		};
+#---    リハビリ等開始日リスト
+	Perform_Information  {
+#---    開始日予約コード
+		Medication_Code		varchar(09);
+		Medication_Name		varchar(80);
+#---    算定年月
+		Perform_Date		varchar(7);
+#---    保険組合せ番号
+		Insurance_Combination_Number	varchar(04);
+#---    保険組合せ番号名称
+		Insurance_Combination_Name	varchar(100);
+#---    算定日
+		Perform_Day_Info {
+			Perform_Day	varchar(02);
+			} [31];
+#---    登録区分１
+		Perform_Code1 		varchar(1);
+#---    コメント登録区分２
+		Perform_Code2 		varchar(1);
+#---    終了日
+		Perform_End_Date		varchar(10);
+#---    終了日登録区分２
+		Perform_Code3 		varchar(1);
+		}[100];
+#---
+#---    選択算定履歴
+	Select_Perform_Information  {
+#---    処理区分
+		Perform_Mode		varchar(6);
+#---    開始日予約コード
+		Medication_Code		varchar(09);
+		Medication_Name		varchar(80);
+#---    算定年月
+		Perform_Date		varchar(7);
+#---    保険組合せ番号
+		Insurance_Combination_Number	varchar(04);
+#---    保険組合せ番号名称
+		Insurance_Combination_Name	varchar(100);
+#---    算定日
+		Perform_Day_Info {
+			Perform_Day	varchar(02);
+			} [31];
+#---    エラーメッセージ
+		Medical_Result_Information {
+	        	Result			varchar(4);
+	        	Result_Message		varchar(100);
+            		} [50];
+        	};
+#---    リハビリコメント内容
+	Rehabilitation_Comment_Information  {
+		Rehabilitation_Comment_Day_Info  {
+			Rehabilitation_Comment_Day	varchar(02);
+			Perform_End_Date		varchar(10);
+			Rehabilitation_Comment_Info    {
+				Rehabilitation_Comment		varchar(80);
+				Rehabilitation_Comment_End_Date	varchar(10);
+				} [50];
+#---    エラーメッセージ
+		        Comment_Result			varchar(4);
+		        Comment_Result_Message1		varchar(100);
+			}[31] ;
+		};
+#---    リハビリ等開始日未登録リスト
+	Not_Set_Perform_Information  {
+#---    開始日予約コード
+		Medication_Code		varchar(09);
+		Medication_Name		varchar(80);
+#---    適応開始日
+		Medication_Start_Date	varchar(10);
+		}[100] ;
+	};
+};

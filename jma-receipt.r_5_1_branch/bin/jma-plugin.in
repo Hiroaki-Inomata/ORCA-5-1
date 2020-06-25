@@ -1,0 +1,193 @@
+#!%RUBY%
+#coding:utf-8
+
+Encoding.default_external=Encoding::UTF_8
+
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__),"..","lib","ruby")))
+
+require "yaml"
+require "logger"
+require "optparse"
+require "plugin/manager"
+
+def parse_option(argv0, argv)
+  spec = [
+    ["-c", "--config=VAL",      "config file",    :config],
+    ["-r", "--root=VAL",        "root directory", :root],
+    ["-l", "--list=VAL",        "list url",       :list],
+    ["-p", "--linkprefix=VAL",  "link prefix",    :linkprefix],
+    ["-L", "--log=VAL",         "log",            :log],
+  ]
+  option = {}
+  parser = OptionParser.new{|opts|
+    opts.banner = "Usage: #{File.basename(argv0)} [option]\n"
+    opts.on_head("options:")
+    spec.each{|short, long, desc, key|
+      opts.on(short, long, desc){|arg|
+        option[key] = arg
+      }
+    }
+    opts.on("-n", "--no-verify", "don't verify") {
+      option[:verify] = false
+    }
+    opts.on("-d", "--debug", "debug mode") {
+      option[:debug] = true
+    }
+    opts.on_tail('--help', 'show this message'){
+      raise "help specified"
+    }
+  }
+  begin
+    parser.parse!(argv)
+  rescue RuntimeError => ex
+    puts parser
+    exit 1
+  end
+
+  config = YAML.load(File.read(option[:config])) rescue {}
+  config[:verify] = false if option[:verify] == false
+  config[:verify] = true  if config[:verify] == nil
+  log = Logger.new(option[:log] || STDERR)
+  log.level = option[:debug] ? Logger::DEBUG : Logger::INFO
+  config[:log] = log
+  config[:root] = option[:root] if option[:root]
+  config[:list] = [option[:list]] if option[:list]
+  config[:linkprefix] = option[:linkprefix] if option[:linkprefix]
+  return config
+end
+
+def parse_package_name(str)
+  if %r|(\w+)-([\w.]+)| =~ str
+    return [$1, $2]
+  else
+    raise "invalid package name: #{str}"
+  end
+end
+
+def parse_package_list(argv)
+  ret = []
+  argv.each { |str|
+    ret << parse_package_name(str)
+  }
+  return ret
+end
+
+def list4cobol(list)
+  available = {}
+  installed = {}
+  list.each{|r|
+    if r[:available] == "TRUE"
+      if available[r[:name]]
+        if r[:version] > available[r[:name]][:version]
+          available[r[:name]] = r
+        end
+      else
+        available[r[:name]] = r
+      end
+    end
+    if r[:install] == "TRUE" || r[:install] == "ERROR"
+      installed[r[:name]] = r
+    end
+  }
+  _list = []
+  list.map{|r| r[:name]}.sort.uniq.each{|n|
+    if installed[n]
+      r = installed[n]
+      r[:current] = r[:version]
+      if available[n]
+        r[:available] = available[n][:version]
+        r[:date] = available[n][:date]
+      else
+        r[:available] = "-"
+      end
+      _list << r
+    else
+      r = available[n]
+      r[:available] = r[:version]
+      r[:current] = "-"
+      _list << r
+    end
+  }
+  key = [:name,:current,:available,:description,:vendor,:date,:install,:link]
+  _list.each{|r| 
+    record = key.map{|k| 
+      printf("%s:%s\n",k.to_s + ' '*(15-k.to_s.size),r[k])
+    }
+  }
+end
+
+if $0 == __FILE__
+  begin
+    opts = parse_option($0, ARGV)
+    manager = JMA::Plugin::Manager.new(opts)
+
+    command_help = [
+      "install   <package>-<version> [<package>-<version>]...",
+      "uninstall <package>-<version> [<package>-<version>]...",
+      "enable    <package>-<version> [<package>-<version>]...",
+      "disable   <package>-<version> [<package>-<version>]...",
+      "list      [installed|linked|upgrade]",
+      "search    <package>",
+      "info      <package>-<version>"
+    ]
+
+    command = ARGV.shift
+    case command
+    when "install"
+      parse_package_list(ARGV).each{|p| manager.install(p[0],p[1])}
+    when "uninstall"
+      parse_package_list(ARGV).each{|p| manager.uninstall(p[0],p[1])}
+    when "enable"
+      parse_package_list(ARGV).each{|p| manager.link(p[0],p[1])}
+    when "disable"
+      parse_package_list(ARGV).each{|p| manager.unlink(p[0],p[1])}
+    when "update"
+      manager.update
+    when "upgrade"
+      manager.upgrade
+    when "upgrade2"
+      parse_package_list(ARGV).each{|p| manager.upgrade2(p[0],p[1])}
+    when "check"
+      install_error,link_error = manager.check
+      unless install_error.empty? || link_error.empty?
+        puts "error"
+        puts "= install error list"
+        install_error.each do |c|
+          puts "#{c[:name]}-#{c[:version]}"
+        end
+        puts "= linke error list"
+        link_error.each do |c|
+          puts "#{c[:name]}-#{c[:version]}"
+        end
+        exit 1
+      end
+      puts "ok"
+    when "restore"
+      manager.restore
+    when "force_restore"
+      manager.force_restore
+    when "list"
+      yaml = YAML.dump(manager.list(ARGV[0]))
+      puts yaml
+    when "list4cobol"
+      list4cobol(manager.list("all"))
+    when "search"
+      yaml = YAML.dump(manager.search(ARGV[0]))
+      puts yaml
+    when "info"
+      p = parse_package_name(ARGV[0])
+      yaml = YAML.dump(manager.info(p[0],p[1]))
+      puts yaml
+    else
+      puts "[ERROR] invalid command: #{command}"
+      puts command_help
+      exit 1
+    end
+  rescue Exception => ex
+    puts "[ERROR] #{ex.message}"
+    puts ex.backtrace
+    exit 1
+  end
+  exit 0
+
+end

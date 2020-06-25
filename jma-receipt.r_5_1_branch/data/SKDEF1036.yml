@@ -1,0 +1,17 @@
+kanri_cd    : "1036"
+name        : "π‚≥€¿¡µ·ªÒŒ¡Õ—ÃÙ∫ﬁ ¨Œ‡æ Û"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "BUNRUIMEI"
+  item_jp   : " ¨Œ‡Ãæ"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "ÕΩ»˜"
+  type      : "X"
+  start     : 41
+  length    : 459

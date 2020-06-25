@@ -1,0 +1,260 @@
+tbl_prvkanri	{
+	HOSPNUM				number(2,0);
+	TBL_KEY			char(8);
+	RENNUM			number(4);
+	TBL_GROUP		char(14);
+	TBL_UUID		char(36);
+	SHORI_RENNUM		number(4);
+	GYOUMU_CD               number(3);
+	SHELLID			varchar(20);
+	PRTID			varchar(20);
+	SRYYM			varchar(06);
+	SKYYMD  		varchar(08);
+	PTID			number(10);
+	PAGE	   		number(5);
+	MOD_FLG			char(1);
+	SHORI_MOD_FLG		char(1);
+	FILENAME		varchar(200);
+	TITLE			varchar(100);
+	PRTNM	  		varchar(16);
+	PTNUM			varchar(20);
+	MEMO 			varchar(100);
+	RECE_FLG 		number(4);
+	SHORI_KBN		char(1);
+	TBL_GROUP1		char(14);
+	TBL_GROUP2		char(14);
+	TBL_GROUP3		char(14);
+	TBL_GROUP4		char(14);
+	TBL_GROUP5		char(14);
+	TERMID			varchar(32);
+	OPID			varchar(16);
+	CREYMD			varchar(08);
+	UPYMD			varchar(08);
+	UPHMS			varchar(06);
+#-----> 検索用項目
+	STPAGE			number(5),virtual;
+	EDPAGE			number(5),virtual;
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM,PAGE;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY	=	:TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         =   :PAGE 
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    ORDER BY  RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         >=  :STPAGE
+                    AND     PAGE         <=  :EDPAGE
+                    ORDER BY TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM,PAGE    
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     RECE_FLG     =   :RECE_FLG
+                    AND     SHORI_KBN    =   :SHORI_KBN
+                    ORDER BY TBL_GROUP DESC
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     MOD_FLG      =   '1'
+	            ORDER BY TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM,PAGE
+		;
+	};
+};
+
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    ORDER BY TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM,PAGE   
+		;
+	};
+};
+
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     RENNUM       =   :RENNUM 
+                    ORDER BY TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM,PAGE 
+		;
+	};
+};
+
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+		;
+	};
+};
+
+path	del12	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    <>   :TBL_GROUP
+                    AND     RECE_FLG     =   :RECE_FLG
+                    AND     SHORI_KBN    =   :SHORI_KBN
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_prvkanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+path    del13   {
+        DBDELETE        {
+                DELETE
+                FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                ;
+        };
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    ORDER BY PAGE DESC
+		;
+	};
+};
+
+path	del14	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   ( TBL_KEY      =   'DAILY'   OR
+                            TBL_KEY      =   'ONLINE'     ) 
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+path	del15	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      <>   'DAILY'
+                    AND     TBL_KEY      <>   'ONLINE'
+                    AND     TBL_KEY      <>   'RECEPTX'
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_prvkanri_key9_csr CURSOR FOR
+		SELECT HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM,
+        COUNT(*) as PAGE,MIN(PAGE) as STPAGE,MAX(PAGE) as EDPAGE
+		FROM   tbl_prvkanri
+		WHERE  HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY	=	:TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM
+                    AND     PAGE         >=  :STPAGE
+                    AND     PAGE         <=  :EDPAGE
+        GROUP   BY  HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM
+		;
+	};
+};
+
+path	del16	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prvkanri
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND     RENNUM		=	:RENNUM
+		AND     TBL_GROUP	=	:TBL_GROUP
+		AND     TBL_UUID	=	:TBL_UUID
+		AND     SHORI_RENNUM	=	:SHORI_RENNUM
+		AND     PAGE		=	:PAGE
+		;
+	};
+};
+

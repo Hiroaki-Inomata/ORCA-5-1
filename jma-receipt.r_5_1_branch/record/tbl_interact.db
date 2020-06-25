@@ -1,0 +1,90 @@
+tbl_interact {
+	DRUGCD				char(9);
+	DRUGCD2				char(9);
+	SYOJYOUCD			char(7);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_interact_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_interact
+			WHERE   DRUGCD   =   :DRUGCD
+                ;
+	};
+};
+
+path	key1		{
+	DBSELECT	{
+		DECLARE tbl_interact_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_interact
+			WHERE	DRUGCD2	 =   :DRUGCD2
+		;
+	};
+};
+
+path	key2		{
+	DBSELECT	{
+		DECLARE tbl_interact_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_interact
+			WHERE	DRUGCD 	 =   :DRUGCD
+			   OR	DRUGCD2	 =   :DRUGCD
+		;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE tbl_interact_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_interact
+;
+	};
+};
+
+path	key3		{
+	DBSELECT	{
+		DECLARE tbl_interact_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_interact
+			WHERE	DRUGCD 	 =   :DRUGCD
+			AND	DRUGCD2	 =   :DRUGCD2
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_interact
+				SET	
+					DRUGCD		=	:DRUGCD,
+					DRUGCD2		=	:DRUGCD2,
+					SYOJYOUCD	=	:SYOJYOUCD,
+					TERMID		=	:TERMID,
+					OPID		=	:OPID,
+					CREYMD		=	:CREYMD,
+					UPYMD		=	:UPYMD,
+					UPHMS		=	:UPHMS
+			WHERE   DRUGCD		=	:DRUGCD
+			AND     DRUGCD2		=	:DRUGCD2
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_interact
+			WHERE   DRUGCD    =   :DRUGCD
+			AND     DRUGCD2   =   :DRUGCD2
+		;
+	};
+};
+

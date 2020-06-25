@@ -1,0 +1,27 @@
+SRCS = ORCGKT01.CBL \
+       ORCGKT011.CBL \
+       ORCGKT012.CBL \
+       ORCGKT013.CBL \
+       ORCGKT02.CBL \
+       ORCGKT03.CBL \
+       ORCGKT98.CBL \
+       ORCGKTERR.CBL \
+       ORCGKTERR2.CBL \
+       ORCGKTID1.CBL \
+       ORCGKTID2.CBL \
+       ORCSCKT95.CBL \
+       ORCSCKTWKSRY.CBL \
+       ORCSCKT100.CBL \
+       ORCSCKT10S.CBL \
+       ORCSCKTKNKCHK.CBL \
+       ORCSCKT10S200804.CBL \
+       ORCSCKT10S201004.CBL \
+       ORCSCKT10S201204.CBL \
+       ORCSCKT10S201404.CBL \
+       ORCSCKT10S201604.CBL \
+       ORCSCKT10S201804.CBL \
+       ORCSCKT10S202004.CBL \
+
+top_builddir = ../..
+include $(top_builddir)/cobol/Makefile.global
+

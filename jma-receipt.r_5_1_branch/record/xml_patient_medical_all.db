@@ -1,0 +1,51 @@
+xml_patient_medical_all {
+	context		int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	Patient_Medical_All {
+#----->		´µ¼Ô¾ðÊó
+		Patient_Information {
+		Patient_ID			varchar(20);
+		WholeName			varchar(100);
+		WholeName_inKana		varchar(100);
+		BirthDate			varchar(10);
+		Sex				varchar(1);
+		};
+#----->		¿ÇÎÅÆüÉÕ
+		Perform_Date			varchar(10);
+		Department_Code			varchar(2);
+		Department_Name			varchar(20);
+		Sequential_Number		varchar(1);
+#----->		ÅÁÉ¼ÈÖ¹æ
+		Invoice_Number			varchar(7);
+#----->		ÊÝ¸±ÁÈ¹ç¤»ÈÖ¹æ
+		Insurance_Combination_Number	varchar(4);
+#----->		¥É¥¯¥¿¡¼
+		Physician_Code			varchar(5);
+		Physician_WholeName		varchar(80);
+#----->		¹¹¿·Æü
+		Update_Date			varchar(10);
+		Update_Time			varchar(8);
+                Medical_Information_Overflow    varchar(5);
+#----->		¿ÇÎÅÆâÍÆ
+		Medical_Information  {
+			Medical_Class			varchar(3);
+			Medical_Class_Name		varchar(50);
+			Medical_Class_Number		varchar(3);
+			Medical_Class_Point		varchar(8);
+			Medical_Class_Money 		varchar(8);
+			Medical_Class_code 		varchar(1);
+			Medical_Inclusion_Class		varchar(5);
+#----->			Êñ³ç¸¡ºº¤Î¸¡ºº¿ô
+			Medical_Examination_Count	varchar(2);
+			Medication_info   {
+				Medication_Code		varchar(9);
+				Medication_Name		varchar(140);
+				Medication_Number	varchar(11);
+				Unit_Code		varchar(3);
+				Unit_Code_Name		varchar(24);
+			} [50];
+		} [50];
+	} [6];
+};

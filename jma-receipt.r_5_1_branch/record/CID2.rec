@@ -1,0 +1,19 @@
+CID2 {
+  fixed1 {
+    BYOMEICD1 {
+      textdata varchar(10);
+    };
+    BYOMEI1 {
+      textdata varchar(70);
+    };
+    BYOMEICD2 {
+      textdata varchar(10);
+    };
+    BYOMEI2 {
+      textdata varchar(70);
+    };
+    MSG {
+      textdata varchar(80);
+    };
+  };
+};

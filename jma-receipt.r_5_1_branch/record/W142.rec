@@ -1,0 +1,19 @@
+W142 {
+  fixed6 {
+    scrolledwindow28 {
+      hpos int;
+      vpos int;
+      DOCERILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(20);
+            column3 varchar(128);
+          }[25];
+          selectdata bool[25];
+      };
+    };
+  };
+};

@@ -1,0 +1,30 @@
+kanri_cd    : "5014"
+name        : "∞ÂŒ≈∂Ë ¨…Ωº®æ Û"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "ZAINUM"
+  item_jp   : "∫ﬁ»÷πÊ"
+  type      : "9"
+  start     : 1
+  length    : 8
+  precision : 0
+- item_no   : 2
+  item      : "SRYCD"
+  item_jp   : "ø«Œ≈π‘∞Ÿ•≥°º•…"
+  type      : "X"
+  start     : 9
+  length    : 9
+- item_no   : 3
+  item      : "DISPKBN"
+  item_jp   : "…Ωº®∂Ë ¨"
+  type      : "X"
+  start     : 18
+  length    : 1
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "ÕΩ»˜"
+  type      : "X"
+  start     : 19
+  length    : 482

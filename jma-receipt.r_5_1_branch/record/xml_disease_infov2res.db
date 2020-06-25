@@ -1,0 +1,57 @@
+xml_disease_infov2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	disease_infores {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+	Reskey			varchar(100);
+	Information_Overflow	varchar(5);
+	Disease_Infores {
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		};
+		Base_Date		varchar(07);
+		Disease_Information  {
+			Disease_InOut			varchar(1);
+			Department_Code			varchar(2);
+			Insurance_Combination_Number	varchar(4);
+			Third_Party_Mark		varchar(4);
+			Disease_Name			varchar(160);
+			Disease_Single	{
+				Disease_Single_Code	varchar(07);
+				Disease_Single_Name	varchar(160);
+#---> 状態(空白:通常 1:削除 2:廃止)
+				Disease_Single_Condition	varchar(01);
+			}[21] ;
+			Disease_Category		varchar(2);
+			Disease_SuspectedFlag		varchar(2);
+			Disease_StartDate		varchar(10);
+			Disease_EndDate			varchar(10);
+			Disease_OutCome			varchar(2);
+#---> 補足コメント
+			Disease_Supplement_Name		varchar(80);
+			Disease_Supplement_Single	{
+				Disease_Supplement_Single_Code	varchar(20);
+				Disease_Supplement_Single_Name	varchar(80);
+			}[3] ;
+#---> カルテ病名
+			Disease_Karte_Name		varchar(160);
+#---> 疾患区分
+			Disease_Class			varchar(02);
+#---> レセプト表示と期間
+			Disease_Receipt_Print		varchar(01);
+			Disease_Receipt_Print_Period	varchar(02);
+			Insurance_Disease		varchar(05);
+			Classification_Number_Mater	varchar(02);
+			Classification_Number_Servant	varchar(02);
+			Discharge_Certificate		varchar(1);
+		}[200] ;
+   	};
+};

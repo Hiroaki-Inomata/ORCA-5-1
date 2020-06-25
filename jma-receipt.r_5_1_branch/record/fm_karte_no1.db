@@ -1,0 +1,111 @@
+fm_karte_no1 {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	data {
+		Form_ID				varchar(30);
+        Custom_ID				varchar(30);
+		Printer					varchar(20);
+		Order_Class			varchar(1);
+		Patient	{
+			ID	 				    varchar(20);
+			Name 				    varchar(50);
+			KanaName  			varchar(50);
+			BirthDate 			varchar(10);
+			Sex					    varchar(1);
+			Taboo           varchar(100)[2];
+			Allergy         varchar(100)[2];
+			Infection       varchar(100)[2];
+			Comment         varchar(100)[2];
+			Condition       varchar(20)[3];
+			Ragistration_Date varchar(10);
+			Job              varchar(20);
+			HouseHolder_Name varchar(50);
+			Relationship    varchar(30);
+			Home_Address  {
+			  Address         varchar(100)[2];
+			  ZipCode         varchar(7);
+			  PhoneNumber     varchar(15);
+			  ContactNumber   varchar(15);
+			};
+			Contact_Address  {
+				Name            varchar(50);
+				Relationship    varchar(30);
+				Address         varchar(100)[2];
+				ZipCode         varchar(7);
+				PhoneNumber_Day varchar(15);
+				PhoneNumber_Night varchar(15);
+			};
+			Office_Address {
+				Name            varchar(50);
+				Address         varchar(100)[2];
+				ZipCode         varchar(7);
+				PhoneNumber     varchar(15);
+			};
+			Permanent_Address {
+				Name            varchar(50);
+				Address         varchar(100)[2];
+				ZipCode         varchar(7);
+				PhoneNumber     varchar(15);
+			};
+		};
+		Insurance_Combination_Information	{
+			Number									varchar(04);
+			Rate_Admission					varchar(03);
+			Rate_Outpatient					varchar(03);
+			InsuranceProvider_Class	varchar(03);
+			InsuranceProvider_Name	varchar(20);
+#--　保険年齢
+			HealthInsuredPerson_Age	varchar(03);
+#--　負担割合
+			HealthInsuredPerson_Rate	varchar(03);
+			HealthInsurance_Information	 {
+				InsuranceProvider_Name							varchar(100);
+				InsuranceProvider_Number						varchar(08);
+				InsuranceProvider_Address						varchar(100)[2];
+				InsuranceProvider_PhoneNumber				varchar(15);
+				HealthInsuredPerson_Symbol					varchar(80);
+				HealthInsuredPerson_Number					varchar(80);
+				HealthInsuredPerson_Branch_Number				varchar(2);
+				HealthInsuredPerson_Continuation		varchar(01);
+				HealthInsuredPerson_Assistance			varchar(01);
+				RelationToInsuredPerson							varchar(01);
+				HealthInsuredPerson_Name						varchar(100);
+				Certificate_StartDate								varchar(10);
+				Certificate_ExpiredDate							varchar(10);
+				Certificate_GetDate									varchar(10);
+			};
+			PublicInsurance_Information		{
+					PublicInsurance_Class			varchar(03);
+					PublicInsurance_Name			varchar(20);
+					PublicInsurer_Number			varchar(08);
+					PublicInsuredPerson_Number	varchar(20);
+					Certificate_IssuedDate		varchar(10);
+					Certificate_ExpiredDate		varchar(10);
+			}[4];
+			Accident_Insurance_Information	{
+				Accident_Insurance_Class		varchar(01);
+				Accident_Insurance_Number 	varchar(14);
+				Accident_StartDate					varchar(10);
+				Accident_ExpiredDate				varchar(10);
+				Disease_Date								varchar(10);
+				Office_Name									varchar(50);
+				Pref_Name										varchar(10);
+				City_Name										varchar(50);
+			};
+		};
+		Hospital	{
+			Name				varchar(60);
+		};
+		Disease_Information	{
+			Name				  									varchar(160);
+			MainDiseaseFlag									varchar(1);
+			SuspectedFlag										varchar(1);
+			StartDate												varchar(10);
+			EndDate													varchar(10);
+			OutCome_Class										varchar(1);
+		}[1000];
+		Memo						varchar(100)[5];
+	};
+};

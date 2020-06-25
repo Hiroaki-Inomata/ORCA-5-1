@@ -1,0 +1,37 @@
+xml_medicalget03v2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	medicalget03res {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		};
+	Perform_Date			varchar(7);
+	Medical_List_Information  {
+		Medical_Class			varchar(02);
+		Medical_Class_Name		varchar(50);
+		Medication_Code			varchar(09);
+		Medication_Name			varchar(140);
+		Unit_Code			varchar(3);
+		Unit_Code_Name			varchar(24);
+		Medical_Class_code 		varchar(01);
+		Medical_Inclusion_Class		varchar(05);
+		Perform_Total_Number		varchar(02);
+		Perform_Calendar  		varchar(31);
+		Perform_Day_Information  {
+			Perform_Day  			varchar(2);
+			Perform_Day_Number		varchar(11);
+	       	} [31];
+       	} [400];
+   	};
+};

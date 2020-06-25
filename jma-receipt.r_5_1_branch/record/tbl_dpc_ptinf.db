@@ -1,0 +1,109 @@
+tbl_dpc_ptinf {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	DPCRRKNUM			number(3,0);
+	DPCSTYMD			char(8);
+	DPCEDYMD			char(8);
+	BASEYMD				char(8);
+	IDOKBN				char(1);
+	YOTEIKBN			char(1);
+	ZENTAIINYMD			char(8);
+	DOBYOKBN			char(1);
+	BIRTHWT				char(4);
+	JCS				char(3);
+	BI				number(4,1);
+	JUSHODO				varchar(100);
+	TERMID				varchar(16);
+	OPID				varchar(16);
+	CREYMD				char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+	RRKNUM			    number(3,0),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,DPCRRKNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptinf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptinf
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		;
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptinf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptinf
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+        ORDER BY DPCRRKNUM DESC
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_dpc_ptinf_key3_csr CURSOR FOR
+		SELECT A.* FROM tbl_dpc_ptinf A,
+		(	SELECT HOSPNUM,PTID,DPCSTYMD,DPCEDYMD FROM tbl_dpc_ptinf
+			WHERE  HOSPNUM  = :HOSPNUM
+			AND    PTID     = :PTID
+			AND    DPCSTYMD = :DPCSTYMD
+			ORDER BY DPCSTYMD,DPCEDYMD DESC LIMIT 1 ) B
+		WHERE
+			    A.HOSPNUM   = :HOSPNUM
+			AND A.PTID      = :PTID
+			AND A.BASEYMD  >= :DPCSTYMD
+		 	AND A.BASEYMD  <= :DPCEDYMD
+		 	AND (A.DPCSTYMD > :DPCSTYMD
+		   OR	( A.DPCSTYMD >= B.DPCSTYMD AND A.DPCEDYMD >= B.DPCEDYMD))
+		;
+	};
+};
+
+path	del1	{
+	DBDELETE	{
+		DELETE 
+		FROM tbl_dpc_ptinf
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptinf_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptinf
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND (DPCRRKNUM      <   :DPCRRKNUM
+           OR :DPCRRKNUM     =   0 )
+        ORDER BY DPCRRKNUM DESC
+		;
+	};
+};
+
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptinf_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptinf
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCSTYMD       <=  :DPCSTYMD
+		 AND  DPCEDYMD       >=  :DPCEDYMD
+		;
+	};
+};

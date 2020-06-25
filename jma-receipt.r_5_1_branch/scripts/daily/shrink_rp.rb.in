@@ -1,0 +1,28 @@
+#!%RUBY%
+# coding : utf-8
+Encoding.default_external = "utf-8"
+
+require 'json'
+
+#euc-jpに変換する前のutf-8でデータを整形するため、10%ほど誤差を考慮
+MAX_BYTESIZE = 20000 * 0.9
+json_file_path = ARGV[0]
+
+array = open(json_file_path) do |io|
+  JSON.pretty_generate(JSON.load(io)).split(/\n/)
+end
+
+open(json_file_path, 'w') do |io|
+  last = array.inject do |result , text|
+    text.strip!
+    if result.bytesize + text.bytesize > MAX_BYTESIZE
+      io.puts result
+      result = text
+    else
+      result += text
+    end
+  end
+
+  io.puts last
+
+end

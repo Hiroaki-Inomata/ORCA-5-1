@@ -1,0 +1,10 @@
+xml_system01_dailyv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	system01_dailyreq {
+		Request_Number		varchar(2);
+		Base_Date		varchar(10);
+	};
+};

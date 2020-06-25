@@ -1,0 +1,46 @@
+xml_receipt_printv3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	receipt_printv3req {
+		Request_Number		varchar(02);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Perform_Date		varchar(10);
+#---     ¿ÇÎÅÇ¯·î(2016-09)
+		Perform_Month		varchar(07);
+#---     Æş³°¶èÊ¬(O :³°Íè I :Æş±¡)
+		InOut			varchar(01);
+#---     ½èÍı¶èÊ¬(All :°ì³ç All°Ê³°:¸ÄÊÌ)
+		Receipt_Mode		varchar(10);
+#---     °õºş¶èÊ¬(All :Á´·ï°õºş All°Ê³°:¸ÄÊÌ°õºş)
+		Print_Mode		varchar(5);
+#---     Äó½ĞÀè(°åÊİ 01:Á´·ï 02:¼ÒÊİ 03:¹ñÊİ 04:¹­°è
+#---            Ï«ºÒ 05
+#---            ¼«ÇåÀÕ 06:¿·ÍÍ¼° 07:½¾ÍèÍÍ¼° 08:Âè»°¼Ô¹Ô°Ù
+#---            ¸ø³² 09)
+		Submission_Mode		varchar(2);
+		Receipt_Information {
+			Submission_Information	{
+#---- $BO"HV(B
+				Submission_Position	varchar(05);
+				Detail_Information	{
+#---- $BO"HV(B
+					Detail_Position	varchar(05);
+#---- $B0u:~;X<((B(Yes :$B0u:~(B $B$=$l0J30(B :$B0u:~$7$J$$(B)
+					Print_Instruct	varchar(05);
+					Submission_Identification	varchar(2);
+#---- $B<oJL%3!<%I(B
+					Submission_Code	varchar(10);
+#---- $B<oJL(B
+					Submission_Type	varchar(100);
+#---- $B7o?t(B
+					Count		varchar(05);
+#---- $BKg?t(B
+					Number_Of_Sheets	varchar(05);
+				} [36];
+			} [19];
+		};
+	};
+};

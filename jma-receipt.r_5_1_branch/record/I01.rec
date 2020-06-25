@@ -1,0 +1,392 @@
+I01 {
+  fixed6 {
+    B07 {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    B10 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    B05 {
+      state int;
+    };
+    B15 {
+      label varchar(10);
+      state int;
+    };
+    B21 {
+      state int;
+    };
+    B24 {
+      label varchar(10);
+      state int;
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    SEX {
+      textdata varchar(4);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    AGE {
+      textdata varchar(8);
+    };
+    CMB_SYORIKBN {
+      SYORIKBN {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[20];
+    };
+    IDOYMD {
+      textdata varchar(10);
+      state int;
+    };
+    MAEIDOYMD {
+      textdata varchar(9);
+    };
+    BRMNUM {
+      textdata varchar(6);
+      state int;
+    };
+    CMB_BTUNAME {
+      BTUNAME {
+        textdata varchar(23);
+        state int;
+      };
+      count int;
+        item varchar(23)[50];
+      state int;
+    };
+    CMB_SAGAKU {
+      SAGAKU {
+        textdata varchar(23);
+        state int;
+      };
+      count int;
+        item varchar(23)[99];
+      state int;
+    };
+    CMB_TIMEKBN {
+      TIMEKBN {
+        textdata varchar(12);
+        state int;
+      };
+      count int;
+        item varchar(12)[5];
+      state int;
+    };
+    CMB_SENTEIKBN {
+      SENTEIKBN {
+        textdata varchar(24);
+        state int;
+      };
+      count int;
+        item varchar(24)[10];
+      state int;
+    };
+    NYUINYMD {
+      textdata varchar(10);
+      state int;
+    };
+    CMB_NYUINKA {
+      NYUINKA {
+        textdata varchar(27);
+        state int;
+      };
+      count int;
+        item varchar(27)[99];
+      state int;
+    };
+    CMB_SHOKAI {
+      SHOKAI {
+        textdata varchar(8);
+        state int;
+      };
+      count int;
+        item varchar(8)[5];
+      state int;
+    };
+    SHONUM {
+      numdata number(2);
+      state int;
+    };
+    LBL_SHONYUINYMD {
+      textdata varchar(16);
+    };
+    LBL_KAIGO {
+      textdata varchar(20);
+    };
+    CMB_KAIGO {
+      KAIGO {
+        textdata varchar(18);
+        state int;
+      };
+      count int;
+        item varchar(18)[5];
+      state int;
+    };
+    TAIINYMD {
+      textdata varchar(10);
+      state int;
+    };
+    CMB_TAIINCD {
+      TAIINCD {
+        textdata varchar(23);
+        state int;
+      };
+      count int;
+        item varchar(23)[50];
+      state int;
+    };
+    CMB_DR1 {
+      DR1 {
+        textdata varchar(29);
+        state int;
+      };
+      count int;
+        item varchar(29)[99];
+      state int;
+    };
+    CMB_DR2 {
+      DR2 {
+        textdata varchar(29);
+        state int;
+      };
+      count int;
+        item varchar(29)[99];
+      state int;
+    };
+    CMB_DR3 {
+      DR3 {
+        textdata varchar(29);
+        state int;
+      };
+      count int;
+        item varchar(29)[99];
+      state int;
+    };
+    CMB_HKNCOMBI {
+      HKNCOMBI {
+        textdata varchar(51);
+        state int;
+      };
+      count int;
+        item varchar(51)[30];
+      state int;
+    };
+    LBL_TOKNYUIN {
+      textdata varchar(10);
+    };
+    CMB_TOKNYUIN {
+      TOKNYUIN {
+        textdata varchar(63);
+        state int;
+      };
+      count int;
+        item varchar(63)[100];
+      state int;
+    };
+    CMB_TOKHIGAITO {
+      TOKHIGAITO {
+        textdata varchar(30);
+        state int;
+      };
+      count int;
+        item varchar(30)[5];
+      state int;
+    };
+    SNTNYUIN {
+      textdata varchar(60);
+      state int;
+    };
+    vp1 {
+      fixed7 {
+        LBLKSN01 {
+          textdata varchar(28);
+        };
+        LBLKSN02 {
+          textdata varchar(28);
+        };
+        LBLKSN03 {
+          textdata varchar(28);
+        };
+        CMB_KSN01 {
+          KSN01 {
+            textdata varchar(20);
+            state int;
+          };
+          count int;
+            item varchar(20)[5];
+          state int;
+        };
+        CMB_KSN02 {
+          KSN02 {
+            textdata varchar(20);
+            state int;
+          };
+          count int;
+            item varchar(20)[5];
+          state int;
+        };
+        CMB_KSN03 {
+          KSN03 {
+            textdata varchar(20);
+            state int;
+          };
+          count int;
+            item varchar(20)[5];
+          state int;
+        };
+      };
+    };
+    CMB_SEIKYU {
+      SEIKYU {
+        textdata varchar(24);
+        state int;
+      };
+      count int;
+        item varchar(24)[5];
+      state int;
+    };
+    CMB_DISPKBN {
+      DISPKBN {
+        textdata varchar(11);
+        state int;
+      };
+      count int;
+        item varchar(11)[5];
+      state int;
+    };
+    CMB_USERPG {
+      USERPG {
+        textdata varchar(22);
+        state int;
+      };
+      count int;
+        item varchar(22)[2];
+      state int;
+    };
+    CMB_NYUCALKBN {
+      NYUCALKBN {
+        textdata varchar(30);
+        state int;
+      };
+      count int;
+        item varchar(30)[5];
+      state int;
+    };
+    LBL_BUNBENKBN {
+      textdata varchar(20);
+    };
+    CMB_BUNBENKBN {
+      BUNBENKBN {
+        textdata varchar(20);
+        state int;
+      };
+      count int;
+        item varchar(20)[5];
+      state int;
+    };
+    LBL_RIYOUKBN {
+      textdata varchar(20);
+    };
+    CMB_RIYOUKBN {
+      RIYOUKBN {
+        textdata varchar(20);
+        state int;
+      };
+      count int;
+        item varchar(20)[5];
+      state int;
+    };
+    CMB_SKJKBN {
+      SKJKBN {
+        textdata varchar(24);
+        state int;
+      };
+      count int;
+      item varchar(24)[10];
+      state int;
+    };
+    LBL_SKJKBN_ASA {
+        textdata varchar(2);
+    };
+    CMB_SKJKBN_ASA {
+      SKJKBN_ASA {
+        textdata varchar(24);
+        state int;
+      };
+      visible bool;
+      count int;
+      item varchar(24)[10];
+      state int;
+    };
+    LBL_SKJKBN_HIRU {
+        textdata varchar(2);
+    };
+    CMB_SKJKBN_HIRU {
+      SKJKBN_HIRU {
+        textdata varchar(24);
+        state int;
+      };
+      visible bool;
+      count int;
+      item varchar(24)[10];
+      state int;
+    };
+    LBL_SKJKBN_YU {
+        textdata varchar(2);
+    };
+    CMB_SKJKBN_YU {
+      SKJKBN_YU {
+        textdata varchar(24);
+        state int;
+      };
+      visible bool;
+      count int;
+      item varchar(24)[10];
+      state int;
+    };
+    LBLINFO {
+      style varchar(20);
+      textdata varchar(160);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      NYUREKILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(4);
+            column4 varchar(20);
+            column5 varchar(6);
+            column6 varchar(9);
+            column7 varchar(11);
+            column8 varchar(20);
+            column9 varchar(40);
+            column10 varchar(4);
+            column11 varchar(5);
+            column12 varchar(5);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

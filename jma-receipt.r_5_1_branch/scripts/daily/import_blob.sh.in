@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        データファイルＤＢ保存
+#
+#        $1 データファイル名
+#        $2 IDファイル名
+#-------------------------------------------#
+DATA_FILE=${MCP_TEMPDIR}/"$1"
+ZIP_FILE=${MCP_TEMPDIR}/$(uuidgen).zip
+FILELIST=${MCP_TEMPDIR}/filelist.txt.$$
+ID_FILE=${MCP_TEMPDIR}/$2
+
+cd ${MCP_TEMPDIR}  
+find  . -maxdepth 1 -type f  -regextype posix-egrep -regex ".*/$1" -print0 | sort -z | xargs -0 -i basename {} > ${FILELIST}
+if [ -s "${FILELIST}" ]; then
+#  zip ${ZIP_FILE} -j ${FILELIST}
+  zip ${ZIP_FILE} -j -@<  ${FILELIST} 
+  ${MONBLOB} -dir ${LDDIRECTORY} -import ${ZIP_FILE} > ${ID_FILE}
+  rm  -f $1  ${ZIP_FILE} $(cat ${FILELIST}) ${FILELIST}
+fi
+exit
+

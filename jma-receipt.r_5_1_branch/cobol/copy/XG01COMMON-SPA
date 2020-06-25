@@ -1,0 +1,39 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    統計ＣＳＶ出力共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-XG01KYOUTU.
+           03  SPA-XG01-CUR            PIC 9(05).
+           03  SPA-XG01-TBL-GROUP      PIC X(14).
+           03  SPA-XG01-JOB-JOBID      PIC 9(07).
+      *
+           03  SPA-XG99-FILESV-CHK-FLG PIC 9(01).
+           03  SPA-XG01-MOTOPG         PIC X(08).
+      *
+           03  SPA-XGIDCD              PIC X(04).
+      *
+           03  SPA-XGID1-AREA. 
+               05  SPA-XGID1-FLG       PIC X(02).
+               05  SPA-XG99-FLG        PIC X(02).
+      *

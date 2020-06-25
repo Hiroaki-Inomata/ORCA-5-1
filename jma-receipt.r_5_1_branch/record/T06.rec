@@ -1,0 +1,140 @@
+T06 {
+  fixed6 {
+    B08 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    B17 {
+      state int;
+    };
+    B18 {
+      state int;
+    };
+    TITLE1 {
+      style varchar(20);
+      textdata varchar(14);
+    };
+    TITLE2 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    TITLE3 {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    SELNUM {
+      numdata number(4);
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    NYUGAIKBN {
+      textdata varchar(1);
+    };
+    NAME {
+      textdata varchar(40);
+    };
+    SRYYM_H {
+      textdata varchar(7);
+    };
+    SRYYMKBN_COMBO {
+      state int;
+      visible bool;
+      SRYYMKBN {
+        textdata varchar(18);
+      };
+      count int;
+        item varchar(18)[10];
+    };
+    SKYYMD_H {
+      textdata varchar(10);
+    };
+    HKNJANAME {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    TEISYUTUSAKI1 {
+      state int;
+      isactive bool;
+    };
+    TEISYUTUSAKI2 {
+      state int;
+      isactive bool;
+    };
+    TEISYUTUSAKI3 {
+      state int;
+      isactive bool;
+    };
+    TEISYUTUSAKI4 {
+      state int;
+      isactive bool;
+    };
+    scrolledwindow3 {
+      KANRI_LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(9);
+            column3 varchar(3);
+            column4 varchar(9);
+            column5 varchar(2);
+            column6 varchar(5);
+            column7 varchar(5);
+          }[500];
+          selectdata bool[500];
+      };
+    };
+    scrolledwindow2 {
+      BODY_LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(2);
+            column4 varchar(20);
+            column5 varchar(40);
+            column6 varchar(6);
+            column7 varchar(9);
+            column8 varchar(4);
+            column9 varchar(8);
+            column10 varchar(40);
+            column11 varchar(4);
+            column12 varchar(200);
+          }[1000];
+          selectdata bool[1000];
+      };
+    };
+    scrolledwindow1 {
+      RECE_LIST {
+        HYODAI1 {
+          textdata varchar(14);
+        };
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(2);
+            column4 varchar(20);
+            column5 varchar(40);
+            column6 varchar(6);
+            column7 varchar(10);
+            column8 varchar(8);
+            column9 varchar(40);
+            column10 varchar(4);
+            column11 varchar(2);
+            column12 varchar(2);
+            column13 varchar(9);
+          }[1000];
+          selectdata bool[1000];
+      };
+    };
+  };
+};

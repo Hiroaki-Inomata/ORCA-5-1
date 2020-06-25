@@ -1,0 +1,33 @@
+G05 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    SELNUM {
+      numdata number(5);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    scrolledwindow1 {
+      PTLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(2);
+            column3 varchar(20);
+            column4 varchar(100);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

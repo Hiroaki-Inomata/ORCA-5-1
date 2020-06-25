@@ -1,0 +1,8 @@
+push_print002 {
+	event		    varchar(50);
+	body	{
+		Orca_Uid	varchar(36);
+		Data_Id	    varchar(36);
+	};
+};
+

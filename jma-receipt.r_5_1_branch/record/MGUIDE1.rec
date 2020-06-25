@@ -1,0 +1,7 @@
+MGUIDE1 {
+  fixed1 {
+    label4 {
+      textdata varchar(5);
+    };
+  };
+};

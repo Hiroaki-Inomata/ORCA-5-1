@@ -1,0 +1,159 @@
+S06 {
+  fixed12 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    CMB_NYUGAIKBN {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[3];
+    };
+    LBLMSG {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    GAI_MISYU {
+      numdata number(9);
+    };
+    NYU_MISYU {
+      numdata number(9);
+    };
+    SELNUM {
+      numdata number(3);
+      state int;
+    };
+    RD_NYUKIN_IKT {
+      isactive bool;
+    };
+    RD_NYUKIN_KBT {
+      isactive bool;
+    };
+    CMB_NYKNKNRKBN {
+      NYKNKNRKBN {
+        textdata varchar(42);
+        state int;
+      };
+      count int;
+        item varchar(42)[5];
+      state int;
+    };
+    CMB_IKTSRYYMKBN {
+      IKTSRYYMKBN {
+        textdata varchar(32);
+        state int;
+      };
+      count int;
+        item varchar(32)[5];
+      state int;
+    };
+    IKTSRYYM {
+      textdata varchar(10);
+      state int;
+    };
+    NYUKINYMD {
+      textdata varchar(10);
+    };
+    CMB_NYKNHOHO {
+      NYKNHOHO {
+        textdata varchar(33);
+      };
+      count int;
+        item varchar(33)[50];
+    };
+    GAI_NYUKIN {
+      numdata number(9);
+      state int;
+    };
+    GAI_LNYUKIN_MAX {
+      textdata varchar(10);
+    };
+    GAI_NYUKIN_MAX {
+      textdata varchar(12);
+    };
+    GAI_HENKIN {
+      numdata number(9);
+      state int;
+    };
+    GAI_LHENKIN_MAX {
+      textdata varchar(10);
+    };
+    GAI_HENKIN_MAX {
+      textdata varchar(12);
+    };
+    NYU_NYUKIN {
+      numdata number(9);
+      state int;
+    };
+    NYU_LNYUKIN_MAX {
+      textdata varchar(10);
+    };
+    NYU_NYUKIN_MAX {
+      textdata varchar(12);
+    };
+    NYU_HENKIN {
+      numdata number(9);
+      state int;
+    };
+    NYU_LHENKIN_MAX {
+      textdata varchar(10);
+    };
+    NYU_HENKIN_MAX {
+      textdata varchar(12);
+    };
+    LBLNYUKIN {
+      textdata varchar(20);
+    };
+    NYUKIN {
+      numdata number(9);
+      state int;
+    };
+    LNYUKIN_MAX {
+      textdata varchar(10);
+    };
+    NYUKIN_MAX {
+      textdata varchar(12);
+    };
+    CMB_SKYPRTKBN {
+      SKYPRTKBN {
+        textdata varchar(32);
+      };
+      count int;
+        item varchar(32)[5];
+    };
+    CMB_SKYSUMKBN {
+      SKYSUMKBN {
+        textdata varchar(42);
+        state int;
+      };
+      count int;
+        item varchar(42)[5];
+      state int;
+    };
+    scrolledwindow1 {
+      SYULIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(10);
+            column3 varchar(6);
+            column4 varchar(4);
+            column5 varchar(50);
+            column6 varchar(5);
+            column7 varchar(11);
+            column8 varchar(15);
+            column9 varchar(11);
+            column10 varchar(11);
+            column11 varchar(11);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+  };
+};

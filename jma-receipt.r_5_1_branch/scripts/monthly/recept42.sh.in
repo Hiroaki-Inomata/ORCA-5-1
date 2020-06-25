@@ -1,0 +1,169 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        ＥＦファイル作成処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        $12 ファイル名（県番号＋医療機関番号＋診療年月）
+#        $13 レセ電ファイル出力先
+#        $14 JOBID 
+#        $15 SHELLID
+#        $16 エラーファイル名 
+#        $17 ファイル出力先区分
+#        $19 入外区分
+#        ${20} HOSPNUM
+#        ${21} 8:ＥＦ 9:様式４
+#        ${24} PREFNUM
+#        ${26} HOSPCD
+#-------------------------------------------#
+
+  if [ ${21} -eq  '8' ]; then
+     LOG_FILE="/var/log/jma-receipt/${20}recept42.log"
+  else
+     LOG_FILE="/var/log/jma-receipt/${20}recept42_style4.log"
+  fi
+
+    [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+        echo $(basename ${LOG_FILE})
+
+
+    echo "arg5 =  [" ${5} "]"  
+    echo "arg12 = [" ${12} "]" 
+    echo "arg13 = [" ${13} "]" 
+    echo "arg17 = [" ${17} "]" 
+    echo "arg19 = [" ${19} "]" 
+    echo "arg20 = [" ${20} "]" 
+    echo "arg21 = [" ${21} "]" 
+    echo "arg24 = [" ${24} "]" 
+    echo "arg26 = [" ${26} "]" 
+
+    rennum=0
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${16}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${16}
+
+
+#   一時請求
+    RECEFILE1="E"
+    RECEFILE2="F"
+    RECEFILE9="DPC_"
+
+#   該当ファイル削除
+    if [ ${21} -eq  '8' ]; then
+      rm  ${13}${20}${RECEFILE1}g*.txt
+      rm  ${13}${20}${RECEFILE1}n*.txt
+      rm  ${13}${20}${RECEFILE2}g*.txt
+      rm  ${13}${20}${RECEFILE2}n*.txt
+    else
+      rm  ${13}${20}FF4*.txt
+    fi
+    rm ${MCP_TEMPDIR}/${20}${RECEFILE9}*.txt
+
+
+#       様式４作成
+    if [ ${21} -eq  '9' ]; then
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM620 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${24},${26},${12},${14},${15},${17},${20},${16} 
+        if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+            echo "--- BM620 err file exist ---" 
+            exit 
+        fi
+
+#       漢字コード変換
+        if  [ ${17} -eq '4' ]; then
+            echo "nkf " ${13}${20}${12} 
+            nkf -s -Lw ${MCP_TEMPDIR}/${20}${RECEFILE9}${12} > ${13}${20}${12}
+            chmod -R g+r ${13}${20}${12}
+        else
+            echo "nkf " ${MCP_TEMPDIR}/${20}${12} 
+            nkf -s -Lw ${MCP_TEMPDIR}/${20}${RECEFILE9}${12} > ${MCP_TEMPDIR}/${20}${12}
+        fi
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20} 
+        exit 
+    fi
+
+
+#   ＥＦファイル作成
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM610 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${19},${17},${20},${16} 
+    if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+        echo "--- BM610 err file exist ---" 
+        exit 
+    fi
+
+#   一時フォルダ作成
+    EF_FILE_FOLDER="${20}_EF_FILE_${5}"
+    OUT_FOLDER="${MCP_TEMPDIR}/$EF_FILE_FOLDER/"
+
+    echo "--- rm out folder [" ${OUT_FOLDER} "]" 
+    rm -fr ${OUT_FOLDER}
+
+    if  [ ${17} -eq '5' ]; then
+        echo "--- folder name  [" ${OUT_FOLDER} "]" 
+        if ! test -d  "$OUT_FOLDER"; then
+            mkdir ${OUT_FOLDER}
+            RC=$?
+            if  [ $RC -ne '0' ]; then
+                ERRCD='0077'
+                $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD},${20} 
+                echo "--- mkdir  err   ---" 
+                exit
+            fi
+            chmod -R g+r ${OUT_FOLDER}
+            echo "--- mkdir out holder ---" 
+        else
+            rm ${OUT_FOLDER}*
+            echo "--- rm out holder file ---" 
+        fi
+    fi
+
+
+#   漢字コード変換
+    echo "ファイルの処理(sjis変換)"
+
+    cd  ${MCP_TEMPDIR}/
+    all=`ls  ${20}${RECEFILE9}*${12}.txt`
+#   all=`ls  ${MCP_TEMPDIR}/${20}${RECEFILE9}*.txt`
+    echo "--- all [" ${20}${RECEFILE9} "]" 
+
+    for f in $all ; do
+        echo "f= " $f 
+        echo "mm = " ${f:6:21} 
+
+#       システム管理場所出力のとき
+        if  [ ${17} -eq '4' ]; then
+            echo "nkf " ${13}${20}${f:6:21} 
+            nkf -s -Lw $f > ${13}${20}${f:6:21}
+#           chmod -R g+r ${13}${20}${f:6:21}
+        else
+            echo "nkf " ${OUT_FOLDER}${f:6:21} 
+            nkf -s -Lw $f > ${OUT_FOLDER}${f:6:21}
+        fi
+    done
+
+#   クライアント保存
+    if  [ ${17} -eq '5' ]; then
+        cd  ${MCP_TEMPDIR}/
+        echo "--- zip name [" ${EF_FILE_FOLDER}.zip "]" 
+        rm  ${EF_FILE_FOLDER}.zip
+        zip -r ${EF_FILE_FOLDER}.zip ${EF_FILE_FOLDER}/
+	RC=$?
+        echo "--- zip end   ---[" $RC  "]" 
+	if  [ $RC -ne '0' ]; then
+	    ERRCD='0000'$RC
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15}'  '${ERRCD:${#ERRCD}-4:4},${20} 
+            echo "--- zip err   ---" 
+            exit
+	fi
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20} 
+    exit 

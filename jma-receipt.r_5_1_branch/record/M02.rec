@@ -1,0 +1,34 @@
+M02 {
+  fixed1 {
+    G101 {
+      state int;
+    };
+    G102 {
+      state int;
+    };
+    G103 {
+      state int;
+    };
+    G104 {
+      state int;
+    };
+    G105 {
+      state int;
+    };
+    G106 {
+      state int;
+    };
+    G107 {
+      state int;
+    };
+    G108 {
+      state int;
+    };
+    G109 {
+      state int;
+    };
+    SELNUM {
+      numdata number(3);
+    };
+  };
+};

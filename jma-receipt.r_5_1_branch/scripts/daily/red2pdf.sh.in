@@ -1,0 +1,64 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+#-------------------------------------------#
+#        ＰＤＦファイルＤＢ保存
+#
+#        $1 HOSPNUM
+#        $2 データファイル名
+#-------------------------------------------#
+DATA_FILE=${MCP_TEMPDIR}/$2
+
+cleanup () {
+  grep -Eo "${MCP_TEMPDIR}[^ ]*\.(jpg|png)" ${DATA_FILE} | grep -v "${MCP_TEMPDIR}/medimage/" | xargs -r rm -f
+  rm -f ${DATA_FILE}*
+}
+
+set_layeroption() {
+  tmpfile=$1
+  layeroption=""
+  [[ $(cat ${tmpfile}) =~ MonpeLayerIn(.*)MonpeLayerOut ]]
+  if [ -n "${BASH_REMATCH[0]}" ]; then
+    layeroption=$(echo "${BASH_REMATCH[1]}" | sed -e "s/ *-L */,/g" | sed -e "s/,/-H /")
+    sed -i -e "s/${BASH_REMATCH[0]}/$(printf %-${#BASH_REMATCH[0]}s ' ')/"  ${tmpfile}
+  fi
+  echo ${layeroption}
+}
+
+trap "cleanup" EXIT
+
+LINE=$(head -n 1 ${DATA_FILE})
+tmpfile=${DATA_FILE}.tmp
+redname=${LINE:0:20}
+offset_x=""
+offset_y=""
+[ -n "$(echo "${LINE:20:5}" | tr -d " ")" ] && offset_x="-x ${LINE:20:5}"
+[ -n "$(echo "${LINE:25:5}" | tr -d " ")" ] && offset_y="-y ${LINE:25:5}"
+site=${LINE:30:1}
+pdffile=${MCP_TEMPDIR}/${LINE:31:1024}
+printf '%-20000s' "${LINE:1055:20000}" > ${tmpfile}
+
+form_path="${PATCHFORMDIR} ${FORMDIR}"
+[ "${site}" == '2' ] &&  form_path="${SITEFORMDIR} ${form_path}"
+redfile=$(find ${form_path} -maxdepth 1 -type f -name ${redname} | head -n 1)
+
+echo red2embed ${redfile} ${tmpfile} -o ${tmpfile}.red
+red2embed ${redfile} ${tmpfile} -o ${tmpfile}.red
+
+layeroption=$(set_layeroption ${DATA_FILE})
+echo monpe ${offset_x} ${offset_y} ${layeroption} ${tmpfile}.red -e ${tmpfile}.pdf
+monpe ${offset_x} ${offset_y} ${layeroption} ${tmpfile}.red -e ${tmpfile}.pdf
+
+echo ${MONBLOB} -dir ${LDDIRECTORY}  -import ${tmpfile}.pdf          
+${MONBLOB} -dir ${LDDIRECTORY}  -import ${tmpfile}.pdf > ${pdffile} 
+cat ${pdffile}
+

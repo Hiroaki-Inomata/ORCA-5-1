@@ -1,0 +1,10 @@
+FERR {
+  fixed1 {
+    ERRCODE {
+      textdata char(11);
+    };
+    ERRMSG {
+      textdata char(61);
+    };
+  };
+};

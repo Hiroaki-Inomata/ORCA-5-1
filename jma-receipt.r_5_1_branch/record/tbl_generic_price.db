@@ -1,0 +1,107 @@
+tbl_generic_price {
+	YAKKAKJNCD			char(12);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	PRICE   			number(12,3);
+	GECODE				char(12);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+#-----> 主キー更新用項目
+	UPYAKKAKJNCD			char(12),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD 			char(8),virtual;
+};
+primary	{YAKKAKJNCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+		WHERE	YAKKAKJNCD    =  (
+			SELECT
+			    CASE
+				WHEN EXISTS ( SELECT * FROM tbl_generic_price WHERE yakkakjncd = :YAKKAKJNCD )
+				    THEN :YAKKAKJNCD
+				ELSE SUBSTR(:YAKKAKJNCD,1,9)
+			    END
+			)
+			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+ 		;
+	};
+};
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+		WHERE 	YAKKAKJNCD	= :YAKKAKJNCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_generic_price
+				SET
+				YAKKAKJNCD     = :YAKKAKJNCD,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				PRICE          = :PRICE,
+				GECODE         = :GECODE,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD
+			WHERE 	YAKKAKJNCD      =  :UPYAKKAKJNCD
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+		WHERE	YAKKAKJNCD    =  :YAKKAKJNCD
+			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+		WHERE	GECODE           =  :GECODE
+			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_price
+		WHERE	YAKKAKJNCD    LIKE  :YAKKAKJNCD
+			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};

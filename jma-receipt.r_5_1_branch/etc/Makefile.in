@@ -1,0 +1,41 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+ETC_files = \
+	kentan.inc \
+	orcadbs.inc \
+	jma-receipt.env \
+	jma-receipt.conf \
+	jma-receipt-crontab \
+	ORCADC.PARA \
+	jppinfo.list \
+	das-upload.conf
+
+DBGROUP_files = dbgroup.inc 
+
+all: jma-receipt-crontab
+
+jma-receipt-crontab: jma-receipt-crontab.in
+	sed -e "s|@SCRIPTSDIR@|$(scriptsdir)|g" \
+	-e "s|@PATCHSCRIPTSDIR@|$(PATCHSCRIPTSDIR)|g" \
+	-e "s|@SITESCRIPTSDIR@|$(SITESCRIPTSDIR)|g" $< > $@
+
+filecheck:
+
+clean:
+	-rm -f jma-receipt-crontab
+
+distclean:
+	-rm -f jma-receipt-crontab
+	-rm -f jma-receipt.env
+	-rm -f jma-receipt.conf
+	-rm -f Makefile
+	-rm -f jppinfo.list
+
+install: all
+	$(INSTALL) -d $(sysconfdir)
+	$(INSTALL_DATA) $(ETC_files) $(sysconfdir)
+	$(INSTALL) -m 600 $(DBGROUP_files) $(sysconfdir)

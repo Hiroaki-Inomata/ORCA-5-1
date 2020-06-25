@@ -1,0 +1,102 @@
+tbl_kyuseirrk {
+	HOSPNUM				number(2,0);
+	PTID 				number(10,0);
+	CHGYMD				char(8)	;
+	KANANAME			varchar(100);
+	NAME				varchar(100);
+	NICKNAME			varchar(100);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPPTID 				number(10,0),virtual;
+	UPCHGYMD			char(8),virtual;
+};
+primary	{
+	HOSPNUM,PTID,CHGYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_kyuseirrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kyuseirrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   CHGYMD      =   :CHGYMD
+		;
+	};
+};
+
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_kyuseirrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kyuseirrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER BY  CHGYMD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_kyuseirrk_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kyuseirrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   CHGYMD      >   :CHGYMD
+			ORDER BY  CHGYMD
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_kyuseirrk 
+				SET	
+#					:*
+                   HOSPNUM              = :HOSPNUM,
+                   PTID                = :PTID,
+                   CHGYMD              = :CHGYMD,
+                   KANANAME            = :KANANAME,
+                   NAME                = :NAME,
+                   NICKNAME            = :NICKNAME,
+                   TERMID              = :TERMID,
+                   OPID                = :OPID,
+                   CREYMD              = :CREYMD,
+                   UPYMD               = :UPYMD,
+                   UPHMS               = :UPHMS
+               WHERE   HOSPNUM          = :UPHOSPNUM
+                 AND   PTID            = :UPPTID
+                 AND   CHGYMD          = :UPCHGYMD
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_kyuseirrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kyuseirrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_kyuseirrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+

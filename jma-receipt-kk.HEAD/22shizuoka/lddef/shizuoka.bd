@@ -1,0 +1,16 @@
+name	shizuoka;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU2203"	"OpenCOBOL";
+bind	"SEIKYU2205"	"OpenCOBOL";
+bind	"SEIKYU2207"	"OpenCOBOL";
+bind	"SOKATU2200"	"OpenCOBOL";
+bind	"SOKATU2210"	"OpenCOBOL";
+bind	"SOKATU2215"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

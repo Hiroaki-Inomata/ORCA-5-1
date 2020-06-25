@@ -1,0 +1,90 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    入院患者検索結果一覧出力
+#        $1  処理区分
+#        $2  CSVファイル名
+#        $3  パラメータファイル名
+#        $4  TERMID
+#        $5  SYSYMD
+#        $6  SYSDATE
+#        $7  HOSPNUM
+#        $8  STAFFCD
+#        $9  ジョブＩＤ
+#        $10 シェルＩＤ
+#        $11 ファイル出力先 1:client
+#        $12 文字コード区分 1:euc 2:s-jis 3:utf8
+#        $13 FILENM FOLDER
+#        $14 FILENM 
+#        $15 WKCSVファイル名
+#        $16 ID(for MONBLOB)
+#
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${7}orcbi201.log"
+[ -e "$LOG_FILE" ] && rm $LOG_FILE
+PARA_FILE_BASE=$3
+PARA_FILE_FULL=${MCP_TEMPDIR}/${3}
+
+WKCSV_FILE_BASE=${15}
+WKCSV_FILE_FULL=${MCP_TEMPDIR}/${WKCSV_FILE_BASE}
+
+
+${MONBLOB} -dir ${LDDIRECTORY} -export ${16} -output ${PARA_FILE_FULL} && ${MONBLOB} -dir ${LDDIRECTORY} -delete ${16}
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBI201 -parameter ${PARA_FILE_BASE},$4,$5,$6,$7,$8,${11},${13},${14},${WKCSV_FILE_BASE} 
+
+##      ＣＳＶファイル作成
+        if  [ $1 -eq "0" ]; then
+            if  [ -e ${WKCSV_FILE_FULL} ]; then
+                awk ' {
+                #     行頭の空白を取り除く
+                      sub(/^ */,"");
+                #     行末の空白を取り除く
+                      sub(/ *$/,"");
+                #     カンマの後の空白を取り除く
+                      gsub(/, */,",");
+                #     カンマの前の空白を取り除く
+                      gsub(/ *,/,",");
+                      print $0
+                }'  ${WKCSV_FILE_FULL} > ${2}.tmp
+
+                if   [ ${11} = '1' ]; then
+#                 クライアント保存のとき固定ファイルに文字コード変換
+                  case ${12} in
+                    2)
+#                     EUC => SJIS
+                        nkf -s -Lw $2.tmp > ${WKCSV_FILE_FULL}
+                        rm  $2.tmp
+                      ;;
+                    3)
+#                     EUC => UTF8
+                      nkf --ic=EUC-JIS-2004 --oc=UTF-8 $2.tmp | tru8.rb > ${WKCSV_FILE_FULL}
+                      rm  $2.tmp
+                      ;;
+                    *)
+                      mv  $2.tmp ${WKCSV_FILE_FULL}
+                  esac
+                else
+                    mv  $2.tmp $2
+                    rm  ${WKCSV_FILE_FULL}
+                fi 
+            fi
+        fi
+
+##      パラメータファイル削除
+        if  [ -e ${PARA_FILE_FULL} ]; then
+            rm  ${PARA_FILE_FULL}
+        fi
+
+       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$9${10},$7 
+        exit

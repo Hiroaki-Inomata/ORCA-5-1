@@ -1,0 +1,41 @@
+xml_medicalv3res7 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3res7 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+	Delete_Information  {
+#---    一括解除
+		Delete_Class		varchar(3);
+#---    削除　カルテＵＩＤ
+		Delete_Karte_Uid	varchar(36);
+#---    削除　オルカＵＩＤ
+		Delete_Orca_Uid		varchar(64);
+	};
+#---    排他制御一覧
+	Lock_Information {
+		Lock_Karte_Uid		varchar(36);
+		Lock_Orca_Uid		varchar(64);
+		Lock_Opid		varchar(16);
+		Lock_Ld_Name		varchar(20);
+		Lock_Patient_ID		varchar(20);
+        	Lock_WholeName		varchar(100);
+		Lock_Date		varchar(10);
+		Lock_Time		varchar(8);
+	} [100];
+#--- 確認メッセージ
+	Delete_Select_Information {
+        Delete_Select			varchar(4);
+        Delete_Select_Message		varchar(100);
+		};
+    };
+};

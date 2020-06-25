@@ -1,0 +1,18 @@
+KID2 {
+  fixed1 {
+    ID2CODE {
+      textdata varchar(10);
+    };
+    ID2MSG {
+      textdata varchar(100);
+    };
+    USERPG_COMB {
+      state int;
+      USERPG {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+  };
+};

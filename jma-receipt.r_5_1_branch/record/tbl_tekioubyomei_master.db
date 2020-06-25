@@ -1,0 +1,153 @@
+tbl_tekioubyomei_master {
+	CHKKBN			char(1);
+	SRYCD			char(9);
+	RENNUM			number(4);
+	BYOMEI			varchar(400);
+	BYOMEICDSU		number(2);
+	BYOMEICD_1		char(7);
+	BYOMEICD_2		char(7);
+	BYOMEICD_3		char(7);
+	BYOMEICD_4		char(7);
+	BYOMEICD_5		char(7);
+	BYOMEICD_6		char(7);
+	BYOMEICD_7		char(7);
+	BYOMEICD_8		char(7);
+	BYOMEICD_9		char(7);
+	BYOMEICD_10		char(7);
+	BYOMEICD_11		char(7);
+	BYOMEICD_12		char(7);
+	BYOMEICD_13		char(7);
+	BYOMEICD_14		char(7);
+	BYOMEICD_15		char(7);
+	BYOMEICD_16		char(7);
+	BYOMEICD_17		char(7);
+	BYOMEICD_18		char(7);
+	BYOMEICD_19		char(7);
+	BYOMEICD_20		char(7);
+	BYOMEICD_21		char(7);
+	BYOMEIHENFLG	char(1);
+	KHNBYOMEICD		char(7);
+	KHNBUICD_1		char(7);
+	KHNBUICD_2		char(7);
+	KHNBUICD_3		char(7);
+	TERMID			varchar(32);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+#-----> 検索キー用項目
+	SELNAME		char(200),virtual;
+	SELYUKOSTYMD  		char(8),virtual;
+	SELYUKOEDYMD  		char(8),virtual;
+};
+primary	{
+	CHKKBN,SRYCD,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tekioubyomei_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_tekioubyomei
+			WHERE   CHKKBN	=	:CHKKBN
+			AND	SRYCD	=	:SRYCD
+			AND	RENNUM	=	:RENNUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_tekioubyomei
+			VALUES(
+				:CHKKBN,
+				:SRYCD,
+				:RENNUM,
+				:BYOMEI,
+				:BYOMEICDSU,
+				:BYOMEICD_1,
+				:BYOMEICD_2,
+				:BYOMEICD_3,
+				:BYOMEICD_4,
+				:BYOMEICD_5,
+				:BYOMEICD_6,
+				:BYOMEICD_7,
+				:BYOMEICD_8,
+				:BYOMEICD_9,
+				:BYOMEICD_10,
+				:BYOMEICD_11,
+				:BYOMEICD_12,
+				:BYOMEICD_13,
+				:BYOMEICD_14,
+				:BYOMEICD_15,
+				:BYOMEICD_16,
+				:BYOMEICD_17,
+				:BYOMEICD_18,
+				:BYOMEICD_19,
+				:BYOMEICD_20,
+				:BYOMEICD_21,
+				:BYOMEIHENFLG,
+				:KHNBYOMEICD,
+				:KHNBUICD_1,
+				:KHNBUICD_2,
+				:KHNBUICD_3,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_tekioubyomei
+			SET
+				CHKKBN       = :CHKKBN,
+				SRYCD        = :SRYCD,
+				RENNUM       = :RENNUM,
+				BYOMEI       = :BYOMEI,
+				BYOMEICDSU   = :BYOMEICDSU,
+				BYOMEICD_1   = :BYOMEICD_1,
+				BYOMEICD_2   = :BYOMEICD_2,
+				BYOMEICD_3   = :BYOMEICD_3,
+				BYOMEICD_4   = :BYOMEICD_4,
+				BYOMEICD_5   = :BYOMEICD_5,
+				BYOMEICD_6   = :BYOMEICD_6,
+				BYOMEICD_7   = :BYOMEICD_7,
+				BYOMEICD_8   = :BYOMEICD_8,
+				BYOMEICD_9   = :BYOMEICD_9,
+				BYOMEICD_10  = :BYOMEICD_10,
+				BYOMEICD_11  = :BYOMEICD_11,
+				BYOMEICD_12  = :BYOMEICD_12,
+				BYOMEICD_13  = :BYOMEICD_13,
+				BYOMEICD_14  = :BYOMEICD_14,
+				BYOMEICD_15  = :BYOMEICD_15,
+				BYOMEICD_16  = :BYOMEICD_16,
+				BYOMEICD_17  = :BYOMEICD_17,
+				BYOMEICD_18  = :BYOMEICD_18,
+				BYOMEICD_19  = :BYOMEICD_19,
+				BYOMEICD_20  = :BYOMEICD_20,
+				BYOMEICD_21  = :BYOMEICD_21,
+				BYOMEIHENFLG = :BYOMEIHENFLG,
+				KHNBYOMEICD  = :KHNBYOMEICD,
+				KHNBUICD_1   = :KHNBUICD_1,
+				KHNBUICD_2   = :KHNBUICD_2,
+				KHNBUICD_3   = :KHNBUICD_3,
+				TERMID       = :TERMID,
+				OPID         = :OPID,
+				CREYMD       = :CREYMD,
+				UPYMD        = :UPYMD,
+				UPHMS        = :UPHMS
+			WHERE   CHKKBN = :CHKKBN
+			AND	SRYCD  = :SRYCD
+			AND	RENNUM = :RENNUM
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_tekioubyomei
+			WHERE   CHKKBN = :CHKKBN
+			AND	SRYCD  = :SRYCD
+			AND	RENNUM = :RENNUM
+		;
+	};
+};

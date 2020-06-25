@@ -1,0 +1,156 @@
+KT02 {
+  fixed1 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    KANANAME {
+      textdata varchar(50);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    HKNKUMI {
+      textdata varchar(60);
+    };
+    RATE {
+      textdata varchar(6);
+    };
+    LASTYMD {
+      textdata varchar(9);
+    };
+    SYOSINYMD {
+      textdata varchar(9);
+    };
+    MISYUMONEY {
+      value varchar(15);
+    };
+    SRYKA {
+      textdata varchar(10);
+    };
+    SRYYMD {
+      textdata varchar(14);
+    };
+    GOKEITEN {
+      textdata varchar(15);
+    };
+    ZAITENTOTAL {
+      value varchar(16);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SSUHKNTEN {
+      textdata varchar(10);
+    };
+    SDOHKNTEN {
+      textdata varchar(10);
+    };
+    ZTKHKNTEN {
+      textdata varchar(10);
+    };
+    TYKHKNTEN {
+      textdata varchar(10);
+    };
+    CSYHKNTEN {
+      textdata varchar(10);
+    };
+    SYCHKNTEN {
+      textdata varchar(10);
+    };
+    SJTHKNTEN {
+      textdata varchar(10);
+    };
+    KNSHKNTEN {
+      textdata varchar(10);
+    };
+    GZUHKNTEN {
+      textdata varchar(10);
+    };
+    ETCHKNTEN {
+      textdata varchar(10);
+    };
+    SELNUM01 {
+      numdata number(3);
+    };
+    SELNUM02 {
+      numdata number(3);
+    };
+    SELNUM03 {
+      numdata number(3);
+    };
+    SELNUM04 {
+      numdata number(3);
+    };
+    SELNUM05 {
+      numdata number(3);
+    };
+    SELNUM06 {
+      numdata number(3);
+    };
+    SELNUM07 {
+      numdata number(3);
+    };
+    SELNUM08 {
+      numdata number(3);
+    };
+    SELNUM09 {
+      numdata number(3);
+    };
+    SELNUM10 {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      MEILIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(150);
+          }[800];
+          selectdata bool[800];
+        style varchar(20);
+      };
+    };
+    SSNHKNTEN {
+      textdata varchar(10);
+    };
+    HOUHKNTEN {
+      textdata varchar(10);
+    };
+    NYUHKNTEN {
+      textdata varchar(10);
+    };
+    MSIHKNTEN {
+      textdata varchar(10);
+    };
+    RYOHKNTEN {
+      textdata varchar(10);
+    };
+    BYRHKNTEN {
+      textdata varchar(10);
+    };
+    SRYMEI14 {
+      textdata varchar(8);
+    };
+    SRYMEI15 {
+      textdata varchar(8);
+    };
+    MSGDATA {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(12);
+    };
+  };
+};

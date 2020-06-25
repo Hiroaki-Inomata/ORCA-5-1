@@ -1,0 +1,17 @@
+SID3 {
+  fixed1 {
+    B12S {
+      state int;
+      visible bool;
+    };
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(70);
+    };
+    LBLID1SKYPRT {
+      textdata varchar(70);
+    };
+  };
+};

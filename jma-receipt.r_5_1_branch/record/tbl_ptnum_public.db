@@ -1,0 +1,36 @@
+tbl_ptnum_public {
+	HOSPNUM			number(2,0);
+	PTID			number(10);
+	PATIENT_ID_1		varchar(20);
+	AGREEMENT		varchar(1);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_public_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum_public
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_public_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum_public
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};

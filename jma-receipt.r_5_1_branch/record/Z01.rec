@@ -1,0 +1,48 @@
+Z01 {
+  fixed1 {
+    SRYCD {
+      textdata varchar(9);
+    };
+    BS1 {
+      isactive bool;
+      label varchar(10);
+    };
+    scrolledwindow1 {
+      TENSU_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(9);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+    SELNUM {
+      textdata varchar(3);
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    B08 {
+      state int;
+      label varchar(10);
+    };
+    B10 {
+      state int;
+      label varchar(10);
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+  };
+};

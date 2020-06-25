@@ -1,0 +1,29 @@
+KHELP {
+  fixed32 {
+    INPUT {
+      textdata varchar(30);
+    };
+    HELP {
+      textdata varchar(2000);
+    };
+    SELNUM {
+      numdata number(4);
+    };
+    scrolledwindow26 {
+      MENULIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(30);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    HEAD {
+      style varchar(20);
+      textdata varchar(10);
+    };
+  };
+};

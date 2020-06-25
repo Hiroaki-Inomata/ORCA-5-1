@@ -1,0 +1,41 @@
+tbl_synonym {
+	BYOMEI				varchar(200);
+	BYOMEICD			char(7);
+	CREYMD  			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+
+path	key	{ 	
+	DBSELECT	{
+		DECLARE tbl_synonym_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_synonym
+			WHERE   BYOMEI     =   :BYOMEI
+		;
+
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_synonym
+				SET
+				BYOMEI      = :BYOMEI,
+				BYOMEICD      = :BYOMEICD,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE 	BYOMEI      =  :BYOMEI
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_synonym
+			WHERE   BYOMEI     =   :BYOMEI
+		;
+	};
+};

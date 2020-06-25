@@ -1,0 +1,100 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    システム管理情報設定  出力先プリンタ名割り当てＳＰＡ
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *    画面用ＳＰＡ
+       01  SPA-W98.
+           03  SPA-W98-AREA.
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-LINE        PIC 9(02).
+               05  SPA-GMN-MAX         PIC 9(03).
+               05  SPA-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+      *                                        
+                   07  SPA-GMN-HAITA-G.   
+                       09  SPA-GMN-HAITA
+                                              PIC X(01).
+                       09  SPA-GMN-F1         PIC X(01).
+                       09  SPA-GMN-HAITAMEI
+                                              PIC X(18).
+      *                                        
+                   07  SPA-GMN-HAITALST      OCCURS  2.
+                       09  SPA-GMN-HAITAL
+                                              PIC X(01).
+                       09  SPA-GMN-F1L        PIC X(01).
+                       09  SPA-GMN-HAITAMEIL
+                                              PIC X(18).
+                   07  SPA-GMN-HAITA-MAX
+                                              PIC 9(02).    
+      *                                        
+                   07  SPA-GMN-FLG-TABLE.
+                     08  SPA-GMN-FLG-TABLE1    OCCURS  26.
+                       09  SPA-GMN-FLG-TABLE2  OCCURS  26.
+                         10  SPA-GMN-FLG-VALUE PIC X(2).
+                   07  SPA-GMN-CHK-TABLE.
+                     08  SPA-GMN-CHK-TABLE1    OCCURS  26.
+                       09  SPA-GMN-CHK-TABLE2  OCCURS  26.
+                         10  SPA-GMN-CHK-VALUE PIC X(1).
+                   07  SPA-GMN-CHK-ON-TABLE.
+                     08  SPA-GMN-CHK-ON-TABLE1    OCCURS  26.
+                       09  SPA-GMN-CHK-ON-VALUE   PIC X.
+      *             
+                   07  SPA-GMN-YOKO-TABLE.
+                     08  SPA-GMN-YOKO-TABLE1    OCCURS  26.
+                       09  SPA-GMN-YOKO-VALUE   PIC X(3).
+                   07  SPA-GMN-TATE-TABLE.
+                     08  SPA-GMN-TATE-TABLE1    OCCURS  26.
+                       09  SPA-GMN-TATE-VALUE   PIC X(15).
+      *             
+               05  SPA-NAIB-AREA.
+                   07  SPA-LDNAME-TABLE.
+                     08  SPA-NAIB-LDNAME-TABLE1    OCCURS  26.
+                       09  SPA-NAIB-LDNAME-TABLE2  OCCURS  26.
+                         10  SPA-NAIB-LDNAME-VALUE PIC X(20).
+      *             
+                   07  SPA-NAIB-TATELD-TABLE.
+                     08  SPA-NAIB-TATELD-TABLE1    OCCURS  26.
+                       09  SPA-NAIB-TATELD-VALUE   PIC X(20).
+      *             
+               05  SPA-NAI-KAIJYO-CNT              PIC 9(02).
+               05  SPA-NAI-KAIJYO-FLG              PIC 9(01).
+               05  SPA-NAI-TATE-MAX                PIC 9(03).
+               05  SPA-NAI-YOKO-MAX                PIC 9(03).
+      *
+           03  SPA-W981-AREA.
+               05  SPA-W981-CUR                PIC 9(02).
+               05  SPA-W981-SELNUM             PIC 9(03).
+               05  SPA-W981-LIST-G.
+                   07  SPA-W981-LIST           OCCURS  100.
+                       09  SPA-W981-RENNUM     PIC 9(03).
+                       09  SPA-W981-OPID       PIC X(16).
+                       09  SPA-W981-PTNUM      PIC X(20).
+                       09  SPA-W981-LDNAME     PIC X(20).
+                       09  SPA-W981-SETTIME.
+                           11  SPA-W981-DATE   PIC X(08).
+                           11  SPA-W981-F1     PIC X(01).
+                           11  SPA-W981-TIME   PIC X(08).
+                       09  SPA-W981-TERMID        PIC X(64).
+                   07  SPA-W981-LIST-MAX          PIC 9(04).
+      *

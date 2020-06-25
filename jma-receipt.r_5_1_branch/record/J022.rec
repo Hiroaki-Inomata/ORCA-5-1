@@ -1,0 +1,52 @@
+J022 {
+  fixed1 {
+    SRYYMD {
+      textdata varchar(14);
+    };
+    DAY1 {
+      state int;
+      numdata number(3);
+    };
+    DAY2 {
+      state int;
+      numdata number(3);
+    };
+    DAY3 {
+      state int;
+      numdata number(3);
+    };
+    DAY4 {
+      state int;
+      numdata number(3);
+    };
+    DAY5 {
+      state int;
+      numdata number(3);
+    };
+    DAY6 {
+      state int;
+      numdata number(3);
+    };
+    DAY7 {
+      state int;
+      numdata number(3);
+    };
+    DAY8 {
+      state int;
+      numdata number(3);
+    };
+    DAY9 {
+      state int;
+      numdata number(3);
+    };
+    MSG1 {
+      textdata varchar(10);
+    };
+    MSG2 {
+      textdata varchar(10);
+    };
+    MSG3 {
+      textdata varchar(10);
+    };
+  };
+};

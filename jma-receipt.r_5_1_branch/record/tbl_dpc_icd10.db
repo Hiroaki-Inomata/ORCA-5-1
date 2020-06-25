@@ -1,0 +1,65 @@
+tbl_dpc_icd10 {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+	ICD10_NAME			varchar(200);
+	ICD10_CD 			varchar(5);
+};
+
+primary	{
+	MDC_CD,BUNRUI_CD,ICD10_CD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_icd10_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_icd10
+			WHERE MDC_CD        =   :MDC_CD
+             AND  BUNRUI_CD     =   :BUNRUI_CD
+             AND  ICD10_CD      =   :ICD10_CD
+		   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+		   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_icd10_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_icd10
+            WHERE (  ICD10_CD = :ICD10_CD
+              OR ( POSITION('$' IN (ICD10_CD)) > 1 
+              AND SUBSTR(ICD10_CD,1,POSITION('$' IN (ICD10_CD))-1)
+                = SUBSTR(:ICD10_CD,1,POSITION('$' IN (ICD10_CD))-1)))
+		   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+		   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_icd10_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_icd10
+			WHERE MDC_CD        =   :MDC_CD
+             AND  BUNRUI_CD     =   :BUNRUI_CD
+		   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+		   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+             ORDER BY ICD10_CD
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_icd10_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_icd10
+			WHERE ICD10_CD      =   :ICD10_CD
+		;
+	};
+};

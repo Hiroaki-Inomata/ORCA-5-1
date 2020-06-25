@@ -1,0 +1,65 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    日次統計 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-D01KYOUTU.
+      *
+           03  SPA-D01-INF-AREA.
+               05  SPA-D01-KBTUSER         PIC  9(01).
+               05  SPA-D01-IKTKBT          PIC  X(01).
+               05  SPA-D01-SRYYM           PIC  X(06).
+               05  SPA-D01-NYUGAIKBN       PIC  X(01).
+               05  SPA-D01-USRCHKKBN       PIC  X(02).
+               05  SPA-D01-CHKKBN-G.
+                   07  SPA-D01-CHKKBN      PIC  X(01)  OCCURS 50.
+               05  SPA-D01-SYAHOPROCKBN    PIC  X(01).
+               05  SPA-D01-KOKUHOPROCKBN   PIC  X(01).
+               05  SPA-D01-KOUKIPROCKBN    PIC  X(01).
+               05  SPA-D01-RSIPROCKBN      PIC  X(01).
+               05  SPA-D01-JBIPROCKBN      PIC  X(01).
+               05  SPA-D01-KGIPROCKBN      PIC  X(01).
+               05  SPA-D01-JIHIPROCKBN     PIC  X(01).
+               05  SPA-D01-CHIKENPROCKBN   PIC  X(01).
+               05  SPA-D01-DAISANPROCKBN   PIC  X(01).
+               05  SPA-D01-INGAIPROCKBN    PIC  X(01).
+               05  SPA-D01-PRTSRTKBN       PIC  X(01).
+               05  SPA-D01-SRYYMDKBN       PIC  X(01).
+               05  SPA-D01-STSRYYMD        PIC  9(02).
+               05  SPA-D01-EDSRYYMD        PIC  9(02).
+               05  SPA-D01-CUR             PIC  9(03).
+           03  SPA-D01-TBL-GROUP           PIC  X(14).
+           03  SPA-D01-JOB-JOBID           PIC  9(07).
+           03  SPA-D04-INF-AREA.
+               05  SPA-D04-SRYYM           PIC  X(06).
+               05  SPA-D04-NYUGAIKBN       PIC  X(01).
+      *警告メッセージ
+           03  SPA-DIDCD                   PIC  X(04).
+      *警告画面より
+           03  SPA-DID1-AREA. 
+               05  SPA-DID1-FLG            PIC  X(02).
+               05  SPA-D99-FLG             PIC  X(02).
+           03  SPA-D01-UPYMD               PIC  X(08).
+           03  SPA-D01-UPHMS               PIC  X(08).
+           03  SPA-D01-ERRMSG              PIC  X(100).
+      *

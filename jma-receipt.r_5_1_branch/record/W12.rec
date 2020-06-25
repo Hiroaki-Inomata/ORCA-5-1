@@ -1,0 +1,901 @@
+W12 {
+  fi1 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    note3 {
+      pageno int;
+      fi23 {
+        BYOMEIHENKBN_COMBO {
+          BYOMEIHENKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        BYOMEIHENKBN1_COMBO {
+          BYOMEIHENKBN1 {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        SYUBYOHENFLG_COMBO {
+          SYUBYOHENFLG {
+            textdata varchar(46);
+          };
+          count int;
+            item varchar(46)[4];
+        };
+        TENKIHENKBN_COMBO {
+          TENKIHENKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        TENKIBYOMEI_KBN_COMBO {
+          TENKIBYOMEI_KBN {
+            textdata varchar(52);
+          };
+          count int;
+            item varchar(52)[3];
+        };
+        SYAOCRKBN_COMBO {
+          SYAOCRKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        KKHOCRKBN_COMBO {
+          KKHOCRKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        KOUIKIOCRKBN_COMBO {
+          KOUIKIOCRKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        RENNUMHENKBN_COMBO {
+          RENNUMHENKBN {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[3];
+        };
+        NYUTAIINREKI_COMBO {
+          NYUTAIINREKI {
+            textdata varchar(42);
+          };
+          count int;
+            item varchar(42)[3];
+        };
+        NYUTAIINREKI_NYU_COMBO {
+          NYUTAIINREKI_NYU {
+            textdata varchar(42);
+          };
+          count int;
+            item varchar(42)[2];
+        };
+        SRYKAHENKBN_COMBO {
+          SRYKAHENKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        BTUNUM_KSIKBN_COMBO {
+          BTUNUM_KSIKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[5];
+        };
+        RJNGNBKKBN_COMBO {
+          RJNGNBKKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        JIHITEKKSIKBN_COMBO {
+          JIHITEKKSIKBN {
+            textdata varchar(10);
+          };
+          count int;
+            item varchar(10)[2];
+        };
+        COMMENT_NYUINRYO_COMBO {
+          COMMENT_NYUINRYO {
+            textdata varchar(34);
+          };
+          count int;
+            item varchar(34)[5];
+        };
+        COMMENT_NYUINRYO1_COMBO {
+          COMMENT_NYUINRYO1 {
+            textdata varchar(34);
+          };
+          count int;
+            item varchar(34)[5];
+        };
+        CHKKBN_COMBO {
+          CHKKBN {
+            textdata varchar(36);
+          };
+          count int;
+            item varchar(36)[5];
+        };
+        SHOKUJI_PRTKBN_COMBO {
+          SHOKUJI_PRTKBN {
+            textdata varchar(36);
+          };
+          count int;
+            item varchar(36)[5];
+        };
+        BYOMEI_PRTJYUN_COMBO {
+          BYOMEI_PRTJYUN {
+            textdata varchar(36);
+          };
+          count int;
+            item varchar(36)[5];
+        };
+        PREFPRGID {
+          textdata varchar(15);
+        };
+        PREFPRGID1 {
+          state int;
+          textdata varchar(15);
+        };
+        AUTODSPKBN_COMBO {
+          AUTODSPKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        SEIHO_DSPKBN_COMBO {
+          SEIHO_DSPKBN {
+            textdata varchar(34);
+          };
+          count int;
+            item varchar(34)[5];
+        };
+        RECEIPT_MAKE_COMBO {
+          RECEIPT_MAKE {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        ZERO_KOH_PRTKBN_COMBO {
+          ZERO_KOH_PRTKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        scr4 {
+          HKNJANUMLIST {
+            count int;
+            row int;
+            rowattr int;
+              item {
+                column1 varchar(2);
+                column2 varchar(8);
+                column3 varchar(2);
+                column4 varchar(50);
+              }[10];
+              selectdata bool[10];
+          };
+        };
+        SELNUM {
+          numdata number(2);
+        };
+        HKNJANUM1 {
+          textdata varchar(8);
+        };
+        HKNJANAME1 {
+          textdata varchar(50);
+        };
+      };
+      fi32 {
+        HKN_RIREKI_COMBO {
+          HKN_RIREKI {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        GENBUTU_ICHIBU_COMBO {
+          GENBUTU_ICHIBU {
+            textdata varchar(38);
+          };
+          count int;
+            item varchar(38)[5];
+        };
+        COMPRESS_COMBO {
+          COMPRESS {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[2];
+        };
+        DISASTER_RECEIPT_COMBO {
+          DISASTER_RECEIPT {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[5];
+        };
+        YKZ_15_COMBO {
+          YKZ_15 {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[5];
+        };
+        KOUHI_ICHIBU_COMBO {
+          KOUHI_ICHIBU {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[5];
+        };
+      };
+      fi30 {
+        SYAPRTNM {
+          textdata varchar(16);
+        };
+        SYAPRTNM_NEXT {
+          textdata varchar(16);
+        };
+        KKHPRTNM {
+          textdata varchar(16);
+        };
+        KKHPRTNM_NEXT {
+          textdata varchar(16);
+        };
+        KOUIKIPRTNM {
+          textdata varchar(16);
+        };
+        KOUIKIPRTNM_NEXT {
+          textdata varchar(16);
+        };
+        NEXTPRTKBN1_COMBO {
+          NEXTPRTKBN_1 {
+            textdata varchar(16);
+          };
+          count int;
+            item varchar(16)[4];
+        };
+        SYAPRTNM_N {
+          textdata varchar(16);
+        };
+        SYAPRTNM_NEXT_N {
+          textdata varchar(16);
+        };
+        KKHPRTNM_N {
+          textdata varchar(16);
+        };
+        KKHPRTNM_NEXT_N {
+          textdata varchar(16);
+        };
+        KOUIKIPRTNM_N {
+          textdata varchar(16);
+        };
+        KOUIKIPRTNM_NEXT_N {
+          textdata varchar(16);
+        };
+        NEXTPRTKBN_COMBO {
+          NEXTPRTKBN {
+            textdata varchar(16);
+          };
+          count int;
+            item varchar(16)[3];
+        };
+        PRT_CHECKKBN_COMBO {
+          PRT_CHECKKBN {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        JIHI_PRTKBN_COMBO {
+          JIHI_PRTKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[2];
+        };
+        PRTJYUNKBN4_COMBO {
+          PRTJYUNKBN4 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+        PRTJYUNKBN6_COMBO {
+          PRTJYUNKBN6 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+        PRTJYUNKBN1_COMBO {
+          PRTJYUNKBN1 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+        PRTJYUNKBN3_COMBO {
+          PRTJYUNKBN3 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+        PRTJYUNKBN5_COMBO {
+          PRTJYUNKBN5 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+        PRTJYUNKBN2_COMBO {
+          PRTJYUNKBN2 {
+            textdata varchar(31);
+          };
+          count int;
+            item varchar(31)[10];
+        };
+      };
+      fi29 {
+        FRAME_ROU_COMBO {
+          FRAME_ROU {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        FRAME_ROU_N_COMBO {
+          FRAME_ROU_N {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        RSI_RECEIPTKBN_COMBO {
+          RSI_RECEIPTKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        ROUPRTKBN_COMBO {
+          ROUPRTKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        ROUPRTKBN_N_COMBO {
+          ROUPRTKBN_N {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        COMMENT_ROU_COMBO {
+          COMMENT_ROU {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        FRAME_JIBAI_COMBO {
+          FRAME_JIBAI {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        FRAME_JIBAI_N_COMBO {
+          FRAME_JIBAI_N {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        JIBAIPRTKBN_COMBO {
+          JIBAIPRTKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        JIBAIPRTKBN_N_COMBO {
+          JIBAIPRTKBN_N {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        JIBAIPRTKBN1_COMBO {
+          JIBAIPRTKBN1 {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        JIBAIPRTKBN1_N_COMBO {
+          JIBAIPRTKBN1_N {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        JIBAI_FRACTION_KBN1_COMBO {
+          JIBAI_FRACTION_KBN1 {
+            textdata varchar(38);
+          };
+          count int;
+            item varchar(38)[5];
+        };
+        JIBAI_FRACTION_KBN2_COMBO {
+          JIBAI_FRACTION_KBN2 {
+            textdata varchar(38);
+          };
+          count int;
+            item varchar(38)[5];
+        };
+        JIBAI_PDF_COMBO {
+          JIBAI_PDF {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        ROUPRTNM {
+          textdata varchar(16);
+        };
+        ROUPRTNM_NEXT {
+          textdata varchar(16);
+        };
+        JBAIPRTNM {
+          textdata varchar(16);
+        };
+        JBAIPRTNM_NEXT {
+          textdata varchar(16);
+        };
+        ROUPRTNM_N {
+          textdata varchar(16);
+        };
+        ROUPRTNM_NEXT_N {
+          textdata varchar(16);
+        };
+        JBAIPRTNM_N {
+          textdata varchar(16);
+        };
+        JBAIPRTNM_NEXT_N {
+          textdata varchar(16);
+        };
+      };
+      fi28 {
+        SYARECEKBN_COMBO {
+          SYARECEKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        KKHRECEKBN_COMBO {
+          KKHRECEKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        KOUIKIRECEKBN_COMBO {
+          KOUIKIRECEKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        ROURECEKBN_COMBO {
+          ROURECEKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[4];
+        };
+        RECEDENOUT {
+          state int;
+          textdata varchar(30);
+        };
+        RECECOMKBN_COMBO {
+          RECECOMKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[2];
+        };
+        NI_JYOKEN1 {
+          numdata number(8);
+        };
+        NI_JYOKEN2 {
+          numdata number(8);
+        };
+        NI_JYOKEN5 {
+          numdata number(8);
+        };
+        NI_JYOKEN3 {
+          numdata number(8);
+        };
+        NI_JYOKEN4 {
+          numdata number(8);
+        };
+        NI_JYOKEN6 {
+          numdata number(8);
+        };
+        RECEDEN_CDRKBN_COMBO {
+          RECEDEN_CDRKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        RECEDEN_LST1KBN_COMBO {
+          RECEDEN_LST1KBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        RECEDEN_LST2KBN_COMBO {
+          RECEDEN_LST2KBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        RECEDEN_LST2KBN_MEDIA_COMBO {
+          RECEDEN_LST2KBN_MEDIA {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[5];
+        };
+        RECEDEN_RIREKI_COMBO {
+          state int;
+          RECEDEN_RIREKIKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        RECEDEN_DATAKBN_COMBO {
+          RECEDEN_DATAKBN {
+            textdata varchar(40);
+          };
+          count int;
+            item varchar(40)[10];
+        };
+        RECEDEN_DISASTER_COMBO {
+          RECEDEN_DISASTER {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        RECEDEN_CHK_COMBO {
+          RECEDEN_CHK {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        KOUIKIKBN_COMBO {
+          KOUIKIKBN {
+            textdata varchar(34);
+          };
+          count int;
+            item varchar(34)[4];
+        };
+        KIGO_DELI_FLG_CMB {
+          KIGO_DELI_FLG {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        KIGO_DELI_HKNJA_CMB {
+          KIGO_DELI_HKNJA {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        NUM_DELI_FLG_CMB {
+          NUM_DELI_FLG {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        NUM_DELI_HKNJA_CMB {
+          NUM_DELI_HKNJA {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+      };
+      fi26 {
+        PR_PRTJYUN_COMBO {
+          PR_PRTJYUN {
+            textdata varchar(12);
+          };
+          count int;
+            item varchar(12)[5];
+        };
+        HKN_PRTJYUN_COMBO {
+          HKN_PRTJYUN {
+            textdata varchar(46);
+          };
+          count int;
+            item varchar(46)[6];
+        };
+        REC_PRTJYUN_COMBO {
+          REC_PRTJYUN {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[6];
+        };
+        ZAITAKU_COMBO {
+          ZAITAKU {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[5];
+        };
+        CHOUKI_COMBO {
+          CHOUKI {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[5];
+        };
+        HKNJANUM {
+          textdata varchar(8);
+        };
+        HKNJANAME {
+          textdata varchar(50);
+        };
+        HKNJ_PRTKBN_COMBO {
+          HKNJ_PRTKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        DRCD_PRTKBN_COMBO {
+          DRCD_PRTKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[2];
+        };
+        DRCD_PRTJYUNKBN_COMBO {
+          DRCD_PRTJYUNKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[10];
+        };
+        BTUNUM_PRTKBN_COMBO {
+          BTUNUM_PRTKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[2];
+        };
+        BTUNUM_PRTJYUN_COMBO {
+          BTUNUM_PRTJYUNKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[10];
+        };
+        TERMINAL_DIGIT_PRTKBN_COMBO {
+          TERMINAL_DIGIT_PRTKBN {
+            textdata varchar(38);
+          };
+          count int;
+            item varchar(38)[5];
+        };
+      };
+      fi25 {
+        MOJI_COMBO {
+          MOJI_KISAIKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[5];
+        };
+        KYURATE_COMBO {
+          KYURATE_KISAIKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[5];
+        };
+        RECESYUBETU_COMBO {
+          RECESYUBETU_KISAIKBN {
+            textdata varchar(26);
+          };
+          count int;
+            item varchar(26)[5];
+        };
+      };
+      fi24 {
+        SYAPRTKBN_COMBO {
+          SYAPRTKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        DISASTER_SYAPRTKBN_COMBO {
+          DISASTER_SYAPRTKBN {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[2];
+        };
+        KKHPRTKBN_COMBO {
+          KKHPRTKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        KOUIKIPRTKBN_COMBO {
+          KOUIKIPRTKBN {
+            textdata varchar(34);
+          };
+          count int;
+            item varchar(34)[5];
+        };
+        RSI_INVOICEKBN_COMBO {
+          RSI_INVOICEKBN {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[2];
+        };
+        ROUSAIPRTKBN_COMBO {
+          ROUSAIPRTKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+        FRAME_ROUSAIPRTKBN_COMBO {
+          FRAME_ROUSAIPRTKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[2];
+        };
+      };
+      fi27 {
+        SYUKA_KBN_COMBO {
+          SYUKA_KBN {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        SYUKA_NYUIN_COMBO {
+          SYUKA_NYUIN {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[5];
+        };
+        SYUKA_GAIRAI_COMBO {
+          SYUKA_GAIRAI {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[5];
+        };
+        SYUKA_SELECT_COMBO {
+          SYUKA_SELECT {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        SYUKA_MODE_COMBO {
+          SYUKA_MODE {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[2];
+        };
+        SYUKA_SYAHO_COMBO {
+          SYUKA_SYAHO {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[3];
+        };
+        SYUKA_KOKUHO_COMBO {
+          SYUKA_KOKUHO {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[3];
+        };
+        SYUKA_KOUIKI_COMBO {
+          SYUKA_KOUIKI {
+            textdata varchar(22);
+          };
+          count int;
+            item varchar(22)[3];
+        };
+      };
+      fi31 {
+        INSPECT_CHAR_COMBO {
+          INSPECT_CHAR {
+            textdata varchar(36);
+          };
+          count int;
+            item varchar(36)[5];
+        };
+        INSPECT_ZERO_COMBO {
+          INSPECT_ZERO {
+            textdata varchar(24);
+          };
+          count int;
+            item varchar(24)[5];
+        };
+        INSPECT_INCLUDE_COMBO {
+          INSPECT_INCLUDE {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[5];
+        };
+        INSPECT_GENERAL_COMBO {
+          INSPECT_GENERAL {
+            textdata varchar(30);
+          };
+          count int;
+            item varchar(30)[5];
+        };
+        DRNAME_KSIKBN_COMBO {
+          DRNAME_KSIKBN {
+            textdata varchar(20);
+          };
+          count int;
+            item varchar(20)[5];
+        };
+      };
+    };
+  };
+};

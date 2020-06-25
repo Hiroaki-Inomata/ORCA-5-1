@@ -1,0 +1,26 @@
+name	saitama;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU1100"	"OpenCOBOL";
+bind	"SOKATU1105"	"OpenCOBOL";
+bind	"SOKATU1110"	"OpenCOBOL";
+bind	"SOKATU1150"	"OpenCOBOL";
+bind	"SOKATU1151"	"OpenCOBOL";
+bind	"SOKATU1160"	"OpenCOBOL";
+bind	"SOKATU1161"	"OpenCOBOL";
+bind	"SOKATU1115"	"OpenCOBOL";
+bind	"SEIKYU1119"	"OpenCOBOL";
+bind	"SEIKYU1120"	"OpenCOBOL";
+bind	"SEIKYU1121"	"OpenCOBOL";
+bind	"SEIKYU1123"	"OpenCOBOL";
+bind	"SEIKYU1125"	"OpenCOBOL";
+bind	"SEIKYU1127"	"OpenCOBOL";
+bind	"SEIKYU1131"	"OpenCOBOL";
+bind	"SEIKYU1133"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

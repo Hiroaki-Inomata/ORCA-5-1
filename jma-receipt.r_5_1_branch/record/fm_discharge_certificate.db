@@ -1,0 +1,53 @@
+fm_discharge_certificate {
+  context                 int;
+  object                  object;
+  mode                    int;
+  recordname              varchar(128);
+  data{
+    Form_ID               varchar(30);
+    Custom_ID             varchar(30);
+    Printer               varchar(20);
+    Patient{
+      ID                  varchar(20);
+      Name                varchar(50);
+      KanaName            varchar(50);
+      BirthDate           varchar(10);
+      Age                 varchar(3);
+      Sex                 varchar(1);
+      Address             varchar(100)[2];
+      ZipCode             varchar(7);
+      PhoneNumber         varchar(15);
+    };
+    Hospital{
+      Name                varchar(120)[3];
+      ZipCode             varchar(7);
+      Address             varchar(200)[3];
+      PhoneNumber         varchar(15);
+    };
+    Doctor{
+      Code                varchar(5);
+      Name                varchar(50);
+      KanaName            varchar(50);
+    };
+    IssuedDate            varchar(10);
+    Admission_Date        varchar(10);
+    Discharge_Date        varchar(10);
+    Hospital_Charge_And_Term{
+      Hospital_Charge{
+        Name                varchar(50);
+        Days                varchar(5);
+      }[3];
+      Other_Days            varchar(5);
+      Term{
+        Days                varchar(5);
+        Start_Date     varchar(10);
+        End_Date       varchar(10);
+      };
+    };
+    General_Hospital_Charge{
+      Days                varchar(5);
+      Base_Date           varchar(10);
+    };
+    Disease_Name          varchar(160);
+  };
+};

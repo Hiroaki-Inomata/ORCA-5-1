@@ -1,0 +1,47 @@
+tbl_henrei_kanri	{
+	HOSPNUM			number(2,0);
+	TEISYUTUSAKI		char(1);
+	TEISYUTUSAKI2		char(1);
+	HOSPCD			char(7);
+#---->  審査側が処理した年月(HIレコードの年月)
+	SYORIYM			char(6);
+	RECV_TOTAL_CNT		number(5);
+	RECV_PATIENT_CNT	number(5);
+	RECV_GO_CNT		number(5);
+	RECV_GO_TEN		number(10);
+#-----> ここまで
+	TERMID			varchar(64);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,TEISYUTUSAKI,TEISYUTUSAKI2,HOSPCD,SYORIYM;
+};
+
+path    key             {
+        DBSELECT        {
+                DECLARE tbl_henrei_kanri_key_csr CURSOR FOR
+                SELECT *
+                FROM tbl_henrei_kanri
+                WHERE   HOSPNUM         = :HOSPNUM
+                    AND TEISYUTUSAKI    = :TEISYUTUSAKI
+                    AND TEISYUTUSAKI2   = :TEISYUTUSAKI2
+                    AND SYORIYM         = :SYORIYM
+                    AND HOSPCD          = :HOSPCD
+                ;
+        };
+};
+
+path    key2             {
+        DBSELECT        {
+                DECLARE tbl_henrei_kanri_key2_csr CURSOR FOR
+                SELECT *
+                FROM tbl_henrei_kanri
+                WHERE   HOSPNUM         = :HOSPNUM
+                ORDER BY SYORIYM DESC,TEISYUTUSAKI,TEISYUTUSAKI2,HOSPCD
+                ;
+        };
+};

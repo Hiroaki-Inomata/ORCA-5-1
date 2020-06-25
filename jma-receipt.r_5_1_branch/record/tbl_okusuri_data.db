@@ -1,0 +1,50 @@
+tbl_okusuri_data {
+	DATA_KEY	number(16,0);
+	RP 		number(3,0);
+	RP_SEQ 		number(3,0);
+	DATA_CLASS	number(3,0);
+	NAME		varchar(200);
+	SURYO 		number(10,5);
+	TANINAME	varchar(20);
+	CODE_CLASS	number(2,0);
+	M_CODE		varchar(20);
+	TERMID   	varchar(16);
+	OPID     	varchar(16);
+	CREYMD   	varchar(8);
+	UPYMD    	varchar(8);
+	UPHMS		varchar(6);
+};
+
+primary	{
+	DATA_KEY,RP,RP_SEQ;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_data_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_data
+			WHERE   DATA_KEY = :DATA_KEY
+		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_data_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_data
+			WHERE   DATA_KEY = :DATA_KEY
+		         	ORDER   BY    RP,
+                                              RP_SEQ
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_okusuri_data
+			WHERE   DATA_KEY = :DATA_KEY
+		;
+	};
+};

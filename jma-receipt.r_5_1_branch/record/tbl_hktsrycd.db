@@ -1,0 +1,120 @@
+tbl_hktsrycd {
+	KANRICD   			number(3);
+	RENNUM    			number(3);
+	YUKOSTYMD  			char(8);
+	YUKOEDYMD	  		char(8);
+	SRYCD				char(9);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	KANRICD,RENNUM,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE   KANRICD     =   :KANRICD
+			AND   RENNUM        =   :RENNUM
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE   KANRICD     =   :KANRICD
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+			ORDER   BY         RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE   KANRICD     =   :KANRICD
+			ORDER   BY         RENNUM,
+			                   YUKOSTYMD
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE  YUKOSTYMD  <=   :YUKOSTYMD
+			AND    YUKOEDYMD  >=   :YUKOEDYMD
+			ORDER   BY         KANRICD,
+                                           RENNUM
+		;
+	};
+};
+
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE  RENNUM     =  1
+			ORDER   BY         KANRICD,
+			                   RENNUM,
+			                   YUKOSTYMD
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE   KANRICD     =   :KANRICD
+                        AND     RENNUM      =   1
+			AND     YUKOEDYMD  <=   :YUKOEDYMD
+			ORDER   BY         YUKOSTYMD DESC
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			ORDER   BY         KANRICD,
+			                   RENNUM,
+			                   YUKOSTYMD
+                       
+ 		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsrycd_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsrycd
+			WHERE   KANRICD     =   :KANRICD
+                        AND     RENNUM      =   1
+			AND     YUKOEDYMD  >=   :YUKOSTYMD
+			ORDER   BY         YUKOSTYMD DESC
+		;
+	};
+};

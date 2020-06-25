@@ -1,0 +1,114 @@
+XG03 {
+  fixed32 {
+    B04 {
+      label varchar(10);
+    };
+    B06S {
+      state int;
+    };
+    B07S {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B10 {
+      label varchar(10);
+    };
+    B11 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    LBLMSG01 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    LBLMSG02 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    PTNUM {
+      state int;
+      textdata varchar(20);
+    };
+    PTNAME {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    CREYMD {
+      state int;
+      textdata varchar(10);
+    };
+    scrolledwindow26 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(50);
+            column5 varchar(10);
+            column6 varchar(9);
+            column7 varchar(50);
+            column8 varchar(20);
+            column9 varchar(9);
+            column10 varchar(8);
+            column11 varchar(6);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    IPTNUM {
+      textdata varchar(20);
+    };
+    IPTNAME {
+      textdata varchar(50);
+    };
+    ITITLE {
+      textdata varchar(50);
+    };
+    IVERSION {
+      textdata varchar(10);
+    };
+    IDRNAME {
+      textdata varchar(50);
+    };
+    ISRYYMD {
+      textdata varchar(9);
+    };
+    ILDNAME {
+      textdata varchar(20);
+    };
+    ICREYMD {
+      textdata varchar(9);
+    };
+    ICREHMS {
+      textdata varchar(8);
+    };
+    IOPID {
+      textdata varchar(16);
+    };
+    ISTATUS {
+      textdata varchar(6);
+    };
+    sw1 {
+      CONTEXT {
+        textdata varchar(50000);
+      };
+    };
+    pandatimer1 {
+      duration int;
+    };
+    pandadownload1 {
+      objectdata object;
+      filename varchar(1024);
+    };
+  };
+};

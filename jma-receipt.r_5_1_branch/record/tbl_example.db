@@ -1,0 +1,61 @@
+tbl_example {
+	HOSPNUM				number(2,0);
+	KUBUN				char(1);
+	RENNUM       		number(3);
+	COMMENT        		varchar(800);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,KUBUN,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_example_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_example
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   KUBUN       =   :KUBUN
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+
+path	key1		{ 	
+	DBSELECT	{
+		DECLARE tbl_example_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_example
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   KUBUN       =   :KUBUN
+			ORDER   BY        RENNUM
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_example_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_example
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_example_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_example
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   KUBUN       =   :KUBUN
+			ORDER   BY        RENNUM  DESC
+		;
+	};
+};
+

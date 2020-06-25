@@ -1,0 +1,12 @@
+---
+ - [cobol/SOKATU1610.CBL , cobol/]
+ - [cobol/SOKATU1615.CBL , cobol/]
+ - [cobol/copy/CPSKT1610TMP.INC , cobol/copy/]
+ - [cobol/copy/SKT1610.INC , cobol/copy/]
+ - [cobol/copy/SKT1615.INC , cobol/copy/]
+ - [form/SKT1610.red , form/]
+ - [form/SKT1610o.red , form/]
+ - [form/SKT1615.red , form/]
+ - [lddef/toyama.bd , lddef/]
+ - [scripts/kentan/sokatu1610.sh , scripts/kentan/]
+ - [scripts/kentan/sokatu1615.sh , scripts/kentan/]

@@ -1,0 +1,59 @@
+      *******************************************************************
+      * Project code name "ORCA" 
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    情報削除画面ＳＰＡ     (SPA-FREE の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+       01  SPA-XB01.
+           03  SPA-XB01-AREA.
+               05  SPA-GMN-PAGE                    PIC 9(05).
+               05  SPA-GMN-CUR                     PIC 9(03).
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-JOBLIST-AREA.
+                       09  SPA-GMN-SELNUM          PIC 9(05).
+                       09  SPA-GMN-JOBLIST-SEL     PIC 9(05).
+                       09  SPA-GMN-JOBLIST-MAX     PIC 9(05).
+                       09  SPA-GMN-JOBLIST-OCC     OCCURS  100.
+                           11  SPA-GMN-TNO         PIC 9(03).
+                           11  SPA-GMN-TJOBNAME    PIC X(40).
+                           11  SPA-GMN-TJOBID      PIC 9(7).
+                           11  SPA-GMN-TSHELLID    PIC X(8).
+                           11  SPA-GMN-TSTYMD      PIC X(9).
+                           11  SPA-GMN-TSTHMS      PIC X(8).
+                           11  SPA-GMN-TEDYMD      PIC X(9).
+                           11  SPA-GMN-TEDHMS      PIC X(8).
+                           11  SPA-GMN-TSTEPSTHMS  PIC X(8).
+                           11  SPA-GMN-TSTEPEDHMS  PIC X(8).
+                           11  SPA-GMN-TERRCD      PIC X(4).
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-DURATION            PIC S9(9).
+                   07  SPA-NAI-MOTOPG              PIC X(08).
+                   07  SPA-NAI-JOBLIST-AREA.
+                       09  SPA-NAI-SHELLID         PIC X(08).
+                       09  SPA-NAI-JOBLIST-OCC     OCCURS  100.
+                           11  SPA-NAI-TNO         PIC 9(03).
+                           11  SPA-NAI-TMONBATCH   PIC 9(1).
+                           11  SPA-NAI-TSTYMD      PIC X(8).
+                           11  SPA-NAI-TEDYMD      PIC X(8).
+                           11  SPA-NAI-TSTATUS     PIC X(1).
+                           11  SPA-NAI-TYOBI       PIC X(500).

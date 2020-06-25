@@ -1,0 +1,17 @@
+J041 {
+  fixed10 {
+    scrolledwindow1 {
+      MED_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(40);
+            column2 varchar(40);
+            column3 varchar(6);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+  };
+};

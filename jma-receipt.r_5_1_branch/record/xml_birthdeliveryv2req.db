@@ -1,0 +1,42 @@
+xml_birthdeliveryv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	private_objects {
+		Save_Request					varchar(1);
+		Request_Number					varchar(2);
+		Patient_ID						varchar(20);
+		Admission_Date					varchar(10);
+		Direct_Payment					varchar(01);
+		Ac_Month						varchar(07);
+		Ac_Date_Class					varchar(1);
+		Ac_Class						varchar(1);
+		Delivery						varchar(1);
+		Submission_Provider				varchar(1);
+		Gestation_Period_Passed			varchar(7);
+		Delivery_Date					varchar(10);
+		Stillborn_Children				varchar(1);
+		Children_Born_Number			varchar(7);
+		Hospital_Stay_Days				varchar(7);
+		Obstetric_Compensation_System	varchar(1);
+		Hospital_Money					varchar(7);
+		Room_Money						varchar(7);
+		Delivery_Care_Money				varchar(7);
+		Delivery_Money					varchar(7);
+		Child_Care_Money				varchar(7);
+		Examination_Money				varchar(7);
+		Medical_Treatment_Money			varchar(7);
+		OCS_Money						varchar(7);
+		Other_Money						varchar(7);
+		Copayment_Money					varchar(7);
+		Remarks							varchar(60);
+		Insurance_Combination_Number	varchar(4);
+		HealthInsurance_Information  {
+			InsuranceProvider_Number		varchar(08);
+			HealthInsuredPerson_Symbol		varchar(38);
+			HealthInsuredPerson_Number		varchar(38);
+			RelationToInsuredPerson			varchar(01);
+		};
+	};
+};

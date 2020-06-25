@@ -1,0 +1,128 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    収集データ作成
+#        $1  TERMID
+#        $2  HOSPNUM
+#        $3  PREFNUM
+#        $4  SRYYM
+#        $5  BEDFLG (0:病床なし、1:病床あり)
+#        $6  JOBID
+#        $7  SHELLID
+#        $8  UPLOAD (0:送信なし、1:送信あり、送信のみ)
+#        $9  HOSPID
+#-------------------------------------------#
+
+COLLECTG=collectg.csv
+COLLECTN=collectn.csv
+#                                collect-yyyymm.tar.gz (collectg.csv,collectn.csv)
+LOG_FILE=/var/log/jma-receipt/$2datacollect1.log
+ERRFILE=/tmp/$2datacollecterror
+
+DASUPLOAD=$SCRIPTSDIR/monthly/das-upload.sh
+
+gairai () {
+#外来分処理
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBC010 -parameter $1,$2,$3,$4,2,$5,$6,$ERRFILE
+  if  [ -e $ERRFILE ]; then
+    rm -f /tmp/$2COLDT*
+  else
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBC020 -parameter $1,$2,$4,$5,$6,$DASDIR/$2/tmp/$COLLECTG,$ERRFILE
+    if  [ -e $ERRFILE ]; then
+      rm -f /tmp/$2COLDT*
+      rm -f $DASDIR/$2/tmp/$COLLECTG
+    fi
+  fi
+}
+
+nyuin () {
+#入院分処理
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBC010 -parameter $1,$2,$3,$4,1,$5,$6,$ERRFILE
+  if  [ -e $ERRFILE ]; then
+    rm -f /tmp/$2COLDT*
+  else
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBC020 -parameter $1,$2,$4,$5,$6,$DASDIR/$2/tmp/$COLLECTN,$ERRFILE
+    if  [ -e $ERRFILE ]; then
+      rm -f /tmp/$2COLDT*
+      rm -f $DASDIR/$2/tmp/$COLLECTN
+    fi
+  fi
+}
+
+make_upload_file () {
+#アップロードファイル作成
+  if  [ $3 -eq '1' ]; then
+    if  [ -e $DASDIR/$1/tmp/$COLLECTG ] && [ -e $DASDIR/$1/tmp/$COLLECTN ]; then
+      tar cvfz $DASDIR/$1/collect-$2.tar.gz -C$DASDIR/$1/ tmp/$COLLECTG tmp/$COLLECTN
+    fi
+    if  [ -e $DASDIR/$1/tmp/$COLLECTG ] && [ ! -e $DASDIR/$1/tmp/$COLLECTN ]; then
+      tar cvfz $DASDIR/$1/collect-$2.tar.gz -C$DASDIR/$1/ tmp/$COLLECTG
+    fi
+    if  [ ! -e $DASDIR/$1/tmp/$COLLECTG ] && [ -e $DASDIR/$1/tmp/$COLLECTN ]; then
+      tar cvfz $DASDIR/$1/collect-$2.tar.gz -C$DASDIR/$1/ tmp/$COLLECTN
+    fi
+  else
+    if  [ -e $DASDIR/$1/tmp/$COLLECTG ]; then
+      tar cvfz $DASDIR/$1/collect-$2.tar.gz -C$DASDIR/$1/ tmp/$COLLECTG
+    fi
+  fi
+}
+
+#main
+
+  if ! [ -d $DASDIR/$2 ]; then 
+    mkdir $DASDIR/$2
+  fi
+  if ! [ -d $DASDIR/$2/tmp ]; then 
+    mkdir $DASDIR/$2/tmp
+  fi
+
+  rm -f $DASDIR/$2/tmp/$COLLECTG
+  rm -f $DASDIR/$2/tmp/$COLLECTN
+  rm -f /tmp/$2COLDT*
+
+# ファイル送信のみ？
+  if  [ $8 -ne '2' ]; then
+    rm -f $LOG_FILE
+    #前年同月
+    PREVYM=$(expr $4 - 100)
+    rm -f $ERRFILE
+    gairai $1 $2 $3 $PREVYM $6 $7
+    if  [ $5 -eq '1' ]; then
+      nyuin $1 $2 $3 $PREVYM $6 $7
+    fi
+    make_upload_file $2 $PREVYM $5
+
+    rm -f $DASDIR/$2/tmp/$COLLECTG
+    rm -f $DASDIR/$2/tmp/$COLLECTN
+    rm -f /tmp/$2COLDT*
+
+    #当年月
+    rm -f $ERRFILE
+    gairai $1 $2 $3 $4 $6 $7
+    if  [ $5 -eq '1' ]; then
+      nyuin $1 $2 $3 $4 $6 $7
+    fi
+    make_upload_file $2 $4 $5
+    rm -f /tmp/$2COLDT*
+  fi
+
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$6$7,$2
+
+  if  [ $8 -ne '0' ]; then
+    echo "収集データ送信処理 起動"
+    $DASUPLOAD $2 $9 &
+    rm -f $DASDIR/$2/tmp/$COLLECTG
+    rm -f $DASDIR/$2/tmp/$COLLECTN
+  fi
+
+  exit

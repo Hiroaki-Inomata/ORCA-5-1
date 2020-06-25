@@ -1,0 +1,73 @@
+monbatch_log {
+	id		varchar(37);
+	pgid		integer;
+	rc		integer;
+	message		varchar(512);
+	starttime	varchar(64);
+	endtime		varchar(64);
+	tenant		integer;
+	name		varchar(256);
+	groupname	varchar(64);
+	comment		varchar(512);
+	extra 		varchar(512);
+	exwindow	varchar(256);
+	exwidget	varchar(256);
+	exevent		varchar(256);
+	exterm		varchar(256);
+	exuser		varchar(256);
+	exhost		varchar(256);
+	exec_record varchar(8192);
+#-----> カーソル移動用
+	movecount	integer,virtual;
+);
+
+primary	{
+    id;
+};
+
+path	list1		{
+	DBSELECT	{
+		DECLARE monbatch_log_list1_csr CURSOR FOR
+		SELECT id, pgid, rc, message,
+			to_char(starttime at time zone 'JST', 'YYYY/MM/DD HH24:MI:SS') AS starttime,
+			to_char(endtime at time zone 'JST', 'YYYY/MM/DD HH24:MI:SS') AS endtime,
+			tenant,	name, groupname, comment, extra, exwindow, exwidget,
+			exevent, exterm, exuser, exhost, exec_record
+		FROM monbatch_log
+		WHERE tenant = :tenant
+		AND to_char(starttime at time zone 'JST', 'YYYYMMDD') = :starttime 
+                ORDER BY starttime DESC
+		;
+
+		MOVE FORWARD :movecount IN monbatch_log_list1_csr
+		;
+	};
+};
+
+path	list2		{
+	DBSELECT	{
+		DECLARE monbatch_log_list2_csr CURSOR FOR
+		SELECT id, pgid, rc, message,
+			to_char(starttime at time zone 'JST', 'YYYY/MM/DD HH24:MI:SS') AS starttime,
+			to_char(endtime at time zone 'JST', 'YYYY/MM/DD HH24:MI:SS') AS endtime,
+			tenant,	name, groupname, comment, extra, exwindow, exwidget,
+			exevent, exterm, exuser, exhost, exec_record
+		FROM monbatch_log
+		WHERE SUBSTR(groupname,1,2) = :groupname
+		AND to_char(starttime at time zone 'JST', 'YYYYMMDD') = :starttime 
+                ORDER BY starttime DESC
+		;
+
+		MOVE FORWARD :movecount IN monbatch_log_list2_csr
+		;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE monbatch_log_all_csr CURSOR FOR
+		SELECT *
+		FROM monbatch_log
+		;
+	};
+};

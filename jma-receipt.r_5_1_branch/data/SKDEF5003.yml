@@ -1,0 +1,23 @@
+kanri_cd    : "5003"
+name        : "Ã»´üÂÚºß¼ê½ÑÅù´ðËÜÎÁ£³¾ðÊó"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "TANKICD"
+  item_jp   : "Ã»¼ê£³¥³¡¼¥É"
+  type      : "X"
+  start     : 1
+  length    : 9
+- item_no   : 2
+  item      : "TOKCD"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 10
+  length    : 2
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 12
+  length    : 489

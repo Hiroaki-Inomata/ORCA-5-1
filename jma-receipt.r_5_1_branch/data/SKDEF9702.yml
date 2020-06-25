@@ -1,0 +1,41 @@
+kanri_cd    : "9702"
+name        : "ユーザプログラム−受付（U02）"
+class_cd    : "*"
+item_max    : 6
+item_list   :
+- item_no   : 1
+  item      : "SYORINM"
+  item_jp   : "処理・帳票名"
+  type      : "X"
+  start     : 1
+  length    : 30
+- item_no   : 2
+  item      : "SHELL"
+  item_jp   : "実行スクリプト"
+  type      : "X"
+  start     : 31
+  length    : 100
+- item_no   : 3
+  item      : "PRTNM"
+  item_jp   : "プリンタ名"
+  type      : "X"
+  start     : 131
+  length    : 16
+- item_no   : 4
+  item      : "EXECUTE-SW"
+  item_jp   : "実行する"
+  type      : "X"
+  start     : 147
+  length    : 1
+- item_no   : 5
+  item      : "EXECUTE-YTPE"
+  item_jp   : "実行形式"
+  type      : "X"
+  start     : 148
+  length    : 1
+- item_no   : 6
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 149
+  length    : 352

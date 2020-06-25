@@ -1,0 +1,107 @@
+Z06 {
+  fixed1 {
+    SRYCDH {
+      textdata varchar(9);
+    };
+    YUKOSTYMDH {
+      textdata varchar(9);
+    };
+    YUKOEDYMDH {
+      textdata varchar(9);
+    };
+    NAMEH {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    KANANAME {
+      textdata varchar(100);
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+    FORMALNAME {
+      textdata varchar(200);
+    };
+    JITEN1COMB {
+      JITEN1 {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    JITEN2COMB {
+      JITEN2 {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    JITEN3COMB {
+      JITEN3 {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    JITEN4COMB {
+      JITEN4 {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    JITEN5COMB {
+      JITEN5 {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    DIGIT1 {
+      numdata number(3);
+    };
+    DIGIT2 {
+      numdata number(3);
+    };
+    DIGIT3 {
+      numdata number(3);
+    };
+    DIGIT4 {
+      numdata number(3);
+    };
+    DIGIT5 {
+      numdata number(3);
+    };
+    COMMENTKBN_COMB {
+      COMMENTKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    COPYCD {
+      state int;
+      textdata varchar(9);
+    };
+    B06 {
+      state int;
+      label varchar(10);
+    };
+    B09 {
+      state int;
+      label varchar(10);
+    };
+    B03 {
+      state int;
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+  };
+};

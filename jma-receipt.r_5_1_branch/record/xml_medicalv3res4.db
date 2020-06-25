@@ -1,0 +1,134 @@
+xml_medicalv3res4 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3res4 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+    	};
+#--- 確認選択あり
+	Medical_Select_Flag			varchar(05);
+#--- 診療日付
+	Perform_Date				varchar(10);
+#--- 伝票番号
+	Invoice_Number				varchar(07);
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+	Sequential_Number			varchar(1);
+        Physician_Code				varchar(5);
+        Physician_WholeName			varchar(80);
+	HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate		varchar(03);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+            	} [4];
+    	};
+#-!!!!!
+#--- 複数科・保険組合せ
+	Grp_Information  {
+	    Grp_Info  {
+#---           伝票番号
+	       Invoice_Number			varchar(07);
+#---           保険組合せ
+	       Insurance_Combination_Number	varchar(04);
+#---           診療科
+               Department_Code			varchar(02);
+#---           連番
+               Sequential_Number		varchar(1);
+            }[15] ;
+    	};
+#-!!!!!
+#--- 院内・院外区分
+	Outside_Class		varchar(5);
+#--- 診療内容
+	Medical_Information  {
+		Medical_Info  {
+#-!!!!!
+#-----  複数科・保険組合せ切替
+			Medication_Change_Info   {
+			    Change_Mode			varchar(03);
+			    Change_Insurance_Combination_Number	varchar(04);
+		            Change_InsuranceProvider_WholeName	varchar(20);
+                            Change_PublicInsurance_Information   {
+                		Change_PublicInsurance_Name	varchar(20);
+		            	} [4];
+			    Change_Department_Code	varchar(02);
+			    Change_Department_Code_Name	varchar(20);
+			    Change_Physician_Code	varchar(5);
+			    Change_Physician_Code_Name	varchar(80);
+			};
+#-!!!!!
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+			Medical_Class_Number		varchar(03);
+			Medical_Point 			varchar(08);
+			Medical_Money			varchar(08);
+			Medical_Inclusion_Class		varchar(05);
+#----->                 包括検査の検査数
+			Medical_Examination_Count	varchar(02);
+			Medication_Info    {
+				Medication_Code	varchar(09);
+				Medication_Name	varchar(140);
+				Medication_Number	varchar(11);
+#----->                         単位コード
+				Medication_Unit_Code		varchar(3);
+				Medication_Unit_Code_Name	varchar(24);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info {
+					Medication_Input_Code	varchar(10);
+				} [5];
+#----->                         フィルム分画数
+				Medication_Film_Comp_Number	varchar(03);
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_No_Addition_Class	varchar(03);
+				Medication_Auto_Addition 	varchar(01);
+			} [50];
+		}[120] ;
+		};
+#--- メッセージ
+	Medical_Message_Information {
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(3);
+       		 Medical_Warning_Message	varchar(100);
+            	} [40];
+	        };
+#--- 確認メッセージ
+	Medical_Select_Information {
+        Medical_Select			varchar(4);
+        Medical_Select_Message		varchar(100);
+		};
+	};
+};

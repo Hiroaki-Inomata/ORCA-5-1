@@ -1,0 +1,196 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ************************************************************
+      *    会計照会 共通ＳＰＡ     (SPA-WORK の内容  最大RL=597)
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      * 01.00.01     MCC-多々納   01/05/17  年齢計算追加
+      * 01.00.02     MCC-多々納   02/04/25  労災追加
+      * 04.08.00     NACL-多々納  16/02/XX  一般名表示対応
+      ************************************************************
+      *
+       01  SPA-J01KYOUTU.
+      *
+           03  SPA-J02-MOTOPG              PIC X(08).
+           03  SPA-J02-MOTOFLG             PIC X(01).
+      *　  診療年月
+           03  SPA-J02-SRYYMD              PIC  X(08).
+           03  SPA-J02-SRYYMDW             PIC  X(14).
+      *
+           03  SPA-J02-SET.
+      *        見出領域
+               05  SPA-J02-HKNCOMBIMEI     PIC X(51).
+               05  SPA-J02-FTNRATEMEI      PIC X(10).
+      *
+      *患者ＩＤ
+               05  SPA-GMN-PTID            PIC 9(10).
+      *患者番号
+               05  SPA-GMN-PTNUM           PIC X(20).
+      *患者カナ氏名
+               05  SPA-GMN-KANANAME        PIC X(50).
+      *患者漢字氏名
+               05  SPA-GMN-NAME            PIC X(50).
+      *患者性別
+               05  SPA-GMN-SEX             PIC X(02).
+      *患者生年月日
+               05  SPA-GMN-BIRTHDAY        PIC X(08).
+      *患者生年月日（和暦編集）
+               05  SPA-GMN-BIRTHDAYW       PIC X(09).
+      *入院日
+               05  SPA-NAI-NYUINYMD        PIC X(08).
+      *退院日
+               05  SPA-NAI-TAIINYMD        PIC X(08).
+      *入院科
+               05  SPA-NAI-NYUINKA         PIC X(02).
+      *
+               05  SPA-GMN-NYUINYMD        PIC X(09).
+               05  SPA-GMN-TAIINYMD        PIC X(09).
+      *入院期間設定
+               05  SPA-NAI-NYUIN-KIKAN.
+                   07  SPA-NAI-NYUIN-OCC   OCCURS   31.
+                       09  SPA-NAI-NYUIN       PIC 9(01).
+      *H30.7           自院歴期間
+                       09  SPA-NAI-NYUIN-JR    PIC 9(01).
+      *
+      *患者の入金方法
+               05  SPA-NYUKIN-HOHO         PIC   X(02).
+               05  SPA-NYUKIN-JYOTAI       PIC   X(01).
+      *
+      *開始パラメタ番号
+               05  SPA-MAE-STRNUM          PIC 9(04).
+               05  SPA-STRNUM              PIC 9(04).
+               05  SPA-ENDNUM              PIC 9(04).
+      *
+               05  SPA-GMN-SRYKBN-MAE      PIC X(02).
+      *
+      *選択対象剤番号
+      *　老人区分
+               05  SPA-ROUJIN          PIC  9(01).
+      *H28.2
+      *        後発医薬品への変更可署名
+               05  SPA-KOUHATUKA                 PIC X(01).
+      *        一般名表示
+               05  SPA-GENERICFLG                PIC X(01).
+      *
+               05  SPA-ZAINUMSEL-AREA.
+      *　診療区分
+                   07  SPA-SRYKBN          PIC  X(02).
+      *　剤番号
+                   07  SPA-ZAINUM          PIC  9(08).
+      *　パラメタ番号
+                   07  SPA-RENNUM          PIC  9(02).
+      *　剤点数分
+                   07  SPA-ZAITEN          PIC  9(08).
+      *  包括診療剤
+                   07  SPA-JIHOKBN          PIC  X(01).
+      *　剤区分
+                   07  SPA-ZAIKBN          PIC  9(03).
+      *H28.2       後発品変更不可あり
+                   07  SPA-GENEFUKAFLG     PIC  X(01).
+      *  回数テーブル
+                   07  SPA-SEL-DAY-G.
+                       11  SPA-SEL-DAY     PIC 9(03)
+                                                OCCURS   31.
+      *
+               05  SPA-NAI-AREA.
+      *            当月の老人の有無
+                   07  SPA-J02-ROUJIN            PIC 9(01).
+      *            年齢 
+                   07  SPA-FLG-NENREI            PIC 9(01).
+                   07  SPA-NAI-NENREI.
+                       09  SPA-NAI-NENREI-YY     PIC 9(03).
+                       09  SPA-NAI-NENREI-MM     PIC 9(02).
+                       09  SPA-NAI-NENREI-DD     PIC 9(02).
+      *
+      *労災用（Ｊ０２でセット）
+               05  SPA-NAI-RSI-ARAE.
+      *            労災用労災区分
+                   07  SPA-NAI-RSI-HKNKBN        PIC X(01).
+                   07  SPA-NAI-RSI-JUNKYO        PIC X(01).
+      *
+      *    保険組合せ一覧画面より
+           03  SPA-J021-SET.
+               05  SPA-J021-HKNCOMBI       PIC  X(04).
+               05  SPA-J021-HKNCOMBIMEI    PIC  X(40).
+               05  SPA-J021-ROUJIN         PIC  9(01).
+      *
+      *    対象受診履歴情報
+           03  SPA-NAI-RRKAREA.
+               05  SPA-SEL-RRKYMD              PIC X(08).
+               05  SPA-SEL-RENNUM              PIC 9(01).
+               05  SPA-SEL-DOUJI-RENNUM        PIC 9(01).
+               05  SPA-SEL-DENPNUM             PIC 9(07).
+               05  SPA-SEL-RRKYMDG             PIC X(16).
+      *
+           03  SPA-JID1-AREA.
+      *確認メッセージ
+               05  SPA-ERRMSG2             PIC  X(100).
+      *警告メッセージ
+               05  SPA-JIDCD               PIC  X(04).
+      *警告画面より
+               05  SPA-JID1-AREA.
+                   07  SPA-JID1-FLG        PIC  X(02).
+      *警告メッセージ２
+           03  SPA-JID2-AREA.
+               05  SPA-JIDCD2              PIC  X(04).
+               05  SPA-JID2-AREA.
+                   07  SPA-JID2-FLG        PIC  9(01).
+      *
+      *Ｐ入力画面より
+               05  SPA-J99-DATA            PIC  X(25).
+      *Ｋ９８画面より
+           03  SPA-J98-AREA.
+                   07  SPA-J98-CDSYUBETU       PIC X(01).
+                   07  SPA-J98-INPUTCD         PIC X(10).
+                   07  SPA-J98-NAIYOU          PIC X(07).
+                   07  SPA-J98-MOJI            PIC 9(02).
+                   07  SPA-J98-TYPE            PIC X(01).
+      *
+      **********   07  SPA-J98-SRYCD           PIC X(09).
+      ***********  07  SPA-J98-NAME            PIC X(60).
+                   07  SPA-J98-SRYCD-G.
+                       09  SPA-J98-SRYCD       PIC X(09)  OCCURS  10.
+      *
+                   07  SPA-J98-RC              PIC 9(04).
+      *
+      *禁忌一覧画面より（Ｋ０２１）
+           03  SPA-J041SET-AREA.
+               05  SPA-J041-CHK             PIC  9(01).
+               05  SPA-J041-SAKI            PIC  X(03).
+      *
+      *診療科一覧
+           03  SPA-J01SET-AREA.
+               05  SPA-J01-SRYKA               PIC X(02).
+               05  SPA-J01-SRYKAMEI            PIC X(12).
+               05  SPA-GMN-SRYKA-AREA.
+                   07  SPA-GMN-SRYKA-LIST      OCCURS  100.
+                       09  SPA-GMN-SRYKAL      PIC X(02).
+                       09  SPA-GMN-F1L         PIC X(01).
+                       09  SPA-GMN-SRYKAMEIL   PIC X(16).
+                   07  SPA-SRYKA-MAX           PIC 9(04).
+      *
+      *　  Ｊ０４用保存
+           03  SPA-MAE-SRYYMD          PIC  X(08).
+           03  SPA-MAE-PTID            PIC  9(10).
+           03  SPA-MAE-HKNKBN          PIC  9(01).
+           03  SPA-MAE-SISIKBN         PIC  9(01).
+           03  SPA-MAE-ZAINUM          PIC  9(08).
+      *
+           03  SPA-J04-SYORI           PIC  9(01).
+      *

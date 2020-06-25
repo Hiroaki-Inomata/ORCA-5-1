@@ -1,0 +1,102 @@
+xml_patientmodv3req4 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3req4 {
+	Request_Number		varchar(2);
+	Karte_Uid		varchar(36);
+	Orca_Uid		varchar(36);
+	Base_Date		varchar(10);
+	Select_Answer		varchar(03);
+	Continue_Mode		varchar(05);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        };
+#---    低所得者２情報（低所得者履歴）
+	Income_Information	{
+            Income_Mode			varchar(6);
+	    Income_Info 	{
+#---            認定開始日
+            	Income_StartDate			varchar(10);
+            	Income_ExpiredDate			varchar(10);
+#---            標準負担額減額開始日
+            	Income_Reduction_Date			varchar(10);
+#---            長期入院該当年月日
+            	Income_Long_Period_Date			varchar(10);
+#---            認定範囲区分
+            	Income_Certificate_Code			varchar(01);
+#---            境界層該当区分
+            	Income_Boundary_Code			varchar(01);
+            	} [20];
+        };
+#---    低所得者１情報（年金履歴）
+	Pension_Information	{
+            Pension_Mode				varchar(6);
+	    Pension_Info 	{
+#---            認定開始日
+            	Pension_StartDate			varchar(10);
+            	Pension_ExpiredDate			varchar(10);
+#---            標準負担額減額開始日
+            	Pension_Reduction_Date			varchar(10);
+#---            老齢福祉年金受給者証区分
+            	Pension_Welfare_Code			varchar(01);
+#---            認定範囲区分
+            	Pension_Certificate_Code		varchar(01);
+#---            境界層該当区分
+            	Pension_Boundary_Code			varchar(01);
+            	} [20];
+        };
+#---    旧姓履歴
+	Maiden_Information	{
+            Maiden_Mode				varchar(6);
+	    Maiden_Info 	{
+#---            変更日付
+            	Maiden_Change_Date		varchar(10);
+#---            旧姓カナ氏名
+		WholeName_inKana 		varchar(100);
+#---            旧姓氏名
+		WholeName			varchar(100);
+#---            旧姓通称名
+		NickName			varchar(100);
+            	} [20];
+        };
+#---    特記事項
+	Special_Notes_Information	{
+            Special_Notes_Mode			varchar(6);
+	    Special_Notes_Info 	{
+#---            入外区分
+            	Special_Notes_InOut			varchar(1);
+#---            レセ電区分
+            	Special_Notes_Receipt_Code		varchar(02);
+#---            レセ電区分名称
+            	Special_Notes_Receipt_Code_Name		varchar(12);
+#---            開始年月
+            	Special_Notes_StartDate			varchar(7);
+            	Special_Notes_ExpiredDate		varchar(7);
+            	} [50];
+        };
+#---    患者個別情報
+	Personally_Information	{
+            Personally_Mode			varchar(6);
+	    Personally_Info 	{
+#---            出生時体重
+            	Birth_Weight			varchar(4);
+#---            地域包括診療対象疾病
+		Community_Disease  {
+			Target_Disease		varchar(05);
+	            	} [4];
+#---            認知症地域包括診療
+            	Community_Disease2		varchar(05);
+#---            小児かかりつけ診療
+            	Community_Disease3		varchar(05);
+#---            妊婦設定
+            	Pregnant_Class			varchar(05);
+            	};
+        };
+    };
+};

@@ -1,0 +1,10 @@
+XBER {
+  fixed1 {
+    XBERCODE {
+      textdata varchar(04);
+    };
+    XBERMSG {
+      textdata varchar(80);
+    };
+  };
+};

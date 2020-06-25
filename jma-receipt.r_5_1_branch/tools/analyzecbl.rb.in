@@ -1,0 +1,130 @@
+#!%RUBY%
+# coding : utf-8
+Encoding.default_external = "ascii-8bit" if defined?(Encoding) && Encoding.respond_to?("default_external")
+
+require 'find'
+
+IGNORED_PROGRAMS='ORCDBMAIN|MONFUNC|MCPSUB'
+
+
+$all_programs=[]
+$all_tables=[]
+
+$orca_tables=[]
+Find.find ('./record') {|f|
+	if  f=~/(tbl_|query_|view_)(.*).db$/
+	   $orca_tables.push(($1 + $2).upcase)  
+	end
+}
+
+$path_type1=[]
+$orca_tables.each {|x|
+	if x=~/(TBL_|VIEW_|)(.*)/
+		$path_type1.push((" \\\"" + $2 + "-.*\\\""))
+	end
+}
+	
+$path_type2=[]
+$orca_tables.each{|x|
+	if x=~ /(TBL_|VIEW_|QUERY_)(.*)/
+		$path_type2.push(('PATH-' + $1 + $2 + '-').gsub(/_/,'-'))
+	end
+}
+
+$path_type3=[]
+$orca_tables.each{|x|
+	$path_type3.push(("\"" + x.downcase + "\""))
+}
+
+
+def analyze_module(name,file)
+	lines=file.readlines
+	i=0
+	lines.each{|x|
+	    if x=~/PROCEDURE .*DIVISION.*/
+	    	break;
+	    end
+	    i+=1
+	}
+	lines=lines.slice(i..(lines.size - 1))
+	lines.delete_if{|x| /^......\*/=~x}
+	programs=[]
+	tables=[]
+	lines.each{|x|
+	    if x=~/.* CALL .*\"(.*)\".*/
+			programs.push("#{$1}.CBL")
+	    end
+
+	    $path_type1.each_index{|i|
+	    	if x=~/#{$path_type1[i]}/
+				tables.push($orca_tables[i])
+	    	end
+	    }
+
+	    $path_type2.each_index{|i|
+	    	if x=~/#{$path_type2[i]}/
+				tables.push($orca_tables[i])
+	    	end
+	    }
+
+	    $path_type3.each_index{|i|
+	    	if x=~/#{$path_type3[i]}/
+				tables.push($orca_tables[i])
+	    	end
+	    }
+	}
+
+	programs.uniq!
+	tables.uniq!
+
+	puts name
+
+	if programs.size > 0
+		puts "-- " + programs.size.to_s + " programs --"
+		puts programs
+	end
+	if tables.size > 0
+		puts "-- " + tables.size.to_s + " tables --"
+		puts tables
+	end
+
+	programs.each {|m|
+		if (name !~ /#{m}/ && $all_programs.index(m) == nil && IGNORED_PROGRAMS.split(/\|/).index(m.slice(/\w+/)) == nil)
+			Find.find ('./cobol') {|f|
+				if  f=~/#{m}$/
+					File.open(f){|y|
+						fname = name + '->' + m 
+						analyze_module(fname,y)
+					}
+				end
+			}
+		else
+			puts name + '->' + m
+			puts "(skip)"
+		end
+	}
+	$all_programs.concat(programs)
+	$all_tables.concat(tables)
+end
+
+def main
+
+	while argv = ARGV.shift
+		if  argv=~/.CBL$/
+			File.open(argv){|y|
+				analyze_module(argv,y)
+			}
+		end
+	end
+	$all_programs.uniq!
+	$all_tables.uniq!
+	puts ""
+	puts ""
+	puts "** all programs (" + $all_programs.size.to_s + " programs)  **"
+	puts $all_programs
+	puts ""
+	puts "** all tables (" + $all_tables.size.to_s + " tables) **"
+	puts $all_tables
+end
+
+main

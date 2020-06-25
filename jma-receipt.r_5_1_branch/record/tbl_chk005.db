@@ -1,0 +1,194 @@
+tbl_chk005	{
+	HOSPNUM			number(2,0);
+	CHKKBN			char(1);
+	ID			integer;
+	YUKOSTYMD	  	char(8);
+	YUKOEDYMD  		char(8);
+	CDKBN   		char(1);
+	RENNUM			integer;
+	SRYCD   		char(9);
+	CD			varchar(170);
+	BYOMEI			varchar(160);
+	COMPKBN			char(1);
+	BYOMEIHENFLG		char(1);
+	NYUGAIKBN		char(1);
+	NYUGAIBNDKBN		char(1);
+	DAYMONTHKBN		char(1);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM		number(2,0),virtual;
+	UPCHKKBN		char(1),virtual;
+	UPID			integer,virtual;
+	UPRENNUM		integer,virtual;
+#-----> 検索キー用項目
+	SELNAME			char(200),virtual;
+};
+
+primary	{
+	HOSPNUM,CHKKBN,ID,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	ID	=	:ID
+			AND	RENNUM	=	:RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	BYOMEI	=	:BYOMEI
+			AND	RENNUM	=	1
+			ORDER BY YUKOSTYMD
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	ID	=	:ID
+			ORDER BY RENNUM
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	RENNUM	=	1
+			ORDER BY ID    DESC
+		;
+	};
+};
+
+path	del1		{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	ID	=	:ID
+		;
+	};
+};
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key5_csr CURSOR FOR
+		SELECT * FROM TBL_CHK005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	YUKOSTYMD	<=	:YUKOSTYMD
+			AND	YUKOEDYMD	>=	:YUKOEDYMD
+			AND	RENNUM	=	1 
+		ORDER BY BYOMEI
+		;
+	};
+};
+
+path	key6	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key6_csr CURSOR FOR
+		SELECT * FROM TBL_CHK005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+            AND ( :ID = 0  OR ( :ID <> 0 AND ID = :ID))
+			AND	YUKOSTYMD	<=	:YUKOSTYMD
+			AND	YUKOEDYMD	>=	:YUKOEDYMD
+		ORDER BY BYOMEI,ID,RENNUM
+		;
+	};
+};
+
+path	key7	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key7_csr CURSOR FOR
+		SELECT * FROM TBL_CHK005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	YUKOSTYMD	<=	:YUKOSTYMD
+			AND	YUKOEDYMD	>=	:YUKOEDYMD
+			AND	BYOMEI   LIKE :BYOMEI
+			AND	RENNUM	=	1 
+		ORDER BY BYOMEI
+		;
+	};
+};
+
+path	key8	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key8_csr CURSOR FOR
+		SELECT DISTINCT ON (CHKKBN,ID) * FROM TBL_CHK005
+		WHERE  HOSPNUM = :HOSPNUM
+		AND    SRYCD   = :SRYCD
+		AND	YUKOSTYMD	<=	:YUKOSTYMD
+		AND	YUKOEDYMD	>=	:YUKOEDYMD
+		ORDER BY CHKKBN,ID
+		;
+	};
+};
+
+path	key9	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key9_csr CURSOR FOR
+		SELECT * FROM TBL_CHK005
+		WHERE	HOSPNUM = :HOSPNUM
+		AND	CHKKBN	= :CHKKBN
+		AND	ID	= :ID
+		AND	SRYCD   = :SRYCD
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	ID	=	:ID
+			ORDER BY RENNUM DESC
+		;
+	};
+};
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk005_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk005
+			WHERE	HOSPNUM	=	:HOSPNUM
+			AND	CHKKBN	=	:CHKKBN
+			AND	BYOMEI	=	:BYOMEI
+			AND	YUKOSTYMD	<=	:YUKOSTYMD
+			AND	YUKOEDYMD	>=	:YUKOEDYMD
+			ORDER BY RENNUM
+		;
+	};
+};
+

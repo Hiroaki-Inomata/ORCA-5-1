@@ -1,0 +1,53 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+RUBY = @RUBY@
+
+ruby_sources = \
+	ruby/plugin.rb.in \
+	ruby/plugin/db.rb.in \
+	ruby/plugin/manager.rb.in \
+	ruby/plugin/store.rb.in \
+	ruby/plugin/util.rb.in
+
+ruby_scripts = \
+	$(ruby_sources:.rb.in=.rb)
+
+.SUFFIXES: .rb.in .rb
+
+.rb.in.rb: 
+	sed -e 's,%RUBY%,$(RUBY),' $< > $@
+	chmod +x $@
+
+all: $(ruby_scripts)
+
+filecheck:
+	@(for i in $(ruby_scripts) ;do echo "make	`basename $${i}`"; done ; \
+	find . \
+	-name "." -o \
+	-name "CVS" -prune -o \
+	-name "Makefile*" -o \
+	-name ".cvsignore" -o \
+	-name "*.bak" -o \
+	-name "ruby" -o \
+	-name "plugin" -o \
+	-printf "file\t%f\n") \
+	|sort -k2 |uniq -u -f1
+
+clean: 
+	-rm -f $(ruby_scripts)
+
+distclean: clean
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(libdir)
+	$(INSTALL) -d $(libdir)/ruby
+	$(INSTALL) -d $(libdir)/ruby/plugin
+	for file in $(ruby_scripts); do \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  $(INSTALL) $$file $(libdir)/$$dir; \
+	done

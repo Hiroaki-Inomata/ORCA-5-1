@@ -1,0 +1,251 @@
+W99 {
+  fixed1 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    SETUZOKU_COMBO {
+      SETUZOKU {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    SCODE_COMBO {
+      SCODE {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    SADDRESS01 {
+      textdata varchar(40);
+    };
+    SPORT01_1 {
+      textdata varchar(5);
+    };
+    SPORT01_2 {
+      textdata varchar(5);
+    };
+    SMEMO01 {
+      textdata varchar(40);
+    };
+    SADDRESS02 {
+      textdata varchar(40);
+    };
+    SPORT02_1 {
+      textdata varchar(5);
+    };
+    SPORT02_2 {
+      textdata varchar(5);
+    };
+    SMEMO02 {
+      textdata varchar(40);
+    };
+    SADDRESS03 {
+      textdata varchar(40);
+    };
+    SPORT03_1 {
+      textdata varchar(5);
+    };
+    SPORT03_2 {
+      textdata varchar(5);
+    };
+    SMEMO03 {
+      textdata varchar(40);
+    };
+    SADDRESS04 {
+      textdata varchar(40);
+    };
+    SPORT04_1 {
+      textdata varchar(5);
+    };
+    SPORT04_2 {
+      textdata varchar(5);
+    };
+    SMEMO04 {
+      textdata varchar(40);
+    };
+    SADDRESS05 {
+      textdata varchar(40);
+    };
+    SPORT05_1 {
+      textdata varchar(5);
+    };
+    SPORT05_2 {
+      textdata varchar(5);
+    };
+    SMEMO05 {
+      textdata varchar(40);
+    };
+    SADDRESS06 {
+      textdata varchar(40);
+    };
+    SPORT06_1 {
+      textdata varchar(5);
+    };
+    SPORT06_2 {
+      textdata varchar(5);
+    };
+    SMEMO06 {
+      textdata varchar(40);
+    };
+    SADDRESS07 {
+      textdata varchar(40);
+    };
+    SPORT07_1 {
+      textdata varchar(5);
+    };
+    SPORT07_2 {
+      textdata varchar(5);
+    };
+    SMEMO07 {
+      textdata varchar(40);
+    };
+    SADDRESS08 {
+      textdata varchar(40);
+    };
+    SPORT08_1 {
+      textdata varchar(5);
+    };
+    SPORT08_2 {
+      textdata varchar(5);
+    };
+    SMEMO08 {
+      textdata varchar(40);
+    };
+    SADDRESS09 {
+      textdata varchar(40);
+    };
+    SPORT09_1 {
+      textdata varchar(5);
+    };
+    SPORT09_2 {
+      textdata varchar(5);
+    };
+    SMEMO09 {
+      textdata varchar(40);
+    };
+    SADDRESS10 {
+      textdata varchar(40);
+    };
+    SPORT10_1 {
+      textdata varchar(5);
+    };
+    SPORT10_2 {
+      textdata varchar(5);
+    };
+    SMEMO10 {
+      textdata varchar(40);
+    };
+    UKEBUTTON1 {
+      isactive bool;
+    };
+    UKEBUTTON2 {
+      isactive bool;
+    };
+    KANBUTTON1 {
+      isactive bool;
+    };
+    KANBUTTON2 {
+      isactive bool;
+    };
+    SYNBUTTON1 {
+      isactive bool;
+    };
+    SYNBUTTON2 {
+      isactive bool;
+    };
+    LBLNO01 {
+      textdata varchar(4);
+    };
+    LBLNO02 {
+      textdata varchar(4);
+    };
+    LBLNO03 {
+      textdata varchar(4);
+    };
+    LBLNO04 {
+      textdata varchar(4);
+    };
+    LBLNO05 {
+      textdata varchar(4);
+    };
+    LBLNO06 {
+      textdata varchar(4);
+    };
+    LBLNO07 {
+      textdata varchar(4);
+    };
+    LBLNO08 {
+      textdata varchar(4);
+    };
+    LBLNO09 {
+      textdata varchar(4);
+    };
+    LBLNO10 {
+      textdata varchar(4);
+    };
+    frame1 {
+      fixed2 {
+        PTINF_SEND1 {
+          isactive bool;
+        };
+        PTINF_SEND2 {
+          isactive bool;
+        };
+        RECEDENKA_SEND1 {
+          isactive bool;
+        };
+        RECEDENKA_SEND2 {
+          isactive bool;
+        };
+        BYOMEI_AGG1 {
+          isactive bool;
+        };
+        BYOMEI_AGG2 {
+          isactive bool;
+        };
+        BYOMEI_SYNC1 {
+          isactive bool;
+        };
+        BYOMEI_SYNC2 {
+          isactive bool;
+        };
+        NYU_ORDER1 {
+          isactive bool;
+        };
+        NYU_ORDER2 {
+          isactive bool;
+        };
+        MULTIHOST1 {
+          isactive bool;
+        };
+        MULTIHOST2 {
+          isactive bool;
+        };
+        RESEND1 {
+          isactive bool;
+        };
+        RESEND2 {
+          isactive bool;
+        };
+      };
+    };
+    SINSATU_FLG_COMBO {
+      SINSATU_FLG {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+  };
+};

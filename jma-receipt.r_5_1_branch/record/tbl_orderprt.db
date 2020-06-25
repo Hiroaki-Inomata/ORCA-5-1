@@ -1,0 +1,168 @@
+tbl_orderprt {
+	HOSPNUM				number(2,0);
+	PTID 				number(10,0);
+	PTNUM 				char(20);
+        NYUGAIKBN                       char(1);
+	SRYKA				char(2);
+        HKNCOMBI                	char(4);
+	SYSYMD				char(8);
+	PRINTYMD		        char(8);
+	PRINTHMS			char(6);
+	PRTKBN  			char(1);
+	ORDERNUM			number(2,0);
+	RENNUM  			number(2,0);
+	DRCD    			char(5);
+	SRYKBN    			char(2);
+	SRYSYUKBN    			char(3);
+	SRYYMD 				char(8);
+	DAY1     			number(3,0);
+	DAY2     			number(3,0);
+	DAY3     			number(3,0);
+	DAY4     			number(3,0);
+	DAY5     			number(3,0);
+	DAY6     			number(3,0);
+	DAY7     			number(3,0);
+	DAY8     			number(3,0);
+	DAY9     			number(3,0);
+	DAY10    			number(3,0);
+	DAY11    			number(3,0);
+	DAY12    			number(3,0);
+	DAY13    			number(3,0);
+	DAY14    			number(3,0);
+	DAY15    			number(3,0);
+	DAY16    			number(3,0);
+	DAY17    			number(3,0);
+	DAY18    			number(3,0);
+	DAY19    			number(3,0);
+	DAY20    			number(3,0);
+	DAY21    			number(3,0);
+	DAY22    			number(3,0);
+	DAY23    			number(3,0);
+	DAY24    			number(3,0);
+	DAY25    			number(3,0);
+	DAY26    			number(3,0);
+	DAY27    			number(3,0);
+	DAY28    			number(3,0);
+	DAY29    			number(3,0);
+	DAY30    			number(3,0);
+	DAY31    			number(3,0);
+	SRYCD    			char(9);
+	SRYSURYO     			number(10,5);
+	SRYSURYO2     			number(10,5);
+	SRYKAISU     			number(3,0);
+        INPUTCOMENT         	        varchar(140);
+	KANSURYO     			number(10,5);
+	TERMID   			varchar(64);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+        HOSPNUM,PTID,PTNUM,NYUGAIKBN,SRYKA,HKNCOMBI,SYSYMD,
+        PRINTYMD,PRINTHMS,PRTKBN,ORDERNUM,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_orderprt_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   PTNUM        =   :PTNUM
+			AND   NYUGAIKBN    =   :NYUGAIKBN
+			AND   SRYKA        =   :SRYKA
+			AND   HKNCOMBI     =   :HKNCOMBI
+			AND   SYSYMD       =   :SYSYMD
+			AND   PRINTYMD     =   :PRINTYMD
+			AND   PRINTHMS     =   :PRINTHMS
+			AND   PRTKBN       =   :PRTKBN
+			AND   ORDERNUM     =   :ORDERNUM
+			AND   RENNUM       =   :RENNUM
+		;
+	};
+};
+
+path	key1 	{
+	DBSELECT	{
+		DECLARE tbl_orderprt_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   PTNUM        =   :PTNUM
+			AND   NYUGAIKBN    =   :NYUGAIKBN
+			AND   SRYKA        =   :SRYKA
+			AND   HKNCOMBI     =   :HKNCOMBI
+			AND   SYSYMD       =   :SYSYMD
+			AND   PRINTYMD     =   :PRINTYMD
+			AND   PRINTHMS     =   :PRINTHMS
+			AND   PRTKBN       =   :PRTKBN
+			ORDER   BY         ORDERNUM,
+                                           RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_orderprt_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   PTNUM        =   :PTNUM
+			AND   NYUGAIKBN    =   :NYUGAIKBN
+			AND   SRYKA        =   :SRYKA
+			AND   HKNCOMBI     =   :HKNCOMBI
+			AND   SYSYMD       =   :SYSYMD
+			AND   PRINTYMD     =   :PRINTYMD
+			AND   PRINTHMS     =   :PRINTHMS
+			AND   PRTKBN       =   :PRTKBN
+			AND   SRYKBN       =   :SRYKBN
+			ORDER   BY         ORDERNUM,
+                                           RENNUM
+		;
+	};
+};
+path	del1  	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   PTNUM        =   :PTNUM
+			AND   NYUGAIKBN    =   :NYUGAIKBN
+			AND   SRYKA        =   :SRYKA
+			AND   HKNCOMBI     =   :HKNCOMBI
+			AND   SYSYMD       =   :SYSYMD
+			AND   PRINTYMD     =   :PRINTYMD
+			AND   PRINTHMS     =   :PRINTHMS
+			AND   PRTKBN       =   :PRTKBN
+		;
+	};
+};
+path	del2  	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			AND   PTID         =   :PTID
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_orderprt_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_orderprt
+			WHERE HOSPNUM       =   :HOSPNUM
+			ORDER   BY         PTNUM,
+                                           SRYKA,
+                                           PRINTYMD,
+                                           PRINTHMS
+ 		;
+	};
+};

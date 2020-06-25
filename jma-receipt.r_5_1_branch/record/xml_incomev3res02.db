@@ -1,0 +1,93 @@
+xml_incomev3res02{
+  context                              int;
+  object                               object;
+  mode                                 int;
+  recordname                           varchar(128);
+  incomev3res{
+    Information_Date                   varchar(10);
+    Information_Time                   varchar(8);
+    Api_Result                         varchar(5);
+    Api_Result_Message                 varchar(100);
+    Request_Number                     varchar(2);
+    Request_Mode                       varchar(2);
+    Response_Number                    varchar(2);
+    Karte_Uid                          varchar(36);
+    Orca_Uid                           varchar(36);
+    Patient_ID                         varchar(20);
+    Income_Detail{
+      Perform_Date                     varchar(10);
+      Perform_End_Date                 varchar(10);
+      IssuedDate                       varchar(10);
+      InOut                            varchar(1);
+      Invoice_Number                   varchar(7);
+      Insurance_Combination_Number     varchar(4);
+      Rate_Cd                          varchar(3);
+      Department_Code                  varchar(2);
+      Cd_Information{
+        Ac_Money                       varchar(10);
+        Tax_In_Ac_Money                varchar(10);
+        Ic_Money                       varchar(10);
+        Ai_Money                       varchar(10);
+        Oe_Money                       varchar(10);
+        Dg_Smoney                      varchar(10);
+        Om_Smoney                      varchar(10);
+        Pi_Smoney                      varchar(10);
+        Meal_Smoney                    varchar(10);
+        Living_Smoney                  varchar(10);
+        Lsi_Total_Money_In_Ai_Money    varchar(10);
+        Dis_Money                      varchar(10);
+        Ad_Money1                      varchar(10);
+        Ad_Money2                      varchar(10);
+      };
+      Ac_Point_Information{
+        Ac_Ttl_Point                   varchar(10);
+        Me_Ttl_Money                   varchar(10);
+        Tax_In_Me_Ttl_Money            varchar(10);
+        Ac_Point_Detail{
+          Ac_Point_Code                varchar(03);
+          Ac_Point_Name                varchar(30);
+          Ac_Point                     varchar(10);
+          Me_Money                     varchar(10);
+        }[16];
+      };
+      Oe_Etc_Information{
+        Oe_Etc_Ttl_Money_Non_Taxable   varchar(10);
+        Oe_Etc_Ttl_Money_Taxable       varchar(10);
+        Tax_In_Oe_Etc_Ttl_Money_Taxable varchar(10);
+        Oe_Etc_Detail{
+          Oe_Etc_Number                varchar(02);
+          Oe_Etc_Name                  varchar(20);
+          Oe_Etc_Money_Non_Taxable     varchar(10);
+          Oe_Etc_Money_Taxable         varchar(10);
+        }[10];
+      };
+      Lsi_Information{
+        Lsi_Fv_Money                   varchar(10);
+        Lsi_Sv_Money                   varchar(10);
+        Lsi_Mm_Money                   varchar(10);
+        Lsi_Other_Money                varchar(10);
+      };
+      Meal_Cost                        varchar(10);
+      Living_Cost                      varchar(10);
+      Oe_Meal_Cost                     varchar(10);
+      Oe_Meal_Smoney                   varchar(10);
+      Oe_Living_Cost                   varchar(10);
+      Oe_Living_Smoney                 varchar(10);
+      Room_Charge                      varchar(10);
+      Tax_In_Room_Charge               varchar(10);
+    };
+    Income_History{
+      History_Number                 varchar(02);
+      Processing_Date                varchar(10);
+      Processing_Time                varchar(05);
+      Ac_Money                       varchar(10);
+      Ad_Money1                      varchar(10);
+      Ad_Money2                      varchar(10);
+      Ic_Money                       varchar(10);
+      State                          varchar(02);
+      State_Name                     varchar(10);
+      Ic_Code                        varchar(02);
+      Ic_Code_Name                   varchar(20);
+    }[99];
+  };
+};

@@ -1,0 +1,779 @@
+tbl_syuday {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	DENPNUM          		number(7,0);
+        SKYYM                           char(6);
+        CREATEKBN                       char(1);
+        HKNTEN1                         number(7,0);
+        SANTEIFLG1_1                    number(1,0);
+        FTNMONEY1_1                     number(5,0);
+        COMPFTN1_1                      number(5,0);
+        COMPFTNWK1_1                    number(5,0);
+        SKJFTN1_1                       number(5,0);
+        SANTEIFLG1_2                    number(1,0);
+        FTNMONEY1_2                     number(5,0);
+        COMPFTN1_2                      number(5,0);
+        COMPFTNWK1_2                    number(5,0);
+        SKJFTN1_2                       number(5,0);
+        SANTEIFLG1_3                    number(1,0);
+        FTNMONEY1_3                     number(5,0);
+        COMPFTN1_3                      number(5,0);
+        COMPFTNWK1_3                    number(5,0);
+        SKJFTN1_3                       number(5,0);
+        SANTEIFLG1_4                    number(1,0);
+        FTNMONEY1_4                     number(5,0);
+        COMPFTN1_4                      number(5,0);
+        COMPFTNWK1_4                    number(5,0);
+        SKJFTN1_4                       number(5,0);
+        HKNTEN2                         number(7,0);
+        SANTEIFLG2_1                    number(1,0);
+        FTNMONEY2_1                     number(5,0);
+        COMPFTN2_1                      number(5,0);
+        COMPFTNWK2_1                    number(5,0);
+        SKJFTN2_1                       number(5,0);
+        SANTEIFLG2_2                    number(1,0);
+        FTNMONEY2_2                     number(5,0);
+        COMPFTN2_2                      number(5,0);
+        COMPFTNWK2_2                    number(5,0);
+        SKJFTN2_2                       number(5,0);
+        SANTEIFLG2_3                    number(1,0);
+        FTNMONEY2_3                     number(5,0);
+        COMPFTN2_3                      number(5,0);
+        COMPFTNWK2_3                    number(5,0);
+        SKJFTN2_3                       number(5,0);
+        SANTEIFLG2_4                    number(1,0);
+        FTNMONEY2_4                     number(5,0);
+        COMPFTN2_4                      number(5,0);
+        COMPFTNWK2_4                    number(5,0);
+        SKJFTN2_4                       number(5,0);
+        HKNTEN3                         number(7,0);
+        SANTEIFLG3_1                    number(1,0);
+        FTNMONEY3_1                     number(5,0);
+        COMPFTN3_1                      number(5,0);
+        COMPFTNWK3_1                    number(5,0);
+        SKJFTN3_1                       number(5,0);
+        SANTEIFLG3_2                    number(1,0);
+        FTNMONEY3_2                     number(5,0);
+        COMPFTN3_2                      number(5,0);
+        COMPFTNWK3_2                    number(5,0);
+        SKJFTN3_2                       number(5,0);
+        SANTEIFLG3_3                    number(1,0);
+        FTNMONEY3_3                     number(5,0);
+        COMPFTN3_3                      number(5,0);
+        COMPFTNWK3_3                    number(5,0);
+        SKJFTN3_3                       number(5,0);
+        SANTEIFLG3_4                    number(1,0);
+        FTNMONEY3_4                     number(5,0);
+        COMPFTN3_4                      number(5,0);
+        COMPFTNWK3_4                    number(5,0);
+        SKJFTN3_4                       number(5,0);
+        HKNTEN4                         number(7,0);
+        SANTEIFLG4_1                    number(1,0);
+        FTNMONEY4_1                     number(5,0);
+        COMPFTN4_1                      number(5,0);
+        COMPFTNWK4_1                    number(5,0);
+        SKJFTN4_1                       number(5,0);
+        SANTEIFLG4_2                    number(1,0);
+        FTNMONEY4_2                     number(5,0);
+        COMPFTN4_2                      number(5,0);
+        COMPFTNWK4_2                    number(5,0);
+        SKJFTN4_2                       number(5,0);
+        SANTEIFLG4_3                    number(1,0);
+        FTNMONEY4_3                     number(5,0);
+        COMPFTN4_3                      number(5,0);
+        COMPFTNWK4_3                    number(5,0);
+        SKJFTN4_3                       number(5,0);
+        SANTEIFLG4_4                    number(1,0);
+        FTNMONEY4_4                     number(5,0);
+        COMPFTN4_4                      number(5,0);
+        COMPFTNWK4_4                    number(5,0);
+        SKJFTN4_4                       number(5,0);
+        HKNTEN5                         number(7,0);
+        SANTEIFLG5_1                    number(1,0);
+        FTNMONEY5_1                     number(5,0);
+        COMPFTN5_1                      number(5,0);
+        COMPFTNWK5_1                    number(5,0);
+        SKJFTN5_1                       number(5,0);
+        SANTEIFLG5_2                    number(1,0);
+        FTNMONEY5_2                     number(5,0);
+        COMPFTN5_2                      number(5,0);
+        COMPFTNWK5_2                    number(5,0);
+        SKJFTN5_2                       number(5,0);
+        SANTEIFLG5_3                    number(1,0);
+        FTNMONEY5_3                     number(5,0);
+        COMPFTN5_3                      number(5,0);
+        COMPFTNWK5_3                    number(5,0);
+        SKJFTN5_3                       number(5,0);
+        SANTEIFLG5_4                    number(1,0);
+        FTNMONEY5_4                     number(5,0);
+        COMPFTN5_4                      number(5,0);
+        COMPFTNWK5_4                    number(5,0);
+        SKJFTN5_4                       number(5,0);
+        HKNTEN6                         number(7,0);
+        SANTEIFLG6_1                    number(1,0);
+        FTNMONEY6_1                     number(5,0);
+        COMPFTN6_1                      number(5,0);
+        COMPFTNWK6_1                    number(5,0);
+        SKJFTN6_1                       number(5,0);
+        SANTEIFLG6_2                    number(1,0);
+        FTNMONEY6_2                     number(5,0);
+        COMPFTN6_2                      number(5,0);
+        COMPFTNWK6_2                    number(5,0);
+        SKJFTN6_2                       number(5,0);
+        SANTEIFLG6_3                    number(1,0);
+        FTNMONEY6_3                     number(5,0);
+        COMPFTN6_3                      number(5,0);
+        COMPFTNWK6_3                    number(5,0);
+        SKJFTN6_3                       number(5,0);
+        SANTEIFLG6_4                    number(1,0);
+        FTNMONEY6_4                     number(5,0);
+        COMPFTN6_4                      number(5,0);
+        COMPFTNWK6_4                    number(5,0);
+        SKJFTN6_4                       number(5,0);
+        HKNTEN7                         number(7,0);
+        SANTEIFLG7_1                    number(1,0);
+        FTNMONEY7_1                     number(5,0);
+        COMPFTN7_1                      number(5,0);
+        COMPFTNWK7_1                    number(5,0);
+        SKJFTN7_1                       number(5,0);
+        SANTEIFLG7_2                    number(1,0);
+        FTNMONEY7_2                     number(5,0);
+        COMPFTN7_2                      number(5,0);
+        COMPFTNWK7_2                    number(5,0);
+        SKJFTN7_2                       number(5,0);
+        SANTEIFLG7_3                    number(1,0);
+        FTNMONEY7_3                     number(5,0);
+        COMPFTN7_3                      number(5,0);
+        COMPFTNWK7_3                    number(5,0);
+        SKJFTN7_3                       number(5,0);
+        SANTEIFLG7_4                    number(1,0);
+        FTNMONEY7_4                     number(5,0);
+        COMPFTN7_4                      number(5,0);
+        COMPFTNWK7_4                    number(5,0);
+        SKJFTN7_4                       number(5,0);
+        HKNTEN8                         number(7,0);
+        SANTEIFLG8_1                    number(1,0);
+        FTNMONEY8_1                     number(5,0);
+        COMPFTN8_1                      number(5,0);
+        COMPFTNWK8_1                    number(5,0);
+        SKJFTN8_1                       number(5,0);
+        SANTEIFLG8_2                    number(1,0);
+        FTNMONEY8_2                     number(5,0);
+        COMPFTN8_2                      number(5,0);
+        COMPFTNWK8_2                    number(5,0);
+        SKJFTN8_2                       number(5,0);
+        SANTEIFLG8_3                    number(1,0);
+        FTNMONEY8_3                     number(5,0);
+        COMPFTN8_3                      number(5,0);
+        COMPFTNWK8_3                    number(5,0);
+        SKJFTN8_3                       number(5,0);
+        SANTEIFLG8_4                    number(1,0);
+        FTNMONEY8_4                     number(5,0);
+        COMPFTN8_4                      number(5,0);
+        COMPFTNWK8_4                    number(5,0);
+        SKJFTN8_4                       number(5,0);
+        HKNTEN9                         number(7,0);
+        SANTEIFLG9_1                    number(1,0);
+        FTNMONEY9_1                     number(5,0);
+        COMPFTN9_1                      number(5,0);
+        COMPFTNWK9_1                    number(5,0);
+        SKJFTN9_1                       number(5,0);
+        SANTEIFLG9_2                    number(1,0);
+        FTNMONEY9_2                     number(5,0);
+        COMPFTN9_2                      number(5,0);
+        COMPFTNWK9_2                    number(5,0);
+        SKJFTN9_2                       number(5,0);
+        SANTEIFLG9_3                    number(1,0);
+        FTNMONEY9_3                     number(5,0);
+        COMPFTN9_3                      number(5,0);
+        COMPFTNWK9_3                    number(5,0);
+        SKJFTN9_3                       number(5,0);
+        SANTEIFLG9_4                    number(1,0);
+        FTNMONEY9_4                     number(5,0);
+        COMPFTN9_4                      number(5,0);
+        COMPFTNWK9_4                    number(5,0);
+        SKJFTN9_4                       number(5,0);
+        HKNTEN10                        number(7,0);
+        SANTEIFLG10_1                   number(1,0);
+        FTNMONEY10_1                    number(5,0);
+        COMPFTN10_1                     number(5,0);
+        COMPFTNWK10_1                   number(5,0);
+        SKJFTN10_1                      number(5,0);
+        SANTEIFLG10_2                   number(1,0);
+        FTNMONEY10_2                    number(5,0);
+        COMPFTN10_2                     number(5,0);
+        COMPFTNWK10_2                   number(5,0);
+        SKJFTN10_2                      number(5,0);
+        SANTEIFLG10_3                   number(1,0);
+        FTNMONEY10_3                    number(5,0);
+        COMPFTN10_3                     number(5,0);
+        COMPFTNWK10_3                   number(5,0);
+        SKJFTN10_3                      number(5,0);
+        SANTEIFLG10_4                   number(1,0);
+        FTNMONEY10_4                    number(5,0);
+        COMPFTN10_4                     number(5,0);
+        COMPFTNWK10_4                   number(5,0);
+        SKJFTN10_4                      number(5,0);
+        HKNTEN11                        number(7,0);
+        SANTEIFLG11_1                   number(1,0);
+        FTNMONEY11_1                    number(5,0);
+        COMPFTN11_1                     number(5,0);
+        COMPFTNWK11_1                   number(5,0);
+        SKJFTN11_1                      number(5,0);
+        SANTEIFLG11_2                   number(1,0);
+        FTNMONEY11_2                    number(5,0);
+        COMPFTN11_2                     number(5,0);
+        COMPFTNWK11_2                   number(5,0);
+        SKJFTN11_2                      number(5,0);
+        SANTEIFLG11_3                   number(1,0);
+        FTNMONEY11_3                    number(5,0);
+        COMPFTN11_3                     number(5,0);
+        COMPFTNWK11_3                   number(5,0);
+        SKJFTN11_3                      number(5,0);
+        SANTEIFLG11_4                   number(1,0);
+        FTNMONEY11_4                    number(5,0);
+        COMPFTN11_4                     number(5,0);
+        COMPFTNWK11_4                   number(5,0);
+        SKJFTN11_4                      number(5,0);
+        HKNTEN12                        number(7,0);
+        SANTEIFLG12_1                   number(1,0);
+        FTNMONEY12_1                    number(5,0);
+        COMPFTN12_1                     number(5,0);
+        COMPFTNWK12_1                   number(5,0);
+        SKJFTN12_1                      number(5,0);
+        SANTEIFLG12_2                   number(1,0);
+        FTNMONEY12_2                    number(5,0);
+        COMPFTN12_2                     number(5,0);
+        COMPFTNWK12_2                   number(5,0);
+        SKJFTN12_2                      number(5,0);
+        SANTEIFLG12_3                   number(1,0);
+        FTNMONEY12_3                    number(5,0);
+        COMPFTN12_3                     number(5,0);
+        COMPFTNWK12_3                   number(5,0);
+        SKJFTN12_3                      number(5,0);
+        SANTEIFLG12_4                   number(1,0);
+        FTNMONEY12_4                    number(5,0);
+        COMPFTN12_4                     number(5,0);
+        COMPFTNWK12_4                   number(5,0);
+        SKJFTN12_4                      number(5,0);
+        HKNTEN13                        number(7,0);
+        SANTEIFLG13_1                   number(1,0);
+        FTNMONEY13_1                    number(5,0);
+        COMPFTN13_1                     number(5,0);
+        COMPFTNWK13_1                   number(5,0);
+        SKJFTN13_1                      number(5,0);
+        SANTEIFLG13_2                   number(1,0);
+        FTNMONEY13_2                    number(5,0);
+        COMPFTN13_2                     number(5,0);
+        COMPFTNWK13_2                   number(5,0);
+        SKJFTN13_2                      number(5,0);
+        SANTEIFLG13_3                   number(1,0);
+        FTNMONEY13_3                    number(5,0);
+        COMPFTN13_3                     number(5,0);
+        COMPFTNWK13_3                   number(5,0);
+        SKJFTN13_3                      number(5,0);
+        SANTEIFLG13_4                   number(1,0);
+        FTNMONEY13_4                    number(5,0);
+        COMPFTN13_4                     number(5,0);
+        COMPFTNWK13_4                   number(5,0);
+        SKJFTN13_4                      number(5,0);
+        HKNTEN14                        number(7,0);
+        SANTEIFLG14_1                   number(1,0);
+        FTNMONEY14_1                    number(5,0);
+        COMPFTN14_1                     number(5,0);
+        COMPFTNWK14_1                   number(5,0);
+        SKJFTN14_1                      number(5,0);
+        SANTEIFLG14_2                   number(1,0);
+        FTNMONEY14_2                    number(5,0);
+        COMPFTN14_2                     number(5,0);
+        COMPFTNWK14_2                   number(5,0);
+        SKJFTN14_2                      number(5,0);
+        SANTEIFLG14_3                   number(1,0);
+        FTNMONEY14_3                    number(5,0);
+        COMPFTN14_3                     number(5,0);
+        COMPFTNWK14_3                   number(5,0);
+        SKJFTN14_3                      number(5,0);
+        SANTEIFLG14_4                   number(1,0);
+        FTNMONEY14_4                    number(5,0);
+        COMPFTN14_4                     number(5,0);
+        COMPFTNWK14_4                   number(5,0);
+        SKJFTN14_4                      number(5,0);
+        HKNTEN15                        number(7,0);
+        SANTEIFLG15_1                   number(1,0);
+        FTNMONEY15_1                    number(5,0);
+        COMPFTN15_1                     number(5,0);
+        COMPFTNWK15_1                   number(5,0);
+        SKJFTN15_1                      number(5,0);
+        SANTEIFLG15_2                   number(1,0);
+        FTNMONEY15_2                    number(5,0);
+        COMPFTN15_2                     number(5,0);
+        COMPFTNWK15_2                   number(5,0);
+        SKJFTN15_2                      number(5,0);
+        SANTEIFLG15_3                   number(1,0);
+        FTNMONEY15_3                    number(5,0);
+        COMPFTN15_3                     number(5,0);
+        COMPFTNWK15_3                   number(5,0);
+        SKJFTN15_3                      number(5,0);
+        SANTEIFLG15_4                   number(1,0);
+        FTNMONEY15_4                    number(5,0);
+        COMPFTN15_4                     number(5,0);
+        COMPFTNWK15_4                   number(5,0);
+        SKJFTN15_4                      number(5,0);
+        HKNTEN16                        number(7,0);
+        SANTEIFLG16_1                   number(1,0);
+        FTNMONEY16_1                    number(5,0);
+        COMPFTN16_1                     number(5,0);
+        COMPFTNWK16_1                   number(5,0);
+        SKJFTN16_1                      number(5,0);
+        SANTEIFLG16_2                   number(1,0);
+        FTNMONEY16_2                    number(5,0);
+        COMPFTN16_2                     number(5,0);
+        COMPFTNWK16_2                   number(5,0);
+        SKJFTN16_2                      number(5,0);
+        SANTEIFLG16_3                   number(1,0);
+        FTNMONEY16_3                    number(5,0);
+        COMPFTN16_3                     number(5,0);
+        COMPFTNWK16_3                   number(5,0);
+        SKJFTN16_3                      number(5,0);
+        SANTEIFLG16_4                   number(1,0);
+        FTNMONEY16_4                    number(5,0);
+        COMPFTN16_4                     number(5,0);
+        COMPFTNWK16_4                   number(5,0);
+        SKJFTN16_4                      number(5,0);
+        HKNTEN17                        number(7,0);
+        SANTEIFLG17_1                   number(1,0);
+        FTNMONEY17_1                    number(5,0);
+        COMPFTN17_1                     number(5,0);
+        COMPFTNWK17_1                   number(5,0);
+        SKJFTN17_1                      number(5,0);
+        SANTEIFLG17_2                   number(1,0);
+        FTNMONEY17_2                    number(5,0);
+        COMPFTN17_2                     number(5,0);
+        COMPFTNWK17_2                   number(5,0);
+        SKJFTN17_2                      number(5,0);
+        SANTEIFLG17_3                   number(1,0);
+        FTNMONEY17_3                    number(5,0);
+        COMPFTN17_3                     number(5,0);
+        COMPFTNWK17_3                   number(5,0);
+        SKJFTN17_3                      number(5,0);
+        SANTEIFLG17_4                   number(1,0);
+        FTNMONEY17_4                    number(5,0);
+        COMPFTN17_4                     number(5,0);
+        COMPFTNWK17_4                   number(5,0);
+        SKJFTN17_4                      number(5,0);
+        HKNTEN18                        number(7,0);
+        SANTEIFLG18_1                   number(1,0);
+        FTNMONEY18_1                    number(5,0);
+        COMPFTN18_1                     number(5,0);
+        COMPFTNWK18_1                   number(5,0);
+        SKJFTN18_1                      number(5,0);
+        SANTEIFLG18_2                   number(1,0);
+        FTNMONEY18_2                    number(5,0);
+        COMPFTN18_2                     number(5,0);
+        COMPFTNWK18_2                   number(5,0);
+        SKJFTN18_2                      number(5,0);
+        SANTEIFLG18_3                   number(1,0);
+        FTNMONEY18_3                    number(5,0);
+        COMPFTN18_3                     number(5,0);
+        COMPFTNWK18_3                   number(5,0);
+        SKJFTN18_3                      number(5,0);
+        SANTEIFLG18_4                   number(1,0);
+        FTNMONEY18_4                    number(5,0);
+        COMPFTN18_4                     number(5,0);
+        COMPFTNWK18_4                   number(5,0);
+        SKJFTN18_4                      number(5,0);
+        HKNTEN19                        number(7,0);
+        SANTEIFLG19_1                   number(1,0);
+        FTNMONEY19_1                    number(5,0);
+        COMPFTN19_1                     number(5,0);
+        COMPFTNWK19_1                   number(5,0);
+        SKJFTN19_1                      number(5,0);
+        SANTEIFLG19_2                   number(1,0);
+        FTNMONEY19_2                    number(5,0);
+        COMPFTN19_2                     number(5,0);
+        COMPFTNWK19_2                   number(5,0);
+        SKJFTN19_2                      number(5,0);
+        SANTEIFLG19_3                   number(1,0);
+        FTNMONEY19_3                    number(5,0);
+        COMPFTN19_3                     number(5,0);
+        COMPFTNWK19_3                   number(5,0);
+        SKJFTN19_3                      number(5,0);
+        SANTEIFLG19_4                   number(1,0);
+        FTNMONEY19_4                    number(5,0);
+        COMPFTN19_4                     number(5,0);
+        COMPFTNWK19_4                   number(5,0);
+        SKJFTN19_4                      number(5,0);
+        HKNTEN20                        number(7,0);
+        SANTEIFLG20_1                   number(1,0);
+        FTNMONEY20_1                    number(5,0);
+        COMPFTN20_1                     number(5,0);
+        COMPFTNWK20_1                   number(5,0);
+        SKJFTN20_1                      number(5,0);
+        SANTEIFLG20_2                   number(1,0);
+        FTNMONEY20_2                    number(5,0);
+        COMPFTN20_2                     number(5,0);
+        COMPFTNWK20_2                   number(5,0);
+        SKJFTN20_2                      number(5,0);
+        SANTEIFLG20_3                   number(1,0);
+        FTNMONEY20_3                    number(5,0);
+        COMPFTN20_3                     number(5,0);
+        COMPFTNWK20_3                   number(5,0);
+        SKJFTN20_3                      number(5,0);
+        SANTEIFLG20_4                   number(1,0);
+        FTNMONEY20_4                    number(5,0);
+        COMPFTN20_4                     number(5,0);
+        COMPFTNWK20_4                   number(5,0);
+        SKJFTN20_4                      number(5,0);
+        HKNTEN21                        number(7,0);
+        SANTEIFLG21_1                   number(1,0);
+        FTNMONEY21_1                    number(5,0);
+        COMPFTN21_1                     number(5,0);
+        COMPFTNWK21_1                   number(5,0);
+        SKJFTN21_1                      number(5,0);
+        SANTEIFLG21_2                   number(1,0);
+        FTNMONEY21_2                    number(5,0);
+        COMPFTN21_2                     number(5,0);
+        COMPFTNWK21_2                   number(5,0);
+        SKJFTN21_2                      number(5,0);
+        SANTEIFLG21_3                   number(1,0);
+        FTNMONEY21_3                    number(5,0);
+        COMPFTN21_3                     number(5,0);
+        COMPFTNWK21_3                   number(5,0);
+        SKJFTN21_3                      number(5,0);
+        SANTEIFLG21_4                   number(1,0);
+        FTNMONEY21_4                    number(5,0);
+        COMPFTN21_4                     number(5,0);
+        COMPFTNWK21_4                   number(5,0);
+        SKJFTN21_4                      number(5,0);
+        HKNTEN22                        number(7,0);
+        SANTEIFLG22_1                   number(1,0);
+        FTNMONEY22_1                    number(5,0);
+        COMPFTN22_1                     number(5,0);
+        COMPFTNWK22_1                   number(5,0);
+        SKJFTN22_1                      number(5,0);
+        SANTEIFLG22_2                   number(1,0);
+        FTNMONEY22_2                    number(5,0);
+        COMPFTN22_2                     number(5,0);
+        COMPFTNWK22_2                   number(5,0);
+        SKJFTN22_2                      number(5,0);
+        SANTEIFLG22_3                   number(1,0);
+        FTNMONEY22_3                    number(5,0);
+        COMPFTN22_3                     number(5,0);
+        COMPFTNWK22_3                   number(5,0);
+        SKJFTN22_3                      number(5,0);
+        SANTEIFLG22_4                   number(1,0);
+        FTNMONEY22_4                    number(5,0);
+        COMPFTN22_4                     number(5,0);
+        COMPFTNWK22_4                   number(5,0);
+        SKJFTN22_4                      number(5,0);
+        HKNTEN23                        number(7,0);
+        SANTEIFLG23_1                   number(1,0);
+        FTNMONEY23_1                    number(5,0);
+        COMPFTN23_1                     number(5,0);
+        COMPFTNWK23_1                   number(5,0);
+        SKJFTN23_1                      number(5,0);
+        SANTEIFLG23_2                   number(1,0);
+        FTNMONEY23_2                    number(5,0);
+        COMPFTN23_2                     number(5,0);
+        COMPFTNWK23_2                   number(5,0);
+        SKJFTN23_2                      number(5,0);
+        SANTEIFLG23_3                   number(1,0);
+        FTNMONEY23_3                    number(5,0);
+        COMPFTN23_3                     number(5,0);
+        COMPFTNWK23_3                   number(5,0);
+        SKJFTN23_3                      number(5,0);
+        SANTEIFLG23_4                   number(1,0);
+        FTNMONEY23_4                    number(5,0);
+        COMPFTN23_4                     number(5,0);
+        COMPFTNWK23_4                   number(5,0);
+        SKJFTN23_4                      number(5,0);
+        HKNTEN24                        number(7,0);
+        SANTEIFLG24_1                   number(1,0);
+        FTNMONEY24_1                    number(5,0);
+        COMPFTN24_1                     number(5,0);
+        COMPFTNWK24_1                   number(5,0);
+        SKJFTN24_1                      number(5,0);
+        SANTEIFLG24_2                   number(1,0);
+        FTNMONEY24_2                    number(5,0);
+        COMPFTN24_2                     number(5,0);
+        COMPFTNWK24_2                   number(5,0);
+        SKJFTN24_2                      number(5,0);
+        SANTEIFLG24_3                   number(1,0);
+        FTNMONEY24_3                    number(5,0);
+        COMPFTN24_3                     number(5,0);
+        COMPFTNWK24_3                   number(5,0);
+        SKJFTN24_3                      number(5,0);
+        SANTEIFLG24_4                   number(1,0);
+        FTNMONEY24_4                    number(5,0);
+        COMPFTN24_4                     number(5,0);
+        COMPFTNWK24_4                   number(5,0);
+        SKJFTN24_4                      number(5,0);
+        HKNTEN25                        number(7,0);
+        SANTEIFLG25_1                   number(1,0);
+        FTNMONEY25_1                    number(5,0);
+        COMPFTN25_1                     number(5,0);
+        COMPFTNWK25_1                   number(5,0);
+        SKJFTN25_1                      number(5,0);
+        SANTEIFLG25_2                   number(1,0);
+        FTNMONEY25_2                    number(5,0);
+        COMPFTN25_2                     number(5,0);
+        COMPFTNWK25_2                   number(5,0);
+        SKJFTN25_2                      number(5,0);
+        SANTEIFLG25_3                   number(1,0);
+        FTNMONEY25_3                    number(5,0);
+        COMPFTN25_3                     number(5,0);
+        COMPFTNWK25_3                   number(5,0);
+        SKJFTN25_3                      number(5,0);
+        SANTEIFLG25_4                   number(1,0);
+        FTNMONEY25_4                    number(5,0);
+        COMPFTN25_4                     number(5,0);
+        COMPFTNWK25_4                   number(5,0);
+        SKJFTN25_4                      number(5,0);
+        HKNTEN26                        number(7,0);
+        SANTEIFLG26_1                   number(1,0);
+        FTNMONEY26_1                    number(5,0);
+        COMPFTN26_1                     number(5,0);
+        COMPFTNWK26_1                   number(5,0);
+        SKJFTN26_1                      number(5,0);
+        SANTEIFLG26_2                   number(1,0);
+        FTNMONEY26_2                    number(5,0);
+        COMPFTN26_2                     number(5,0);
+        COMPFTNWK26_2                   number(5,0);
+        SKJFTN26_2                      number(5,0);
+        SANTEIFLG26_3                   number(1,0);
+        FTNMONEY26_3                    number(5,0);
+        COMPFTN26_3                     number(5,0);
+        COMPFTNWK26_3                   number(5,0);
+        SKJFTN26_3                      number(5,0);
+        SANTEIFLG26_4                   number(1,0);
+        FTNMONEY26_4                    number(5,0);
+        COMPFTN26_4                     number(5,0);
+        COMPFTNWK26_4                   number(5,0);
+        SKJFTN26_4                      number(5,0);
+        HKNTEN27                        number(7,0);
+        SANTEIFLG27_1                   number(1,0);
+        FTNMONEY27_1                    number(5,0);
+        COMPFTN27_1                     number(5,0);
+        COMPFTNWK27_1                   number(5,0);
+        SKJFTN27_1                      number(5,0);
+        SANTEIFLG27_2                   number(1,0);
+        FTNMONEY27_2                    number(5,0);
+        COMPFTN27_2                     number(5,0);
+        COMPFTNWK27_2                   number(5,0);
+        SKJFTN27_2                      number(5,0);
+        SANTEIFLG27_3                   number(1,0);
+        FTNMONEY27_3                    number(5,0);
+        COMPFTN27_3                     number(5,0);
+        COMPFTNWK27_3                   number(5,0);
+        SKJFTN27_3                      number(5,0);
+        SANTEIFLG27_4                   number(1,0);
+        FTNMONEY27_4                    number(5,0);
+        COMPFTN27_4                     number(5,0);
+        COMPFTNWK27_4                   number(5,0);
+        SKJFTN27_4                      number(5,0);
+        HKNTEN28                        number(7,0);
+        SANTEIFLG28_1                   number(1,0);
+        FTNMONEY28_1                    number(5,0);
+        COMPFTN28_1                     number(5,0);
+        COMPFTNWK28_1                   number(5,0);
+        SKJFTN28_1                      number(5,0);
+        SANTEIFLG28_2                   number(1,0);
+        FTNMONEY28_2                    number(5,0);
+        COMPFTN28_2                     number(5,0);
+        COMPFTNWK28_2                   number(5,0);
+        SKJFTN28_2                      number(5,0);
+        SANTEIFLG28_3                   number(1,0);
+        FTNMONEY28_3                    number(5,0);
+        COMPFTN28_3                     number(5,0);
+        COMPFTNWK28_3                   number(5,0);
+        SKJFTN28_3                      number(5,0);
+        SANTEIFLG28_4                   number(1,0);
+        FTNMONEY28_4                    number(5,0);
+        COMPFTN28_4                     number(5,0);
+        COMPFTNWK28_4                   number(5,0);
+        SKJFTN28_4                      number(5,0);
+        HKNTEN29                        number(7,0);
+        SANTEIFLG29_1                   number(1,0);
+        FTNMONEY29_1                    number(5,0);
+        COMPFTN29_1                     number(5,0);
+        COMPFTNWK29_1                   number(5,0);
+        SKJFTN29_1                      number(5,0);
+        SANTEIFLG29_2                   number(1,0);
+        FTNMONEY29_2                    number(5,0);
+        COMPFTN29_2                     number(5,0);
+        COMPFTNWK29_2                   number(5,0);
+        SKJFTN29_2                      number(5,0);
+        SANTEIFLG29_3                   number(1,0);
+        FTNMONEY29_3                    number(5,0);
+        COMPFTN29_3                     number(5,0);
+        COMPFTNWK29_3                   number(5,0);
+        SKJFTN29_3                      number(5,0);
+        SANTEIFLG29_4                   number(1,0);
+        FTNMONEY29_4                    number(5,0);
+        COMPFTN29_4                     number(5,0);
+        COMPFTNWK29_4                   number(5,0);
+        SKJFTN29_4                      number(5,0);
+        HKNTEN30                        number(7,0);
+        SANTEIFLG30_1                   number(1,0);
+        FTNMONEY30_1                    number(5,0);
+        COMPFTN30_1                     number(5,0);
+        COMPFTNWK30_1                   number(5,0);
+        SKJFTN30_1                      number(5,0);
+        SANTEIFLG30_2                   number(1,0);
+        FTNMONEY30_2                    number(5,0);
+        COMPFTN30_2                     number(5,0);
+        COMPFTNWK30_2                   number(5,0);
+        SKJFTN30_2                      number(5,0);
+        SANTEIFLG30_3                   number(1,0);
+        FTNMONEY30_3                    number(5,0);
+        COMPFTN30_3                     number(5,0);
+        COMPFTNWK30_3                   number(5,0);
+        SKJFTN30_3                      number(5,0);
+        SANTEIFLG30_4                   number(1,0);
+        FTNMONEY30_4                    number(5,0);
+        COMPFTN30_4                     number(5,0);
+        COMPFTNWK30_4                   number(5,0);
+        SKJFTN30_4                      number(5,0);
+        HKNTEN31                        number(7,0);
+        SANTEIFLG31_1                   number(1,0);
+        FTNMONEY31_1                    number(5,0);
+        COMPFTN31_1                     number(5,0);
+        COMPFTNWK31_1                   number(5,0);
+        SKJFTN31_1                      number(5,0);
+        SANTEIFLG31_2                   number(1,0);
+        FTNMONEY31_2                    number(5,0);
+        COMPFTN31_2                     number(5,0);
+        COMPFTNWK31_2                   number(5,0);
+        SKJFTN31_2                      number(5,0);
+        SANTEIFLG31_3                   number(1,0);
+        FTNMONEY31_3                    number(5,0);
+        COMPFTN31_3                     number(5,0);
+        COMPFTNWK31_3                   number(5,0);
+        SKJFTN31_3                      number(5,0);
+        SANTEIFLG31_4                   number(1,0);
+        FTNMONEY31_4                    number(5,0);
+        COMPFTN31_4                     number(5,0);
+        COMPFTNWK31_4                   number(5,0);
+        SKJFTN31_4                      number(5,0);
+	DAYINFFLG			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,DENPNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_syuday_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuday
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   DENPNUM     =   :DENPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     CREATEKBN    =   :CREATEKBN
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND      PTID        =   :PTID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     PTID         =   :PTID
+			AND     SKYYM        =   :SKYYM
+			AND     CREATEKBN    =   :CREATEKBN
+		;
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   '1'
+			AND     DENPNUM      >=   9000000
+			AND     DENPNUM      <    9100000
+			AND     CREATEKBN    =   '3'
+		;
+	};
+};
+
+path	del5 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+			WHERE   HOSPNUM       =   :HOSPNUM
+			AND     NYUGAIKBN    =   :NYUGAIKBN
+			AND     PTID         =   :PTID
+			AND     DENPNUM      =   :DENPNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_syuday_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuday
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+
+path	upd1 	{
+	DBUPDATE	{
+		UPDATE	tbl_syuday
+                SET	NYUGAIKBN	=    :NYUGAIKBN
+		WHERE   HOSPNUM         =    :HOSPNUM
+		AND     NYUGAIKBN       =    :DAYINFFLG
+		AND     PTID            =    :PTID
+		AND     SKYYM		=    :SKYYM
+		AND     CREATEKBN       =    :CREATEKBN
+		;
+	};
+};
+
+path	del6 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuday
+		WHERE   HOSPNUM         =    :HOSPNUM
+		AND     NYUGAIKBN       =    :NYUGAIKBN
+		AND     PTID            =    :PTID
+		AND     CREATEKBN       <>   '3'
+		AND     DENPNUM		>=   :DENPNUM
+		;
+	};
+};
+

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#        ${1} 削除用ファイル名 
+#-------------------------------------------#
+#
+##      エラーファイル削除
+	echo "file1 = " $1
+	echo "file2 = " $2
+	rm -f  ${1}
+	exit 

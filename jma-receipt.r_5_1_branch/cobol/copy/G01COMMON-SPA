@@ -1,0 +1,61 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    月次統計 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  05.00.01    NACL-藤原    17/12/28  ＨＡＯＲＩ対応
+      *****************************************************************
+       01  SPA-G01KYOUTU.
+           03  SPA-G01-SEL                 PIC  9(05).
+           03  SPA-G01-IDX                 PIC  9(05).
+           03  SPA-G01-CUR                 PIC  9(05).
+           03  SPA-G01-TBL-GROUP           PIC  X(14).
+           03  SPA-G01-JOB-JOBID           PIC  9(07).
+           03  SPA-G01-MOTOPG              PIC  X(08).
+           03  SPA-G01-CUSTOM-ENABLED      PIC  X(01).
+      *
+           03  SPA-G99-FILESV-CHK-FLG      PIC 9(01).
+           03  SPA-G99-MOTOPG              PIC X(08).
+      *
+      *警告メッセージ
+           03  SPA-GIDCD                   PIC  X(04).
+      *警告画面より
+           03  SPA-GID1-AREA. 
+               05  SPA-GID1-FLG            PIC  X(02).
+               05  SPA-G99-FLG             PIC  X(02).
+      *
+           03  SPA-G01-JOB-PARAM.
+               05  SPA-G01-JOB-ORCA-UID    PIC X(36).
+               05  SPA-G01-JOB-KARTE-UID   PIC X(36).
+      *
+           03  SPA-G01-MONBLOB-PRINT-ID    PIC X(37).
+      *
+           03  SPA-G01-PUSHBA01-EVENT      PIC X(50).
+      *
+      *    エラー項目名称の位置
+           03  SPA-G01-PARAHYOJI-1         PIC 9(03).
+           03  SPA-G01-PARAHYOJI-2         PIC 9(03).
+      *
+           03  SPA-G01-PGLST-MAX           PIC 9(05).
+           03  SPA-G01-PGLST.
+               05  SPA-G01-PGLST-OCC       OCCURS 200.
+                   07  SPA-G01-TPGID       PIC X(20).

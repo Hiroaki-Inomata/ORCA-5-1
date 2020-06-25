@@ -1,0 +1,29 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    バックアップ処理
+#        $1   TABLE-NAME
+#        $2   CNV-NAME
+#        $3   OUT-NAME-WK
+#        $4$5 OUT-NAME
+#        $6   KBEN
+#        $7   HOSPNUM
+#-------------------------------------------#
+##
+
+if  [ -e $4$5 ]; then
+    rm  $4$5
+fi
+create_pgpass
+pg_dump ${DBCONNOPTION} -O $DBNAME > $4$5
+delete_pgpass
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE0000001ORCBSF1,${7}
+
+exit

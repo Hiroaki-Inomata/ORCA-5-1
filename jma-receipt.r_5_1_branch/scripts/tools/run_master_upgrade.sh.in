@@ -1,0 +1,105 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+RUNDATE=$(date  '+%Y%m%d%H%M%S')
+FLG_TEMPDIR_GEN=0
+if [ -z "${MCP_TEMPDIR}" ]; then
+  export MCP_TEMPDIR=/tmp/orca_root/$(uuidgen)
+  mkdir -p ${MCP_TEMPDIR}
+  FLG_TEMPDIR_GEN=1
+fi 
+
+export PATH=${PATCHSCRIPTSDIR}:${SCRIPTSDIR}:$PATH
+export COB_LIBRARY_PATH=${PATCHLIBDIR}:${ORCALIBDIR}:/usr/lib/panda
+if [ `whoami` != "${ORCAUSER}" ]; then
+    echo   "${ORCAUSER}ユーザーで実行してください。"
+    exit 101
+fi
+
+pgrep aps > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo   "日レセが起動していません。"
+    exit 102
+fi
+
+#HOSPNUM=01
+
+delete_tempdir(){
+  if [ ${FLG_TEMPDIR_GEN} -eq 1 ] ; then
+     rm -R ${MCP_TEMPDIR}
+  fi
+}
+
+create_pgpass
+SQL="select hospnum from tbl_sysbase;"
+HNLIST=`psql ${DBCONNOPTION} ${DBNAME} -t -A -q -c "${SQL}"`
+for hospnum in ${HNLIST} ; do
+  HOSPNUM=`printf "%02d" $hospnum`
+
+  MNTERRFS=${HOSPNUM}MNTERR-${RUNDATE}.$$
+  MLIERRFS=${HOSPNUM}MLIERR-${RUNDATE}.$$
+  HOSPIDFS=${HOSPNUM}HODPID-${RUNDATE}.$$
+
+  MNTERRFL=${MCP_TEMPDIR}/${MNTERRFS}
+  MLIERRFL=${MCP_TEMPDIR}/${MLIERRFS}
+  HOSPIDFL=${MCP_TEMPDIR}/${HOSPIDFS}
+
+  if [	-e ${MNTERRFL}	] ; then
+    rm ${MNTERRFL}
+  fi
+
+  if [	-e ${MLIERRFL}	] ; then
+    rm ${MLIERRFL}
+  fi
+
+  if [	-e ${HOSPIDFL}	] ; then
+    rm ${HOSPIDFL}
+  fi
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBCHECKREDL -parameter "${MNTERRFS}"
+  if [	-e ${MNTERRFL}	] ; then
+    cat ${MNTERRFL}
+    delete_tempdir 
+    exit 103
+  fi
+
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBMNT01 -parameter "${HOSPNUM},${MNTERRFS},${HOSPIDFS}"
+  if [	-e ${MNTERRFL}	] ; then
+    cat ${MNTERRFL}
+    delete_tempdir 
+    exit 104
+  fi
+
+  if [	-e ${HOSPIDFL}	] ; then
+    HOSPID=$(cat ${HOSPIDFL})
+    rm ${HOSPIDFL}
+  else
+    echo   "HOSPIDが取得できませんでした。"
+    exit 105
+  fi
+
+  ACCESSKEY=`${MONSQL} -dir ${LDDIRECTORY} -c "select access_key_1 from tbl_access_key where hospnum=${HOSPNUM};" -o CSV2`
+
+export MON_BATCH_ID=$(uuidgen)
+export MON_BATCH_NAME="master_upgrade.sh"
+export MON_BATCH_GROUPNAME="${HOSPNUM}"
+export MON_BATCH_EXTRA="0000001MSTMNT"
+export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+export MCP_TENANT=1
+export MCP_MIDDLEWARE_NAME="panda"
+
+  /usr/lib/panda/bin/monbatch  "execshell.sh \"allways\" \"master_upgrade.sh\"  \"${HOSPNUM}\" T \"${HOSPID}\" \"${MNTERRFS}\" 0000001 MSTMNT \"${MLIERRFS}\" 0000001 MSTMLI \"${ACCESSKEY}\""
+  MSTMNT=$?
+  if [ ${MSTMNT} -ne 0 ] ; then
+    exit ${MSTMNT}
+  fi
+done
+delete_tempdir 
+delete_pgpass
+
+exit ${MSTMNT}

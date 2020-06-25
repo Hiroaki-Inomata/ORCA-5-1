@@ -1,0 +1,60 @@
+tbl_sskijyo_master {
+	SYOJYOUCD			char(7);
+	SYOJYOU				varchar(2048);
+	SAYOKIJYO	     		varchar(2048);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+primary	{
+	SYOJYOUCD;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_sskijyo_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_sskijyo
+			WHERE   SYOJYOUCD   =   :SYOJYOUCD
+                ;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_sskijyo
+			VALUES(
+				:SYOJYOUCD,
+				:SYOJYOU,
+				:SAYOKIJYO,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_sskijyo
+			SET
+				SYOJYOUCD = :SYOJYOUCD,
+				SYOJYOU   = :SYOJYOU,
+				SAYOKIJYO = :SAYOKIJYO,
+				TERMID    = :TERMID,
+				OPID      = :OPID,
+				CREYMD    = :CREYMD,
+				UPYMD     = :UPYMD,
+				UPHMS     = :UPHMS
+			WHERE   SYOJYOUCD = :SYOJYOUCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_sskijyo
+			WHERE   SYOJYOUCD = :SYOJYOUCD
+		;
+	};
+};

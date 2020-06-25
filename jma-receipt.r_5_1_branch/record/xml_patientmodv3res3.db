@@ -1,0 +1,173 @@
+xml_patientmodv3res3 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3res3 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Continue_Mode		varchar(05);
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(3);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Base_Date		varchar(10);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		Home_Address_Information	{
+			WholeAddress1		varchar(200);
+			WholeAddress2		varchar(200);
+        	};
+    	};
+#-----> Ï«ºÒ¾ðÊó
+	Accident_Insurance_Information	{
+	    Accident_Insurance_Info 	{
+#-----> 	½èÍý¶èÊ¬
+            	Accident_Mode			varchar(6);
+#-----> 	Ï«ºÒÊÝ¸±£É£Ä
+		InsuranceProvider_Id		varchar(10);
+#-----> 	Ï«ºÒ¸øÈñ£É£Ä
+		PublicInsurance_Id		varchar(10);
+#-----> 	Ï«ºÒÊÝ¸±¤Î¼ïÎà
+		InsuranceProvider_Class		varchar(03);
+		InsuranceProvider_Name 		varchar(20);
+#-----> 	Ï«ºÒÊÝ¸±¶èÊ¬
+		Accident_Insurance          	varchar(01);
+#-----> 	Ï«ºÒÊÝ¸±Ì¾¾Î
+		Accident_Insurance_WholeName	varchar(50);
+#-----> 	½ýÉÂ¤ÎÉô°Ì
+		Disease_Location		varchar(100);
+#-----> 	½ýÉÂÇ¯·îÆü
+		Disease_Date			varchar(10);
+#-----> 	ÎÅÍÜ³«»ÏÆü
+		Accident_StartDate		varchar(10);
+#-----> 	ÎÅÍÜ½ªÎ»Æü
+		Accident_ExpiredDate		varchar(10);
+#-----> 	Ï«Æ¯ÊÝ¸±ÈÖ¹æ
+		Accident_Insurance_Number	varchar(14);
+#-----> 	Ç¯¶â¾Ú½ñÈÖ¹æ
+		PensionCertificate_Number	varchar(09);
+#-----> 	ºÒ³²¶èÊ¬Ì¾¾Î
+		Accident_Class			varchar(01);
+		Accident_Class_Name		varchar(20);
+#-----> 	Ï«Æ¯´ð½à´ÆÆÄ½ð¥³¡¼¥É
+		Labor_Station_Code		varchar(05);
+		Labor_Station_Code_Name		varchar(50);
+#-----> 	¿·µ¬·ÑÂ³¶èÊ¬
+		Accident_Continuous		varchar(01);
+		Accident_Continuous_Name	varchar(10);
+#-----> 	Å¾µ¢»öÍ³
+		Outcome_Reason	     		varchar(01);
+		Outcome_Reason_Name 		varchar(10);
+#-----> 	»Í»èÆÃÎã¶èÊ¬
+		Limbs_Exception     		varchar(01);
+		Limbs_Exception_Name   		varchar(10);
+#----->
+		Liability_Office_Information	{
+#-----> 	»ö¶È½êÌ¾¾Î
+			L_WholeName		varchar(80);
+#-----> 	        ½êºßÃÏÅÔÆ»ÉÜ¸©
+			Prefecture_Information	{
+				P_WholeName	varchar(20);
+				P_Class		varchar(01);
+				P_Class_Name	varchar(02);
+				};
+#-----> 	        ½êºßÃÏ·´»Ô
+			City_Information	{
+				C_WholeName	varchar(80);
+				C_Class		varchar(01);
+				C_Class_Name	varchar(02);
+				};
+			};
+#-----> 	Ï«ºÒ¥ì¥»²ó¿ôµ­ºÜ ´ð½àÇ¯·î
+		Accident_Base_Month		varchar(07);
+#-----> 	Ï«ºÒ¥ì¥»²ó¿ôµ­ºÜ ²ó¿ô
+		Accident_Receipt_Count 		varchar(03);
+#-----> 	¼«ÇåÀÕÀÁµá¶èÊ¬
+		Liability_Insurance		varchar(01);
+		Liability_Insurance_Name	varchar(20);
+#-----> 	¼«ÇåÀÕÊÝ¸±²ñ¼ÒÌ¾
+		Liability_Insurance_Office_Name	varchar(80);
+#-----> 	¼«ÇåÀÕÃ´Åö°å
+		Liability_Physician_Code	varchar(05);
+		Liability_Physician_Code_Name	varchar(100);
+#-----> 	¼«ÇåÀÕÅÀ¿ô»»Äê¶èÊ¬
+		Liability_Class			varchar(01);
+		Liability_Class_Name		varchar(30);
+#-----> 	¥¢¥Õ¥¿¡¼¥±¥¢  ·ò¹¯´ÉÍý¼êÄ¢ÈÖ¹æ
+		PersonalHealthRecord_Number	varchar(13);
+		Damage_Class	{
+#-----> 	        Â»½ý¶èÊ¬
+			D_Code			varchar(03);
+			D_WholeName		varchar(100);
+			};
+#-----> 	Âè»°¼Ô¹Ô°Ù  ¸½Êª»Ùµë¶èÊ¬
+		Third_Party_Supply		varchar(1);
+		Third_Party_Supply_Name		varchar(20);
+#-----> 	Âè»°¼Ô¹Ô°Ù  ÆÃµ­»ö¹à¶èÊ¬
+		Third_Party_Report		varchar(1);
+		Third_Party_Report_Name		varchar(20);
+            } [40];
+        };
+#---    ÊÝ¸±ÁÈ¹ç¤»¾ðÊó
+	HealthInsurance_Combination_Information	{
+	    HealthInsurance_Combination_Info 	{
+            	Insurance_Combination_Mode		varchar(6);
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate_Admission	varchar(04);
+		Insurance_Combination_Rate_Outpatient	varchar(04);
+            	Insurance_Combination_StartDate	varchar(10);
+            	Insurance_Combination_ExpiredDate	varchar(10);
+#---            ÊÝ¸±ÁÈ¹ç¤»ÊÝ¸±¸øÈñ¾ðÊó
+		InsuranceProvider_Id			varchar(10);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Branch_Number	varchar(2);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+                PublicInsurance_Info      {
+	                PublicInsurance_Id			varchar(10);
+        	        PublicInsurance_Class			varchar(03);
+	                PublicInsurance_Name			varchar(20);
+	                PublicInsurer_Number			varchar(08);
+	                PublicInsuredPerson_Number		varchar(20);
+			Rate_Admission				varchar(04);
+			Money_Admission				varchar(06);
+			Rate_Outpatient				varchar(04);
+			Money_Outpatient			varchar(06);
+        		} [4];
+            } [200];
+        };
+#---    ¥¨¥é¡¼¥á¥Ã¥»¡¼¥¸
+	Patient_Message_Information	{
+	Patient_Message_Info	{
+		Patient_Result		varchar(4);
+		Patient_Result_Message	varchar(200);
+      	  } [50];
+        };
+#---    ¥ï¡¼¥Ë¥ó¥°¥á¥Ã¥»¡¼¥¸
+	Patient_Warning_Information	{
+	Patient_Warning_Info	{
+		Patient_Warning		varchar(4);
+		Patient_Warning_Message	varchar(200);
+          } [50];
+        };
+#--- ³ÎÇ§¥á¥Ã¥»¡¼¥¸
+	Patient_Select_Information	{
+        Patient_Select			varchar(4);
+        Patient_Select_Message		varchar(100);
+   	};
+   };
+};

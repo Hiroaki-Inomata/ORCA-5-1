@@ -1,0 +1,45 @@
+XC01 {
+  fixed32 {
+    B04 {
+      state int;
+    };
+    SELNUM {
+      numdata number(5);
+    };
+    ERRMSG {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    TITLE {
+      style varchar(20);
+      textdata varchar(40);
+    };
+    PSAREA {
+      objectdata object;
+    };
+    scrolledwindow26 {
+      CLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(10);
+            column3 varchar(20);
+            column4 varchar(10);
+            column5 varchar(1);
+            column6 varchar(2);
+            column7 varchar(20);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    MEMO {
+      state int;
+      textdata varchar(100);
+    };
+    pandatimer1 {
+      duration int;
+    };
+  };
+};

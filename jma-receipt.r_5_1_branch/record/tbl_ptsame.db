@@ -1,0 +1,47 @@
+tbl_ptsame {
+	HOSPNUM	    number(2,0);
+	PTID		    number(10);
+	SAME_HOSPNUM	    number(2,0);
+	SAME_PTID	    number(10);
+	TERMID	    varchar(16);
+	OPID		    varchar(16);
+	CREYMD	    char(8);
+	UPYMD		    char(8);
+	UPHMS		    char(6);
+};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptsame_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsame
+			WHERE	HOSPNUM       =   :HOSPNUM  AND
+				PTID          =   :PTID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptsame_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsame
+			WHERE  SAME_HOSPNUM  =   :SAME_HOSPNUM
+			AND    SAME_PTID     =   :SAME_PTID
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsame
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};

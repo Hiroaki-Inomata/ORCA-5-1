@@ -1,0 +1,194 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    点数マスタ設定 画面ＳＰＡ     (SPA-FREE の内容)
+      *            Z010
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-Z010.
+      *
+           03  SPA-Z010-MOTOPG              PIC X(08).
+           03  SPA-Z010-CUR                 PIC 9(04).
+           03  SPA-Z010-SYORI               PIC 9(01).
+      *    診療行為内容
+           03  SPA-Z010-SRYKBN             PIC X(02).
+           03  SPA-Z010-DATAKBN            PIC X(01).
+           03  SPA-Z010-JGNCNT             PIC 9(03).
+           03  SPA-Z010-JGNCNT1D           PIC 9(03).
+           03  SPA-Z010-SANTEIRRKKBN       PIC 9(01).
+      *    薬剤内容
+           03  SPA-Z010-YKZKBN             PIC X(01).
+           03  SPA-Z010-GENERICNAME        PIC X(100).
+           03  SPA-Z010-TANICD             PIC X(03).
+           03  SPA-Z010-SIPPKBN            PIC X(01).
+      *
+           03  SPA-Z010-MIDASHI            PIC X(80).
+           03  SPA-Z010-MEISHO             PIC X(20).
+      *
+           03   SPA-Z010-NAI-KEIFLG3       PIC 9(01).
+      *
+           03  SPA-Z010-AREA.
+               05  SPA-Z010-RRKLIST-G.
+                   07  SPA-Z010-RRKLIST-OCC     OCCURS   50.
+                       09  SPA-Z010-TRENNUM     PIC 9(03).
+                       09  SPA-Z010-TYUKOSTYMD  PIC X(10).
+                       09  SPA-Z010-TYUKOEDYMD  PIC X(10).
+      *
+                       09  SPA-Z010-NAI-TYUKOSTYMD  PIC X(08).
+                       09  SPA-Z010-NAI-TYUKOEDYMD  PIC X(08).
+                   07  SPA-Z010-RRKMAX          PIC 9(03).
+               05  SPA-Z010-SELNUM              PIC X(03).
+               05  SPA-Z010-NAI-SELNUM          PIC 9(03).
+      *
+      *        有効期間
+               05  SPA-Z010-KIKAN.
+                   07  SPA-Z010-YUKOSTYMD       PIC X(10).
+                   07  SPA-Z010-YUKOEDYMD       PIC X(10).
+      *
+                   07  SPA-Z010-NAI-YUKOSTYMD    PIC X(08).
+                   07  SPA-Z010-NAI-YUKOEDYMD    PIC X(08).
+      *
+      *        単位リスト
+               05  SPA-Z010-TANICDLST           OCCURS  200.
+                   07  SPA-Z010-TANICDL         PIC X(03).
+                   07  SPA-Z010-F1L             PIC X(01).
+                   07  SPA-Z010-TANICDMEIL      PIC X(24).
+               05  SPA-Z010-TANICD-MAX          PIC 9(04).
+               5   SPA-Z010-COMB-G.
+      *            採血料区分
+                   07  SPA-Z010-SAIKETUCOMB-G.
+                       09  SPA-Z010-SAIKETUCOMB     PIC X(16)
+                                               OCCURS  4.
+                   07  SPA-Z010-SAIKETUKBN-MAX      PIC 9(04).
+      *            前回検査日区分
+                   07  SPA-Z010-ZENKNSKBN-COMB-G.
+                       09  SPA-Z010-ZENKNSKBN-COMB  PIC X(30)
+                                               OCCURS  5.
+                   07  SPA-Z010-ZENKNSKBN-MAX          PIC 9(04).
+      *            ユーザ設定上限回数
+                   07  SPA-Z010-PLUS-SANTEICOMB-G.
+                       09  SPA-Z010-PLUS-SANTEICOMB   PIC X(30)
+                                               OCCURS  2.
+                   07  SPA-Z010-PLUS-SANTEI-MAX      PIC 9(04).
+      *            総量編集
+                   07  SPA-Z010-SOURYOKBN-LSTG.
+                       09  SPA-Z010-SOURYOKBN-LST    PIC X(20)
+                                               OCCURS   5.
+                       09  SPA-Z010-SOURYO-MAX      PIC 9(03).
+      *            一般名記載区分
+                   07  SPA-Z010-IPN-KISAIKBN-LSTG.
+                       09  SPA-Z010-IPN-KISAIKBN-LST  PIC X(28)
+                                               OCCURS   5.
+                       09  SPA-Z010-IPN-KISAI-MAX      PIC 9(03).
+      *
+                   07  SPA-Z010-BUNRUIKBNLST-G.
+                       09  SPA-Z010-BUNRUIKBNLST        OCCURS  20.
+                           11  SPA-Z010-BUNRUIKBNL      PIC X(02).
+                           11  SPA-Z010-F1L             PIC X(01).
+                           11  SPA-Z010-BUNRUIKBNMEIL   PIC X(40).
+                   07  SPA-Z010-BUNRUIKBN-MAX       PIC 9(03).
+      *
+                   07  SPA-Z010-ALLSURYOKBNLST      OCCURS  5.
+                       09  SPA-Z010-ALLSURYOKBNL    PIC X(01).
+                       09  SPA-Z010-F1L             PIC X(01).
+                       09  SPA-Z010-ALLSURYOKBNMEIL PIC X(12).
+                   07  SPA-Z010-ALLSURYOKBN-MAX     PIC 9(03).
+      *
+      *        入力項目
+               05  SPA-Z010-INPUT-G.
+      *            処方名称
+                   07  SPA-Z010-SHONAME         PIC X(100).
+      *R02.2
+      *            ユーザー単位
+                   07  SPA-Z010-USER-TANICD-G.
+                       09  SPA-Z010-USER-TANICD       PIC X(03).
+                       09  SPA-Z010-USER-F3           PIC X(01).
+                       09  SPA-Z010-USER-TANICDMEI    PIC X(24).
+      *            採血料区分
+                   07  SPA-Z010-SAIKETUKBN-G.
+                       09  SPA-Z010-SAIKETUKBN  PIC X(01).
+                       09  SPA-Z010-DUMMY       PIC X(01).
+                       09  SPA-Z010-SAIKETUMEI  PIC X(14).
+      *            前回検査日区分
+                   07  SPA-Z010-ZENKNSKBN-G.
+                       09  SPA-Z010-ZENKNSKBN       PIC X(01).
+                       09  SPA-Z010-ZENKNSKBNF1     PIC X(01).
+                       09  SPA-Z010-ZENKNSKBN-MEI   PIC X(28).
+      *            ユーザ設定上限回数
+                   07  SPA-Z010-PLUS-SANTEIRRK-G.
+                       09  SPA-Z010-PLUS-SANTEIRRK      PIC 9(01).
+                       09  SPA-Z010-DUMMY2              PIC X(01).
+                       09  SPA-Z010-PLUS-SANTEIRRKMEI   PIC X(28).
+                   07  SPA-Z010-PLUS-JGNCNT          PIC 9(3).
+                   07  SPA-Z010-PLUS-JGNCNT1D        PIC 9(3).
+                   07  SPA-Z010-PLUS-JGNCNT1W        PIC 9(3).
+                   07  SPA-Z010-PLUS-JGNCNTETCM      PIC 9(2).
+                   07  SPA-Z010-PLUS-JGNCNTETC       PIC 9(3).
+                   07  SPA-Z010-PLUS-JGNCNTERR       PIC 9(1).
+      *
+      *            総量編集
+                   07  SPA-Z010-SOURYOKBN-G.
+                       09  SPA-Z010-SOURYOKBN    PIC X(01).
+                       09  SPA-Z010-SOURYOKBNF   PIC X(01).
+                       09  SPA-Z010-SOURYOKBNMEI PIC X(18).
+      *            一般名記載区分
+                   07  SPA-Z010-IPN-KISAIKBN-G.
+                       09  SPA-Z010-IPN-KISAIKBN     PIC X(01).
+                       09  SPA-Z010-IPN-KISAIKBNF    PIC X(01).
+                       09  SPA-Z010-IPN-KISAIKBNMEI  PIC X(26).
+      *            一般名記載単位
+                   07  SPA-Z010-IPN-TANICD-G.
+                       09  SPA-Z010-IPN-TANICD       PIC X(03).
+                       09  SPA-Z010-IPN-F3           PIC X(01).
+                       09  SPA-Z010-IPN-TANICDMEI    PIC X(24).
+      *            一般名変換値
+                   07  SPA-Z010-IPN-KANZANCHI        PIC 9(5)V9(5).
+      *            分類区分
+                   07  SPA-Z010-BUNRUIKBN-G.
+                       09  SPA-Z010-BUNRUIKBN       PIC X(02).
+                       09  SPA-Z010-F1L             PIC X(01).
+                       09  SPA-Z010-BUNRUIKBNMEI    PIC X(40).
+      *            全数量記載区分
+                   07  SPA-Z010-ALLSURYOKBN-G.
+                       09  SPA-Z010-ALLSURYOKBN     PIC X(01).
+                       09  SPA-Z010-F1L             PIC X(01).
+                       09  SPA-Z010-ALLSURYOKBNMEI  PIC X(12).
+      *            数量変換単位
+                   07  SPA-Z010-KANZANTANICD-G.
+                       09  SPA-Z010-KANZANTANICD    PIC X(03).
+                       09  SPA-Z010-F1              PIC X(01).
+                       09  SPA-Z010-KANZANTANICDMEI PIC X(24).
+      *            数量換算値
+                   07  SPA-Z010-KANZANCHI           PIC 9(5)V9(5).
+      *
+      *            湿布薬　膏体量１
+                   07  SPA-Z010-SIPRYOU1            PIC 9(03).
+      *            湿布薬　包装入数１
+                   07  SPA-Z010-SIPIRISU1           PIC 9(03).
+      *            湿布薬　膏体量２
+                   07  SPA-Z010-SIPRYOU2            PIC 9(03).
+      *            湿布薬　包装入数２
+                   07  SPA-Z010-SIPIRISU2           PIC 9(03).
+      *
+                   07   SPA-Z010-ENDKEIFLG          PIC 9(01).
+      *R02.2
+                   07   SPA-Z010-TANIKEIFLG         PIC 9(01).
+      *

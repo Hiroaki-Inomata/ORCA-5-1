@@ -1,0 +1,132 @@
+xml_medicalv3res6 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3res6 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#---    診療年月
+	Perform_Date			varchar(7);
+#---    診療科
+	Department_Code			varchar(2);
+        Department_Name			varchar(80);
+#--- 患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+	};
+#---    受診履歴情報リスト
+	Medical_List_Information  {
+#---    診療日付
+		Perform_Date		varchar(10);
+#---     伝票番号
+		Invoice_Number			varchar(07);
+#---    保険組合せ番号
+		Insurance_Combination_Number	varchar(04);
+#---    同日連番
+		Sequential_Number		varchar(01);
+#---    保険組合せ負担割合
+		Insurance_Combination_Rate	varchar(03);
+            	Insurance_Combination_StartDate	varchar(10);
+            	Insurance_Combination_ExpiredDate	varchar(10);
+#---    保険情報
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_WholeName		varchar(20);
+            	InsuranceProvider_Number		varchar(08);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+        	} [4];
+#---    保険組合せ状態
+		Insurance_Combination_Mode      varchar(01);
+#---    入院調剤料のみ算定した履歴
+            	Ad_Dispensing_Information   {
+			Ad_Dispensing_Mode      varchar(10);
+        	};
+	}[150];
+#---    保険組合せ情報
+	HealthInsurance_Combination_Information	{
+	    HealthInsurance_Combination_Info 	{
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate 		varchar(03);
+            	Insurance_Combination_StartDate		varchar(10);
+            	Insurance_Combination_ExpiredDate	varchar(10);
+#---            保険組合せ保険公費情報
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_WholeName		varchar(20);
+            	InsuranceProvider_Number		varchar(08);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+                PublicInsurance_Information     {
+        	        PublicInsurance_Class			varchar(03);
+	                PublicInsurance_Name			varchar(20);
+	                PublicInsurer_Number			varchar(08);
+	                PublicInsuredPerson_Number		varchar(20);
+			Rate_Outpatient				varchar(04);
+			Money_Outpatient			varchar(06);
+	                Certificate_IssuedDate			varchar(10);
+	                Certificate_ExpiredDate			varchar(10);
+        		} [4];
+            } [100];
+        };
+#---    一括変更内容（リクエスト＝０２）
+	Change_Information  {
+#---    前保険組合せ番号
+		Bf_Insurance_Combination_Number	varchar(04);
+#---    後保険組合せ番号
+		Af_Insurance_Combination_Number	varchar(04);
+#---    変更期間
+		Md_Start_Day 	varchar(02);
+		Md_End_Day	varchar(02);
+#---   収納一括更新区分
+		Income_Change	varchar(03);
+	};
+#---    変更後、収納情報（リクエスト＝０２）
+	Update_List_Information  {
+        	Update_List_Info  {
+#---    診療日付
+		Perform_Date		varchar(10);
+#---    伝票番号
+		Invoice_Number		varchar(07);
+#---    保険組合せ番号
+		Insurance_Combination_Number	varchar(04);
+#---    収納負担割合
+		Rate_Cd			varchar(03);
+#---    伝票発行日
+		Invoice_Date		varchar(10);
+#---    変更前請求額
+		Bf_Ac_Money		varchar(7);
+#---    変更後請求額
+		Af_Ac_Money		varchar(7);
+#---    変更メッセージ
+		Dc_Message    		varchar(6);
+            } [100];
+        };
+#---    ワーニングメッセージ
+	Change_Warning_Information	{
+	Change_Warning_Info	{
+		Change_Warning			varchar(3);
+		Change_Warning_Message		varchar(200);
+                } [20];
+        };
+    };
+};

@@ -1,0 +1,252 @@
+tbl_syutotal_prv {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	DENPNUM          		number(7,0);
+	SRYKA				char(2);
+	DOUJI_SRYKA1			char(2);
+	DOUJI_SRYKA2			char(2);
+	DOUJI_SRYKA3			char(2);
+	DOUJI_SRYKA4			char(2);
+	DOUJI_SRYKA5			char(2);
+	DOUJI_SRYKA6			char(2);
+	DOUJI_SRYKA7			char(2);
+	DOUJI_SRYKA8			char(2);
+	DOUJI_SRYKA9			char(2);
+	DOUJI_SRYKA10			char(2);
+	SRYYMD                          char(8);
+	DENPJTIKBN			char(1);
+	CREATEKBN			char(1);
+	DENPPRTYMD			char(8);
+	SKYSTYMD			char(8);
+	SKYEDYMD			char(8);
+	HKNCOMBINUM			char(4);
+	SYUHKNNUM			char(3);
+	SYUHKNFTNMONEY                  number(7,0);
+	SYUCOMPFTN                      number(7,0);
+	SYUCOMPFTN_ENTANI               number(8,1);
+	SYUCOMPYKZFTN                   number(7,0);
+	SYUCOMPTOTAL                    number(7,0);
+	SYUYKZFTNKBN			char(1);
+	KOH1HKNNUM			char(3);
+	KOH1HKNFTNMONEY                 number(7,0);
+	KOH1COMPFTN                     number(7,0);
+	KOH1COMPFTN_ENTANI              number(8,1);
+	KOH1COMPYKZFTN                  number(7,0);
+	KOH1COMPTOTAL                   number(7,0);
+	KOH1YKZFTNKBN			char(1);
+	KOH2HKNNUM			char(3);
+	KOH2HKNFTNMONEY                 number(7,0);
+	KOH2COMPFTN                     number(7,0);
+	KOH2COMPFTN_ENTANI              number(8,1);
+	KOH2COMPYKZFTN                  number(7,0);
+	KOH2COMPTOTAL                   number(7,0);
+	KOH2YKZFTNKBN			char(1);
+	KOH3HKNNUM			char(3);
+	KOH3HKNFTNMONEY                 number(7,0);
+	KOH3COMPFTN                     number(7,0);
+	KOH3COMPFTN_ENTANI              number(8,1);
+	KOH3COMPYKZFTN                  number(7,0);
+	KOH3COMPTOTAL                   number(7,0);
+	KOH3YKZFTNKBN			char(1);
+	KOH4HKNNUM			char(3);
+	KOH4HKNFTNMONEY                 number(7,0);
+	KOH4COMPFTN                     number(7,0);
+	KOH4COMPFTN_ENTANI              number(8,1);
+	KOH4COMPYKZFTN                  number(7,0);
+	KOH4COMPTOTAL                   number(7,0);
+	KOH4YKZFTNKBN			char(1);
+	PTFTNRATE			number(3,0);
+	SKYKUKBN			char(1);
+	SSU_HKNTEN			number(7,0);
+	SSU_MONEY			number(7,0);
+	SSU_TGMONEY			number(7,0);
+	SSU_TGMONEY_TAX			number(7,0);
+	SDO_HKNTEN			number(7,0);
+	SDO_MONEY			number(7,0);
+	SDO_TGMONEY			number(7,0);
+	SDO_TGMONEY_TAX			number(7,0);
+	ZTK_HKNTEN			number(7,0);
+	ZTK_MONEY			number(7,0);
+	ZTK_TGMONEY			number(7,0);
+	ZTK_TGMONEY_TAX			number(7,0);
+	TYK_HKNTEN			number(7,0);
+	TYK_MONEY			number(7,0);
+	TYK_TGMONEY			number(7,0);
+	TYK_TGMONEY_TAX			number(7,0);
+	CSY_HKNTEN			number(7,0);
+	CSY_MONEY			number(7,0);
+	CSY_TGMONEY			number(7,0);
+	CSY_TGMONEY_TAX			number(7,0);
+	SYC_HKNTEN			number(7,0);
+	SYC_MONEY			number(7,0);
+	SYC_TGMONEY			number(7,0);
+	SYC_TGMONEY_TAX			number(7,0);
+	SJT_HKNTEN			number(7,0);
+	SJT_MONEY			number(7,0);
+	SJT_TGMONEY			number(7,0);
+	SJT_TGMONEY_TAX			number(7,0);
+	MSI_HKNTEN			number(7,0);
+	MSI_MONEY			number(7,0);
+	MSI_TGMONEY			number(7,0);
+	MSI_TGMONEY_TAX			number(7,0);
+	KNS_HKNTEN			number(7,0);
+	KNS_MONEY			number(7,0);
+	KNS_TGMONEY			number(7,0);
+	KNS_TGMONEY_TAX			number(7,0);
+	GZU_HKNTEN			number(7,0);
+	GZU_MONEY			number(7,0);
+	GZU_TGMONEY			number(7,0);
+	GZU_TGMONEY_TAX			number(7,0);
+	ETC_HKNTEN			number(7,0);
+	ETC_MONEY			number(7,0);
+	ETC_TGMONEY			number(7,0);
+	ETC_TGMONEY_TAX			number(7,0);
+	SSN_HKNTEN			number(7,0);
+	SSN_MONEY			number(7,0);
+	SSN_TGMONEY			number(7,0);
+	SSN_TGMONEY_TAX			number(7,0);
+	HOU_HKNTEN			number(7,0);
+	HOU_MONEY			number(7,0);
+	HOU_TGMONEY			number(7,0);
+	HOU_TGMONEY_TAX			number(7,0);
+	BYR_HKNTEN				number(7,0);
+	BYR_MONEY					number(7,0);
+	BYR_TGMONEY				number(7,0);
+	BYR_TGMONEY_TAX		number(7,0);
+	NYN_HKNTEN			number(7,0);
+	NYN_MONEY			number(7,0);
+	NYN_TGMONEY			number(7,0);
+	NYN_TGMONEY_TAX			number(7,0);
+	RYO_HKNTEN			number(7,0);
+	RYO_MONEY			number(7,0);
+	RYO_TGMONEY			number(7,0);
+	RYO_TGMONEY_TAX			number(7,0);
+	TOTAL_HKNTEN			number(7,0);
+	TOTAL_MONEY			number(7,0);
+	TOTAL_TGMONEY			number(7,0);
+	TOTAL_TGMONEY_TAX		number(7,0);
+	SHOHOU_SAI			number(7,0);
+	TGMONEY_TAX_SAI			number(7,0);
+	JIHI_1  			number(7,0);
+	JIHI_1_TAX 			number(7,0);
+	JIHI_2  			number(7,0);
+	JIHI_2_TAX 			number(7,0);
+	JIHI_3  			number(7,0);
+	JIHI_3_TAX 			number(7,0);
+	JIHI_4  			number(7,0);
+	JIHI_4_TAX 			number(7,0);
+	JIHI_5  			number(7,0);
+	JIHI_5_TAX 			number(7,0);
+	JIHI_6  			number(7,0);
+	JIHI_6_TAX 			number(7,0);
+	JIHI_7  			number(7,0);
+	JIHI_7_TAX 			number(7,0);
+	JIHI_8  			number(7,0);
+	JIHI_8_TAX 			number(7,0);
+	JIHI_9  			number(7,0);
+	JIHI_9_TAX 			number(7,0);
+	JIHI_10  			number(7,0);
+	JIHI_10_TAX 			number(7,0);
+	JIHI_TOTAL  			number(7,0);
+	JIHI_TOTAL_TAX 			number(7,0);
+	JIHI_TAX  			number(7,0);
+	RJN_FTN 			number(7,0);
+	KOH_FTN				number(7,0);
+	KOH_FTN_ENTANI			number(8,1);
+	CHOSEI  			number(7,0);
+	CHOSEI1  			number(7,0);
+	CHOSEI2  			number(7,0);
+	GRP_SGKMONEY			number(7,0);
+	HKNTEKMONEY			number(7,0);
+	DISCOUNT_KBN			char(2);
+	DISCOUNT_BODY			varchar(160);
+	DISCOUNT_RATEKBN		char(2);
+	DISCOUNT_TEIRITU		char(1);
+	DISCOUNT_RATE			number(7,0);
+	DISCOUNT_MONEY			number(7,0);
+        RSISHOSHIN_MONEY		number(7,0);
+        RSISAISHIN_MONEY		number(7,0);
+        RSISDO_MONEY	    		number(7,0);
+        RSIETC_MONEY		    	number(7,0);
+	RSI_TAX_SAI			number(7,0);
+	RSI_TOTAL			number(7,0);
+	RSIJIBAI_SKYMONEY		number(7,0);
+	SKYMONEY_TAX_SAI		number(7,0);
+	SKYMONEY			number(7,0);
+	NYUKIN_TOTAL   			number(7,0);
+	NYUKIN_KAISU   			number(7,0);
+	MISYURIYU    			char(2);
+	ZAITAKU      			char(1);
+        KYUFUGAI_SHOSHIN_TEN            number(7,0);
+        KYUFUGAI_SIDOU_TEN              number(7,0);
+        KYUFUGAI_OSIN1_TEN              number(7,0);
+        KYUFUGAI_OSIN2_TEN              number(7,0);
+        KYUFUGAI_OSIN3_TEN              number(7,0);
+        KYUFUGAI_GOKEI_TEN              number(7,0);
+	HKNTEKKBN  			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,DENPNUM,CREYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_syutotal_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syutotal_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   DENPNUM     =   :DENPNUM
+			AND   CREYMD      =   :CREYMD
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_syutotal_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syutotal_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			ORDER BY CREYMD DESC
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_syutotal_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syutotal_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syutotal_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path	delprv 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syutotal_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =  :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};

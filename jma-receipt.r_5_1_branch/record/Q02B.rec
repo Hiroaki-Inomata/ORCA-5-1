@@ -1,0 +1,77 @@
+Q02B {
+  fixed17 {
+    B05 {
+      state int;
+    };
+    B05S {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B06S {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B09S {
+      state int;
+    };
+    B10 {
+      state int;
+    };
+    B11 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    B12S {
+      state int;
+    };
+    HYODAI {
+      textdata varchar(100);
+    };
+    JYOKEN1 {
+      textdata varchar(100);
+    };
+    JYOKEN2 {
+      textdata varchar(100);
+    };
+    SCR_KEKKALST {
+      KEKKALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(2);
+            column5 varchar(8);
+            column6 varchar(80);
+            column7 varchar(11);
+            column8 varchar(5);
+            column9 varchar(13);
+            column10 varchar(10);
+            column11 varchar(200);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    TOTAL {
+      textdata varchar(22);
+      style varchar(20);
+    };
+    SELNUM {
+      numdata number(5);
+    };
+    pandatimer1 {
+      duration int;
+    };
+  };
+};

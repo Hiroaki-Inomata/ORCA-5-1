@@ -1,0 +1,189 @@
+tbl_yyk {
+	HOSPNUM				number(2,0);
+	SRYNAIYO			char(2);
+	DRCD    			char(5);
+	YYKYMD  			char(8);
+	KEYYYKTIME          		number(4,0);
+	YYKID   			number(2,0);
+	YYKMAXCNT   			number(3,0);
+	YYKCNT                          number(3,0);
+	YYKTIME 			number(4,0);
+	PTID     			number(10,0);
+	NAME    			varchar(100);
+	SRYKA                           char(2);
+	YYKKBN  	   		char(2);
+	KAKREN  			char(2);
+	RAIINZUMI   			char(1);
+	TERMID  		  	varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,SRYNAIYO,DRCD,YYKYMD,KEYYYKTIME,YYKID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		SRYNAIYO      =   :SRYNAIYO
+			AND		DRCD          =   :DRCD
+			AND		YYKYMD        =   :YYKYMD
+			AND		KEYYYKTIME    =   :KEYYYKTIME
+			AND		YYKID         =   :YYKID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		SRYNAIYO      =   :SRYNAIYO
+			AND		DRCD          =   :DRCD
+			AND 	YYKYMD        =   :YYKYMD
+			AND		KEYYYKTIME    =   :KEYYYKTIME
+			ORDER   BY        YYKID
+		;
+	};
+};
+             
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		SRYNAIYO      =   :SRYNAIYO
+			AND		DRCD          =   :DRCD
+			AND		YYKYMD        =   :YYKYMD
+			ORDER   BY        KEYYYKTIME,YYKTIME,YYKID
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		YYKYMD        =   :YYKYMD
+			AND		PTID          =   :PTID
+			ORDER   BY        KEYYYKTIME,YYKID
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		YYKYMD        =   :YYKYMD
+			ORDER   BY        KEYYYKTIME,YYKTIME,YYKID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM      =   :HOSPNUM
+ 		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     PTID        =   :PTID
+			ORDER   BY        YYKYMD,KEYYYKTIME,YYKID
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		SRYNAIYO      =   :SRYNAIYO
+			AND		DRCD          =   :DRCD
+			AND 	YYKYMD        =   :YYKYMD
+			AND		KEYYYKTIME    =   :KEYYYKTIME
+			ORDER   BY        YYKID   DESC
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     PTID        =   :PTID
+			ORDER   BY        YYKYMD  DESC,
+                                          KEYYYKTIME DESC,
+                                          YYKTIME DESC
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     PTID         =   :PTID
+			AND     YYKYMD       >=  :YYKYMD
+			AND     YYKID        <>  0
+			ORDER   BY        YYKYMD,
+                                          KEYYYKTIME,
+                                          YYKTIME,
+                                          SRYKA
+		;
+	};
+};
+
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_yyk_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND	YYKYMD        <=   :YYKYMD
+			ORDER   BY        KEYYYKTIME,YYKID
+		;
+	};
+};
+
+path	del 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_yyk
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND		SRYNAIYO      =   :SRYNAIYO
+			AND		DRCD          =   :DRCD
+			AND		YYKYMD        =   :YYKYMD
+			AND		KEYYYKTIME    =   :KEYYYKTIME
+			AND		YYKID         =   :YYKID
+		;
+	};
+};

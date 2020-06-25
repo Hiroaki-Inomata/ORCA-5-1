@@ -1,0 +1,104 @@
+N22 {
+  fixed17 {
+    pandatimer1 {
+      duration int;
+    };
+    KENCD {
+      textdata varchar(9);
+    };
+    KENNAME {
+      textdata varchar(100);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      KEKKALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(12);
+            column3 varchar(5);
+            column4 varchar(50);
+            column5 varchar(50);
+          }[40];
+          selectdata bool[40];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    MESSAGE {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    GAZOKBNCOMBO {
+      GAZOKBN {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[4];
+    };
+    COPYKBNCOMBO {
+      COPYKBN {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[3];
+    };
+    GAZO1 {
+      objectdata object;
+    };
+    GAZO2 {
+      objectdata object;
+    };
+    GAZO3 {
+      objectdata object;
+    };
+    GAZOLABEL1 {
+      textdata varchar(14);
+    };
+    GAZOLABEL2 {
+      textdata varchar(14);
+    };
+    GAZOLABEL3 {
+      textdata varchar(14);
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      EFFECT {
+        textdata varchar(2000);
+      };
+    };
+    scrolledwindow3 {
+      hpos int;
+      vpos int;
+      COLOR {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow4 {
+      hpos int;
+      vpos int;
+      SHAPE {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow5 {
+      hpos int;
+      vpos int;
+      MARK {
+        textdata varchar(360);
+      };
+    };
+    scrolledwindow6 {
+      hpos int;
+      vpos int;
+      CAUTION {
+        textdata varchar(4000);
+      };
+    };
+  };
+};

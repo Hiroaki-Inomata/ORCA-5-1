@@ -1,0 +1,19 @@
+PATH=@SITESCRIPTSDIR@/tools:@PATCHSCRIPTSDIR@/tools:@SCRIPTSDIR@/tools:@PATCHSCRIPTSDIR@/allways:@SCRIPTSDIR@/allways:/sbin:/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+10 * * * * orca run.rb
+
+# 医療情報連携基盤用(外来一括)
+#  run_renkei_data_2.sh (医療機関識別番号) (連携基盤用データ出力ディレクトリ)
+#  例 医療機関識別番号：01
+#     連携基盤用データ出力ディレクトリ：/var/tmp/renkei
+#     毎日23時00分実行
+#00 23 * * * orca run_renkei_data_2.sh 01 /var/tmp/renkei
+
+# 診療情報システム用
+#  run_mis.sh (医療機関識別番号) (確定版データ作成日) (データ出力ディレクトリ)
+#  例 医療機関識別番号：01
+#     確定版データ作成日：13
+#     データ出力ディレクトリ：/var/lib/dbbackup-client
+#     （データ出力ディレクトリはバックアップサービスのディレクトリを想定）
+#     毎日22時00分実行
+#00 22 * * * orca run_mis.sh 01 13 /var/lib/dbbackup-client

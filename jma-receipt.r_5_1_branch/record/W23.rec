@@ -1,0 +1,116 @@
+W23 {
+  fixed6 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    SEIKYU01 {
+      textdata varchar(3);
+    };
+    SEIKYU02 {
+      textdata varchar(3);
+    };
+    SEIKYU03 {
+      textdata varchar(3);
+    };
+    CMB_NYUKINKBN {
+      NYUKINKBN {
+        textdata varchar(60);
+      };
+      count int;
+        item varchar(60)[5];
+    };
+    CMB_NYUKINPRTKBN {
+      NYUKINPRTKBN {
+        textdata varchar(30);
+        state int;
+      };
+      count int;
+        item varchar(30)[5];
+      state int;
+    };
+    CMB_SAISYORIKBN {
+      SAISYORIKBN {
+        textdata varchar(60);
+      };
+      count int;
+        item varchar(60)[5];
+    };
+    CMB_CHGWINDOWKBN {
+      CHGWINDOWKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_DELKBN {
+      DELKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_SKYSUMKBN {
+      SKYSUMKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CMB_SKYPRTKBN {
+      SKYPRTKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[5];
+    };
+    CMB_SRYPRTKBN {
+      SRYPRTKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[5];
+    };
+    CMB_PTINFREFKBN {
+      PTINFREFKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CMB_PRTJYUN {
+      PRTJYUN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[10];
+    };
+    CMB_TAIINGRPKBN {
+      TAIINGRPKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    frame_repo {
+      visible bool;
+      fixed_repo {
+        LBLMSG01 {
+          style varchar(20);
+          textdata varchar(80);
+        };
+        REPOS_NAME {
+          textdata varchar(128);
+        };
+        SKYPRT_NAME {
+          textdata varchar(20);
+        };
+        SRYPRT_NAME {
+          textdata varchar(20);
+        };
+      };
+    };
+  };
+};

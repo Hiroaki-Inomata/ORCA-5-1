@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#    自院病名一覧出力設定
+#        $1 TERMID     X(32)
+#        $2 SYSYMD     X(8)
+#        $3 HOSPNUM    9(2)
+#        $4 SYUKBN     X(1)
+#        $5  ジョブＩＤ
+#        $6  シェルＩＤ
+#        $7  STAFFCD
+#-------------------------------------------#
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORHCML09 -parameter $1,$2,$3,$4,$5,$6,$7
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$5${6},${3}

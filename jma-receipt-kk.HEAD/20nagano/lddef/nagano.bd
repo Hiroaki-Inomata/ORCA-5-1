@@ -1,0 +1,22 @@
+name	nagano;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU2001"	"OpenCOBOL";
+bind	"SEIKYU2003"	"OpenCOBOL";
+bind	"SEIKYU2005"	"OpenCOBOL";
+bind	"SOKATU2000"	"OpenCOBOL";
+bind	"SOKATU2010"	"OpenCOBOL";
+bind	"SOKATU2020"	"OpenCOBOL";
+bind	"SOKATU2025"	"OpenCOBOL";
+bind	"SOKATU2030"	"OpenCOBOL";
+bind	"SOKATU2040"	"OpenCOBOL";
+bind	"SEIKYU20BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU20BYOMEI2"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

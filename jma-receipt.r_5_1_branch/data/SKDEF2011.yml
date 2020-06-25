@@ -1,0 +1,35 @@
+kanri_cd    : "2011"
+name        : "レセ電記号番号区切り文字設定情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "KIGO-DELIMITER-FLG"
+  item_jp   : "区切り文字設定フラグ（記号）"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "KIGO-DELIMITER-HKNJANUM-FLG"
+  item_jp   : "区切り文字設定対象保険者フラグ（記号）"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "NUM-DELIMITER-FLG"
+  item_jp   : "区切り文字設定フラグ（番号）"
+  type      : "X"
+  start     : 3
+  length    : 1
+- item_no   : 4
+  item      : "NUM-DELIMITER-HKNJANUM-FLG"
+  item_jp   : "区切り文字設定対象保険者フラグ（番号）"
+  type      : "X"
+  start     : 4
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 5
+  length    : 496

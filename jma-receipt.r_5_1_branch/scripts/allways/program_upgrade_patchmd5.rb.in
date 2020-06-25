@@ -1,0 +1,67 @@
+#!%RUBY%
+# coding : utf-8
+
+$:.unshift(File.dirname(__FILE__))
+
+require "digest/md5"
+require "yaml"
+require "zlib"
+
+module OrcaMNT
+  class Command
+    def initialize()
+      @md5hash = Hash.new
+    end
+
+    def patch_to_md5list(md5hash=@md5hash)
+      Zlib::GzipReader.open(PRGDIR+"patch.gz") {|tmp|
+        tmp.each do |data|
+          data.chomp!
+          tmp1 = data.split(/,/)
+          md5hash[tmp1[0].to_s] = tmp1
+        end
+      }
+      return true
+    end
+
+    def file_read_md5list(md5hash=@md5hash)
+      begin
+        fmd5 = File.open(PATCHMD5,"r")
+        tmphash = Hash.new
+        YAML.load_stream(fmd5) {|y|
+          tmphash = y
+        }
+        fmd5.close
+        md5hash = md5hash.merge!(tmphash)
+      rescue Exception => ex
+        STDERR.puts "[ERROR] #{ex.message}"
+        return false
+      else
+        return true
+      end
+    end
+
+    def file_write_md5list(md5hash=@md5hash)
+      fmd5 = File.open(PATCHMD5,"w")
+      YAML.dump(md5hash,fmd5)
+      fmd5.close
+      return true
+    end
+
+    def md5list(md5hash=@md5hash)
+      if file_read_md5list(md5hash)
+        patch_to_md5list(md5hash)
+        file_write_md5list(md5hash)
+      end
+    end
+
+    def self.main(argv)
+      mnt = self.new
+      exit!(mnt.md5list ? 0 : 1)
+    end
+  end
+end
+
+PRGDIR = ENV['PRGDIR'] + "/"
+PATCHMD5 = ENV['PATCHMD5']
+OrcaMNT::Command.main(ARGV) if $0 == __FILE__

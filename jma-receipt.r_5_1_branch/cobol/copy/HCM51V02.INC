@@ -1,0 +1,52 @@
+        01  HCM51V02.
+            02  HCM51V02-HEAD.
+              03  HCM51V02-NYUGAI PIC X(8).
+              03  HCM51V02-HSRYYMD    PIC X(64).
+              03  HCM51V02-HSRYKA PIC X(10).
+              03  HCM51V02-SAKYMD PIC X(22).
+              03  HCM51V02-PAGE   PIC X(5).
+              03  HCM51V02-SRYYMDMSG  PIC X(10).
+              03  HCM51V02-SYOSAIMSG  PIC X(10).
+            02  HCM51V02-TBL            OCCURS  50 TIMES.
+              03  HCM51V02-NO PIC X(3).
+              03  HCM51V02-DENPNUM    PIC X(7).
+              03  HCM51V02-PTNUM  PIC X(10).
+              03  HCM51V02-PTNUM2 PIC X(20).
+              03  HCM51V02-NAME   PIC X(20).
+              03  HCM51V02-SRYYMD PIC X(9).
+              03  HCM51V02-SYOSAI PIC X(4).
+              03  HCM51V02-SRYKA  PIC X(2).
+              03  HCM51V02-HOKEN  PIC X(10).
+              03  HCM51V02-HKNTEN PIC X(10).
+              03  HCM51V02-SKYMONEY   PIC X(10).
+              03  HCM51V02-SKYHOKEN   PIC X(10).
+              03  HCM51V02-SKYJIHI    PIC X(10).
+              03  HCM51V02-NYUKIN PIC X(10).
+              03  HCM51V02-HOHO   PIC X(10).
+              03  HCM51V02-HENKIN PIC X(10).
+              03  HCM51V02-CHOSEI PIC X(10).
+              03  HCM51V02-CHOSEI-MARK    PIC X(1).
+              03  HCM51V02-MISYU  PIC X(10).
+            02  HCM51V02-TOTAL.
+              03  HCM51V02-TTL-SYOSINMSG  PIC X(4).
+              03  HCM51V02-TTL-SYOSIN PIC X(10).
+              03  HCM51V02-TTL-SAISINMSG  PIC X(4).
+              03  HCM51V02-TTL-SAISIN PIC X(10).
+              03  HCM51V02-TTL-HKNTENMSG  PIC X(10).
+              03  HCM51V02-TTL-HKNTEN PIC X(10).
+              03  HCM51V02-TTL-SKYMONEYMSG    PIC X(10).
+              03  HCM51V02-TTL-SKYMONEY   PIC X(10).
+              03  HCM51V02-TTL-SKYHOKENMSG    PIC X(12).
+              03  HCM51V02-TTL-SKYHOKEN   PIC X(10).
+              03  HCM51V02-TTL-SKYJIHIMSG PIC X(10).
+              03  HCM51V02-TTL-SKYJIHI    PIC X(10).
+              03  HCM51V02-TTL-NYUKINMSG  PIC X(10).
+              03  HCM51V02-TTL-NYUKIN PIC X(10).
+              03  HCM51V02-TTL-CHOSEIMSG  PIC X(10).
+              03  HCM51V02-TTL-CHOSEI PIC X(10).
+              03  HCM51V02-TTL-CHOSEI-MARK    PIC X(1).
+              03  HCM51V02-TTL-MISYUMSG   PIC X(10).
+              03  HCM51V02-TTL-MISYU  PIC X(10).
+            02  HCM51V02-MISYUMSG   PIC X(10).
+            02  HCM51V02-TTL-TTLMSG PIC X(10).
+            02  HCM51V02-LOPTION    PIC X(50).

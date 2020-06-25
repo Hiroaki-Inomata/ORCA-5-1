@@ -1,0 +1,266 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    点数マスタ設定 画面ＳＰＡ     (SPA-FREE の内容)
+      *
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-多々納   01/05/22  入力コード表示キーを追加
+      *  01.00.02    MCC-多々納   01/07/03  日付の桁数変更
+      *  04.05.00    NACL-多々納  09/07/24  検索一覧の選択数変更
+      *  04.05.00    NACL-太田    09/11/25  Z91SCR-SPA吸収
+      *****************************************************************
+       01  SPA-Z01FREE.
+      *  Ｚ０１画面より
+         03  SPA-Z01-GMNKYOUTU.
+      *
+             05  SPA-Z01-NAIB-AREA.
+                 07  SPA-Z01-SELNUM              PIC 9(4).
+                 07  SPA-Z01-SELTBL.
+                     09  SPA-Z01-SELTBLT         OCCURS  30 TIMES.
+                         11  SPA-Z01-TYUKOSTYMD  PIC X(8).
+                         11  SPA-Z01-TYUKOEDYMD  PIC X(8).
+                 05  SPA-Z01-MAX                 PIC 9(4).
+      *
+      *    Ｚ９８画面用
+           03  SPA-Z98-MOTOPG                    PIC X(08).
+           03  SPA-Z98GMN-AREA.
+               05  SPA-Z98-GMN-MAX               PIC 9(03).
+               05  SPA-Z98-NEXT                  PIC 9(04).
+               05  SPA-Z98-PAGE                  PIC 9(04).
+               05  SPA-Z98-GMN-CUR               PIC 9(03).
+      *
+               05  SPA-Z98-GMN-SELNUM-G.
+                   07  SPA-Z98-GMN-SELNUM        PIC X(03).
+      ****                                       OCCURS  5.
+               05  SPA-Z98-NAI-SELNUM-G.
+                   07  SPA-Z98-NAI-SELNUM        PIC 9(03).
+      *****                                      OCCURS  5.
+               05  SPA-Z98-GMN-INPUT             PIC X(22).
+               05  SPA-Z98-GMN-SYORI             PIC X(01).
+               05  SPA-Z98-GMN-SYORI2            PIC X(01).
+               05  SPA-Z98-GMN-SYORI3            PIC X(02).
+               05  SPA-Z98-NAI-KENSA.
+                   07  SPA-Z98-NAI-KENSANO       PIC 9(02).
+                   07  SPA-Z98-NAI-HOUKATU       PIC X(01).
+               05  SPA-Z98-OLD-SYORI             PIC X(01).
+               05  SPA-Z98-SENTAKU               PIC X(30).
+      *
+               05  SPA-Z98-GMN-TBL.
+                   07  SPA-Z98-GMN-TBLREC        OCCURS   200.
+                       11  SPA-Z98-GMN-NO         PIC 9(03).
+                       11  SPA-Z98-GMN-NO-X       REDEFINES
+                           SPA-Z98-GMN-NO         PIC X(03).
+                       11  SPA-Z98-GMN-INPUTCD    PIC X(20).
+                       11  SPA-Z98-GMN-SRYCD      PIC X(09).
+                       11  SPA-Z98-GMN-NAME       PIC X(70).
+                       11  SPA-Z98-GMN-TANI       PIC X(10).
+                       11  SPA-Z98-GMN-KISOTEN    PIC 9(09)V99.
+                       11  SPA-Z98-GMN-SETCD      PIC X(10).
+      *
+                       11  SPA-Z98-NAI-NO         PIC 9(03).
+      *        自院採用
+               05  SPA-Z98-JIIN-G.
+                   07  SPA-Z98-JIIN               PIC X(01).
+                   07  SPA-Z98-JIINF              PIC X(01).
+                   07  SPA-Z98-JIINMEI            PIC X(18).
+               05  SPA-Z98-JIIN-COB               OCCURS  10.
+                   07  SPA-Z98-JIINLST            PIC X(20).
+      *
+               05  SPA-Z98-USER-G.
+                   07  SPA-Z98-USER               PIC X(01).
+                   07  SPA-Z98-USERF              PIC X(01).
+                   07  SPA-Z98-USERMEI            PIC X(18).
+               05  SPA-Z98-USER-COB               OCCURS  10.
+                   07  SPA-Z98-USERLST            PIC X(20).
+      *
+      *
+      *    Ｚ９０画面
+           03  SPA-Z90GMN-AREA.
+               05  SPA-Z90GMN-CUR             PIC 9(02).
+               05  SPA-Z90-IDX                PIC 9(04).
+               05  SPA-Z90GMN-TBL.
+                   07  SPA-Z90GMN-TBL-G           OCCURS   5.
+                       09  SPA-Z90GMN-SRYCDCHG        PIC X(09).
+                       09  SPA-Z90GMN-SRYNAME         PIC X(100).
+      *    Ｚ９０画面用
+           03  SPA-Z90-AREA.
+               05  SPA-Z90-TBL.
+                   07  SPA-Z90-TBL-G           OCCURS   5.
+                       09  SPA-Z90-SRYCDCHG        PIC X(09).
+                       09  SPA-Z90-SRYNAME         PIC X(100).
+      *
+               05  SPA-Z90MAE-TBL.
+                   07  SPA-Z90MAE-TBL-G           OCCURS   5.
+                       09  SPA-Z90-IPNSRYCD        PIC X(09).
+                       09  SPA-Z90-RJNSRYCD        PIC X(09).
+      *
+      *    Ｚ９９画面用ＳＰＡ
+           03  SPA-Z99GMN-AREA.
+               05  SPA-Z99GMN-PAGE        PIC 9(02).
+               05  SPA-Z99GMN-MAX         PIC 9(04).
+               05  SPA-Z99GMN-IDX         PIC 9(04).
+               05  SPA-Z99GMN-CUR         PIC 9(02).
+               05  SPA-Z99GMN-MOTOPG      PIC X(08).
+               05  SPA-Z99GMN-AREA.
+                   07  SPA-Z99GMN-SRYCDH            PIC X(20).
+                   07  SPA-Z99GMN-NAMEH             PIC X(100).
+                   07  SPA-Z99GMN-TBL.
+                       09  SPA-Z99GMN-TBL-G         OCCURS  10. 
+      *************    09  SPA-Z99GMN-TBL-G         OCCURS  23. 
+                           11  SPA-Z99GMN-HYOUJI    PIC X(04).
+                           11  SPA-Z99GMN-INPUTCD   PIC X(20).
+                           11  SPA-Z99GMN-DSPNAME   PIC X(100).
+                           11  SPA-Z99NAI-CDSYU     PIC X(01).
+      *    Ｚ９９画面用
+           03  SPA-Z99-AREA.
+               05  SPA-Z99-TBL.
+    ***************07  SPA-Z99-TBL-G           OCCURS   23.
+                   07  SPA-Z99-TBL-G           OCCURS   10.
+                       09  SPA-Z99-HYOUJI          PIC X(04).
+                       09  SPA-Z99-INPUTCD         PIC X(20).
+                       09  SPA-Z99-DSPNAME         PIC X(100).
+                       09  SPA-Z99-CDSYU           PIC X(01).
+               05  SPA-Z99-FLG                 PIC 9(1).
+      *    Ｚ９１画面より
+           03  SPA-Z91-AREA.
+               05  SPA-Z91-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-Z91-GMN-AREA.
+                   07  SPA-GMN-SRYCHK      PIC X.
+                   07  SPA-GMN-SRY         PIC X     OCCURS  2.
+                   07  SPA-GMN-IYKCHK-G.
+                       09  SPA-GMN-IYKCHKALL         PIC X.
+                       09  SPA-GMN-IPNCHKALL         PIC X.
+                       09  SPA-GMN-IYKCHK  PIC X     OCCURS  7.
+                   07  SPA-GMN-TOKCHK      PIC X.
+                   07  SPA-GMN-HOKACHK     PIC X.
+                   07  SPA-GMN-KZICHK      PIC X.
+                   07  SPA-GMN-JIHCHK      PIC X.
+                   07  SPA-GMN-COMCHK-G.
+                       09  SPA-GMN-COMCHKALL         PIC X.
+                       09  SPA-GMN-COMCHK  PIC X     OCCURS  3.
+                   07  SPA-GMN-MSTYMD      PIC X(9).
+                   07  SPA-GMN-CYU         PIC X     OCCURS  3.
+                   07  SPA-GMN-IPN         PIC X.
+                   07  SPA-GMN-SYU         PIC X     OCCURS  4.
+                   07  SPA-GMN-KEI         PIC X     OCCURS  2.
+      *
+                   07  SPA-Z91-SRYSTR.
+                       09  SPA-Z91-SRYSTRL     PIC X(02).
+                       09  SPA-Z91-F1L         PIC X(01).
+                       09  SPA-Z91-SRYSTRMEIL  PIC X(13).
+                   07  SPA-Z91-SRYEND.
+                       09  SPA-Z91-SRYENDL     PIC X(02).
+                       09  SPA-Z91-F2L         PIC X(01).
+                       09  SPA-Z91-SRYENDMEIL  PIC X(13).
+      *
+               05  SPA-GMN-SRYSTR-AREA.
+                   07  SPA-GMN-SRYSTR-LIST     OCCURS 14.
+                       09  SPA-GMN-SRYSTRL     PIC X(02).
+                       09  SPA-GMN-F1L         PIC X(01).
+                       09  SPA-GMN-SRYSTRMEIL  PIC X(14).
+                   07  SPA-SRYSTR-MAX          PIC 9(04).
+      *
+               05  SPA-GMN-SRYEND-AREA.
+                   07  SPA-GMN-SRYEND-LIST     OCCURS 14.
+                       09  SPA-GMN-SRYENDL     PIC X(02).
+                       09  SPA-GMN-F2L         PIC X(01).
+                       09  SPA-GMN-SRYENDMEIL  PIC X(14).
+                   07  SPA-SRYEND-MAX          PIC 9(04).
+      *
+               05  SPA-Z91-NAI-AREA.
+                   07  SPA-NAI-MSTYMD          PIC 9(08).
+      *
+           03  SPA-Z97-AREA.
+               05  SPA-Z97-MOTOPG                 PIC X(08).
+               05  SPA-Z97-JOB-AREA.
+                   07  SPA-Z97-JOB-KBNCD          PIC X(08).
+                   07  SPA-Z97-JOB-JOBID          PIC 9(07).
+                   07  SPA-Z97-JOB-SHELLID        PIC X(08).
+               05  SPA-SFILESV-AREA.
+                   07 SPA-SFILESV-OCC             OCCURS  100.
+                       09  SPA-SFILESV-TITLE       PIC X(100).
+                       09  SPA-SFILESV-CNT-ALL     PIC 9(07).
+                       09  SPA-SFILESV-FOR-FOLDER  PIC X(200).
+                       09  SPA-SFILESV-FOR-DATA    PIC X(200).
+                       09  SPA-SFILESV-TO-FOLDER   PIC X(200).
+                       09  SPA-SFILESV-TO-DATA     PIC X(200).
+                       09  SPA-SFILESV-CODE-TYPE   PIC X(01).
+                       09  SPA-SFILESV-DATA-TYPE   PIC X(01).
+                   07  SPA-SFILESV-IDX             PIC 9(03).
+                   07  SPA-SFILESV-MAX             PIC 9(03).
+      *
+           03  SPA-Z100-AREA.
+               05  SPA-Z100-CUR         PIC 9(02).
+               05  SPA-Z100-GMN-AREA.
+      *            メッセージコード
+                   07  SPA-Z100-CD                 PIC X(04).
+      *            メッセージ
+                   07  SPA-Z100-MSG                PIC X(80).
+      *            ファイル名
+                   07  SPA-Z100-FILENAME-G         OCCURS  8.
+                       09  SPA-Z100-FILENAME           PIC X(100).
+                       09  SPA-Z100-FILENAME-STATE     PIC S9(9)
+                                                       BINARY.
+      *            ファイル出力先
+                   07  SPA-Z100-FILELST            OCCURS  6.
+                       09  SPA-Z100-FILEL          PIC X(01).
+                       09  SPA-Z100-F1L            PIC X(01).
+                       09  SPA-Z100-FILEMEIL       PIC X(20).
+                   07  SPA-Z100-FILE-MAX           PIC 9(02).    
+      *                                             
+                   07  SPA-Z100-FILE-G.
+                       09  SPA-Z100-FILE           PIC X(01).
+                       09  SPA-Z100-F1             PIC X(01).
+                       09  SPA-Z100-FILEMEI        PIC X(20).
+                   07  SPA-Z100-FILE-STATE         PIC S9(9)
+                                                       BINARY.
+      *            文字コード
+                   07  SPA-Z100-CDKBNLST           OCCURS  6.
+                       09  SPA-Z100-CDKBNL         PIC X(01).
+                       09  SPA-Z100-F1L            PIC X(01).
+                       09  SPA-Z100-CDKBNMEIL      PIC X(20).
+                   07  SPA-Z100-CDKBN-MAX          PIC 9(02).    
+      *                                             
+                   07  SPA-Z100-CDKBN-G.
+                       09  SPA-Z100-CDKBN          PIC X(01).
+                       09  SPA-Z100-F1             PIC X(01).
+                       09  SPA-Z100-CDKBNMEI       PIC X(20).
+                   07  SPA-Z100-CDKBN-STATE        PIC S9(9)
+                                                       BINARY.
+      *           クライアント保存可否フラグ
+                   07  SPA-Z100-CLIENT-SAVE        PIC X(01).
+      *    ＣＳＶ用
+           03  SPA-CSV-AREA.
+               05  SPA-CSV-TBL-G              OCCURS   8.
+                   07  SPA-CSV-CHK                PIC  X(01).
+                   07  SPA-CSV-DIRNAME            PIC  X(100).
+                   07  SPA-CSV-FILENAME           PIC  X(100).
+               05  SPA-CSV-FILE                   PIC  X(01).
+               05  SPA-CSV-CDKBN                  PIC  X(01).
+      *
+           03  SPA-Z97-FILESV-CHK-FLG      PIC 9(01).
+      *
+      *    他の画面
+           03  SPA-Z01SONOTA                     PIC X(200000). 
+      *
+      *    ユーザー設定
+           03  SPA-Z010FREE                      PIC X(15000). 

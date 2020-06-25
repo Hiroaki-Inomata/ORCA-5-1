@@ -1,0 +1,30 @@
+xml_medicalv2res3 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv2res3 {
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#---    患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+        	};
+#---    初診算定日
+	First_Calculation_Date		varchar(10);
+#---    最終来院日
+	LastVisit_Date			varchar(10);
+#---    診療科
+        Department_Code			varchar(2);
+        Department_Name			varchar(80);
+#---    初回来院日
+	FirstVisit_Date		varchar(10);
+    	};
+};

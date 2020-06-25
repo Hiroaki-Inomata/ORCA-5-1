@@ -1,0 +1,17 @@
+kanri_cd    : "9800"
+name        : "排他制御情報"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "HAITA"
+  item_jp   : "排他制御"
+  type      : "9"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 149
+  length    : 352

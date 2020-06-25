@@ -1,0 +1,59 @@
+xml_receiptdata_patient_makev3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	receiptdata_patient_makev3req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Perform_Date		varchar(10);
+#---     診療年月(2016-09)
+                Perform_Month           varchar(7);
+#---     請求年月日
+		Ac_Date			varchar(10);
+#---     作成モード(Check:点検用 Ckeck以外:提出用)
+		Create_Mode		varchar(6);
+#---     提出先(1:社保 2:国保 3:広域 4:労災)
+		Submission_Mode		varchar(2);
+#---     レセ電データチェック(Yes:チェックする Yes以外:チェックしない)
+		Check_Mode		varchar(3);
+#---     保険者番号(00000000:直接請求する保険者以外 00000000以外:直接請求する保険者以外)
+        	InsuranceProvider_Number	varchar(8);
+#---     期間指定
+		Start_Month		varchar(7);
+		End_Month		varchar(7);
+#---     個別対象患者一覧
+		Patient_Information {
+			Patient_ID      	varchar(20);
+			Patient_Perform_Month   varchar(7);
+			Patient_InOut		varchar(2);
+			Patient_Detail_Information {
+				Patient_Detail_Code				varchar(4);
+				Patient_Detail_Type				varchar(10);
+				Patient_Detail_InOut				varchar(1);
+				Patient_Detail_InsuranceProvider_Id		varchar(10);
+				Patient_Detail_InsuranceProvider_Class		varchar(3);
+				Patient_Detail_InsuranceProvider_Number		varchar(8);
+				Patient_Detail_HealthInsuredPerson_Symbol	varchar(38);
+				Patient_Detail_HealthInsuredPerson_Number	varchar(38);
+				Patient_Detail_HealthInsuredPerson_Assistance	varchar(1);
+				Patient_Detail_PublicInsurance_Information   {
+					Patient_Detail_PublicInsurance_Id		varchar(10);
+					Patient_Detail_PublicInsurance_Class		varchar(3);
+					Patient_Detail_PublicInsurer_Number		varchar(8);
+					Patient_Detail_PublicInsuredPerson_Number	varchar(20);
+				} [4];
+				Patient_Detail_Accident_Target_Class		varchar(4);
+				Patient_Detail_Incare_Class			varchar(4);
+#---				Patient_Detail_Disease_Location			varchar(100);
+				Patient_Detail_Accident_Insurance		varchar(1);
+				Patient_Detail_Accident_Insurance_Number	varchar(14);
+				Patient_Detail_PensionCertificate_Number	varchar(9);
+				Patient_Detail_Accident_Class			varchar(1);
+#---     実施確認指示（警告）
+				Patient_Detail_Receipt_Perform_Flag		varchar(4);
+			} [5];
+		} [100];
+	};
+};

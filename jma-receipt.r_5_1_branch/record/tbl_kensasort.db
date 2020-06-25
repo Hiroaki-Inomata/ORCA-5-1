@@ -1,0 +1,43 @@
+tbl_kensasort {
+	KNSBUNRUI     			number(2,0);
+	SRYCD   			char(9);
+	DSPSEQ          		number(4,0);
+	TERMID  			varchar(32);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	KNSBUNRUI,SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_kensasort_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kensasort
+			WHERE   KNSBUNRUI =   :KNSBUNRUI
+			AND     SRYCD     =   :SRYCD
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_kensasort_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kensasort
+ 		;
+	};
+};
+
+#sitekey
+path	st_key1 	{
+	DBSELECT	{
+		DECLARE tbl_kensasort_st_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kensasort
+		WHERE   SRYCD     =   :SRYCD
+		;
+	};
+};

@@ -1,0 +1,29 @@
+kanri_cd    : "4100"
+name        : "¸ø³²°åÎÅµ¡´Ø¾ðÊó"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "KGIIRYOKBN"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "KGIIRYOCD"
+  item_jp   : "¸ø³²°åÎÅµ¡´Ø¥³¡¼¥É"
+  type      : "X"
+  start     : 2
+  length    : 20
+- item_no   : 3
+  item      : "KGISKYKBN"
+  item_jp   : "¿ÇÎÅÊó½·ÀÁµá½ñ"
+  type      : "X"
+  start     : 22
+  length    : 2
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 24
+  length    : 477

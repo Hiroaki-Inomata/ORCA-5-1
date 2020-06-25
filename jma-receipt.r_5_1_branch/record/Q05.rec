@@ -1,0 +1,52 @@
+Q05 {
+  fixed32 {
+    B03 {
+      state int;
+    };
+    B05 {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B05R {
+      state int;
+    };
+    B06R {
+      state int;
+    };
+    B07R {
+      state int;
+    };
+    B08R {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow26 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(100);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

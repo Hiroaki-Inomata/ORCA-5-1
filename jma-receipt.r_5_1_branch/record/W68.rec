@@ -1,0 +1,134 @@
+W68 {
+  fixed8 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    KJNYMD {
+      textdata varchar(10);
+    };
+    SELNUM1 {
+      textdata varchar(50);
+    };
+    HKNJANUM {
+      textdata varchar(8);
+      state int;
+    };
+    HKNJANAME {
+      textdata varchar(100);
+      state int;
+    };
+    CMB_HBTNUM10KBN {
+      HBTNUM10KBN {
+        textdata varchar(80);
+      };
+      count int;
+        item varchar(80)[10];
+    };
+    CMB_HBTNUM10TAIKBN {
+      HBTNUM10TAIKBN {
+        textdata varchar(40);
+        state int;
+      };
+      count int;
+        item varchar(40)[10];
+      state int;
+    };
+    CMB_HBTNUM11KBN {
+      HBTNUM11KBN {
+        textdata varchar(80);
+      };
+      count int;
+        item varchar(80)[10];
+    };
+    CMB_HBTNUM11TAIKBN {
+      HBTNUM11TAIKBN {
+        textdata varchar(40);
+        state int;
+      };
+      count int;
+        item varchar(40)[10];
+      state int;
+    };
+    CMB_HBTNUM20KBN {
+      HBTNUM20KBN {
+        textdata varchar(80);
+      };
+      count int;
+        item varchar(80)[10];
+    };
+    CMB_HBTNUM20TAIKBN {
+      HBTNUM20TAIKBN {
+        textdata varchar(40);
+        state int;
+      };
+      count int;
+        item varchar(40)[10];
+      state int;
+    };
+    CMB_HBTNUM21KBN {
+      HBTNUM21KBN {
+        textdata varchar(80);
+      };
+      count int;
+        item varchar(80)[10];
+    };
+    CMB_HBTNUM21TAIKBN {
+      HBTNUM21TAIKBN {
+        textdata varchar(40);
+        state int;
+      };
+      count int;
+        item varchar(40)[10];
+      state int;
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+      state int;
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+      state int;
+    };
+    SELNUM2 {
+      numdata number(2);
+      state int;
+    };
+    LBLMODE {
+      style varchar(20);
+      textdata varchar(40);
+    };
+    scrw1 {
+      HKNJALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(8);
+            column3 varchar(100);
+            column4 varchar(10);
+            column5 varchar(10);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    scrw29 {
+      RIREKILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(30);
+          }[20];
+          selectdata bool[20];
+      };
+    };
+  };
+};

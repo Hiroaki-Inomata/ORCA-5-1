@@ -1,0 +1,288 @@
+C02 {
+  fixed6 {
+    BYOMEI_UP {
+      state int;
+    };
+    BYOMEI_DOWN {
+      state int;
+    };
+    PTNUM {
+      state int;
+      textdata varchar(20);
+    };
+    SYSYMD {
+      textdata varchar(9);
+    };
+    KANANAME {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    NAME {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(12);
+    };
+    AGE {
+      textdata varchar(6);
+    };
+    HKNNAME {
+      textdata varchar(60);
+    };
+    PTFTNRATE {
+      textdata varchar(4);
+    };
+    LASTYMD {
+      textdata varchar(16);
+    };
+    SRYKA_COMBO {
+      SRYKA {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+    SYOKBN_COMBO {
+      SYOKBN {
+        textdata varchar(6);
+      };
+      count int;
+        item varchar(6)[3];
+    };
+    HNYUGAIKBN_COMBO {
+      HNYUGAIKBN {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[3];
+    };
+    B03 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    B05 {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    B21 {
+      label varchar(4);
+    };
+    B23 {
+      label varchar(6);
+    };
+    BANGO {
+      textdata varchar(50);
+    };
+    SRYYMD {
+      textdata varchar(10);
+    };
+    REZEMM {
+      numdata number(2);
+    };
+    TENKIYMD {
+      textdata varchar(10);
+    };
+    BYOMEICD_1 {
+      textdata varchar(12);
+    };
+    BYOMEICD_2 {
+      textdata varchar(12);
+    };
+    BYOMEICD_3 {
+      textdata varchar(12);
+    };
+    BYOMEICD_4 {
+      textdata varchar(12);
+    };
+    BYOMEICD_5 {
+      textdata varchar(12);
+    };
+    BYOMEICD_6 {
+      textdata varchar(12);
+    };
+    BYOMEI {
+      textdata varchar(480);
+    };
+    HOSOKUCD_1 {
+      textdata varchar(12);
+    };
+    HOSOKUCD_2 {
+      textdata varchar(12);
+    };
+    HOSOKUCD_3 {
+      textdata varchar(12);
+    };
+    HOSOKU_COMMENT {
+      textdata varchar(40);
+    };
+    CHARTBYOMEI {
+      textdata varchar(480);
+    };
+    SYUBYOFLGCOMBO {
+      SYUBYOFLG {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[5];
+    };
+    UTAGAIFLGCOMBO {
+      UTAGAIFLG {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[5];
+    };
+    NYUGAIKBNCOMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[5];
+    };
+    HKNBYOMEIFLGCOMBO {
+      HKNBYOMEIFLG {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[5];
+    };
+    HKNCOMBICOMBO {
+      HKNCOMBI {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[200];
+    };
+    KOHIDCOMBO {
+      state int;
+      KOHID {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[100];
+    };
+    BYOMEIHENFLG {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    TENKICOMBO {
+      TENKIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[5];
+    };
+    MANSEIFLGCOMBO {
+      MANSEIFLG {
+        textdata varchar(46);
+      };
+      count int;
+        item varchar(46)[6];
+    };
+    REZEFLGCOMBO {
+      REZEFLG {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[5];
+    };
+    DISCHARGEFLGCOMBO {
+      DISCHARGEFLG {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    CLASS1COMBO {
+      CLASS1 {
+        textdata varchar(11);
+      };
+      count int;
+        item varchar(11)[10];
+    };
+    CLASS2COMBO {
+      CLASS2 {
+        textdata varchar(13);
+      };
+      count int;
+        item varchar(13)[10];
+    };
+    scrolledwindow6 {
+      HKNCOMBILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(50);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    scrolledwindow28 {
+      BYOMEILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(4);
+            column3 varchar(50);
+            column4 varchar(10);
+            column5 varchar(10);
+            column6 varchar(8);
+            column7 varchar(12);
+            column8 varchar(8);
+            column9 varchar(14);
+            column10 varchar(8);
+            column11 varchar(40);
+            column12 varchar(22);
+            column13 varchar(10);
+            column14 varchar(4);
+            column15 varchar(10);
+            column16 varchar(4);
+            column17 varchar(8);
+            column18 varchar(10);
+            column19 varchar(09);
+            column20 varchar(08);
+            column21 varchar(09);
+            column22 varchar(08);
+          }[200];
+          selectdata bool[200];
+          fgcolor varchar(16)[200];
+          bgcolor varchar(16)[200];
+      };
+    };
+    BSRYKA_COMBO {
+      BSRYKA {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+    HYOUJI {
+      style varchar(20);
+      textdata varchar(22);
+    };
+  };
+};

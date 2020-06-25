@@ -1,0 +1,17 @@
+kanri_cd    : "5109"
+name        : "性別特定"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "BRM-SEX-NM"
+  item_jp   : "性別特定名称"
+  type      : "X"
+  start     : 1
+  length    : 10
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 11
+  length    : 490

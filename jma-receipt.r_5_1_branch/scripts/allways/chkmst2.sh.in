@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    チェックマスタ一覧作成
+#        $1    プログラムID
+#        $2-${12} 印刷ＤＢ用固定引数
+#        ${13} ジョブＩＤ
+#        ${14} シェルＩＤ
+#        ${15} 医療機関番号
+#        ${16} エラーファイル名 
+#        ${17}以降 プログラム固有パラメタ
+#-------------------------------------------#
+#
+
+PGID=$1
+JOBID=${13}
+SHELLID=${14}
+HOSPNUM=${15}
+ERR_FILE=${16}
+LOGNUM=$(( $(echo ${PGID} | sed  "s/[^0-9]//g") ))
+LOG_FILE=/var/log/jma-receipt/${HOSPNUM}orcb103_${LOGNUM}.log
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+echo $(basename ${LOG_FILE})
+
+##      エラーファイル削除
+        if  [ -e $ERR_FILE ]; then
+            rm  $ERR_FILE
+        fi
+
+        shift
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ${PGID} -parameter \"$(printf "%s," "$@")\"
+        if  [ -e $ERR_FILE ]; then
+            exit
+        fi
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${JOBID}${SHELLID},${HOSPNUM}
+        exit 

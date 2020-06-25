@@ -1,0 +1,91 @@
+X07 {
+  fixed6 {
+    B04 {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    TITLE {
+      textdata varchar(10);
+    };
+    LBLBYOMEI {
+      textdata varchar(20);
+    };
+    SELNUM2 {
+      numdata number(5);
+    };
+    INPUTCD1 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    INPUTCD2 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    INPUTCD3 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    INPUTCD4 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    INPUTCD5 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    INPUTCD6 {
+      state int;
+      visible bool;
+      textdata varchar(10);
+    };
+    BYOMEI {
+      textdata varchar(400);
+    };
+    BUNRUICD {
+      state int;
+      numdata number(3);
+    };
+    KENBYOMEI {
+      state int;
+      textdata varchar(50);
+    };
+    SCR_ACTLST {
+      BUNRUILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(20);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow28 {
+      BYOMEILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(10);
+            column3 varchar(80);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

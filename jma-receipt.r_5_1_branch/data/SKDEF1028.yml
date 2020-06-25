@@ -1,0 +1,29 @@
+kanri_cd    : "1028"
+name        : "予約内容情報"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "YYKKBNNAME"
+  item_jp   : "予約内容"
+  type      : "X"
+  start     : 1
+  length    : 30
+- item_no   : 2
+  item      : "YYKKBNNAME1"
+  item_jp   : "予約内容表示用"
+  type      : "X"
+  start     : 31
+  length    : 10
+- item_no   : 3
+  item      : "HYOJIKBN"
+  item_jp   : "初期表示用"
+  type      : "X"
+  start     : 41
+  length    : 1
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 42
+  length    : 459

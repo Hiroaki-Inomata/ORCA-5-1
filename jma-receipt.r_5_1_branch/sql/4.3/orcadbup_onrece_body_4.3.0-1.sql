@@ -1,0 +1,81 @@
+--                                    --
+-- オンラインレセ電明細データ更新     --
+--                                    --
+-- Create Date : 2008/10/25           --
+--                                    --
+
+\set ON_ERROR_STOP
+
+drop table tbl_onrece_body;
+
+create	table	tbl_onrece_body	(
+	HOSPNUM		numeric(2,0),
+	TEISYUTUSAKI	char(1),
+	SRYYM		char(6),
+	UCNT		numeric(3,0),
+	SCNT		numeric(3,0),
+	RENNUM		numeric(3,0),
+	RECEIPT_NO	numeric(6,0),
+	SYORIYMD	char(8),
+	UKEYMD		char(8),
+	SKYYMD		char(8),
+	RECV_FLG	numeric(1,0),
+	AMOUNT_FLG	numeric(1,0),
+	NYUGAIKBN	char(1),
+	RECESYUBETU	char(4),
+	SRYYM_B		char(6),
+	NAME		varchar(40),
+	SEX		char(1),
+	BIRTHDAY	char(8),
+	PTNUM		char(20),
+	PTID		numeric(10,0),
+	HKNJANUM	char(8),
+	KIGO		varchar(40),
+	NUM		varchar(40),
+	HKNNUM		char(3),
+	TEISYUTUSAKI_B	char(1),
+	RECEKA  	char(2),
+	HOJOKBN		char(1),
+	TEKSTYMD        char(8),
+	H_TTL_TEN	numeric(8,0),
+	FTNNUM_1	varchar(8),
+	JKYNUM_1	varchar(7),
+	K_TTL_TEN_1	numeric(8,0),
+	FTNNUM_2	varchar(8),
+	JKYNUM_2	varchar(7),
+	K_TTL_TEN_2	numeric(8,0),
+	FTNNUM_3	varchar(8),
+	JKYNUM_3	varchar(7),
+	K_TTL_TEN_3	numeric(8,0),
+	FTNNUM_4	varchar(8),
+	JKYNUM_4	varchar(7),
+	K_TTL_TEN_4	numeric(8,0),
+	KAKUTEI_KBN	char(1),
+	ERR_KBN		char(2),
+	SEIKYU_INFO	varchar(40),
+	U_ERR_CODE	char(4),
+	U_ERR_MSG_1	varchar(400),
+	U_ERR_MSG_2	varchar(512),
+	U_ERR_SRYKBN	char(2),
+	U_ERR_INFO	varchar(400),
+	U_TEN_NG	numeric(8,0),
+	U_TEN_OK	numeric(8,0),
+	U_HENREI_FLG	char(1),
+	U_YOBI1		varchar(10),
+	U_YOBI2		varchar(10),
+	END_FLG		numeric(1,0),
+	TERMID		varchar(64),
+	OPID		varchar(16),
+	CREYMD		char(8),
+	UPYMD		char(8),
+	UPHMS		char(6),
+	primary	key(
+		HOSPNUM,
+		TEISYUTUSAKI,
+		SRYYM,
+		UCNT,
+		SCNT,
+		RENNUM,
+		RECEIPT_NO
+	)
+);

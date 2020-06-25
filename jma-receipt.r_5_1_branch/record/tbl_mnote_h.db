@@ -1,0 +1,182 @@
+tbl_mnote_h	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			char(8);
+	RENNUM			number(4);
+	TBL_GROUP		char(14);
+	TBL_UUID		varchar(36);
+	SHORI_RENNUM	number(4);
+	GYOUMU_CD       number(3);
+	LOCATION_CD     char(02);
+	SHELLID			varchar(20);
+	SRYYM			varchar(6);
+	SRYYMD			varchar(8);
+	CNT				number(5);
+	NYUGAIKBN		char(1);
+	PTID			number(10);
+	DRCD			char(5);
+	TO_FOLDER		varchar(200);
+	TO_DATA			varchar(200);
+	CODE_TYPE		char(1);
+	PUTFLG			char(1);
+	TITLE			varchar(100);
+	DATA_VERSION	char(1);
+	OPID			varchar(16);
+	CREYMD			varchar(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	TBL_UUID	=	:TBL_UUID
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		;
+	};
+};
+
+path	key2		{
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		ORDER BY  TBL_GROUP desc,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path    del1   {
+	DBDELETE        {
+		DELETE
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	TBL_UUID	=	:TBL_UUID
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+                ;
+        };
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_mnote_h_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM		=	 :HOSPNUM
+ 		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    ORDER BY  RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+                    AND	   ( TRIM(:CREYMD) =   '' OR CREYMD = :CREYMD )
+                    AND	   ( :PTID	       =   0  OR PTID   = :PTID )
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+		    AND	     CREYMD	=   :CREYMD
+		    AND	     GYOUMU_CD  =   :GYOUMU_CD
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_mnote_h
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE	{
+		UPDATE
+			tbl_mnote_h
+		SET
+			PUTFLG      = :PUTFLG,
+			UPYMD		= :UPYMD,
+			UPHMS		= :UPHMS
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	del3 {
+	DBDELETE	{
+		DELETE
+		FROM	tbl_mnote_h
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      =   :TBL_KEY
+                    AND     substring(TBL_GROUP,1,8) < :SRYYMD
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_h_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_h
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+                    AND	   ( TRIM(:CREYMD) =   '' OR CREYMD = :CREYMD )
+                    AND	   ( :PTID	       =   0  OR PTID   = :PTID )
+                    ORDER BY  TBL_GROUP,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};

@@ -1,0 +1,66 @@
+tbl_sykrrk {
+	HOSPNUM				number(2,0);
+	PTID     			number(10,0);
+	SYKKBN   			char(1);
+	SYKYMD  			char(8);
+	SYKIRYID          		number(10,0);
+	SYKIRYNAME			varchar(200);
+	SYKKA   			char(2);
+	SOAP                            varchar(200);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM;
+	PTID;
+	SYKKBN;
+	SYKYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sykrrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sykrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYKKBN      =   :SYKKBN
+			AND   SYKYMD      =   :SYKYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sykrrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sykrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SYKKBN      =   :SYKKBN
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sykrrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sykrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sykrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+

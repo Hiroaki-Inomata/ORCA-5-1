@@ -1,0 +1,23 @@
+tbl_med_image {
+	HOSPNUM		number(2,0);
+	SRYCD 		char(9);
+	IMAGEKBN	number(1,0);
+	IMAGEDATA	varchar(500000);
+	OPID		varchar(16);
+	UPYMD		varchar(8);
+};
+
+primary	{
+	HOSPNUM,SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_med_image_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_med_image
+			WHERE	HOSPNUM       =   :HOSPNUM  AND
+				SRYCD         =   :SRYCD
+		;
+	};
+};

@@ -1,0 +1,5 @@
+        01  MONBLOB.
+            02  MONBLOB-ID    PIC X(37).
+            02  MONBLOB-BLOBID    PIC X(36).
+            02  MONBLOB-FILENAME   PIC X(400).
+            02  MONBLOB-CONTENT-TYPE PIC X(100).

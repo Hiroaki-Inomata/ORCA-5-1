@@ -1,0 +1,13 @@
+xml_statementv_h2req {
+  context                   int;
+  object                    object;
+  mode                      int;
+  recordname                varchar(128);
+  statement_hv2req {
+    Request_Number          varchar(2);
+    Patient_ID              varchar(20);
+    Print_Mode              varchar(10);
+    Invoice_Number          varchar(7);
+  };
+};
+

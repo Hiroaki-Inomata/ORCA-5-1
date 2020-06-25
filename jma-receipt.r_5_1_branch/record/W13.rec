@@ -1,0 +1,190 @@
+W13 {
+  fixed1 {
+    B03 {
+      state int;
+    };
+    BTNPREV {
+      state int;
+    };
+    BTNNEXT {
+      state int;
+    };
+    BTNDEL {
+      state int;
+    };
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    RSIIRYOCDN {
+      textdata varchar(40);
+    };
+    SONSHOUKBN1 {
+      textdata varchar(2);
+    };
+    SONSHOUKBN2 {
+      textdata varchar(1);
+    };
+    SONSHOUNAME {
+      textdata varchar(60);
+    };
+    scrolledwindow6 {
+      SONSHOUKBNLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(60);
+          }[40];
+          selectdata bool[40];
+      };
+    };
+    TENKBN_COMBO {
+      TENKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    ROUKAISU_COMBO {
+      ROUKAISU {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    KSNRATE {
+      numdata number(3);
+    };
+    RSIIRYOKBN_COMBO {
+      RSIIRYOKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    JIBAIKBN_COMBO {
+      JIBAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    TAXKBN_COMBO {
+      TAXKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    SKJKBN_COMBO {
+      SKJKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    KIZAITAXKBN_COMBO {
+      KIZAITAXKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    KOTEIKBN_COMBO {
+      KOTEIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    LBLKIZAILST {
+      textdata varchar(60);
+    };
+    scrolledwindow7 {
+      KIZAILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(1);
+            column3 varchar(9);
+            column4 varchar(60);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+    RSIPRT_COMBO {
+      RSIPRT {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    SYUTENTANKA_G {
+      numdata number(2);
+    };
+    SYUTENTANKA_N {
+      numdata number(2);
+    };
+    YKZTENTANKA_G {
+      numdata number(2);
+    };
+    YKZTENTANKA_N {
+      numdata number(2);
+    };
+    KOMUKBN_COMBO {
+      KOMUKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    KOMURSITANKAKBN_COMBO {
+      KOMURSITANKAKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    KOMURSITANKA {
+      numdata number(3,1);
+      state int;
+    };
+    KOMUTENTANKA {
+      numdata number(2);
+    };
+    JBISKYKBN_COMBO {
+      JBISKYKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    DAISANGENBTKBN_COMBO {
+      DAISANGENBTKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    KOMUSKYKBN_COMBO {
+      KOMUSKYKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    KYUGYOPRTKBN_COMBO {
+      KYUGYOPRTKBN {
+        textdata varchar(50);
+      };
+      count int;
+        item varchar(50)[2];
+    };
+  };
+};

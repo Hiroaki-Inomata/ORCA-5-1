@@ -1,0 +1,127 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    医療請求書出力処理
+#        CPCOMMONSHELL1.INC($3-$6)  
+#        $1 JOBID 
+#        $2 SHELLID
+#        $3 SRYYM TERID SYSYMD
+#        $4 実行プログラム
+#           0:ORCR0101
+#           1:ORCR0102 
+#        $5 SYOKBN         （ＯＲＣＲ０１０２のときのみ使用）
+#           1:一括 2:個別
+#        $6 エラーファイル名 
+#        $7 印刷用条件パラメタ 
+#        $8 印刷開始 
+#        $9 印刷終了
+#        $10 帳票識別番号
+#        $11 プリンタ名
+#        $12 プリンタ名（続紙）
+#        $13-$23 印刷ＤＢ用固定引数
+#        $24 続紙印刷区分
+#        $25 国保プリンタ名（入力順印刷時のみ）
+#        $26 国保プリンタ名（続紙）（入力順印刷時のみ）
+#        $27 印刷区分 1:印刷のみ 2:印刷＆ｐｓ 3:ｐｓのみ 
+#        $28 県内県外区分
+#        $29 主科
+#        $30 HOSPNUM
+#        $31 param(apiのみ)
+#        $32 MONBLOB-ID(apiのみ)
+#        $33 EVENT
+#-------------------------------------------#
+
+        echo "window  ${MCP_WINDOW}"
+
+        if  [ "${MCP_WINDOW}" == "receiptprintv3" ]; then
+            mkdir -p  ${MCP_TEMPDIR}
+        fi
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+##      MCP_WINDOW がAPI のとき、一時ディレクトリを削除
+      if  [ "${MCP_WINDOW}" == "receiptprintv3" ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+      fi
+}
+trap cleanup EXIT
+
+        if [ $4 -eq  '0' ] && [ ${10} -eq  '01' ]; then
+
+           echo "arg1  = [" ${1} "]" 
+           echo "arg2  = [" ${2} "]" 
+           echo "arg3  = [" ${3} "]" 
+           echo "arg6  = [" ${6} "]" 
+           echo "arg23 = [" ${23} "]" 
+           echo "arg30 = [" ${30} "]" 
+        fi
+        if [ $4 -eq  '1' ]; then
+           echo "arg27 = [" ${27} "]" 
+           echo "arg31 = [" ${31} "]" 
+           echo "arg32 = [" ${32} "]" 
+        fi
+
+##      エラーファイル削除
+        echo "arg4   = [" ${4} "]"  
+        echo "arg10  = [" ${10} "]" 
+        echo "err    = [" ${MCP_TEMPDIR}/${6}  "]" 
+
+        if [ $4 -eq  '0' ] && [ ${10} -eq '01' ]; then
+	   echo "errfile = [" ${MCP_TEMPDIR}/${6}  "]" 
+           rm  -f ${MCP_TEMPDIR}/${6}
+        fi
+
+        rennum=0
+
+        if [ $4 -eq  '0' ]; then
+           if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+               exit
+           else
+	           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0101 -parameter ${24},${28},${29},$1,$2,$3,$7,$8,$9,${10},${11},${12},${25},${26},${30},${6}, 
+           fi
+        else 
+           if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+	           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$1$2,${30} 
+           else
+              rennum=$(expr $rennum + 1) 
+	          $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0102 -parameter $1,$2,$3,$7,$5,${13},${14},${15},$rennum,${17},${18},${19},${20},${21},${22},${23},${27},${30},${6},${31} 
+              if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+	             $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$1$2,${30} 
+              else
+                 $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPREV1 -parameter ${13},${14},${15},$rennum,${17},${18},${19},${20},${21},${22},${23},$1,$2,$8,$9,${27},$5,${6},${30} 
+                 if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+	             $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$1$2,${30} 
+                 else
+                     if [ ${31} == "orca" ]; then
+                        echo "no haori"
+                     else
+                        FILENM="${14}${15}.pdf"
+                        echo "filenm=[" $FILENM "]"
+                        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter ${13},${14},${15},$rennum,${17},${18},${19},${20},${21},${22},${23},$1,$2,${6},${30},$FILENM,"pdf",${32}
+                        if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+                           exit
+                        fi
+                        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPUSH -parameter ${13},${14},${15},$rennum,${17},${18},${19},${20},${21},${22},${23},$1,$2,${30},${6},${33},${5},${17},"","","","","","","",""
+                        if  [ -e ${MCP_TEMPDIR}/${6} ]; then
+                           exit
+                        fi
+                     fi
+	             $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$1$2,${30}
+                 fi
+              fi
+           fi
+        fi
+
+        exit

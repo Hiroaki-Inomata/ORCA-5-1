@@ -1,0 +1,98 @@
+#!%RUBY%
+# coding : utf-8
+
+require "digest/md5"
+require "yaml"
+
+patchmd5 = "/var/lib/jma-receipt/patch/patchmd5.yml"
+patch_lib_org = "/usr/lib/jma-receipt/patch-lib"   # ex. /usr/lib/jma-receipt/patch-lib/
+patch_lib_tmp = "/tmp/jma-receipt-patch-work"
+check_log_sh = "program_upgrade_check_log.sh"
+
+def local_md5list(patch_lib,dir_list)
+  Dir.glob(patch_lib+"/**/*").each do |path|
+    if FileTest.directory?(path)
+    else
+      dir_name = File.dirname(path).sub(patch_lib,"")
+      if dir_name != ""
+        dir_name.sub!(/^\//,"")
+      end
+      file_name = File.basename(path)
+      if file_name.to_s != ""
+        unless file_name == "patch-program.prf"
+          begin
+            md5 = Digest::MD5.hexdigest(File.open(path).read)
+          rescue Exception => ex
+            md5 = ""
+          end
+          dir_list.delete_if {|m| m[0]==file_name && m[1]==dir_name}
+          dir_list.push([file_name, dir_name, md5])
+        end
+      end
+    end
+  end
+  return
+end
+
+#-- Main --
+
+md5hash = Hash.new
+
+begin
+  fmd5 = File.open(patchmd5,"r")
+  md5hash = YAML.load(fmd5)
+  fmd5.close
+rescue Exception => ex
+  STDERR.puts "[ERROR] #{ex.message}"
+  exit 1
+end
+
+releasemd5 = md5hash.values
+localmd5 = []
+local_md5list(patch_lib_org, localmd5)
+local_md5list(patch_lib_tmp, localmd5)
+releasemd5.sort!
+localmd5.sort!
+
+`bash #{check_log_sh} clear`
+if localmd5 == releasemd5
+  `bash #{check_log_sh} complete`
+else
+  localmd5_only = localmd5 - releasemd5
+  releasemd5_only = releasemd5 - localmd5
+
+  localmd5_only.each do |local|
+    only = 0
+    releasemd5_only.each do |release|
+      if local[0] == release[0]
+        only = 1
+        if local[1] == release[1]
+          if local[2] == release[2]
+            `bash #{check_log_sh} error9 #{local[0]} #{local[1]}`
+          else
+            `bash #{check_log_sh} error3 #{local[0]} #{local[1]}`
+          end
+        else
+          `bash #{check_log_sh} error4 #{local[0]} #{local[1]}`
+        end
+      end
+    end
+    if only == 0
+      `bash #{check_log_sh} error2 #{local[0]} #{local[1]}`
+    end
+  end
+
+  releasemd5_only.each do |release|
+    only = 0
+    localmd5_only.each do |local|
+      if release[0] == local[0]
+        only = 1
+      end
+    end
+    if only == 0
+      `bash #{check_log_sh} error1 #{release[0]} #{release[1]}`
+    end
+  end
+end
+
+exit 0

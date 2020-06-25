@@ -1,0 +1,31 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+EXTRA_DIST = \
+	license.html \
+	orcarc \
+	version \
+	examples/.orcapwd \
+	jmaplugin.pub \
+	dbversion
+
+all:   
+
+filecheck:
+
+clean: 
+
+distclean: 
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(docdir)
+	$(INSTALL) -d $(docdir)/examples/
+	for file in $(EXTRA_DIST); do \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  $(INSTALL_DATA) $$file $(docdir)/$$dir; \
+	done
+

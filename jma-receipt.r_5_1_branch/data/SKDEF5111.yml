@@ -1,0 +1,41 @@
+kanri_cd    : "5111"
+name        : "ÆÃÄêÆş±¡ÎÁ¡ÊÉÂ¼¼¡Ë"
+class_cd    : "*"
+item_max    : 6
+item_list   :
+- item_no   : 1
+  item      : "SRYCD"
+  item_jp   : "¿ÇÎÅ¥³¡¼¥É"
+  type      : "X"
+  start     : 1
+  length    : 9
+- item_no   : 2
+  item      : "BRM-TOKUTEINYUIN-NM"
+  item_jp   : "ÆÃÄêÆş±¡ÎÁÌ¾¾Î"
+  type      : "X"
+  start     : 10
+  length    : 60
+- item_no   : 3
+  item      : "BRM-TOKUTEINYUIN-NM2"
+  item_jp   : "ÆÃÄêÆş±¡ÎÁÌ¾¾Î£²"
+  type      : "X"
+  start     : 70
+  length    : 24
+- item_no   : 4
+  item      : "BRM-NYUINRYOKBN"
+  item_jp   : "Æş±¡ÎÁ¶èÊ¬"
+  type      : "X"
+  start     : 94
+  length    : 2
+- item_no   : 5
+  item      : "SEIKATU-RYOKBN"
+  item_jp   : "À¸³èÎÅÍÜ¶èÊ¬"
+  type      : "X"
+  start     : 96
+  length    : 1
+- item_no   : 6
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 97
+  length    : 404

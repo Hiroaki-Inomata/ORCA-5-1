@@ -1,0 +1,57 @@
+xml_medicalsetv2res {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalsetres {
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- セット情報
+    	Base_Date		varchar(10);
+	Set_Code   		varchar(06);
+	Set_Code_Name		varchar(80);
+    	Start_Date		varchar(10);
+	Ende_Date		varchar(10);
+#--- セット内容
+	Medical_Information  {
+		Medical_Info  {
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+			Medical_Class_Number		varchar(03);
+			Medication_Info    {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(140);
+				Medication_Number	varchar(11);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info {
+					Medication_Input_Code	varchar(10);
+				} [5];
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+			} [40];
+		}[40] ;
+	};
+#--- メッセージ
+	Medical_Message_Information {
+	Medical_Message_Info {
+	        Medical_Result			varchar(4);
+	        Medical_Result_Message1		varchar(100);
+	        Medical_Result_Message2		varchar(100);
+	        Medical_Position	        varchar(3);
+	        Medical_Item_Position		varchar(2);
+	        Medical_Result_Code		varchar(9);
+            	} [50];
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(4);
+       		 Medical_Warning_Message1	varchar(100);
+       		 Medical_Warning_Message2	varchar(100);
+	         Medical_Warning_Position	varchar(3);
+	         Medical_Warning_Item_Position	varchar(2);
+       		 Medical_Warning_Code		varchar(9);
+            	} [50];
+        };
+	};
+};

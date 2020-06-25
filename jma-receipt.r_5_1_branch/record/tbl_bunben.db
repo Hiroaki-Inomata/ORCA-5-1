@@ -1,0 +1,180 @@
+tbl_bunben {
+	HOSPNUM			number(2,0);
+	PTID			number(10,0);
+	NYUGAIKBN		char(1);
+	SKYYM			char(6);
+	RRKNUM			number(7,0);
+	PTNUM			char(20);
+	SKYKBN			char(1);
+	RIYOUKBN		char(1);
+	BUNBENKBN		char(1);
+	TEISYUTUSAKI		char(1);
+	KANYUKBN		char(1);
+	HONKZKKBN		char(1);
+	HKNJANUM		char(8);
+	KIGO			varchar(40);
+	NUM			varchar(40);
+	NAME			varchar(40);
+	ZAIWEEK			number(2,0);
+	BIRTHDAY		char(8);
+	SIZANKBN		char(1);
+	BIRTHCNT		number(1,0);
+	NYUIN_DAY		number(3,0);
+	SANKAKBN		char(1);
+	NYU_MONEY		number(8,0);
+	RMSGK_MONEY		number(8,0);
+	KAIJO_MONEY		number(8,0);
+	BUNBEN_MONEY		number(8,0);
+	SHIN_MONEY		number(8,0);
+	KNS_MONEY		number(8,0);
+	SYC_MONEY		number(8,0);
+	SNK_MONEY		number(8,0);
+	ETC_MONEY		number(8,0);
+	ICBFTN_MONEY		number(8,0);
+	NINPUFTN_MONEY		number(8,0);
+	DAIRI_MONEY		number(8,0);
+	BIKOU			varchar(60);
+	UPDKBN			char(1);
+	HKNJANUM_S		char(8);
+	TEISYUTUBIKBN		char(1);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,NYUGAIKBN,SKYYM,RRKNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SKYYM       =   :SKYYM
+			AND   RRKNUM      =   :RRKNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND     PTID      =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SKYYM     =   :SKYYM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   SKYYM        =   :SKYYM
+			AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+			AND   RIYOUKBN     =   '1'
+			AND   SKYKBN       <>  '0'
+		ORDER BY KANYUKBN DESC,BUNBENKBN,HKNJANUM_S,HKNJANUM,NAME
+		;
+	};
+};
+
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   RRKNUM      =   :RRKNUM
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_bunben
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     RRKNUM    =   :RRKNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   SKYYM        =   :SKYYM
+			AND   TEISYUTUSAKI like   :TEISYUTUSAKI
+			AND   RIYOUKBN     =   '1'
+		ORDER BY TEISYUTUSAKI,SKYKBN,HKNJANUM_S,HKNJANUM,BUNBENKBN,NAME
+		;
+	};
+};
+
+path	abort	{
+	DBSELECT	{
+		error
+ 		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_bunben_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_bunben
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   BIRTHDAY    =   :BIRTHDAY
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_bunben
+		SET	PTNUM       =   :PTNUM
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+

@@ -1,0 +1,24 @@
+name	yamagata;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU0603"	"OpenCOBOL";
+bind	"SEIKYU0604"	"OpenCOBOL";
+bind	"SEIKYU0605"	"OpenCOBOL";
+bind	"SEIKYU0606"	"OpenCOBOL";
+bind	"SEIKYU0607"	"OpenCOBOL";
+bind	"SEIKYU0609"	"OpenCOBOL";
+bind	"SEIKYU06BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU06BYOMEI2"	"OpenCOBOL";
+bind	"SEIKYU0611"	"OpenCOBOL";
+bind	"SEIKYU0613"	"OpenCOBOL";
+bind	"SOKATU0600"	"OpenCOBOL";
+bind	"SOKATU0610"	"OpenCOBOL";
+bind	"SOKATU0605"	"OpenCOBOL";
+bind	"SOKATU0615"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

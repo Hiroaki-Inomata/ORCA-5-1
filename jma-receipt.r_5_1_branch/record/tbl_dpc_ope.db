@@ -1,0 +1,74 @@
+tbl_dpc_ope {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+    OPE_VAL				number(5,0);
+	OPE_FLG				number(2,0);
+	OPE_AGE				char(1);
+	OPE_CD				char(2);
+	K_NAME1				char(200);
+	K_CD1				char(20);
+	K_NAME2				char(200);
+	K_CD2				char(20);
+	K_NAME3				char(200);
+	K_CD3				char(20);
+	K_NAME4				char(200);
+	K_CD4				char(20);
+	K_NAME5				char(200);
+	K_CD5				char(20);
+	SEL_DPC_CD			varchar(14),virtual;
+};
+
+primary	{
+	MDC_CD,BUNRUI_CD,OPE_FLG,OPE_CD,K_CD1,K_CD2,K_CD3,K_CD4,K_CD5,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ope_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ope
+		WHERE MDC_CD        =   :MDC_CD
+		 AND  BUNRUI_CD     =   :BUNRUI_CD
+	     AND  OPE_FLG       =   :OPE_FLG
+	     AND  OPE_AGE       =   :OPE_AGE
+	     AND  OPE_CD        =   :OPE_CD
+	     AND  K_CD1         =   :K_CD1
+	     AND  K_CD2         =   :K_CD2
+	     AND  K_CD3         =   :K_CD3
+	     AND  K_CD4         =   :K_CD4
+	     AND  K_CD5         =   :K_CD5
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ope_key2_csr CURSOR FOR
+		SELECT  a.*
+		FROM tbl_dpc_ope a,
+          ( SELECT OPE_CD FROM tbl_dpc_tensu
+              WHERE DPC_CD     LIKE   :SEL_DPC_CD
+               AND  YUKOSTYMD     <=  :YUKOSTYMD
+               AND  YUKOEDYMD     >=  :YUKOEDYMD
+            GROUP   BY OPE_CD
+          ) b
+		WHERE
+		     A.MDC_CD    = :MDC_CD
+		 AND A.BUNRUI_CD = :BUNRUI_CD
+		 AND A.OPE_CD    =  B.OPE_CD
+		AND  A.YUKOSTYMD     <=  :YUKOSTYMD
+		AND  A.YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER BY A.OPE_CD DESC,A.OPE_FLG,
+                 TRANSLATE(A.K_CD1,'-','~'),
+                 TRANSLATE(A.K_CD2,'-','~'),
+                 TRANSLATE(A.K_CD3,'-','~'),
+                 TRANSLATE(A.K_CD4,'-','~'),
+                 TRANSLATE(A.K_CD5,'-','~')
+		;
+	};
+};
+

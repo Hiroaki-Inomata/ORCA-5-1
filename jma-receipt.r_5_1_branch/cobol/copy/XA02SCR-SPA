@@ -1,0 +1,120 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *    ºÆ°õºþ¡Ê¥ª¥ó¥é¥¤¥óÄ¢É¼¡Ë²èÌÌ£Ó£Ð£Á    (SPA-FREE ¤ÎÆâÍÆ)
+      *  ¥³¥Ô¡¼¶ç½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      *  05.00.01    NACL-Æ£¸¶    19/08/28  £È£Á£Ï£Ò£ÉÂÐ±þ
+      *****************************************************************
+      *
+       01  SPA-XA02FREE.
+           03  SPA-XA02-AREA.
+               05  SPA-GMN-PAGE        PIC 9(05).
+               05  SPA-GMN-MAX         PIC 9(03).
+               05  SPA-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-TITLE1              PIC X(08).
+                   07  SPA-GMN-TITLE2              PIC X(10).
+                   07  SPA-GMN-CREYMD              PIC X(10).
+      *
+                   07  SPA-GMN-GYOMULST                OCCURS  100.
+                       09  SPA-GMN-ITEM-CD         PIC X(02).
+                       09  SPA-GMN-ITEM-FIL        PIC X(01).
+                       09  SPA-GMN-ITEM-NAME       PIC X(32).
+                   07  SPA-GMN-GYOMULST-MAX        PIC S9(09)  BINARY.
+      *
+                   07  SPA-GMN-TBL-NEXT            PIC 9(01).
+      *
+                   07  SPA-GMN-TBL.
+                       09  SPA-GMN-OCC             OCCURS  300.
+                           11  SPA-GMN-TNO         PIC 9(03).
+                           11  SPA-GMN-TTBL-GROUP  PIC X(14).
+                           11  SPA-GMN-TRENNUM     PIC 9(04).
+                           11  SPA-GMN-TSHORI-RENNUM
+                                                   PIC 9(04).
+                           11  SPA-GMN-TPAGE       PIC 9(05).
+                           11  SPA-GMN-TSRYYM      PIC X(06).
+                           11  SPA-GMN-TGYOUMU     PIC X(12).
+                           11  SPA-GMN-TSKYYMD     PIC X(09).
+                           11  SPA-GMN-TLPTNUM     PIC X(20).
+                           11  SPA-GMN-TLPTNAME    PIC X(50).
+                           11  SPA-GMN-TPRT-TITLE  PIC X(60).
+      *
+                   07  SPA-GMN-GYOMU-G.
+                       09  SPA-GMN-GYOMU-CD        PIC X(02).
+                       09  SPA-GMN-GYOMU-FIL       PIC X(01).
+                       09  SPA-GMN-GYOMU-NAME      PIC X(32).
+      *
+                   07  SPA-GMN-GYOMU-OLD-G.
+                       09  SPA-GMN-GYOMU-CD-OLD    PIC X(02).
+                       09  SPA-GMN-GYOMU-FIL       PIC X(01).
+                       09  SPA-GMN-GYOMU-NAME-OLD  PIC X(32).
+      *
+                   07  SPA-GMN-BODY.
+                       09  SPA-GMN-BODY1.
+                           11  SPA-GMN-SELNUM      PIC 9(03).
+                           11  SPA-GMN-SKYYMD      PIC X(10).
+                           11  SPA-GMN-TBL-UUID    PIC X(36).
+                           11  SPA-GMN-RENNUM      PIC 9(04).
+                           11  SPA-GMN-SHORI-RENNUM
+                                                   PIC 9(04).
+                           11  SPA-GMN-STPAGE      PIC 9(05).
+                           11  SPA-GMN-EDPAGE      PIC 9(05).
+                           11  SPA-GMN-PRT-TITLE   PIC X(60).
+      *
+                       09  SPA-GMN-BODY2.
+                           11  SPA-GMN-PTNUM       PIC X(20).
+                           11  SPA-GMN-NAME        PIC X(50).
+      *
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-CREYMD              PIC X(08).
+                   07  SPA-NAI-CREYMD-OLD          PIC X(08).
+      *
+                   07  SPA-NAI-BODY.
+                       09  SPA-NAI-BODY1.
+                           11  SPA-NAI-SELNUM      PIC 9(03).
+                       09  SPA-NAI-BODY2.
+                           11  SPA-NAI-PTID        PIC 9(10).
+                           11  SPA-NAI-TBL-GROUP   PIC X(14).
+                           11  SPA-NAI-API         PIC X(1).
+                           11  SPA-NAI-API-ID      PIC X(20).
+      *
+                   07  SPA-NAI-TBL.
+                       09  SPA-NAI-OCC             OCCURS  300.
+                           11  SPA-NAI-TTBL-KEY    PIC X(08).
+                           11  SPA-NAI-TTBL-GROUP  PIC X(14).
+                           11  SPA-NAI-TTBL-UUID   PIC X(36).
+                           11  SPA-NAI-TPRTFLG     PIC X(01).
+                           11  SPA-NAI-LPTID       PIC 9(10).
+                           11  SPA-NAI-TSKYYMD     PIC X(09).
+                           11  SPA-NAI-TAPI        PIC X(1).
+                           11  SPA-NAI-TAPI-ID     PIC X(20).
+                           11  SPA-NAI-TSKYYMD-9   PIC X(08).
+      *
+               05  SPA-WRK-TBL-KEY                 PIC X(08).
+               05  SPA-NAI-SMCNDATE-YMD            PIC 9(08).
+               05  SPA-GMN-SMCNDATE-YMD            PIC X(09).
+      *
+           03  SPA-XA02-MOTOPG             PIC X(08).
+      *
+           03  SPA-XA03-AREA.
+               05  SPA-GMN-XA03-CUR        PIC 9(02).
+               05  SPA-GMN-XA03-AREA.
+                   07  SPA-GMN-XA03-DAY    PIC 9(02).
+                   07  SPA-NAI-XA03-CREYMD PIC X(08).
+      *

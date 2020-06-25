@@ -1,0 +1,44 @@
+xml_hsptevalv2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+		Api_Result	     		varchar(02);
+		Api_Result_Message 		varchar(100);
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate			varchar(10);
+			Sex					varchar(01);
+		};
+		Admission_Discharge_Date {
+			Admission_Date		varchar(10);
+			Discharge_Date		varchar(10);
+		}[5];
+		Perform_Month			varchar(07);
+		Medical_Condition	{
+			Level				varchar(1);
+			ID					varchar(2);
+			Name				varchar(100);
+			Evaluation_Month	varchar(1);
+			Evaluation_Daily		varchar(128);
+		}[50];
+		ADL_Score	{
+			ID					varchar(1);
+			Name				varchar(100);
+			Evaluation_Daily	varchar(128);
+		}[4];
+		Medical_Condition_Level_Daily	varchar(128);
+		ADL_Total_Score_Daily	varchar(128);
+		Patient_Condition	{
+			Evaluation_Daily		varchar(128);
+			Evaluation_Difference	varchar(128);
+		};
+		Designr_Total_Score_Daily		varchar(128);
+	};
+};
+

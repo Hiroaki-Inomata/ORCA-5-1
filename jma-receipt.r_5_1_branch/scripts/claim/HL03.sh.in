@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+ORCASCRIPT=$ORCA_DIR/scripts/claim/rb2
+#-------------------------------------------#
+#  $1 - InputXMLFile
+#  $2 - Output SequencialFile
+#-------------------------------------------#
+#-------------------------------------------#
+# XML File Exchange Execute
+# 
+#-------------------------------------------#
+  cd $ORCASCRIPT
+     ./claim2_decode.rb ../def/orca_decode.hir $1 $2
+#-------------------------------------------#
+#        $2 SequencialFile
+#-------------------------------------------#
+       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCL0030 -parameter $2 >/tmp/L0030.log
+	rm ${2:0:33}*
+       exit 

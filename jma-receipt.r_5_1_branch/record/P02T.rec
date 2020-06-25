@@ -1,0 +1,22 @@
+P02T {
+  fixed10 {
+    KAKUNINYMD1 {
+      textdata varchar(11);
+    };
+    KAKUNINYMD2 {
+      textdata varchar(11);
+    };
+    KAKUNINYMD3 {
+      textdata varchar(11);
+    };
+    KAKUNINYMD4 {
+      textdata varchar(11);
+    };
+    KAKUNINYMD5 {
+      textdata varchar(11);
+    };
+    HKNMSG {
+      textdata varchar(22);
+    };
+  };
+};

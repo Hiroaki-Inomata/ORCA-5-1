@@ -1,0 +1,42 @@
+xml_medicalget01v2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	medicalget01res {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		};
+	Medical_List_Information  {
+	        Perform_Date			varchar(10);
+	        Department_Code			varchar(2);
+	        Department_Name			varchar(20);
+		Sequential_Number		varchar(1);
+		Insurance_Combination_Number	varchar(4);
+		HealthInsurance_Information  {
+			InsuranceProvider_Class			varchar(03);
+			InsuranceProvider_WholeName		varchar(20);
+	            	InsuranceProvider_Number		varchar(08);
+	            	HealthInsuredPerson_Symbol		varchar(80);
+	            	HealthInsuredPerson_Number		varchar(80);
+	            	PublicInsurance_Information   {
+	 	               	PublicInsurance_Class		varchar(03);
+	                	PublicInsurance_Name		varchar(20);
+	                	PublicInsurer_Number		varchar(08);
+	                	PublicInsuredPerson_Number	varchar(20);
+	            	} [4];
+        	};
+#--- ≈¡…º»÷πÊ
+		Invoice_Number				varchar(07);
+       	} [150];
+   	};
+};

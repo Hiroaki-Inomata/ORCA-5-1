@@ -1,0 +1,54 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#  ${1} : 医療機関識別番号(HOSPNUM)
+#  ${2} : 処理起動日時
+#  ${3} : データ出力ディレクトリ
+#-------------------------------------------#
+
+HOSPNUM=${1}
+RUNDATE=${2}
+EXYM=${RUNDATE:0:6}
+EXYMD=${RUNDATE:0:8}
+EXTIME=${RUNDATE:8:6}
+
+create_pgpass
+
+PTID=9999999999
+#NYUGAI=2
+JMAMRVER=2
+DRCD=
+OPID=
+#１日１ファイルとして
+DOUJITU="A"
+
+for NYUGAI in 2 1 ; do
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="jmamr.sh"
+  export MON_BATCH_GROUPNAME="${HOSPNUM}"
+  export MON_BATCH_EXTRA="0000001JMAMR1"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+ 
+  PARAM="${HOSPNUM} ${PTID} ${NYUGAI} ${EXYMD} ${JMAMRVER} \
+         \"\" \"\" ${DOUJITU} ${3} ${EXYMD} ${EXTIME}"
+ 
+  ${MONBATCH} "jmamr.sh ${PARAM}"
+  RC=$?
+ 
+  if [ ${RC} -ne 0 ] ; then
+    delete_pgpass
+    exit ${RC}
+  fi
+done
+
+delete_pgpass
+
+exit ${RC}

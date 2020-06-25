@@ -1,0 +1,1597 @@
+#$ type="hierarchy" version="2.0" encoding="EUC-JP"
+# XMLデコード用　階層データファイル
+# または、コンバート後のXMLデコード用　階層−パラメータ結びつけ（リンク）ファイル
+# または、コンバート後のXMLデコード用　defファイル
+#
+#
+
+
+
+# ===========================================================================
+
+# MMLタグの属性
+
+# Mml[1]@xmlns:mmlPh
+# Mml[1]@xmlns:mmlCm
+# Mml[1]@xmlns:mmlHi
+# Mml[1]@xmlns:mmlPi
+# Mml[1]@xmlns:mmlFc
+# Mml[1]@version
+# Mml[1]@xmlns:mmlPsi
+# Mml[1]@xmlns:mmlNm
+# Mml[1]@xmlns:mmlCi
+# Mml[1]@xmlns:mmlDp
+# Mml[1]@xmlns:mmlAd
+# Mml[1]@xmlns:claim
+# Mml[1]@xmlns:mmlRd
+# 作成日・作成日時
+# Mml[1]@createDate
+
+
+
+# ===========================================================================
+# MMLヘッダ情報
+
+
+# ---------------------------------------------
+
+# 患者主ID情報
+
+# 患者主ID
+/Mml[1]/MmlHeader[1]/masterId[1]/mmlCm:Id[1] = 20
+# IDの種類コード
+/Mml[1]/MmlHeader[1]/masterId[1]/mmlCm:Id[1]@mmlCm:type = 8
+# IDの種類コードのテーブル名
+# /Mml[1]/MmlHeader[1]/masterId[1]/mmlCm:Id[1]@mmlCm:tableId
+# チェックディジット値
+# /Mml[1]/MmlHeader[1]/masterId[1]/mmlCm:Id[1]@mmlCm:checkDigit
+# チェックディジット方式
+# /Mml[1]/MmlHeader[1]/masterId[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+
+
+# ---------------------------------------------
+
+# 生成者情報
+
+$BaseStart, /Mml[1]/MmlHeader[1]/mmlCi:CreatorInfo[1]
+	$BaseStart, mmlPsi:PersonalizedInfo[1]
+		# 生成者 個人ID
+
+		# 作成者 個人ID
+		mmlCm:Id[1] = 20
+		# mmlCm:Id[1]@mmlCm:type
+		# mmlCm:Id[1]@mmlCm:tableId
+		# mmlCm:Id[1]@mmlCm:checkDigit
+		# mmlCm:Id[1]@mmlCm:checkDigitSchema
+
+		# 生成者 氏名情報
+
+		# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:repCode
+		# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:tableId
+		# 作成者 個人フルネーム
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:fullname[1] = 100
+		# 作成者 個人姓
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:family[1] = 50
+		# 作成者 個人名
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:given[1] = 50
+		# 作成者 ミドルネーム
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:middle[1] = 50
+		# 作成者 肩書きなど
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:prefix[1] = 50
+		# 作成者 学位
+		mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:degree[1] = 50
+
+
+		# 生成者 施設情報
+
+		# 施設情報名
+		mmlFc:Facility[1]/mmlFc:name[1] = 50
+		# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:repCode
+		# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:tableId
+		# 施設ID
+		mmlFc:Facility[1]/mmlCm:Id[1] = 20
+		# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:type
+		# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:tableId
+		# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigit
+		# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+
+
+		# 生成者 診療科情報
+
+		# 診療科名称
+		mmlDp:Department[1]/mmlDp:name[1] = 50
+		# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:repCode
+		# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:tableId
+		# 診療科ID
+		mmlDp:Department[1]/mmlCm:Id[1] = 20
+		# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:type
+		# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:tableId
+		# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigit
+		# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+
+
+		# 生成者 住所
+
+		# 住所
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1] = 400
+		# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId
+		# 住所の種類 [省略可能・属性] [business]
+		mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass = 10
+		# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode
+		# 都道府県
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1] = 20
+		# 市、区、郡
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1] = 20
+		# 町、村
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1] = 20
+		# 番地、丁目等
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1] = 200
+		# 郵便番号
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1] = 8
+		# 国コード
+		mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1] = 10
+
+
+		# 生成者 電子メールアドレス
+
+		# メールアドレス
+		mmlPsi:emailAddresses[1]/mmlCm:email[1] = 100
+
+
+		# 生成者 連絡先電話番号
+
+		# 市外局番
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1] = 10
+		# 局番
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1] = 10
+		# 加入番号
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1] = 10
+		# 内線番号
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1] = 10
+		# 国番号
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1] = 10
+		# 使用時間帯などを記載
+		mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1] = 100
+		# 装置の種類コード [省略可能・属性] [PH]
+		mmlPsi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType = 10
+	$BaseEnd
+
+
+	# 生成者の資格情報
+
+	# mmlCi:creatorLicense[1]@mmlCi:tableId
+	# 生成者に資格
+	mmlCi:creatorLicense[1] = 20
+$BaseEnd
+
+
+# ---------------------------------------------
+
+# MMLで使われているすべてのDTDのリストアップ
+
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[1]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[2]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[3]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[4]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[5]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[6]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[7]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[8]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[9]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[10]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[11]
+# /Mml[1]/MmlHeader[1]/toc[1]/tocItem[12]
+
+
+# ---------------------------------------------
+
+
+# MML本文全体の対象期間[単独タグ]
+
+# 開始日
+# /Mml[1]/MmlHeader[1]/scopePeriod[1]@start
+# 終了日
+# /Mml[1]/MmlHeader[1]/scopePeriod[1]@end
+# 期間外情報の有無
+# /Mml[1]/MmlHeader[1]/scopePeriod[1]@has0otherInfo
+# 情報抽出の有無
+# /Mml[1]/MmlHeader[1]/scopePeriod[1]@isExtract
+# 抽出のポリシー
+# /Mml[1]/MmlHeader[1]/scopePeriod[1]@extractPolicy
+
+
+# 電子署名などの暗号化情報
+# /Mml[1]/MmlHeader[1]/encryptInfo[1]
+
+
+
+# ===========================================================================
+# 患者情報モジュール
+
+
+# lt_pat1 配列対象指定 Start
+$LineTargetStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType = patientInfo, 1, /Mml[1]/MmlBody[1]/MmlModuleItem[X]
+
+
+# ---------------------------------------------
+
+# ヘッダ情報
+
+# モジュールの種類
+# /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType
+
+$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]
+
+	# アクセス権
+
+	# アクセス者
+	# securityLevel[1]/accessRight[1]@accessRole
+	# 削除権の有無
+	# securityLevel[1]/accessRight[1]@delete
+	# 参照権の有無
+	# securityLevel[1]/accessRight[1]@read
+
+	# アクセス者
+	# securityLevel[1]/accessRight[2]@accessRole
+	# 削除権の有無
+	# securityLevel[1]/accessRight[2]@delete
+	# 参照権の有無
+	# securityLevel[1]/accessRight[2]@read
+
+	# 文書タイトル
+	# title[1]
+	# 文書詳細種別
+	# title[1]@generationPurpose
+
+	# 文書ユニークID
+	docId[1]/uid[1] = 36
+	# 関連親文書のID
+	# docId[1]/parentId[1]
+	# 関連の種別
+	# docId[1]/parentId[1]@relation
+
+	# カルテ電子保存の確定日
+	confirmDate[1] = 10
+
+
+	# ---------------------------------------------
+
+	$BaseStart, mmlCi:CreatorInfo[1]
+
+	# 生成者情報
+		$BaseStart, mmlPsi:PersonalizedInfo[1]
+
+			# 生成者 個人ID
+
+			# mmlCm:Id[1]@mmlCm:checkDigitSchema
+			# mmlCm:Id[1]@mmlCm:tableId
+			# mmlCm:Id[1]@mmlCm:type
+			# mmlCm:Id[1]@mmlCm:checkDigit
+			# mmlCm:Id[1]
+
+
+			# 生成者 氏名情報
+
+			$BaseStart, mmlPsi:personName[1]
+				# mmlNm:Name[1]@mmlNm:repCode
+				# mmlNm:Name[1]@mmlNm:tableId
+				# mmlNm:Name[1]/mmlNm:fullname[1]
+				# mmlNm:Name[1]/mmlNm:family[1]
+				# mmlNm:Name[1]/mmlNm:given[1]
+				# mmlNm:Name[1]/mmlNm:middle[1]
+				# mmlNm:Name[1]/mmlNm:prefix[1]
+				# mmlNm:Name[1]/mmlNm:degree[1]
+			$BaseEnd
+
+			# 生成者 施設情報
+
+			$BaseStart, mmlFc:Facility[1]
+				# mmlFc:name[1]@mmlFc:tableId
+				# mmlFc:name[1]@mmlFc:repCode
+				# mmlFc:name[1]
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+			$BaseEnd
+
+
+			# 生成者 診療科情報
+
+			$BaseStart, mmlDp:Department[1]
+				# mmlDp:name[1]@mmlDp:tableId
+				# mmlDp:name[1]@mmlDp:repCode
+				# mmlDp:name[1]
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+			$BaseEnd
+
+
+			# 生成者 住所
+
+			$BaseStart, mmlPsi:addresses[1]
+				# mmlAd:Address[1]@mmlAd:tableId
+				# mmlAd:Address[1]@mmlAd:addressClass
+				# mmlAd:Address[1]@mmlAd:repCode
+				# mmlAd:Address[1]/mmlAd:full[1]
+				# mmlAd:Address[1]/mmlAd:prefecture[1]
+				# mmlAd:Address[1]/mmlAd:city[1]
+				# mmlAd:Address[1]/mmlAd:town[1]
+				# mmlAd:Address[1]/mmlAd:homeNumber[1]
+				# mmlAd:Address[1]/mmlAd:zip[1]
+				# mmlAd:Address[1]/mmlAd:countryCode[1]
+			$BaseEnd
+
+
+			# 生成者 電子メールアドレス
+
+			# mmlPsi:emailAddresses[1]/mmlCm:email[1]
+
+
+			# 生成者 連絡先電話番号
+
+			$BaseStart, mmlPsi:phones[1]
+				# mmlPh:Phone[1]@mmlPh:telEquipType
+				# mmlPh:Phone[1]/mmlPh:area[1]
+				# mmlPh:Phone[1]/mmlPh:city[1]
+				# mmlPh:Phone[1]/mmlPh:number[1]
+				# mmlPh:Phone[1]/mmlPh:extension[1]
+				# mmlPh:Phone[1]/mmlPh:country[1]
+				# mmlPh:Phone[1]/mmlPh:memo[1]
+			$BaseEnd
+		$BaseEnd
+
+
+		# 生成者の資格
+
+		# mmlCi:creatorLicense[1]@mmlCi:tableId
+		# mmlCi:creatorLicense[1]
+	$BaseEnd
+
+$BaseEnd
+
+
+# =======================================================
+
+
+$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/mmlPi:PatientModule[1]
+	# 患者主ID
+
+	$BaseStart, mmlPi:uniqueInfo[1]/mmlPi:masterId[1]
+		# 患者主ID
+		mmlCm:Id[1] = 20
+		# IDの種類コード
+		mmlCm:Id[1]@mmlCm:type = 8
+		# MML0024
+		mmlCm:Id[1]@mmlCm:tableId = 7
+		# チェックディジット値
+		mmlCm:Id[1]@mmlCm:checkDigit = 2
+		# チェックディジット方式
+		mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+	$BaseEnd
+
+
+
+	# その他のID
+
+	# その他のIDの種類
+	mmlPi:uniqueInfo[1]/mmlPi:otherId[1]@mmlPi:type = 20
+
+
+	$BaseStart, mmlPi:uniqueInfo[1]/mmlPi:otherId[1]
+		# その他のID
+		mmlCm:Id[1] = 20
+		# IDの種類コード
+		mmlCm:Id[1]@mmlCm:type = 8
+		# IDの種類コードのテーブル名
+		mmlCm:Id[1]@mmlCm:tableId = 7
+		# チェックディジット値
+		mmlCm:Id[1]@mmlCm:checkDigit = 2
+		# チェックディジット方式
+		mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+	$BaseEnd
+
+
+
+	# -------------------------------------------------------
+
+	# 氏名情報
+
+	$BaseStart, mmlPi:personName[1]
+		# 表記法
+		mmlNm:Name[1]@mmlNm:repCode = 1
+		# 表記法のテーブル名[MML0025で固定]
+		mmlNm:Name[1]@mmlNm:tableId = 7
+		# 姓
+		mmlNm:Name[1]/mmlNm:family[1] = 50
+		# 名
+		mmlNm:Name[1]/mmlNm:given[1] = 50
+		# ミドルネーム
+		mmlNm:Name[1]/mmlNm:middle[1] = 50
+		# フルネーム
+		mmlNm:Name[1]/mmlNm:fullname[1] = 100
+		# 肩書きなど
+		mmlNm:Name[1]/mmlNm:prefix[1] = 50
+		# 学位
+		mmlNm:Name[1]/mmlNm:degree[1] = 50
+	$BaseEnd
+
+
+
+	# -------------------------------------------------------
+
+
+	# 生年月日
+	mmlPi:birthday[1] = 10
+	# 性別
+	mmlPi:sex[1] = 7
+	# 国籍コード
+	mmlPi:nationality[1] = 10
+	# 第２国籍コード [属性]
+	mmlPi:nationality[1]@mmlPi:subtype = 10
+	# 婚姻状態
+	mmlPi:marital[1] = 10
+
+
+	# -------------------------------------------------------
+
+	# 住所情報
+
+
+	# -----------------------------------
+
+	$BaseStart, mmlPi:addresses[1]
+
+		# 住所情報
+
+
+		# 住所情報の領域を4つ定義する
+		$Repeat, 4, @@PM_ADR@@, 0
+
+			# 住所情報 [@@PM_ADR@@]
+			# 表記法
+			mmlAd:Address[@@PM_ADR@@]@mmlAd:repCode = 1
+			# 表記法のテーブル名
+			mmlAd:Address[@@PM_ADR@@]@mmlAd:tableId = 7
+			# 住所の種類コード
+			mmlAd:Address[@@PM_ADR@@]@mmlAd:addressClass = 10
+			# 都道府県
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:prefecture[1] = 20
+			# 市、区、郡
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:city[1] = 20
+			# 町、村
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:town[1] = 20
+			# 番地、丁目、その他
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:homeNumber[1] = 200
+			# 一連住所
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:full[1] = 400
+			# 郵便番号
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:zip[1] = 8
+			# 国コード
+			mmlAd:Address[@@PM_ADR@@]/mmlAd:countryCode[1] = 10
+		$EndRepeat
+	$BaseEnd
+
+
+
+	# -------------------------------------------------------
+
+	# 電子メールアドレス
+	mmlPi:emailAddresses[1]/mmlCm:email[1] = 100
+
+
+	# -------------------------------------------------------
+
+	# 電話番号情報
+
+	$BaseStart, mmlPi:phones[1]
+		# 装置の種類コード
+		mmlPh:Phone[1]@mmlPh:telEquipType = 10
+		# 市外局番
+		mmlPh:Phone[1]/mmlPh:area[1] = 10
+		# 局番
+		mmlPh:Phone[1]/mmlPh:city[1] = 10
+		# 加入番号
+		mmlPh:Phone[1]/mmlPh:number[1] = 10
+		# 内線番号
+		mmlPh:Phone[1]/mmlPh:extension[1] = 10
+		# 国番号
+		mmlPh:Phone[1]/mmlPh:country[1] = 10
+		# 使用時間帯などのメモ
+		mmlPh:Phone[1]/mmlPh:memo[1] = 100
+	$BaseEnd
+
+
+	# -------------------------------------------------------
+
+
+	# 会計番号
+	mmlPi:accountNumber[1] = 50
+	# 社会番号
+	mmlPi:socialldentification[1] = 50
+	# 死亡フラグ
+	mmlPi:death[1] = 5
+	# 死亡日／日時
+	mmlPi:death[1]@mmlPi:date = 16
+$BaseEnd
+
+
+
+# =======================================================
+
+
+# lt_pat1 配列対象指定 End
+$LineTargetEnd
+
+
+
+# ===========================================================================
+# 健康保険情報モジュールを２つ用意する
+$Repeat, 2, @@HI_MOD@@, 0
+# 健康保険情報モジュール [@@HI_MOD@@]
+
+
+# 配列対象指定 Start
+$LineTargetStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType = healthInsurance, @@HI_MOD@@, /Mml[1]/MmlBody[1]/MmlModuleItem[X]
+
+
+	# ---------------------------------------------
+
+	# ヘッダ情報
+
+	# モジュールの種類
+	# /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType
+
+
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]
+
+
+		# アクセス権
+
+		# アクセス者
+		# securityLevel[1]/accessRight[1]@accessRole
+		# 削除権の有無
+		# securityLevel[1]/accessRight[1]@delete
+		# 参照権の有無
+		# securityLevel[1]/accessRight[1]@read
+
+		# アクセス者
+		# securityLevel[1]/accessRight[2]@accessRole
+		# 削除権の有無
+		# securityLevel[1]/accessRight[2]@delete
+		# 参照権の有無
+		# securityLevel[1]/accessRight[2]@read
+
+		# 文書タイトル
+		# title[1]
+		# 文書詳細種別
+		# title[1]@generationPurpose
+
+		# 文書ユニークID
+		docId[1]/uid[1] = 36
+		# 関連親文書のID
+		# docId[1]/parentId[1]
+		# 関連の種別
+		# docId[1]/parentId[1]@relation
+
+		# カルテ電子保存の確定日
+		confirmDate[1] = 10
+
+
+	# ---------------------------------------------
+
+		# 生成者情報
+
+		$BaseStart, mmlCi:CreatorInfo[1]
+
+			$BaseStart, mmlPsi:PersonalizedInfo[1]
+				# 生成者 個人ID
+
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+
+
+				# 生成者 氏名情報
+
+				# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:repCode
+				# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:tableId
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:fullname[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:family[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:given[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:middle[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:prefix[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:degree[1]
+
+
+				# 生成者 施設情報
+
+				# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:tableId
+				# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:repCode
+				# mmlFc:Facility[1]/mmlFc:name[1]
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:tableId
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:type
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlFc:Facility[1]/mmlCm:Id[1]
+
+
+				# 生成者 診療科情報
+
+				# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:tableId
+				# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:repCode
+				# mmlDp:Department[1]/mmlDp:name[1]
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:tableId
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:type
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlDp:Department[1]/mmlCm:Id[1]
+
+
+				# 生成者 住所
+
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1]
+
+
+				# 生成者 電子メールアドレス
+
+				# mmlPsi:emailAddresses[1]/mmlCm:email[1]
+
+
+				# 生成者 連絡先電話番号
+
+				# mmlPsi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1]
+			$BaseEnd
+
+
+			# 生成者の資格
+
+			# mmlCi:creatorLicense[1]@mmlCi:tableId
+			# mmlCi:creatorLicense[1]
+
+
+		$BaseEnd
+	$BaseEnd
+
+
+
+	# =======================================================
+
+
+	# 国タイプ
+	/Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]@mmlHi:countryType = 10
+
+
+	# 健康保険情報本体をベースにする
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]
+
+		# 健康保険種別
+		mmlHi:insuranceClass[1] = 20
+		# 保険種別コード [属性, 2桁]
+		mmlHi:insuranceClass[1]@mmlHi:ClassCode = 2
+		# 保険種別コードのテーブル名[MML0031]
+		mmlHi:insuranceClass[1]@mmlHi:tableId = 7
+
+
+		# 健康保険番号
+		mmlHi:insuranceNumber[1] = 8
+
+		# 被保険者記号
+		mmlHi:clientId[1]/mmlHi:group[1] = 80
+		# 被保険者番号
+		mmlHi:clientId[1]/mmlHi:number[1] = 80
+
+		# 本人家族区分
+		mmlHi:familyClass[1] = 5
+
+
+
+		# -------------------------------------------------------
+
+		# 被保険者情報
+		$BaseStart, mmlHi:clientInfo[1]
+
+			# 表記法
+			mmlHi:PersonName[1]/mmlNm:Name[1]@mmlNm:repCode = 1
+			# 表記法のテーブル名[MML0025で固定]
+			mmlHi:PersonName[1]/mmlNm:Name[1]@mmlNm:tableId = 7
+			# 姓
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:family[1] = 50
+			# 名
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:given[1] = 50
+			# ミドルネーム
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:middle[1] = 50
+			# フルネーム
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:fullname[1] = 100
+			# 肩書きなど
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:prefix[1] = 50
+			# 学位
+			mmlHi:PersonName[1]/mmlNm:Name[1]/mmlNm:degree[1] = 50
+
+
+			# -------------------------------------------------------
+
+			# 被保険者住所
+
+			# 表記法
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode = 1
+			# 表記法のテーブル名
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId = 7
+			# 住所の種類コード
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass = 10
+			# 都道府県
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1] = 20
+			# 市、区、郡
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1] = 20
+			# 町、村
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1] = 20
+			# 番地、丁目、その他
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1] = 200
+			# 一連住所
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1] = 400
+			# 郵便番号
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1] = 8
+			# 国コード
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1] = 10
+
+
+			# -------------------------------------------------------
+
+			# 被保険者電話番号
+
+			# 装置の種類コード
+			mmlHi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType = 10
+			# 市外局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1] = 10
+			# 局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1] = 10
+			# 加入番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1] = 10
+			# 内線番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1] = 10
+			# 国番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1] = 10
+			# 使用時間帯などのメモ
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1] = 100
+		$BaseEnd
+
+
+		# -------------------------------------------------------
+
+		# 継続適応疾患名 [必須・繰り返し]
+		mmlHi:continuedDiseases[1]/mmlHi:diseases[1] = 50
+		# 開始日（交付年月日）
+		mmlHi:startDate[1] = 10
+		# 有効期限
+		mmlHi:expiredDate[1] = 10
+		# 入院時の負担率
+		mmlHi:paymentInRatio[1] = 10
+		# 外来時の負担率
+		mmlHi:paymentOutRatio[1] = 10
+
+
+		# -------------------------------------------------------
+
+		# 保険者情報
+		$BaseStart, mmlHi:insuredInfo[1]
+			# 保険者施設情報
+
+			# 表記法
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:repCode = 1
+			# 表記法のテーブル名
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:tableId = 7
+			# 施設名称
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1] = 50
+
+			# 施設ID
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1] = 20
+			# IDの種類コード
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:type = 10
+			# MML0027
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:tableId = 7
+			# チェックディジット値
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigit = 2
+			# チェックディジット方式
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+
+
+			# -------------------------------------------------------
+
+			# 保険者住所
+
+			# 表記法
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode = 1
+			# 表記法のテーブル名
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId = 7
+			# 住所の種類コード
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass = 10
+			# 都道府県
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1] = 20
+			# 市、区、郡
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1] = 20
+			# 町、村
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1] = 20
+			# 番地、丁目、その他
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1] = 200
+			# 一連住所
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1] = 400
+			# 郵便番号
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1] = 8
+			# 国コード
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1] = 10
+
+
+			# -------------------------------------------------------
+
+			# 保険者電話番号
+
+			# 装置の種類コード
+			mmlHi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType = 10
+			# 市外局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1] = 10
+			# 局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1] = 10
+			# 加入番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1] = 10
+			# 内線番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1] = 10
+			# 国番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1] = 10
+			# 使用時間帯などのメモ
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1] = 100
+		$BaseEnd
+
+
+		# -------------------------------------------------------
+
+		# 被保険者の所属する事業所情報
+		$BaseStart, mmlHi:workInfo[1]
+			# 事業所施設情報
+
+			# 表記法
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:repCode = 1
+			# 表記法のテーブル名
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:tableId = 7
+			# 施設名称
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlFc:name[1] = 50
+
+			# 施設ID
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1] = 20
+			# IDの種類コード
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:type = 10
+			# MML0027
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:tableId = 7
+			# チェックディジット値
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigit = 2
+			# チェックディジット方式
+			mmlHi:facility[1]/mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+
+
+			# -------------------------------------------------------
+
+			# 事業所住所
+
+			# 表記法
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode = 1
+			# 表記法のテーブル名
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId = 7
+			# 住所の種類コード
+			mmlHi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass = 10
+			# 都道府県
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1] = 20
+			# 市、区、郡
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1] = 20
+			# 町、村
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1] = 20
+			# 番地、丁目、その他
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1] = 200
+			# 一連住所
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1] = 400
+			# 郵便番号
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1] = 8
+			# 国コード
+			mmlHi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1] = 10
+
+
+			# -------------------------------------------------------
+
+			# 事業所電話番号
+
+			# 装置の種類コード
+			mmlHi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType = 10
+			# 市外局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1] = 10
+			# 局番
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1] = 10
+			# 加入番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1] = 10
+			# 内線番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1] = 10
+			# 国番号
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1] = 10
+			# 使用時間帯などのメモ
+			mmlHi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1] = 100
+		$BaseEnd
+
+
+		# -------------------------------------------------------
+
+		# 公費負担医療情報
+
+
+		# -----------------------------------
+
+		$BaseStart, mmlHi:publicInsurance[1]
+
+			# 公費負担の領域を３つ用意
+			$Repeat, 6, @@HI_KOUHI@@, 0
+				# -----------------------------------
+
+				# 公費負担 [@@HI_KOUHI@@]
+
+				# 複数公費の優先順位
+				mmlHi:publicInsuranceItem[@@HI_KOUHI@@]@mmlHi:priority = 1
+				$BaseStart, mmlHi:publicInsuranceItem[@@HI_KOUHI@@]
+					# 公費負担名称
+					mmlHi:providerName[1] = 20
+					# 負担者番号
+					mmlHi:provider[1] = 8
+					# 受給者番号
+					mmlHi:recipient[1] = 20
+					# 開始日
+					mmlHi:startDate[1] = 10
+					# 有効期限
+					mmlHi:expiredDate[1] = 10
+					# 負担率または負担金 [属性・必須]
+					mmlHi:paymentRatio[1]@mmlHi:ratioType = 5
+					# 負担率または負担金
+					mmlHi:paymentRatio[1] = 10
+				$BaseEnd
+
+			$EndRepeat
+		$BaseEnd
+	$BaseEnd
+
+
+	# =======================================================
+
+
+# 配列対象指定 End
+$LineTargetEnd
+
+
+
+$EndRepeat
+
+
+# ===========================================================================
+# 診断履歴モジュールを５０用意する
+$Repeat, 50, @@HI_MOD@@, 0
+# 診断履歴モジュール [@@HI_MOD@@]
+
+
+# 配列対象指定 Start
+$LineTargetStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType = registeredDiagnosis, @@HI_MOD@@, /Mml[1]/MmlBody[1]/MmlModuleItem[X]
+
+
+	# ---------------------------------------------
+
+	# ヘッダ情報
+
+	# /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType
+
+
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]
+
+		# アクセス権種別
+		# アクセス者1
+		# securityLevel[1]/accessRight[1]@accessRole
+		# 参照権の有無1
+		# securityLevel[1]/accessRight[1]@read
+		# 削除権の有無1
+		# securityLevel[1]/accessRight[1]@delete
+		# アクセス者2
+		# securityLevel[1]/accessRight[2]@accessRole
+		# 参照権の有無2
+		# securityLevel[1]/accessRight[2]@read
+		# 削除権の有無2
+		# securityLevel[1]/accessRight[2]@delete
+
+		# 文書詳細種別
+		# title[1]@generationPurpose
+		# 文書タイトル
+		# title[1]
+
+		# 文書ユニークID
+		docId[1]/uid[1] = 36
+		# 関連文書のID
+		# docId[1]/parentId[1]
+		# 関連文書のIDの種別
+		# docId[1]/parentId[1]@relation
+
+		# カルテ電子保存の確定日
+		confirmDate[1] = 10
+
+
+		# ---------------------------------------------
+
+		$BaseStart, mmlCi:CreatorInfo[1]
+
+			# 生成者情報
+			$BaseStart, mmlPsi:PersonalizedInfo[1]
+
+				# 生成者 個人ID
+
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+
+
+				# 生成者 氏名情報
+
+				# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:repCode
+				# mmlPsi:personName[1]/mmlNm:Name[1]@mmlNm:tableId
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:fullname[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:family[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:given[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:middle[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:prefix[1]
+				# mmlPsi:personName[1]/mmlNm:Name[1]/mmlNm:degree[1]
+
+
+				# 生成者 施設情報
+
+				# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:tableId
+				# mmlFc:Facility[1]/mmlFc:name[1]@mmlFc:repCode
+				# mmlFc:Facility[1]/mmlFc:name[1]
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:tableId
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:type
+				# mmlFc:Facility[1]/mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlFc:Facility[1]/mmlCm:Id[1]
+
+
+				# 生成者 診療科情報
+
+				# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:tableId
+				# mmlDp:Department[1]/mmlDp:name[1]@mmlDp:repCode
+				# mmlDp:Department[1]/mmlDp:name[1]
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:tableId
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:type
+				# mmlDp:Department[1]/mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlDp:Department[1]/mmlCm:Id[1]
+
+
+				# 生成者 住所
+
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:tableId
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:addressClass
+				# mmlPsi:addresses[1]/mmlAd:Address[1]@mmlAd:repCode
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:full[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:prefecture[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:city[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:town[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:homeNumber[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:zip[1]
+				# mmlPsi:addresses[1]/mmlAd:Address[1]/mmlAd:countryCode[1]
+
+
+				# 生成者 電子メールアドレス
+
+				# mmlPsi:emailAddresses[1]/mmlCm:email[1]
+
+
+				# 生成者 連絡先電話番号
+
+				# mmlPsi:phones[1]/mmlPh:Phone[1]@mmlPh:telEquipType
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:area[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:city[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:number[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:extension[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:country[1]
+				# mmlPsi:phones[1]/mmlPh:Phone[1]/mmlPh:memo[1]
+			$BaseEnd
+
+
+			# 生成者の資格
+
+			# mmlCi:creatorLicense[1]@mmlCi:tableId
+			# mmlCi:creatorLicense[1]
+		$BaseEnd
+
+
+	$BaseEnd
+
+
+
+	# =======================================================
+
+
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]
+
+		# 疾患コード
+		mmlRd:diagnosis[1]@mmlRd:code = 50
+		# 疾患コード体系名
+		mmlRd:diagnosis[1]@mmlRd:system = 15
+		# 疾患名
+		mmlRd:diagnosis[1] = 80
+
+
+		# -----------------------------------
+
+		# 疾患要素を6つ用意する
+		$Repeat, 6, @@DIG_CONT@@, 0
+			# 疾病要素 [@@DIG_CONT@@]
+
+			$BaseStart, mmlRd:diagnosisContents[1]/mmlRd:dxItem[@@DIG_CONT@@]
+				# 疾患コード
+				mmlRd:name[1]@mmlRd:code = 10
+				# 疾患コード体系名
+				mmlRd:name[1]@mmlRd:system = 15
+				# 疾患要素名
+				mmlRd:name[1] = 20
+			$BaseEnd
+
+		$EndRepeat
+
+
+		# -----------------------------------
+		$BaseStart, mmlRd:categories[1]
+
+			# 分類を4つ用意する
+			$Repeat, 4, @@CATEGORI@@, 0
+				# 分類 [@@CATEGORI@@]
+
+				# 分類の種類コード
+				mmlRd:category[@@CATEGORI@@]@mmlRd:tableId = 7
+				# 分類名
+				mmlRd:category[@@CATEGORI@@] = 30
+			$EndRepeat
+
+		$BaseEnd
+
+
+		# -----------------------------------
+
+		# 疾患開始日
+		mmlRd:startDate[1] = 10
+		# 疾患終了日
+		mmlRd:endDate[1] = 10
+		# 転帰
+		mmlRd:outcome[1] = 20
+		# 疾患の初診日
+		mmlRd:firstEncounterDate[1] = 10
+		# 疾患に関する保険の健康保険モジュールのUID[単独タグ]
+		mmlRd:relatedHealthInsurance[1]@mmlRd:uid = 36
+		# 入外区分
+		mmlRd:InOutPatient[1] = 20
+
+	$BaseEnd
+
+
+	# =======================================================
+
+
+# 配列対象指定 End
+$LineTargetEnd
+
+
+
+$EndRepeat
+# ===========================================================================
+# 予約請求[Claim]モジュール
+
+
+# lt_claim1 配列対象指定 Start
+$LineTargetStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType = claim, 1, /Mml[1]/MmlBody[1]/MmlModuleItem[X]
+
+
+# ---------------------------------------------
+
+# ヘッダ情報
+
+# モジュールの種類
+# /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]@contentModuleType
+
+
+$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]
+
+	# アクセス権
+
+	# アクセス者
+	# securityLevel[1]/accessRight[1]@accessRole
+	# 削除権の有無
+	# securityLevel[1]/accessRight[1]@delete
+	# 参照権の有無
+	# securityLevel[1]/accessRight[1]@read
+
+	# アクセス者
+	# securityLevel[1]/accessRight[2]@accessRole
+	# 削除権の有無
+	# securityLevel[1]/accessRight[2]@delete
+	# 参照権の有無
+	# securityLevel[1]/accessRight[2]@read
+
+	# 文書タイトル
+	# title[1]
+	# 文書詳細種別
+	# title[1]@generationPurpose
+
+	# 文書ユニークID
+	docId[1]/uid[1] = 36
+	# 関連親文書のID
+	# docId[1]/parentId[1]
+	# 関連の種別
+	# docId[1]/parentId[1]@relation
+
+	# カルテ電子保存の確定日
+	confirmDate[1] = 10
+
+	# ---------------------------------------------
+
+	# 生成者情報
+	# $BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/docInfo[1]/mmlCi:CreatorInfo[1]
+	$BaseStart, mmlCi:CreatorInfo[1]
+
+		$BaseStart, mmlPsi:PersonalizedInfo[1]
+
+			# 生成者 個人ID
+
+			# mmlCm:Id[1]@mmlCm:checkDigitSchema
+			# mmlCm:Id[1]@mmlCm:tableId
+			# mmlCm:Id[1]@mmlCm:type
+			# mmlCm:Id[1]@mmlCm:checkDigit
+			 mmlCm:Id[1] = 10
+
+
+			# 生成者 氏名情報
+
+			# $BaseStart, mmlPsi:personName[1]
+				# mmlNm:Name[1]@mmlNm:repCode
+				# mmlNm:Name[1]@mmlNm:tableId
+				# mmlNm:Name[1]/mmlNm:fullname[1]
+				# mmlNm:Name[1]/mmlNm:family[1]
+				# mmlNm:Name[1]/mmlNm:given[1]
+				# mmlNm:Name[1]/mmlNm:middle[1]
+				# mmlNm:Name[1]/mmlNm:prefix[1]
+				# mmlNm:Name[1]/mmlNm:degree[1]
+			# $BaseEnd
+
+
+			# 生成者 施設情報
+
+			# $BaseStart, mmlFc:Facility[1]
+				# mmlFc:name[1]@mmlFc:tableId
+				# mmlFc:name[1]@mmlFc:repCode
+				# mmlFc:name[1]
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+			# $BaseEnd
+
+
+			# 生成者 診療科情報
+
+			# $BaseStart, mmlDp:Department[1]
+				# mmlDp:name[1]@mmlDp:tableId
+				# mmlDp:name[1]@mmlDp:repCode
+				# mmlDp:name[1]
+				# mmlCm:Id[1]@mmlCm:checkDigitSchema
+				# mmlCm:Id[1]@mmlCm:tableId
+				# mmlCm:Id[1]@mmlCm:type
+				# mmlCm:Id[1]@mmlCm:checkDigit
+				# mmlCm:Id[1]
+			# $BaseEnd
+
+
+			# 生成者 住所
+
+			# $BaseStart, mmlPsi:addresses[1]
+				# mmlAd:Address[1]@mmlAd:tableId
+				# mmlAd:Address[1]@mmlAd:addressClass
+				# mmlAd:Address[1]@mmlAd:repCode
+				# mmlAd:Address[1]/mmlAd:full[1]
+				# mmlAd:Address[1]/mmlAd:prefecture[1]
+				# mmlAd:Address[1]/mmlAd:city[1]
+				# mmlAd:Address[1]/mmlAd:town[1]
+				# mmlAd:Address[1]/mmlAd:homeNumber[1]
+				# mmlAd:Address[1]/mmlAd:zip[1]
+				# mmlAd:Address[1]/mmlAd:countryCode[1]
+			# $BaseEnd
+
+
+			# 生成者 電子メールアドレス
+
+			# mmlPsi:emailAddresses[1]/mmlCm:email[1]
+
+
+			# 生成者 連絡先電話番号
+
+			# $BaseStart, mmlPsi:phones[1]
+				# mmlPh:Phone[1]@mmlPh:telEquipType
+				# mmlPh:Phone[1]/mmlPh:area[1]
+				# mmlPh:Phone[1]/mmlPh:city[1]
+				# mmlPh:Phone[1]/mmlPh:number[1]
+				# mmlPh:Phone[1]/mmlPh:extension[1]
+				# mmlPh:Phone[1]/mmlPh:country[1]
+				# mmlPh:Phone[1]/mmlPh:memo[1]
+			# $BaseEnd
+		$BaseEnd
+
+
+		# 生成者の資格
+
+		# mmlCi:creatorLicense[1]@mmlCi:tableId
+		# mmlCi:creatorLicense[1]
+
+
+	$BaseEnd
+
+$BaseEnd
+
+
+
+# =======================================================
+
+
+
+$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]
+	# 点数金額モジュールの状態
+	claim:information[1]@claim:status = 7
+	# オーダー発行日時
+	claim:information[1]@claim:orderTime = 19
+	# 実施予定日時
+	claim:information[1]@claim:appointTime = 19
+	# 受付日時
+	claim:information[1]@claim:registTime = 19
+	# 実施日時
+	claim:information[1]@claim:performTime = 19
+	# 入院外来区分
+	claim:information[1]@claim:admitFlag = 5
+	# 時間外区分
+	claim:information[1]@claim:timeClass = 1
+	# 使用保険
+	claim:information[1]@claim:insuranceUid = 36
+	# 共通医事請求コード体系名
+	claim:information[1]@claim:defaultTableId = 100
+$BaseEnd
+
+
+# 予約
+
+$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]
+	$BaseStart, claim:information[1]
+		$BaseStart, claim:appoint[1]
+			# 予約
+			claim:appName[1] = 20
+			# 予約コード
+			claim:appName[1]@claim:appCode = 14
+			# 予約コードテーブル
+			claim:appName[1]@claim:appCodeId = 8
+			# 予約メモ
+			claim:memo[1] = 100
+		$BaseEnd
+
+
+		# 健康保険種別
+
+		# 健康保険種別
+		mmlHi:insuranceClass[1] = 20
+		# 保険種別コード
+		mmlHi:insuranceClass[1]@mmlHi:ClassCode = 2
+		# 保険種別コードのテーブル名
+		mmlHi:insuranceClass[1]@mmlHi:tableId = 7
+
+
+		# 診療実施科
+
+		$BaseStart, claim:patientDepartment[1]/mmlDp:Department[1]
+			# 診療科名称
+			mmlDp:name[1] = 12
+			# 表記法
+			mmlDp:name[1]@mmlDp:repCode = 1
+			# MML0025
+			mmlDp:name[1]@mmlDp:tableId = 7
+			# 診療科ID
+			mmlCm:Id[1] = 2
+			# IDの種類コード
+			mmlCm:Id[1]@mmlCm:type = 7
+			# MML0029
+			mmlCm:Id[1]@mmlCm:tableId = 7
+			# チェックディジット値
+			mmlCm:Id[1]@mmlCm:checkDigit = 2
+			# チェックディジット方式
+			mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+		$BaseEnd
+
+
+		# 診療実施病棟
+
+		$BaseStart, claim:patientWard[1]/mmlDp:Department[1]
+			# 診療実施病棟名称
+			mmlDp:name[1] = 12
+			# 表記法
+			mmlDp:name[1]@mmlDp:repCode = 1
+			# MML0025
+			mmlDp:name[1]@mmlDp:tableId = 7
+
+			# 診療実施病棟ID
+			mmlCm:Id[1] = 2
+			# IDの種類コード
+			mmlCm:Id[1]@mmlCm:type = 7
+			# MML0029
+			mmlCm:Id[1]@mmlCm:tableId = 7
+			# チェックディジット値
+			mmlCm:Id[1]@mmlCm:checkDigit = 2
+			# チェックディジット方式
+			mmlCm:Id[1]@mmlCm:checkDigitSchema = 3
+		$BaseEnd
+	$BaseEnd
+$BaseEnd
+
+
+# 診療括りセクションを20確保
+$Repeat, 20, @@CLM_BUNDLE@@, 0
+# =======================================================
+
+	# 診療括りセクション [@@CLM_BUNDLE@@]
+
+
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]
+		# bundleタグの属性
+		# 診療行為区分コード
+		claim:bundle[@@CLM_BUNDLE@@]@claim:classCode = 3
+		# 診療行為区分コードテーブル
+		claim:bundle[@@CLM_BUNDLE@@]@claim:classCodeId = 8
+	$BaseEnd
+
+
+	$BaseStart, /Mml[1]/MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[@@CLM_BUNDLE@@]
+
+		# 診療行為区分名称
+		claim:className[1] = 40
+
+		#用法
+
+		# 用法
+		claim:administration[1] = 50
+		# 用法コード
+		claim:administration[1]@claim:adminCode = 9
+		# 用法コードテーブル
+		claim:administration[1]@claim:adminCodeId = 8
+		# 用法コメント
+		claim:admMemo[1] = 100
+
+		# 回数もしくは日数
+		claim:bundleNumber[1] = 50
+
+
+		# -------------------------------------------------------
+		# 診療項目セクションの領域を20確保
+		$Repeat, 20, @@CLM_ITEM@@, 0
+
+			# 診療項目セクション [@@CLM_ITEM@@]
+
+			# itemタグの属性
+			# 診療種別区分コード
+			claim:item[@@CLM_ITEM@@]@claim:subclassCode = 1
+			# 診療種別区分コード
+			claim:item[@@CLM_ITEM@@]@claim:subclassCodeId = 8
+			# 医事請求コード
+			claim:item[@@CLM_ITEM@@]@claim:code = 10
+			# 医事請求コード体系名
+			claim:item[@@CLM_ITEM@@]@claim:tableId = 20
+			# 第２医事請求コード
+			claim:item[@@CLM_ITEM@@]@claim:aliasCode = 10
+			# 第２医事請求コード
+			claim:item[@@CLM_ITEM@@]@claim:aliasTableId = 20
+
+
+
+			$BaseStart, claim:item[@@CLM_ITEM@@]
+
+				# 医事請求名称
+				claim:name[1] = 80
+
+				# 数量
+				claim:number[1] = 40
+				# 数量コード
+				claim:number[1]@claim:numberCode = 2
+				# 数量コードテーブル
+				claim:number[1]@claim:numberCodeId = 8
+				# 単位
+				claim:number[1]@claim:unit = 20
+
+
+				# 所要時間
+				claim:duration[1] = 19
+				# 部位
+				claim:location[1] = 50
+
+
+				# -----------------------------------
+
+
+				# フィルムセクション (6領域確保)
+				$Repeat, 6, @@CLM_FLM@@, 0
+					$BaseStart, claim:film[@@CLM_FLM@@]
+
+						# フィルム[@@CLM_FLM@@]
+
+						# フィルムサイズ
+						claim:filmSize[1] = 50
+						# フィルムサイズコード
+						claim:filmSize[1]@claim:sizeCode = 2
+						# フィルムサイズコードテーブル
+						claim:filmSize[1]@claim:sizeCodeId = 8
+						# フィルム分割
+						claim:filmSize[1]@claim:filmDivision = 2
+						# フィルム枚数
+						claim:filmNumber[1] = 6
+
+						# ---------------
+					$BaseEnd
+				$EndRepeat
+
+
+				# -----------------------------------
+
+				# 関連手技
+				claim:event[1] = 50
+				# 開始日
+				claim:event[1]@claim:eventStart = 10
+				# 終了日
+				claim:event[1]@claim:eventEnd = 10
+
+				# 診療項目メモ
+				claim:memo[1] = 100
+			$BaseEnd
+
+
+			# -------------------------------------------------------
+		$EndRepeat
+
+
+		# -------------------------------------------------------
+
+		# 診療括りメモ
+		claim:memo[1] = 100
+	$BaseEnd
+
+
+$EndRepeat
+# =======================================================
+
+
+# lt_claim1 配列対象指定 End
+$LineTargetEnd
+
+
+
+# ===========================================================================

@@ -1,0 +1,61 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      * 01.00.01     MCC-多々納   02/03/05  警告フラグ追加
+      *****************************************************************
+      *     Y01共通ＳＰＡ     (RL=550)
+       01  SPA-Y01KYOUTU.
+      *    初期設定
+           03  SPA-Y01-INIT-DRCD             PIC X(05).
+           03  SPA-Y01-YYKINIT-FLG           PIC X(01).
+           03  SPA-Y01-YYKHYO-KBN            PIC X(01).
+           03  SPA-Y01-YYKMAXCNT             PIC 9(03).
+      *    予約登録内容
+           03  SPA-Y01-YYK-AREA.
+               05  SPA-Y01-SRYNAIYOG.
+                   07  SPA-Y01-SRYNAIYO          PIC X(02).
+                   07  SPA-Y01-SK1               PIC X(01).
+                   07  SPA-Y01-SRYNAIYOMEI       PIC X(24).
+               05  SPA-Y01-DRNAME.
+                   07  SPA-Y01-DRCDH             PIC X(04).
+                   07  SPA-Y01-D1                PIC X(01).
+                   07  SPA-Y01-DRCDMAI           PIC X(24).
+               05  SPA-Y01-YYKNAME               PIC X(50).
+               05  SPA-Y01-DRCD                  PIC X(05).
+               05  SPA-Y01-YYKYMD                PIC X(07).
+               05  SPA-Y01-YYKYMDS               PIC X(08).
+               05  SPA-Y01-YYKTIME               PIC 9(04).
+               05  SPA-Y01-YYKID                 PIC 9(02).
+               05  SPA-Y01-PTID                  PIC 9(10).
+               05  SPA-Y01-PTNUM                 PIC X(20).
+               05  SPA-Y01-SEX                   PIC X(02).
+               05  SPA-Y01-BIRTHDAY              PIC X(08).
+               05  SPA-Y01-BIRTHDAYH             PIC X(09).
+      *    警告フラグ
+           03  SPA-Y01-KEIKOKU               PIC 9(01).
+      *    確認メッセージ
+           03  SPA-YID1CD                    PIC X(04).
+           03  SPA-YID1-FLG                  PIC X(02).
+      *    予約印刷用
+           03  SPA-Y03-SET.
+               05  SPA-Y03-SRYNAIYO          PIC X(02).
+               05  SPA-Y03-DRCD              PIC X(05).
+               05  SPA-Y03-YYKYMDS           PIC X(08).
+      *

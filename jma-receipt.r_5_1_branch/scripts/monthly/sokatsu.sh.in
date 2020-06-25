@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#    決定通知書作成
+#        CPCOMMONSHELL1.INC  
+#        $1 SRYYM TERID SYSYMD
+#        $2 RECEKBN(総括表の種類)
+#           1:社保　2:国保
+#        $3 エラーファイル名 
+#        $4 HOSPNUM
+#        $5 端末ＩＤ　Ｘ（３２） 
+#-------------------------------------------#
+
+    LOG_FILE="/var/log/jma-receipt/${4}sokatsu${2}.log"
+    [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+    echo $(basename ${LOG_FILE})
+
+    echo "arg3 =  [" ${3} "]"
+
+##  エラーファイル削除
+    echo "errfile = [" ${MCP_TEMPDIR}/${3}  "]"
+    rm  -f ${MCP_TEMPDIR}/${3}
+        
+##      決定通知書（社保）
+        if  [ $2 = '1' ]; then
+       	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM020 -parameter $1$5,${4},${3}
+       	fi    
+
+##      決定通知書（国保）
+        if  [ $2 = '2' ]; then
+       	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM021 -parameter $1$5,${4},${3}
+       	fi    

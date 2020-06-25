@@ -1,0 +1,5147 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!-- 
+受付情報、テンプレートXMLファイル
+
+バージョン2.0形式
+-->
+
+<!--
+使用するMMLはCommon(ID,外部参照), Name(人名), Facility(施設), Department(診療科), Address(住所), Phone(電話), PersonalInfo(個人情報), CreatorInfo(作成者), PatientInfo(患者), HealthInsurance(健康保険), claimModule(Claim)です。
+
+このテンプレートXMLファイルは、できる限り、いじらないでください。
+このファイルは、ファイルを別の場所にコピーした後、一部の文字を置換して、使用しています。
+コメント・空白行・空のエレメントは、出力XMLファイル生成時に削除しています。
+また、インデントとしてタブを使っていますが、これも、出力XMLファイル生成時に、半角空白4文字に変換しています。
+
+
+文字を変換する際は、一番最初の行を、文字コードにあわせて変換してください。
+  シフトJIS = Shift_JIS
+  EUCコード = EUC-JP
+  UTF-8     = UTF-8
+  JISコード = JIS
+
+
+変換部分は「%(識別文字)%」として記述しています。その部分に対して変換をかける仕組みになっています。
+識別文字は、独自に決めています。
+
+ID関連は、チェックディジットの属性は省略可能であるため、はずしています。
+付け加えたい場合は、ID関連の「mmlCm:Id」エレメントに「mmlCm:checkDigitSchema」「mmlCm:checkDigit」を付加してください。同時に、チェックディジットの値をセットする仕組みが必要になりますので、注意してください。
+
+アクセス権種別は、サンプルでは開始・終了タグの両方がありましたが、空のタグは削除する使用になっているので、仕様書に沿って単独タグに変更しています。
+
+
+ -->
+
+
+ 
+<Mml version="2.3" createDate="%M_RH_CD1%" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mmlCm="http://www.medxml.net/MML/SharedComponent/Common/1.0" xmlns:mmlNm="http://www.medxml.net/MML/SharedComponent/Name/1.0" xmlns:mmlFc="http://www.medxml.net/MML/SharedComponent/Facility/1.0" xmlns:mmlDp="http://www.medxml.net/MML/SharedComponent/Department/1.0" xmlns:mmlAd="http://www.medxml.net/MML/SharedComponent/Address/1.0" xmlns:mmlPh="http://www.medxml.net/MML/SharedComponent/Phone/1.0" xmlns:mmlPsi="http://www.medxml.net/MML/SharedComponent/PersonalizedInfo/1.0" xmlns:mmlCi="http://www.medxml.net/MML/SharedComponent/CreatorInfo/1.0" xmlns:mmlPi="http://www.medxml.net/MML/ContentModule/PatientInfo/1.0" xmlns:mmlBc="http://www.medxml.net/MML/ContentModule/BaseClinic/1.0" xmlns:mmlFcl="http://www.medxml.net/MML/ContentModule/FirstClinic/1.0" xmlns:mmlHi="http://www.medxml.net/MML/ContentModule/HealthInsurance/1.1" xmlns:mmlLs="http://www.medxml.net/MML/ContentModule/Lifestyle/1.0" xmlns:mmlPc="http://www.medxml.net/MML/ContentModule/ProgressCourse/1.0" xmlns:mmlRd="http://www.medxml.net/MML/ContentModule/RegisteredDiagnosis/1.0" xmlns:mmlSg="http://www.medxml.net/MML/ContentModule/Surgery/1.0" xmlns:mmlSm="http://www.medxml.net/MML/ContentModule/Summary/1.0" xmlns:mmlLb="http://www.medxml.net/MML/ContentModule/test/1.0" xmlns:mmlRp="http://www.medxml.net/MML/ContentModule/report/1.0" xmlns:mmlRe="http://www.medxml.net/MML/ContentModule/Referral/1.0" xmlns:mmlSc="http://www.medxml.net/MML/SharedComponent/Security/1.0" xmlns:claim="http://www.medxml.net/claim/claimModule/2.1" xmlns:claimA="http://www.medxml.net/claim/claimAmountModule/2.1">       
+	<MmlHeader>
+		<!-- 作成者情報 -->
+		<!--  -->
+		<mmlCi:CreatorInfo>
+			<mmlPsi:PersonalizedInfo>
+				<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+				<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+					%M_RX001_A%
+				</mmlCm:Id>
+				<!-- 作成者 個人名情報 -->
+				<mmlPsi:personName>
+					<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+						<mmlNm:fullname>%M_RX001_B11%</mmlNm:fullname>
+						<mmlNm:family>%M_RX001_B12%</mmlNm:family>
+						<mmlNm:given>%M_RX001_B13%</mmlNm:given>
+						<mmlNm:middle>%M_RX001_B14%</mmlNm:middle>
+						<mmlNm:prefix>%M_RX001_B15%</mmlNm:prefix>
+						<mmlNm:degree>%M_RX001_B16%</mmlNm:degree>
+					</mmlNm:Name>
+				</mmlPsi:personName>
+				<!-- 施設情報 -->
+				<mmlFc:Facility>
+					<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+						%M_RX001_C11%
+					</mmlFc:name>
+					<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+					<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+						%M_RX001_C2%
+					</mmlCm:Id>
+				</mmlFc:Facility>
+				<!-- 診療科情報 -->
+				<mmlDp:Department>
+					<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+						%M_RX001_D11%
+					</mmlDp:name>
+					<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+						%M_RX001_D2%
+					</mmlCm:Id>
+				</mmlDp:Department>
+				<!-- 住所情報 -->
+				<mmlPsi:addresses>
+					<mmlAd:Address mmlAd:repCode="I"%M_RX001_E18% mmlAd:tableId="MML0025">
+						<mmlAd:full>
+							%M_RX001_E11%
+						</mmlAd:full>
+						<mmlAd:prefecture>
+							%M_RX001_E12%
+						</mmlAd:prefecture>
+						<mmlAd:city>
+							%M_RX001_E13%
+						</mmlAd:city>
+						<mmlAd:town>
+							%M_RX001_E14%
+						</mmlAd:town>
+						<mmlAd:homeNumber>
+							%M_RX001_E15%
+						</mmlAd:homeNumber>
+						<mmlAd:zip>
+							%M_RX001_E16%
+						</mmlAd:zip>
+						<mmlAd:countryCode>
+							%M_RX001_E17%
+						</mmlAd:countryCode>
+					</mmlAd:Address>
+				</mmlPsi:addresses>
+				<!-- メールアドレス -->
+				<mmlPsi:emailAddresses>
+					<mmlCm:email>%M_RX001_F1%</mmlCm:email>
+				</mmlPsi:emailAddresses>
+				<!-- 電話番号 -->
+				<mmlPsi:phones>
+					<mmlPh:Phone%M_RX001_G17%>
+						<mmlPh:area>
+							%M_RX001_G11%
+						</mmlPh:area>
+						<mmlPh:city>
+							%M_RX001_G12%
+						</mmlPh:city>
+						<mmlPh:number>
+							%M_RX001_G13%
+						</mmlPh:number>
+						<mmlPh:extension>
+							%M_RX001_G14%
+						</mmlPh:extension>
+						<mmlPh:country>
+							%M_RX001_G15%
+						</mmlPh:country>
+						<mmlPh:memo>
+							%M_RX001_G16%
+						</mmlPh:memo>
+					</mmlPh:Phone>
+				</mmlPsi:phones>
+			</mmlPsi:PersonalizedInfo>
+			<!-- 生成者の資格 -->
+			<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+				%M_RX001_H1%
+			</mmlCi:creatorLicense>
+		</mmlCi:CreatorInfo>
+		<!-- 患者主ID -->
+		<masterId>
+			<mmlCm:Id%M_RH_PIDSTYLE% mmlCm:tableId="MML0024">
+				%M_RH_PID%
+			</mmlCm:Id>
+		</masterId>
+		<!-- table of content -->
+		<toc>
+			<!-- DTDリスト -->
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Common/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Name/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Facility/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Department/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Address/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Phone/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/PersonalizedInfo/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/CreatorInfo/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/ContentModule/PatientInfo/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/ContentModule/HealthInsurance/1.1</tocItem>
+			<tocItem>http://www.medxml.net/claim/claimModule/2.1</tocItem>
+		</toc>
+		<!-- scopePeriodは省略可能であるため、削除しています -->
+		<!-- 電子署名などの暗号化情報 -->
+		<encryptInfo>no encryption</encryptInfo>
+	</MmlHeader>
+	<!-- ============================================================ -->
+	<!-- ============================================================ -->
+	<MmlBody>
+		<!-- ============================================================ -->
+		<!-- 患者情報 -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="patientInfo">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI101_ACC1%
+					<!-- %M_RI101_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI101_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI101_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI101_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX101_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX101_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX101_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX101_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX101_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX101_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX101_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX101_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX101_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX101_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX101_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX101_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX101_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX101_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX101_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX101_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX101_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX101_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX101_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX101_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX101_G17%>
+								<mmlPh:area>
+									%M_RX101_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX101_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX101_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX101_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX101_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX101_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX101_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX101_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlPi:PatientModule>
+					<!-- ID情報 -->
+					<mmlPi:uniqueInfo>
+						<mmlPi:masterId>
+							<mmlCm:Id%D_A2% mmlCm:tableId="MML0024">
+								%D_A1%
+							</mmlCm:Id>
+						</mmlPi:masterId>
+					</mmlPi:uniqueInfo>
+					<!-- 氏名情報 -->
+					<mmlPi:personName>
+						<mmlNm:Name%D_B1% mmlNm:tableId="MML0025">
+							<mmlNm:fullname>%D_B2%</mmlNm:fullname>
+						</mmlNm:Name>
+						<mmlNm:Name%D_C1% mmlNm:tableId="MML0025">
+							<mmlNm:fullname>%D_C2%</mmlNm:fullname>
+						</mmlNm:Name>
+					</mmlPi:personName>
+					<!-- 生年月日 -->
+					<mmlPi:birthday>%D_D1%</mmlPi:birthday>
+					<!-- 性別 -->
+					<mmlPi:sex>%D_D2%</mmlPi:sex>
+					<!-- 住所 -->
+					<mmlPi:addresses>
+						<!-- 住所情報(自宅) -->
+						<mmlAd:Address mmlAd:repCode="I"%D_EA2% mmlAd:tableId="MML0025">
+							<mmlAd:full>
+								%D_EA1%
+							</mmlAd:full>
+							<mmlAd:zip>
+								%D_EA3%
+							</mmlAd:zip>
+						</mmlAd:Address>
+						<!-- 住所情報(連絡先) -->
+						<mmlAd:Address mmlAd:repCode="I"%D_EB2% mmlAd:tableId="MML0025">
+							<mmlAd:full>
+								%D_EB1%
+							</mmlAd:full>
+							<mmlAd:zip>
+								%D_EB3%
+							</mmlAd:zip>
+						</mmlAd:Address>
+						<!-- 住所情報(勤務先) -->
+						<mmlAd:Address mmlAd:repCode="I"%D_EC2% mmlAd:tableId="MML0025">
+							<mmlAd:full>
+								%D_EC1%
+							</mmlAd:full>
+							<mmlAd:zip>
+								%D_EC3%
+							</mmlAd:zip>
+						</mmlAd:Address>
+						<!-- 住所情報(帰省先) -->
+						<mmlAd:Address mmlAd:repCode="I"%D_ED2% mmlAd:tableId="MML0025">
+							<mmlAd:full>
+								%D_ED1%
+							</mmlAd:full>
+							<mmlAd:zip>
+								%D_ED3%
+							</mmlAd:zip>
+						</mmlAd:Address>
+					</mmlPi:addresses>
+					<!-- 電話番号 -->
+					<mmlPi:phones>
+						<mmlPh:Phone%D_PH1_EQUIP%>
+							<mmlPh:area>
+								%D_PH1_AREA%
+							</mmlPh:area>
+							<mmlPh:city>
+								%D_PH1_CITY%
+							</mmlPh:city>
+							<mmlPh:number>
+								%D_PH1_NUM%
+							</mmlPh:number>
+							<mmlPh:extension>
+								%D_PH1_EXT%
+							</mmlPh:extension>
+							<mmlPh:country>
+								%D_PH1_COUNTRY%
+							</mmlPh:country>
+							<mmlPh:memo>
+								%D_PH1_MEMO%
+							</mmlPh:memo>
+						</mmlPh:Phone>
+					</mmlPi:phones>
+					<!-- 会計番号 -->
+					<!-- 社会番号 -->
+					<!-- 死亡フラグ -->
+					<mmlPi:death>%D_F1%</mmlPi:death>
+				</mmlPi:PatientModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ============================================================ -->
+		<!-- 健康保険情報 -->
+
+<!-- 健康保険情報[01-20] (繰り返しの際に、@@HIMOD@@に01〜20の数字が入って置換される) -->
+
+		<!-- 健康保険情報(01) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI201_ACC1%
+					<!-- %M_RI201_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI201_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI201_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI201_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX201_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX201_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX201_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX201_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX201_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX201_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX201_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX201_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX201_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX201_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX201_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX201_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX201_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX201_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX201_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX201_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX201_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX201_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX201_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX201_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX201_G17%>
+								<mmlPh:area>
+									%M_RX201_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX201_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX201_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX201_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX201_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX201_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX201_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX201_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_01_A2%%I_01_A3%>
+						%I_01_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_01_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_01_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_01_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_01_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_01_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_01_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_01_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_01_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F11%">
+							<mmlHi:providerName>%I_01_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F17%>%I_01_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F21%">
+							<mmlHi:providerName>%I_01_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F27%>%I_01_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F31%">
+							<mmlHi:providerName>%I_01_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F37%>%I_01_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F41%">
+							<mmlHi:providerName>%I_01_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F47%>%I_01_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F51%">
+							<mmlHi:providerName>%I_01_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F57%>%I_01_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_01_F61%">
+							<mmlHi:providerName>%I_01_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_01_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_01_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_01_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_01_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_01_F67%>%I_01_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(02) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI202_ACC1%
+					<!-- %M_RI202_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI202_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI202_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI202_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX202_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX202_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX202_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX202_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX202_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX202_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX202_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX202_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX202_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX202_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX202_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX202_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX202_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX202_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX202_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX202_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX202_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX202_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX202_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX202_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX202_G17%>
+								<mmlPh:area>
+									%M_RX202_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX202_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX202_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX202_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX202_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX202_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX202_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX202_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_02_A2%%I_02_A3%>
+						%I_02_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_02_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_02_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_02_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_02_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_02_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_02_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_02_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_02_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F11%">
+							<mmlHi:providerName>%I_02_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F17%>%I_02_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F21%">
+							<mmlHi:providerName>%I_02_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F27%>%I_02_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F31%">
+							<mmlHi:providerName>%I_02_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F37%>%I_02_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F41%">
+							<mmlHi:providerName>%I_02_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F47%>%I_02_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F51%">
+							<mmlHi:providerName>%I_02_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F57%>%I_02_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_02_F61%">
+							<mmlHi:providerName>%I_02_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_02_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_02_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_02_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_02_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_02_F67%>%I_02_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(03) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI203_ACC1%
+					<!-- %M_RI203_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI203_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI203_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI203_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX203_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX203_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX203_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX203_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX203_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX203_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX203_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX203_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX203_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX203_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX203_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX203_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX203_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX203_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX203_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX203_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX203_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX203_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX203_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX203_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX203_G17%>
+								<mmlPh:area>
+									%M_RX203_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX203_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX203_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX203_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX203_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX203_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX203_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX203_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_03_A2%%I_03_A3%>
+						%I_03_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_03_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_03_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_03_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_03_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_03_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_03_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_03_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_03_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F11%">
+							<mmlHi:providerName>%I_03_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F17%>%I_03_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F21%">
+							<mmlHi:providerName>%I_03_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F27%>%I_03_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F31%">
+							<mmlHi:providerName>%I_03_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F37%>%I_03_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F41%">
+							<mmlHi:providerName>%I_03_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F47%>%I_03_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F51%">
+							<mmlHi:providerName>%I_03_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F57%>%I_03_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_03_F61%">
+							<mmlHi:providerName>%I_03_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_03_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_03_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_03_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_03_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_03_F67%>%I_03_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(04) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI204_ACC1%
+					<!-- %M_RI204_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI204_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI204_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI204_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX204_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX204_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX204_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX204_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX204_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX204_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX204_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX204_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX204_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX204_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX204_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX204_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX204_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX204_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX204_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX204_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX204_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX204_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX204_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX204_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX204_G17%>
+								<mmlPh:area>
+									%M_RX204_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX204_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX204_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX204_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX204_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX204_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX204_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX204_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_04_A2%%I_04_A3%>
+						%I_04_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_04_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_04_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_04_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_04_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_04_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_04_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_04_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_04_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F11%">
+							<mmlHi:providerName>%I_04_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F17%>%I_04_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F21%">
+							<mmlHi:providerName>%I_04_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F27%>%I_04_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F31%">
+							<mmlHi:providerName>%I_04_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F37%>%I_04_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F41%">
+							<mmlHi:providerName>%I_04_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F47%>%I_04_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F51%">
+							<mmlHi:providerName>%I_04_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F57%>%I_04_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_04_F61%">
+							<mmlHi:providerName>%I_04_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_04_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_04_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_04_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_04_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_04_F67%>%I_04_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(05) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI205_ACC1%
+					<!-- %M_RI205_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI205_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI205_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI205_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX205_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX205_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX205_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX205_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX205_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX205_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX205_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX205_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX205_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX205_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX205_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX205_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX205_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX205_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX205_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX205_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX205_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX205_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX205_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX205_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX205_G17%>
+								<mmlPh:area>
+									%M_RX205_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX205_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX205_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX205_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX205_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX205_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX205_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX205_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_05_A2%%I_05_A3%>
+						%I_05_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_05_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_05_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_05_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_05_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_05_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_05_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_05_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_05_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F11%">
+							<mmlHi:providerName>%I_05_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F17%>%I_05_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F21%">
+							<mmlHi:providerName>%I_05_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F27%>%I_05_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F31%">
+							<mmlHi:providerName>%I_05_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F37%>%I_05_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F41%">
+							<mmlHi:providerName>%I_05_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F47%>%I_05_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F51%">
+							<mmlHi:providerName>%I_05_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F57%>%I_05_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_05_F61%">
+							<mmlHi:providerName>%I_05_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_05_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_05_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_05_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_05_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_05_F67%>%I_05_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(06) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI206_ACC1%
+					<!-- %M_RI206_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI206_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI206_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI206_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX206_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX206_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX206_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX206_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX206_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX206_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX206_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX206_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX206_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX206_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX206_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX206_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX206_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX206_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX206_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX206_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX206_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX206_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX206_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX206_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX206_G17%>
+								<mmlPh:area>
+									%M_RX206_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX206_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX206_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX206_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX206_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX206_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX206_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX206_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_06_A2%%I_06_A3%>
+						%I_06_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_06_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_06_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_06_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_06_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_06_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_06_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_06_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_06_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F11%">
+							<mmlHi:providerName>%I_06_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F17%>%I_06_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F21%">
+							<mmlHi:providerName>%I_06_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F27%>%I_06_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F31%">
+							<mmlHi:providerName>%I_06_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F37%>%I_06_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F41%">
+							<mmlHi:providerName>%I_06_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F47%>%I_06_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F51%">
+							<mmlHi:providerName>%I_06_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F57%>%I_06_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_06_F61%">
+							<mmlHi:providerName>%I_06_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_06_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_06_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_06_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_06_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_06_F67%>%I_06_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(07) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI207_ACC1%
+					<!-- %M_RI207_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI207_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI207_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI207_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX207_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX207_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX207_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX207_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX207_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX207_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX207_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX207_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX207_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX207_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX207_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX207_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX207_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX207_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX207_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX207_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX207_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX207_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX207_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX207_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX207_G17%>
+								<mmlPh:area>
+									%M_RX207_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX207_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX207_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX207_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX207_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX207_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX207_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX207_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_07_A2%%I_07_A3%>
+						%I_07_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_07_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_07_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_07_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_07_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_07_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_07_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_07_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_07_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F11%">
+							<mmlHi:providerName>%I_07_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F17%>%I_07_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F21%">
+							<mmlHi:providerName>%I_07_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F27%>%I_07_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F31%">
+							<mmlHi:providerName>%I_07_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F37%>%I_07_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F41%">
+							<mmlHi:providerName>%I_07_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F47%>%I_07_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F51%">
+							<mmlHi:providerName>%I_07_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F57%>%I_07_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_07_F61%">
+							<mmlHi:providerName>%I_07_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_07_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_07_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_07_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_07_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_07_F67%>%I_07_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(08) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI208_ACC1%
+					<!-- %M_RI208_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI208_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI208_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI208_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX208_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX208_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX208_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX208_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX208_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX208_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX208_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX208_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX208_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX208_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX208_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX208_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX208_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX208_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX208_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX208_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX208_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX208_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX208_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX208_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX208_G17%>
+								<mmlPh:area>
+									%M_RX208_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX208_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX208_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX208_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX208_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX208_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX208_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX208_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_08_A2%%I_08_A3%>
+						%I_08_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_08_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_08_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_08_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_08_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_08_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_08_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_08_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_08_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F11%">
+							<mmlHi:providerName>%I_08_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F17%>%I_08_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F21%">
+							<mmlHi:providerName>%I_08_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F27%>%I_08_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F31%">
+							<mmlHi:providerName>%I_08_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F37%>%I_08_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F41%">
+							<mmlHi:providerName>%I_08_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F47%>%I_08_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F51%">
+							<mmlHi:providerName>%I_08_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F57%>%I_08_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_08_F61%">
+							<mmlHi:providerName>%I_08_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_08_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_08_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_08_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_08_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_08_F67%>%I_08_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(09) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI209_ACC1%
+					<!-- %M_RI209_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI209_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI209_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI209_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX209_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX209_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX209_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX209_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX209_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX209_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX209_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX209_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX209_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX209_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX209_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX209_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX209_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX209_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX209_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX209_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX209_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX209_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX209_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX209_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX209_G17%>
+								<mmlPh:area>
+									%M_RX209_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX209_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX209_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX209_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX209_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX209_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX209_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX209_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_09_A2%%I_09_A3%>
+						%I_09_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_09_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_09_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_09_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_09_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_09_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_09_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_09_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_09_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F11%">
+							<mmlHi:providerName>%I_09_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F17%>%I_09_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F21%">
+							<mmlHi:providerName>%I_09_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F27%>%I_09_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F31%">
+							<mmlHi:providerName>%I_09_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F37%>%I_09_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F41%">
+							<mmlHi:providerName>%I_09_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F47%>%I_09_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F51%">
+							<mmlHi:providerName>%I_09_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F57%>%I_09_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_09_F61%">
+							<mmlHi:providerName>%I_09_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_09_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_09_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_09_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_09_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_09_F67%>%I_09_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(10) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI210_ACC1%
+					<!-- %M_RI210_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI210_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI210_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI210_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX210_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX210_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX210_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX210_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX210_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX210_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX210_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX210_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX210_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX210_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX210_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX210_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX210_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX210_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX210_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX210_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX210_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX210_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX210_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX210_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX210_G17%>
+								<mmlPh:area>
+									%M_RX210_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX210_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX210_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX210_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX210_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX210_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX210_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX210_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_10_A2%%I_10_A3%>
+						%I_10_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_10_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_10_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_10_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_10_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_10_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_10_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_10_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_10_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F11%">
+							<mmlHi:providerName>%I_10_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F17%>%I_10_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F21%">
+							<mmlHi:providerName>%I_10_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F27%>%I_10_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F31%">
+							<mmlHi:providerName>%I_10_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F37%>%I_10_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F41%">
+							<mmlHi:providerName>%I_10_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F47%>%I_10_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F51%">
+							<mmlHi:providerName>%I_10_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F57%>%I_10_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_10_F61%">
+							<mmlHi:providerName>%I_10_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_10_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_10_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_10_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_10_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_10_F67%>%I_10_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(11) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI211_ACC1%
+					<!-- %M_RI211_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI211_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI211_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI211_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX211_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX211_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX211_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX211_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX211_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX211_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX211_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX211_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX211_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX211_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX211_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX211_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX211_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX211_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX211_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX211_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX211_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX211_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX211_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX211_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX211_G17%>
+								<mmlPh:area>
+									%M_RX211_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX211_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX211_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX211_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX211_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX211_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX211_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX211_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_11_A2%%I_11_A3%>
+						%I_11_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_11_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_11_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_11_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_11_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_11_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_11_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_11_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_11_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F11%">
+							<mmlHi:providerName>%I_11_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F17%>%I_11_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F21%">
+							<mmlHi:providerName>%I_11_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F27%>%I_11_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F31%">
+							<mmlHi:providerName>%I_11_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F37%>%I_11_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F41%">
+							<mmlHi:providerName>%I_11_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F47%>%I_11_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F51%">
+							<mmlHi:providerName>%I_11_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F57%>%I_11_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_11_F61%">
+							<mmlHi:providerName>%I_11_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_11_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_11_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_11_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_11_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_11_F67%>%I_11_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(12) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI212_ACC1%
+					<!-- %M_RI212_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI212_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI212_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI212_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX212_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX212_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX212_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX212_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX212_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX212_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX212_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX212_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX212_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX212_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX212_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX212_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX212_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX212_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX212_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX212_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX212_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX212_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX212_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX212_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX212_G17%>
+								<mmlPh:area>
+									%M_RX212_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX212_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX212_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX212_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX212_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX212_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX212_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX212_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_12_A2%%I_12_A3%>
+						%I_12_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_12_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_12_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_12_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_12_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_12_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_12_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_12_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_12_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F11%">
+							<mmlHi:providerName>%I_12_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F17%>%I_12_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F21%">
+							<mmlHi:providerName>%I_12_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F27%>%I_12_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F31%">
+							<mmlHi:providerName>%I_12_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F37%>%I_12_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F41%">
+							<mmlHi:providerName>%I_12_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F47%>%I_12_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F51%">
+							<mmlHi:providerName>%I_12_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F57%>%I_12_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_12_F61%">
+							<mmlHi:providerName>%I_12_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_12_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_12_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_12_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_12_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_12_F67%>%I_12_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(13) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI213_ACC1%
+					<!-- %M_RI213_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI213_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI213_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI213_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX213_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX213_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX213_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX213_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX213_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX213_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX213_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX213_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX213_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX213_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX213_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX213_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX213_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX213_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX213_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX213_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX213_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX213_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX213_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX213_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX213_G17%>
+								<mmlPh:area>
+									%M_RX213_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX213_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX213_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX213_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX213_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX213_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX213_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX213_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_13_A2%%I_13_A3%>
+						%I_13_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_13_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_13_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_13_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_13_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_13_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_13_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_13_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_13_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F11%">
+							<mmlHi:providerName>%I_13_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F17%>%I_13_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F21%">
+							<mmlHi:providerName>%I_13_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F27%>%I_13_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F31%">
+							<mmlHi:providerName>%I_13_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F37%>%I_13_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F41%">
+							<mmlHi:providerName>%I_13_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F47%>%I_13_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F51%">
+							<mmlHi:providerName>%I_13_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F57%>%I_13_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_13_F61%">
+							<mmlHi:providerName>%I_13_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_13_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_13_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_13_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_13_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_13_F67%>%I_13_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(14) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI214_ACC1%
+					<!-- %M_RI214_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI214_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI214_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI214_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX214_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX214_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX214_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX214_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX214_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX214_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX214_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX214_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX214_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX214_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX214_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX214_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX214_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX214_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX214_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX214_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX214_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX214_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX214_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX214_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX214_G17%>
+								<mmlPh:area>
+									%M_RX214_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX214_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX214_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX214_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX214_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX214_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX214_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX214_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_14_A2%%I_14_A3%>
+						%I_14_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_14_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_14_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_14_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_14_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_14_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_14_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_14_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_14_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F11%">
+							<mmlHi:providerName>%I_14_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F17%>%I_14_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F21%">
+							<mmlHi:providerName>%I_14_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F27%>%I_14_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F31%">
+							<mmlHi:providerName>%I_14_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F37%>%I_14_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F41%">
+							<mmlHi:providerName>%I_14_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F47%>%I_14_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F51%">
+							<mmlHi:providerName>%I_14_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F57%>%I_14_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_14_F61%">
+							<mmlHi:providerName>%I_14_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_14_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_14_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_14_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_14_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_14_F67%>%I_14_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(15) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI215_ACC1%
+					<!-- %M_RI215_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI215_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI215_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI215_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX215_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX215_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX215_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX215_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX215_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX215_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX215_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX215_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX215_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX215_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX215_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX215_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX215_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX215_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX215_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX215_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX215_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX215_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX215_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX215_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX215_G17%>
+								<mmlPh:area>
+									%M_RX215_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX215_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX215_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX215_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX215_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX215_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX215_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX215_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_15_A2%%I_15_A3%>
+						%I_15_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_15_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_15_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_15_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_15_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_15_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_15_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_15_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_15_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F11%">
+							<mmlHi:providerName>%I_15_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F17%>%I_15_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F21%">
+							<mmlHi:providerName>%I_15_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F27%>%I_15_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F31%">
+							<mmlHi:providerName>%I_15_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F37%>%I_15_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F41%">
+							<mmlHi:providerName>%I_15_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F47%>%I_15_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F51%">
+							<mmlHi:providerName>%I_15_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F57%>%I_15_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_15_F61%">
+							<mmlHi:providerName>%I_15_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_15_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_15_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_15_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_15_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_15_F67%>%I_15_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(16) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI216_ACC1%
+					<!-- %M_RI216_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI216_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI216_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI216_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX216_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX216_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX216_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX216_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX216_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX216_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX216_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX216_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX216_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX216_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX216_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX216_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX216_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX216_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX216_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX216_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX216_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX216_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX216_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX216_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX216_G17%>
+								<mmlPh:area>
+									%M_RX216_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX216_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX216_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX216_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX216_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX216_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX216_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX216_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_16_A2%%I_16_A3%>
+						%I_16_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_16_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_16_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_16_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_16_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_16_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_16_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_16_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_16_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F11%">
+							<mmlHi:providerName>%I_16_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F17%>%I_16_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F21%">
+							<mmlHi:providerName>%I_16_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F27%>%I_16_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F31%">
+							<mmlHi:providerName>%I_16_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F37%>%I_16_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F41%">
+							<mmlHi:providerName>%I_16_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F47%>%I_16_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F51%">
+							<mmlHi:providerName>%I_16_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F57%>%I_16_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_16_F61%">
+							<mmlHi:providerName>%I_16_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_16_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_16_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_16_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_16_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_16_F67%>%I_16_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(17) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI217_ACC1%
+					<!-- %M_RI217_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI217_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI217_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI217_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX217_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX217_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX217_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX217_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX217_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX217_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX217_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX217_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX217_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX217_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX217_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX217_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX217_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX217_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX217_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX217_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX217_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX217_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX217_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX217_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX217_G17%>
+								<mmlPh:area>
+									%M_RX217_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX217_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX217_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX217_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX217_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX217_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX217_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX217_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_17_A2%%I_17_A3%>
+						%I_17_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_17_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_17_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_17_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_17_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_17_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_17_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_17_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_17_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F11%">
+							<mmlHi:providerName>%I_17_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F17%>%I_17_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F21%">
+							<mmlHi:providerName>%I_17_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F27%>%I_17_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F31%">
+							<mmlHi:providerName>%I_17_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F37%>%I_17_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F41%">
+							<mmlHi:providerName>%I_17_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F47%>%I_17_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F51%">
+							<mmlHi:providerName>%I_17_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F57%>%I_17_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_17_F61%">
+							<mmlHi:providerName>%I_17_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_17_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_17_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_17_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_17_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_17_F67%>%I_17_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(18) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI218_ACC1%
+					<!-- %M_RI218_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI218_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI218_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI218_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX218_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX218_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX218_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX218_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX218_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX218_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX218_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX218_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX218_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX218_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX218_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX218_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX218_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX218_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX218_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX218_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX218_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX218_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX218_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX218_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX218_G17%>
+								<mmlPh:area>
+									%M_RX218_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX218_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX218_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX218_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX218_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX218_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX218_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX218_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_18_A2%%I_18_A3%>
+						%I_18_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_18_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_18_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_18_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_18_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_18_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_18_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_18_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_18_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F11%">
+							<mmlHi:providerName>%I_18_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F17%>%I_18_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F21%">
+							<mmlHi:providerName>%I_18_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F27%>%I_18_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F31%">
+							<mmlHi:providerName>%I_18_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F37%>%I_18_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F41%">
+							<mmlHi:providerName>%I_18_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F47%>%I_18_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F51%">
+							<mmlHi:providerName>%I_18_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F57%>%I_18_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_18_F61%">
+							<mmlHi:providerName>%I_18_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_18_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_18_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_18_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_18_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_18_F67%>%I_18_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(19) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI219_ACC1%
+					<!-- %M_RI219_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI219_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI219_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI219_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX219_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX219_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX219_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX219_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX219_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX219_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX219_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX219_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX219_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX219_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX219_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX219_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX219_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX219_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX219_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX219_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX219_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX219_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX219_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX219_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX219_G17%>
+								<mmlPh:area>
+									%M_RX219_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX219_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX219_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX219_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX219_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX219_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX219_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX219_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_19_A2%%I_19_A3%>
+						%I_19_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_19_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_19_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_19_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_19_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_19_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_19_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_19_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_19_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F11%">
+							<mmlHi:providerName>%I_19_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F17%>%I_19_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F21%">
+							<mmlHi:providerName>%I_19_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F27%>%I_19_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F31%">
+							<mmlHi:providerName>%I_19_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F37%>%I_19_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F41%">
+							<mmlHi:providerName>%I_19_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F47%>%I_19_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F51%">
+							<mmlHi:providerName>%I_19_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F57%>%I_19_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_19_F61%">
+							<mmlHi:providerName>%I_19_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_19_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_19_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_19_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_19_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_19_F67%>%I_19_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+		<!-- 健康保険情報(20) -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="healthInsurance">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI220_ACC1%
+					<!-- %M_RI220_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI220_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI220_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI220_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX220_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX220_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX220_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX220_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX220_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX220_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX220_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX220_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX220_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX220_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX220_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX220_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX220_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX220_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX220_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX220_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX220_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX220_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX220_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX220_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX220_G17%>
+								<mmlPh:area>
+									%M_RX220_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX220_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX220_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX220_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX220_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX220_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX220_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX220_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<mmlHi:HealthInsuranceModule mmlHi:countryType="JPN">
+					<!-- 健康保険種別 -->
+					<mmlHi:insuranceClass%I_20_A2%%I_20_A3%>
+						%I_20_A1%
+					</mmlHi:insuranceClass>
+					<!-- 健康保険番号 -->
+					<mmlHi:insuranceNumber>%I_20_B1%</mmlHi:insuranceNumber>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientId>
+						<!-- 被保険者記号 -->
+						<mmlHi:group>%I_20_C1%</mmlHi:group>
+						<!-- 被保険者情報 -->
+						<mmlHi:number>%I_20_C2%</mmlHi:number>
+					</mmlHi:clientId>
+					<!-- 本人家族区分 -->
+					<mmlHi:familyClass>%I_20_D1%</mmlHi:familyClass>
+					<!-- 被保険者情報 -->
+					<mmlHi:clientInfo>
+					</mmlHi:clientInfo>
+					<!-- 継続疾患情報 -->
+					<!-- 開始日（交付年月日） -->
+					<mmlHi:startDate>%I_20_E1%</mmlHi:startDate>
+					<!-- 有効期限 -->
+					<mmlHi:expiredDate>%I_20_E2%</mmlHi:expiredDate>
+					<!-- 入院時の負担率 -->
+					<mmlHi:paymentInRatio>%I_20_INRATIO%</mmlHi:paymentInRatio>
+					<!-- 外来時の負担率 -->
+					<mmlHi:paymentOutRatio>%I_20_OUTRATIO%</mmlHi:paymentOutRatio>
+					<!-- 保険者情報 -->
+					<!-- 被保険者の所属する事業所情報 -->
+					<!-- 公費負担医療情報 -->
+					<mmlHi:publicInsurance>
+
+<!-- 公費負担医療情報[1-6] (繰り返しの際に、@@PIITEM@@に1〜6の数字が入って置換される) -->
+
+						<!-- 公費負担医療情報(1) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F11%">
+							<mmlHi:providerName>%I_20_F12%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F13%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F14%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F15%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F16%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F17%>%I_20_F18%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(2) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F21%">
+							<mmlHi:providerName>%I_20_F22%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F23%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F24%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F25%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F26%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F27%>%I_20_F28%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(3) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F31%">
+							<mmlHi:providerName>%I_20_F32%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F33%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F34%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F35%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F36%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F37%>%I_20_F38%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(4) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F41%">
+							<mmlHi:providerName>%I_20_F42%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F43%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F44%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F45%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F46%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F47%>%I_20_F48%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(5) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F51%">
+							<mmlHi:providerName>%I_20_F52%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F53%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F54%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F55%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F56%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F57%>%I_20_F58%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+						<!-- 公費負担医療情報(6) -->
+						<mmlHi:publicInsuranceItem mmlHi:priority="%I_20_F61%">
+							<mmlHi:providerName>%I_20_F62%</mmlHi:providerName>
+							<mmlHi:provider>%I_20_F63%</mmlHi:provider>
+							<mmlHi:recipient>%I_20_F64%</mmlHi:recipient>
+							<mmlHi:startDate>%I_20_F65%</mmlHi:startDate>
+							<mmlHi:expiredDate>%I_20_F66%</mmlHi:expiredDate>
+							<!-- 負担金または負担率 -->
+							<mmlHi:paymentRatio%I_20_F67%>%I_20_F68%</mmlHi:paymentRatio>
+						</mmlHi:publicInsuranceItem>
+
+<!-- 公費負担医療情報 End -->
+
+					</mmlHi:publicInsurance>
+				</mmlHi:HealthInsuranceModule>
+			</content>
+		</MmlModuleItem>
+		<!-- ............................................................ -->
+
+<!-- 健康保険情報 End -->
+
+
+		<!-- ============================================================ -->
+		<!-- Claim情報 -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="claim">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI301_ACC1%
+					<!-- %M_RI301_ACC2% -->
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI301_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI301_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI301_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX301_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX301_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX301_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX301_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX301_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX301_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX301_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX301_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX301_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX301_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX301_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX301_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX301_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX301_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX301_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX301_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX301_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX301_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX301_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX301_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX301_G17%>
+								<mmlPh:area>
+									%M_RX301_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX301_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX301_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX301_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX301_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX301_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX301_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX301_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<claim:ClaimModule>
+					<!-- 請求ヘッダ情報 -->
+					<claim:information%C_A1%%C_A2%%C_A3%%C_A4%%C_A5%%C_A6%>
+						<!-- 予約情報 -->
+						<claim:appoint>
+							<!-- 予約 -->
+							<claim:appName%C_B2%%C_B3%>
+								%C_B1%
+							</claim:appName>
+							<!-- 予約メモ -->
+							<claim:memo>
+								%C_B4%
+							</claim:memo>
+						</claim:appoint>
+						<!-- 診療実施科 -->
+						<claim:patientDepartment>
+							<mmlDp:Department>
+								<!-- 診療科名称 -->
+								<mmlDp:name mmlDp:repCode="%C_C2%" mmlDp:tableId="MML0025">
+									%C_C1%
+								</mmlDp:name>
+								<!-- 診療科ID -->
+								<mmlCm:Id mmlCm:type="%C_C4%" mmlCm:tableId="MML0029">
+									%C_C3%
+								</mmlCm:Id>
+							</mmlDp:Department>
+						</claim:patientDepartment>
+						<!-- 診療実施病棟 -->
+						<claim:patientWard>
+							<mmlDp:Department>
+								<!-- 病棟診療科名称 -->
+								<mmlDp:name mmlDp:repCode="%C_D2%" mmlDp:tableId="MML0025">
+									%C_D1%
+								</mmlDp:name>
+								<!-- 病棟診療科ID -->
+								<mmlCm:Id mmlCm:type="%C_D4%" mmlCm:tableId="MML0029">
+									%C_D3%
+								</mmlCm:Id>
+							</mmlDp:Department>
+						</claim:patientWard>
+						<!-- 健康保険種別 (受付では入れることはない) -->
+					</claim:information>
+					<!-- 診療括りセクション -->
+					<claim:bundle%C_E1% claim:classCodeId="Claim007">
+						<!-- 診療行為区分名 -->
+						<claim:className>診療料</claim:className>
+						<!-- 回数もしくは日数 -->
+						<claim:bundleNumber>1</claim:bundleNumber>
+						<!-- 診療項目セクション -->
+						<claim:item claim:subclassCode="0" claim:subclassCodeId="Claim003"%C_E2%%C_E3%>
+							<!-- 医事請求名称 -->
+							<claim:name>%C_E4%</claim:name>
+						</claim:item>
+							<!-- 受付メモ -->
+						<claim:memo>
+							%C_F1%
+						</claim:memo>
+					</claim:bundle>
+				</claim:ClaimModule>
+			</content>
+		</MmlModuleItem>
+	</MmlBody>
+</Mml>

@@ -1,0 +1,72 @@
+W061 { #GtkWindow
+  fixed32 { #GtkFixed
+    B01 { #GtkButton
+      state int;
+    };
+    B02 { #GtkButton
+      state int;
+    };
+    B04 { #GtkButton
+      state int;
+    };
+    B06 { #GtkButton
+      state int;
+    };
+    B07 { #GtkButton
+      state int;
+    };
+    B09 { #GtkButton
+      state int;
+    };
+    B10 { #GtkButton
+      state int;
+    };
+    B12 { #GtkButton
+      state int;
+      label varchar(10);
+    };
+    SELNUM { #GtkPandaEntry
+      textdata varchar(4);
+    };
+    MIDASI1 { #GtkLabel
+      textdata varchar(100);
+    };
+    scrolledwindow1 { #GtkScrolledWindow
+      DATALIST { #GtkPandaCList
+        count int;
+        row int;
+        rowattr int;
+        selectdata bool[100];
+        fgcolor varchar(20)[100];
+        bgcolor varchar(20)[100];
+        item {
+          column1 varchar(4);
+          column2 varchar(4);
+          column3 varchar(80);
+          column4 varchar(16);
+          column5 varchar(12);
+          column6 varchar(12);
+          column7 varchar(2);
+          column8 varchar(12);
+        }[100];
+      };
+    };
+    MIDASI2 { #GtkLabel
+      style varchar(20);
+      textdata varchar(50);
+    };
+    EDYUYMD { #GtkPandaEntry
+      textdata varchar(12);
+    };
+    MIDASI3 { #GtkLabel
+      textdata varchar(30);
+    };
+    MIDASI4 { #GtkLabel
+      textdata varchar(100);
+    };
+    MIDASI5 { #GtkLabel
+      style varchar(20);
+      textdata varchar(30);
+    };
+  };
+};

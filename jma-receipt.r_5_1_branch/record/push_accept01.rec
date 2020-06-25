@@ -1,0 +1,15 @@
+push_accept01	{
+	event				varchar(50);
+	body	{
+#		Patient_Mode		varchar(10);
+		Patient_ID		varchar(20);
+		Accept_Date		varchar(10);
+		Accept_Time		varchar(08);
+		Department_Code		varchar(02);
+		Physician_Code		varchar(05);
+		Insurance_Combination_Number	varchar(04);
+		Medical_Memo_Info	varchar(02);
+		Medical_Memo		varchar(16);
+	};
+};
+

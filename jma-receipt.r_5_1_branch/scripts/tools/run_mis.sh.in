@@ -1,0 +1,165 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+# 診療情報システム用データ作成
+#-------------------------------------------#
+#  ${1} : 医療機関識別番号(HOSPNUM)
+#  ${2} : 確定版データ作成日
+#  ${3} : データ出力ディレクトリ
+#-------------------------------------------#
+
+export PATH=${PATCHSCRIPTSDIR}/tools:${SCRIPTSDIR}/tools:${SITESCRIPTSDIR}/monthly:${PATCHSCRIPTSDIR}/monthly:${SCRIPTSDIR}/monthly:${SITESCRIPTSDIR}/allways:${PATCHSCRIPTSDIR}/allways:${SCRIPTSDIR}/allways:$PATH
+
+export COB_LIBRARY_PATH=${PATCHLIBDIR}:${ORCALIBDIR}:/usr/lib/panda
+
+if [ `whoami` != "${ORCAUSER}" ]; then
+  echo "${ORCAUSER}ユーザーで実行してください。"
+  exit 1
+fi
+if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ]; then
+  if [ $# -ne 2 ]; then
+    echo "オプション不正"
+    exit 1
+  fi
+  DATADIR="monblob"
+else
+  if [ $# -ne 3 ]; then
+    echo "オプション不正"
+    exit 1
+  fi
+  if ! [ -d $3 ]; then 
+    echo "診療情報システム用データ出力ディレクトリが見つかりません"
+    exit 1
+  fi
+  touch ${3}/misdirtest
+  if [ "$?" -eq 0 ]; then
+    rm ${3}/misdirtest
+  else
+    echo "診療情報システム用データ出力ディレクトリの権限が不足しています"
+    exit 1
+  fi
+  DATADIR="$3"
+fi
+
+EXDATE=$(date  '+%Y%m%d%H%M')
+RUNDATE="${EXDATE}00"
+FLG_TEMPDIR_GEN=0
+if [ -z "${MCP_TEMPDIR}" ]; then
+  export MCP_TEMPDIR=/tmp/orca_root/$(uuidgen)
+  mkdir -p ${MCP_TEMPDIR}
+  FLG_TEMPDIR_GEN=1
+fi
+
+delete_tempdir(){
+  if [ ${FLG_TEMPDIR_GEN} -eq 1 ]; then
+     rm -R ${MCP_TEMPDIR}
+  fi
+}
+
+create_pgpass
+
+HOSPNUM=`printf "%02d" $1`
+
+RNKERRFS=${HOSPNUM}MIS-${RUNDATE}.$$
+RNKERRFL=${MCP_TEMPDIR}/${RNKERRFS}
+
+if [ -e ${RNKERRFL} ]; then
+  rm ${RNKERRFL}
+fi
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBCHECKREDL -parameter "${RNKERRFS}"
+if [ -e ${RNKERRFL} ]; then
+  cat ${RNKERRFL}
+  delete_tempdir 
+  delete_pgpass
+  exit 0
+fi
+
+RESULTF=${MCP_TEMPDIR}/${HOSPNUM}orcbjobchk1-${RUNDATE}.$$
+PARAM="${HOSPNUM},0000001,RECEPT1,mis,${RESULTF}"
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBCHK1 -parameter "${PARAM}"
+if [ -e ${RESULTF} ] ; then
+  RES=`cat ${RESULTF}`
+  EXMISRECE="${RES:1:1}"
+  EXMISJMAMR="${RES:2:1}"
+  rm ${RESULTF}
+else
+  EXMISRECE="0"
+  EXMISJMAMR="0"
+fi
+
+delete_pgpass
+
+#-------------------------------------------#
+# レセプト電子データ
+#-------------------------------------------#
+if [ ${EXMISRECE} -eq 1 ]; then
+  #-------------------------------------------#
+  #  ${1} : 医療機関識別番号(HOSPNUM)
+  #  ${2} : 診療年月
+  #  ${3} : 処理起動日時
+  #  ${4} : データ出力ディレクトリ
+  #  ${5} : 処理区分（0:毎日・1:確定）
+  #-------------------------------------------#
+
+  SRYYM="${RUNDATE:0:6}"
+  #-------------------------------------------#
+  # 医科・デイリー分作成
+  #-------------------------------------------#
+
+  run_receipt_mis_ika.sh ${HOSPNUM} ${SRYYM} ${RUNDATE} ${DATADIR} "0"
+
+  #-------------------------------------------#
+  # 労災・デイリー分作成
+  #-------------------------------------------#
+
+  run_receipt_mis_rou.sh ${HOSPNUM} ${SRYYM} ${RUNDATE} ${DATADIR} "0"
+
+  #-------------------------------------------#
+  # 確定分作成
+  #
+  # 処理起動日が確定版データ作成日である場合
+  # 処理年月を前月として処理をする
+  #-------------------------------------------#
+
+  RUNDATE="${EXDATE}30"
+  if [ "${RUNDATE:6:2}" = "${2}" ]; then
+     WKYY="${RUNDATE:0:4}"
+     WKMM="${RUNDATE:4:2}"
+     if [ "${WKMM}" = "01" ]; then
+        WKYY=$(expr ${WKYY} - 1)
+        WKMM="12"
+     else
+        WKMM=`printf "%02d" $(expr ${WKMM} - 1)`
+     fi
+     SRYYM="${WKYY}${WKMM}"
+     #-------------------------------------------#
+     # 医科・確定分作成
+     #-------------------------------------------#
+   
+     run_receipt_mis_ika.sh ${HOSPNUM} ${SRYYM} ${RUNDATE} ${DATADIR} "1"
+
+     #-------------------------------------------#
+     # 労災・確定分作成
+     #-------------------------------------------#
+
+     run_receipt_mis_rou.sh ${HOSPNUM} ${SRYYM} ${RUNDATE} ${DATADIR} "1"
+  fi
+fi
+
+#-------------------------------------------#
+# 日医版診療情報データ
+#-------------------------------------------#
+if [ ${EXMISJMAMR} -eq 1 ]; then
+  run_jmamr_mis.sh ${HOSPNUM} ${RUNDATE} ${DATADIR}
+fi
+
+delete_tempdir
+
+exit 0

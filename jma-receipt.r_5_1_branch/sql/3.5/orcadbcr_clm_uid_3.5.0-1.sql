@@ -1,0 +1,60 @@
+\set ON_ERROR_STOP
+--
+-- claim用uid格納テーブル
+--
+-- Create Date : 2007/05/24         --
+--
+create	table	tbl_clm_uid	(
+	HOSPNUM	numeric(2,0),
+	PTID	numeric(10,0),
+	SRYKA	char(2),
+	UID_NEW	char(36),
+	HKNCOMBI1	numeric(4,0),
+	UID1	char(36),
+	HKNCOMBI2	numeric(4,0),
+	UID2	char(36),
+	HKNCOMBI3	numeric(4,0),
+	UID3	char(36),
+	HKNCOMBI4	numeric(4,0),
+	UID4	char(36),
+	HKNCOMBI5	numeric(4,0),
+	UID5	char(36),
+	HKNCOMBI6	numeric(4,0),
+	UID6	char(36),
+	HKNCOMBI7	numeric(4,0),
+	UID7	char(36),
+	HKNCOMBI8	numeric(4,0),
+	UID8	char(36),
+	HKNCOMBI9	numeric(4,0),
+	UID9	char(36),
+	HKNCOMBI10	numeric(4,0),
+	UID10	char(36),
+	HKNCOMBI11	numeric(4,0),
+	UID11	char(36),
+	HKNCOMBI12	numeric(4,0),
+	UID12	char(36),
+	HKNCOMBI13	numeric(4,0),
+	UID13	char(36),
+	HKNCOMBI14	numeric(4,0),
+	UID14	char(36),
+	HKNCOMBI15	numeric(4,0),
+	UID15	char(36),
+	HKNCOMBI16	numeric(4,0),
+	UID16	char(36),
+	HKNCOMBI17	numeric(4,0),
+	UID17	char(36),
+	HKNCOMBI18	numeric(4,0),
+	UID18	char(36),
+	HKNCOMBI19	numeric(4,0),
+	UID19	char(36),
+	HKNCOMBI20	numeric(4,0),
+	UID20	char(36),
+	CREYMD	char(8),
+	UPYMD	char(8),
+	UPHMS	char(6),
+	Constraint "tbl_clm_uid_primary_key" primary	key(
+		HOSPNUM,
+		PTID,
+		SRYKA
+	)
+);

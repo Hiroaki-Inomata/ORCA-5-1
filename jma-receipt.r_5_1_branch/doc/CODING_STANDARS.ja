@@ -1,0 +1,115 @@
+            日医標準レセプトソフトコーディング規約
+-----------------------------------------------------------------------------
+COBOL
+=====
+
+○固定形式で記述する。
+  (8桁目から 72桁目の間に記述する)。
+
+|1|2|3|4|5|6  |   7    |8|9|10|11 |12|13|14|15|....72|73|74|....80|
+|一連番号領域 |標識領域|  A領域   |       B領域      | 見出し領域 |
+                       |  プログラムテキスト領域     |
+
+○日本語EUCで記述する。
+
+
+
+SCRIPTS
+=======
+スクリプトは shシェルスクリプト か Rubyスクリプトを使用する。
+
+○シェルスクリプト
+・ソースファイル名を *.sh.in としてmake 時に *.sh となるようにする。
+
+・スクリプトの先頭は以下のように記述する。
+---
+#!/bin/sh 
+. @jma-receipt-env@
+---
+・ @jma-receipt-env@ はソース make 時に実ファイルに置き換えられる。
+
+・PATH をスクリプト中に埋め込まず、@jma-receipt-env@ で設定される
+  変数を使用する。
+
+
+○Rubyスクリプト
+
+・ スクリプトの先頭は以下のように記述する
+---
+#!/usr/bin/env ruby
+---
+
+画面作成(.glade)
+================
+
+○ 1つのWindow に対して 1 file とする。
+
+○ GtkWidnow には必ず以下の3つのシグナルを付ける。
+  Signal        Handler
+  ------------------------------
+  map_event     map_event      
+  set_focus     set_focus
+  delete_event  gtk_true
+
+○ Windowがダイアログの場合は
+  1. Window の type を Dialog(GTK_WINDOW_DIALOG)にする。
+  2. WM Class(wmclass_class) を jma-receipt.dialog とする。
+
+○ 使用可能 widget
+   現在以下の Widget が使用可能
+     GtkWindow
+     GtkButton
+     GtkRadioButton
+     GtkToggleButton
+     GtkCheckButton
+     GtkCalendar
+     GtkList
+     GtkProgressBar
+     GtkLabel
+     GtkTable
+     GtkFrame
+     GtkHSeparator
+     GtkVSeparator
+     GtkScrolledWindow
+     GtkViewport
+     GtkFixed
+     GtkNotebook
+     GtkNumberEntry
+     GtkPandaCList
+     GtkPandaCombo
+     GtkPandaEntry
+     GtkPandaText
+     GtkPandaTimer
+     GtkPandaHTML
+
+   以下の widget は使用可能であるが、GtkPanda* を使用すべきである。
+     GtkEntry
+     GtkText
+     GtkCList
+
+
+命名規約
+========
+
+○ORCA標準以外（県単等）のアプリケーション等を作成する場合以下の規約に
+  従う
+  1. オンライン帳票関係カスタマイズモジュール
+     全ての定義体の先頭１文字を「A」とする。
+  2. レセプト（診療報酬明細書）カスタマイズモジュール
+     全ての定義体の先頭２文字を「SR」とする。
+  3. バッチ（統計資料等）帳票関係カスタマイズモジュール
+     全ての定義体の先頭１文字を「B」とする。
+  4. 地方公費
+     (1).プログラムID
+         先頭３桁が「ORC」以外とする。
+     (2).帳票定義体、def、COBOL 帳票COPY句
+         定義体の先頭２文字を「SC」とする。
+     (3).請求書シェルID
+         SEIKYU@@**.sh とする。 （@@:都道府県番号、**:任意）
+     (4).総括表シェルID
+         SOKATSU@@**.sh とする。（@@:都道府県番号、**:任意）
+     (5).その他のCOBOL 帳票COPY句
+         CPS@@@@@@@.INC         （@@@@@@@:任意）
+
+
+

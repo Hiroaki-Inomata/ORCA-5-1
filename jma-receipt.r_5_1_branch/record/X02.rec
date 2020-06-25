@@ -1,0 +1,549 @@
+X02 {
+  fixed2 {
+    NAME {
+      textdata varchar(100);
+    };
+    B03 {
+      state int;
+    };
+    NO01 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO02 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO03 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO04 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO05 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO06 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO07 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO08 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO09 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO10 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO11 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO12 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO13 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO14 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO15 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO16 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO17 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO18 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO19 {
+      style varchar(20);
+      numdata number(3);
+    };
+    NO20 {
+      style varchar(20);
+      numdata number(3);
+    };
+    TEKCD01 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD02 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD03 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD04 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD05 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD06 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD07 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD08 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD09 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD10 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD11 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD12 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD13 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD14 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD15 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD16 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD17 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD18 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD19 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TEKCD20 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    DSPNAME01 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME02 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME03 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME04 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME05 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME06 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME07 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME08 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME09 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME10 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME11 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME12 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME13 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME14 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME15 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME16 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME17 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME18 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME19 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME20 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    NGBNDKBN01 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN02 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN03 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN04 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN05 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN06 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN07 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN08 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN09 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN10 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN11 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN12 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN13 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN14 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN15 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN16 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN17 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN18 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN19 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    NGBNDKBN20 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR01 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR02 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR03 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR04 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR05 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR06 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR07 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR08 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR09 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR10 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR11 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR12 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR13 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR14 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR15 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR16 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR17 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR18 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR19 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    CHKERR20 {
+      state int;
+      style varchar(20);
+      numdata number(1);
+    };
+    LBLCHKERR01 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR02 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR03 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR04 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR05 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR06 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR07 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR08 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR09 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR10 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR11 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR12 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR13 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR14 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR15 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR16 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR17 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR18 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR19 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    LBLCHKERR20 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    SRYCD {
+      textdata varchar(9);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    CHKKBN {
+      textdata varchar(50);
+    };
+    LBLPAGE {
+      textdata varchar(10);
+    };
+    LBLCAUTION {
+      style varchar(20);
+      textdata varchar(200);
+    };
+  };
+};

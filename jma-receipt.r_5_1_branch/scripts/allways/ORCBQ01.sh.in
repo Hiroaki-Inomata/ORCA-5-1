@@ -1,0 +1,170 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    患者一覧出力
+#        $1  処理区分
+#        $2  CSVファイル名
+#        $3  パラメータファイルID
+#        $4  APII以外: TERMID, APIの場合: ORCA-UID
+#        $5  HOSPNUM
+#        $6  ジョブＩＤ
+#        $7  シェルＩＤ
+#        $8 ファイル出力先 1:client
+#        $9 文字コード区分 1:euc 2:s-jis 3:utf-8
+#        $10 検索パターン 0:通常/1:点数/2:診療行為
+#        $11 TBL_KEY
+#        $12 KARTE-UID
+#        $13 DATA-ID
+#        $14 PRINT-ID
+#        $15 PDFファイル名(大容量API用）
+#-------------------------------------------#
+
+[ -z "${MCP_TEMPDIR}" ] && exit 1
+
+LOG_FILE="/var/log/jma-receipt/${HOSPNUM}orcb013_1.log"
+
+[ -f "${LOG_FILE}" ] &&  rm ${LOG_FILE}
+
+PAPA_ID=$3
+HOSPNUM=$5
+SHELLID=$7
+CLIENT_SAVE=$8
+REQUEST_PRINT=${1:0:1}
+REQUEST_CSV=${1:1:1}
+CSV_FILE_FULL=$2
+# set dummy file if CSV was not requested
+[ ${REQUEST_CSV} != "1" ] && CSV_FILE_FULL=${MCP_TEMPDIR}/$(uuidgen)
+CSV_FILE_BASE=$(basename ${CSV_FILE_FULL})
+if   [ ${CLIENT_SAVE} == '1' ]; then
+  CSV_FILE_BASE=$(basename ${CSV_FILE_FULL})
+  CSV_FILE_FULL=${MCP_TEMPDIR}/${CSV_FILE_BASE}
+fi
+
+ZIP_FILE_BASE=${CSV_FILE_BASE%%.csv}.zip
+ZIP_FILE_FULL=${MCP_TEMPDIR}/${ZIP_FILE_BASE}
+
+WKCSV_FILE_FULL=$(mktemp  ${MCP_TEMPDIR}/BQ01_01.XXXXXXXXXX)
+WKCSV_FILE_BASE=$(basename ${WKCSV_FILE_FULL})
+
+MONPUSHEVENT="/usr/lib/panda/bin/monpushevent"
+PUSH_FILE_FULL=$(mktemp  ${MCP_TEMPDIR}/BQ01_02.XXXXXXXXXX)
+PUSH_FILE_BASE=$(basename ${PUSH_FILE_FULL})
+RECFILE="push_found.db"
+RECDIR=${RECORDDIR}
+if [ -f ${PATCHRECORDDIR}/${RECFILE} ]; then
+  RECDIR=${PATCHRECORDDIR}
+fi
+TBL_KEY=${11}
+#PDF用空ファイル(APIで使用)
+
+TEMP_PREFIX=${MCP_TEMPDIR}/${TBL_KEY}
+PDF_TEMP_FULL=$(mktemp  --suffix=.pdf ${TEMP_PREFIX}.XXXXXXXXXXXXX)
+PDF_TEMP_BASE=$(basename ${PDF_TEMP_FULL})
+
+PDF_FILE_BASE=${15}
+PDF_FILE_FULL=${MCP_TEMPDIR}/${PDF_FILE_BASE}
+
+#sedのセパレータを"/"から">"に変更（正規表現に"/"が含まれる場合の考慮）
+TBL_GROUP=$(echo ${PDF_TEMP_BASE} | sed -e "s>^${TBL_KEY}\|\.pdf$>>g")
+
+KARTE_UID=${12}
+ORCA_UID=$4
+DATA_ID=${13}
+PRINT_ID=${14}
+
+
+# エラー処理(API用)
+error(){
+  ERRMSG="大容量データの作成に失敗しました"
+  [ -n "$2" ] && ERRMSG=$2
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ04 -parameter "${HOSPNUM},${PAPA_ID},${KARTE_UID},${ORCA_UID},${TBL_KEY},$1,${PUSH_FILE_BASE},${ERRMSG}"
+}
+
+do_push(){
+  ${MONPUSHEVENT} ${RECDIR}/${RECFILE} ${PUSH_FILE_FULL}
+}
+
+cleanup(){
+##      一時ファイル削除
+  [ -f "${PDF_TEMP_FULL}" ]    && rm ${PDF_TEMP_FULL}
+  [ -f "${WKCSV_FILE_FULL}" ]  && rm ${WKCSV_FILE_FULL}
+  [ -f "${PUSH_FILE_FULL}" ]   && rm ${PUSH_FILE_FULL}
+  [ -f "${PDF_FILE_FULL}" ]    && rm ${PDF_FILE_FULL}
+  [ "${CLIENT_SAVE}" = '1' ] &&  [ -f "${CSV_FILE_FULL}" ]  && rm ${CSV_FILE_FULL}
+
+  if [ "${SHELLID}" == "API" ]; then
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+  fi
+}
+
+trap cleanup EXIT
+
+##
+PGNAME=ORCBQ01
+[ "${10}" == "2" ] && PGNAME=ORCBQ01A
+[ "${10}" == "3" ] && PGNAME=ORCBQ01B
+##
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ${PGNAME} -parameter "${HOSPNUM},${PAPA_ID},$4,${WKCSV_FILE_BASE},${PUSH_FILE_BASE},${TBL_KEY},${TBL_GROUP}"
+
+
+## ＣＳＶファイル作成
+if  [ "${REQUEST_CSV}" == "1" ] && [ -f "${WKCSV_FILE_FULL}" ]; then
+
+  sed -i -e 's/^ *\| *$//g' -e 's/ *, */,/g' ${WKCSV_FILE_FULL}
+
+  if   [ ${CLIENT_SAVE} = '1' ]; then
+#   クライアント保存のとき固定ファイルに文字コード変換
+    case $9 in
+      2)
+#       EUC => SJIS
+        nkf -s -Lw ${WKCSV_FILE_FULL} > ${CSV_FILE_FULL}
+        ;;
+      3)
+#       EUC => UTF8
+        nkf --ic=EUC-JIS-2004 --oc=UTF-8 ${WKCSV_FILE_FULL} | tru8.rb > ${CSV_FILE_FULL}
+        ;;
+      *)
+        mv  ${WKCSV_FILE_FULL} ${CSV_FILE_FULL}
+    esac
+  else
+    mv  ${WKCSV_FILE_FULL} ${CSV_FILE_FULL}
+  fi
+fi
+
+if [ "${SHELLID}" == "API" ]; then
+
+  if [ ${REQUEST_CSV} == "1" ]; then
+    zip -j ${ZIP_FILE_FULL}  ${CSV_FILE_FULL}
+    [ $? -ne 0 ] && error "99" && exit 1
+    ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBMBIMPORT -parameter "${DATA_ID},${ZIP_FILE_BASE},zip,short"
+    [ $? -ne 0 ] && error "98" && exit 2
+  fi
+
+  if [ ${REQUEST_PRINT} == "1" ]; then
+    if [ -f "${PDF_TEMP_FULL}" ]; then
+      mv ${PDF_TEMP_FULL} ${PDF_FILE_FULL}
+      ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBMBIMPORT -parameter "${PRINT_ID},${PDF_FILE_BASE},pdf,short"
+      [ $? -ne 0 ] && error "97" && exit 3
+    else
+      error "96" && exit 3
+    fi
+  fi
+
+  do_push
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ04 -parameter "${HOSPNUM},${PAPA_ID},${KARTE_UID},${ORCA_UID},${TBL_KEY},02,${PUSH_FILE_BASE},"
+else
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ05 -parameter "${HOSPNUM},${PAPA_ID},${CSV_FILE_BASE}"
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBE$6$7,${HOSPNUM}"
+fi
+
+exit

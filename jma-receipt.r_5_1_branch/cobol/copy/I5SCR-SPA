@@ -1,0 +1,268 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      *****************************************************************
+       01  SPA-I5FREE.
+      *
+      *      ²èÌÌ¥¹¥ÑÎÎ°è
+         03  SPA-I51.
+           05  SPA-I51-AREA.
+               07  SPA-GMN-I51-PAGE                  PIC 9(02).
+               07  SPA-GMN-I51-LINE                  PIC 9(02).
+               07  SPA-GMN-I51-MAX                   PIC 9(02).
+               07  SPA-GMN-I51-CUR                   PIC 9(03).
+               07  SPA-GMN-I51-AREA.
+                   09  SPA-GMN-I51-HEAD-AREA.
+      *                ´µ¼ÔÈÖ¹æ
+                       11  SPA-GMN-I51-PTNUM         PIC X(20).
+      *                ´µ¼Ô¥«¥Ê»áÌ¾
+                       11  SPA-GMN-I51-KANANAME      PIC X(60).
+      *                ´µ¼Ô»áÌ¾
+                       11  SPA-GMN-I51-NAME          PIC X(60).
+      *                ´µ¼ÔÀ­ÊÌ
+                       11  SPA-GMN-I51-SEX           PIC X(04).
+      *                ´µ¼ÔÃÂÀ¸Æü
+                       11  SPA-GMN-I51-BIRTHDAY      PIC X(09).
+      *                ´µ¼ÔÇ¯Îð
+                       11  SPA-GMN-I51-AGE           PIC X(07).
+      *                ÊÝ¸±ÁÈ¤ß¹ç¤ï¤»
+                       11  SPA-GMN-I51-HKNCOMBI      PIC X(60).
+      *                ÉéÃ´Î¨
+                       11  SPA-GMN-I51-FTNRATE       PIC X(05).
+      *                Æþ±¡²Ê
+                       11  SPA-GMN-I51-NYUINKA       PIC X(10).
+      *                Á°²óÄê´üÀÁµá´ü´Ö
+                       11  SPA-GMN-I51-TEIKIKIKAN    PIC X(30).
+                   09  SPA-GMN-I51-INPUT-AREA.
+      *                Æþ±¡Æü
+                       11  SPA-GMN-I51-NYUINYMD      PIC X(10).
+      *                »»Äê³«»ÏÆü
+                       11  SPA-GMN-I51-SANTEISTYMD   PIC X(10).
+      *                »»Äê½ªÎ»Æü
+                       11  SPA-GMN-I51-SANTEIEDYMD   PIC X(10).
+                       11  SPA-GMN-I51-SEIKYU-AREA.
+      *                    ¿ÇÎÅÎÁ
+                           13  SPA-GMN-I51-HKNRYO    PIC 9(07)
+                                                     OCCURS  17.
+      *                    ÊÝ¸±Å¬ÍÑ³°¿ÇÎÅÎÁ
+                           13  SPA-GMN-I51-TGMONEY       PIC 9(07)
+                                                         OCCURS  17.
+      *
+      *                    ÊÝ¸±Å¬ÍÑÊ¬
+                           13  SPA-GMN-I51-HKNTEKI       PIC 9(10).
+      *                    ¿©»öÎÅÍÜÈñ
+                           13  SPA-GMN-I51-RYOYOHI-SKJ   PIC 9(07).
+      *                    À¸³èÎÅÍÜÈñ
+                           13  SPA-GMN-I51-RYOYOHI-LIFE  PIC 9(07).
+      *                    ¿©»öÉéÃ´³Û
+                           13  SPA-GMN-I51-SKYMONEY-SKJ  PIC 9(07).
+      *                    À¸³èÉéÃ´³Û
+                           13  SPA-GMN-I51-SKYMONEY-LIFE PIC 9(07).
+      *                    Ï·¿Í°ìÉôÉéÃ´¶â
+                           13  SPA-GMN-I51-ROUFTN        PIC 9(07).
+      *                    ¸øÈñ°ìÉôÉéÃ´¶â
+                           13  SPA-GMN-I51-KOHFTN        PIC 9(07).
+      *
+                           13  SPA-GMN-I51-JIHI-G.
+      *                        ¼«Èñ£±
+                               15  SPA-GMN-I51-JIHI1     PIC 9(07).
+      *                        ¼«Èñ£²
+                               15  SPA-GMN-I51-JIHI2     PIC 9(07).
+      *                        ¼«Èñ£³
+                               15  SPA-GMN-I51-JIHI3     PIC 9(07).
+      *                        ¼«Èñ£´
+                               15  SPA-GMN-I51-JIHI4     PIC 9(07).
+      *                        ¼«Èñ£µ
+                               15  SPA-GMN-I51-JIHI5     PIC 9(07).
+      *                        ¼«Èñ£¶
+                               15  SPA-GMN-I51-JIHI6     PIC 9(07).
+      *                        ¼«Èñ£·
+                               15  SPA-GMN-I51-JIHI7     PIC 9(07).
+      *                        ¼«Èñ£¸
+                               15  SPA-GMN-I51-JIHI8     PIC 9(07).
+      *                        ¼«Èñ£¹
+                               15  SPA-GMN-I51-JIHI9     PIC 9(07).
+      *                        ¼«Èñ£±£°
+                               15  SPA-GMN-I51-JIHI10    PIC 9(07).
+                           13  SPA-GMN-I51-JIHI-R
+                                   REDEFINES SPA-GMN-I51-JIHI-G.
+                               15  SPA-GMN-I51-JIHI      PIC 9(07)
+                                                         OCCURS  10.
+      *                    ¼«Èñ·×
+                           13  SPA-GMN-I51-JIHIKEI       PIC 9(07).
+      *
+                           13  SPA-GMN-I51-JIHITAX-G.
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£±
+                               15  SPA-GMN-I51-JIHITAX1  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£²
+                               15  SPA-GMN-I51-JIHITAX2  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£³
+                               15  SPA-GMN-I51-JIHITAX3  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£´
+                               15  SPA-GMN-I51-JIHITAX4  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£µ
+                               15  SPA-GMN-I51-JIHITAX5  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£¶
+                               15  SPA-GMN-I51-JIHITAX6  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£·
+                               15  SPA-GMN-I51-JIHITAX7  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£¸
+                               15  SPA-GMN-I51-JIHITAX8  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£¹
+                               15  SPA-GMN-I51-JIHITAX9  PIC 9(07).
+      *                        ¼«Èñ¾ÃÈñÀÇ¤¢¤ê£±£°
+                               15  SPA-GMN-I51-JIHITAX10 PIC 9(07).
+                           13  SPA-GMN-I51-JIHITAX-R
+                                   REDEFINES SPA-GMN-I51-JIHITAX-G.
+                               15  SPA-GMN-I51-JIHITAX   PIC 9(07)
+                                                         OCCURS  10.
+      *                    ¼«Èñ¾ÃÈñÀÇ¤¢¤ê·×
+                           13  SPA-GMN-I51-JIHITAXKEI    PIC 9(07).
+      *                    ¼«Èñ¾ÃÈñÀÇ
+                           13  SPA-GMN-I51-JIHIZEI       PIC 9(07).
+      *                    ÊÝ¸±Å¬ÍÑ³°
+                           13  SPA-GMN-I51-HKNGAI        PIC 9(07).
+      *                    °ìÉôÉéÃ´¶â·×
+                           13  SPA-GMN-I51-ICHIFTN       PIC 9(07).
+      *                    º£²óÀÁµá³Û
+                           13  SPA-GMN-I51-SEIKYU        PIC S9(07).
+      *                    ¹ç·×ÀÁµá³Û
+                           13  SPA-GMN-I51-SEIGOK        PIC S9(07).
+      *
+      *                    Ï«ºÒ½é¿Ç
+                           13  SPA-GMN-I51-ROUSYOSIN     PIC S9(07).
+      *                    Ï«ºÒºÆ¿Ç
+                           13  SPA-GMN-I51-ROUSAISIN     PIC S9(07).
+      *                    Ï«ºÒ»ØÆ³
+                           13  SPA-GMN-I51-ROUSIDOU      PIC S9(07).
+      *                    Ï«ºÒ¤½¤ÎÂ¾
+                           13  SPA-GMN-I51-ROUETC        PIC S9(07).
+      *                    ¼«ÈñÌ¾¾Î
+                           13  SPA-GMN-I51-JIHIMSG       PIC X(20)
+                                                         OCCURS   10.
+      *                    ¼¼ÎÁº¹³Û
+                           13  SPA-GMN-I51-RMSAGAKU      PIC S9(07).
+      *                    Ä´À°¶â
+                           13  SPA-GMN-I51-CHOSEI-G.
+                               15  SPA-GMN-I51-CHOSEI-OCC
+                                                         OCCURS  2.
+                                   17  SPA-GMN-I51-CHOSEI    PIC S9(07).
+                                   17  SPA-GMN-I51-CHOSEI-X  PIC X(10).
+      *                Á°²óÌ¤¼ý³Û¡Ê³°Íè¡Ë
+                       11  SPA-GMN-I51-ZENMISYU-GAI  PIC S9(07).
+      *                Á°²óÌ¤¼ý³Û¡ÊÆþ±¡¡Ë
+                       11  SPA-GMN-I51-ZENMISYU-NYU  PIC S9(07).
+      *                ÁªÂòÈÖ¹æ
+                       11  SPA-GMN-I51-SELNUM        PIC 9(02).
+      *                ÊÝ¸±ÁÈ¤ß¹ç¤ï¤»¥ê¥¹¥È
+                       11  SPA-GMN-I51-HKNCOMBILST.
+                           13  SPA-GMN-I51-HKNCOMBILST-CNT
+                                                     PIC S9(9)   BINARY.
+                           13  SPA-GMN-I51-HKNCOMBILST-ITM  OCCURS   15.
+                               15  SPA-GMN-I51-TSELNUM   PIC 9(02).
+                               15  SPA-GMN-I51-THKNCOMBI PIC X(50).
+                           13  SPA-GMN-I51-HKNCOMBILST-SEL
+                                                         PIC 9(05).
+      *            ÀÁµá½ñ·óÎÎ¼ý½ñÈ¯¹ÔÊýË¡
+                   09  SPA-GMN-I51-SKYSUMKBN-G.
+                       11   SPA-GMN-I51-SKYSUMKBN    PIC X(01).
+                       11   SPA-GMN-I51-SKYSUMKBNFL  PIC X(01).
+                       11   SPA-GMN-I51-SKYSUMKBNMEI PIC X(28).
+      *            ²èÌÌ¥³¥ó¥Ü¥Ç¡¼¥¿ÎÎ°è
+                   09  SPA-GMN-I51-CMB-DAT-AREA.
+      *                    ÀÁµá½ñ·óÎÎ¼ý½ñÈ¯¹ÔÊýË¡
+                       11  SPA-GMN-I51-SKYSUMKBNLST-G.
+                           13  SPA-GMN-I51-SKYSUMKBN-MAX
+                                                     PIC 9(5).
+                           13  SPA-GMN-I51-SKYSUMKBNLST
+                                                     OCCURS  4.
+                               15  SPA-GMN-I51-SKYSUMKBNL    PIC X(01).
+                               15  SPA-GMN-I51-SKYSUMKBNFLL  PIC X(01).
+                               15  SPA-GMN-I51-SKYSUMKBNMEIL PIC X(28).
+      *
+                   09  SPA-NAI-I51-HEAD-AREA.
+      *                ´µ¼ÔÈÖ¹æ¥¨¥é¡¼¾õÂÖ
+                       11  SPA-NAI-I51-PTNUM-ERR     PIC X(04).
+      *                ´µ¼Ô£É£Ä
+                       11  SPA-NAI-I51-PTID          PIC 9(10).
+      *                ´µ¼ÔÃÂÀ¸Æü
+                       11  SPA-NAI-I51-BIRTHDAY      PIC X(08).
+      *                ÆþÎÏ¥Ç¡¼¥¿Æþ±¡ÍúÎòÈÖ¹æ
+                       11  SPA-NAI-I51-PTRRKNUM      PIC 9(03).
+      *                ÆþÎÏ¥Ç¡¼¥¿Æþ±¡ÍúÎò»ÞÈÖ¹æ
+                       11  SPA-NAI-I51-PTRRKEDANUM   PIC 9(03).
+      *                Á°²óÄê´üÀÁµá³«»ÏÆü
+                       11  SPA-NAI-I51-SKYSTYMD      PIC X(08).
+      *                Á°²óÄê´üÀÁµá½ªÎ»Æü
+                       11  SPA-NAI-I51-SKYEDYMD      PIC X(08).
+      *                ½é´üÉ½¼¨»þ»»Äê³«»ÏÆü
+                       11  SPA-NAI-I51-DEFSTYMD      PIC X(08).
+                   09  SPA-NAI-I51-INPUT-AREA.
+      *                Æþ±¡Æü
+                       11  SPA-NAI-I51-NYUINYMD      PIC X(08).
+      *                Âà±¡Æü
+                       11  SPA-NAI-I51-TAIINYMD      PIC X(08).
+      *                »»Äê³«»ÏÆü
+                       11  SPA-NAI-I51-SANTEISTYMD   PIC X(08).
+      *                »»Äê½ªÎ»Æü
+                       11  SPA-NAI-I51-SANTEIEDYMD   PIC X(08).
+      *                ÀÁµá¥Ç¡¼¥¿
+                       11  SPA-NAI-I51-SEIKYU-AREA.
+                           13  SPA-NAI-I51-CHOSEI-TBL.
+                             14    SPA-NAI-I51-CHOSEI-OCC1
+                                                         OCCURS    15.
+                               15  SPA-NAI-I51-CHOSEI-OCC2
+                                                         OCCURS    2.
+                                   17  SPA-NAI-I51-CHOSEI    PIC S9(07).
+                                   17  SPA-NAI-I51-CHOSEI-X  PIC X(10).
+                                   17  SPA-NAI-I51-CHOSEI-MOT
+                                                             PIC S9(07).
+      *                    ÀÁµá¶â³Û
+                           13  SPA-NAI-I51-SEIKYU-TBL.
+                               15  SPA-NAI-I51-SEIKYU-OCC
+                                                         OCCURS    15.
+                                   17  SPA-NAI-I51-SEIKYU-PLUS
+                                                            PIC S9(10).
+                                   17  SPA-NAI-I51-SEIKYU    PIC S9(10).
+                                   17  SPA-NAI-I51-SEIKYU-KON
+                                                             PIC S9(10).
+      *
+                       11  SPA-NAI-I51-HKNCOMBILST.
+                           13  SPA-NAI-I51-HKNCOMBILST-ITM   OCCURS  15.
+                               15  SPA-NAI-I51-TTTLDAT-FLG   PIC 9(01).
+                               15  SPA-NAI-I51-TSYUNOUIDX    PIC 9(02).
+                               15  SPA-NAI-I51-THKNCOMBI-DAT.
+                                   17  SPA-NAI-I51-TSELNUM   PIC Z9.
+      *  ¼ýÇ¼¥Ç¡¼¥¿
+         03  SPA-I5-SYUNOU-TBL.
+           05  SPA-I5-SYUNOU-SANTEISTYMD             PIC X(08).
+           05  SPA-I5-SYUNOU-SANTEIEDYMD             PIC X(08).
+           05  SPA-I5-SYUNOU-CNT                     PIC 9(05).
+           05  SPA-I5-SYUNOU-OCC                     OCCURS  13.
+      *      ¼ýÇ¼¹ç·×¥Õ¥é¥°  0:¼ýÇ¼¥Ç¡¼¥¿
+      *                      1:·îÊÌ¹ç·×¥Ç¡¼¥¿
+      *                      2:¹ç·×¥Ç¡¼¥¿
+             07  SPA-I5-SYUNOU-TTLDAT-FLG            PIC 9(01).
+             07  SPA-I5-SYUNOU-YM-S                  PIC X(06).
+             07  SPA-I5-SYUNOU-YM-W                  PIC X(06).
+             07  SPA-I5-SYUNOU-SKYSTYMD              PIC X(08).
+             07  SPA-I5-SYUNOU-SKYEDYMD              PIC X(08).
+             07  SPA-I5-SYUNOU-HKNCOMBI              PIC X(50).
+      *      ·îÊÌÊÝ¸±ÁÈ¹ç¤»¿ô¡Ê·îÊÌ¹ç·×¥Ç¡¼¥¿¤Î¤ßÀßÄê¡Ë
+             07  SPA-I5-SYUNOU-HKNCOMBI-SU           PIC 9(02).
+      *      ÂÐ¾Ý·î¿ô¡Ê¹ç·×¥Ç¡¼¥¿¤Î¤ßÀßÄê¡Ë
+             07  SPA-I5-SYUNOU-TUKI-SU               PIC 9(02).
+             07  SPA-I5-SYUNOU-DAT                   PIC X(3000).

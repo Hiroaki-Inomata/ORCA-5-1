@@ -1,0 +1,44 @@
+xml_hsfindv3req{
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  hsfindv3req  {
+    Request_Number                 varchar(2);
+    Base_Date                      varchar(10);
+    Selection{
+      First                        varchar(7);
+      Last                         varchar(7);
+    };
+    Patient_Information{
+      Patient_ID                   varchar(20);
+      WholeName                    varchar(100);
+      BirthDate{
+        First                      varchar(10);
+        Last                       varchar(10);
+      };
+      WholeAddress                 varchar(100);
+      Admission_Date{
+        First                      varchar(10);
+        Last                       varchar(10);
+      };
+      Discharge_Date{
+        First                      varchar(10);
+        Last                       varchar(10);
+      };
+      Department_Code              varchar(2);
+      Ward_Number                  varchar(2);
+      State                        varchar(1);
+      Billing_State                varchar(1);
+      Reccurning_Billing_Month     varchar(7);
+      Reccurning_Billing_Period    varchar(1);
+      Discharge_Reason             varchar(2);
+      Death_Class                  varchar(1);
+      TestPatient_Class            varchar(1);
+    };
+    Sort_Key{
+      Key_Class                    varchar(1);
+      Order_Class                  varchar(1);
+    }[3];
+  };
+};

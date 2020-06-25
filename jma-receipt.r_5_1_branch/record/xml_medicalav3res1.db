@@ -1,0 +1,77 @@
+xml_medicalav3res1 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3res1 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+	Perform_Date				varchar(10);
+	Perform_Time				varchar(8);
+#--- 中途データ存在有無を格納
+	Temp_Medical_Flag			varchar(05);
+#--- 受診有無
+	Visit_History				varchar(05);
+#--- 入院日
+	Admission_Date				varchar(10);
+#--- 退院日
+	Discharge_Date				varchar(10);
+#---   同日再入院区分（連番）
+	Sequential_Number			varchar(1);
+#--- 診療科
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+#---
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Admission			varchar(04);
+			Money_Admission			varchar(06);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+            	} [4];
+        	};
+    	};
+	Medical_Message_Information {
+        Medical_Result				varchar(3);
+        Medical_Result_Message			varchar(100);
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(3);
+       		 Medical_Warning_Message	varchar(100);
+       		 Medical_Warning_Code		varchar(9);
+            	} [50];
+        };
+#--- 
+	};
+};

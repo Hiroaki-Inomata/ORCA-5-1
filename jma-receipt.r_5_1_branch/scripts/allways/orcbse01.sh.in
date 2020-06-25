@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#    データチェク処理
+#        CPCOMMONSHELL5.INC
+#        $1 SRYYM TERID SYSYMD
+#        $2 SYOKBN
+#        $3 RECEKBN
+#        $4 エラーファイル名 
+#        $5 HOSPNUM 
+#-------------------------------------------#
+##
+
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCGE03 -parameter $1$2$3$5
+	
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE0000001ORCBSE1,$5
+	
+        exit

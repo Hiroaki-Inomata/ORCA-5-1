@@ -1,0 +1,47 @@
+        01  HCM18V01.
+            02  HCM18V01-KANANAME   PIC X(30).
+            02  HCM18V01-NAME   PIC X(26).
+            02  HCM18V01-HOSPNAME   PIC X(60).
+            02  HCM18V01-BYOSYOSU   PIC X(4).
+            02  HCM18V01-TOTALTEN   PIC X(6).
+            02  HCM18V01-TOTALMONEY PIC X(10).
+            02  HCM18V01-KOFUNUM.
+              03  HCM18V01-KOFUNUM-S  PIC X(1)    OCCURS  13 TIMES.
+            02  HCM18V01-SRYYMD.
+              03  HCM18V01-SRYYMD-S   PIC X(1)    OCCURS  7 TIMES.
+            02  HCM18V01-KENSAYMD.
+              03  HCM18V01-KENSAYMD-S PIC X(1)    OCCURS  7 TIMES.
+            02  HCM18V01-GOKEI.
+              03  HCM18V01-GOKEI-S    PIC X(1)    OCCURS  7 TIMES.
+            02  HCM18V01-KEIKA-G        OCCURS  3 TIMES.
+              03  HCM18V01-KEIKA  PIC X(52).
+            02  HCM18V01-ZENKAIY    PIC X(2).
+            02  HCM18V01-ZENKAIM    PIC X(2).
+            02  HCM18V01-ZENKAID    PIC X(2).
+            02  HCM18V01-SYOSHINY   PIC X(2).
+            02  HCM18V01-SYOSHINM   PIC X(2).
+            02  HCM18V01-SYOSHIND   PIC X(2).
+            02  HCM18V01-SAISHINY   PIC X(2).
+            02  HCM18V01-SAISHINM   PIC X(2).
+            02  HCM18V01-SAISHIND   PIC X(2).
+            02  HCM18V01-JIKANGAI1  PIC X(2).
+            02  HCM18V01-JIKANGAI2  PIC X(2).
+            02  HCM18V01-JIKANGAI3  PIC X(2).
+            02  HCM18V01-KAISU-G        OCCURS  32 TIMES.
+              03  HCM18V01-KAISU  PIC X(3).
+            02  HCM18V01-KOUTEN-G       OCCURS  32 TIMES.
+              03  HCM18V01-KOUTEN PIC X(7).
+            02  HCM18V01-SRYKBN-G       OCCURS  30 TIMES.
+              03  HCM18V01-SRYKBN PIC X(4).
+            02  HCM18V01-TEKIYO-G       OCCURS  30 TIMES.
+              03  HCM18V01-TEKIYO PIC X(52).
+            02  HCM18V01-SYOBYOEDA  PIC X(1).
+            02  HCM18V01-SYOBYO PIC X(2).
+            02  HCM18V01-SYOSHINMONEY   PIC X(7).
+            02  HCM18V01-SAISHINMONEY   PIC X(7).
+            02  HCM18V01-SYOKEI PIC X(7).
+            02  HCM18V01-PTNUM  PIC X(20).
+            02  HCM18V01-JIKANGAI11 PIC X(4).
+            02  HCM18V01-JIKANGAI21 PIC X(4).
+            02  HCM18V01-JIKANGAI31 PIC X(4).
+            02  HCM18V01-RENNUM PIC X(7).

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : スーパーバイザー
+# $3 : 医療機関識別番号(HOSPID)
+# $4 : 標準マスタエラーファイル名
+# $5 : 標準マスタジョブＩＤ
+# $6 : 標準マスタシェルＩＤ
+# $7 : ライセンスマスタエラーファイル名
+# $8 : ライセンスマスタジョブＩＤ
+# $9 : ライセンスマスタシェルＩＤ
+# $10: アクセスキー
+#------------------------------------
+HOSPNUM=$1
+MNTRET=0
+MLIRET=0
+
+#標準マスタ更新
+master_standard_upgrade.sh $1 $2 $4 $5 $6 ""
+MNTRET=$?
+if [ ${MNTRET} -ne 1 ]; then
+    #ライセンスマスタ更新
+    sleep 1
+    master_license_upgrade.sh $1 $2 $3 $7 $8 $9 ${10}
+    MLIRET=$?
+fi
+
+
+exit $(expr ${MNTRET} + ${MLIRET})

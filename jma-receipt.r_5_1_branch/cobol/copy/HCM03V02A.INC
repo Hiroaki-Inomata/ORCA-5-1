@@ -1,0 +1,57 @@
+        01  HCM03V02A.
+            02  HCM03V02A-NO    PIC X(7).
+            02  HCM03V02A-LBLSRYYMD PIC X(10).
+            02  HCM03V02A-SRYYMD    PIC X(50).
+            02  HCM03V02A-KNJNAMW   PIC X(30).
+            02  HCM03V02A-KNJNO PIC X(20).
+            02  HCM03V02A-MIDASI    PIC X(20).
+            02  HCM03V02A-HAKYMD    PIC X(22).
+            02  HCM03V02A-HOKEN PIC X(20).
+            02  HCM03V02A-FUTAN PIC X(3).
+            02  HCM03V02A-TUKISRYKA PIC X(100).
+            02  HCM03V02A-MEISAI
+                    PIC X(20)   OCCURS  15 TIMES.
+            02  HCM03V02A-HKNRYO1   PIC X(18).
+            02  HCM03V02A-HKNRYO2   PIC X(18).
+            02  HCM03V02A-HKNRYO3   PIC X(18).
+            02  HCM03V02A-HKNRYO4   PIC X(18).
+            02  HCM03V02A-HKNRYO5   PIC X(18).
+            02  HCM03V02A-HKNRYO6   PIC X(18).
+            02  HCM03V02A-HKNRYO7   PIC X(18).
+            02  HCM03V02A-HKNRYO8   PIC X(18).
+            02  HCM03V02A-HKNRYO9   PIC X(18).
+            02  HCM03V02A-HKNRYO10  PIC X(18).
+            02  HCM03V02A-HKNRYO11  PIC X(18).
+            02  HCM03V02A-HKNRYO12  PIC X(18).
+            02  HCM03V02A-HKNRYO13  PIC X(18).
+            02  HCM03V02A-HKNRYO14  PIC X(18).
+            02  HCM03V02A-HKNRYO15  PIC X(18).
+            02  HCM03V02A-GOKTEN    PIC X(18).
+            02  HCM03V02A-JIHIBUN
+                    PIC X(18)   OCCURS  15 TIMES.
+            02  HCM03V02A-HOKENBUN  PIC X(18).
+            02  HCM03V02A-HOKENGAI  PIC X(18).
+            02  HCM03V02A-HOKENZEI  PIC X(18).
+            02  HCM03V02A-JIHIMSG1  PIC X(20).
+            02  HCM03V02A-JIHIMSG2  PIC X(20).
+            02  HCM03V02A-JIHIMSG3  PIC X(20).
+            02  HCM03V02A-JIHIMSG4  PIC X(20).
+            02  HCM03V02A-JIHIMSG5  PIC X(20).
+            02  HCM03V02A-JIHI
+                    PIC X(18)   OCCURS  7 TIMES.
+            02  HCM03V02A-YAKUZAI   PIC X(18).
+            02  HCM03V02A-ROUJIN    PIC X(18).
+            02  HCM03V02A-KOUHI PIC X(18).
+            02  HCM03V02A-CHOSEI    PIC X(18).
+            02  HCM03V02A-KONSEIKYU PIC X(18).
+            02  HCM03V02A-SEIKYUZEI PIC X(18).
+            02  HCM03V02A-ZENMISYU  PIC X(18).
+            02  HCM03V02A-GOUKEIGAK PIC X(18).
+            02  HCM03V02A-KONNYUKIN PIC X(18).
+            02  HCM03V02A-IRYOADRS  PIC X(100).
+            02  HCM03V02A-IRYOMEI   PIC X(100).
+            02  HCM03V02A-IRYOTEL   PIC X(15).
+            02  HCM03V02A-MIDASHI   PIC X(10).
+            02  HCM03V02A-RSIMIDASI PIC X(16).
+            02  HCM03V02A-RSIBUN    PIC X(18).
+            02  HCM03V02A-RSIEN PIC X(2).

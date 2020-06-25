@@ -1,0 +1,87 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    感染症データ作成
+#        $1  GMNID (K03, K08, C02)
+#        $2  HOSPNUM
+#        $3  HOSPID
+#        $4  SYORIFLG (0:新規、1:訂正)
+#        $5  NYUGAI (1:入院、2:外来)
+#        $6  PTID
+#        $7  SRYYMD
+#        $8  SRYKA
+#        $9  BEDFLG (0:病床なし、1:病床あり)
+#-------------------------------------------#
+
+GMNID=${1}
+HOSPNUM=${2}
+HOSPID=${3}
+SYORIFLG=${4}
+NYUGAI=${5}
+PTID=${6}
+SRYYMD=${7}
+SRYKA=${8}
+BEDFLG=${9}
+
+INFECFILE=$DASDIR/${HOSPNUM}/infection.csv.$$
+INFECRFILE=$DASDIR/${HOSPNUM}/infection.csv
+ERRFILE=/tmp/${HOSPNUM}infectionerror_real
+LOG=/var/log/jma-receipt/${HOSPNUM}infectiondata2.log
+LOG_FILE=/var/log/jma-receipt/${HOSPNUM}infectiondata2_real.log
+
+DASUPLOAD=das-infection2.sh
+
+DPKGLT=`dpkg -l | grep 'ii  jma-receipt' | grep 'JMA Standard Receipt'`
+PKGVER=`echo $DPKGLT | sed 's/\s\{1,\}/ /g' | cut -d' ' -f 3`
+
+if ! [ -d $DASDIR/${HOSPNUM} ]; then 
+  mkdir $DASDIR/${HOSPNUM}
+fi
+if ! [ -d $DASDIR/${HOSPNUM}/infection ]; then 
+  mkdir $DASDIR/${HOSPNUM}/infection
+fi
+
+#if [ -e $LOGFILE ]; then
+#  cat $LOGFILE >> $LOG
+#fi
+rm -f ${LOG_FILE}
+
+echo "SYORIBI [ $SRYYMD ]"
+echo "SYORIFLG [ $SYORIFLG ]"
+
+#感染症データ作成
+
+rm -f $ERRFILE
+
+PARA0="${GMNID},${HOSPNUM},${SYORIFLG},${NYUGAI},${PTID},${SRYYMD}"
+PARAM="${PARA0},${SRYKA},${INFECFILE},${ERRFILE},${PKGVER}"
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBINF2 -parameter ${PARAM}
+
+if [ -e $ERRFILE ]; then
+  rm -f $INFECFILE
+fi
+
+if [ -e $INFECFILE ]; then
+  if [ -s $INFECFILE ]; then
+    TIMESTAMP=`(date +%Y%m%d%H%M%S)`
+    RANDOMIZE=`%RUBY% -e 'print sprintf("%04d",rand(10000))'`
+    mv $INFECFILE $INFECRFILE.$TIMESTAMP$RANDOMIZE
+    gzip $INFECRFILE.$TIMESTAMP$RANDOMIZE
+  else
+    rm -f $INFECFILE
+  fi
+fi
+
+echo "感染症データ送信処理 起動"
+$DASUPLOAD ${HOSPNUM} ${HOSPID} 2 &
+
+exit 0

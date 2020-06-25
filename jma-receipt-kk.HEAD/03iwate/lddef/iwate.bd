@@ -1,0 +1,22 @@
+name	iwate;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU0303"	"OpenCOBOL";
+bind	"SEIKYU0307"	"OpenCOBOL";
+bind	"SEIKYU03BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU03BYOMEI2"	"OpenCOBOL";
+bind	"SEIKYU0309"	"OpenCOBOL";
+bind	"SEIKYU0311"	"OpenCOBOL";
+bind	"SEIKYU0313"	"OpenCOBOL";
+bind	"SEIKYU0315"	"OpenCOBOL";
+bind	"SOKATU0300"	"OpenCOBOL";
+bind	"SOKATU0305"	"OpenCOBOL";
+bind	"SOKATU0310"	"OpenCOBOL";
+bind	"SOKATU0315"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

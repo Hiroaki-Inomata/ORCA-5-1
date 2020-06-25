@@ -1,0 +1,47 @@
+kanri_cd    : "2001"
+name        : "レセプト作成指示コード"
+class_cd    : "*"
+item_max    : 7
+item_list   :
+- item_no   : 1
+  item      : "SYOKBN"
+  item_jp   : "処理区分"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "SRYYM"
+  item_jp   : "診療年月"
+  type      : "X"
+  start     : 2
+  length    : 6
+- item_no   : 3
+  item      : "RECEKBN"
+  item_jp   : "レセプト種類区分"
+  type      : "X"
+  start     : 8
+  length    : 1
+- item_no   : 4
+  item      : "NYUGAIKBN"
+  item_jp   : "入外区分"
+  type      : "X"
+  start     : 9
+  length    : 1
+- item_no   : 5
+  item      : "SYOSBT"
+  item_jp   : "処理区分"
+  type      : "X"
+  start     : 10
+  length    : 1
+- item_no   : 6
+  item      : "PRTKBN"
+  item_jp   : "レセプト作成区分"
+  type      : "X"
+  start     : 11
+  length    : 1
+- item_no   : 7
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 12
+  length    : 489

@@ -1,0 +1,98 @@
+N41 {
+  fixed6 {
+    B03 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    HEADMENU {
+      textdata varchar(30);
+    };
+    SELNUM {
+      numdata number(4);
+    };
+    MENU {
+      textdata varchar(30);
+    };
+    HELP {
+      textdata varchar(2000);
+    };
+    MENUNUM1_CP {
+      state int;
+      numdata number(4);
+    };
+    MENU1_CP {
+      state int;
+      textdata varchar(30);
+    };
+    MENUNUM2_CP {
+      state int;
+      numdata number(4);
+    };
+    MENU2_CP {
+      state int;
+      textdata varchar(30);
+    };
+    HELPKBN_COMB {
+      HELPKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    LDNAME_COMB {
+      LDNAME {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[50];
+    };
+    SELNUM2 {
+      numdata number(4);
+    };
+    MENU2 {
+      textdata varchar(30);
+    };
+    LDNAME_CP_COMB {
+      LDNAME_CP {
+        textdata varchar(40);
+      };
+      state int;
+      count int;
+        item varchar(40)[50];
+    };
+    HELPKBN_CP_COMB {
+      HELPKBN_CP {
+        textdata varchar(20);
+      };
+      state int;
+      count int;
+        item varchar(20)[5];
+    };
+    scrolledwindow2 {
+      MENU2LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(30);
+          }[300];
+          selectdata bool[300];
+      };
+    };
+    scrolledwindow1 {
+      HEADLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(30);
+          }[300];
+          selectdata bool[300];
+      };
+    };
+  };
+};

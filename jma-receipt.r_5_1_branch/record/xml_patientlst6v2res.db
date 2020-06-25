@@ -1,0 +1,126 @@
+xml_patientlst6v2res {
+    context         int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	patientlst2res {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(3);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        	};
+	HealthInsurance_Information	{
+		Insurance_Combination_Number		varchar(04);
+#-----> 保険組合せ負担割合
+		InsuranceCombination_Rate_Admission	varchar(04);
+		InsuranceCombination_Rate_Outpatient	varchar(04);
+		InsuranceCombination_StartDate		varchar(10);
+		InsuranceCombination_ExpiredDate	varchar(10);
+#-----> 保険組合せ非表示区分
+		Insurance_Nondisplay			varchar(01);
+#-----> 
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	Certificate_GetDate			varchar(10);
+#-----> 最終確認日
+            	Insurance_CheckDate			varchar(10);
+#-----> 
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Admission			varchar(04);
+			Money_Admission			varchar(06);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+#-----> 最終確認日
+            		Certificate_CheckDate		varchar(10);
+	            	} [4];
+#-----> 労災情報
+		Accident_Insurance_Information	{
+			Accident_Insurance_WholeName	varchar(50);
+			Disease_Location		varchar(100);
+			Disease_Date			varchar(10);
+#-----> 	労働保険番号
+			Accident_Insurance_Number	varchar(14);
+#-----> 	年金証書番号
+			PensionCertificate_Number	varchar(09);
+#-----> 	災害区分
+			Accident_Class			varchar(01);
+			Accident_Class_Name		varchar(20);
+#-----> 	労働基準監督署コード
+			Labor_Station_Code		varchar(05);
+			Labor_Station_Code_Name		varchar(50);
+#-----> 	新規継続区分
+			Accident_Continuous		varchar(01);
+			Accident_Continuous_Name	varchar(10);
+#-----> 	転帰事由
+			Outcome_Reason	     		varchar(01);
+			Outcome_Reason_Name 		varchar(10);
+#-----> 	四肢特例区分
+			Limbs_Exception     		varchar(01);
+			Limbs_Exception_Name   		varchar(10);
+			Liability_Office_Information	{
+#-----> 	        事業所名称
+			L_WholeName		varchar(80);
+#-----> 	        所在地都道府県
+			Prefecture_Information	{
+				P_WholeName	varchar(20);
+				P_Class		varchar(01);
+				P_Class_Name	varchar(02);
+				};
+#-----> 	        所在地郡市
+			City_Information	{
+				C_WholeName	varchar(80);
+				C_Class		varchar(01);
+				C_Class_Name	varchar(02);
+				};
+			};
+#-----> 	労災レセ回数記載 基準年月
+			Accident_Base_Month		varchar(07);
+#-----> 	労災レセ回数記載 回数
+			Accident_Receipt_Count 		varchar(03);
+#-----> 	自賠責請求区分
+			Liability_Insurance		varchar(01);
+			Liability_Insurance_Name	varchar(20);
+#-----> 	自賠責保険会社名
+			Liability_Insurance_Office_Name	varchar(80);
+#-----> 	自賠責担当医
+			Liability_Physician_Code	varchar(05);
+			Liability_Physician_Code_Name	varchar(100);
+#-----> 	アフターケア  健康管理手帳番号
+			PersonalHealthRecord_Number	varchar(13);
+			Damage_Class	{
+				D_Code			varchar(03);
+				D_WholeName		varchar(100);
+				};
+			};
+#-----> 	第三者行為  現物支給区分
+			Third_Party_Supply		varchar(1);
+			Third_Party_Supply_Name		varchar(20);
+#-----> 	第三者行為  特記事項区分
+			Third_Party_Report		varchar(1);
+			Third_Party_Report_Name		varchar(20);
+        	} [200];
+   	};
+};

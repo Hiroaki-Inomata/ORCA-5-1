@@ -1,0 +1,41 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+umask 022
+
+PRGDIR=/var/tmp/orca-prg@VERSION@
+PATCHDIR=/var/lib/jma-receipt/patch
+PACKAGEFILE=patch@VERSION@.gz
+PRGPATH=$PGUPGRADEPATH/@VERSION@
+PATCHLIST=$PATCHDIR/patch-file-list
+
+#オフラインメンテナンスであるかチェック
+OFFLINEPATH=`echo $PRGPATH | sed -ne 's#file://##p'`
+if [ -z $OFFLINEPATH ]; then
+  OFFLINE="online"
+else
+  OFFLINE="offline"
+  PRGPATH=$OFFLINEPATH
+fi
+
+if ! [ -d $PATCHDIR ];	then
+	echo "パッチディレクトリが存在しません"
+	exit
+fi
+
+export PACKAGEFILE
+export PATCHDIR
+export PRGPATH
+export CACERTFILE
+export PATCHLIST
+
+#更新プログラムダウンロード
+cachedl.rb 2>&1
+
+exit

@@ -1,0 +1,222 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *  »»ÄêÍúÎò¹¹¿·ÆþÎÏ¡¡£Ó£Á£Ð ¡Ê£Ë£°£¶¡Ë
+      *----------------------------------------------------------*
+      ************************************************************
+      *  ¥³¥Ô¡¼¶ç½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      ************************************************************
+      *
+       01  SPA-K06.
+           03  SPA-K06-AREA.
+               07  SPA-K06-MOTOPG      PIC X(08).
+               07  SPA-GMN-MAX         PIC 9(04).
+               07  SPA-GMN-PAGE        PIC 9(02).
+               07  SPA-GMN-CUR         PIC 9(02).
+               07  SPA-GMN-AREA.
+                   09  SPA-GMN-PTNUM       PIC X(20).
+                   09  SPA-GMN-KANANAME    PIC X(30).
+                   09  SPA-GMN-NAME        PIC X(30).
+                   09  SPA-GMN-SEX         PIC X(02).
+                   09  SPA-GMN-BIRTHDAY    PIC X(09).
+                   09  SPA-GMN-SRYYM       PIC X(07).
+                   09  SPA-GMN-TBL.
+                       11  SPA-GMN-TBLO    OCCURS  100.
+                           13  SPA-GMN-TRENNUM     PIC 9(03).
+                           13  SPA-GMN-TSRYCD      PIC X(09).
+                           13  SPA-GMN-TNYUGAIKBN  PIC X(03).
+                           13  SPA-GMN-TSRYKA      PIC X(11).
+                           13  SPA-GMN-THKNCOMBI   PIC X(21).
+                           13  SPA-GMN-TMEISYO     PIC X(71).
+                           13  SPA-GMN-TFSANTEIYMD PIC X(09).
+                           13  SPA-GMN-TMSANTEID   PIC 9(02).
+                           13  SPA-GMN-TMSANTEICNT PIC 9(03).
+                           13  SPA-GMN-TMSANTEITEN PIC 9(08).
+                   09  SPA-GMN-KOUMOKU.
+                       11  SPA-GMN-RENNUM          PIC 9(03).
+                       11  SPA-GMN-SRYCD           PIC X(09).
+                       11  SPA-GMN-NYUGAIKBN       PIC 9(01).
+                       11  SPA-GMN-SRYKA           PIC 9(02).
+                       11  SPA-GMN-SRYKAH          PIC X(10). 
+                       11  SPA-GMN-HKNCOMBI        PIC 9(04).
+                       11  SPA-GMN-HKNCOMBIMEI     PIC X(21). 
+                       11  SPA-GMN-MEISYO          PIC X(70).
+                       11  SPA-GMN-FSANTEIYMD      PIC X(10).
+                       11  SPA-GMN-MSANTEID        PIC 9(02).
+                       11  SPA-GMN-MSANTEICNT      PIC 9(03).
+                       11  SPA-GMN-DAY-G.
+                           13  SPA-GMN-DAY         OCCURS  31
+                                                   PIC 9(02).
+      *
+                   07  SPA-NAIB-AREA.
+                       09  SPA-NAI-SRYYM           PIC X(06).
+                       09  SPA-NAI-KOUMOKU.
+                           11  SPA-NAI-FSANTEIYMD      PIC X(08).
+                           11  SPA-NAI-SANTEIRRKKBN    PIC 9(01).
+                           11  SPA-NAI-JGNCNT          PIC 9(03).
+                           11  SPA-NAI-JGNCNT1D        PIC 9(03).
+                           11  SPA-NAI-MSANTEIFLG      PIC 9(01).
+                           11  SPA-NAI-PLUSKBN         PIC 9(01).
+      *            ·Ù¹ð¥Õ¥é¥°
+                           11  SPA-KEIFLG1             PIC 9(01).
+                           11  SPA-KEIFLG2             PIC 9(01).
+                           11  SPA-KEIFLG3             PIC 9(01).
+      *R01.10
+                           11  SPA-NAI-SYOSIN          PIC 9(01).
+                           11  SPA-LST-SRYKA           PIC X(02).
+      * 
+                       09  SPA-NAI-TBL.
+                           11  SPA-NAI-TBLO        OCCURS  100.
+                               13  SPA-NAI-TNYUGAIKBN  PIC 9(01).
+                               13  SPA-NAI-TSRYKA      PIC 9(02).
+                               13  SPA-NAI-THKNCOMBI   PIC 9(04).
+                               13  SPA-NAI-TFSANTEIYMD PIC X(08).
+                               13  SPA-NAI-TDAY-G      OCCURS  31.
+                                   15  SPA-NAI-TDAY    PIC 9(02).
+                               13  SPA-NAI-TUPDFLG     PIC 9(01).
+                               13  SPA-NAI-TMSANTEIFLG PIC 9(01).
+      *
+                      09  SPA-DEL-TBL.
+                          11  SPA-DEL-TBLO         OCCURS  100.
+                              13  SPA-DEL-TSRYCD       PIC X(09).
+                              13  SPA-DEL-TNYUGAIKBN   PIC 9(01).
+                              13  SPA-DEL-TSRYKA       PIC 9(02).
+                              13  SPA-DEL-THKNCOMBI    PIC 9(04).
+                      09  SPA-DEL-MAX              PIC 9(03). 
+      *----(01.00.01) LINE ADD START ----------------------------------
+      *            ÊÑ¹¹³ÎÇ§¥Õ¥é¥°
+               07  SPA-UPDFLG              PIC X(01).
+      *            ·Ù¹ð¥Õ¥é¥°
+      *        07  SPA-KEIFLG1             PIC 9(01).
+      *        07  SPA-KEIFLG2             PIC 9(01).
+      *        07  SPA-KEIFLG3             PIC 9(01).
+      *----(01.00.01) LINE ADD END   ----------------------------------
+      *
+      *°Ü¹ÔÍúÎòÅÐÏ¿²èÌÌ¡Ê£Ë£°£¶£±¡Ë
+           03  SPA-K061-MOTOPG                PIC X(08).
+           03  SPA-K061-GMN                   PIC 9(01).
+           03  SPA-K061-AREA.
+               05  SPA-K061-CUR               PIC 9(02).
+               05  SPA-K061-MIDASI            PIC X(160).
+               05  SPA-K061-LIST-G.
+                   07  SPA-K061-LIST           OCCURS   100.
+                       09  SPA-K061-TRENNUM        PIC 9(03).
+                       09  SPA-K061-TSRYCD         PIC X(09).
+                       09  SPA-K061-TMEISYO        PIC X(80).
+                       09  SPA-K061-TSANYMDG       PIC X(09).
+                       09  SPA-K061-TSYOYMDG       PIC X(09).
+                       09  SPA-K061-TKAISU         PIC 9(03).
+                       09  SPA-K061-THKNCOMBI      PIC X(04).
+                       09  SPA-K061-THKNCOMBIMEI   PIC X(30).
+                       09  SPA-K061-TKBNMEI.
+                           11  SPA-K061-TKBNMEI1   PIC X(02).
+                           11  SPA-K061-TKBNMEI2   PIC X(02).
+                           11  SPA-K061-TKBNMEI3   PIC X(02).
+                       09  SPA-K061-TENDYMDG       PIC X(09).
+      *
+                       09  SPA-K061-TSRYYM         PIC X(06).
+                       09  SPA-K061-TSANYMD        PIC X(08).
+                       09  SPA-K061-TSYOYMD        PIC X(08).
+                       09  SPA-K061-THKNFLG        PIC X(01).
+                       09  SPA-K061-TSYORIKBN      PIC X(01).
+                       09  SPA-K061-TPLUSKBN       PIC X(01).
+                       09  SPA-K061-TENDYMD        PIC X(08).
+                       09  SPA-K061-TENDFLG        PIC X(01).
+      *R01.9
+                       09  SPA-K061-TENDCHK        PIC X(01).
+                   07  SPA-K061-MAX                PIC 9(03).
+               05  SPA-K061-SELNUM             PIC 9(03).
+      *
+               05  SPA-K061-INPUT-G.
+                   07  SPA-K061-SRYCD          PIC X(09).
+                   07  SPA-K061-MEISYO         PIC X(80).
+                   07  SPA-K061-SANYMDG        PIC X(11).
+                   07  SPA-K061-SYOYMDG        PIC X(11).
+                   07  SPA-K061-KAISU          PIC 9(03).
+                   07  SPA-K061-HKNCOMBI       PIC X(04).
+                   07  SPA-K061-HKNCOMBIMEI    PIC X(30).
+                   07  SPA-K061-LSTYMDG        PIC X(11).
+                   07  SPA-K061-ENDYMDG        PIC X(11).
+      *
+                   07  SPA-K061-SANYMD         PIC X(08).
+                   07  SPA-K061-SYOYMD         PIC X(08).
+                   07  SPA-K061-LSTYMD         PIC X(08).
+                   07  SPA-K061-ENDYMD         PIC X(08).
+                   07  SPA-K061-SYORIKBN       PIC X(01).
+      *            ²ó¿ô·Ù¹ð
+                   07  SPA-K061-KAISU-KEI      PIC 9(01).
+      *
+                   07  SPA-K061-KEIFLG         PIC 9(01).
+      *
+                   07  SPA-K061-KBN            PIC X(01).
+                   07  SPA-K061-KBN2           PIC X(01).
+                   07  SPA-K061-SANTEIRRKKBN   PIC 9(01).
+                   07  SPA-K061-JGNCNT         PIC 9(03).
+                   07  SPA-K061-JGNCNT1D       PIC 9(03).
+                   07  SPA-K061-MSANTEIFLG     PIC 9(01).
+      *
+               05  SPA-K061-NAI-ARA.
+                   07  SPA-K061-SYORI             PIC 9(01).
+                   07  SPA-K061-FSYOYMD           PIC X(08).
+                   07  SPA-K061-RRKYMD            PIC X(08).
+                   07  SPA-K061-CHKYMD            PIC X(08).
+                   07  SPA-K061-NAI-LSTYMD        PIC X(08).
+                   07  SPA-K061-NAI-LSTYMDG       PIC X(09).
+      *
+                   07  SPA-K061-NAI-ENDFLG        PIC X(01).
+      *
+      *¥ê¥Ï¥Ó¥ê¥³¥á¥ó¥ÈÅÐÏ¿¡Ê£Ë£°£¶£²¡Ë
+           03  SPA-K062-GMN-G.
+               05  SPA-K062-MOTOPG            PIC X(08).
+               05  SPA-K062-SRYCD             PIC X(09).
+               05  SPA-K062-MEISYO            PIC X(80).
+               05  SPA-K062-SRYYMG            PIC X(06).
+               05  SPA-K062-SRYYM             PIC X(06).
+               05  SPA-K062-HKNCOMBI          PIC X(04).
+               05  SPA-K062-HKNCOMBIMEI       PIC X(30).
+               05  SPA-K062-DAY-G.
+                   07  SPA-K062-DAY           PIC 9(03)
+                                              OCCURS   31.
+               05  SPA-K062-COM-DAY-G.
+                   07  SPA-K062-DAYC          PIC X(01)
+                                              OCCURS   31.
+               05  SPA-K062-ACT-DAY-G.
+                   07  SPA-K062-DAYA          PIC X(01)
+                                              OCCURS   31.
+               05  SPA-K062-MIDASI2            PIC X(20).
+               05  SPA-K062-MSGENDYMD          PIC X(10).
+               05  SPA-K062-RRKENDYMD          PIC X(08).
+           03  SPA-K062-AREA.
+               05  SPA-K062-CUR                PIC 9(02).
+               05  SPA-K062-SELNUM             PIC 9(02).
+               05  SPA-K062-PAGE               PIC 9(02).
+               05  SPA-K062-SYORI              PIC 9(01).
+               05  SPA-K062-SYORI2             PIC 9(01).
+               05  SPA-K062-SYORI-KEI          PIC 9(01).
+      *
+               05  SPA-K062-INPUT-G.
+                   07  SPA-K062-ENDYMDG            PIC X(10).
+                   07  SPA-K062-ENDYMD             PIC X(08).
+      *
+                   07  SPA-K062-COMMENT-TBL    OCCURS   50.
+                       09  SPA-K062-COMMENT        PIC X(80).
+                       09  SPA-K062-TENDYMDG       PIC X(10).
+                       09  SPA-K062-TENDYMD        PIC X(08).
+                       09  SPA-K062-INFLG          PIC X(01).
+      *

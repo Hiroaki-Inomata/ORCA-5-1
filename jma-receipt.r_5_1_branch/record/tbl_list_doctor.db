@@ -1,0 +1,73 @@
+tbl_list_doctor {
+	HOSPNUM				number(2,0);
+	SRYKA				char(2);
+	RENNUM				number(3,0);
+	DRCD 				char(5);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,SRYKA,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_list_doctor_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_list_doctor
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYKA        =   :SRYKA
+			AND   RENNUM       =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_list_doctor_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_list_doctor
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYKA        =   :SRYKA
+			ORDER   BY        RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_list_doctor_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_list_doctor
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        SRYKA,
+					  RENNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_list_doctor_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_list_doctor
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_list_doctor
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYKA      =   :SRYKA
+		;
+	};
+};
+
+

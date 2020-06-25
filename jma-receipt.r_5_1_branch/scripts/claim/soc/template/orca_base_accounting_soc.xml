@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="EUC-JP" ?>
+<!-- 
+点数金額モジュール会計終了情報、テンプレートXMLファイル
+
+バージョン2.0形式
+-->
+
+<Mml version="2.3" createDate="%M_RH_CD1%" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mmlCm="http://www.medxml.net/MML/SharedComponent/Common/1.0" xmlns:mmlNm="http://www.medxml.net/MML/SharedComponent/Name/1.0" xmlns:mmlFc="http://www.medxml.net/MML/SharedComponent/Facility/1.0" xmlns:mmlDp="http://www.medxml.net/MML/SharedComponent/Department/1.0" xmlns:mmlAd="http://www.medxml.net/MML/SharedComponent/Address/1.0" xmlns:mmlPh="http://www.medxml.net/MML/SharedComponent/Phone/1.0" xmlns:mmlPsi="http://www.medxml.net/MML/SharedComponent/PersonalizedInfo/1.0" xmlns:mmlCi="http://www.medxml.net/MML/SharedComponent/CreatorInfo/1.0" xmlns:mmlPi="http://www.medxml.net/MML/ContentModule/PatientInfo/1.0" xmlns:mmlBc="http://www.medxml.net/MML/ContentModule/BaseClinic/1.0" xmlns:mmlFcl="http://www.medxml.net/MML/ContentModule/FirstClinic/1.0" xmlns:mmlHi="http://www.medxml.net/MML/ContentModule/HealthInsurance/1.1" xmlns:mmlLs="http://www.medxml.net/MML/ContentModule/Lifestyle/1.0" xmlns:mmlPc="http://www.medxml.net/MML/ContentModule/ProgressCourse/1.0" xmlns:mmlRd="http://www.medxml.net/MML/ContentModule/RegisteredDiagnosis/1.0" xmlns:mmlSg="http://www.medxml.net/MML/ContentModule/Surgery/1.0" xmlns:mmlSm="http://www.medxml.net/MML/ContentModule/Summary/1.0" xmlns:mmlLb="http://www.medxml.net/MML/ContentModule/test/1.0" xmlns:mmlRp="http://www.medxml.net/MML/ContentModule/report/1.0" xmlns:mmlRe="http://www.medxml.net/MML/ContentModule/Referral/1.0" xmlns:mmlSc="http://www.medxml.net/MML/SharedComponent/Security/1.0" xmlns:claim="http://www.medxml.net/claim/claimModule/2.1" xmlns:claimA="http://www.medxml.net/claim/claimAmountModule/2.1">       
+	<MmlHeader>
+		<!-- 作成者情報 -->
+		<!--  -->
+		<mmlCi:CreatorInfo>
+			<mmlPsi:PersonalizedInfo>
+				<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+				<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+					%M_RX001_A%
+				</mmlCm:Id>
+				<!-- 作成者 個人名情報 -->
+				<mmlPsi:personName>
+					<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+						<mmlNm:fullname>%M_RX001_B11%</mmlNm:fullname>
+						<mmlNm:family>%M_RX001_B12%</mmlNm:family>
+						<mmlNm:given>%M_RX001_B13%</mmlNm:given>
+						<mmlNm:middle>%M_RX001_B14%</mmlNm:middle>
+						<mmlNm:prefix>%M_RX001_B15%</mmlNm:prefix>
+						<mmlNm:degree>%M_RX001_B16%</mmlNm:degree>
+					</mmlNm:Name>
+				</mmlPsi:personName>
+				<!-- 施設情報 -->
+				<mmlFc:Facility>
+					<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+						%M_RX001_C11%
+					</mmlFc:name>
+					<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+					<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+						%M_RX001_C2%
+					</mmlCm:Id>
+				</mmlFc:Facility>
+				<!-- 診療科情報 -->
+				<mmlDp:Department>
+					<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+						%M_RX001_D11%
+					</mmlDp:name>
+					<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+						%M_RX001_D2%
+					</mmlCm:Id>
+				</mmlDp:Department>
+				<!-- 住所情報 -->
+				<mmlPsi:addresses>
+					<mmlAd:Address mmlAd:repCode="I"%M_RX001_E18% mmlAd:tableId="MML0025">
+						<mmlAd:full>
+							%M_RX001_E11%
+						</mmlAd:full>
+						<mmlAd:prefecture>
+							%M_RX001_E12%
+						</mmlAd:prefecture>
+						<mmlAd:city>
+							%M_RX001_E13%
+						</mmlAd:city>
+						<mmlAd:town>
+							%M_RX001_E14%
+						</mmlAd:town>
+						<mmlAd:homeNumber>
+							%M_RX001_E15%
+						</mmlAd:homeNumber>
+						<mmlAd:zip>
+							%M_RX001_E16%
+						</mmlAd:zip>
+						<mmlAd:countryCode>
+							%M_RX001_E17%
+						</mmlAd:countryCode>
+					</mmlAd:Address>
+				</mmlPsi:addresses>
+				<!-- メールアドレス -->
+				<mmlPsi:emailAddresses>
+					<mmlCm:email>%M_RX001_F1%</mmlCm:email>
+				</mmlPsi:emailAddresses>
+				<!-- 電話番号 -->
+				<mmlPsi:phones>
+					<mmlPh:Phone%M_RX001_G17%>
+						<mmlPh:area>
+							%M_RX001_G11%
+						</mmlPh:area>
+						<mmlPh:city>
+							%M_RX001_G12%
+						</mmlPh:city>
+						<mmlPh:number>
+							%M_RX001_G13%
+						</mmlPh:number>
+						<mmlPh:extension>
+							%M_RX001_G14%
+						</mmlPh:extension>
+						<mmlPh:country>
+							%M_RX001_G15%
+						</mmlPh:country>
+						<mmlPh:memo>
+							%M_RX001_G16%
+						</mmlPh:memo>
+					</mmlPh:Phone>
+				</mmlPsi:phones>
+			</mmlPsi:PersonalizedInfo>
+			<!-- 生成者の資格 -->
+			<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+				%M_RX001_H1%
+			</mmlCi:creatorLicense>
+		</mmlCi:CreatorInfo>
+		<!-- 患者主ID -->
+		<masterId>
+			<mmlCm:Id %M_RH_PIDSTYLE% mmlCm:tableId="MML0024">
+				%M_RH_PID%
+			</mmlCm:Id>
+		</masterId>
+		<!-- table of content -->
+		<toc>
+			<!-- DTDリスト -->
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Common/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Name/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Facility/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Department/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Address/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/Phone/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/PersonalizedInfo/1.0</tocItem>
+			<tocItem>http://www.medxml.net/MML/SharedComponent/CreatorInfo/1.0</tocItem>
+			<tocItem>http://www.medxml.net/claim/claimAmountModule/2.1</tocItem>
+		</toc>
+		<!-- scopePeriodは省略可能であるため、削除しています -->
+		<!-- 電子署名などの暗号化情報 -->
+		<encryptInfo>no encryption</encryptInfo>
+	</MmlHeader>
+	<!-- ============================================================ -->
+	<!-- ============================================================ -->
+	<MmlBody>
+		<!-- ============================================================ -->
+		<!-- ============================================================ -->
+		<!-- Claim情報 -->
+		<MmlModuleItem>
+			<docInfo contentModuleType="claimAmount">
+				<!-- アクセス権種別 -->
+				<securityLevel>
+					<!-- アクセス権 -->
+					%M_RI401_ACC1%
+				</securityLevel>
+				<!-- 文書タイトル -->
+				<title>
+					%M_RI401_TITLE%
+				</title>
+				<!-- 文書ID情報 -->
+				<docId>
+					<uid>%M_RI401_UI%</uid>
+				</docId>
+				<!-- カルテ電子保存の確定日 -->
+				<confirmDate>%M_RI401_KD%</confirmDate>
+				<!-- 作成者情報 -->
+				<!--  -->
+				<mmlCi:CreatorInfo>
+					<mmlPsi:PersonalizedInfo>
+						<!-- 作成者 個人ID (チェックディジットは、はずしています) -->
+						<mmlCm:Id mmlCm:type="facility" mmlCm:tableId="MML0024">
+							%M_RX401_A%
+						</mmlCm:Id>
+						<!-- 作成者 個人名情報 -->
+						<mmlPsi:personName>
+							<mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
+								<mmlNm:fullname>%M_RX401_B11%</mmlNm:fullname>
+								<mmlNm:family>%M_RX401_B12%</mmlNm:family>
+								<mmlNm:given>%M_RX401_B13%</mmlNm:given>
+								<mmlNm:middle>%M_RX401_B14%</mmlNm:middle>
+								<mmlNm:prefix>%M_RX401_B15%</mmlNm:prefix>
+								<mmlNm:degree>%M_RX401_B16%</mmlNm:degree>
+							</mmlNm:Name>
+						</mmlPsi:personName>
+						<!-- 施設情報 -->
+						<mmlFc:Facility>
+							<mmlFc:name mmlFc:repCode="I" mmlFc:tableId="MML0025">
+								%M_RX401_C11%
+							</mmlFc:name>
+							<!-- insurance指定がある場合、次のIDコードは、保険医療機関コードをセットします -->
+							<mmlCm:Id mmlCm:type="insurance" mmlCm:tableId="MML0027">
+								%M_RX401_C2%
+							</mmlCm:Id>
+						</mmlFc:Facility>
+						<!-- 診療科情報 -->
+						<mmlDp:Department>
+							<mmlDp:name mmlDp:repCode="I" mmlDp:tableId="MML0025">
+								%M_RX401_D11%
+							</mmlDp:name>
+							<mmlCm:Id mmlCm:type="medical" mmlCm:tableId="MML0029">
+								%M_RX401_D2%
+							</mmlCm:Id>
+						</mmlDp:Department>
+						<!-- 住所情報 -->
+						<mmlPsi:addresses>
+							<mmlAd:Address mmlAd:repCode="I"%M_RX401_E18% mmlAd:tableId="MML0025">
+								<mmlAd:full>
+									%M_RX401_E11%
+								</mmlAd:full>
+								<mmlAd:prefecture>
+									%M_RX401_E12%
+								</mmlAd:prefecture>
+								<mmlAd:city>
+									%M_RX401_E13%
+								</mmlAd:city>
+								<mmlAd:town>
+									%M_RX401_E14%
+								</mmlAd:town>
+								<mmlAd:homeNumber>
+									%M_RX401_E15%
+								</mmlAd:homeNumber>
+								<mmlAd:zip>
+									%M_RX401_E16%
+								</mmlAd:zip>
+								<mmlAd:countryCode>
+									%M_RX401_E17%
+								</mmlAd:countryCode>
+							</mmlAd:Address>
+						</mmlPsi:addresses>
+						<!-- メールアドレス -->
+						<mmlPsi:emailAddresses>
+							<mmlCm:email>%M_RX401_F1%</mmlCm:email>
+						</mmlPsi:emailAddresses>
+						<!-- 電話番号 -->
+						<mmlPsi:phones>
+							<mmlPh:Phone%M_RX401_G17%>
+								<mmlPh:area>
+									%M_RX401_G11%
+								</mmlPh:area>
+								<mmlPh:city>
+									%M_RX401_G12%
+								</mmlPh:city>
+								<mmlPh:number>
+									%M_RX401_G13%
+								</mmlPh:number>
+								<mmlPh:extension>
+									%M_RX401_G14%
+								</mmlPh:extension>
+								<mmlPh:country>
+									%M_RX401_G15%
+								</mmlPh:country>
+								<mmlPh:memo>
+									%M_RX401_G16%
+								</mmlPh:memo>
+							</mmlPh:Phone>
+						</mmlPsi:phones>
+					</mmlPsi:PersonalizedInfo>
+					<!-- 生成者の資格 -->
+					<mmlCi:creatorLicense mmlCi:tableId="MML0026">
+						%M_RX401_H1%
+					</mmlCi:creatorLicense>
+				</mmlCi:CreatorInfo>
+				%M_RX401_I1%
+			</docInfo>
+			<!-- 記載内容 -->
+			<content>
+				<claimA:ClaimAmountModule>
+
+					<!-- 点数金額ヘッダ情報 -->
+					<claimA:amountInformation%A_A1%%A_A2%%A_A3%%A_A4%%A_A5%%A_A6%%A_A7%%A_A8%%A_A9%%A_A10%>
+						<!-- 診療実施科 -->
+						<claimA:patientDepartment>
+							<mmlDp:Department>
+								<!-- 診療科名称 -->
+								<mmlDp:name%A_B2% mmlDp:tableId="MML0025">
+									%A_B1%
+								</mmlDp:name>
+								<!-- 診療科ID -->
+								<mmlCm:Id%A_B5% mmlCm:tableId="MML0029">
+									%A_B4%
+								</mmlCm:Id>
+							</mmlDp:Department>
+						</claimA:patientDepartment>
+						<!-- 診療実施病棟 -->
+						<claimA:patientWard>
+							<mmlDp:Department>
+								<!-- 病棟診療科名称 -->
+								<mmlDp:name%A_C2% mmlDp:tableId="MML0025">
+									%A_C1%
+								</mmlDp:name>
+								<!-- 病棟診療科ID -->
+								<mmlCm:Id %A_C5% mmlCm:tableId="MML0029">
+									%A_C4%
+								</mmlCm:Id>
+							</mmlDp:Department>
+						</claimA:patientWard>
+						<!-- 健康保険種別 -->
+						<mmlHi:insuranceClass%A_D2%%A_D3%>
+							%A_D1%
+						</mmlHi:insuranceClass>
+					</claimA:amountInformation>
+
+
+
+<!-- 診療括りセクション[01-20] (繰り返しの際に、@@BUNDLE@@に01〜20の数字が入って置換される) -->
+$Repeat, 30, @@BUNDLE@@, 2
+
+					<!-- 診療括りセクション   その@@BUNDLE@@ -->
+					<claimA:bundle%A_@@BUNDLE@@_01%%A_@@BUNDLE@@_02%>
+						<!-- 診療行為区分名 -->
+						<claimA:className>%A_@@BUNDLE@@_03%</claimA:className>
+						<!-- 合計請求点数 -->
+						<claimA:claimBundlePoint>%A_@@BUNDLE@@_04%</claimA:claimBundlePoint>
+						<!-- 合計請求額 -->
+						<claimA:claimBundleRate>%A_@@BUNDLE@@_05%</claimA:claimBundleRate>
+						<!-- 用法 -->
+						<claimA:administration%A_@@BUNDLE@@_07%%A_@@BUNDLE@@_08%>
+							%A_@@BUNDLE@@_06%
+						</claimA:administration>
+						<!-- 用法コメント -->
+						<claimA:admMemo>%A_@@BUNDLE@@_09%</claimA:admMemo>
+						<!-- 回数もしくは日数 -->
+						<claimA:bundleNumber>
+							%A_@@BUNDLE@@_10%
+						</claimA:bundleNumber>
+						<!-- 手技料合計点数 -->
+						<claimA:methodPoint>
+							%A_@@BUNDLE@@_11%
+						</claimA:methodPoint>
+						<!-- 材料料合計点数 -->
+						<claimA:materialPoint>
+							%A_@@BUNDLE@@_12%
+						</claimA:materialPoint>
+						<!-- 薬剤料合計点数 -->
+						<claimA:drugPoint>
+							%A_@@BUNDLE@@_13%
+						</claimA:drugPoint>
+						<!-- 包括区分包括フラグ -->
+						<claimA:ppsClass>
+							%A_@@BUNDLE@@_14%
+						</claimA:ppsClass>
+
+<!-- 診療項目セクション[01-20] (繰り返しの際に、@@ITEM@@に01〜20の数字が入って置換される) -->
+$Repeat, 30, @@ITEM@@, 2
+						<!-- 診療項目セクション   その@@ITEM@@ -->
+						<claimA:item%A_@@BUNDLE@@_@@ITEM@@_01%%A_@@BUNDLE@@_@@ITEM@@_02%%A_@@BUNDLE@@_@@ITEM@@_03%%A_@@BUNDLE@@_@@ITEM@@_04%%A_@@BUNDLE@@_@@ITEM@@_05%%A_@@BUNDLE@@_@@ITEM@@_06%>
+							<!-- 医事請求名称 -->
+							<claimA:name>%A_@@BUNDLE@@_@@ITEM@@_07%</claimA:name>
+							<!-- 数量 -->
+							<claimA:number%A_@@BUNDLE@@_@@ITEM@@_09%%A_@@BUNDLE@@_@@ITEM@@_10%%A_@@BUNDLE@@_@@ITEM@@_11%>
+								%A_@@BUNDLE@@_@@ITEM@@_08%
+							</claimA:number>
+							<!-- 請求点数 -->
+							<claimA:claimPoint>%A_@@BUNDLE@@_@@ITEM@@_12%</claimA:claimPoint>
+							<!-- 明細単価 -->
+							<claimA:claimRate>%A_@@BUNDLE@@_@@ITEM@@_13%</claimA:claimRate>
+							<!-- 所要時間 -->
+							<claimA:duration>%A_@@BUNDLE@@_@@ITEM@@_14%</claimA:duration>
+							<!-- 部位 -->
+							<claimA:location>%A_@@BUNDLE@@_@@ITEM@@_15%</claimA:location>
+							<!-- フィルム情報 -->
+							<claimA:film>
+								<!-- フィルムサイズ -->
+								<claimA:filmSize%A_@@BUNDLE@@_@@ITEM@@_16_B%%A_@@BUNDLE@@_@@ITEM@@_16_C%%A_@@BUNDLE@@_@@ITEM@@_16_D%>
+									%A_@@BUNDLE@@_@@ITEM@@_16_A%
+								</claimA:filmSize>
+								<!-- フィルム枚数 -->
+								<claimA:filmNumber>
+									%A_@@BUNDLE@@_@@ITEM@@_16_E%
+								</claimA:filmNumber>
+							</claimA:film>
+							<!-- 関連手技 -->
+							<claimA:event%A_@@BUNDLE@@_@@ITEM@@_18%%A_@@BUNDLE@@_@@ITEM@@_19%>
+								%A_@@BUNDLE@@_@@ITEM@@_17%
+							</claimA:event>
+							<!-- 診療項目メモ -->
+							<claimA:memo>
+								%A_@@BUNDLE@@_@@ITEM@@_20%
+							</claimA:memo>
+						</claimA:item>
+$EndRepeat
+<!-- 診療項目セクション End -->
+
+						<!-- メモ -->
+						<claimA:memo>
+							%A_@@BUNDLE@@_15%
+						</claimA:memo>
+					</claimA:bundle>
+$EndRepeat
+<!-- 診療括りセクション End -->
+
+				</claimA:ClaimAmountModule>
+			</content>
+		</MmlModuleItem>
+	</MmlBody>
+</Mml>

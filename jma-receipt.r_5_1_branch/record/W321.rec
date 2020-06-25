@@ -1,0 +1,31 @@
+W321 {
+  fixed32 {
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(9);
+            column3 varchar(2);
+            column4 varchar(80);
+            column5 varchar(20);
+          }[500];
+          selectdata bool[500];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SELNUM {
+      numdata number(4);
+    };
+    MIDASI {
+      textdata varchar(30);
+    };
+  };
+};

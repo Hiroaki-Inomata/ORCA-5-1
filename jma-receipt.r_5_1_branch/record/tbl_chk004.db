@@ -1,0 +1,260 @@
+tbl_chk004	{
+	HOSPNUM		number(2,0);
+	KANRICD		char(4);
+	KBNCD		char(8);
+	STYUKYMD	char(8);
+	EDYUKYMD	char(8);
+	PTID 				number(10);
+	KANRITBL	varchar(500);
+	TERMID		varchar(16);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM	number(2,0),virtual;
+	UPKANRICD	char(4),virtual;
+	UPKBNCD	char(8),virtual;
+	UPSTYUKYMD	char(8),virtual;
+	UPEDYUKYMD	char(8),virtual;
+	SELLIMIT		number(8),virtual;
+	SELOFFSET		number(8),virtual;
+};
+
+primary	{
+	HOSPNUM,KANRICD,KBNCD,STYUKYMD,EDYUKYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND	KBNCD        =   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY KBNCD
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			ORDER	BY KBNCD
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_chk004
+				SET	
+					HOSPNUM      =   :HOSPNUM,
+					KANRICD      =   :KANRICD,
+					KBNCD     	 =   :KBNCD,
+					STYUKYMD     =   :STYUKYMD,
+					EDYUKYMD     =   :EDYUKYMD,
+					PTID		     =   :PTID,
+					KANRITBL     =   :KANRITBL,
+					TERMID       =   :TERMID,
+					OPID         =   :OPID,
+					CREYMD       =   :CREYMD,
+					UPYMD        =   :UPYMD,
+					UPHMS        =   :UPHMS
+			WHERE   HOSPNUM      =   :UPHOSPNUM 
+			AND	KANRICD      =   :UPKANRICD
+			AND		KBNCD        =   :UPKBNCD
+			AND		STYUKYMD     =   :UPSTYUKYMD
+			AND		EDYUKYMD     =   :UPEDYUKYMD
+		;
+	};
+};
+
+
+path	del1		{ 	
+	DBDELETE	{
+		DELETE	FROM	tbl_chk004
+		WHERE   HOSPNUM      =   :HOSPNUM 
+		AND	KANRICD      =   :KANRICD
+			AND KBNCD     LIKE   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD
+			AND KBNCD				LIKE :KBNCD
+			ORDER	BY KBNCD
+			LIMIT    :SELLIMIT
+			OFFSET   :SELOFFSET
+		;
+	};
+};
+
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND KBNCD        LIKE :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			AND PTID             =   :PTID
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND KBNCD            LIKE :KBNCD
+			AND KBNCD            <>   :UPKBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY KBNCD DESC
+		;
+	};
+};
+
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND KBNCD				LIKE :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY KBNCD
+		;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM  =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY UPYMD DESC,UPHMS DESC
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND KBNCD				LIKE :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY KBNCD DESC
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+		;
+	};
+};
+
+path	upd2	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_chk004
+				SET	
+					KBNCD     	 =   :KBNCD,
+					UPYMD        =   :UPYMD,
+					UPHMS        =   :UPHMS
+			WHERE   HOSPNUM      =   :UPHOSPNUM 
+			AND		KANRICD      =   :UPKANRICD
+			AND		KBNCD        =   :UPKBNCD
+			AND		STYUKYMD     =   :UPSTYUKYMD
+			AND		EDYUKYMD     =   :UPEDYUKYMD
+		;
+	};
+};
+
+path	del2		{ 	
+	DBDELETE	{
+		DELETE	FROM	tbl_chk004
+		WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      >=  :KANRICD
+			AND     KANRICD      <=  :UPKANRICD
+			AND	KBNCD     LIKE   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+path    del3            {
+        DBDELETE        {
+                DELETE  FROM    tbl_chk004
+                WHERE   HOSPNUM         =       :HOSPNUM
+                        AND     KANRICD         =       :KANRICD
+                        AND     KBNCD           =       :KBNCD
+                ;
+        };
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk004_key10_csr CURSOR FOR
+		SELECT DISTINCT ON (KBNCD) *
+		FROM tbl_chk004
+			WHERE   HOSPNUM      =   :HOSPNUM 
+			AND	KANRICD      =   :KANRICD 
+			AND	STYUKYMD     <=  :STYUKYMD
+			ORDER	BY KBNCD DESC
+		;
+	};
+};
+

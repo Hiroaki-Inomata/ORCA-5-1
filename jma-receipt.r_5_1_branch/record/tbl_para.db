@@ -1,0 +1,209 @@
+tbl_para {
+	HOSPNUM				number(2,0);
+	GYOUMUID			char(4);
+	TERMID				char(64);
+	FILEMEI 			char(20);
+	EDANUM  			number(3,0);
+	DATA_REC 			char(5000);
+	UPYMD				char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,GYOUMUID,TERMID,FILEMEI,EDANUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_para_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =  :FILEMEI
+			AND   EDANUM       =   :EDANUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_para_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      LIKE :FILEMEI
+			ORDER   BY        EDANUM
+		;
+	};
+};
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      LIKE :FILEMEI
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_para_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+		;
+	};
+};
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_para_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			ORDER   BY        FILEMEI,
+                                          EDANUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_para_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			AND   EDANUM       =   :EDANUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_para_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			ORDER   BY        EDANUM
+		;
+	};
+};
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+		;
+	};
+};
+
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_para_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			AND   EDANUM       >=  :EDANUM
+			ORDER   BY        EDANUM
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_para_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			AND   EDANUM       <=  :EDANUM
+			ORDER   BY        EDANUM DESC
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_para_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      LIKE :FILEMEI
+			ORDER   BY      FILEMEI,
+					EDANUM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_para_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID   =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			ORDER   BY        EDANUM DESC
+		;
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   TERMID       =   :TERMID
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_para_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_para
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   FILEMEI      =   :FILEMEI
+			ORDER   BY        TERMID,
+					  EDANUM DESC
+		;
+	};
+};
+
+

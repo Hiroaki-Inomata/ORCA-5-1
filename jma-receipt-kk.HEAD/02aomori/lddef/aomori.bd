@@ -1,0 +1,21 @@
+name	aomori;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU0201"	"OpenCOBOL";
+bind	"SEIKYU0202"	"OpenCOBOL";
+bind	"SEIKYU0203"	"OpenCOBOL";
+bind	"SEIKYU0204"	"OpenCOBOL";
+bind	"SEIKYU0205"	"OpenCOBOL";
+bind	"SEIKYU0206"	"OpenCOBOL";
+bind	"SOKATU0200"	"OpenCOBOL";
+bind	"SOKATU0205"	"OpenCOBOL";
+bind	"SOKATU0210"	"OpenCOBOL";
+bind	"SOKATU0215"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

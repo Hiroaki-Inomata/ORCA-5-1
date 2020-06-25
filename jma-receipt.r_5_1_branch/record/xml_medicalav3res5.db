@@ -1,0 +1,129 @@
+xml_medicalav3res5 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3res5 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+    	};
+#--- 診療日付
+	Perform_Date				varchar(07);
+#---    診療内容（投薬）
+	Medical_Information  {
+		Medical_Info  {
+#---            診療科
+	       		Department_Code			varchar(2);
+	        	Department_Name			varchar(20);
+#---            保険組合せ
+			Insurance_Combination_Number	varchar(04);
+         	   	InsuranceProvider_WholeName	varchar(20);
+            		PublicInsurance_Information   {
+                		PublicInsurance_Name	varchar(20);
+            		} [4];
+#---                    保険組合せ状態
+			Insurance_Combination_Mode      varchar(01);
+#---
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+#---                    算定日（合計）
+			Medical_Day_Information  {
+			    Medical_Day_Info     {
+				Medical_Class_Number	varchar(03);
+				} [31] ;
+			} [1] ;
+#---                    同日再入院日
+			Readmission_Day_Information  {
+			    Readmission_Day_Info     {
+				Readmission_Day		varchar(02);
+				Readmission_Class_Number	varchar(03);
+				} [31] ;
+			};
+#----->                 剤点数
+			Medical_Point 			varchar(08);
+#----->                 包括区分
+			Medical_Inclusion_Class		varchar(05);
+			Medication_Info    {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(140);
+				Medication_Number	varchar(11);
+#----->                         単位コード
+				Medication_Unit_Code		varchar(3);
+				Medication_Unit_Code_Name	varchar(24);
+				Medication_Auto_Addition 	varchar(01);
+			} [50];
+		}[100] ;
+		};
+#---    診療内容（入院調剤料自動算定）
+	Ad_Dispensing_Information  {
+		Ad_Dispensing_Info  {
+#---            診療科
+	       		Department_Code			varchar(2);
+	        	Department_Name			varchar(20);
+#---            保険組合せ
+			Insurance_Combination_Number	varchar(04);
+         	   	InsuranceProvider_WholeName	varchar(20);
+            		PublicInsurance_Information   {
+                		PublicInsurance_Name	varchar(20);
+            		} [4];
+#---                    保険組合せ状態
+			Insurance_Combination_Mode      varchar(01);
+#---                    剤番号
+			Medical_Number			varchar(08);
+#---
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+#---                    算定日（合計）
+			Medical_Day_Information  {
+			    Medical_Day_Info     {
+				Medical_Class_Number	varchar(03);
+				} [31] ;
+			} [1] ;
+#---                    同日再入院日
+			Readmission_Day_Information  {
+			    Readmission_Day_Info     {
+				Readmission_Day		varchar(02);
+				Readmission_Class_Number	varchar(03);
+				} [31] ;
+			};
+#----->                 剤点数
+			Medical_Point 			varchar(08);
+#----->                 包括区分
+			Medical_Inclusion_Class		varchar(05);
+			Medication_Info    {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(80);
+				Medication_Auto_Addition 	varchar(01);
+			} [5];
+		}[10] ;
+		};
+#--- メッセージ
+	Medical_Message_Information {
+        Medical_Message_Info {
+       		Medical_Result			varchar(4);
+        	Medical_Result_Message1		varchar(100);
+        	Medical_Result_Message2		varchar(100);
+	        };
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(4);
+       		 Medical_Warning_Message	varchar(100);
+            	} [40];
+	        };
+	};
+};

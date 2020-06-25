@@ -1,0 +1,32 @@
+P982 {
+  fixed32 {
+    SELNUM {
+      textdata varchar(3);
+    };
+    scrolledwindow26 {
+      LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(7);
+            column3 varchar(5);
+            column4 varchar(100);
+            column5 varchar(600);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    B10 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+  };
+};

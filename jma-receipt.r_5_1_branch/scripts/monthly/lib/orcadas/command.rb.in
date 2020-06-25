@@ -1,0 +1,111 @@
+#!%RUBY%
+# coding : utf-8
+
+require "net/https"
+require "webrick/log"
+require "orcadas/utils"
+
+module OrcaDAS
+  class Command
+    include OrcaDAS::Utils
+
+    def initialize(argv)
+      @config = Hash.new
+      @config["LogLeve"] = WEBrick::Log::DEBUG
+      @logger = WEBrick::Log.new($stderr, log_level)
+    end
+
+    def log_level
+      case @config["LogLevel"]
+      when "FATAL" then WEBrick::Log::FATAIL
+      when "ERROR" then WEBrick::Log::ERROR
+      when "WARN"  then WEBrick::Log::WARN
+      when "INFO"  then WEBrick::Log::INFO
+      when "DEBUG" then WEBrick::Log::DEBUG
+      else WEBrick::Log::DEBUG
+      end
+    end
+
+    def run(argv)
+      raise "001 You should override this method."
+    end
+
+    def http_request(url, http_method, header, body, config)
+      parsed_url = URI.parse(url)
+      http = Net::HTTP.new(parsed_url.host, parsed_url.port)
+      
+      case parsed_url.scheme
+      when "https"
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+        if config["CertificateCAFile"]
+          http.ca_file = File.expand_path(config["CertificateCAFile"])
+        end
+      when "http"
+        # do nothing
+      else
+        $stderr.puts("unexpected URI scheme: #{parsed_url.scheme}")
+        return false
+      end
+
+      req = case http_method
+            when :POST then Net::HTTP::Post.new(parsed_url.path, header)
+            when :GET  then Net::HTTP::Get.new(parsed_url.path, header)
+            else raise "001 unexpected HTTP method: #{http_method}"
+            end
+
+      req["user-agent"] = "#{USER_AGENT}/#{PGVERSION} (#{PGRELDATE})"
+      req.basic_auth(config["User"], config["Password"])
+      res = http.request(req, body)
+      yield(res)
+    end
+
+    def http_get(url, header, config=@config, &block)
+      http_request(url, :GET, header, nil, config, &block)
+    end
+
+    def http_post(url, header, body, config=@config, &block)
+      http_request(url, :POST, header, body, config, &block)
+    end
+
+    def use_removable_medium
+      mounted_path = nil
+      @config["MediumPath"].each{|path|
+        path = File.expand_path(path)
+        @logger.info("mounting #{path}.")
+        system("#{MOUNT_COMMAND} #{path}")
+        next if $?.exitstatus != 0
+        mounted_path = path
+        begin
+          yield(path)
+        ensure
+          @logger.info("unmounting #{path}.")
+          system("#{UMOUNT_COMMAND} #{path}")
+          if $?.exitstatus != 0
+            raise "001 #{UMOUNT_COMMAND} failure"
+          end
+        end
+        break
+      }
+      unless mounted_path
+        raise "001 #{MOUNT_COMMAND} failure"
+      end
+    end
+
+    def self.main(argv)
+      begin
+        exit(self.new(argv).run(argv) ? 0 : 1)
+      rescue => ex
+        if $VERBOSE
+          $stderr.puts "#{ex.message} (#{ex.class.name})"
+          ex.backtrace.each{|line| $stderr.puts("\t#{line}\n") }
+        else
+          $stderr.puts "error occured: #{ex.message}"
+        end
+        exit 1
+      end
+    end
+  end
+end
+
+OrcaDAS::Command.main(ARGV) if $0 == __FILE__

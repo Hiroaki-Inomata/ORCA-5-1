@@ -1,0 +1,16 @@
+SID2 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(70);
+    };
+    B11 {
+      label varchar(30);
+    };
+    B12 {
+      label varchar(30);
+    };
+  };
+};

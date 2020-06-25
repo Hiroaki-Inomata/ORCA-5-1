@@ -1,0 +1,9 @@
+xml_receipt_inf1v2req	{
+	context     int;
+	object      object;
+	mode    int;
+	recordname      varchar(128);
+	receipt_infreq	{
+		Perform_Month	varchar(7);
+		};
+};

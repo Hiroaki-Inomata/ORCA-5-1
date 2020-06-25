@@ -1,0 +1,9 @@
+xml_imagegetv2req{
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  imagegetv2req  {
+    Image_ID                       varchar(80);
+  };
+};

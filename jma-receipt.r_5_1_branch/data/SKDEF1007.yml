@@ -1,0 +1,41 @@
+kanri_cd    : "1007"
+name        : "自動算定・チェック機能制御情報"
+class_cd    : "*"
+item_max    : 6
+item_list   :
+- item_no   : 1
+  item      : "SANTEI1"
+  item_jp   : "調剤技術基本料"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "SANTEI2"
+  item_jp   : "薬剤情報提供料（一般）"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "SANTEI3"
+  item_jp   : "薬剤情報提供料（老人　手帳記載あり）"
+  type      : "X"
+  start     : 3
+  length    : 1
+- item_no   : 4
+  item      : "SANTEI4"
+  item_jp   : "薬剤情報提供料（老人　手帳記載なし） "
+  type      : "X"
+  start     : 4
+  length    : 1
+- item_no   : 5
+  item      : "SANTEI5"
+  item_jp   : "療養担当手当（北海道）"
+  type      : "X"
+  start     : 5
+  length    : 1
+- item_no   : 6
+  item      : "SANTEI6"
+  item_jp   : "特定薬剤治療管理料"
+  type      : "X"
+  start     : 6
+  length    : 1

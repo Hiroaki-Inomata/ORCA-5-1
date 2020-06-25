@@ -1,0 +1,111 @@
+tbl_hknjainf_user {
+	HOSPNUM				number(2,0);
+	HKNJANUM			varchar(8);
+	HKNJANAME			varchar(200);
+	HKNJANAME_TAN1		varchar(100);
+	HKNJANAME_TAN2		varchar(40);
+	HKNJANAME_TAN3		varchar(40);
+	HKNNUM  			varchar(3);
+	HON_GAIKYURATE 			number(3);
+	HON_NYUKYURATE 			number(3);
+	KZK_GAIKYURATE 			number(3);
+	KZK_NYUKYURATE 			number(3);
+	POST        		varchar(7);
+	ADRS			    varchar(200);
+	BANTI 		    	varchar(200);
+	TEL 			    varchar(15);
+	KIGO    			varchar(80);
+	IDOKBN  			varchar(1);
+	IDOYMD  			varchar(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+
+primary	{
+	HOSPNUM,HKNJANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_user_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_user
+		WHERE	HOSPNUM  = :HOSPNUM  AND
+			HKNJANUM = :HKNJANUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	tbl_hknjainf_user
+			VALUES(
+				:HKNJANUM,
+				:HKNJANAME,
+				:HKNJANAME_TAN1,
+				:HKNJANAME_TAN2,
+				:HKNJANAME_TAN3,
+				:HKNNUM,
+				:HON_GAIKYURATE,
+				:HON_NYUKYURATE,
+				:KZK_GAIKYURATE,
+				:KZK_NYUKYURATE,
+				:POST,
+				:ADRS,
+				:BANTI,
+				:TEL,
+				:KIGO,
+				:IDOKBN,
+				:IDOYMD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS,
+				:HOSPNUM
+			)
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	tbl_hknjainf_user
+		WHERE	HOSPNUM  = :HOSPNUM  AND
+			HKNJANUM = :HKNJANUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_user_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_user
+		WHERE   HOSPNUM = :HOSPNUM  AND
+			SUBSTR(HKNJANUM,1,5) = SUBSTR(:HKNJANUM,1,5)
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_user_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_user
+		WHERE	HOSPNUM = :HOSPNUM
+                ORDER BY HKNJANUM
+ 		;
+	};
+};
+
+path	key3		{ 
+	DBSELECT	{
+		DECLARE tbl_hknjainf_user_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_user
+		WHERE	HOSPNUM = :HOSPNUM  AND
+			HKNNUM  = :HKNNUM
+                ORDER BY HKNJANUM
+		;
+	};
+};

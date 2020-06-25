@@ -1,0 +1,163 @@
+#!%RUBY%
+# coding : utf-8
+
+# XMLfile j-code convert scirpt
+#     args 0:in_file
+#          1:out_code
+# 
+# version 1.3.0
+#                  '01-10-30 by Yamamoto
+
+require 'nkf'
+in_file, out_code, mode = ARGV
+
+#----- Define Classes ----------------------------------------
+
+class XmlJCnv
+  def initialize(fl,ocd,mode)
+    @fpn = "" ; @fpn = String(fl)   if fl
+    @to = ""  ; @to  = String(ocd)  if ocd
+    @md = ""  ; @md  = String(mode) if mode
+    @lct = 0
+  end
+
+  def argchk
+    @arg = true
+    if !File.exists?(@fpn)
+      print " xmljcnv ERR: no file [ " + @fpn + " ]\n"
+      @arg = false
+    end
+    case @to
+    when "tou8"
+      @out_code = "UTF-8"
+    when "toeuc"
+      @out_code = "EUC-JP"
+    when "tosjis"
+      @out_code = "Shift_JIS"
+    when "tojis"
+      @out_code = "JIS"
+    else 
+      @arg = false
+    end
+    case @md
+    when "-n", "-normal", ""
+      @md = "-n"
+    when "-f", "-force"
+      @md = "-f" 
+    else
+      @arg = false
+    end
+  end
+
+  def chkhd
+    case @head
+    when /utf-8/i
+      @in_code = "UTF-8"     ; @from = "u8"
+    when /euc/i
+      @in_code = "EUC-JP"    ; @from = "euc"
+    when /shift_jis/i,/shift-jis/i
+      @in_code = "(Shift_JIS|Shift-JIS)" ; @from = "sjis"
+    when /jis/i
+      @in_code = "JIS"       ; @from = "jis"
+    else
+#     @in_code = nil         ; @from = "" ; @to = ""
+      @in_code = "UTF-8"     ; @from = "u8"
+      @head = '<?xml version ="1.0" encoding="UTF-8" ?>'
+    end
+  end
+
+  def ersub
+    @ermes = "jcode unmatching at " + String(@lct) + " line"
+    if @md == "-f"
+      $stderr.print " xmljcnv Warrning:" + @ermes + "\n"
+    else
+      raise @ermes 
+    end
+  end
+
+  def cvt
+    open(@fpn,"rb") do |f|
+      @head = f.gets ; chkhd ; @lct = 1
+      @mes = "file:[" + @fpn + "] cmd:[" + @from + @to + "] mode:[" + @md + "]"
+      $stderr.puts @mes
+      @head.sub!(/#{@in_code}/i, @out_code) if @in_code
+      puts @head 
+      while @buf = f.gets
+        @lct += 1
+        case @from
+        when "u8"
+          case @to
+          when "tou8"
+            print @buf
+          when "toeuc"
+            print NKF.nkf( '-xm0 --ic=UTF-8 --oc=EUC-JP', @buf )
+          when "tosjis"
+            print NKF.nkf( '-xm0 --ic=UTF-8 --oc=CP932', @buf )
+          when "tojis"
+            print NKF.nkf( '-xm0 --ic=UTF-8 --oc=ISO-2022-JP', @buf )
+          end
+        when "euc"
+          case @to
+          when "tou8"
+            print NKF.nkf( '-xm0 --ic=EUC-JP --oc=UTF-8', @buf )
+          when "toeuc"
+            print @buf
+          when "tosjis"
+            print NKF.nkf('-E -s', @buf)
+          when "tojis"
+            print NKF.nkf('-E -j', @buf)
+          end
+        when "sjis"
+          case @to
+          when "tou8"
+            print NKF.nkf( '-xm0 --ic=CP932 --oc=UTF-8', @buf )
+          when "toeuc"
+            print NKF.nkf('-S -e', @buf)
+          when "tosjis"
+            print @buf
+          when "tojis"
+            print NKF.nkf('-S -j', @buf)
+          end
+        when "jis"
+          case @to
+          when "tou8"
+            print NKF.nkf( '-xm0 --ic=ISO-2022-JP --oc=UTF-8', @buf )
+          when "toeuc"
+            print NKF.nkf('-J -e', @buf)
+          when "tosjis"
+            print NKF.nkf('-J -s', @buf)
+          when "tojis"
+            print @buf
+          end
+        else
+          print @buf
+        end
+      end 
+    end
+  end
+
+  def go
+    argchk
+    if !@arg
+      puts "------------------------------------------------------"
+      puts " Help:xmljcnv.rb in_xml_file"
+      puts "                 out_code(tojis, toeuc, tosjis, tou8)"
+      puts "                 mode(-n,nil=normal, -f=force)"
+      puts "------------------------------------------------------"
+    else
+      begin
+        cvt
+      rescue
+        @mes = " xmljcnv ERR:" + $!
+        $stderr.puts @mes
+      ensure
+        "(nothing)"
+      end
+    end
+  end
+end
+
+#----- Main --------------------------------------------------
+
+hoe = XmlJCnv.new(in_file, out_code, mode)
+hoe.go

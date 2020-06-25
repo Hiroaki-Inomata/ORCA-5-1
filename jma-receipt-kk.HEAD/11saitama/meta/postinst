@@ -1,0 +1,91 @@
+#!/bin/bash
+echo $0 | logger
+echo `pwd`  | logger
+
+JMARECEIPT_ENV="/etc/jma-receipt/jma-receipt.env"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+PATH=.:${PATH}
+
+# compile COBOL programs
+COBMEM=`module CBL`
+for f in ${COBMEM}; do
+  if test "x`echo -n $f | grep 'CBL$'`" != "x"; then
+    m=`echo $f | sed 's/CBL$/so/'`
+    echo -n "Building ${m}..." | logger
+    ${COBOL} ${COBOLFLAGS} -o ${SITELIBDIR}/${m} \
+         -I ${PATCHCOPYDIR} \
+         -I ${COPYDIR} \
+         -I ${SITESRCDIR}/cobol/copy \
+        ${SITESRCDIR}/cobol/${f}
+    if [ $? -ne 0 ]; then
+      ./prerm
+      exit 1
+    fi
+  fi
+done
+
+# copy scripts file
+SCRIPTMEM=`module scripts`
+for f in ${SCRIPTMEM}; do 
+  if test -f "${SITESRCDIR}/${f}"; then
+    echo -n "Copying ${SITESRCDIR}/${f}..." | logger
+    sed -e 's,\@jma-receipt-env\@,/etc/jma-receipt/jma-receipt.env,g' \
+        < "${SITESRCDIR}/${f}" > "${SITEDIR}/${f}"
+	chmod +x "${SITEDIR}/${f}"
+    if [ $? -ne 0 ]; then
+      ./prerm
+      exit 1
+    fi
+  fi
+done
+echo "done"
+
+# copy lddef file
+LDDEFMEM=`module lddef`
+for f in ${LDDEFMEM}; do 
+  if test -f "${SITESRCDIR}/${f}"; then
+    echo -n "Copying ${SITESRCDIR}/${f}..." | logger
+    $CPP -I"${LDDEFDIR}" -x c "${SITESRCDIR}/${f}" > "${SITEDIR}/${f}"
+    if [ $? -ne 0 ]; then
+      ./prerm
+      exit 1
+    fi
+  fi
+done
+echo "done"
+
+# copy data files
+for d in data doc form init record screen ; do
+  m=`module ${d}`
+  for f in ${m}; do 
+    if test -f "${SITESRCDIR}/${f}"; then
+      echo -n "Copying ${SITESRCDIR}/${f}..." | logger
+      cp -p "${SITESRCDIR}/${f}" "${SITEDIR}/${d}"
+      if [ $? -ne 0 ]; then
+        ./prerm
+        exit 1
+      fi
+    fi
+  done
+done
+echo "done"
+
+#modify kentan.inc
+if test -f ./kentan.inc; then
+  PREF=`cat ./kentan.inc`
+  echo -n "Modifying kentan.inc files... ${PREF}" | logger
+  cp ${SYSCONFDIR}/kentan.inc /tmp/kentan.inc.bak
+  sed "/${PREF}/d" /tmp/kentan.inc.bak > ${SYSCONFDIR}/kentan.inc
+  rm -rf /tmp/kentan.inc.bak
+  echo -e "\t${PREF};" >> ${SYSCONFDIR}/kentan.inc
+  if [ $? -ne 0 ]; then
+    ./prerm
+    exit 1
+  fi
+  echo "done"
+fi

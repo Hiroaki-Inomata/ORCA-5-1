@@ -1,0 +1,42 @@
+tbl_material_h {
+	KANRINO				number(8,0);
+	JANCD				char(13);
+	SNAME				varchar(200);
+	KIKAKU				varchar(120);
+	SRYCD				char(9);
+	COMPANY1			varchar(100);
+	COMPANY2			varchar(100);
+	DOCKANRICD			varchar(30);
+	KINOKBNNO			varchar(30);
+	CHGYMD   			varchar(8);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	KANRINO;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_h_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_material_h
+		WHERE 	KANRINO	= :KANRINO
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_material_h_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_material_h
+		WHERE 	SRYCD	= :SRYCD
+			ORDER   BY  SNAME,
+                                    KIKAKU,
+                                    JANCD
+		;
+	};
+};
+

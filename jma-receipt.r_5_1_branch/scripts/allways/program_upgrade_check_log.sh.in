@@ -1,0 +1,73 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#------------------------------------
+# $1 : 処理区分
+# $2 : プログラム名
+# $3 : インストールディレクトリ
+#------------------------------------
+
+PRGDIR=orca-prgupwork
+LOG="$LOGDIR"/program_upgrade_check.log
+
+SYORI=$1
+PGNAME=$2
+INSTALLDIR=$3
+
+case "${SYORI}" in
+  clear)
+      TEMP=$(mktemp)
+      grep -av ':E:' ${PGUP_PROOF} | grep -av '9999:' > ${TEMP}
+      mv ${TEMP} ${PGUP_PROOF}
+      exit 0
+      ;;
+
+  complete)
+      COMMENT="提供されている最新の状態でした。"
+      UPDATEFLG=" "
+      ;;
+
+  error1)
+      COMMENT="${PGNAME} が提供されていますが適用されていません。"
+      UPDATEFLG="E"
+      ;;
+
+  error2)
+      COMMENT="${INSTALLDIR}/${PGNAME} がありますが提供されたものではありません。"
+      UPDATEFLG="E"
+      ;;
+
+  error3)
+      COMMENT="${INSTALLDIR}/${PGNAME} は提供されたものと内容が違います。"
+      UPDATEFLG="E"
+      ;;
+
+  error4)
+      COMMENT="${INSTALLDIR}/${PGNAME} は提供されたものと違う場所にあります。"
+      UPDATEFLG="E"
+      ;;
+
+  error9)
+      COMMENT="${INSTALLDIR}/${PGNAME} ？？"
+      UPDATEFLG="E"
+      ;;
+
+  *)
+      COMMENT=""
+      UPDATEFLG=" "
+      ;;
+esac
+
+ymd=$(date +'%Y%m%d')
+time=$(date +'%H%M%S')
+
+CMSG=`echo "${COMMENT}" | nkf -e`
+echo "9999:${UPDATEFLG}:${ymd}:${CMSG}" >> ${PGUP_PROOF}
+
+exit 0

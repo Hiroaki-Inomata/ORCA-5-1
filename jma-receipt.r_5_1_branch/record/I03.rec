@@ -1,0 +1,81 @@
+I03 {
+  fixed4 {
+    B02 {
+      state int;
+    };
+    B03 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    CMB_SHOKAI {
+      SHOKAI {
+        textdata varchar(8);
+        state int;
+      };
+      count int;
+        item varchar(8)[2];
+      state int;
+    };
+    SHONUM {
+      numdata number(3);
+      state int;
+    };
+    COMMENT {
+      textdata varchar(20);
+    };
+    NYUINYMD {
+      textdata varchar(10);
+      state int;
+    };
+    TAIINYMD {
+      textdata varchar(10);
+      state int;
+    };
+    TAISYONISSU {
+      numdata number(5);
+      state int;
+    };
+    BYOMEI1 {
+      textdata varchar(50);
+    };
+    BYOMEI2 {
+      textdata varchar(50);
+    };
+    BYOMEI3 {
+      textdata varchar(50);
+    };
+    BYOMEI4 {
+      textdata varchar(50);
+    };
+    BYOMEI5 {
+      textdata varchar(50);
+    };
+    KHNRYO {
+      textdata varchar(50);
+    };
+    CMB_RRKKBN {
+      RRKKBN {
+        textdata varchar(40);
+        state int;
+      };
+      count int;
+        item varchar(40)[3];
+      state int;
+    };
+    CMB_NYUINCHUKBN {
+      NYUINCHUKBN {
+        textdata varchar(10);
+        state int;
+      };
+      count int;
+        item varchar(10)[2];
+      state int;
+    };
+    TOKUTAISYONISSU {
+      numdata number(5);
+      state int;
+    };
+  };
+};

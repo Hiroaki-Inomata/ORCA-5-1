@@ -1,0 +1,83 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *    業務選択 共通画面ＳＰＡ  
+      *****************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      * 03.04.01     NACL-森脇    07/01/24  タイマーイベントフラグ追加
+      *****************************************************************
+      *
+       01  SPA-M96.
+           03  SPA-M96-AREA.
+               05  SPA-CTLSEQ          PIC 9(02).
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-MAX         PIC 9(02).
+               05  SPA-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-GSEL    PIC 9(02).
+      *
+      *    マスタ更新画面（Ｍ９６）
+           03  SPA-M96-AREA.
+               05  SPA-M96-CUR         PIC 9(02).
+               05  SPA-GMN-M96-AREA.
+                   07  SPA-GMN-TBLG1.
+                       09  SPA-GMN-TBL1    OCCURS  2.
+                           11  SPA-GMN-VERSION        PIC  X(64).
+                           11  SPA-GMN-DBSVERSION1    PIC  X(64).
+                           11  SPA-GMN-DBSVERSION2    PIC  X(64).
+                           11  SPA-GMN-CREYMD         PIC  X(09).
+                   07  SPA-GMN-TBLG3.
+                       09  SPA-GMN-TBL3    OCCURS  99.
+                           11  SPA-GMN-MASTNAME       PIC  X(30).
+                           11  SPA-GMN-DBRVERSION1    PIC  X(64).
+                           11  SPA-GMN-DBRVERSION2    PIC  X(64).
+                       09  SPA-GMN-MAX3               PIC 9(04).
+                   07  SPA-GMN-TBLG2.
+                       09  SPA-GMN-TBL2    OCCURS  2.
+                           11  SPA-GMN-JOBNAME        PIC  X(40).
+                           11  SPA-GMN-STARTYMD       PIC  X(09).
+                           11  SPA-GMN-STARTTIME      PIC  X(08).
+                           11  SPA-GMN-ENDYMD         PIC  X(09).
+                           11  SPA-GMN-ENDTIME        PIC  X(08).
+                           11  SPA-GMN-LASTYMD        PIC  X(09).
+      *
+                           11  SPA-NAI-STARTYMD       PIC  X(08).
+                           11  SPA-NAI-STARTTIME      PIC  X(06).
+                           11  SPA-NAI-ENDYMD         PIC  X(08).
+                           11  SPA-NAI-ENDTIME        PIC  X(08).
+      *
+                   07  SPA-GMN-MSG-G.
+                       09  SPA-GMN-MSG1-STYLE         PIC X(20).
+                       09  SPA-GMN-MSG1               PIC X(70).
+                       09  SPA-GMN-MSG1PLUS           PIC X(70).
+                       09  SPA-GMN-MSG2-STYLE         PIC X(20).
+                       09  SPA-GMN-MSG2               PIC X(70).
+                       09  SPA-GMN-MSG2PLUS           PIC X(70).
+      *----(03.04.01)--ADD-START---
+                   07  SPA-GMN-DURATION       PIC 9(01).
+      *----(03.04.01)--ADD-END-----
+      *
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-MOTOPG         PIC X(08).
+                   07  SPA-NAI-CANCEL         PIC 9(01).
+      *
+           03  SPA-NAI-KADO-LEVEL      PIC  9(01).
+           03  SPA-NAI-CONTRACT-COND   PIC  9(01).

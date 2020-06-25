@@ -1,0 +1,31 @@
+xml_okusurigetv2res {
+	context		int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	okusurigetv2res {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+		Api_Result	     		varchar(04);
+		Api_Result_Message 		varchar(100);
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana		varchar(100);
+			BirthDate			varchar(10);
+			Sex				varchar(01);
+		};
+		Mnote_Information	{
+			Mnote_Key	{
+				Rennum				varchar(04);
+				Tbl_Group			varchar(14);
+				Tbl_UUID			varchar(36);
+				Shori_Rennum			varchar(04);
+			};
+    			Perform_Date			varchar(10);
+		} [10];
+		Mnote_Data	{
+			CsvData				varchar(30000);
+		};
+   	};
+};

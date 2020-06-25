@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#----------------------------------------------------------------------#
+#       arguments
+#       1:hospnum
+#       2:termid
+#       3:opid
+#       4:sysymd
+#       5:spa_prt_uuid
+#----------------------------------------------------------------------#
+
+# sleep 3
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBAPIFMTERM -parameter "$1,$2,$3,$4,$5,"
+

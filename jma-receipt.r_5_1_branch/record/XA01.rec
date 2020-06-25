@@ -1,0 +1,48 @@
+XA01 {
+  fixed32 {
+    SELNUM {
+      numdata number(3);
+    };
+    TBL_GROUP {
+      textdata varchar(14);
+    };
+    RENNUM {
+      numdata number(4);
+    };
+    SHORI_RENNUM {
+      numdata number(4);
+    };
+    STPAGE {
+      numdata number(5);
+    };
+    EDPAGE {
+      numdata number(5);
+    };
+    scrolledwindow26 {
+      LIST {
+        HEAD1 {
+          textdata varchar(8);
+        };
+        HEAD2 {
+          textdata varchar(10);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(14);
+            column3 varchar(4);
+            column4 varchar(4);
+            column5 varchar(5);
+            column6 varchar(6);
+            column7 varchar(9);
+            column8 varchar(20);
+            column9 varchar(60);
+            column10 varchar(2);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

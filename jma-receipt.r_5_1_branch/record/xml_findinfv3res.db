@@ -1,0 +1,48 @@
+xml_findinfv3res{
+  context                            int;
+  object                             object;
+  mode                               int;
+  recordname                         varchar(128);
+  findinfv3res  {
+    Information_Date                 varchar(10);
+    Information_Time                 varchar(8);
+    Api_Result                       varchar(5);
+    Api_Result_Message               varchar(100);
+    Request_Number                   varchar(2);
+    Patient_Information{
+      Condition1_Code_Information{
+        Condition1_Code              varchar(02);
+        Condition1_Code_Name         varchar(20);
+      }[100];
+      Condition2_Code_Information{
+        Condition2_Code              varchar(02);
+        Condition2_Code_Name         varchar(20);
+      }[100];
+      Condition3_Code_Information{
+        Condition3_Code              varchar(02);
+        Condition3_Code_Name         varchar(20);
+      }[100];
+      Discount_Reason_Code_Information{
+        Discount_Reason_Code         varchar(2);
+        Discount_Reason_Code_Name    varchar(20);
+      }[99];
+      Special_Report_Code_Information{
+        Special_Report_Code          varchar(02);
+        Special_Report_Code_Name     varchar(12);
+      }[50];
+    };
+    HealthInsurance_Information{
+      InsuranceProvider_Class_Information{
+        InsuranceProvider_Class      varchar(03);
+        InsuranceProvider_Class_Name varchar(16);
+      }[50];
+    };
+    PublicInsurance_Information{
+      PublicInsurance_Class_Information{
+        PublicInsurance_Class        varchar(03);
+        PublicInsurance_Class_Name   varchar(16);
+        PublicInsurance_Class_Restraction   varchar(01);
+      }[150];
+    };
+  };
+};

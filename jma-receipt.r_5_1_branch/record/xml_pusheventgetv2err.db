@@ -1,0 +1,11 @@
+xml_pusheventgetv2err {
+  context      int;
+  object       object;
+  mode         int;
+  recordname   varchar(128);
+  error{
+    code       varchar(4);
+    message    varchar(128);
+  };        
+};
+

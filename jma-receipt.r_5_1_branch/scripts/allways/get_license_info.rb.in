@@ -1,0 +1,55 @@
+#!%RUBY%
+# coding : utf-8
+
+require "uri"
+require "net/https"
+require "json"
+
+APIURL = ENV['ORCAIDPATH'] + "/contracts"
+ID = ARGV[0]
+ACKEY = ARGV[1]
+
+uri = URI.parse("#{APIURL}/#{ID}")
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+begin
+  req = Net::HTTP::Get.new(uri.request_uri)
+  req["Authorization"] = "Bearer #{ACKEY}"
+  req["Content-Type"] = "application/json"
+
+  begin
+    json = http.request(req)
+    res = JSON.parse(json.body)
+  
+    if json.code.to_i == 200
+      if "#{res['contracted_on']}" == ""
+        Contracted_On = "00000000"
+      else
+        Contracted_On = "#{res['contracted_on']}".gsub("-","")
+      end
+      if "#{res['intro_level']}" == ""
+        Intro_Level = "0"
+      else
+        Intro_Level = "#{res['intro_level']}"
+      end
+      if "#{res['intro_year']}" == ""
+        Intro_YM = "000000"
+      else
+        if "#{res['intro_month']}" == ""
+          Intro_YM = "000000"
+        else
+          Intro_YM = "#{res['intro_year']}#{format('%02d', res['intro_month'])}"
+        end
+      end
+      STDERR.puts "200,#{res['contract_status']},#{Contracted_On},#{Intro_Level},#{Intro_YM}"
+    else
+      STDERR.puts "#{json.code},#{res['error']['code']},#{res['error']['message']}"
+    end
+  rescue Exception => ex
+    STDERR.puts "#{json.code},#{ex.message}"
+  end
+rescue Exception => ex
+  STDERR.puts "998,#{ex.message}"
+end

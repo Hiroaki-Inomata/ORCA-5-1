@@ -1,0 +1,50 @@
+X01 {
+  fixed1 {
+    B10 {
+      label varchar(10);
+      state int;
+    };
+    scrolledwindow1 {
+      TENSU_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(10);
+            column3 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    SELNUM {
+      textdata varchar(3);
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    LBLSRYCD {
+      textdata varchar(20);
+    };
+    SRYCD {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    CHKKBNCOMB {
+      CHKKBN {
+        textdata varchar(32);
+      };
+      count int;
+        item varchar(32)[11];
+    };
+    LBLBYOSTATUS {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

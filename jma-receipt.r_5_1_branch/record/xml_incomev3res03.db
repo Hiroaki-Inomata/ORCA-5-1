@@ -1,0 +1,41 @@
+xml_incomev3res03{
+  context                              int;
+  object                               object;
+  mode                                 int;
+  recordname                           varchar(128);
+  incomev3res{
+    Information_Date                   varchar(10);
+    Information_Time                   varchar(8);
+    Api_Result                         varchar(5);
+    Api_Result_Message                 varchar(100);
+    Request_Number                     varchar(2);
+    Request_Mode                       varchar(2);
+    Response_Number                    varchar(2);
+    Karte_Uid                          varchar(36);
+    Orca_Uid                           varchar(36);
+    Patient_ID                         varchar(20);
+    InOut                              varchar(1);
+    Invoice_Number                     varchar(7);
+    Ac_Money                           varchar(10);
+    Ic_Money                           varchar(10);
+    Unpaid_Money                       varchar(10);
+    State                              varchar(1);
+    State_Name                         varchar(10);
+    Income_History{
+      History_Number                   varchar(02);
+      Processing_Date                  varchar(10);
+      Processing_Time                  varchar(05);
+      Ad_Money1                        varchar(10);
+      Ad_Money2                        varchar(10);
+      Ac_Money                         varchar(10);
+      Ic_Money                         varchar(10);
+      State                            varchar(02);
+      State_Name                       varchar(10);
+      Ic_Code                          varchar(02);
+      Ic_Code_Name                     varchar(20);
+    }[99];
+    Data_Id_Information {
+      Data_Id                          varchar(37);
+    };
+  };
+};

@@ -1,0 +1,64 @@
+tbl_psychotropic {
+	CODE				varchar(7);
+	YUKOSTYMD			varchar(8);
+	YUKOEDYMD			varchar(8);
+	CLASS				varchar(1);
+	GROUPCODE			varchar(7);
+	UPYMD				varchar(8);
+#-----> 主キー更新用項目
+	UPCODE				varchar(7),virtual;
+	UPYUKOSTYMD			varchar(8),virtual;
+	UPYUKOEDYMD			varchar(8),virtual;
+};
+primary	{
+	CODE,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_psychotropic_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_psychotropic
+		WHERE   CODE     =   :CODE
+ 		AND   YUKOSTYMD  <=  :YUKOSTYMD
+		AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_psychotropic_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_psychotropic
+			ORDER   BY  CODE,
+				    YUKOSTYMD
+ 		;
+	};
+};
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_psychotropic_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_psychotropic
+			WHERE 	CODE	= :CODE
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_psychotropic
+				SET
+				CODE     = :CODE,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				CLASS          = :CLASS,
+				GROUPCODE      = :GROUPCODE,
+				UPYMD      = :UPYMD 
+			WHERE 	CODE      =  :UPCODE
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

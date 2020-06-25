@@ -1,0 +1,14 @@
+session_start {                             
+   arguments {                              
+       user                varchar(16);    
+       password            varchar(256);    
+       session_type        varchar(256);    
+       reserve1            varchar(256);    
+       reserve2            varchar(256);    
+       reserve3            varchar(256);    
+   };                                       
+   http_method             varchar(8);      
+   http_status             int;             
+   content_type            varchar(64);     
+   body                    object;          
+};

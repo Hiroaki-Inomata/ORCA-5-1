@@ -1,0 +1,261 @@
+tbl_order {
+	HOSPNUM			 	number(2,0);
+	KARTE_KEY			varchar(36);
+	ORDERNUM			number(2,0);
+	NYUGAIKBN			char(1);
+	PTNUM				char(20);
+	PTID				number(10,0);
+	SRYKA				char(2);
+	SRYYMD				char(8);
+	HKNCOMBI			number(4,0);
+	ORDERID				char(4);
+	UKEYMD   			char(8);
+	UKEHMS   			char(8);
+	ERRCD1				char(4);
+	ERRCD2				char(4);
+	STATUS				number(1,0);
+	MODIFY				number(1,0);
+	KEYGENERATE			number(1,0);
+	RRKNUM				number(3,0);
+	RRKEDANUM			number(3,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 検索用項目
+	SELSTUKEYMD			char(8),virtual;
+	SELEDUKEYMD 	    char(8),virtual;
+	SELSTATUS		    varchar(1),virtual;
+	SELLIMIT 	        number(5,0),virtual;
+	SELOFFSET 	        number(5,0),virtual;
+	SELSORT 	        varchar(2),virtual;
+	SELNUMBER 	        number(8,0),virtual;
+};
+primary	{
+	HOSPNUM,KARTE_KEY,ORDERNUM ;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_order_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   KARTE_KEY   =   :KARTE_KEY
+			AND   ORDERNUM    =   :ORDERNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_order_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     KARTE_KEY =   :KARTE_KEY
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_order_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE  HOSPNUM        = :HOSPNUM
+		AND    UKEYMD        = :UKEYMD
+		AND    STATUS        <> 3
+		ORDER  BY  SRYYMD  ,UKEHMS ,KARTE_KEY ,ORDERNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_order_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE  HOSPNUM        = :HOSPNUM
+		AND    PTNUM         = :PTNUM
+		AND    STATUS		 <> 3
+		ORDER  BY  UKEYMD DESC,UKEHMS DESC,KARTE_KEY DESC,ORDERNUM DESC
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_order_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE  HOSPNUM        = :HOSPNUM
+		AND    PTID          = :PTID
+		AND    STATUS		 <>    3
+		ORDER  BY  SRYYMD DESC,UKEYMD DESC,UKEHMS DESC,KARTE_KEY DESC,ORDERNUM DESC
+		;
+	};
+};
+
+path	upd1 	{
+	DBUPDATE	{
+		UPDATE  tbl_order
+		SET     STATUS    =   3
+		WHERE   HOSPNUM   =   :HOSPNUM
+		AND     KARTE_KEY =   :KARTE_KEY
+		AND     ORDERNUM  =   :ORDERNUM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_order_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE  HOSPNUM        = :HOSPNUM
+		AND    UKEYMD       >= :SELSTUKEYMD
+		AND    UKEYMD       <= :SELEDUKEYMD
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_order_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE  HOSPNUM        = :HOSPNUM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_order_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order
+		WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	upd2 	{
+	DBUPDATE	{
+		UPDATE  tbl_order
+		SET     PTNUM     =   :PTNUM
+		WHERE   HOSPNUM   =   :HOSPNUM
+		AND     PTID      =   :PTID
+		;
+	};
+};
+
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_order
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID       =   :PTID
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_order_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_order 
+		WHERE  HOSPNUM       =    :HOSPNUM
+		AND    (TRIM(:UKEYMD)= '' OR UKEYMD = :UKEYMD)
+		AND    (TRIM(:SRYYMD)= '' OR SRYYMD = :SRYYMD)
+		AND    (:PTID        = 0  OR PTID   = :PTID)
+		AND    (TRIM(:SELSTATUS) = '' OR STATUS <> :STATUS)
+		AND    STATUS        <> 3
+		ORDER  BY
+          (CASE :SELSORT WHEN '01' THEN SRYYMD     END) ASC,
+          (CASE :SELSORT WHEN '01' THEN UKEYMD     END) ASC,
+          (CASE :SELSORT WHEN '01' THEN UKEHMS     END) ASC,
+          (CASE :SELSORT WHEN '01' THEN KARTE_KEY  END) ASC,
+          (CASE :SELSORT WHEN '01' THEN ORDERNUM   END) ASC,
+
+          (CASE :SELSORT WHEN '02' THEN SRYYMD     END) DESC,
+          (CASE :SELSORT WHEN '02' THEN UKEYMD     END) DESC,
+          (CASE :SELSORT WHEN '02' THEN UKEHMS     END) DESC,
+          (CASE :SELSORT WHEN '02' THEN KARTE_KEY  END) DESC,
+          (CASE :SELSORT WHEN '02' THEN ORDERNUM   END) DESC,
+
+          (CASE :SELSORT WHEN '03' THEN UKEYMD     END) ASC,
+          (CASE :SELSORT WHEN '03' THEN UKEHMS     END) ASC,
+          (CASE :SELSORT WHEN '03' THEN SRYYMD     END) ASC,
+          (CASE :SELSORT WHEN '03' THEN KARTE_KEY  END) ASC,
+          (CASE :SELSORT WHEN '03' THEN ORDERNUM   END) ASC,
+
+          (CASE :SELSORT WHEN '04' THEN UKEYMD     END) DESC,
+          (CASE :SELSORT WHEN '04' THEN UKEHMS     END) DESC,
+          (CASE :SELSORT WHEN '04' THEN SRYYMD     END) DESC,
+          (CASE :SELSORT WHEN '04' THEN KARTE_KEY  END) DESC,
+          (CASE :SELSORT WHEN '04' THEN ORDERNUM   END) DESC
+		LIMIT  :SELLIMIT
+		OFFSET :SELOFFSET
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_order_key9_csr CURSOR FOR
+        SELECT *
+        FROM (
+			SELECT row_number() over(
+			ORDER  BY
+              (CASE :SELSORT WHEN '01' THEN SRYYMD     END) ASC,
+              (CASE :SELSORT WHEN '01' THEN UKEYMD     END) ASC,
+              (CASE :SELSORT WHEN '01' THEN UKEHMS     END) ASC,
+              (CASE :SELSORT WHEN '01' THEN KARTE_KEY  END) ASC,
+              (CASE :SELSORT WHEN '01' THEN ORDERNUM   END) ASC,
+
+              (CASE :SELSORT WHEN '02' THEN SRYYMD     END) DESC,
+              (CASE :SELSORT WHEN '02' THEN UKEYMD     END) DESC,
+              (CASE :SELSORT WHEN '02' THEN UKEHMS     END) DESC,
+              (CASE :SELSORT WHEN '02' THEN KARTE_KEY  END) DESC,
+              (CASE :SELSORT WHEN '02' THEN ORDERNUM   END) DESC,
+
+              (CASE :SELSORT WHEN '03' THEN UKEYMD     END) ASC,
+              (CASE :SELSORT WHEN '03' THEN UKEHMS     END) ASC,
+              (CASE :SELSORT WHEN '03' THEN SRYYMD     END) ASC,
+              (CASE :SELSORT WHEN '03' THEN KARTE_KEY  END) ASC,
+              (CASE :SELSORT WHEN '03' THEN ORDERNUM   END) ASC,
+
+              (CASE :SELSORT WHEN '04' THEN UKEYMD     END) DESC,
+              (CASE :SELSORT WHEN '04' THEN UKEHMS     END) DESC,
+              (CASE :SELSORT WHEN '04' THEN SRYYMD     END) DESC,
+              (CASE :SELSORT WHEN '04' THEN KARTE_KEY  END) DESC,
+              (CASE :SELSORT WHEN '04' THEN ORDERNUM   END) DESC
+		) as SELNUMBER,*
+		FROM tbl_order 
+			WHERE  HOSPNUM       =    :HOSPNUM
+			AND    (TRIM(:UKEYMD)= '' OR UKEYMD = :UKEYMD)
+			AND    (TRIM(:SRYYMD)= '' OR SRYYMD = :SRYYMD)
+			AND    (:PTID        = 0  OR PTID   = :PTID)
+			AND    (TRIM(:SELSTATUS) = '' OR STATUS <> :STATUS)
+			AND    STATUS        <> 3
+        ) as row_order
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   KARTE_KEY   =   :KARTE_KEY
+			AND   ORDERNUM    =   :ORDERNUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+        FROM tbl_order
+        WHERE HOSPNUM       =  :HOSPNUM
+        AND   UKEYMD        <  :UKEYMD
+		;
+	};
+};
+

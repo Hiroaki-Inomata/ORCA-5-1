@@ -1,0 +1,17 @@
+kanri_cd    : "1202"
+name        : "ÅÀ¿ô»»Äê´ð½à"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "DAKETUKBN"
+  item_jp   : "Äã¾Ò²ðÎ¨"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 2
+  length    : 499

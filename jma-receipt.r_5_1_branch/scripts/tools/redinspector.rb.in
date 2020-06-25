@@ -1,0 +1,30 @@
+#!%RUBY%
+# coding : utf-8
+
+require "zlib"
+
+def read_red(path)
+  Zlib::GzipReader.open(path){|gz|
+    return gz.read
+  }
+rescue Zlib::GzipFile::Error
+  return File.read(path)
+end
+
+def check_red(file)
+  redin = read_red(file)
+  redin.gsub!(/&#10;/,"\n")
+  redin.gsub!(/&#([0-9]+);/){[$1.to_i.to_s(16)].pack("H*")}
+  redin.split(/\n/).each.with_index(1){|s,i|
+    begin
+      s.encode('utf-8','euc-jp')
+    rescue Encoding::InvalidByteSequenceError
+      STDERR.puts "---- ERROR #{file} line:#{i}"
+      exit 1
+    end
+  }
+end
+
+ARGV.each{|file|
+  check_red(file)
+}

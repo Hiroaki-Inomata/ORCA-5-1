@@ -1,0 +1,70 @@
+tbl_jinmei {
+	HOSPNUM				number(2,0);
+	KANJI    			varchar(50);
+	KANA    			varchar(50);
+	UPYMD   			varchar(8);
+	UPHMS   			varchar(6);
+};
+
+primary	{
+	HOSPNUM,KANJI,KANA;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_jinmei_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jinmei
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANJI        =   :KANJI
+       AND    KANA         =   :KANA
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_jinmei_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jinmei
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANA        =   :KANA
+      ORDER   BY UPYMD DESC,UPHMS DESC,KANJI ASC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_jinmei_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jinmei
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANJI        =   :KANJI
+      ORDER   BY UPYMD DESC,UPHMS DESC,KANA ASC
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_jinmei
+		SET	
+				UPYMD	=	:UPYMD,
+				UPHMS	=	:UPHMS
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND   KANJI        =   :KANJI
+       AND  KANA         =   :KANA
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_jinmei_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jinmei
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};

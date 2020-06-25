@@ -1,0 +1,368 @@
+I47 {
+  fixed2 {
+    B10 {
+      state int;
+    };
+    B10S {
+      state int;
+    };
+    LBLINFO {
+      style varchar(20);
+      textdata varchar(80);
+    };
+    LBLINFO2 {
+      style varchar(20);
+      textdata varchar(80);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    SRYYM {
+      textdata varchar(8);
+    };
+    KANANAME {
+      textdata varchar(50);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    NYUINYMD {
+      textdata varchar(9);
+    };
+    TAIINYMD {
+      textdata varchar(9);
+    };
+    SELNUM {
+      textdata varchar(50);
+    };
+    MEISYO {
+      textdata varchar(200);
+    };
+    frame1{
+      state int;
+      fixed1{
+        DAYALL {
+          textdata varchar(2);
+        };
+        DAY01 {
+          textdata varchar(2);
+        };
+        DAY02 {
+          textdata varchar(2);
+        };
+        DAY03 {
+          textdata varchar(2);
+        };
+        DAY04 {
+          textdata varchar(2);
+        };
+        DAY05 {
+          textdata varchar(2);
+        };
+        DAY06 {
+          textdata varchar(2);
+        };
+        DAY07 {
+          textdata varchar(2);
+        };
+        DAY08 {
+          textdata varchar(2);
+        };
+        DAY09 {
+          textdata varchar(2);
+        };
+        DAY10 {
+          textdata varchar(2);
+        };
+        DAY11 {
+          textdata varchar(2);
+        };
+        DAY12 {
+          textdata varchar(2);
+        };
+        DAY13 {
+          textdata varchar(2);
+        };
+        DAY14 {
+          textdata varchar(2);
+        };
+        DAY15 {
+          textdata varchar(2);
+        };
+        DAY16 {
+          textdata varchar(2);
+        };
+        DAY17 {
+          textdata varchar(2);
+        };
+        DAY18 {
+          textdata varchar(2);
+        };
+        DAY19 {
+          textdata varchar(2);
+        };
+        DAY20 {
+          textdata varchar(2);
+        };
+        DAY21 {
+          textdata varchar(2);
+        };
+        DAY22 {
+          textdata varchar(2);
+        };
+        DAY23 {
+          textdata varchar(2);
+        };
+        DAY24 {
+          textdata varchar(2);
+        };
+        DAY25 {
+          textdata varchar(2);
+        };
+        DAY26 {
+          textdata varchar(2);
+        };
+        DAY27 {
+          textdata varchar(2);
+        };
+        DAY28 {
+          textdata varchar(2);
+        };
+        DAY29 {
+          textdata varchar(2);
+        };
+        DAY30 {
+          textdata varchar(2);
+        };
+        DAY31 {
+          textdata varchar(2);
+        };
+        GRPINPUT {
+          textdata varchar(50);
+        };
+      };
+    };
+    scrolledwindow1 {
+      RYOLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(1);
+            column3 varchar(100);
+            column4 varchar(2);
+            column5 varchar(2);
+            column6 varchar(2);
+            column7 varchar(2);
+            column8 varchar(2);
+            column9 varchar(2);
+            column10 varchar(2);
+            column11 varchar(2);
+            column12 varchar(2);
+            column13 varchar(2);
+            column14 varchar(2);
+            column15 varchar(2);
+            column16 varchar(2);
+            column17 varchar(2);
+            column18 varchar(2);
+            column19 varchar(2);
+            column20 varchar(2);
+            column21 varchar(2);
+            column22 varchar(2);
+            column23 varchar(2);
+            column24 varchar(2);
+            column25 varchar(2);
+            column26 varchar(2);
+            column27 varchar(2);
+            column28 varchar(2);
+            column29 varchar(2);
+            column30 varchar(2);
+            column31 varchar(2);
+            column32 varchar(2);
+            column33 varchar(2);
+            column34 varchar(2);
+            column35 varchar(2);
+            column36 varchar(2);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow2 {
+      NYULIST {
+        count int;
+        row int;
+        rowattr int;
+        NDAY01 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY02 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY03 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY04 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY05 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY06 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY07 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY08 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY09 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY10 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY11 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY12 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY13 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY14 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY15 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY16 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY17 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY18 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY19 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY20 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY21 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY22 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY23 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY24 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY25 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY26 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY27 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY28 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY29 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY30 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+        NDAY31 {
+          style varchar(20);
+          textdata varchar(2);
+        };
+          item {
+            column1 varchar(2);
+            column2 varchar(1);
+            column3 varchar(100);
+            column4 varchar(2);
+            column5 varchar(2);
+            column6 varchar(2);
+            column7 varchar(2);
+            column8 varchar(2);
+            column9 varchar(2);
+            column10 varchar(2);
+            column11 varchar(2);
+            column12 varchar(2);
+            column13 varchar(2);
+            column14 varchar(2);
+            column15 varchar(2);
+            column16 varchar(2);
+            column17 varchar(2);
+            column18 varchar(2);
+            column19 varchar(2);
+            column20 varchar(2);
+            column21 varchar(2);
+            column22 varchar(2);
+            column23 varchar(2);
+            column24 varchar(2);
+            column25 varchar(2);
+            column26 varchar(2);
+            column27 varchar(2);
+            column28 varchar(2);
+            column29 varchar(2);
+            column30 varchar(2);
+            column31 varchar(2);
+            column32 varchar(2);
+            column33 varchar(2);
+            column34 varchar(2);
+            column35 varchar(2);
+            column36 varchar(2);
+          }[3];
+          selectdata bool[3];
+      };
+    };
+  };
+};

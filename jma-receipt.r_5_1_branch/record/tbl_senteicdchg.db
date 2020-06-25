@@ -1,0 +1,52 @@
+tbl_senteicdchg {
+	IPNSRYCD   		char(9);
+	SENTEISRYCD  	char(9);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+};
+primary	{
+	IPNSRYCD,SENTEISRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_senteicdchg_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_senteicdchg
+			WHERE   IPNSRYCD  =   :IPNSRYCD
+			AND   SENTEISRYCD    =   :SENTEISRYCD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_senteicdchg_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_senteicdchg
+			WHERE   IPNSRYCD  =   :IPNSRYCD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_senteicdchg_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_senteicdchg
+			WHERE   SENTEISRYCD    =   :SENTEISRYCD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_senteicdchg_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_senteicdchg
+ 		;
+	};
+};

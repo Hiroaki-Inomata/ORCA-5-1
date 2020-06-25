@@ -1,0 +1,228 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+RENNUM=0
+#-------------------------------------------#
+#    総括表用ファイル作成（２００３年４月以降のみ作成）
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} SRYYM TERID SYSYMD
+#        ${13} RECEKBN(総括表の種類)
+#           1:社保 2:国保 3:広域連合
+#        ${14} HOSPNUM
+#        ${15} 国保診療報酬請求書印刷区分
+#        ${16} ジョブＩＤ
+#        ${17} シェルＩＤ
+#        ${18} エラーファイル名 
+#        ${19} 処理年月
+#        ${20} 入外区分
+#        ${21} 個別指定の保険者番号（国保、広域連合）
+#        ${22} 社保:処理対象区分
+#           0:全体  1:当月・月遅れ分  2:返戻分
+#        ${23} 国保:処理対象区分
+#           0:全体  1:当月・月遅れ分  2:返戻分
+#        ${24} 1:マル長分を別総括作成
+#        ${25} 社保:災害 0:確定分 1:未確定分 9:まとめる
+#        ${26} 広域連合:処理対象区分
+#           0:全体  1:当月・月遅れ分  2:返戻分
+#        ${27} 直接請求する保険者番号
+#            99999999:設定なし 00000000:設定以外の保険者
+#        ${28}-  ${29}医療機関コード別の処理指定時
+#            該当診療年月の開始、終了
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${14}recept3${13}.log"
+        if  [ ${25} -eq '0' ] || [ ${25} -eq '9' ]; then
+            if  [ ${27} -eq '99999999' ] || [ ${27} -eq '00000000' ]; then
+                rm -f $LOG_FILE
+            fi
+        fi 
+        echo $(basename ${LOG_FILE})
+
+        echo "arg5  = [" ${5} "]"  
+        echo "arg12 = [" ${12} "]" 
+        echo "arg14 = [" ${14} "]" 
+        echo "arg16 = [" ${16} "]" 
+        echo "arg17 = [" ${17} "]" 
+        echo "arg18 = [" ${18} "]" 
+        echo "arg19 = [" ${19} "]" 
+        echo "arg20 = [" ${20} "]" 
+        if  [ ${13} -eq 1 ]; then
+            echo "arg22 = [" ${22} "]" 
+            echo "arg24 = [" ${24} "]" 
+            echo "arg25 = [" ${25} "]" 
+            echo "arg27 = [" ${27} "]" 
+        else
+            echo "arg15 = [" ${15} "]" 
+            echo "arg21 = [" ${21} "]" 
+            echo "arg23 = [" ${23} "]" 
+            echo "arg26 = [" ${26} "]" 
+        fi
+        echo "arg28 = [" ${28} "]" 
+        echo "arg29 = [" ${29} "]" 
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${18}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${18}
+        
+##      総括表（社保）
+        if  [ ${13} -eq 1 ]; then
+           if  [ $5 -ge '200304' ]; then
+               if  [ ${24} -eq '0' ]; then
+##                 返戻分
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '2' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},2,0,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+##                 当月・月遅れ分
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '1' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},1,0,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+               else
+##                 返戻分（マル長以外）
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '2' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},2,1,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+##                 当月・月遅れ分（マル長以外）
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '1' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},1,1,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+##                 返戻分（マル長）
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '2' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},2,2,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+##                 当月・月遅れ分（マル長）
+                   if  [ ${22} -eq '0' ] || [ ${22} -eq '1' ]; then
+                       RENNUM=$(expr $RENNUM + 1) 
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM022 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},1,2,${25},${27},${28},${29},${18} 
+                       if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                          exit
+                       fi
+                   fi
+               fi    
+            fi
+        fi
+         
+##      総括表（国保）
+        if  [ ${13} -eq 2 ]; then
+            if  [ $5 -ge '200304' ]; then
+##             返戻分
+               if  [ ${23} -eq '0' ] || [ ${23} -eq '2' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   if  [ ${15} = 1 ]; then
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM030 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,1,${18} 
+                   else
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM029 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,1,${28},${29},${18} 
+                   fi
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+##             当月・月遅れ分
+               if  [ ${23} -eq '0' ] || [ ${23} -eq '1' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   if  [ ${15} = 1 ]; then
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM030 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,1,${18} 
+                   else
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM029 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,1,${28},${29},${18} 
+                   fi
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+
+##             返戻分（特別療養費分）
+               if  [ ${23} -eq '0' ] || [ ${23} -eq '2' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   if  [ ${15} = 1 ]; then
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM030 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,2,${18} 
+                   else
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM029 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,2,${28},${29},${18} 
+                   fi
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+##             当月・月遅れ分（特別療養費分）
+               if  [ ${23} -eq '0' ] || [ ${23} -eq '1' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   if  [ ${15} = 1 ]; then
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM030 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,2,${18} 
+                   else
+                       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM029 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,2,${28},${29},${18} 
+                   fi 
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+
+            fi    
+        fi
+         
+##      総括表（広域連合）
+        if  [ ${13} -eq 3 ]; then
+##             返戻分
+               if  [ ${26} -eq '0' ] || [ ${26} -eq '2' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM035 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,1,${28},${29},${18} 
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+##             当月・月遅れ分
+               if  [ ${26} -eq '0' ] || [ ${26} -eq '1' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM035 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,1,${28},${29},${18} 
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+
+##             返戻分（特別療養費分）
+               if  [ ${26} -eq '0' ] || [ ${26} -eq '2' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM035 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},2,2,${28},${29},${18} 
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+##             当月・月遅れ分（特別療養費分）
+               if  [ ${26} -eq '0' ] || [ ${26} -eq '1' ]; then
+                   RENNUM=$(expr $RENNUM + 1) 
+                   $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM035 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${16},${17},${20},${21},1,2,${28},${29},${18} 
+                   if  [ -e ${MCP_TEMPDIR}/${18} ]; then
+                       exit
+                   fi
+               fi
+       fi
+       
+       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${16}${17},${14} 
+
+        exit 

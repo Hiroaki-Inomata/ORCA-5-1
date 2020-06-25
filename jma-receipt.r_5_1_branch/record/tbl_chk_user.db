@@ -1,0 +1,291 @@
+tbl_chk_user	{
+	HOSPNUM		number(2,0);
+	CHKKBN		char(1);
+	SRYCD   	char(9);
+	GRPNUM		number(2,0);
+	YUKOSTYMD  	char(8);
+	YUKOEDYMD  	char(8);
+	CDKBN   	char(1);
+	CD		varchar(9);
+	NYUGAIKBN	char(1);
+	NYUGAIBNDKBN	char(1);
+	SYORIKBN	char(1);
+	CHKERR		number(1,0);
+	DATAKBN		char(1);
+	RENNUM		number(3);
+	TERMID  	varchar(16);
+	OPID    	varchar(16);
+	CREYMD  	char(8);
+	UPYMD   	char(8);
+	UPHMS		char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM	number(2,0),virtual;
+	UPCHKKBN	char(1),virtual;
+	UPSRYCD   	char(9),virtual;
+	UPGRPNUM	number(2,0),virtual;
+	UPYUKOSTYMD	char(8),virtual;
+	UPYUKOEDYMD	char(8),virtual;
+	UPCDKBN   	char(1),virtual;
+	UPCD		varchar(9),virtual;
+#-----> 検索キー用項目
+	SELNAME		char(200),virtual;
+	SELCDSYU	char(1),virtual;
+	SELINPUTCD	char(20),virtual;
+};
+
+primary	{
+	HOSPNUM,CHKKBN,SRYCD,GRPNUM,YUKOSTYMD,YUKOEDYMD,CDKBN,CD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE	HOSPNUM	= :HOSPNUM
+			AND CHKKBN     = :CHKKBN
+			AND SRYCD      = :SRYCD
+			AND GRPNUM     = :GRPNUM
+			AND YUKOSTYMD <= :YUKOSTYMD
+			AND YUKOEDYMD >= :YUKOEDYMD
+			AND CDKBN      = :CDKBN
+			AND CD         = :CD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	tbl_chk_user
+			VALUES(
+				:HOSPNUM,
+				:CHKKBN,
+				:SRYCD,
+				:GRPNUM,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:CDKBN,
+				:CD,
+				:NYUGAIKBN,
+				:NYUGAIBNDKBN,
+				:SYORIKBN,
+				:CHKERR,
+				:DATAKBN,
+				:RENNUM,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	tbl_chk_user
+		WHERE	HOSPNUM	= :HOSPNUM
+			AND CHKKBN    = :CHKKBN
+			AND SRYCD     = :SRYCD
+			AND GRPNUM    = :GRPNUM
+			AND YUKOSTYMD = :YUKOSTYMD
+			AND YUKOEDYMD = :YUKOEDYMD
+			AND CDKBN     = :CDKBN
+			AND CD        = :CD
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE	HOSPNUM	= :HOSPNUM
+			AND CHKKBN     = :CHKKBN
+			AND SRYCD      = :SRYCD
+			AND GRPNUM     = :GRPNUM
+			AND YUKOSTYMD <= :YUKOSTYMD
+			AND YUKOEDYMD >= :YUKOEDYMD
+		ORDER	BY DATAKBN,RENNUM
+		;
+	};
+};
+
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE	HOSPNUM	= :HOSPNUM
+			AND CHKKBN     = :CHKKBN
+			AND SRYCD      = :SRYCD
+			AND GRPNUM     = :GRPNUM
+			AND CD         = :CD
+		ORDER	BY YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE	{
+		UPDATE	tbl_chk_user
+			SET
+				HOSPNUM      = :HOSPNUM,
+				CHKKBN       = :CHKKBN,
+				SRYCD        = :SRYCD,
+				GRPNUM       = :GRPNUM,
+				YUKOSTYMD    = :YUKOSTYMD,
+				YUKOEDYMD    = :YUKOEDYMD,
+				CDKBN        = :CDKBN,
+				CD           = :CD,
+				NYUGAIKBN    = :NYUGAIKBN,
+				NYUGAIBNDKBN = :NYUGAIBNDKBN,
+				SYORIKBN     = :SYORIKBN,
+				CHKERR       = :CHKERR,
+				DATAKBN      = :DATAKBN,
+				RENNUM       = :RENNUM,
+				TERMID       = :TERMID,
+				OPID         = :OPID,
+				CREYMD       = :CREYMD,
+				UPYMD        = :UPYMD,
+				UPHMS        = :UPHMS
+		WHERE	HOSPNUM = :UPHOSPNUM
+			AND CHKKBN    = :UPCHKKBN
+			AND SRYCD     = :UPSRYCD
+			AND GRPNUM    = :UPGRPNUM
+			AND YUKOSTYMD = :UPYUKOSTYMD
+			AND YUKOEDYMD = :UPYUKOEDYMD
+			AND CDKBN     = :UPCDKBN
+			AND CD        = :CD
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	del11	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_chk_user
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   CHKKBN    =   :CHKKBN
+			AND   SRYCD       =   :SRYCD
+			AND   GRPNUM      =   :GRPNUM
+			AND YUKOSTYMD <= :YUKOSTYMD
+			AND YUKOEDYMD >= :YUKOEDYMD
+		;
+	};
+};
+
+path	key6	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   CHKKBN  = :CHKKBN
+			AND   SRYCD   = :SRYCD
+			AND   GRPNUM  = :GRPNUM
+			ORDER  BY  YUKOSTYMD,DATAKBN,RENNUM
+		;
+	};
+};
+
+path	key18	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key18_csr CURSOR FOR
+		SELECT DISTINCT ON (CHKKBN,SRYCD,GRPNUM) * FROM tbl_chk_user
+		WHERE  HOSPNUM = :HOSPNUM
+		AND    SRYCD   = :SRYCD
+		AND   YUKOSTYMD  <=   :YUKOSTYMD
+		AND   YUKOEDYMD  >=   :YUKOEDYMD
+		ORDER BY CHKKBN,SRYCD,GRPNUM,CDKBN,RENNUM,YUKOEDYMD DESC
+		;
+	};
+};
+
+path	ins1	{
+	DBINSERT	{
+		INSERT INTO tbl_chk_user (
+		HOSPNUM,
+		CHKKBN,
+		SRYCD,
+		GRPNUM,
+		YUKOSTYMD,
+		YUKOEDYMD,
+		CDKBN,
+		CD,
+		NYUGAIKBN,
+		NYUGAIBNDKBN,
+		SYORIKBN,
+		CHKERR,
+		DATAKBN,
+		RENNUM,
+		TERMID,
+		OPID,
+		CREYMD,
+		UPYMD,
+		UPHMS
+		) SELECT HOSPNUM,CHKKBN,:SRYCD,GRPNUM,:YUKOSTYMD,:YUKOEDYMD,CDKBN,CD,NYUGAIKBN,NYUGAIBNDKBN,SYORIKBN,CHKERR,DATAKBN,RENNUM,:TERMID,:OPID,:CREYMD,:UPYMD,:UPHMS
+		FROM  tbl_chk_user
+		WHERE	HOSPNUM = :HOSPNUM
+		AND	CHKKBN  = :CHKKBN
+		AND	SRYCD   = :UPSRYCD
+		AND	GRPNUM  = :GRPNUM
+		AND	YUKOSTYMD = :UPYUKOSTYMD
+		AND	YUKOEDYMD = :UPYUKOEDYMD
+	;
+	};
+};
+
+path	key19	{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+		WHERE  HOSPNUM = :HOSPNUM
+		AND    CD      = :CD
+		AND   YUKOSTYMD  <=   :YUKOSTYMD
+		AND   YUKOEDYMD  >=   :YUKOEDYMD
+		ORDER BY HOSPNUM,CHKKBN,SRYCD,GRPNUM,YUKOSTYMD,YUKOEDYMD,CDKBN
+		;
+	};
+};
+
+path	key20		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_key20_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+			WHERE HOSPNUM	  =   :HOSPNUM
+			AND   CHKKBN      =   :CHKKBN
+			AND   SRYCD       =   :SRYCD
+			AND   GRPNUM      =   :GRPNUM
+			AND   YUKOSTYMD   =   :YUKOSTYMD
+			AND   YUKOEDYMD   =   :YUKOEDYMD
+			AND   CDKBN       =   :CDKBN
+		ORDER   BY    RENNUM DESC
+		;
+	};
+};
+
+path	chklist		{ 	
+	DBSELECT	{
+		DECLARE tbl_chk_user_chklist_csr CURSOR FOR
+		SELECT *
+		FROM tbl_chk_user
+			WHERE HOSPNUM	  =   :HOSPNUM
+			AND ((CHKKBN      =   '5')
+			OR   (CHKKBN      =   'A')
+			OR   (CHKKBN      =   'B'))
+		ORDER   BY    CHKKBN,SRYCD,GRPNUM,YUKOSTYMD,YUKOEDYMD,CDKBN
+		;
+	};
+};

@@ -1,0 +1,65 @@
+tbl_tekiou_disease {
+	KONOCD		varchar(5);
+	BYOMEI		varchar(200);
+	BEFORE_BYOMEI	varchar(100);
+	AFTER_BYOMEI	varchar(100);
+	BYOMEICD	varchar(7);
+	BEFORE_BYOMEICD	varchar(4);
+	AFTER_BYOMEICD	varchar(4);
+	ICD		varchar(5);
+	KAITEIYM	varchar(6);
+	HOJYOKBN	number(2);
+	KONOMEINO	number(6);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+#-----> virtual
+	SELSRYCD	varchar(9),virtual;
+	SELBYOMEI	varchar(200),virtual;
+};
+primary	{
+	KONOCD, BYOMEICD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_disease_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tekiou_disease
+			WHERE KONOCD	=	:KONOCD
+			AND   BYOMEICD  =	:BYOMEICD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_disease_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tekiou_disease
+			WHERE KONOCD	=	:KONOCD
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_disease_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tekiou_disease
+		ORDER   BY  KONOCD,trim(BEFORE_BYOMEI)||trim(BYOMEI)||trim(AFTER_BYOMEI)
+		;
+	};
+};
+
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_tekiou_disease_key3_csr CURSOR FOR
+		SELECT B.SRYCD as SELSRYCD,TRIM(A.BEFORE_BYOMEI) || TRIM(A.BYOMEI)|| TRIM(A.AFTER_BYOMEI) AS SELBYOMEI
+		FROM tbl_tekiou_disease a join tbl_tekiou_medicine b using (KONOCD)
+		WHERE   B.SRYCD  LIKE :SELSRYCD
+		ORDER   BY B.SRYCD, trim(A.BEFORE_BYOMEI)||trim(A.BYOMEI)||trim(A.AFTER_BYOMEI)
+		;
+	};
+};

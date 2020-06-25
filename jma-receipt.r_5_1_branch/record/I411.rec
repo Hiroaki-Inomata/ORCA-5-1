@@ -1,0 +1,25 @@
+I411 {
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(1024);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed4 {
+    SELNUM {
+      textdata varchar(4);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      HKNLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(50);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+  };
+};

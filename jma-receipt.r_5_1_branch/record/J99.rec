@@ -1,0 +1,10 @@
+J99 {
+  fixed1 {
+    PED {
+      textdata varchar(20);
+    };
+    PIN {
+      textdata varchar(2);
+    };
+  };
+};

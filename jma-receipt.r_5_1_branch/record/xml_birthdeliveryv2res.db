@@ -1,0 +1,160 @@
+xml_birthdeliveryv2res {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	private_objects {
+		Information_Date 			varchar(10);
+		Information_Time 			varchar(08);
+		Api_Results{
+			Api_Result	     		varchar(04);
+			Api_Result_Message 		varchar(100);
+		}[10];
+		Request_Number	{
+			Label			varchar(20);
+			Data			varchar(02);
+			Name			varchar(30);
+		};
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate			varchar(10);
+			Sex					varchar(01);
+		};
+		Birth_Delivery_Infomation {
+			History_Number		varchar(3);
+			Admission_Date		varchar(10);
+			Discharge_Date		varchar(10);
+			Direct_Payment	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Ac_Month	{
+				Label			varchar(20);
+				Data			varchar(7);
+			};
+			Ac_Date_Class	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Ac_Class	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Delivery	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Submission_Provider{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Gestation_Period_Passed{
+				Label			varchar(20);
+				Data			varchar(2);
+				Name			varchar(10);
+			};
+			Delivery_Date{
+				Label			varchar(20);
+				Data			varchar(10);
+			};
+			Stillborn_Children{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(10);
+			};
+			Children_Born_Number{
+				Label			varchar(10);
+				Data			varchar(2);
+				Name			varchar(10);
+			};
+			Hospital_Stay_Days{
+				Label			varchar(10);
+				Data			varchar(3);
+				Name			varchar(10);
+			};
+			Obstetric_Compensation_System{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Hospital_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Room_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Delivery_Care_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Delivery_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Child_Care_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Examination_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Medical_Treatment_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			OCS_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Other_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Copayment_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Ac_Money{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Agency_Receipt{
+				Label			varchar(20);
+				Data			varchar(7);
+				Name			varchar(20);
+			};
+			Remarks{
+				Label			varchar(10);
+				Data			varchar(60);
+			};
+			HealthInsurance_Information  {
+				InsuranceProvider_Number		varchar(08);
+				InsuranceProvider_Name			varchar(100);
+				HealthInsuredPerson_Symbol		varchar(38);
+				HealthInsuredPerson_Number		varchar(38);
+				RelationToInsuredPerson			varchar(01);
+			};
+		};
+	};
+};

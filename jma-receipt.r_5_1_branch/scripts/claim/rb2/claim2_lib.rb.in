@@ -1,0 +1,777 @@
+#!%RUBY%
+# coding : euc-jp
+
+
+# Claimバージョン2ライブラリ
+
+
+
+
+
+# =============================================================================
+
+
+
+# 項目の前後にある空白の除去処理
+#    引数
+# word - 空白を除去する文字列
+#    戻り値
+# 空白除去後の文字列
+#    備考
+# 引数に対しても空白の除去処理を行うので、
+# 内容を保存したい場合は、別領域にデータを退避してから実行してください
+def item_trim(word)
+	# 行頭・行末・項目間の空白除去
+	while  /^\s+?/ =~ word
+		word.gsub!(/^\s+?/ , '')
+	end
+	while  /\s+?\n/ =~ word
+		word.gsub!(/\s+?\n/ , "\n")
+	end
+	while  /\s+?$/ =~ word
+		word.gsub!(/\s+?$/ , '')
+	end
+	while  /,[^\S\n]+?/ =~ word
+		word.gsub!(/,[^\S\n]+?/ , ',')
+	end
+	while  /\s+?,/ =~ word
+		word.gsub!(/\s+?,/ , ",")
+	end
+	return word
+end
+
+
+# =========================================================
+
+# コメントや空白の行、行頭・行末・項目間の空白の削除
+#    引数
+# word - 空白等の削除をする文字列
+#    戻り値
+# 空白等削除後の文字列
+#    備考
+# 引数に対しても空白の除去処理を行うので、
+# 内容を保存したい場合は、別領域にデータを退避してから実行してください
+def record_del_comment_space(word)
+	# コメントの削除
+	while  /#[^\n]+?\n/ =~ word
+		word.gsub!(/#[^\n]+?\n/ , "\n")
+	end
+	# コメントのみの削除 (2003/12/5追加)
+	while  /^\s*?#[^\n]*?\n/ =~ word
+		word.gsub!(/^\s*?#[^\n]*?\n/ , "\n")
+	end
+	# ファイル末コメントの削除
+	word.gsub!(/#[^\n]+?$/, '')
+	# 空白行の削除処理
+	while  /^\s*?\n/ =~ word
+		word.gsub!(/^\s*?\n/ , '')
+	end
+	# 行頭・行末・項目間の空白除去
+	item_trim word
+	return word
+end
+
+
+# =============================================================================
+
+
+# Repeat定義処理
+#    引数
+# in_data - Repeat定義が存在すると思われる文字列 (String型/IN)
+#    戻り値
+# Repeat展開した文字列 (String型/OUT)
+def repeat_extend_proc(in_data)
+	# ネストしたRepeat定義へ対応できるように、前処理
+	# この段階で、何回Repeat定義の処理をするかも確定する。（これで、次のwhile文をfor文に変更する）
+	# ネストに対応する際に、Repeat定義の名前を変更するので、
+	#   変更した名前をスタックして、あとでシフトで取り出せるようにすること
+	# 識別子を加えると、「$Repeat」から「$REPEAT_1」になるようにする
+	# まず、配列化し、その後にマージして対応する（concat処理は重いと聞いているが・・・）
+	w_data1 = []	# 配列化データ領域
+	w_data2 = ''	# 一時的な文字列領域
+	w_data3 = []
+
+	repeat_indexname1 = []	# Repeat定義の識別名のみを格納する場所（あとでfor文で使用）
+	repeat_indexname2 = []	# Repeat定義の識別名のみを格納するスタック領域（ワーク用）
+	repeat_indexcount = 0	# repeat定義にセットする識別子のカウント用
+
+	# 識別子は、「_」を付けた、可変長数字をセットする
+
+	w_data1 = in_data.split("\n")	# Repeat定義に対応できるように配列化
+	w_data1.each_index do |x|
+		w_str1 = ''
+		w_str2 = ''
+		if w_data1[x] =~ /^\s*?(\$Repeat)\s*?,/i
+			repeat_indexcount += 1		# カウント値をあらかじめ＋１する
+			w_str1 = ''
+			w_str1 = '_' + String(repeat_indexcount)
+			repeat_indexname2.push w_str1
+			repeat_indexname1.push w_str1
+			w_data1[x].gsub!(/^(\s*?\$Repeat)(\s*?,)/i, '\1' + w_str1 + '\2')
+		end
+
+
+		if w_data1[x] =~ /^\s*?(\$EndRepeat)\s*?/i
+			if repeat_indexname2.size == 0
+				# $Repeatがない$EndRepeatがある
+				puts '関連する$Repeatのないの$EndRepeat定義があります'
+			end
+			w_str2 = repeat_indexname2.pop	# 対応する識別子を取得
+			w_data1[x].gsub!(/^(\s*?\$EndRepeat)(\s*?)/i, '\1' + w_str2 + '\2')
+		end
+
+	end
+
+
+	if repeat_indexname2.size > 0
+		# $EndRepeatがない$Repeatがある
+		puts '$EndRepeat定義がない$Repeat定義が存在します'
+	end
+
+
+	w_data2 = w_data1.join("\n")
+	w_data1 = []
+	# このjoinした直後は、最後の行の後ろに改行がないので注意
+
+	# 最後が改行でない場合は、ここで改行を追加
+	if w_data2[-1, 1] != "\n"
+		w_data2 += "\n"
+	end
+
+
+	# Repeat定義処理(1) [ネスト対応版]
+	repeat_indexname1.each do |rname|
+		repeat_alldata = ''		# Repeat定義を含めた全体の文字列
+		repeat_count = 0		# 繰り返し回数
+		repeat_string = ''		# 置換対象文字列
+		repeat_figures = 0		# 桁数指定(0の場合、自由桁数)
+		repeat_target = ''		# 繰り返しターゲット領域
+		repeat_figformat = ''	# 桁数をsprintfで表現する際の表現を格納する領域
+
+		if w_data2 =~ /^(\s*?\$Repeat#{rname}\s*?,[\s\S]*?)\n/
+			w_data3 = $1.split(',')
+			if (w_data3.size != 4)
+				puts 'Repeat定義の中で、引数の指定が3つではないものがあります'
+			end
+		end
+
+
+		while w_data2 =~ /^(\s*?\$Repeat#{rname}\s*?,\s*?([0-9]+?)\s*?,\s*?(\S+?)\s*?,\s*?([0-9]+?)[\s\S]*?\n([\s\S]*?)^\s*?\$EndRepeat#{rname}[\s\S]*?\n)/i
+			# $1 = $Repeat定義の開始行から終了行までの全体
+			# $2 = 繰り返し回数
+			# $3 = 置換対象文字列
+			# $4 = 桁数指定(0の場合、自由桁数)
+			# $5 = 繰り返し・置換ターゲット領域
+			repeat_alldata = $1
+			repeat_count = $2.to_i	# 繰り返し回数を数値に変換してセット
+			repeat_string = $3
+			repeat_figures = $4.to_i	# 桁数を数値に変換
+			repeat_target = $5
+
+			if repeat_figures == 0
+				repeat_figformat = '%d'
+			else
+				repeat_figformat = '%0' + String(repeat_figures) + 'd'
+			end
+
+			put_data = ''	# セットデータの格納領域
+			for x in 1..repeat_count do
+				put_data += repeat_target.gsub(/#{Regexp.quote(repeat_string)}/, sprintf(repeat_figformat, x))
+			end
+
+			# Repeat定義の置換処理
+			w_data2.gsub!(/#{Regexp.quote(repeat_alldata)}/, put_data)
+			put_data = ''
+		end
+
+	end
+
+	return w_data2
+end
+
+
+
+# =========================================================
+
+
+# 相対パスを絶対パスに変換
+#    引数
+# soc_path  - 比較対象パス (String型/IN)
+# base_path - 相対パス時のベースパス(String型/IN)
+#    戻り値
+# 絶対パス (String型/OUT)
+#    備考
+# コメントや定義のはじめである「#」「$」で始まるものについては、この関数での処理はしません
+def exchange_absolute_path(soc_path, base_path)
+
+	if soc_path =~ /^\s*?\#/
+		# コメントである
+		w_path = soc_path
+	elsif soc_path =~ /^\s*?[^\$\#]/
+		# 通常の行
+		if soc_path =~ /^(\s*?)\.(\/[\s\S]*?)$/
+			# 相対アドレス指定である(./指定あり)
+			w_path = $1 + base_path + $2
+		elsif soc_path =~ /^(\s*?)([^\/\s][\s\S]*?)$/
+			# 相対アドレス指定である(./指定なし)
+			w_path = $1 + base_path + '/' + $2
+		else
+			# 絶対アドレス指定である
+			w_path = soc_path
+		end
+	else
+		# 定義である
+		w_path = soc_path
+	end
+
+	return w_path
+
+end
+
+
+
+# =========================================================
+
+
+# 階層データのbase定義処理
+#    引数
+# in_data - base定義処理対象文字列 (String型/IN)
+#    戻り値
+# base定義処理後の文字列 (String型/OUT)
+#    備考
+def basehierarchy_extend_proc(in_data)
+
+# ネストに対応できるようにすること
+# そのため、BaseStartとBaseEndの識別子をあらかじめ加えること。
+# また、ベース階層の出入りでスタック操作をする
+# gsubでの一気の変換はせず、行単位で該当するベース階層の置換処理を行うようにする。
+#   （そうしないと、ネストへの対応ができない）
+
+
+	# 識別子設定処理
+	# ネストしたBase定義へ対応できるように、識別子を設定する前処理
+	w_data1 = []	# 配列化データ領域
+	w_data2 = ''	# 一時的な文字列領域
+	w_data3 = []	# LineTarget命令で使用する配列データ領域
+
+#	base_indexname1 = []	# Base定義の識別名のみを格納するスタック領域（Base定義展開時用）
+	base_indexname2 = []	# Base定義の識別名のみを格納するスタック領域（識別名セット時用）
+	base_indexcount = 0		# Base定義にセットする識別子のカウント用
+
+	# 識別子は、「_」を付けた、可変長数字をセットする
+
+	w_data1 = in_data.split("\n")	# Base定義に対応できるように配列化
+	w_data1.each_index do |x|
+		w_str1 = ''
+		w_str2 = ''
+		# カンマ区切り忘れへの、配慮（余計かもしれないが、対応はする）
+		if w_data1[x] =~ /^\s*?(\$BaseStart)\s*?[^,\s]+?/i
+			w_data1[x].gsub!(/^(\s*?\$BaseStart)(\s*?[^,\s]+?)/i, '\1' + ',' + '\2')
+		end
+		if w_data1[x] =~ /^\s*?(\$BaseStart)\s*?,/i
+			base_indexcount += 1		# カウント値をあらかじめ＋１する
+			w_str1 = ''
+			w_str1 = '_' + String(base_indexcount)
+			base_indexname2.push w_str1
+			w_data1[x].gsub!(/^(\s*?\$BaseStart)(\s*?,)/i, '\1' + w_str1 + '\2')
+		end
+
+		# ここでエラーチェックができる（$BaseStartがない$BaseEndがある）
+
+		if w_data1[x] =~ /^\s*?(\$BaseEnd)\s*?/i
+			w_str2 = base_indexname2.pop	# 対応する識別子を取得
+			w_data1[x].gsub!(/^(\s*?\$BaseEnd)(\s*?)/i, '\1' + w_str2 + '\2')
+		end
+
+	end
+
+
+	# ここでエラーチェックができる ($BaseEndがない$BaseStartがある)
+
+
+	base_indexname2 = []
+	hierarchy_stack = []
+	now_hierarchy = ''		# 現在のディレクトリ
+	w_str1 = ''
+
+#	base_indexname1.push w_str1
+
+	# base定義実行処理
+	w_data1.each_index do |x|
+		if w_data1[x] =~ /^\s*?\$BaseStart(\_[0-9]+?)\s*?,\s*?([\s\S]*?)\s*?$/i
+			# BaseStart定義
+#			base_indexname1.push $1
+			w_str1 = $2
+			hierarchy_stack.push now_hierarchy
+			if w_str1 =~ /^\s*?\//
+				now_hierarchy = w_str1.strip
+			elsif w_str1 =~ /^\s*?\.\/([\s\S]*?)$/
+				now_hierarchy += '/' + $1.strip
+			elsif w_str1 =~ /^\s*?([^\/][\s\S]*?)$/
+				now_hierarchy += '/' + $1.strip
+			end
+			now_hierarchy.gsub!(/\/$/, '')		# 末尾に「/」を付けていたら、はずす
+		elsif w_data1[x] =~ /^\s*?\$BaseEnd(\_[0-9]+?)\s*?$/i
+			# BaseEnd定義
+#			base_indexname1.pop
+			now_hierarchy = hierarchy_stack.pop
+# base_indexname1を使うと思ったが、実際は使う必要がないと思われる
+		elsif w_data1[x] =~ /^\s*?\$LineTargetStart/i
+			# $LineTarget命令
+			# $LineTargetStart [比較対象階層] = [内容], [１オリジンの開始位置], [置換対象階層]
+			# 比較対象階層・置換対象階層が階層情報に相当
+			w_data3 = []
+			# 「,」単位で配列化する
+			w_data3 = w_data1[x].split(',')
+			# 比較対象階層を相対パスから絶対パスに変換
+			w_data3[1] = exchange_absolute_path(w_data3[1], now_hierarchy)
+			# 置換対象階層を相対パスから絶対パスに変換
+			w_data3[3] = exchange_absolute_path(w_data3[3], now_hierarchy)
+			# 「,」単位で配列化したものを、元に戻す
+			w_data1[x] = w_data3.join(',')
+
+		else
+			# 通常の行
+			# 相対パスの行を絶対パスに変換する
+			w_data1[x] = exchange_absolute_path(w_data1[x], now_hierarchy)
+		end
+	end
+
+
+	# base定義の削除処理
+	w_data1.each_index do |x|
+		if w_data1[x] =~ /^\s*?\$BaseStart_[0-9]+?\s*?/i
+			# BaseStart文の行である
+			w_data1[x] = ''
+#			w_data1[x] = "\n"
+		elsif w_data1[x] =~ /^\s*?\$BaseEnd_[0-9]+?\s*?/i
+			# BaseEnd文の行である
+			w_data1[x] = ''
+#			w_data1[x] = "\n"
+		end
+	end
+	# ここでは、単純に$BaseStart,$BaseEndの行を空白にしているだけなので、
+	# 結果的に空白行ができてしまう。
+
+	# 空白行の削除処理
+	w_idx1 = w_data1.size
+	while w_idx1 >= 0 do
+		w_idx1 -= 1
+		case	w_data1[w_idx1]
+		when	nil, ''
+			w_data1.delete_at(w_idx1)
+		end
+	end
+	# 単純に、gsubを使った方法がだめだったので、こちらの方法をとる
+
+
+	w_data2 = w_data1.join("\n")
+	w_data1 = []
+	# このjoinした直後は、最後の行の後ろに改行がないので注意
+
+	# 最後が改行でない場合は、ここで改行を追加
+	if w_data2[-1, 1] != "\n"
+		w_data2 += "\n"
+	end
+
+	return w_data2
+
+end
+
+
+
+# =========================================================
+
+
+# 階層データのLineTarget命令への識別子セット処理
+#    引数
+# in_data - LineTarget命令の識別子セット処理対象文字列 (String型/IN)
+#    戻り値
+# LineTarget命令への識別子セット処理後の文字列 (String型/OUT)
+#    備考
+# 新しい形式の階層データファイルコンバート後の形式に変換するので、
+#   既存の場合には置き換えに注意すること
+def linetarget_setmark_proc(in_data)
+
+	marknum = 0		# 識別子に付ける番号の初期化
+	out_data = ''	# 識別子セット後の格納領域の初期化
+	w_data1 = []	# 改行で区切った文字列の格納配列領域の初期化
+	w_data2 = ''	# 識別子の一時格納領域
+	marknum_stack = []	# ネストに対応するためのスタック領域
+
+
+	w_data1 = in_data.split("\n")
+
+	w_data1.each_index do |i|
+		w_data2 = ''	# １行のデータの一時格納領域
+		if w_data1[i] =~ /^(\s*?\$LineTargetStart\s*?)(,[\s\S]+?)$/i
+			# LineTargetStart文である
+			marknum += 1
+			w_data2 = 'LT_' + String(marknum)
+			w_data1[i] = $1 + ', ' + w_data2 + $2
+			marknum_stack.push w_data2
+		elsif w_data1[i] =~ /^(\s*?\$LineTargetEnd\s*?)$/i
+			# LineTargetEnd文である
+			w_data1[i] = $1 + ',  ' + marknum_stack.pop
+#		else
+#			# その他の行である
+		end
+	end
+
+
+	out_data = w_data1.join("\n")
+	# このjoinした直後は、最後の行の後ろに改行がないので注意
+
+	# 最後が改行でない場合は、ここで改行を追加
+	if out_data[-1, 1] != "\n"
+		out_data += "\n"
+	end
+
+	return out_data
+
+end
+
+
+
+# =========================================================
+
+
+# LineTargetの行以外の階層情報に起点位置を追加する処理
+#    引数
+# in_data - 起点位置を追加する階層情報
+#    戻り値
+# 起点位置を追加した階層情報(nilの場合、起点位置を追加できなかった)
+#    備考
+# 「/***[*]/***[*]=99」を「/***[*]/***[*]=99,99」と変換する
+def hierarchy_add_startpoint_proc(in_data)
+	ret_data = nil
+
+	h_data1 = []
+	w_idx1 = 0
+	w_str1 = ''	# 対象行の前後の空白を除いた文字列
+	w_str2 = ''	# 上記変数の中のうち、１文字目の文字
+	w_str3 = ''	# XMLパス部分の文字列
+	w_str4 = ''	# バイト数部分の文字列
+	w_str5 = ''	# バイト数以降の文字列
+	w_num1 = 0
+
+
+	h_data1 = in_data.split "\n"
+
+
+	w_idx1 = 0		# 起点位置のインデックス
+	h_data1.each_index do |w_idx2|
+		w_str1 = h_data1[w_idx2].strip
+		if w_str1 != ''
+			# 空白行ではない
+			w_str2 = w_str1[0, 1]	# 1文字目の取得
+			if w_str2 != '#' and w_str2 != '$'
+				# 定義行やコメント行ではない
+				h_data1[w_idx2] =~ /^(\s*?\S+?\s*?\=\s*?)(\S[\S\s]*?\s*?)$/
+				# $1 = XMLパス部分
+				# $2 = バイト数以降の部分
+				w_str3 = $1
+				w_str4 = $2
+				if w_str4 =~ /^([0-9]+?)(\s*?,[\S\s]*?$)/
+					# バイト数以降にも文字列がある
+					# $1 = バイト数の部分
+					# $2 = バイト数より後ろの部分
+					w_str5 = $2
+					w_str4 = $1
+				else
+					# バイト数以降には文字列がない
+					w_str5 = ''
+				end
+				w_num1 = Integer(w_str4)	# 数字に変換
+				h_data1[w_idx2] = w_str3 + w_str4 + ',' + String(w_idx1) + w_str5
+				w_idx1 += w_num1	# 起点位置のインデックスに、バイト数を加算
+			end
+		end
+	end
+
+
+	ret_data = ''
+	ret_data = h_data1.join "\n"
+	# 最後が改行でない場合は、ここで改行を追加
+	if ret_data[-1, 1] != "\n"
+		ret_data += "\n"
+	end
+
+
+	return ret_data
+end
+
+
+
+# =========================================================
+
+
+# 行頭認識処理
+#    引数
+# soc_line - 解析する１行目の情報
+#    戻り値
+# [0] - 形式
+#        0 = 不正な内容か、バージョン2より前のもの
+#        1 = XMLテンプレートファイル
+#        2 = defソースファイル
+#        3 = 階層情報ソースファイル
+#        4 = def実行時ファイル
+#        5 = 階層実行時ファイル
+# [1] - メジャーバージョン
+#        0 = 不正な内容か、バージョン1である
+#        2 = バージョン2である
+# [2] - マイナーバージョン(予約)
+# [3] - 文字コード
+#        0 = 未定義か未定義の文字コードである
+#        1 = EUC-JPコード
+#        2 = Shift_JISコード (予定)
+#        3 = UTF-8コード (予定)
+#        4 = JISコード (予定)
+#    備考
+# この関数は、バージョン互換を考慮するためのものです。
+def realize_topline(soc_line)
+	ret = []
+
+# puts soc_line
+
+	file_format = 0		# ファイルの形式 [0]
+	major_version = 0	# メジャーバージョン [1]
+	minor_version = 0	# マイナーバージョン(予約) [2]
+	character_code = 0	# 文字コード [3]
+	w_line1 = ''
+	w_line2 = ''
+	w_line3 = ''
+	w_line4 = ''
+
+	w_line1 = soc_line.clone	# 作業領域にコピー
+  #if RUBY_VERSION.to_s <= "1.8.7"
+    # UTF-8のヘッダを取り除く(リトルエンディアンには対応しない)
+    #if w_line1 =~ /^\xEF\xBB\xBF([\s\S]*?)$/
+    #  w_line1 = $1
+    #end
+  #end
+
+	if w_line1 =~ /^\#\$/
+		# 行頭に識別情報が格納されてある
+
+		# =の前後の空白を取り除く
+		w_line1.gsub!(/\s+?\=\s+?/, '=')
+
+		# 各定義にダブルクォーテーションがない場合、ダブルクォーテーションを加える
+		w_line1.gsub!(/(\=)([^\"\s]+?)(\s)/, '\1"\2"\3')	# 通常のダブルクォーテーションセット対応
+		w_line1.gsub!(/(\=)([^\"\s]+?)$/, '\1"\2"')		# 行末のダブルクォーテーションセット対応
+
+		# type定義の取得
+		if w_line1 =~ /\s+?type\=\"([^\"]*?)\"/i
+			w_line2 = $1.strip
+
+			case	w_line2.downcase
+			when	'figure-define'
+				# defソースファイル
+				file_format = 2
+			when	'hierarchy'
+				# 階層情報ソースファイル
+				file_format = 3
+			when	'figure-define-execute'
+				# def実行時ファイル
+				file_format = 4
+			when	'hierarchy-execute'
+				# 階層実行時ファイル
+				file_format = 5
+			else
+				# 不正な内容
+				file_format = 0
+			end
+		end
+
+
+		# version定義の取得
+		if w_line1 =~ /\s+?version\=\"([^\"]*?)\"/i
+			w_line2 = $1.strip
+			if w_line2 =~ /^(\S+?)\.(\S+?)/
+				w_line3 = $1
+				w_line4 = $2
+			else
+				w_line3 = w_line2
+				w_line4 = '0'
+			end
+
+			# バージョンを数値に変換する
+			major_version = w_line3.to_i	# メジャーバージョン [1]
+			minor_version = w_line4.to_i	# マイナーバージョン(予約) [2]
+		end
+
+
+		# encoding定義の取得
+		if w_line1 =~ /\s+?encoding\=\"([^\"]*?)\"/i
+			w_line2 = $1.strip
+			case	w_line2.downcase
+			when	'euc-jp', 'euc_jp'
+				# EUC-JPコード
+				character_code = 1
+			when	'shift_jis', 'shift-jis', 'sjis'
+				# Shift_JISコード
+				character_code = 2
+			when	'utf8', 'utf-8'
+				# UTF-8コード
+				character_code = 3
+			when	'jis'
+				# JISコード
+				character_code = 4
+			end
+		end
+
+
+	elsif w_line1 =~ /^\s*?\<\?xml\s/
+		# XMLファイルなので、xmlテンプレートファイルと判断
+
+		# XMLテンプレートファイル
+		file_format = 1		# ファイルの形式 [0]
+		major_version = 0	# メジャーバージョン [1]
+		minor_version = 0	# マイナーバージョン(予約) [2]
+		character_code = 0	# 文字コード [3]
+
+		# =の前後の空白を取り除く
+		w_line1.gsub!(/\s+?\=\s+?/, '=')
+
+		# 各定義にダブルクォーテーションがない場合、ダブルクォーテーションを加える
+		w_line1.gsub!(/(\=)([^\"\s]+?)(\s)/, '\1"\2"\3')	# 通常のダブルクォーテーションセット対応
+		w_line1.gsub!(/(\=)([^\"\s]+?)$/, '\1"\2"')		# 行末のダブルクォーテーションセット対応
+
+		# encoding定義の取得
+		if w_line1 =~ /\s+?encoding\=\"([^\"]*?)\"/i
+			w_line2 = $1.strip
+			case	w_line2.downcase
+			when	'euc-jp', 'euc_jp'
+				# EUC-JPコード
+				character_code = 1
+			when	'shift-jis', 'sjis', 'shift_jis'
+				# Shift_JISコード
+				character_code = 2
+			when	'utf8', 'utf-8'
+				# UTF-8コード
+				character_code = 3
+			when	'jis'
+				# JISコード
+				character_code = 4
+			end
+		else
+			# 文字コード
+			character_code = 3	# XML規格のencoding未定義のデフォルトはUTF-8
+		end
+	end
+
+
+	w_line1 = nil
+	w_line2 = nil
+	w_line3 = nil
+	w_line4 = nil
+
+	ret.push(file_format)		# ファイルの形式 [0]
+	ret.push(major_version)		# メジャーバージョン [1]
+	ret.push(minor_version)		# マイナーバージョン(予約) [2]
+	ret.push(character_code)	# 文字コード [3]
+
+	return	ret
+end
+
+
+
+# =========================================================
+
+
+# デバッグ用行頭認識処理結果メッセージ作成処理
+#    引数
+# output_mode - 出力メッセージモード(現在、1のみ有効)
+# info_ary - realize_topline関数の戻り値
+def debug_realize_topline_mes(output_mode, info_ary)
+
+	output_mes = ''
+
+	case	output_mode
+	# ----------------------------------------
+	when	1
+		output_mes += '-' * 40 + "\n"
+		output_mes += 'ファイルの形式' + "\n"
+		case	info_ary[0]
+		when	0
+			output_mes += '0 = 不正な内容か、バージョン2より前のもの' + "\n"
+		when	1
+			output_mes += '1 = XMLテンプレートファイル' + "\n"
+		when	2
+			output_mes += '2 = defソースファイル' + "\n"
+		when	3
+			output_mes += '3 = 階層情報ソースファイル' + "\n"
+		when	4
+			output_mes += '4 = def実行時ファイル' + "\n"
+		when	5
+			output_mes += '5 = 階層実行時ファイル' + "\n"
+		else
+			output_mes += String(info_ary[0]) + ' = ' + 'realize_topline関数のファイル形式の値か不正です' + "\n"
+		end
+
+		output_mes += '-' * 40 + "\n"
+		output_mes += 'メジャーバージョン = ' + String(info_ary[1]) + "\n"
+		output_mes += 'マイナーバージョン = ' + String(info_ary[2]) + "\n"
+
+		output_mes += '-' * 40 + "\n"
+		output_mes += '文字コード' + "\n"
+		case	info_ary[3]
+		when	0
+			output_mes += '0 = 未定義か未定義の文字コードである' + "\n"
+		when	1
+			output_mes += '1 = EUC-JPコード' + "\n"
+		when	2
+			output_mes += '2 = Shift_JISコード' + "\n"
+		when	3
+			output_mes += '3 = UTF-8コード' + "\n"
+		when	4
+			output_mes += '4 = JISコード' + "\n"
+		else
+			output_mes += String(info_ary[0]) + ' = ' + 'realize_topline関数の文字コードの値か不正です' + "\n"
+		end
+	# ----------------------------------------
+	else
+		raise '「realize_topline」の引数「output_mode」に無効な値がセットされました。'
+	end
+
+
+	return output_mes
+end
+# soc_line - 解析する１行目の情報
+
+
+# =============================================================================
+# =============================================================================
+
+
+if __FILE__ == $0
+	# 直接実行したときの処理
+
+	# テストメッセージ
+	mes = '#$ type=figure-define version=2.0 encoding=EUC-JP'
+#	mes = '#$ type=figure-define version=2.1.2 encoding=EUC-JP'
+#	mes = '#$ type = hierarchy version = 2.0 encoding = EUC-JP'
+#	mes = '#$ type="figure-define-execute" version="2.0" encoding="EUC-JP"'
+#	mes = '#$ type = "hierarchy-execute" version = "2.0" encoding = "EUC-JP"'
+#	mes = "\xEF\xBB\xBF" + '#$ type = "hierarchy" version = "2.0" encoding = "UTF-8"'
+#	mes = '<?xml version="1.0" encoding="Shift_JIS" ?>'
+#	mes = '<?xml version="1.0" encoding="EUC-JP" ?>'
+#	mes = '<?xml version="1.0" encoding="JIS" ?>'
+#	mes = "\xEF\xBB\xBF" + '<?xml version="1.0" encoding="UTF-8" ?>'
+#	mes = "\xEF\xBB\xBF" + '<?xml version="1.0" ?>'
+
+
+	w_ary1 = []
+
+	# テスト実行
+	w_ary1 = realize_topline(mes)
+
+	# デバッグ用のメッセージ表示
+	# puts debug_realize_topline_mes 1, w_ary1
+	puts debug_realize_topline_mes(1, w_ary1)
+
+end
+
+
+# =============================================================================

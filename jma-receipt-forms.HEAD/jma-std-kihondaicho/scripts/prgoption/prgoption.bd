@@ -1,0 +1,10 @@
+name	prgoption;
+
+arraysize	20;
+textsize	400;
+
+bind	"PRGOPTIONSET"		"OpenCOBOL";
+
+db {
+        tbl_prgoption;
+};

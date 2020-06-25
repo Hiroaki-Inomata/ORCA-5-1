@@ -1,0 +1,23 @@
+xml_claim_receivev2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	claim_receivev2res {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+	        Api_Result			varchar(2);
+	        Api_Result_Message		varchar(100);
+# 患者番号
+		Patient_ID			varchar(20);
+    		Perform_Date			varchar(19);
+# ワーニングメッセージ
+        Medical_Message_Info {
+       		 Medical_Message_Code	       	varchar(3);
+       		 Medical_Message_Message	varchar(100);
+            	} [50];
+	};
+};
+
+
+

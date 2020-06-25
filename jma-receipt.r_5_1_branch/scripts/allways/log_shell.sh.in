@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+SHDIR=${SCRIPTSDIR}/allways
+[ -e ${PATCHSCRIPTSDIR}/allways/mask.sh ] && SHDIR=${PATCHSCRIPTSDIR}/allways
+[ -e ${SITESCRIPTSDIR}/allways/mask.sh ]  && SHDIR=${SITESCRIPTSDIR}/allways
+
+LOG="/var/log/jma-receipt/shell.log"
+LOGGZ=${LOG}.gz
+
+if [ -f ${LOGGZ} ];  then
+    if [ $(stat -c "%s" ${LOGGZ}) -ge 524288 ] ; then
+	mv ${LOGGZ}  ${LOGGZ}.0
+	for NUM in $(seq 5 -1 1)
+	do
+	  NEWLOG="${LOGGZ}.${NUM}"
+	  NUM=$(expr ${NUM} - 1)
+	  OLDLOG="${LOGGZ}.${NUM}"
+	  echo mv ${OLDLOG} ${NEWLOG}
+	  mv ${OLDLOG} ${NEWLOG} 2>/dev/null
+	done
+    fi
+fi
+
+echo $(date +"%Y-%m-%d %H:%M:%S") $(printf "[%s]" "$@") | nkf -e | $SHDIR/mask.sh | gzip -c >> ${LOGGZ}
+

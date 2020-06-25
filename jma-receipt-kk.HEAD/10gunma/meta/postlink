@@ -1,0 +1,24 @@
+#!/bin/bash
+echo $0 | logger
+echo `pwd`  | logger
+
+JMARECEIPT_ENV="/etc/jma-receipt/jma-receipt.env"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+umask 022
+
+# program option set
+cp -rp ../scripts/prgoption ${MCP_TEMPDIR}
+bash ${MCP_TEMPDIR}/prgoption/prgoption.sh
+rm -r ${MCP_TEMPDIR}/prgoption
+echo -n "prgoption......done" | logger
+
+# syskanri 3004 set
+cp -rp ../scripts/syskanri ${MCP_TEMPDIR}
+bash ${MCP_TEMPDIR}/syskanri/sys3004.sh
+rm -r ${MCP_TEMPDIR}/syskanri
+echo -n "syskanri 3004......done" | logger

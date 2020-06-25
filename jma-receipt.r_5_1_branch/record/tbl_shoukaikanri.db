@@ -1,0 +1,110 @@
+tbl_shoukaikanri {
+	HOSPNUM		number(2,0);
+	UID		char(36);
+	RENNUM		number(5,0);
+	NAME	  	varchar(100);
+	NYUGAIKBN	char(1);
+	TITLEKBN	char(1);
+	TERMID		varchar(32);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+	RENNUM_FIRST		number(5,0),virtual;
+	RENNUM_LAST		number(5,0),virtual;
+};
+
+primary	{
+	HOSPNUM,UID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaikanri_key_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaikanri
+		WHERE		HOSPNUM	= :HOSPNUM
+		AND		UID			=	:UID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaikanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaikanri
+		WHERE		HOSPNUM	= :HOSPNUM
+		AND		NYUGAIKBN = :NYUGAIKBN
+		ORDER		BY  RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaikanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaikanri
+		WHERE		HOSPNUM	  = :HOSPNUM
+		AND			UID			<>  :UID
+		AND			NYUGAIKBN = :NYUGAIKBN
+		AND			NAME      =	:NAME
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaikanri_key4_csr CURSOR FOR
+		SELECT 	*
+		FROM		tbl_shoukaikanri
+		WHERE		HOSPNUM	  = :HOSPNUM
+		AND			NYUGAIKBN = :NYUGAIKBN
+		ORDER		BY  RENNUM DESC
+		;
+	};
+};
+
+path	upd1		{ 	
+	DBUPDATE	{
+		UPDATE	tbl_shoukaikanri
+		SET			NAME     = :NAME ,
+					TITLEKBN = :TITLEKBN
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND			UID			=	:UID
+		;
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_shoukaikanri_all_csr CURSOR FOR
+		SELECT *
+		FROM		tbl_shoukaikanri
+		WHERE		HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+
+path	upd2		{ 	
+	DBUPDATE	{
+		UPDATE	tbl_shoukaikanri AS M
+		SET			RENNUM   = S.SEQ
+		FROM ( SELECT  HOSPNUM,UID, ROW_NUMBER() OVER(ORDER BY RENNUM) AS SEQ FROM tbl_shoukaikanri ) AS S
+		WHERE 	M.HOSPNUM	= S.HOSPNUM
+		AND			M.UID			=	S.UID
+		;
+	};
+};
+
+path	upd3		{
+	DBUPDATE	{
+		UPDATE	tbl_shoukaikanri
+		SET			RENNUM   = RENNUM + :RENNUM
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND     RENNUM  BETWEEN :RENNUM_FIRST AND :RENNUM_LAST
+		;
+	};
+};

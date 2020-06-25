@@ -1,0 +1,84 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+export PATH=${SITESCRIPTSDIR}/tools:${PATCHSCRIPTSDIR}/tools:${SCRIPTSDIR}/tools:$PATH
+
+
+BACKUP=false
+TEST=false
+ERRFILES=""
+
+while getopts "htb" opt ; do
+  case $opt in
+    h) echo 
+       echo "  $(basename $0) [OPTION...] [FILE...]"
+       echo  
+       echo "    -h	show help options"
+       echo "    -t	test whether a given file(s) can convert"
+       echo "    -b	create a backup file(s)"
+       echo  
+       exit 0
+         ;;
+    t) TEST=true ;;
+    b) BACKUP=true ;;
+    \?) exit 1 ;;
+  esac
+done
+
+shift $(($OPTIND -1))
+
+for f in $@ ; do
+   TMPFILE=${f%%$(basename $f)}.$(basename $f)
+   if [ $TEST == true ]; then
+     echo -n "$f testing..."
+     [ -e $f.err.log ] && rm $f.err.log 
+     redinspector.rb  $f > /dev/null 2> $f.err.log && red2conv $f > /dev/null 2> $f.err.log
+     if [ -s $f.err.log ]; then
+         echo "NG"
+         ERRFILES="$ERRFILES $f" 
+     else
+         echo "OK"
+         rm $f.err.log
+     fi  
+   else
+     echo -n "$f converting..."
+     [ -e $f.err.log ] && rm $f.err.log 
+     [ $BACKUP == true ] && cp -a $f $f.bak
+     redinspector.rb  $f > /dev/null 2> $f.err.log && red2conv $f -o $TMPFILE 2> $f.err.log
+     if [ -s $f.err.log ]; then
+         echo "FAILED"
+         ERRFILES="$ERRFILES $f" 
+     else
+         echo "done"
+         rm $f.err.log
+         gunzip -c $f >/dev/null 2>&1
+         if [ $? -eq 0 ] ; then
+           gzip -c $TMPFILE > $f && rm $TMPFILE
+         else
+           mv   $TMPFILE $f
+         fi
+     fi  
+   fi
+done
+
+if [ "$ERRFILES" != "" ]; then
+   echo "#######################################################"
+   echo "#SOME FILES CAN'T CONVERT BECAUSE OF DATA CORRUPTION!!#"
+   echo "#######################################################"
+   for f in $ERRFILES ; do
+     echo $f
+   done
+   exit 1
+fi
+
+exit 0
+
+

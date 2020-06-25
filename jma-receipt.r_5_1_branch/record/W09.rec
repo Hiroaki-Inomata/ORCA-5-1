@@ -1,0 +1,96 @@
+W09 {
+  fixed1 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    B03 {
+      state int;
+    };
+    SYURUINAME {
+      textdata varchar(40);
+    };
+    PRTJYUNI {
+      textdata varchar(3);
+    };
+    SYUBETU01 {
+      textdata varchar(4);
+    };
+    SYUBETU02 {
+      textdata varchar(4);
+    };
+    SYUBETU03 {
+      textdata varchar(4);
+    };
+    SYUBETU04 {
+      textdata varchar(4);
+    };
+    SYUBETU05 {
+      textdata varchar(4);
+    };
+    SYUBETU06 {
+      textdata varchar(4);
+    };
+    SYUBETU07 {
+      textdata varchar(4);
+    };
+    SYUBETU08 {
+      textdata varchar(4);
+    };
+    SYUBETU09 {
+      textdata varchar(4);
+    };
+    SYUBETU10 {
+      textdata varchar(4);
+    };
+    SYUBETUNAME1 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME2 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME3 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME4 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME5 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME6 {
+      textdata varchar(40);
+    };
+    SYUBETUBAME7 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME8 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME9 {
+      textdata varchar(40);
+    };
+    SYUBETUNAME10 {
+      textdata varchar(40);
+    };
+    TEISYUTUSAKI_COMBO {
+      TEISYUTUSAKI {
+        textdata varchar(26);
+      };
+      count int;
+        item varchar(26)[10];
+    };
+    NYUGAIKBN_COMBO {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    DSPSEQ {
+      numdata number(3);
+    };
+  };
+};

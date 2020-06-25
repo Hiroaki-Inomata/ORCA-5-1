@@ -1,0 +1,70 @@
+--                                    --
+-- 診療会計附加テーブルの作成         --
+-- (プレビュー用)                     --
+--                                    --
+-- Create Date : 2005/05/13           --
+--                                    --
+
+
+-- TBL_SRYACCTPLUS_PRV 作成               --
+
+create table TBL_SRYACCTPLUS_PRV (
+HOSPID				char(24)	not null,
+NYUGAIKBN			char(01)	not null,
+PTID				numeric(10)     not null,
+SRYKA                           char(02)        not null,
+SRYYM                           char(06)        not null,
+ZAINUM   			numeric(08)     not null,
+RENNUM   			numeric(02)     not null,
+PLUSKBN   			numeric(01),
+RSIKINGAKU   			numeric(07),
+SRYCD1  			char(09),
+SYUTEN1  			numeric(07),
+YKZTEN1  			numeric(07),
+KIZAITEN1 			numeric(07),
+FIRTEN1 			numeric(07),
+SRYCD2  			char(09),
+SYUTEN2  			numeric(07),
+YKZTEN2  			numeric(07),
+KIZAITEN2 			numeric(07),
+FIRTEN2 			numeric(07),
+SRYCD3  			char(09),
+SYUTEN3  			numeric(07),
+YKZTEN3  			numeric(07),
+KIZAITEN3 			numeric(07),
+FIRTEN3 			numeric(07),
+SRYCD4  			char(09),
+SYUTEN4  			numeric(07),
+YKZTEN4  			numeric(07),
+KIZAITEN4 			numeric(07),
+FIRTEN4 			numeric(07),
+SRYCD5  			char(09),
+SYUTEN5  			numeric(07),
+YKZTEN5  			numeric(07),
+KIZAITEN5 			numeric(07),
+FIRTEN5 			numeric(07),
+SANSOTEN 			numeric(07),
+CHISOTEN 			numeric(07),
+GRP_ZAINUM1 			numeric(08),
+GRP_ZAINUM2 			numeric(08),
+GRP_ZAINUM3 			numeric(08),
+GRP_ZAINUM4 			numeric(08),
+GRP_ZAINUM5 			numeric(08),
+GRP_ZAINUM6 			numeric(08),
+GRP_ZAINUM7 			numeric(08),
+GRP_ZAINUM8 			numeric(08),
+GRP_ZAINUM9 			numeric(08),
+GRP_ZAINUM10			numeric(08),
+GRP_ZAINUM11			numeric(08),
+GRP_ZAINUM12			numeric(08),
+GRP_ZAINUM13			numeric(08),
+GRP_ZAINUM14			numeric(08),
+GRP_ZAINUM15			numeric(08),
+TERMID                          varchar(16),
+OPID    			varchar(16),
+CREYMD  			char(8),
+UPYMD    			char(8),
+UPHMS				char(6),
+constraint TBL_SRYACCTPLUS_PRV_primary_key primary key (HOSPID,NYUGAIKBN,PTID,
+SRYKA,SRYYM,ZAINUM,RENNUM));
+

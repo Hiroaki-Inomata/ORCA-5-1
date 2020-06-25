@@ -1,0 +1,208 @@
+tbl_help {
+	HOSPNUM				number(2,0);
+	HELPKBN				char(1);
+	KEY_OPID			varchar(16);
+	LDNAME				varchar(20);
+	MENUNUM1			number(4);
+	MENUNUM2			number(4);
+	EDANUM				number(4);
+	MENU2FLG			number(1);
+	MENU				varchar(60);
+	HELP				varchar(100);
+	TERMID   			varchar(64);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,HELPKBN,KEY_OPID,LDNAME,MENUNUM1,MENUNUM2,EDANUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_help_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   MENUNUM2     =   :MENUNUM2
+			AND   EDANUM       =   :EDANUM
+		;
+	};
+};
+
+path	key1 	{
+	DBSELECT	{
+		DECLARE tbl_help_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM2     =   0
+			AND  (EDANUM       =   0
+			 OR   EDANUM       =   1 )
+			ORDER   BY         MENUNUM1,
+                                           MENUNUM2,
+                                           EDANUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_help_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   EDANUM       =   '0001'
+			ORDER   BY         MENUNUM2,
+                                           EDANUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_help_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   MENUNUM2     =   :MENUNUM2
+			ORDER   BY         EDANUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_help_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND     LDNAME     =   :LDNAME
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   MENU       LIKE  :MENU
+			AND  (EDANUM       =   0   OR
+			      EDANUM       =   1 )
+			ORDER   BY         HELPKBN,
+                                           MENUNUM1,
+                                           MENUNUM2,
+                                           EDANUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_help_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENU       LIKE  :MENU
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   EDANUM       =   :EDANUM
+			ORDER   BY         LDNAME,
+                                           MENUNUM1,
+                                           MENUNUM2,
+                                           EDANUM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_help_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND HELPKBN      =   :HELPKBN
+			AND   LDNAME       =   :LDNAME
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   MENU       LIKE  :MENU
+			AND   MENUNUM2     =   0
+			AND  (EDANUM       =   0   OR
+			      EDANUM       =   1 )
+			ORDER   BY         MENUNUM1,
+                                           MENUNUM2,
+                                           EDANUM
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_help_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   MENUNUM2     =   :MENUNUM2
+			AND  (EDANUM       =   0
+			 OR   EDANUM       =   1 )
+			ORDER   BY         EDANUM
+		;
+	};
+};
+
+path	del1  	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+			AND   MENUNUM2     =   :MENUNUM2
+		;
+	};
+};
+path	del2  	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   HELPKBN    =   :HELPKBN
+			AND   KEY_OPID     =   :KEY_OPID
+			AND   LDNAME       =   :LDNAME
+			AND   MENUNUM1     =   :MENUNUM1
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_help_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_help
+		WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY         HELPKBN,
+                                           KEY_OPID,
+                                           LDNAME,
+                                           MENUNUM1,
+                                           MENUNUM2,
+                                           EDANUM
+ 		;
+	};
+};

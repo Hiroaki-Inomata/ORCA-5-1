@@ -1,0 +1,62 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *
+      *    入院関連情報設定 画面ＳＰＡ
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  
+      *****************************************************************
+      *
+       01  SPA-W22.
+           03  SPA-W22-AREA.
+               05  SPA-W22-PAGE                    PIC 9(02).
+               05  SPA-W22-LINE                    PIC 9(04).
+               05  SPA-W22-MAX                     PIC 9(04).
+               05  SPA-W22-CUR                     PIC 9(03).
+               05  SPA-W22-PFK                     PIC X(02).
+               05  SPA-W22-ERRMSG                  PIC X(60).
+               05  SPA-W22-MOTOPG                  PIC X(08).
+               05  SPA-W22-GMN.
+                   07  SPA-W22-KANRICD.
+                       09  SPA-W22-KANRICD-C   PIC X(04).
+                       09  SPA-W22-KANRICD-K   PIC X(01).
+                       09  SPA-W22-KANRICD-N   PIC X(25).
+                   07  SPA-W22-KANRICD-L       OCCURS  20.
+                       09  SPA-W22-KANRICD-1   PIC X(04).
+                       09  SPA-W22-KANRICD-2   PIC X(01).
+                       09  SPA-W22-KANRICD-3   PIC X(25).
+                   07  SPA-W22-KBNCD               PIC X(09).
+                   07  SPA-W22-MEISYOU             PIC X(7).
+                   07  SPA-W22-STYUKYMD-L.
+                       09  SPA-W22-STYUKYMD        PIC X(10).
+                       09  SPA-W22-STYUKYMD-S      PIC X(08).
+                       09  SPA-W22-STYUKYMD-OLD    PIC X(08).
+                   07  SPA-W22-EDYUKYMD-L.
+                       09  SPA-W22-EDYUKYMD        PIC X(10).
+                       09  SPA-W22-EDYUKYMD-S      PIC X(08).
+                       09  SPA-W22-EDYUKYMD-OLD    PIC X(08).
+                   07  SPA-W22-MEISYOU-TBL.
+                       09  SPA-W22-MEISYOU-ITEM    OCCURS  200.
+                           11  SPA-W22-ITEM1       PIC X(16).
+                           11  SPA-W22-ITEM2       PIC X(20).
+                           11  SPA-W22-ITEM3       PIC X(19).
+                           11  SPA-W22-ITEM4       PIC X(19).
+                       09  SPA-W22-BTNO            PIC 9(03).
+                       09  SPA-W22-MEISYOU-COUNT   PIC 9(4).

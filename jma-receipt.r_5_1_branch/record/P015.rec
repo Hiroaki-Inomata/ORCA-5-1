@@ -1,0 +1,10 @@
+P015 {
+  fixed1 {
+    PTNUM1 {
+      textdata varchar(20);
+    };
+    PTNUM2 {
+      textdata varchar(20);
+    };
+  };
+};

@@ -1,0 +1,23 @@
+xml_address_masterlst {
+	context int;
+	object object;
+	mode int;
+	recordname	varchar(128);
+	address_masterlst {
+		Local_Public_Organization_Code	varchar(5);
+		Zip_Code		varchar(7);
+		Branch_Number		varchar(2);
+		Prefectures_Name_inKana	varchar(20);
+		City_Name_inKana	varchar(100);
+		Town_Area_Name_inKana	varchar(200);
+		Prefectures_Name	varchar(10);
+		City_Name		varchar(50);
+		Town_Area_Name		varchar(100);
+		Edit_address_inKana	varchar(320);
+		Edit_address		varchar(160);
+		Town_Area_Division_Flag	varchar(1);
+		Multiple_Town_Area_Flag	varchar(1);
+		Common_Name		varchar(600);
+	} [1903];
+};
+

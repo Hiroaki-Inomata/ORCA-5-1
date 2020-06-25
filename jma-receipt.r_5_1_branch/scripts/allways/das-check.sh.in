@@ -1,0 +1,56 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+HOSPNUM=$1
+HOSPID=$2
+
+if [ -e ${PATCHSCRIPTSDIR}/monthly/das-upload.rb ]; then 
+  UPLOAD_COMMAND=$PATCHSCRIPTSDIR/monthly/das-upload.rb
+else
+  UPLOAD_COMMAND=$SCRIPTSDIR/monthly/das-upload.rb
+fi
+LOG_FILE=$LOGDIR/"$HOSPNUM"das-check.log
+[ -e "${LOG_FILE}"] && rm ${LOG_FILE}
+
+if [ -e ${PATCHLIBDIR}/etc/das-upload.conf ]; then 
+  DASCONF_HEAD="${PATCHLIBDIR}/etc/das-upload.conf"
+else
+  DASCONF_HEAD="${SYSCONFDIR}/das-upload.conf"
+fi
+
+DASCONFIG=${MCP_TEMPDIR}/das-upload$$.conf
+CLIENT_CONFIG_FILE="${DASCONFIG}"
+DAS_CHECK_HOSPID=${HOSPID}
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBDASCONF \
+          -parameter "M,${HOSPNUM},${HOSPID},,${DASCONFIG},${DASCONF_HEAD},"
+
+if [ ! -f ${CLIENT_CONFIG_FILE} ]; then
+  exit
+fi
+
+trap "rm -f ${DASCONFIG}" EXIT
+
+export CLIENT_CONFIG_FILE
+export DAS_CHECK_HOSPID
+
+# delete login check log
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+          -parameter "das-check,D,,,,$HOSPNUM,"
+
+RESULT=`$UPLOAD_COMMAND -a 2>&1|head -1`
+if [ "LOGIN OK" = "$RESULT" ]; then
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+            -parameter "das-check,2,0,,200,$HOSPNUM,login success"
+else
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+            -parameter "das-check,2,1,,${RESULT:0:3},$HOSPNUM,${RESULT:4:200}"
+fi
+
+exit

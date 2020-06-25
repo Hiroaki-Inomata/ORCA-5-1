@@ -1,0 +1,55 @@
+tbl_das_conf {
+	HOSPNUM		number(2,0);
+	SINSEIYMD	varchar(8);
+	KANANAME	varchar(50);
+	NAME		varchar(50);
+	EMAIL		varchar(256);
+	HOSPSBT1	varchar(1);
+	HOSPSBT2	varchar(1);
+	BEDSUIPPAN	number(4,0);
+	BEDSURYOYO	number(4,0);
+	BEDSUSEISIN	number(4,0);
+	BEDSUKEKKAKU	number(4,0);
+	BEDSU		number(4,0);
+	SETTI		varchar(1);
+	SYUKA		varchar(2);
+	CHIIKI		varchar(1);
+	DPCKBN		varchar(1);
+	ZAITAKU		varchar(1);
+	KAIINYM		varchar(6);
+	POST		varchar(7);
+	USERID		varchar(15);
+	PASSWORD	varchar(128);
+	AGREEMENT	varchar(1);
+	SENDRESULT	varchar(3);
+	SENDDATE	varchar(8);
+	TERMID		varchar(16);
+	OPID		varchar(16);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+};
+
+primary	{
+	HOSPNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_das_conf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_das_conf
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_das_conf_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_das_conf
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};

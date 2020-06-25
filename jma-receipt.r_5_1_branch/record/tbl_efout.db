@@ -1,0 +1,132 @@
+tbl_efout	{
+HOSPNUM				number(2,0);
+SRYYM				number(6);
+NYUGAIKBN			char(1);
+PTID				number(10);
+RECEKA				char(2);
+TEISYUTUSAKI		number(1,0);
+RECESYUBETU			char(4);
+HKNJANUM			char(8);
+HOJOKBN_KEY			char(1);
+KOHID_KEY       		number(10);
+TEKSTYMD			char(8);
+RECEIPT_KBN			char(10);
+RECKBN				char(1);
+RENNUM				number(4);
+CREYMD				char(8);
+CREHMS				char(6);
+TOTALTEN			number(10);
+SJKBN				char(2);
+RECEDATA			char(2500);
+};
+
+primary	{
+	HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN,RECKBN,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_efout_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_efout
+		WHERE	HOSPNUM		=	:HOSPNUM
+		  AND	SRYYM		=	:SRYYM
+		  AND	NYUGAIKBN	=	:NYUGAIKBN
+		  AND	PTID		=	:PTID
+		  AND	RECEKA		=	:RECEKA
+		  AND	TEISYUTUSAKI	=	:TEISYUTUSAKI
+		  AND	RECESYUBETU	=	:RECESYUBETU
+		  AND	HKNJANUM	=	:HKNJANUM
+		  AND	HOJOKBN_KEY	=	:HOJOKBN_KEY
+		  AND   KOHID_KEY	=	:KOHID_KEY 
+		  AND	TEKSTYMD	=	:TEKSTYMD
+		  AND   RECEIPT_KBN	=	:RECEIPT_KBN
+		  AND	RECKBN		=	:RECKBN
+		  AND   RENNUM		=	:RENNUM
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_efout_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_efout
+		WHERE	HOSPNUM		=	:HOSPNUM
+		  AND	SRYYM		=	:SRYYM
+		  AND	NYUGAIKBN	=	:NYUGAIKBN
+		  AND	RECKBN	        LIKE	:RECKBN
+		  ORDER  BY  RECKBN,HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN,RENNUM
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_efout_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_efout
+		WHERE	HOSPNUM		=	:HOSPNUM
+		  AND	SRYYM		=	:SRYYM
+		  AND	NYUGAIKBN	=	:NYUGAIKBN
+		  AND	PTID		=	:PTID
+		  AND	RECEKA		=	:RECEKA
+		  AND	TEISYUTUSAKI	=	:TEISYUTUSAKI
+		  AND	RECESYUBETU	=	:RECESYUBETU
+		  AND	HKNJANUM	=	:HKNJANUM
+		  AND	HOJOKBN_KEY	=	:HOJOKBN_KEY
+		  AND   KOHID_KEY	=	:KOHID_KEY 
+		  AND	TEKSTYMD	=	:TEKSTYMD
+		  AND   RECEIPT_KBN	=	:RECEIPT_KBN
+		  AND	RECKBN	        <>	'2'
+		  ORDER  BY  RENNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_efout
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_efout
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_efout
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_efout_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_efout
+		WHERE	HOSPNUM		=	:HOSPNUM
+		  AND	SRYYM		=	:SRYYM
+		  AND	NYUGAIKBN	=	:NYUGAIKBN
+		  AND	RECKBN	        LIKE	:RECKBN
+		  ORDER  BY  HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN,SJKBN,TOTALTEN,RECKBN,RENNUM
+		;
+	};
+};
+

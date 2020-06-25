@@ -1,0 +1,42 @@
+tbl_generic_log {
+    HOSPNUM             number(2,0);
+    PTID                number(10,0);
+    SRYYMD              char(8);
+    PRINTYMD            char(8);
+    PRINTHMS            char(6);
+    RECIPENUM           number(2,0);
+    SYORIKBN            number(1,0);
+    DENPNUM             number(7,0);
+    ZAINUM              number(8,0);
+    SRYCD               char(9);
+    YAKKAKJNCD          char(12);
+    GENERICNAME         char(200);
+};
+primary {
+    HOSPNUM,PTID,SRYYMD,PRINTYMD,PRINTHMS,RECIPENUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_generic_log_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_log
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND     PTID           =   :PTID
+			AND     SRYYMD         =   :SRYYMD
+			AND     PRINTYMD       =   :PRINTYMD
+			AND     PRINTHMS       =   :PRINTHMS
+			AND     RECIPENUM      =   :RECIPENUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_generic_log_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_log
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};

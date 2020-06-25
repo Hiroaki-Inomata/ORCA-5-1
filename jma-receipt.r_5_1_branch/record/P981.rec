@@ -1,0 +1,25 @@
+P981 {
+  fixed1 {
+    POST {
+      textdata varchar(7);
+    };
+    TOWNNAMEDSP {
+      textdata varchar(20);
+    };
+    LPUBCD {
+      textdata varchar(5);
+    };
+    RENNUM {
+      numdata number(2);
+    };
+    TOWNNAME {
+      textdata varchar(100);
+    };
+    KBNCD {
+      numdata number(3);
+    };
+    TOWNNAME2 {
+      textdata varchar(100);
+    };
+  };
+};

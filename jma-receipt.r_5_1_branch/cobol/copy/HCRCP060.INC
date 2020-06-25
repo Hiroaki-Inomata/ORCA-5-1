@@ -1,0 +1,86 @@
+        01  HCRCP060.
+            02  HCRCP060-TEISYUTUSAKI   PIC X(6).
+            02  HCRCP060-PTNUM  PIC X(20).
+            02  HCRCP060-SRYY   PIC X(2).
+            02  HCRCP060-SRYM   PIC X(2).
+            02  HCRCP060-PREFNUM    PIC X(2).
+            02  HCRCP060-HOSPCDN    PIC X(20).
+            02  HCRCP060-KHNTEN2    PIC X(7)    OCCURS  2 TIMES.
+            02  HCRCP060-KHNTEN1    PIC X(7).
+            02  HCRCP060-SRYKBN PIC X(2)        OCCURS  33 TIMES.
+            02  HCRCP060-TEKIYO PIC X(52)       OCCURS  33 TIMES.
+            02  HCRCP060-KOUTEN PIC X(7)        OCCURS  35 TIMES.
+            02  HCRCP060-TOTALTEN   PIC X(7)    OCCURS  3 TIMES.
+            02  HCRCP060-FTNMONEY   PIC X(8)    OCCURS  3 TIMES.
+            02  HCRCP060-OCR1   PIC X(67).
+            02  HCRCP060-OCR2   PIC X(67).
+            02  HCRCP060-OCR3   PIC X(67).
+            02  HCRCP060-RJNFTNJANUM    PIC X(8).
+            02  HCRCP060-KOH-TBL1.
+              03  HCRCP060-KOHFTNJANUM1   PIC X(8).
+              03  HCRCP060-KOHFTNJANUM1N  PIC X(20).
+              03  HCRCP060-KOHJKYSNUM1    PIC X(7).
+              03  HCRCP060-KOHJKYSNUM1N   PIC X(20).
+            02  HCRCP060-KOH-TBL2.
+              03  HCRCP060-KOHFTNJANUM2   PIC X(8).
+              03  HCRCP060-KOHFTNJANUM2N  PIC X(20).
+              03  HCRCP060-KOHJKYSNUM2    PIC X(7).
+              03  HCRCP060-KOHJKYSNUM2N   PIC X(20).
+            02  HCRCP060-HKNJANUM   PIC X(8).
+            02  HCRCP060-KYURATE    PIC X(8).
+            02  HCRCP060-RJNJKYSNUM PIC X(7).
+            02  HCRCP060-HKNSBT1    PIC X(6).
+            02  HCRCP060-HKNSBT2    PIC X(6).
+            02  HCRCP060-HONKZK PIC X(10).
+            02  HCRCP060-KIGO   PIC X(34).
+            02  HCRCP060-NUM    PIC X(34).
+            02  HCRCP060-KANANAME   PIC X(30).
+            02  HCRCP060-SEXNUM PIC X(2).
+            02  HCRCP060-BIRTHDAY   PIC X(22).
+            02  HCRCP060-JIYU   PIC X(20).
+            02  HCRCP060-SEXN   PIC X(2).
+            02  HCRCP060-TOKKI  PIC X(12)       OCCURS  4 TIMES.
+            02  HCRCP060-HOSPTEL    PIC X(15).
+            02  HCRCP060-SRYKA  PIC X(30).
+            02  HCRCP060-BEDSU  PIC X(3).
+            02  HCRCP060-BYOMEI PIC X(54)       OCCURS  5 TIMES.
+            02  HCRCP060-SRYYMD PIC X(24)       OCCURS  5 TIMES.
+            02  HCRCP060-TENKI  PIC X(10)       OCCURS  5 TIMES.
+            02  HCRCP060-JINISSU    PIC X(2).
+            02  HCRCP060-JINISSU1   PIC X(2).
+            02  HCRCP060-JINISSU2   PIC X(2).
+            02  HCRCP060-TENSU  PIC X(7)        OCCURS  35 TIMES.
+            02  HCRCP060-KAISU  PIC X(3)        OCCURS  35 TIMES.
+            02  HCRCP060-KHNTEN PIC X(7)        OCCURS  5 TIMES.
+            02  HCRCP060-HOSPNAME   PIC X(80).
+            02  HCRCP060-HOSPADRS   PIC X(100).
+            02  HCRCP060-NAME   PIC X(50).
+            02  HCRCP060-HEAD1-G.
+              03  HCRCP060-HEAD1  PIC X(46)       OCCURS  2 TIMES.
+            02  HCRCP060-HEAD2-G.
+              03  HCRCP060-HEAD2  PIC X(2)        OCCURS  7 TIMES.
+            02  HCRCP060-HEAD3-G.
+              03  HCRCP060-HEAD3  PIC X(50)       OCCURS  2 TIMES.
+            02  HCRCP060-BODY   PIC X(52).
+            02  HCRCP060-FOOT-G.
+              03  HCRCP060-FOOT   PIC X(46)       OCCURS  4 TIMES.
+            02  HCRCP060-SHOSHINTIME    PIC X(10).
+            02  HCRCP060-TENKIYMD   PIC X(6)    OCCURS  5 TIMES.
+            02  HCRCP060-FTNMONEYSAI    PIC X(11).
+            02  HCRCP060-RENNUM PIC X(7).
+            02  HCRCP060-SRYKA2 PIC X(60).
+            02  HCRCP060-KHNTEN3    PIC X(7).
+            02  HCRCP060-SONOTA PIC X(10).
+            02  HCRCP060-KBN.
+              03  HCRCP060-KBN-S  PIC X(1)        OCCURS  2 TIMES.
+            02  HCRCP060-KBNN.
+              03  HCRCP060-KBNN-S PIC X(2)        OCCURS  2 TIMES.
+            02  HCRCP060-SICYOSON.
+              03  HCRCP060-SICYOSON-S PIC X(1)    OCCURS  6 TIMES.
+            02  HCRCP060-SICYOSONN.
+              03  HCRCP060-SICYOSONN-S    PIC X(2)    OCCURS  6 TIMES.
+            02  HCRCP060-SYONUM PIC X(9).
+            02  HCRCP060-SYONUMN    PIC X(20).
+            02  HCRCP060-ITBKBN PIC X(2)        OCCURS  2 TIMES.
+            02  HCRCP060-ITBKINGAK  PIC X(8).
+            02  HCRCP060-SAKUJYOSEN PIC X(52).

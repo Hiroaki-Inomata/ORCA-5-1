@@ -1,0 +1,22 @@
+xml_masterlastupdatev3res {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	masterlastupdatev3res {
+	  Information_Date	varchar(10);
+	  Information_Time	varchar(8);
+	  Api_Result		varchar(4);
+	  Api_Result_Message	varchar(100);
+	  Master_Last_Update_Information {
+		  Master_Id   varchar(64);
+		  Last_Update_Date varchar(10);
+	  }[20];
+	  Master_Id   varchar(64);
+	  Last_Update_Date varchar(10);
+	  Update_Information{
+		  Update_Date varchar(10);
+		  Count            varchar(8);
+	  }[5];
+  };
+};

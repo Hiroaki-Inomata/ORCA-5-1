@@ -1,0 +1,330 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    レセプト作成−印刷指示画面ＳＰＡ     (SPA-FREE の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  03.04.01    NACL-藤原    07/01/16  プリンタ一括設定機能
+      *  03.04.02    NACL-藤原    07/03/01  国保レセプト編綴順詳細設定対応
+      *
+      *  03.05.01    NACL-藤原    07/06/30  印刷後のチェック解除機能対応
+      *
+      *  04.01.01    NACL-藤原    07/11/22  公害レセプト対応
+      *
+      *  04.02.01    NACL-藤原    08/03/25  平成２０年４月改正対応
+      *  04.02.02    NACL-藤原    08/05/07  公費３種、４種の併用の
+      *                                     レセプト種別の追加
+      *  04.02.03    NACL-藤原    08/06/18  メッセージの追加
+      *
+      *  04.03.01    NACL-藤原    08/06/19  医師別出力対応
+      *  04.03.02    NACL-藤原    08/07/09  仮レセ作成（院外処方含む）対応
+      *
+      *  04.05.01    NACL-藤原    09/06/11  病棟別出力対応
+      *  04.05.02    NACL-藤原    09/06/18  社保レセプト遍綴順対応
+      *  04.05.03    NACL-藤原    09/08/19  全件印刷時の自費レセプトの
+      *                                     印刷指定対応
+      *
+      *  04.06.01    NACL-藤原    11/12/12  点検レセ０点公費印字対応
+      *
+      *  04.07.01    NACL-藤原    12/02/13  健保組合への直接請求と審査
+      *                                     支払機関請求対応
+      *  04.07.02    NACL-藤原    13/09/20  第三者行為対応
+      *  04.07.03    NACL-藤原    15/06/19  診療科表示件数の変更
+      *                                     SPA-NAI-TBLを移動
+      *
+      *  04.08.01    NACL-藤原    12/01/08  包括診療分の点検用レセプト記
+      *                                     載対応
+      *****************************************************************
+      *
+       01  SPA-R02.
+      *
+      *    プリンタ情報
+           03  SPA-GMN-PRTNM-AREA.
+               05  SPA-GMN-PRTNMLST                OCCURS  100.
+                   07  SPA-GMN-PRTNML              PIC X(02).
+                   07  SPA-GMN-F1L                 PIC X(01).
+                   07  SPA-GMN-PRTNMMEIL           PIC X(16).
+               05  SPA-GMN-PRTNM-MAX               PIC 9(03).
+      *
+      *    医保分印刷指示画面
+           03  SPA-R02-AREA.
+               05  SPA-GMN-PAGE                    PIC 9(02).
+               05  SPA-GMN-PAGE-MAX                PIC 9(02).
+               05  SPA-GMN-PAGE-MAX1               PIC 9(02).
+               05  SPA-GMN-CUR                     PIC 9(03).
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-SYOKBN              PIC X(01).
+                   07  SPA-GMN-FILEKBN             PIC X(82).
+                   07  SPA-GMN-MSG                 PIC X(42).
+                   07  SPA-GMN-CREYMD              PIC X(22).
+                   07  SPA-GMN-PAGEH               PIC 9(04).
+                   07  SPA-GMN-KENSUH              PIC 9(04).
+                   07  SPA-GMN-SYUKA-G.
+                       09  SPA-GMN-SYUKA           PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-SYUKAMEI        PIC X(18).
+                   07  SPA-GMN-SYUKALST            OCCURS  101.
+                       09  SPA-GMN-SYUKAL          PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-SYUKAMEIL       PIC X(18).
+                   07  SPA-GMN-SYUKA-MAX           PIC 9(03).
+                   07  SPA-GMN-PRTJYUN-OLD         PIC X(02).
+                   07  SPA-GMN-PRTJYUN-G.
+                       09  SPA-GMN-PRTJYUN         PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PRTJYUNMEI      PIC X(30).
+                   07  SPA-GMN-PRTJYUNLST          OCCURS  15.
+                       09  SPA-GMN-PRTJYUNL        PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PRTJYUNMEIL     PIC X(30).
+                   07  SPA-GMN-PRTJYUN-MAX         PIC 9(02).
+                   07  SPA-GMN-PRTJYUN1-G.
+                       09  SPA-GMN-PRTJYUN1        PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PRTJYUN1MEI     PIC X(30).
+                   07  SPA-GMN-PRTJYUN1LST         OCCURS  15.
+                       09  SPA-GMN-PRTJYUN1L       PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PRTJYUN1MEIL    PIC X(30).
+                   07  SPA-GMN-PRTJYUN1-MAX        PIC 9(02).
+                   07  SPA-GMN-PRTJYUN2-G.
+                       09  SPA-GMN-PRTJYUN2        PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PRTJYUN2MEI     PIC X(30).
+                   07  SPA-GMN-PRTJYUN2LST         OCCURS  15.
+                       09  SPA-GMN-PRTJYUN2L       PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PRTJYUN2MEIL    PIC X(30).
+                   07  SPA-GMN-PRTJYUN2-MAX        PIC 9(02).
+                   07  SPA-GMN-PREFKBN-G.
+                       09  SPA-GMN-PREFKBN         PIC X(01).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PREFKBNMEI      PIC X(18).
+                   07  SPA-GMN-PREFKBNLST          OCCURS  4.
+                       09  SPA-GMN-PREFKBNL        PIC X(01).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PREFKBNMEIL     PIC X(18).
+                   07  SPA-GMN-PRTKBN-G.
+                       09  SPA-GMN-PRTKBN          PIC X(01).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-PRTKBNMEI       PIC X(12).
+                   07  SPA-GMN-PRTKBNLST           OCCURS  3.
+                       09  SPA-GMN-PRTKBNL         PIC X(01).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-PRTKBNMEIL      PIC X(12).
+                   07  SPA-GMN-TBL.
+                       09  SPA-GMN-TBL-OCC         OCCURS   19.
+                           11  SPA-GMN-TBL-G       OCCURS   36.
+                               13  SPA-GMN-TSTDATA PIC X(100).
+                               13  SPA-GMN-TEDDATA PIC X(100).
+                               13  SPA-GMN-TCHK.
+                                   15  SPA-GMN-TCHK-VALUE
+                                                   PIC X(01).
+                               13  SPA-GMN-TPRTFLG PIC X(01).
+                   07  SPA-GMN-TBL1.
+                       09  SPA-GMN-TBL-OCC1        OCCURS   19.
+                           11  SPA-GMN-THKNJANAME-SYAHO
+                                                   PIC X(30).
+                           11  SPA-GMN-TBL-G1      OCCURS   36.
+                               13  SPA-GMN-TPAGE   PIC 9(04).
+                               13  SPA-GMN-TKENSU  PIC 9(04).
+                               13  SPA-GMN-TSYURUINAME
+                                                   PIC X(40).
+                   07  SPA-GMN-TBL2.
+                       09  SPA-GMN-TBL-OCC2        OCCURS   19.
+                           11  SPA-GMN-TBL-G2      OCCURS   36.
+                               13  SPA-GMN-TPRTNM-G.
+                                   15  SPA-GMN-TPRTNM
+                                                   PIC X(02).
+                                   15  SPA-GMN-F1  PIC X(01).
+                                   15  SPA-GMN-TPRTNMMEI
+                                                   PIC X(16).
+                               13  SPA-GMN-TPRTNM-N-G.
+                                   15  SPA-GMN-TPRTNM-N
+                                                   PIC X(02).
+                                   15  SPA-GMN-F1  PIC X(01).
+                                   15  SPA-GMN-TPRTNM-NMEI
+                                                   PIC X(16).
+      *
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-WIDGET              PIC X(08). 
+                   07  SPA-NAI-2005-SYAPRTNM       PIC X(16).
+                   07  SPA-NAI-2005-KKHPRTNM       PIC X(16).
+                   07  SPA-NAI-2005-KOUIKIPRTNM    PIC X(16).
+                   07  SPA-NAI-2005-SYAPRTNM-NEXT  PIC X(16).
+                   07  SPA-NAI-2005-KKHPRTNM-NEXT  PIC X(16).
+                   07  SPA-NAI-2005-KOUIKIPRTNM-NEXT
+                                                   PIC X(16).
+                   07  SPA-NAI-2005-SYAPRTNM-N     PIC X(16).
+                   07  SPA-NAI-2005-KKHPRTNM-N     PIC X(16).
+                   07  SPA-NAI-2005-KOUIKIPRTNM-N  PIC X(16).
+                   07  SPA-NAI-2005-SYAPRTNM-NEXT-N  PIC X(16).
+                   07  SPA-NAI-2005-KKHPRTNM-NEXT-N  PIC X(16).
+                   07  SPA-NAI-2005-KOUIKIPRTNM-NEXT-N
+                                                   PIC X(16).
+                   07  SPA-NAI-2005-PRT-CHECKKBN   PIC X(01).
+                   07  SPA-NAI-2005-DRCD-PRTJYUNKBN
+                                                   PIC X(01).
+                   07  SPA-NAI-2005-BTUNUM-PRTJYUNKBN
+                                                   PIC X(01).
+                   07  SPA-NAI-2005-PRTJYUNKBN1    PIC X(02).
+                   07  SPA-NAI-2005-PRTJYUNKBN3    PIC X(02).
+                   07  SPA-NAI-200501-PRTJYUNKBN5  PIC X(02).
+                   07  SPA-NAI-2005-JIHI-PRTKBN    PIC X(01).
+                   07  SPA-NAI-2008-HYOUJI         PIC 9(01).
+      *
+                   07  SPA-NAI-2003-TABLE.
+                       09  SPA-NAI-2003-TBL    OCCURS  50.
+                           11  SPA-NAI-2003-TSYUBETU
+                                                   PIC X(04)
+                                                           OCCURS  5.
+                           11  SPA-NAI-2003-TSYUBETUNAME
+                                                   PIC X(40).
+      *
+                   07  SPA-NAI-PRTNM-TABLE.
+                       09  SPA-NAI-PRTNM-G                 OCCURS  6.
+                           11  SPA-NAI-PRTNM       PIC X(02).
+                           11  SPA-NAI-FIL         PIC X(01).
+                           11  SPA-NAI-PRTNMMEI    PIC X(16).
+      *
+                   07  SPA-NAI-2008-ZAITAKU        PIC  X(01).
+                   07  SPA-NAI-2008-CHOUKI         PIC  X(01).
+                   07  SPA-NAI-2008-PREFKBN-PRTJYUN
+                                                   PIC  X(01).
+                   07  SPA-NAI-2008-HKNJANUM-PRTJYUN
+                                                   PIC  X(01).
+                   07  SPA-NAI-2008-SYUBETU-PRTJYUN
+                                                   PIC  X(01).
+                   07  SPA-NAI-2008-HKNJANUM       PIC  X(08).
+                   07  SPA-NAI-2008-HKNJANUM-PRTKBN
+                                                   PIC  X(01).
+                   07  SPA-NAI-2008-HKNJANAME      PIC  X(50).
+      *
+                   07  SPA-NAI-DRCD-TABLE.
+                       09  SPA-NAI-DRCD-TBL        OCCURS  100.
+                           11  SPA-NAI-DRCD-TDRCD  PIC X(05).
+                           11  SPA-NAI-DRCD-OCC        OCCURS  101.
+                               13  SPA-NAI-DRCD-TPAGE  PIC 9(04).
+                               13  SPA-NAI-DRCD-TKENSU PIC 9(04).
+      *
+                   07  SPA-NAI-BTUNUM-TABLE.
+                       09  SPA-NAI-BTUNUM-TBL        OCCURS  100.
+                           11  SPA-NAI-BTUNUM-TBTUNUM    PIC X(02).
+                           11  SPA-NAI-BTUNUM-OCC        OCCURS  101.
+                               13  SPA-NAI-BTUNUM-TPAGE  PIC 9(04).
+                               13  SPA-NAI-BTUNUM-TKENSU PIC 9(04).
+      *    プレビュー用情報
+           03  SPA-LNK-XC01-KEY.
+               05  SPA-LNK-XC01-TBL-KEY    PIC X(8).
+               05  SPA-LNK-XC01-RENNUM     PIC 9(4).
+               05  SPA-LNK-XC01-TBL-GROUP  PIC X(14).
+               05  SPA-LNK-XC01-SHORI-RENNUM
+                                          PIC 9(4).
+      *
+      *    労災・自賠責・公害印刷指示画面
+            03  SPA-R04-AREA.
+               05  SPA-GMN-R04-PAGE                PIC 9(02).
+               05  SPA-GMN-R04-CUR                 PIC 9(02).
+               05  SPA-GMN-R04-AREA.
+                   07  SPA-GMN-R04-FILEKBN         PIC X(94).
+                   07  SPA-GMN-R04-CREYMD          PIC X(22).
+                   07  SPA-GMN-R04-PAGEH           PIC 9(04).
+                   07  SPA-GMN-R04-KENSUH          PIC 9(04).
+                   07  SPA-GMN-R04-PRTJYUN-G.
+                       09  SPA-GMN-R04-PRTJYUN     PIC X(02).
+                       09  SPA-GMN-R04-F1          PIC X(01).
+                       09  SPA-GMN-R04-PRTJYUNMEI  PIC X(22).
+                   07  SPA-GMN-R04-PRTJYUNLST      OCCURS  2.
+                       09  SPA-GMN-R04-PRTJYUNL    PIC X(02).
+                       09  SPA-GMN-R04-F1L         PIC X(01).
+                       09  SPA-GMN-R04-PRTJYUNMEIL PIC X(22).
+                   07  SPA-GMN-R04-PREFKBN-G.
+                       09  SPA-GMN-R04-PREFKBN     PIC X(01).
+                       09  SPA-GMN-R04-F1          PIC X(01).
+                       09  SPA-GMN-R04-PREFKBNMEI  PIC X(04).
+                   07  SPA-GMN-R04-PREFKBNLST      OCCURS  1.
+                       09  SPA-GMN-R04-PREFKBNL    PIC X(01).
+                       09  SPA-GMN-R04-F1L         PIC X(01).
+                       09  SPA-GMN-R04-PREFKBNMEIL PIC X(04).
+                   07  SPA-GMN-R04-TBL.
+                       09  SPA-GMN-R04-TBL-G       OCCURS   25.
+                           11  SPA-GMN-R04-TSTDATA PIC X(100).
+                           11  SPA-GMN-R04-TEDDATA PIC X(100).
+                           11  SPA-GMN-R04-TCHK.
+                               13  SPA-GMN-R04-TCHK-VALUE
+                                                   PIC X(01).
+                               13  SPA-GMN-R04-TCHK-STYLE
+                                                   PIC X(20).
+                   07  SPA-GMN-R04-TBL1.
+                       09  SPA-GMN-R04-TPAGE       PIC 9(04)
+                                                   OCCURS   25.
+                       09  SPA-GMN-R04-TKENSU      PIC 9(04)
+                                                   OCCURS   25.
+                       09  SPA-GMN-R04-TSYURUINAME PIC X(20)
+                                                   OCCURS   25.
+      *
+               05  SPA-NAI-R04-AREA.
+                   07  SPA-NAI-R04-WIDGET          PIC X(08). 
+                   07  SPA-NAI-R04-2005-ROUPRTNM   PIC X(16).
+                   07  SPA-NAI-R04-2005-JBAIPRTNM  PIC X(16).
+                   07  SPA-NAI-R04-2005-KOUGAIPRT
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-ROUPRTNM-NE
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-JBAIPRTNM-NE
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-KOUGAIPRT-NE
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-ROUPRTNM-N PIC X(16).
+                   07  SPA-NAI-R04-2005-JBAIPRTNM-N
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-KOUGAIPRT-N
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-ROUPRTNM-NE-N
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-JBAIPRTNM-NE-N
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-2005-KOUGAIPRT-NE-N
+                                                   PIC X(16).
+                   07  SPA-NAI-R04-TBL.
+                       09  SPA-NAI-R04-TBL-G       OCCURS  25.
+                           11  SPA-NAI-R04-PRTJYUNI
+                                                   PIC X(02).
+                           11  SPA-NAI-R04-TEISYUTUSAKI
+                                                   PIC X(01).
+                           11  SPA-NAI-R04-SYUBETU-G.
+                               13  SPA-NAI-R04-SYUBETU PIC X(04)
+                                                   OCCURS 1.
+      *
+      *    プリンタ一括設定画面
+           03  SPA-R06-AREA.
+               05  SPA-GMN-R06-CUR                 PIC 9(03).
+               05  SPA-GMN-R06-AREA.
+                   07  SPA-GMN-R06-SETTEI1         PIC X(01).
+                   07  SPA-GMN-R06-SETTEI2         PIC X(01).
+                   07  SPA-GMN-R06-PRTNM-G.
+                       09  SPA-GMN-R06-PRTNM       PIC X(02).
+                       09  SPA-GMN-R06-F1          PIC X(01).
+                       09  SPA-GMN-R06-PRTNMMEI    PIC X(16).
+                   07  SPA-GMN-R06-PRTNM-N-G.
+                       09  SPA-GMN-R06-PRTNM-N     PIC X(02).
+                       09  SPA-GMN-R06-F1          PIC X(01).
+                       09  SPA-GMN-R06-PRTNM-NMEI  PIC X(16).

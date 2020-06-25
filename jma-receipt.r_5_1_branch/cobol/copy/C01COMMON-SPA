@@ -1,0 +1,106 @@
+      *****************************************************************
+      *
+      *    病名登録 共通ＳＰＡ     (SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-藤原     01/11/06  患者ＩＤ・診療科の追加
+      *  01/00/02    MCC-藤原     01.11.13  病名コードを７桁に変更
+      *  01/00/03    MCC-藤原     01.12.18  検索病名の追加
+      *  01/00/04    MCC-藤原     02.04.05  病名コードを１０桁に変更
+      *
+      *  新患者病名マスタ対応
+      *  01/01/01    NACL-藤原    03.12.15  病名コードを２１個に変更
+      *                                     分類コードを追加
+      *
+      *  02.07.01    NACL-藤原    06/02/01  検索自院病名コード追加
+      *
+      *  03.01.01    NACL-藤原    07/07/11  自院病名検索用ＩＮＤＥＸ追加
+      *
+      *  04.01.01    NACL-藤原    07/10/11  診療科コピー（移動）機能対応
+      *
+      *  04.06.01    NACL-藤原    10/11/05  補足コメント対応
+      *  04.06.02    NACL-藤原    12/10/01  入力病名の入力ＣＤ登録対応
+      *
+      *  04.07.01    NACL-藤原    11/06/10  未コード化病名となる病名の別
+      *                                     組み立てへの移行を可能にする
+      *  04.07.02    NACL-藤原    13/07/30  自院病名のセット登録対応
+      *  04.07.03    NACL-藤原    13/07/12  第三者行為対応
+      *
+      *  04.08.01    NACL-藤原    16/02/10  自院病名への補足コメント追加
+      *                                     対応
+      *****************************************************************
+      *
+       01  SPA-C01KYOUTU.
+      *病名コード
+           05  SPA-C01-BYOMEI-TBL.
+               07  SPA-C01-BYOMEICD-G      OCCURS  21.
+                   09  SPA-C01-TBYOMEICD   PIC X(10).
+                   09  SPA-C01-TBYOMEI     PIC X(50).
+                   09  SPA-C01-TRECECD     PIC X(07).
+                   09  SPA-C01-TUSERBYOMEIFLG
+                                           PIC X(01).                          
+                   09  SPA-C01-TBYOMEITOP  PIC X(01).
+                   09  SPA-C01-TBYOMEISBT  PIC X(01).
+                   09  SPA-C01-TBYOMEICD-INDEX
+                                           PIC 9(02).
+               07  SPA-C01-HOSOKUCD-G      OCCURS  3.
+                   09  SPA-C01-THOSOKUCD   PIC X(10).
+                   09  SPA-C01-THOSOKU-COMMENT
+                                           PIC X(50).
+                   09  SPA-C01-THOSOKUCD-INDEX
+                                           PIC 9(01).
+               07  SPA-C01-HOSOKU-COMMENT  PIC X(40).
+      *検索病名
+           05  SPA-C01-BYOMEI              PIC X(80).             
+      *患者ＩＤ
+           05  SPA-C01-PTID                PIC 9(10).             
+      *診療科
+           05  SPA-C01-SRYKA               PIC X(02).             
+      *検索分類コード
+           05  SPA-C01-BUNRUICD            PIC 9(03).             
+      *検索自院病名コード（コード検索時のみ設定）
+      *更新自院病名コード（病名入力時）
+           05  SPA-C01-BYOMEIINPUTCD       PIC X(10).
+           05  SPA-C01-INDEX               PIC 9(01).
+           05  SPA-C01-INDEX-ST            PIC 9(01).
+           05  SPA-C01-INDEX-ED            PIC 9(01).
+           05  SPA-C01-CHANGE-ST           PIC 9(01).
+      *検索元コード
+           05  SPA-C01-WIDGET              PIC X(10). 
+           05  SPA-C01-B10-FLG             PIC 9(01). 
+      *簡単修正項目
+           05  SPA-C01-HENSYU-NUM-G.
+               07  SPA-C01-STNUM-O         PIC 9(05)   OCCURS  5.
+               07  SPA-C01-EDNUM-O         PIC 9(05)   OCCURS  5.
+           05  SPA-C01-HENSYU-DATA-G.
+               07  SPA-C01-HENSYU-DATA-O   PIC X(10)   OCCURS  10.
+               07  SPA-C01-HENSYU-DATA-9   PIC 9(10).
+      *
+      *戻り先
+           05  SPA-C01-MOTOPG              PIC  X(08).
+      *
+      *エラーメッセージ
+           05  SPA-C01-ERRCD               PIC  X(04).
+      *
+      *警告メッセージ
+           05  SPA-CIDCD-AREA. 
+               07  SPA-CIDCD               PIC  X(04).
+               07  SPA-CIDCD2              PIC  X(04).
+               07  SPA-CIDCD3              PIC  X(04).
+               07  SPA-CIDCD4              PIC  X(04).
+               07  SPA-CIDCD5              PIC  X(04).
+               07  SPA-CIDCD6              PIC  X(04).
+      *警告画面より
+           05  SPA-CID1-AREA. 
+               07  SPA-CID1-FLG            PIC  X(02).
+               07  SPA-CID2-FLG            PIC  X(02).
+               07  SPA-CID3-FLG            PIC  X(03).
+               07  SPA-CID4-FLG            PIC  X(03).
+               07  SPA-CID5-FLG            PIC  X(03).
+               07  SPA-CID6-FLG            PIC  X(03).
+      *
+      *自院病名更新フラグ
+           05  SPA-C01-HENFLG              PIC 9(01).
+      *

@@ -1,0 +1,126 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *  ユーザプログラム実行 画面ＳＰＡ
+      *----------------------------------------------------------*
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      ************************************************************
+       01  SPA-XD01.
+           03  SPA-XD01GMN-AREA.
+               05  SPA-GMN-PAGE                  PIC 9(04).
+               05  SPA-GMN-NEXT                  PIC 9(04).
+               05  SPA-GMN-CUR                   PIC 9(03).
+               05  SPA-MAE-MOTOPG                PIC X(08).
+      *H28.6   伝票番号
+               05  SPA-NAI-DENPNUM               PIC 9(07).
+      *H29.8   Ginbeeカスタムバッチ有効区分（1:有効）
+               05  SPA-NAI-CUSTOM-ENABLED        PIC X(01).
+      *
+               05  SPA-GMN-AREA.
+      *        見出領域
+                   07  SPA-GMN-PTNUM           PIC X(20).
+                   07  SPA-GMN-PTID            PIC 9(10).
+                   07  SPA-GMN-NAME            PIC X(50).
+                   07  SPA-GMN-KANANAME        PIC X(50).
+                   07  SPA-GMN-SEX             PIC X(02).
+                   07  SPA-GMN-BIRTHDAY        PIC X(10).
+                   07  SPA-GMN-SRYYMD          PIC X(10).
+                   07  SPA-GMN-SYORIMEI        PIC X(40).
+      *
+               05  SPA-GMN-TBLG.
+                   07  SPA-GMN-TBL             OCCURS  10.
+                       09  SPA-GMN-TNUM            PIC 9(03).
+                       09  SPA-GMN-TSYORINM        PIC X(30).
+                       09  SPA-GMN-TSRYKA          PIC X(12).
+                       09  SPA-GMN-TDRCD           PIC X(24).
+                       09  SPA-GMN-THKNCOMBI       PIC X(60).
+                       09  SPA-GMN-TPRTNM          PIC X(16).
+                   07  SPA-TBL-MAX                 PIC 9(04).
+      *
+               05  SPA-GMN-INPUT.
+                   07  SPA-GMN-SYORINM             PIC X(30).
+      *            診療科
+                   07  SPA-GMN-SRYKA-G.
+                       09  SPA-GMN-SRYKA           PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-SRYKAMEI        PIC X(12).
+      *            ドクター
+                   07  SPA-GMN-DRCD-G.
+                       09  SPA-GMN-DRCD            PIC X(04).
+                       09  SPA-GMN-DRCDF1          PIC X(01).
+                       09  SPA-GMN-DRCDMEI         PIC X(24).
+      *            保険組合せ
+                   07  SPA-GMN-HKNCOMBI-G.
+                       09  SPA-GMN-HKNCOMBI        PIC X(04).
+                       09  SPA-GMN-HKNF1           PIC X(01).
+                       09  SPA-GMN-HKNCOMBIMEI     PIC X(60).
+      *            プリンタ名
+                   07  SPA-GMN-PRTNM               PIC X(16).
+      *            選択番号
+                   07  SPA-GMN-SELNUM              PIC 9(03).
+      *        処理・帳票名
+               05  SPA-GMN-SYORINM-LISTG.
+                   07  SPA-GMN-SYORINM-LIST      OCCURS  10.
+                       09  SPA-GMN-SYORINML        PIC X(30).
+      *
+                       09  SPA-NAI-KBNCDL          PIC X(08).
+                       09  SPA-NAI-PRTNML          PIC X(16).
+      *
+                   07  SPA-SYORINM-MAX            PIC 9(04).
+      *        診療科
+               05  SPA-GMN-SRYKA-LISTG.
+                   07  SPA-GMN-SRYKA-LIST      OCCURS  40.
+                       09  SPA-GMN-SRYKAL          PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-SRYKAMEIL       PIC X(12).
+                   07  SPA-SRYKA-MAX               PIC 9(04).
+      *        ドクター
+               05  SPA-GMN-DRCD-LISTG.
+                   07  SPA-GMN-DRCD-LIST       OCCURS  99.
+                       09  SPA-GMN-DRCDL           PIC X(04).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-DRCDMEIL        PIC X(24).
+                   07  SPA-DRCD-MAX                PIC 9(04).
+      *
+               05  SPA-GMN-HKNCOMBI-LISTG.
+                   07  SPA-GMN-HKNCOMBI-LIST   OCCURS  30.
+                       09  SPA-GMN-THKNCOMBINUM    PIC X(04).
+                       09  SPA-GMN-THKNCOMBY1      PIC X(01).
+                       09  SPA-GMN-THKNCOMBIMEI    PIC X(60).
+                   07  SPA-HKNCOMBI-MAX            PIC 9(04).
+      *
+           03  SPA-NAI-AREA.
+               05  SPA-MAE-SRYKA                   PIC X(02).
+               05  SPA-NAI-INIT.
+                   07  SPA-NAI-KANRICD             PIC X(04).
+               05  SPA-NAI-TBLG.
+                   07  SPA-NAI-KBNCD               PIC X(08).
+                   07  SPA-NAI-TBL             OCCURS   10.
+                       09  SPA-NAI-TKBNCD          PIC X(08).
+                       09  SPA-NAI-TSRYKA          PIC X(02).
+                       09  SPA-NAI-TDRCD           PIC X(04).
+                       09  SPA-NAI-THKNCOMBI       PIC X(04).
+      *確認画面用
+           03  SPA-XDID1GMN-AREA.
+               05  SPA-XDID1CD               PIC  X(04).
+               05  SPA-XDID1-AREA.
+                   07  SPA-XDID1-FLG        PIC  X(02).
+      *
+      *

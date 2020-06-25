@@ -1,0 +1,35 @@
+tbl_dpc_mdc {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	MDC_NAME			varchar(60);
+};
+
+primary	{
+	MDC_CD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_mdc_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_mdc
+			WHERE MDC_CD        =   :MDC_CD
+		   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+		   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_mdc_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_mdc
+		   	WHERE YUKOSTYMD     <=  :YUKOSTYMD
+	         AND  YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER  BY  MDC_CD
+		;
+	};
+};
+

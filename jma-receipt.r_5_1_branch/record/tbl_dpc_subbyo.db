@@ -1,0 +1,52 @@
+tbl_dpc_subbyo {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+	SUBBYO_CD			char(1);
+	SUBBYO_FLG			number(2,0);
+	ICD10_NAME			varchar(200);
+	ICD10_CD			char(5);
+	SEL_DPC_CD			varchar(14),virtual;
+};
+
+primary	{
+	MDC_CD,BUNRUI_CD,ICD10_CD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_subbyo_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_subbyo
+		WHERE MDC_CD        =   :MDC_CD
+		 AND  BUNRUI_CD     =   :BUNRUI_CD
+	     AND  ICD10_CD      =   :ICD10_CD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_subbyo_key2_csr CURSOR FOR
+		SELECT  a.*
+		FROM tbl_dpc_subbyo a,
+          ( SELECT SUBBYO_CD FROM tbl_dpc_tensu
+              WHERE DPC_CD     LIKE   :SEL_DPC_CD
+               AND  YUKOSTYMD     <=  :YUKOSTYMD
+               AND  YUKOEDYMD     >=  :YUKOEDYMD
+            GROUP   BY SUBBYO_CD
+          ) b
+		WHERE
+		     A.MDC_CD     = :MDC_CD
+		 AND A.BUNRUI_CD  = :BUNRUI_CD
+		 AND A.SUBBYO_CD  =  B.SUBBYO_CD
+		 AND A.YUKOSTYMD     <=  :YUKOSTYMD
+		 AND A.YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER BY A.SUBBYO_CD,A.SUBBYO_FLG,A.ICD10_CD
+		;
+	};
+};
+

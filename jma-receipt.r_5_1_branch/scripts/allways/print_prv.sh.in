@@ -1,0 +1,77 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#if ! test -d /var/tmp/.orca_ps ; then
+#    mkdir /var/tmp/.orca_ps
+#fi
+
+#-------------------------------------------#
+#    印刷ＤＢからの印刷処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} エラーファイル名 
+#        ${13} ジョブＩＤ
+#        ${14} シェルＩＤ
+#        ${15} 印刷開始頁
+#        ${16} 印刷終了頁
+#        ${17} 出力区分 1:印刷のみ（１ページ毎）
+#                       2:印刷、PDF作成（１ページ毎）
+#                       3:PDFのみ（１ページ毎）
+#                       4:3と同じ（１ページ毎）
+#                       5:クライアント印刷
+#                       6:印刷のみ（帳票毎）
+#                       7:PDFのみ（TBL_KEY+TBL_GROUP毎）
+#        ${18} HOSPNUM
+#        ${19} UUID
+#        ${20} GYOUMU-CD
+#        ${21} 印刷データ(オリジナル)
+#        ${22} クライアント印刷ダイアログ表示
+#        ${23} PDF保持区分(1:保持)
+#-------------------------------------------#
+#
+
+        echo "window  ${MCP_WINDOW}"
+
+        if  [ "${MCP_WINDOW}" == "reprintv3" ]; then
+            mkdir -p  ${MCP_TEMPDIR}
+        fi
+
+cleanup(){
+##      
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+}
+trap cleanup EXIT
+
+ERR_FILE_BASE=${12}
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+
+PRT_FILE_BASE=${21}
+PRT_FILE_FULL=${MCP_TEMPDIR}/${PRT_FILE_BASE}
+
+##      エラーファイル削除
+	echo $#
+	echo "echo " ${ERR_FILE_FULL}
+	echo "echo " ${PRT_FILE_FULL}
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            rm  ${ERR_FILE_FULL}
+        fi
+        
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPRT1 -parameter $1,$2,$3,$4,$5,$6,$7,$8,$9,${10},${11},${ERR_FILE_BASE},${13},${14},${15},${16},${17},${18},${19},${20},${PRT_FILE_BASE},${22},${23}
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            exit
+        else
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${13}${14},${18}
+	fi
+#
+
+
+        exit 
+

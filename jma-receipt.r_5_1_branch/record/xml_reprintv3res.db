@@ -1,0 +1,50 @@
+xml_reprintv3res {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	reprintv3res {
+		Request_Number		varchar(2);
+		Response_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Information_Date	varchar(10);
+		Information_Time	varchar(8);
+		Api_Result		varchar(3);
+		Api_Result_Message	varchar(100);
+		Reskey			varchar(100);
+		Reprint_Mode		varchar(7);
+		Reprint_Select		varchar(8);
+		Reprint_Select_Name	varchar(40);
+		Reprint_Create_Date	varchar(10);
+		Reprint_Information {
+			Reprint_Group_No	varchar(14);
+			Reprint_Uuid		varchar(36);
+			Reprint_Patient_ID	varchar(20);
+			Reprint_Proccessing_Number	varchar(4);
+			Reprint_Serial_Number	varchar(4);
+			Reprint_Start_Page	varchar(5);
+			Reprint_End_Page	varchar(5);
+		};
+		Reprint_List_Information_Overflow	varchar(4);
+		Reprint_List_Information {
+			Reprint_Group_No	varchar(14);
+			Reprint_Uuid		varchar(36);
+			Reprint_Patient_ID	varchar(20);
+			Reprint_WholeName	varchar(30);
+			Reprint_Proccessing_Number	varchar(4);
+			Reprint_Serial_Number	varchar(4);
+			Reprint_Page		varchar(5);
+			Reprint_Perform_Month	varchar(7);
+			Reprint_Ac_Date		varchar(10);
+			Reprint_Create_Date	varchar(10);
+			Reprint_Perform_Date	varchar(10);
+			Reprint_Form_Title	varchar(60);
+			Reprint_Print_Still	varchar(4);
+		} [300];
+		All_Number_Of_Sheets    varchar(10);
+		Data_Id_Information {
+			Print_Id        varchar(37);
+		} [10];
+	};
+};

@@ -1,0 +1,58 @@
+fm_medicine_information_h{
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	data {
+		Form_ID				varchar(30);
+		Custom_ID				varchar(30);
+		Printer					varchar(20);
+		Style_Class			varchar(1);
+		IssuedDate				varchar(10);
+		Ward_Number					varchar(02);
+		Ward_Name						varchar(20);
+		Room_Number					varchar(6);
+		Patient	{
+			ID	 				    varchar(20);
+			Name 				    varchar(50);
+			KanaName  			varchar(50);
+			BirthDate 			varchar(10);
+			Sex					    varchar(1);
+		};
+		Hospital	{
+			Name								varchar(120)[3];
+			ZipCode         		varchar(7);
+			Address							varchar(200)[3];
+			PhoneNumber					varchar(15);
+		};
+		Doctor	{
+			Code								varchar(5);
+			Name 								varchar(50);
+			KanaName 						varchar(50);
+		};
+		Medicine_Count			varchar(3);
+		Medicine_Information	{
+			Name								varchar(100);
+			Code								varchar(9);
+			Image_ID						varchar(36);
+			Effect							varchar(1000);
+			Shape								varchar(180);
+			Color								varchar(180);
+			Mark								varchar(180);
+			Caution							varchar(2000);
+			Usage								varchar(100)[30];
+			Dosage{
+				Risingtime						varchar(3);
+				Risingtime_Unit_Name	varchar(2);
+				Morning								varchar(3);
+				Morning_Unit_Name			varchar(2);
+				Afternoon							varchar(3);
+				Afternoon_Unit_Name		varchar(2);
+				Evening								varchar(3);
+				Evening_Unit_Name			varchar(2);
+				Bedtime								varchar(3);
+				Bedtime_Unit_Name			varchar(2);
+			};
+		}[99];
+	};
+};

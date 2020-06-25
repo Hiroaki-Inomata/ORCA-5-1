@@ -1,0 +1,47 @@
+kanri_cd    : "9102"
+name        : "ＥＦファイル作成"
+class_cd    : "*"
+item_max    : 7
+item_list   :
+- item_no   : 1
+  item      : "EFOUT"
+  item_jp   : "ＥＦファイル用データ作成"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "FILE-DIR"
+  item_jp   : "ＥＦファイル用デイレクトリ"
+  type      : "X"
+  start     : 2
+  length    : 200
+- item_no   : 3
+  item      : "NUMBER"
+  item_jp   : "データ識別番号記録"
+  type      : "X"
+  start     : 202
+  length    : 1
+- item_no   : 4
+  item      : "SRYCD1"
+  item_jp   : "退院時処方指示１"
+  type      : "X"
+  start     : 203
+  length    : 9
+- item_no   : 5
+  item      : "SRYCD2"
+  item_jp   : "退院時処方指示２"
+  type      : "X"
+  start     : 212
+  length    : 9
+- item_no   : 6
+  item      : "RECEIPT"
+  item_jp   : "公費のみのレセプト"
+  type      : "X"
+  start     : 221
+  length    : 1
+- item_no   : 7
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 222
+  length    : 279

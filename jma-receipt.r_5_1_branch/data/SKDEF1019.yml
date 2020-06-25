@@ -1,0 +1,29 @@
+kanri_cd    : "1019"
+name        : "患者状態コメント情報"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "CONDITION-BODY"
+  item_jp   : "状態内容"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "CONDITION-WORD"
+  item_jp   : "比喩単語"
+  type      : "X"
+  start     : 41
+  length    : 40
+- item_no   : 3
+  item      : "ICON-FILENAME"
+  item_jp   : "アイコンファイル名"
+  type      : "X"
+  start     : 81
+  length    : 100
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 181
+  length    : 356

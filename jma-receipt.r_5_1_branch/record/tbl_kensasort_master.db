@@ -1,0 +1,62 @@
+tbl_kensasort_master {
+	KNSBUNRUI     			number(2,0);
+	SRYCD   			char(9);
+	DSPSEQ          		number(4,0);
+	TERMID  			varchar(32);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	KNSBUNRUI,SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_kensasort_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_kensasort
+			WHERE   KNSBUNRUI =   :KNSBUNRUI
+			AND     SRYCD     =   :SRYCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_kensasort
+			VALUES(
+				:KNSBUNRUI,
+				:SRYCD,
+				:DSPSEQ,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_kensasort
+			SET
+				KNSBUNRUI = :KNSBUNRUI,
+				SRYCD = :SRYCD,
+				DSPSEQ = :DSPSEQ,
+				TERMID = :TERMID,
+				OPID = :OPID,
+				CREYMD = :CREYMD,
+				UPYMD = :UPYMD,
+				UPHMS = :UPHMS
+			WHERE   KNSBUNRUI =   :KNSBUNRUI
+			AND     SRYCD     =   :SRYCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_kensasort
+			WHERE   KNSBUNRUI =   :KNSBUNRUI
+			AND     SRYCD     =   :SRYCD
+		;
+	};
+};

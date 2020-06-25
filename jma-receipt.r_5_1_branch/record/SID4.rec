@@ -1,0 +1,45 @@
+SID4 {
+  fixed1 {
+    B06 {
+      state int;
+      visible bool;
+    };
+    B07 {
+      state int;
+      visible bool;
+    };
+    LBLID1SKYPRT {
+      textdata varchar(70);
+    };
+    LBLSRYYMD {
+      textdata varchar(8);
+    };
+    LBLKENSU {
+      textdata varchar(20);
+    };
+    SRYYMD {
+      textdata varchar(20);
+    };
+    SRYKA {
+      textdata varchar(50);
+    };
+    HOKEN {
+      textdata varchar(20);
+    };
+    KINGAKU01 {
+      textdata varchar(10);
+    };
+    KINGAKU02 {
+      textdata varchar(10);
+    };
+    KINGAKU03 {
+      textdata varchar(10);
+    };
+    KINGAKU04 {
+      textdata varchar(10);
+    };
+    KINGAKU05 {
+      textdata varchar(10);
+    };
+  };
+};

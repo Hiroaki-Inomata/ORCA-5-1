@@ -1,0 +1,182 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    収納 共通ＳＰＡ     (SPA-WORK の内容  最大RL=550)
+      *    画面　S01 S02 S03 で使用                              *
+      *****************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-藤原     01/11/06  患者ＩＤ〜診療科の追加
+      *  01.00.02    NACL-藤原    02/11/05  入外区分の追加
+      *  01.00.03    NACL-太田    02/12/12  伝票発行日を追加
+      *  01.00.04    NACL-太田    03/02/18  警告メッセージエリア追加
+      *  01.00.05    NACL-太田    03/04/21  診療科コード追加
+      *****************************************************************
+       01  SPA-S01KYOUTU.
+           03  SPA-S01KYOUTU-AREA.
+      *処理番号
+               05  SPA-S01-SYORINO           PIC X(02).
+      *伝票番号
+               05  SPA-S01-DENPNUM           PIC 9(07).
+      *伝票発行日
+               05  SPA-S01-DENPPRTYMD        PIC X(08).
+      *グループ伝票番号
+               05  SPA-S01-GRP-DENPNUM       PIC 9(07).
+      *患者ＩＤ
+               05  SPA-S01-PTID              PIC 9(10).
+      *患者番号
+               05  SPA-S01-PTNUM             PIC X(20).
+      *患者カナ氏名
+               05  SPA-S01-KANANAME          PIC X(50).
+      *患者漢字氏名
+               05  SPA-S01-NAME              PIC X(50).
+      *患者性別
+               05  SPA-S01-SEX               PIC X(02).
+      *患者入金方法
+               05  SPA-S01-NYUKIN-HOHO       PIC X(02).
+      *患者発行区分
+               05  SPA-S01-SKYPRT            PIC X(01).
+               05  SPA-S01-TUKI-G.
+      *月別請求書伝票番号
+                   07  SPA-S01-TUKI-DENPNUM  PIC  9(07).
+      *月別請求書診療年月
+                   07  SPA-S01-TUKI-SRYYM    PIC  X(06).
+      *月別請求書期間区分
+                   07  SPA-S01-TUKI-KIKANKBN PIC  X(06).
+      *請求期間開始日
+                   07  SPA-S01-TUKI-STYMD.
+                       09  SPA-S01-TUKI-STYM PIC  X(06).
+                       09  SPA-S01-TUKI-STDD PIC  9(02).
+      *請求期間終了日
+                   07  SPA-S01-TUKI-EDYMD.
+                       09  SPA-S01-TUKI-EDYM PIC  X(06).
+                       09  SPA-S01-TUKI-EDDD PIC  9(02).
+      *月別請求書発行方法
+                   07  SPA-S01-TUKI-GRPKBN   PIC  X(01).
+      *月別請求書印刷区分
+                   07  SPA-S01-TUKI-SKYPRT   PIC  X(01).
+      *月別明細書印刷区分
+                   07  SPA-S01-TUKI-SRYPRT   PIC  X(01).
+      *排他フラグ
+               05  SPA-S01-LOCK              PIC 9(01).
+      *排他メッセージ
+           05  SPA-S01-SLOCK-MSG         PIC X(32).
+      *患者生年月日（和暦編集）
+           05  SPA-S01-BIRTHDAYW         PIC X(09).
+      *患者生年月日（西暦編集）
+           05  SPA-S01-BIRTHDAY          PIC X(08).
+      *診療年月
+           05  SPA-S01-SRYYM             PIC X(08).
+      *診療年月（和暦編集済）
+           05  SPA-S01-SRYYMW            PIC X(09).
+      *診療年月日
+           05  SPA-S01-SRYYMD            PIC X(08).
+      *診療科
+           05  SPA-S01-SRYKA             PIC X(02).
+      *診療科名
+           05  SPA-S01-SRYKAMEI          PIC X(30).
+      *診療科（ヘッダー）
+           05  SPA-S01-HSRYKA            PIC X(02).
+      *負担率名称
+           05  SPA-S01-FTNRATEMEI        PIC X(10).
+      *保険組合せ内容
+           05  SPA-S01-HKNCOMBIMEI       PIC X(50).
+      *保険番号
+           05  SPA-S01-HKNNUM            PIC X(03).
+      *労災保険区分
+           05  SPA-S01-RSI-HKNKBN        PIC X(01).
+      *入外区分
+           05  SPA-S01-NYUGAIKBN         PIC X(01).
+      *入外区分（ヘッダー）
+           05  SPA-S01-HNYUGAIKBN        PIC X(01).
+      *収納リスト頁
+           05  SPA-S01-PAGE              PIC 9(05).
+      *収納モード
+           05  SPA-S01-MODE              PIC 9(01).
+      *並び順
+           05  SPA-S01-SORTKBN           PIC X(01).
+      *収納リスト選択行
+           05  SPA-S01-SYULISTSEL        PIC 9(05).
+      *外来未収額
+           05  SPA-S01-GAI-MISYU         PIC S9(08).
+      *入院未収額
+           05  SPA-S01-NYU-MISYU         PIC S9(08).
+      *PARA-GYOUMUID
+           05  SPA-S01-GYOUMUID          PIC  X(03).
+      *UID
+           05  SPA-S01-UID               PIC  X(36).
+      *PARAFILEMEI
+           05  SPA-S01-FILEMEI.
+               07  SPA-S01-FILEMEI-YMD   PIC X(08).
+               07  SPA-S01-FILEMEI-HMS   PIC X(06).
+               07  SPA-S01-FILEMEI-CD    PIC X(06).
+      *警告メッセージ
+           05  SPA-SIDCD                 PIC  X(04).
+      *警告画面より
+           05  SPA-SID1-AREA. 
+               07  SPA-SID1-FLG          PIC  X(05).
+               07  SPA-S99-FLG           PIC  X(05).
+           05  SPA-S01-SHIHARAI-PARA.
+               07  SPA-S01-SHR-ORDER     PIC  X(02).
+               07  SPA-S01-SHR-NYUGAIKBN PIC  X(01).
+               07  SPA-S01-SHR-KIKANKBN  PIC  X(01).
+               07  SPA-S01-SHR-STYMD     PIC  X(08).
+               07  SPA-S01-SHR-EDYMD     PIC  X(08).
+               07  SPA-S01-SHR-SUMKBN    PIC  X(01).
+               07  SPA-S01-SHR-SYORIKBN  PIC  X(01).
+               07  SPA-S01-SHR-DSPKBN    PIC  X(01).
+               07  SPA-S01-SHR-JIHSUMKBN PIC  X(01).
+               07  SPA-S01-SHR-PRTFLG-G.
+                   09  SPA-S01-SHR-HCM31FLG
+                                         PIC  9(01).
+                   09  SPA-S01-SHR-HCM32FLG
+                                         PIC  9(01).
+                   09  SPA-S01-SHR-HCM50FLG
+                                         PIC  9(01).
+               07  SPA-S01-SHR-PRTFLG-R  REDEFINES SPA-S01-SHR-PRTFLG-G.
+                   09  SPA-S01-SHR-PRTFLG    PIC  9(01)    OCCURS  3.
+      *
+           05  SPA-S02-TBL-GROUP           PIC  X(14).
+           05  SPA-S02-JOB-JOBID           PIC  9(07).
+      *
+      *    Ｓ０８遷移情報
+           05  SPA-S08-AREA.
+               07  SPA-S08-NYUGAIKBN       PIC X(01).
+               07  SPA-S08-RRKNUM          PIC 9(07).
+               07  SPA-S08-MOTOPG          PIC X(08).
+      *      Ｓ０９遷移情報
+           05  SPA-S09-AREA.
+               07  SPA-S09-BTN             PIC X(03).
+           05  SPA-S10-AREA.
+               07  SPA-S10-PTNUM           PIC  X(20).
+      *
+      *S04画面情報
+         03  SPA-S04-AREA.
+           05  SPA-S04-SAVED           PIC X(01).
+           05  SPA-S04-SIHARAIKBN      PIC X(01).
+           05  SPA-S04-NYUGAIKBN       PIC X(01).
+           05  SPA-S04-SRYKBN          PIC X(01).
+           05  SPA-S04-STRSRYYMD       PIC X(08).
+           05  SPA-S04-ENDSRYYMD       PIC X(08).
+           05  SPA-S04-KIKANKBN        PIC X(01).
+           05  SPA-S04-DSPKBN          PIC X(01).
+           05  SPA-S04-SUMKBN          PIC X(01).
+           05  SPA-S04-SYORIKBN        PIC X(01).
+           05  SPA-S04-JIHIKBN         PIC X(01).

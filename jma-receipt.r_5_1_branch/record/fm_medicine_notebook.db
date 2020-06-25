@@ -1,0 +1,44 @@
+fm_medicine_notebook {
+	context	int;
+	object	object;
+	mode	int;
+    recordname	varchar(128);
+	data {
+		Form_ID				varchar(30);
+		Custom_ID				varchar(30);
+		Printer					varchar(20);
+		Perform_Date   varchar(10);
+		Invoice_Number varchar(7);
+		Patient	{
+			ID	 				varchar(20);
+			Name 				varchar(50);
+			KanaName  			varchar(50);
+			BirthDate 			varchar(10);
+			Sex					varchar(1);
+		};
+		Hospital	{
+			Prefectures_Number  varchar(2);
+			Name				varchar(120)[3];
+			Address				varchar(200)[3];
+			PhoneNumber			varchar(15);
+		};
+		Doctor	{
+			Code				varchar(5);
+			Name 				varchar(50);
+		};
+		Rp	{
+			Medical_Class		varchar(2);
+			Count				varchar(3);
+			Not_Countable_Flg    varchar(1);
+			Unit_Name			varchar(12);
+			Medication	{
+				Name				varchar(80);
+				Amount				varchar(12);
+				Unit_Name			varchar(12);
+				Code				varchar(9);
+			}[50];
+		}[50];
+		Memo						varchar(80)[10];
+		Qr_ID   					varchar(80);
+	};
+};

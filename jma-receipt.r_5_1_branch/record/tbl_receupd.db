@@ -1,0 +1,58 @@
+tbl_receupd {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	 NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	HKNKBN  			char(1);
+	HKNKBN2 			char(1);
+	RECEYMD   			char(8);
+	ONLUPD  			char(1);
+	ONLUPD1 			char(1);
+	ONLUPD2 			char(1);
+	ONLUPD3 			char(1);
+	ONLUPD4 			char(1);
+	ONLUPD5 			char(1);
+	ONLUPD6 			char(1);
+	ONLUPD7 			char(1);
+	ONLUPD8 			char(1);
+	ONLUPD9 			char(1);
+	ONLUPD10			char(1);
+	TERMID   			varchar(64);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,NYUGAIKBN,SRYKA,SRYYM,HKNKBN,
+	HKNKBN2;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_receupd_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_receupd
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   HKNKBN      =   :HKNKBN
+			AND   HKNKBN2     =   :HKNKBN2
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_receupd_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_receupd
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+

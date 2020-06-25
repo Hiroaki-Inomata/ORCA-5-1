@@ -1,0 +1,34 @@
+W111 {
+  fixed32 {
+    scrolledwindow28 {
+      MEILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(16);
+            column4 varchar(5);
+            column5 varchar(5);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    FORMID {
+      textdata varchar(20);
+    };
+    PRTNM {
+      textdata varchar(16);
+    };
+    OFFSET_X {
+      textdata varchar(5);
+    };
+    OFFSET_Y {
+      textdata varchar(5);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+  };
+};

@@ -1,0 +1,49 @@
+K97 {
+  fixed32 {
+    SELNUM1 {
+      textdata varchar(4);
+    };
+    SELNUM2 {
+      textdata varchar(2);
+    };
+    SELNUM3 {
+      textdata varchar(4);
+    };
+    scrolledwindow28 {
+      DRCDLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(24);
+          }[99];
+          selectdata bool[99];
+      };
+    };
+    scrolledwindow27 {
+      SRYKALIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(12);
+          }[99];
+          selectdata bool[99];
+      };
+    };
+    scrolledwindow26 {
+      HKNCOMBILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(60);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+  };
+};

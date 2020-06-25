@@ -1,0 +1,63 @@
+tbl_prgoption {
+	HOSPNUM				number(2,0);
+	PRGID      			char(25);
+	KBNCD      			char(16);
+	OPTION	        		varchar(44000);
+	ADDKBN     			char(1);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PRGID,KBNCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_prgoption_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prgoption
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PRGID        =   :PRGID
+			AND   KBNCD        =   :KBNCD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_prgoption_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prgoption
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PRGID        =   :PRGID
+			ORDER   BY        KBNCD
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_prgoption_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prgoption
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        PRGID,
+                                          KBNCD
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prgoption
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PRGID        =   :PRGID
+		;
+	};
+};
+

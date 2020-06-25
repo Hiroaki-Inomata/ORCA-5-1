@@ -1,0 +1,62 @@
+tbl_material_k_master {
+	SRYCD				char(9);
+	RENNUM1				number(3,0);
+	RENNUM2				number(2,0);
+	SCD				varchar(9);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	SRYCD,RENNUM1,RENNUM2;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_k_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_material_k
+		WHERE 	SRYCD   = :SRYCD
+		AND	RENNUM1 = :RENNUM1
+		AND	RENNUM2 = :RENNUM2
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_material_k
+			VALUES(
+				:SRYCD,
+				:RENNUM1,
+				:RENNUM2,
+				:SCD,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_material_k
+			SET
+				SRYCD   = :SRYCD,
+				RENNUM1 = :RENNUM1,
+				RENNUM2 = :RENNUM2,
+				SCD     = :SCD,
+				CREYMD  = :CREYMD,
+				UPYMD   = :UPYMD,
+				UPHMS   = :UPHMS
+			WHERE 	SRYCD   = :SRYCD
+			AND	RENNUM1 = :RENNUM1
+			AND	RENNUM2 = :RENNUM2
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_material_k
+			WHERE 	SRYCD   = :SRYCD
+			AND	RENNUM1 = :RENNUM1
+			AND	RENNUM2 = :RENNUM2
+		;
+	};
+};

@@ -1,0 +1,17 @@
+view_Q004 {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	SRYYMD				char(8);
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE view_Q004_all_csr CURSOR FOR
+		SELECT *
+		FROM view_Q004
+	    WHERE	HOSPNUM    =    :HOSPNUM
+ 		;
+	};
+};

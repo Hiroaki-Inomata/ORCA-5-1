@@ -1,0 +1,280 @@
+tbl_btpara {
+	HOSPNUM				number(2,0);
+	SHELLID 		char(8);
+	RUN_OPID		char(16);
+	DSP_RENNUM		number(3,0);
+	RENNUM			number(4,0);
+	JOBID			number(3,0);
+	SCRIPTID		char(20);
+	INFO_KBN		char(02);
+	INFO_PARA		varchar(500);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+	SELLIMIT		number(8),virtual;
+	SELOFFSET		number(8),virtual;
+};
+
+primary {
+	HOSPNUM,SHELLID,RUN_OPID,DSP_RENNUM,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID    AND
+					RUN_OPID    =   :RUN_OPID   AND
+					DSP_RENNUM  =   :DSP_RENNUM AND
+					RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID    AND
+					SCRIPTID    =   :SCRIPTID   AND
+					INFO_PARA   =   :INFO_PARA
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					SCRIPTID    =   :SCRIPTID
+					ORDER  BY  RENNUM
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					SCRIPTID    =   :SCRIPTID AND
+					RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					JOBID       =   :JOBID
+					ORDER  BY  RENNUM
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					SCRIPTID    =   :SCRIPTID
+					ORDER BY  RENNUM DESC
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_btpara
+				SET	JOBID       =   :JOBID
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID 
+			AND     SCRIPTID    =   :SCRIPTID
+		;
+	};
+};
+
+path	del1	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID 
+		;
+	};
+};
+
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					SCRIPTID    =   :SCRIPTID AND
+					RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_btpara_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	del3	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					JOBID       =   :JOBID
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID  AND
+					SCRIPTID    =   :SCRIPTID
+					ORDER  BY  DSP_RENNUM,RENNUM
+		;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND	SHELLID     =   :SHELLID
+			AND	JOBID       =   :JOBID
+			AND	DSP_RENNUM  =   :DSP_RENNUM
+			ORDER	BY	RENNUM
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_btpara_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND	SHELLID     =   :SHELLID
+			AND	JOBID       =   :JOBID
+			AND	DSP_RENNUM  =   :DSP_RENNUM
+			ORDER	BY	RENNUM
+			LIMIT    :SELLIMIT
+			OFFSET   :SELOFFSET
+		;
+	};
+};
+
+
+path	key10		{
+	DBSELECT	{
+		DECLARE tbl_btpara_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND	SHELLID     =   :SHELLID
+			AND	JOBID       =   :JOBID
+			AND	DSP_RENNUM  =   :DSP_RENNUM
+			ORDER	BY	RENNUM DESC
+		;
+	};
+};
+
+path	ins1	{
+	DBINSERT	{
+		INSERT  INTO
+		tbl_btpara (
+			HOSPNUM,
+			SHELLID,
+			RUN_OPID,
+			DSP_RENNUM,
+			RENNUM,
+			JOBID,
+			SCRIPTID,
+			INFO_KBN,
+			INFO_PARA,
+			TERMID,
+			OPID,
+			CREYMD,
+			UPYMD,
+			UPHMS
+		)
+		SELECT	HOSPNUM,
+			SHELLID,
+			RUN_OPID,
+			:SELLIMIT,
+			RENNUM,
+			JOBID,
+			SCRIPTID,
+			INFO_KBN,
+			INFO_PARA,
+			TERMID,
+			OPID,
+			CREYMD,
+			UPYMD,
+			UPHMS
+		FROM tbl_btpara
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND	SHELLID     =   :SHELLID
+		AND	JOBID       =   :JOBID
+		AND	DSP_RENNUM  =   :DSP_RENNUM
+		;
+	};
+};
+
+path	del4	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_btpara
+		WHERE 	HOSPNUM	= :HOSPNUM
+		AND	SHELLID     =   :SHELLID
+		AND	JOBID       =   :JOBID
+		AND	DSP_RENNUM  =   :DSP_RENNUM
+		;
+	};
+};
+
+path	del5	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_btpara
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID     =   :SHELLID
+			AND	  JOBID       =   :JOBID
+			AND	  DSP_RENNUM  =   :DSP_RENNUM
+			AND	  RENNUM      =   :RENNUM
+		;
+	};
+};

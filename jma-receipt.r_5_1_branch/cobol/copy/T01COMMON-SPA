@@ -1,0 +1,124 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    総括表作成 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  04.07.01    NACL-藤原    12/01/13  健保組合への直接請求と審査
+      *                                     支払機関請求対応
+      *  04.07.02    NACL-藤原    12/08/01  レセ電データチェック機能対応
+      *  04.07.03    NACL-藤原    13/12/09  医療情報連携基盤対応
+      *
+      *  04.08.01    NACL-藤原    16/06/27  医療機関コード変更時のレセ電
+      *                                     データ等の作成対応
+      *                                      （１日からの変更のみ）
+      *
+      *  04.09.01    NACL-藤原    17/08/01  ＨＡＯＲＩ対応
+      *****************************************************************
+       01  SPA-T01KYOUTU.
+         03  SPA-T01KYOUTU-H. 
+      *
+      *警告メッセージ
+           05  SPA-TIDCD                   PIC  X(04).
+           05  SPA-TIDMSG                  PIC  X(200).
+      *警告画面より
+           05  SPA-TID1-AREA. 
+               07  SPA-TID1-FLG            PIC  X(02).
+               07  SPA-T99-FLG             PIC  X(02).
+      *警告画面より（印刷指示）
+           05  SPA-RECEDEN-FLG             PIC  X(02).
+      *
+           05  SPA-T99-MOTOPG              PIC X(08).
+      *
+      *処理状態フラグ（１：レセ電）
+           05  SPA-T01-SYORIFLG            PIC  9(01).
+      *
+           05  SPA-T01-TIMER-FLG           PIC 9(01).
+      *
+           05  SPA-T01-TBL-GROUP           PIC  X(14).
+      *
+      *レセ電作成枚数
+           05  SPA-T01-WRNO                PIC  9(02).
+      *
+      *レセ電最終枚数
+           05  SPA-T01-EDNO                PIC  9(02).
+      *
+      *クライアント保存時のファイルセレクションチェックフラグ
+           05  SPA-T99-FILESV-CHK-FLG      PIC 9(01).
+      *
+      *入力位置
+           05  SPA-T01-WIDGET              PIC X(64).
+      *
+      *戻り表示画面フラグ（１：確認ダイアログ）
+           05  SPA-T07-FLG                 PIC X(01).
+      *ジョブ管理ＤＢのキー値  
+           05  SPA-T01-JOB-JOBID           PIC 9(07).
+      *
+         03  SPA-T01KYOUTU-G. 
+      *直接請求する保険者番号
+           05  SPA-T01-DIRECT-HKNJANUM-AREA.
+               07  SPA-T01-DIRECT-HKNJANUM-G.
+                    09  SPA-T01-DIRECT-HKNJANUM
+                                           PIC X(08).
+                    09  SPA-T01-DIRECT-HKNJANAME
+                                           PIC X(30).
+               07  SPA-T01-DIRECT-HKNJANUM-63
+                                           PIC X(08).
+               07  SPA-T01-DIRECT-HKNJANUMLST  OCCURS  10.
+                   09  SPA-T01-DIRECT-HKNJANUML
+                                           PIC X(08).
+                   09  SPA-T01-DIRECT-HKNJANUM-63L
+                                           PIC X(08).
+      *レセ電データチェック 
+           05  SPA-T01-RECEDEN-CHK         PIC X(01).
+      *レセプト作成区分
+           05  SPA-T01-PRTKBN              PIC X(01).
+      *入外区分
+           05  SPA-T01-NYUGAIKBN           PIC X(01).
+      *連携基盤用データファイルデイレクトリ
+           05  SPA-T01-9101-FILE-DIR       PIC X(200).
+      *診療年月期間
+           05  SPA-T01-1001-T.
+               07  SPA-T01-1001-OCC        OCCURS  10.
+                   09  SPA-T01-1001-TSTYUKYMD
+                                           PIC X(08).
+                   09  SPA-T01-1001-TEDYUKYMD
+                                           PIC X(08).
+                   09  SPA-T01-1001-THOSPCD
+                                           PIC 9(07).
+                   09  SPA-T01-1001-TSTYUKYM
+                                           PIC X(06).
+                   09  SPA-T01-1001-TEDYUKYM
+                                           PIC X(06).
+                   09  SPA-T01-1001-TSTYUKYM-G
+                                           PIC X(16).
+                   09  SPA-T01-1001-TEDYUKYM-G
+                                           PIC X(16).
+               07  SPA-T01-1001-MAX        PIC 9(02).
+      *
+           05  SPA-T01-JOB-PARAM.
+               07  SPA-T01-JOB-ORCA-UID    PIC X(36).
+               07  SPA-T01-JOB-KARTE-UID   PIC X(36).
+      *
+           05  SPA-T01-JOB-DATAKBN         PIC X(01).
+      *
+           05  SPA-T01-MONBLOB-PRINT-ID    PIC X(37).
+           05  SPA-T01-MONBLOB-DATA-ID     PIC X(37).

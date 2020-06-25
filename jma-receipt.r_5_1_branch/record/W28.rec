@@ -1,0 +1,82 @@
+W28 {
+  fixed6 {
+    scrolledwindow1 {
+      BTULST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(4);
+            column3 varchar(6);
+            column4 varchar(40);
+            column5 varchar(60);
+            column6 varchar(20);
+            column7 varchar(16);
+            column8 varchar(10);
+            column9 varchar(9);
+            column10 varchar(9);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    STSELNUM {
+      numdata number(3);
+    };
+    EDSELNUM {
+      numdata number(3);
+    };
+    STBTUNUM {
+      numdata number(2);
+    };
+    EDBTUNUM {
+      numdata number(2);
+    };
+    KJNYMD {
+      textdata varchar(10);
+    };
+    CMB_SENTEI_FTNKBN {
+      SENTEI_FTNKBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[10];
+    };
+    SENTEI_TANKA {
+      numdata number(4);
+    };
+    SENTEI_TANKAIP {
+      numdata number(4);
+      state int;
+    };
+    SENTEI_TANKARJ {
+      numdata number(4);
+      state int;
+    };
+    CMB_SENTEI_TAX {
+      SENTEI_TAX {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    LBL_SENTEI_TANKA {
+      textdata varchar(10);
+    };
+    LBL_SENTEI_EN {
+      textdata varchar(2);
+    };
+    LBL_SENTEI_TANKAIP {
+      textdata varchar(8);
+    };
+    LBL_SENTEI_ENIP {
+      textdata varchar(2);
+    };
+    LBL_SENTEI_TANKARJ {
+      textdata varchar(8);
+    };
+    LBL_SENTEI_ENRJ {
+      textdata varchar(2);
+    };
+  };
+};

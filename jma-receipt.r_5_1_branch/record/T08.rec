@@ -1,0 +1,45 @@
+T08 {
+  fixed6 {
+    TEISYUTUSAKI {
+      textdata varchar(4);
+    };
+    SRYYM {
+      textdata varchar(6);
+    };
+    scrolledwindow3 {
+      KANRI_LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(4);
+            column4 varchar(9);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow1 {
+      RECE_LIST {
+        HYODAI1 {
+          textdata varchar(14);
+        };
+        count int;
+        row int;
+          item {
+            column1 varchar(4);
+            column2 varchar(2);
+            column3 varchar(20);
+            column4 varchar(40);
+            column5 varchar(9);
+            column6 varchar(6);
+            column7 varchar(10);
+            column8 varchar(8);
+            column9 varchar(40);
+            column10 varchar(2);
+          }[1000];
+          selectdata bool[1000];
+      };
+    };
+  };
+};

@@ -1,0 +1,116 @@
+tbl_recekisai {
+	ITEMNO			number(4,0);
+	EDANO			number(2,0);
+	STYM			varchar(6);
+	EDYM			varchar(6);
+	SRYCD			varchar(9);
+	RENNUM			number(2,0);
+	C_CD			varchar(9);
+	JYOTAICD		varchar(3);
+	KEISAIKBN		number(1,0);
+	KUBUN			varchar(64);
+	JYOKEN			number(2,0);
+	HISANTEI		number(1,0);
+	SYORIKBN		number(1,0);
+	MEISYOETC		varchar(300);
+	CHGYMD			varchar(8);
+	HAISIYMD		varchar(8);
+	CREYMD			varchar(8);
+	UPYMD			varchar(8);
+	UPHMS			varchar(6);
+	NYUGAIKBN		varchar(1);
+	KAISU			number(3,0);
+#-----> 主キー更新用項目
+	UPITEMNO		number(4,0),virtual;
+	UPEDANO			number(2,0),virtual;
+	UPSTYM			varchar(6),virtual;
+	UPEDYM			varchar(6),virtual;
+	UPSRYCD			varchar(9),virtual;
+	UPRENNUM		number(2,0),virtual;
+};
+primary	{
+	SRYCD,ITEMNO,EDANO,STYM,EDYM,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_recekisai_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekisai
+			WHERE   SRYCD     = :SRYCD
+ 			AND     ITEMNO    = :ITEMNO
+ 			AND     EDANO     = :EDANO
+ 			AND     STYM     <= :STYM
+			AND     EDYM     >= :EDYM
+			AND     RENNUM    = :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_recekisai_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekisai
+ 			WHERE   SRYCD     = :SRYCD
+ 			AND     STYM     <= :STYM
+			AND     EDYM     >= :EDYM
+			AND   ( SYORIKBN  = 1
+			OR      SYORIKBN  = 2 )
+			ORDER   BY      ITEMNO,
+				        EDANO,
+				        RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_recekisai_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekisai
+ 			WHERE   STYM     <= :STYM
+			AND     EDYM     >= :EDYM
+			AND   ( SYORIKBN  =  1 
+			OR      SYORIKBN  =  3 )
+			ORDER   BY      KUBUN,
+					ITEMNO,
+				        EDANO,
+				        RENNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_recekisai_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekisai
+ 			WHERE   KUBUN     = :KUBUN
+ 			AND     ITEMNO    = :ITEMNO
+ 			AND     EDANO     = :EDANO
+ 			AND     STYM     <= :STYM
+			AND     EDYM     >= :EDYM
+			AND   ( SYORIKBN  =  1 
+			OR      SYORIKBN  =  3 )
+			ORDER   BY      SRYCD,
+				        RENNUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_recekisai_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_recekisai
+ 			WHERE   SRYCD     = :SRYCD
+ 			AND     STYM     <= :STYM
+			AND     EDYM     >= :EDYM
+			ORDER   BY      ITEMNO,
+				        EDANO,
+				        RENNUM
+		;
+	};
+};
+

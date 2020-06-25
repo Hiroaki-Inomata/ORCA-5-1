@@ -1,0 +1,24 @@
+xml_hsacctmodv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	private_objects {
+		Save_Request     varchar(1);
+		Request_Number   varchar(1);
+		Patient_ID		 varchar(20);
+		Admission_Date	 varchar(10);
+		End_Month        varchar(7);
+		Perform_Date	 varchar(10);
+		End_Date         varchar(10);
+		Meal_Information	{
+			Meal_Time		varchar(2);
+			Meal_Type		varchar(1);
+			Meal_Dates		varchar(100);
+			Meal_SameAfter	varchar(1);
+		}[3];
+		Patient_Status	varchar(2);
+		Room_Charge     varchar(7);
+	};
+};
+

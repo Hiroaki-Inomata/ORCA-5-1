@@ -1,0 +1,47 @@
+#!/bin/bash
+echo $0 | logger
+echo `pwd`  | logger
+
+JMARECEIPT_ENV="/etc/jma-receipt/jma-receipt.env"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+PATH=.:${PATH}
+
+# remove .so
+echo -n "Remove .so files..."
+COBMEM=`module CBL`
+for f in ${COBMEM}; do
+  if test "x`echo -n $f | grep 'CBL$'`" != "x"; then
+    m=`echo $f | sed 's/CBL$/so/'`
+    echo -n "Remove ${m}..." | logger
+    rm -rf ${SITELIBDIR}/${m}
+  fi
+done
+echo "done"
+
+# remove file
+for d in scripts lddef data doc form init record screen ; do
+  echo -n "Remove ${d}/ files..."
+  m=`module ${d}`
+  for f in ${m}; do
+    if test -f "${SITEDIR}/${f}"; then
+      echo -n "Remove ${f}..." | logger
+      rm -rf ${SITEDIR}/${f}
+    fi
+  done
+done
+echo "done"
+
+# modify kentan.inc
+if test -f ./kentan.inc; then
+  PREF=`cat ./kentan.inc`
+  echo -n "Modifying kentan.inc files... ${PREF}" | logger
+  cp ${SYSCONFDIR}/kentan.inc /tmp/kentan.inc.bak
+  sed "/${PREF}/d" /tmp/kentan.inc.bak > ${SYSCONFDIR}/kentan.inc
+  rm -rf /tmp/kentan.inc.bak
+  echo "done"
+fi

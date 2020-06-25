@@ -1,0 +1,183 @@
+P02D {
+  fixed10 {
+    KOHNUM2 {
+      textdata varchar(9);
+    };
+    JIGYOUNAME {
+      textdata varchar(80);
+    };
+    HIHKNJANAME {
+      textdata varchar(50);
+    };
+    SHOBYOYMD {
+      textdata varchar(10);
+    };
+    KOHNUM1 {
+      textdata varchar(14);
+    };
+    SINSATUYMD {
+      textdata varchar(10);
+    };
+    KOHNUM3 {
+      textdata varchar(13);
+    };
+    RYOEDYMD {
+      textdata varchar(10);
+    };
+    RYOSTYMD {
+      textdata varchar(10);
+    };
+    CITYNAME {
+      textdata varchar(20);
+    };
+    HKNKBNCOMBO {
+      HKNKBN {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[9];
+    };
+    COMMENT {
+      textdata varchar(100);
+    };
+    SONSHOUKBNCOMBO {
+      SONSHOUKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[50];
+    };
+    PREFNAMECOMBO {
+      PREFNAME {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[47];
+    };
+    PREFKBNCOMBO {
+      PREFKBN {
+        textdata varchar(4);
+      };
+      count int;
+        item varchar(4)[4];
+    };
+    CITYKBNCOMBO {
+      CITYKBN {
+        textdata varchar(4);
+      };
+      count int;
+        item varchar(4)[3];
+    };
+    SISIKBNCOMBO {
+      SISIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[3];
+    };
+    SINKEICOMBO {
+      SINKEI {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[4];
+    };
+    TENKICOMBO {
+      TENKI {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[5];
+    };
+    SAIGAICOB {
+      SAIGAI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    SINSATUEND {
+      textdata varchar(10);
+    };
+    JIBAISEIKBNCOB {
+      JIBAISEIKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[2];
+    };
+    SRYKA_COMB {
+      SRYKA {
+        textdata varchar(15);
+      };
+      count int;
+        item varchar(15)[99];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[99];
+    };
+    HOKENNAME {
+      textdata varchar(80);
+    };
+    KIJYUNYM {
+      textdata varchar(6);
+    };
+    KAISU {
+      numdata number(3);
+    };
+    TANTOIMEI {
+      textdata varchar(20);
+    };
+    SEIKBNMEI {
+      textdata varchar(20);
+    };
+    SYOCD {
+      textdata varchar(5);
+    };
+    SYOCDNAME {
+      textdata varchar(26);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      RSILIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(16);
+            column3 varchar(20);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    DAI3_GENBTKBN_COMB {
+      DAI3_GENBTKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    DAI3_TOKKIKBN_COMB {
+      DAI3_TOKKIKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    JIBAIKBN_COMB {
+      JIBAIKBN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[5];
+      };
+  };
+};

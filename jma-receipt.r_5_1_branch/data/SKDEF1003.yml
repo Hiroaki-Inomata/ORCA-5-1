@@ -1,0 +1,23 @@
+kanri_cd    : "1003"
+name        : "医療機関情報−広告"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "EMAIL"
+  item_jp   : "ｅメールアドレス"
+  type      : "X"
+  start     : 1
+  length    : 100
+- item_no   : 2
+  item      : "HPURL"
+  item_jp   : "ＨＰアドレス"
+  type      : "X"
+  start     : 101
+  length    : 100
+- item_no   : 3
+  item      : "USERURL"
+  item_jp   : "ユーザＵＲＬ設定"
+  type      : "X"
+  start     : 201
+  length    : 200

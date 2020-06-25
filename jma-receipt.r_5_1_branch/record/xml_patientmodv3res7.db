@@ -1,0 +1,45 @@
+xml_patientmodv3res7 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3res7 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Continue_Mode		varchar(05);
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(3);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+    	};
+#---    患者禁忌薬剤情報
+	Patient_Contra_Information	{
+	    Patient_Contra_Info	{
+#---            薬剤コード
+		Medication_Code		varchar(09);
+		Medication_Name		varchar(80);
+#---            薬剤コード終了日
+		Medication_EndDate	varchar(10);
+#---            経過措置品目移行コード
+		Medication_Change_Code	varchar(09);
+		Medication_Change_Name	varchar(80);
+#---            禁忌開始日付
+                Contra_StartDate	varchar(10);
+#---            投薬日付
+                Medication_StartDate	varchar(10);
+#---            エラーコード
+		Patient_Result			varchar(4);
+		Patient_Result_Message		varchar(100);
+	        } [500];
+        };
+   };
+};

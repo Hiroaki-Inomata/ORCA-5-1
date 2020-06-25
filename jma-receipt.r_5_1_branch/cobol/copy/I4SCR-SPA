@@ -1,0 +1,207 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *    入院会計 共通画面ＳＰＡ
+      *----------------------------------------------------------*
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *
+      ************************************************************
+      *
+       01  SPA-I41.
+      *
+      *     室料差額セット
+           03  SPA-I4-FUNC-BTN-AREA.
+               05  SPA-GMN-B05-FLG-41                    PIC 9(01).
+               05  SPA-GMN-B05-LABEL-41                  PIC X(10).
+           03  SPA-I4-AREA.
+               05  SPA-GMN-PAGE-41                       PIC 9(02).
+               05  SPA-MAX-PAGE-41                       PIC 9(02).
+               05  SPA-GMN-CUR-41                        PIC 9(02).
+               05  SPA-IDXZ-41                           PIC 9(02).
+      *    LOCK状態フラグ
+               05  SPA-NAI-LOCK                          PIC 9(01).
+      *    剤変更フラグ
+               05  SPA-I4-SYORI                          PIC 9(01).
+      *    月変更フラグ
+               05  SPA-I4-SEL                            PIC 9(01).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-SRYYM                     PIC X(06).
+      *
+               05  SPA-GMN-AREA2.
+                   07  SPA-GMN-SRYKA-IG-41.
+                       09  SPA-GMN-SRYKA-I-41            PIC X(02).
+                       09  SPA-GMN-SRYKAH-I-41           PIC X(01).
+                       09  SPA-GMN-SRYKAMEI-I-41         PIC X(12).
+      *            警告メッセージ
+                   07  SPA-GMN-KEIKOKU             PIC X(60).
+      *            変更入力欄
+                   07  SPA-GMN-INPUT-41.
+                       09  SPA-GMN-NUM-41                PIC X(03).
+                       09  SPA-GMN-MEISYO-41             PIC X(50).
+                       09  SPA-GMN-DAY-G-41.
+                           11  SPA-GMN-DAY-41            PIC 9(03)
+                                                         OCCURS   31.
+                       09  SPA-GMN-KOMENTO-41            PIC X(60).
+                       09  SPA-NAI-NUM-41                PIC 9(03).
+      *
+                       09  SPA-NAI-BANGO                 PIC 9(03).
+                       09  SPA-NAI-IKKATUFLG             PIC 9(01).
+                       09  SPA-NAI-IKKATUOK              PIC 9(01).
+                       09  SPA-NAI-IKKATUDAY             PIC 9(02).
+                       09  SPA-NAI-IKKATUKAI             PIC 9(03).
+      *                食事一括
+                       09  SPA-NAI-ALL                   PIC 9(01).
+      *
+               05  SPA-NAI-AREA-41.
+                   07  SPA-NAI-SRYYM.
+                       09  SPA-NAI-SRYYY                 PIC 9(04).
+                       09  SPA-NAI-SRYMM                 PIC 9(02).
+      *    診療年月末日
+                   07  SPA-NAI-SRYMATU                   PIC 9(02).
+                   07  SPA-DAY-IDX-41                    PIC 9(02).
+      *    曜日
+                   07  SPA-NAI-YOBI-G.
+                       09  SPA-NAI-YOBI                  PIC X(01)
+                                                         OCCURS 31.
+      *H29.3
+      *    変更前年月
+                   07  SPA-MAE-GMN-SRYYM                 PIC X(06).
+                   07  SPA-MAE-NAI-SRYYM                 PIC X(06).
+      *    更新フラグ
+               05  SPA-UPDFLG-41                         PIC X(01).
+               05  SPA-MAE-BANGO-41                      PIC 9(03).
+      *        診療科
+               05  SPA-MAE-SRYKA-G-41.
+                   07  SPA-MAE-SRYKA-41                  PIC X(02).
+                   07  SPA-MAE-SRYKAH-41                 PIC X(01).
+                   07  SPA-MAE-SRYKAMEI-41               PIC X(12).
+      *
+      *    室料差額情報
+           03  SPA-GMN-SAGAKUTBL-41.
+               05  SPA-GMN-SAGAKU-TITLE-41               PIC X(22).
+               05  SPA-GMN-SAGAKULIST-41                 OCCURS  99.
+                   07  SPA-GMN-SAGAKUNO-41               PIC X(04).
+                   07  SPA-GMN-SAGAKU-41                 PIC X(22).
+               05  SPA-SAGAKU-MAX-41                     PIC 9(03).
+      *    保険組合せ一覧画面用
+           03  SPA-HKNCOMBI-AREA-41.
+               05  SPA-HKNCOMBI-MAX                   PIC 9(04).
+               05  SPA-HKNCOMBI-OCC-41.
+                   07  SPA-HKNCOMBI-TBL-41               OCCURS  30.
+                       09  SPA-I41-THKNCOMBI             PIC 9(04).
+                       09  SPA-I41-THKNCOMBIMEI          PIC X(50).
+                       09  SPA-I41-TTEKSTYMD             PIC X(08).
+                       09  SPA-I41-TTEKEDYMD             PIC X(08).
+      **************** 09  SPA-I41-TFTNWARI-41           PIC X(08).
+                       09  SPA-I41-HKNNUM                PIC X(03).
+                       09  SPA-I41-HKNKBN                PIC X(01).
+                       09  SPA-I41-RSI-HKNKBN            PIC X(01).
+                       09  SPA-I41-SISIKBN               PIC 9(01).
+      *    剤変更チェック
+           03  SPA-CHK-TBL.
+               05  SPA-CHK-OCC                 OCCURS   31.
+      *            入院日
+                   07  SPA-CHK-DAY             PIC X(01).
+      *            入院科
+                   07  SPA-CHK-SRYKA           PIC X(02).
+           03  SPA-CHK-TBL2.
+               05  SPA-CHK-OCC2                OCCURS   31.
+      *            入院料算定日
+                   07  SPA-CHK-NYUIN           PIC X(01).
+      *            選定入院料算定日
+                   07  SPA-CHK-SENTEI          PIC X(01).
+      *            外泊日
+                   07  SPA-CHK-GAIHAKU         PIC X(01).
+      *            保険組合せ
+                   07  SPA-CHK-HKNCOMBI        PIC X(01).
+      *            医療観察法の入院料算定日
+                   07  SPA-CHK-IRYOKNS         PIC X(01).
+      *
+      *    剤行為変更画面用
+           03  SPA-SCR-REC-AREA.
+               05  SPA-SCR-REC-41.
+                   07  SPA-GMN-TBL-41.
+                       09  SPA-GMN-TBLREC              OCCURS  400.
+                           11  SPA-GMN-TBANGO            PIC 9(03).
+                           11  SPA-GMN-TBANGO2           PIC 9(03).
+                           11  SPA-GMN-TSRYCD            PIC X(09).
+                           11  SPA-GMN-TMEISYO-41        PIC X(100).
+                           11  SPA-GMN-TTENSU-41         PIC X(07).
+                           11  SPA-GMN-TNYUGAIKBN-41     PIC X(01).
+                           11  SPA-GMN-TSRYKA-41         PIC X(02).
+                           11  SPA-GMN-TZAISKBKBN-41     PIC X(01).
+                           11  SPA-GMN-TDAY-G-41.
+                               13  SPA-GMN-TDAY-41       PIC X(03)
+                                                         OCCURS  31.
+      *
+                   07  SPA-NAI-TBL-41.
+                       09  SPA-NAI-TBLREC             OCCURS   400.
+                           11  SPA-NAI-TBANGO            PIC 9(04).
+                           11  SPA-NAI-TBANGO2           PIC 9(03).
+                           11  SPA-NAI-ENDBANGO-41       PIC 9(04).
+                           11  SPA-NAI-SRYKBN-41         PIC X(02).
+                           11  SPA-NAI-ZAINUM-41         PIC 9(08).
+                           11  SPA-NAI-HKNCOMBI-41       PIC 9(04).
+                           11  SPA-NAI-ROUJIN-41         PIC 9(01).
+                           11  SPA-NAI-ZAITEN-41         PIC 9(08).
+                           11  SPA-NAI-ZAIKAISU-41       PIC 9(07).
+                           11  SPA-NAI-TNYUGAIKBN        PIC X(01).
+                           11  SPA-NAI-TSRYKA-41         PIC X(02).
+                           11  SPA-NAI-TZAISKBKBN-41     PIC X(01).
+                           11  SPA-NAI-DAY-AREA-41.
+                               13  SPA-NAI-DAY-41        PIC 9(03)
+                                                         OCCURS   31.
+      *                    一括修正フラグ
+                           11  SPA-NAI-TIKKATUFLG        PIC X(01).
+                           11  SPA-NAI-TIKKATUDAY        PIC 9(02).
+                           11  SPA-NAI-TIKKATUKAI        PIC 9(03).
+      *
+                           11  SPA-NAI-RENNUM-41         PIC 9(03).
+      *    老人適用区分
+                           11  SPA-NAI-ROUTEKKBN-41      PIC 9(01).
+               05  SPA-NAI-MAX-41                    PIC 9(04).
+               05  SPA-GMN-MAX-41                    PIC 9(04).
+      *
+      *    プレビュー用保険情報
+           03  SPA-XC01-AREA.
+               05  SPA-XC01-CHK            PIC X(01).
+               05  SPA-XC01-HKNKBN         PIC X(01).
+               05  SPA-XC01-RSI-HKNKBN     PIC X(01).
+               05  SPA-XC01-RESPRVFLG      PIC X(01).
+      *
+               05  SPA-XC01-DAISANFLG      PIC X(01).
+      *
+      *    プレビュー保険組合せ一覧
+           03  SPA-I411-AREA.
+               05  SPA-I411-GMN-CUR        PIC 9(02).
+      *
+               05  SPA-I411-HKNCOMBI-MAX           PIC 9(04).
+               05  SPA-I411-HKNCOMBI-OCCS.
+                   07  SPA-I411-HKNCOMBI-TBL       OCCURS  30.
+                       09  SPA-I411-THKNCOMBI            PIC X(04).
+                       09  SPA-I411-THKNCOMBIMEI         PIC X(50).
+                       09  SPA-I411-THKNNUM              PIC X(03).
+                       09  SPA-I411-THKNKBN              PIC X(01).
+                       09  SPA-I411-TRSI-HKNKBN          PIC X(01).
+                       09  SPA-I411-TSISIKBN             PIC 9(01).
+               05 SPA-I411-SELNUM          PIC X(04).
+      *
+      *

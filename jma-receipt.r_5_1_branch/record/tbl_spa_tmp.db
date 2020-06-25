@@ -1,0 +1,97 @@
+tbl_spa_tmp {
+	HOSPNUM				number(2,0);
+	GYOUMUID			varchar(4);
+	TERMID				varchar(64);
+	FILEMEI 			varchar(20);
+	EDANUM  			number(3,0);
+	DATA_REC 			varchar(600000);
+	UPYMD				char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,GYOUMUID,TERMID,FILEMEI,EDANUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_spa_tmp_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			AND   EDANUM       =   :EDANUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_spa_tmp_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+			ORDER   BY        EDANUM
+		;
+	};
+};
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_spa_tmp_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			ORDER   BY        FILEMEI,
+                                          EDANUM
+		;
+	};
+};
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+			AND   FILEMEI      =   :FILEMEI
+		;
+	};
+};
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+			AND   TERMID       =   :TERMID
+		;
+	};
+};
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_spa_tmp
+		WHERE         HOSPNUM      =   :HOSPNUM
+			AND   TERMID       =   :TERMID
+		;
+	};
+};
+
+path	del5 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_api_para
+		WHERE	      HOSPNUM     = :HOSPNUM
+			AND   GYOUMUID     =   :GYOUMUID
+	        AND   FILEMEI 	   =   :FILEMEI
+            AND   UPYMD||UPHMS <   :DATA_REC
+		;
+	};
+};
+

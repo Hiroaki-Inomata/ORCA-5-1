@@ -1,0 +1,35 @@
+kanri_cd    : "1050"
+name        : "職員情報２"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "ICCARDRW"
+  item_jp   : "ＩＣカードリーダ／ライタ"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "GLINECNT"
+  item_jp   : "頁行数　外来"
+  type      : "X"
+  start     : 2
+  length    : 2
+- item_no   : 3
+  item      : "NLINECNT"
+  item_jp   : "頁行数　入院"
+  type      : "X"
+  start     : 4
+  length    : 2
+- item_no   : 4
+  item      : "PRTCONF"
+  item_jp   : "プリンタへのデータ送信"
+  type      : "X"
+  start     : 6
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 7
+  length    : 494

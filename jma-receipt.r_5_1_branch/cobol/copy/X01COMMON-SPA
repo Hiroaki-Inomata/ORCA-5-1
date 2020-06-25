@@ -1,0 +1,124 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    チェックマスタ情報設定 共通ＳＰＡ
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.02    NACL-森脇    06/03/20  プレビューフラグ追加
+      *****************************************************************
+      *
+       01  SPA-X01KYOUTU.
+           05  SPA-X01-MOTOPG              PIC X(20).
+      *有効期間
+           05  SPA-X01-STYUKYMD            PIC 9(08).
+           05  SPA-X01-EDYUKYMD            PIC 9(08).
+           05  SPA-X01-STYUKYMDH           PIC X(09).
+           05  SPA-X01-EDYUKYMDH           PIC X(09).
+      *
+           05  SPA-X01-SEL-STYUKYMD        PIC X(08).
+           05  SPA-X01-SEL-EDYUKYMD        PIC X(08).
+      *
+      *基準日
+           05  SPA-X01-KJNYMD              PIC X(08).
+      *
+      *診療コード
+           05  SPA-X01-SRYCD               PIC X(09).
+           05  SPA-X01-ID                  PIC 9(09).
+           05  SPA-X01-NAME                PIC X(100).
+           05  SPA-X01-SRYBYO              PIC 9(01).
+      *チェック区分 
+           05  SPA-X01-CHKKBN-G.
+               07  SPA-X01-CHKKBN              PIC X(01).
+               07  SPA-X01-CHKKBNFL            PIC X(01).
+               07  SPA-X01-CHKKBNNAME          PIC X(48).
+           05  SPA-X01-USERBYOMEI-G.
+               07  SPA-X01-SELKBN          PIC X(01).
+               07  SPA-X01-POSITION        PIC 9(01).
+      *検索分類コード
+               07  SPA-X01-BUNRUICD        PIC 9(03).
+      *検索自院病名コード（コード検索時のみ設定）
+               07  SPA-X01-BYOMEIINPUTCD   PIC X(10).
+               07  SPA-X01-INDEX           PIC 9(01).
+               07  SPA-X01-BYOSEL          PIC 9(05).
+               07  SPA-X01-UERBYOMEI-KAKUTEI
+                                           PIC 9(01).
+               07  SPA-X01-INPUTCD-G.
+                   09  SPA-X01-INPUTCD     PIC X(20)
+                                           OCCURS  6.
+      *選択番号
+           05  SPA-X01-SELNUM              PIC 9(03).
+           05  SPA-X01-BYOSTATUS           PIC X(1).
+           05  SPA-X01-JYKNKBN             PIC X(1).
+           05  SPA-X01-BYOCD-G.
+               07  SPA-X01-BYOCD-OCC       OCCURS  21.
+                   09  SPA-X01-BYOCD       PIC X(07).
+                   09  SPA-X01-BYOCDSEP    PIC X(01).
+           05  SPA-X01-MAE-G.
+               07  SPA-X01-MAE-CHKKBN      PIC X(01).
+               07  SPA-X01-MAE-SRYCD       PIC X(09).
+               07  SPA-X01-MAE-NAME        PIC X(100).
+           05  SPA-X01-BYOMEI              PIC X(100).
+           05  SPA-X01-HOSOKU              PIC X(40).
+      *
+      *----(01.00.02)--ADD-START---
+           05  SPA-X91-TBL-GROUP           PIC  X(14).
+           05  SPA-X91-JOB-JOBID           PIC  9(07).
+      *----(01.00.02)--ADD-END-----
+      *警告メッセージ
+           05  SPA-XIDCD                   PIC X(04).
+      *警告画面より
+           05  SPA-XID1-AREA. 
+               07  SPA-XID1-FLG            PIC X(02).
+      *----(01.00.02)--ADD-START---
+               07  SPA-X97-FLG                 PIC X(02).
+      *----(01.00.02)--ADD-END-----
+      *Ｘ０６画面より
+           05  SPA-X06-AREA.
+               07  SPA-X06-MAX             PIC 9(05).
+               07  SPA-X06-TEKCD           PIC X(09)
+                                           OCCURS  100.
+      *Ｘ９８画面より
+           05  SPA-X98-AREA.
+               07  SPA-X98-SYORIKBN        PIC X(01).
+               07  SPA-X98-CHK-IDX         PIC 9(03).
+               07  SPA-X98-CDSYUBETU       PIC X(01).
+               07  SPA-X98-INPUTCD         PIC X(22).
+               07  SPA-X98-NAIYOU          PIC X(07).
+               07  SPA-X98-MOJI            PIC 9(02).
+               07  SPA-X98-TYPE            PIC X(01).
+      *
+               07  SPA-X98-GMN-ALL         PIC X(01).
+      *
+               07  SPA-X98-SRYCD-G.
+                   09  SPA-X98-SRYCD       PIC X(09)
+                                           OCCURS  5.
+      *
+               07  SPA-X98-RC              PIC 9(04).
+      *
+      *Ｘ９９画面より
+           05  SPA-X99-AREA.
+               07  SPA-X99-BYOMEI          PIC X(100).
+               07  SPA-X99-BYOSTATUS       PIC X(1).
+               07  SPA-X99-BYOCD-G.
+                   09  SPA-X99-BYOCD       PIC X(07)
+                                           OCCURS  21.
+      *
+      *

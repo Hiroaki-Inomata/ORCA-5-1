@@ -1,0 +1,22 @@
+W08 {
+  fixed1 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    B03 {
+      state int;
+    };
+    SYUBETUNAME {
+      textdata varchar(40);
+    };
+    SYUBETU {
+      textdata varchar(4);
+    };
+    PRTJYUNI {
+      textdata varchar(2);
+    };
+  };
+};

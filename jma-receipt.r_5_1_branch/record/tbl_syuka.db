@@ -1,0 +1,484 @@
+tbl_syuka {
+    HOSPNUM              number(2,0);
+    NYUGAIKBN           char(1);
+    PTID                number(10,0);
+# ---> 入院基本料と診療分をわける
+    TEN_KBN             char(1);
+    SRYYM               char(6);
+    TEISYUTUSAKI        char(1);
+    HKNJANUM            char(8);
+    HOJOKBN             char(1);
+    KOHID               number(10,0);
+    RECEIPT_KBN		char(10);
+    RECESYUBETU         char(4);
+    SRYKA               char(2);
+#------> key
+    HKNNUM              char(3);
+    SRYKA_INPUT         char(2);
+    SRYKA_AUTO          char(2);
+    HKNCOMBI_1          number(4,0);
+    HKNCOMBI_2          number(4,0);
+    HKNCOMBI_3          number(4,0);
+    HKNCOMBI_4          number(4,0);
+    HKNCOMBI_5          number(4,0);
+    HKNCOMBI_6          number(4,0);
+    HKNCOMBI_7          number(4,0);
+    HKNCOMBI_8          number(4,0);
+    HKNCOMBI_9          number(4,0);
+    HKNCOMBI_10         number(4,0);
+    TENSU               number(9);
+    KAISU               number(3);
+    NISSU               number(3);
+    EDDAY               number(2);
+#  未請求レセで使う予定
+    MISEIKYU_FLG        char(2);
+#  削除フラグ
+    DLT_FLG             char(1);
+    TERMID              varchar(16);
+    OPID                varchar(16);
+    CREYMD              char(8);
+    UPYMD               char(8);
+    UPHMS               char(6);
+#-----> 検索用項目
+    XXPTNUM             char(20),virtual;
+};
+primary {
+    HOSPNUM,NYUGAIKBN,PTID,TEN_KBN,SRYYM,TEISYUTUSAKI,HKNJANUM,HOJOKBN,KOHID,RECEIPT_KBN,RECESYUBETU,SRYKA;
+};
+
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     TEN_KBN        =   :TEN_KBN
+			AND     SRYYM          =   :SRYYM
+			AND     TEISYUTUSAKI   =   :TEISYUTUSAKI
+			AND     HKNJANUM       =   :HKNJANUM
+			AND     HOJOKBN        =   :HOJOKBN
+			AND     KOHID          =   :KOHID
+			AND     RECESYUBETU    =   :RECESYUBETU
+			AND     SRYKA          =   :SRYKA
+			AND   RECEIPT_KBN      =   :RECEIPT_KBN
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND   ( NYUGAIKBN      =   :NYUGAIKBN   OR
+				NYUGAIKBN      =   '0'        )
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+			AND     DLT_FLG        <>  '1'
+			AND     RECESYUBETU    <>  'YYYY'
+			ORDER   BY  TEN_KBN,TEISYUTUSAKI,HKNJANUM,HOJOKBN,KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+			AND     TEN_KBN        =   :TEN_KBN
+			ORDER   BY  TEISYUTUSAKI,HKNJANUM,HOJOKBN,KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+			AND     RECESYUBETU    =   'XXXX'
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key5_csr CURSOR FOR
+		SELECT a.ptid
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM       =   :HOSPNUM
+			AND     SRYYM          =   :SRYYM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     TEISYUTUSAKI   =   '1'
+			AND     a.PTID         =   b.PTID
+            AND     a.HOSPNUM       =   b.HOSPNUM
+			GROUP BY a.PTID,PTNUM
+			ORDER BY PTNUM
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key6_csr CURSOR FOR
+		SELECT a.ptid
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     SRYYM          =   :SRYYM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     TEISYUTUSAKI   =   '1'
+			AND     a.PTID         =   b.PTID
+            AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     SRYKA_INPUT    =   ''
+			GROUP BY a.PTID
+			ORDER BY b.PTNUM
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      =    :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     PTID           =    :PTID
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     HKNJANUM       =    :HKNJANUM
+			AND     HOJOKBN        =    :HOJOKBN
+			AND     KOHID          =    :KOHID
+			AND     RECEIPT_KBN    =    :RECEIPT_KBN
+			AND     DLT_FLG        <>   '1'
+			ORDER BY SRYKA,TEN_KBN
+		;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      =    :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     PTID           =    :PTID
+			AND     DLT_FLG        <>   '1'
+			AND     RECESYUBETU    <>   '8888'
+			AND     RECESYUBETU    <>   'YYYY'
+			ORDER BY TEN_KBN,TEISYUTUSAKI,HKNJANUM,HOJOKBN,KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      =    :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     PTID           =    :PTID
+			AND     DLT_FLG        <>   '1'
+			ORDER BY TEN_KBN,TEISYUTUSAKI,HKNJANUM,HOJOKBN,KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key10_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM       =   :HOSPNUM
+			AND     SRYYM          =   :SRYYM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     RECESYUBETU    <>  '8888'
+			AND     RECESYUBETU    <>  'YYYY'
+			AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     a.PTID         =   b.PTID
+			AND     PTNUM          >=  :XXPTNUM
+			AND     DLT_FLG        <>   '1'
+			ORDER   BY  PTNUM,TEN_KBN,TEISYUTUSAKI,HKNJANUM,HOJOKBN,a.KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key11_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM       =   :HOSPNUM
+			AND     SRYYM          =   :SRYYM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     RECESYUBETU    <>  '8888'
+			AND     RECESYUBETU    <>  'YYYY'
+			AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     a.PTID         =   b.PTID
+			AND     DLT_FLG        <>   '1'
+			AND     SRYKA_INPUT    =   ''
+			ORDER   BY  PTNUM,TEN_KBN,TEISYUTUSAKI,HKNJANUM,HOJOKBN,a.KOHID,RECESYUBETU,SRYKA
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syuka 
+				SET	
+					SRYKA_INPUT  =   :SRYKA_INPUT
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+		;
+	};
+};
+
+path	upd2	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syuka 
+				SET	
+					SRYKA_INPUT    =   :SRYKA_INPUT, 
+					UPYMD          =   :UPYMD,
+					UPHMS          =   :UPHMS
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+			AND     TEISYUTUSAKI   =   :TEISYUTUSAKI
+			AND     HKNJANUM       =   :HKNJANUM
+			AND     HOJOKBN        =   :HOJOKBN
+			AND     KOHID          =   :KOHID
+			AND     RECESYUBETU    =   :RECESYUBETU
+			AND   RECEIPT_KBN      =   :RECEIPT_KBN
+		;
+	};
+};
+
+path	upd3	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syuka 
+				SET
+					DLT_FLG        =   :DLT_FLG, 
+					UPYMD          =   :UPYMD,
+					UPHMS          =   :UPHMS
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND	    NYUGAIKBN      =   :NYUGAIKBN
+			AND	    PTID           =   :PTID
+			AND	    SRYYM          =   :SRYYM
+			AND	    RECESYUBETU    <>  'XXXX'
+			AND	    RECESYUBETU    <>  'YYYY'
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuka
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     SRYYM          >   :SRYYM
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     TEN_KBN        =   :TEN_KBN
+			AND     SRYYM          >   :SRYYM
+		;
+	};
+};
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_syuka_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+		;
+	};
+};
+
+path	key12		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      =    :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     DLT_FLG        <>   '1'
+		;
+	};
+};
+
+path	key13		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key13_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM       =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     MISEIKYU_FLG   =    :MISEIKYU_FLG
+			AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     a.PTID         =    b.PTID
+			ORDER   BY PTNUM
+		;
+	};
+};
+
+path	key14		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key14_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM       =    :HOSPNUM
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     MISEIKYU_FLG   =    :MISEIKYU_FLG
+			AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     a.PTID         =    b.PTID
+			ORDER   BY SRYYM,PTNUM,NYUGAIKBN
+		;
+	};
+};
+
+path	key15		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     PTID           =   :PTID
+			AND     SRYYM          =   :SRYYM
+			AND     RECESYUBETU    =   :RECESYUBETU
+			AND     NYUGAIKBN      like :NYUGAIKBN
+		;
+	};
+};
+
+path	key16		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =   :HOSPNUM
+			AND     SRYYM          <=  :SRYYM
+			AND     RECESYUBETU    =   :RECESYUBETU
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND     MISEIKYU_FLG   =    :MISEIKYU_FLG
+		;
+	};
+};
+
+path	upd4	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syuka 
+				SET
+					MISEIKYU_FLG   =   :MISEIKYU_FLG, 
+					TERMID         =   :TERMID,
+					OPID           =   :OPID,
+					UPYMD          =   :UPYMD,
+					UPHMS          =   :UPHMS
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND	PTID           =    :PTID
+			AND	SRYYM          =    :SRYYM
+			AND     RECESYUBETU    =    :RECESYUBETU
+		;
+	};
+};
+
+path	key17		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM         =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      =    :NYUGAIKBN
+			AND     TEISYUTUSAKI   LIKE :TEISYUTUSAKI
+			AND     PTID           =    :PTID
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     HOJOKBN        =    :HOJOKBN
+			AND     KOHID          =    :KOHID
+			AND     RECEIPT_KBN    =    :RECEIPT_KBN
+			AND     DLT_FLG        <>   '1'
+			ORDER BY SRYKA,TEN_KBN
+		;
+	};
+};
+
+
+path	key18		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key18_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syuka
+			WHERE   HOSPNUM        =    :HOSPNUM
+			AND     SRYYM          =    :SRYYM
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     PTID           =    :PTID
+			AND     MISEIKYU_FLG   =    :MISEIKYU_FLG
+		;
+	};
+};
+
+path	key19		{ 	
+	DBSELECT	{
+		DECLARE tbl_syuka_key19_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_syuka a,tbl_ptnum b
+			WHERE   a.HOSPNUM      =    :HOSPNUM
+			AND     SRYYM          <=   :SRYYM
+			AND     NYUGAIKBN      like :NYUGAIKBN
+			AND     RECESYUBETU    =    :RECESYUBETU
+			AND     MISEIKYU_FLG   =    :MISEIKYU_FLG
+			AND     a.HOSPNUM       =   b.HOSPNUM
+			AND     a.PTID         =    b.PTID
+			ORDER   BY SRYYM DESC,PTNUM,NYUGAIKBN
+		;
+	};
+};

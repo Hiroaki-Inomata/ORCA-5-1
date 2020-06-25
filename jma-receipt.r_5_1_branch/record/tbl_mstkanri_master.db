@@ -1,0 +1,80 @@
+tbl_mstkanri_master {
+	HOSPNUM				number(2,0);
+	KANRICD				char(8);
+	NAME				varchar(64);
+	DBRVERSION1     		varchar(64);
+	DBRVERSION2     		varchar(64);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+primary	{
+	HOSPNUM,KANRICD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_mstkanri_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_mstkanri_master
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =   :KANRICD
+                ;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_mstkanri_master
+			VALUES(
+				:HOSPNUM,
+				:KANRICD,
+				:DBRVERSION1,
+				:DBRVERSION2,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS,
+				:NAME
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_mstkanri_master
+			SET
+				HOSPNUM = :HOSPNUM,
+				KANRICD = :KANRICD,
+				NAME = :NAME,
+				DBRVERSION1 = :DBRVERSION1,
+				DBRVERSION2 = :DBRVERSION2,
+				TERMID = :TERMID,
+				OPID = :OPID,
+				CREYMD = :CREYMD,
+				UPYMD = :UPYMD,
+				UPHMS = :UPHMS
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND	KANRICD = :KANRICD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_mstkanri_master
+			WHERE 	HOSPNUM	= :HOSPNUM
+			AND	KANRICD = :KANRICD
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_mstkanri_master_all_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_mstkanri_master
+		WHERE 	HOSPNUM	= :HOSPNUM
+                   ORDER BY  KANRICD
+		;
+	};
+};

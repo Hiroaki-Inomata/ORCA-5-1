@@ -1,0 +1,16 @@
+name	hiroshima;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU3403"	"OpenCOBOL";
+bind	"SEIKYU3405"	"OpenCOBOL";
+bind	"SOKATU3400"	"OpenCOBOL";
+bind	"SOKATU3410"	"OpenCOBOL";
+bind	"SOKATU3415"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

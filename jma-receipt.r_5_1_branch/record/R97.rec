@@ -1,0 +1,113 @@
+R97 {
+  fixed1 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    NYUGAIKBNCOMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[2];
+    };
+    HTEISYUTUSAKICOMBO {
+      HTEISYUTUSAKI {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[4];
+    };
+    HYOUJIKBNCOMBO {
+      HYOUJIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    SELNUM {
+      numdata number(5);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(30);
+    };
+    TEISYUTUSAKI {
+      textdata varchar(8);
+    };
+    RECESYUBETU {
+      textdata varchar(20);
+    };
+    HKNJANUM {
+      textdata varchar(8);
+    };
+    HKNJAMEI {
+      textdata varchar(20);
+    };
+    HOJOKBN {
+      value varchar(10);
+    };
+    SYUKA_INPUT {
+      textdata varchar(15);
+    };
+    SYUKA_AUTO {
+      textdata varchar(15);
+    };
+    SYUKA_INPUT1 {
+      textdata varchar(15);
+    };
+    SYUKACOMB {
+      SYUKA {
+        textdata varchar(21);
+      };
+      count int;
+        item varchar(21)[100];
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      SYUKALST {
+        count int;
+        row int;
+          item {
+            column1 varchar(5);
+            column2 varchar(2);
+            column3 varchar(20);
+            column4 varchar(30);
+            column5 varchar(8);
+            column6 varchar(10);
+            column7 varchar(8);
+            column8 varchar(10);
+            column9 varchar(4);
+            column10 varchar(2);
+            column11 varchar(6);
+            column12 varchar(6);
+          }[500];
+          selectdata bool[500];
+      };
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      PTNUMLST {
+        HYODAI {
+          textdata varchar(4);
+        };
+        count int;
+        row int;
+          item {
+            column1 varchar(15);
+            column2 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

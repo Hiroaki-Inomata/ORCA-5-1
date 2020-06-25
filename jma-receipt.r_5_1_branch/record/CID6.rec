@@ -1,0 +1,78 @@
+CID6 {
+  fixed1 {
+    B10 {
+      state int;
+      label varchar(22);
+    };
+    B12 {
+      state int;
+    };
+    H_BYOMEI1 {
+      style varchar(20);
+      textdata varchar(70);
+    };
+    HAISIYMD_H {
+      textdata varchar(10);
+    };
+    HAISIYMD {
+      textdata varchar(22);
+    };
+    BYOMEICD1 {
+      textdata varchar(10);
+    };
+    BYOMEI1 {
+      textdata varchar(60);
+    };
+    LABEL1 {
+      textdata varchar(12);
+    };
+    H_BYOMEI2 {
+      style varchar(20);
+      textdata varchar(70);
+    };
+    BYOMEICD2 {
+      textdata varchar(10);
+    };
+    BYOMEI2 {
+      textdata varchar(60);
+    };
+    MSG {
+      textdata varchar(120);
+    };
+    BYOMEICD10 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEICD11 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEICD12 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEICD13 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEICD14 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEICD15 {
+      style varchar(20);
+      textdata varchar(7);
+    };
+    BYOMEI10 {
+      style varchar(20);
+      textdata varchar(800);
+    };
+    MSG1 {
+      textdata varchar(80);
+    };
+    MSG2 {
+      style varchar(20);
+      textdata varchar(120);
+    };
+  };
+};

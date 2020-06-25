@@ -1,0 +1,44 @@
+P02G2 {
+  fixed10 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    ADRS1 {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    ADRS2 {
+      textdata varchar(100);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(4);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      GRPLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(10);
+            column3 varchar(20);
+            column4 varchar(50);
+          }[10];
+          selectdata bool[10];
+      };
+    };
+    GRPHOSPNUM_COMB {
+      GRPHOSPNUM {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[9];
+    };
+  };
+};

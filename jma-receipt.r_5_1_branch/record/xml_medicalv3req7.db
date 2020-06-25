@@ -1,0 +1,21 @@
+xml_medicalv3req7 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3req7 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Delete_Information  {
+#---    	办崇豺近
+			Delete_Class		varchar(3);
+#---    	豺近カルテＵＩＤ
+			Delete_Karte_Uid	varchar(36);
+#---    	豺近オルカＵＩＤ
+			Delete_Orca_Uid		varchar(64);
+		};
+#--
+		Select_Answer		varchar(02);
+	};
+};

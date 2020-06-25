@@ -1,0 +1,136 @@
+D04 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B06C {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B07C {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    B09 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    LBLSRYYM {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    LBLNYUGAI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    CMB_CHKNUM {
+      CHKNUM {
+        textdata varchar(43);
+      };
+      count int;
+        item varchar(43)[50];
+    };
+    SELNUM {
+      numdata number(5);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    SRYNAME {
+      textdata varchar(222);
+    };
+    CMB_BEHAVE {
+      BEHAVE {
+        textdata varchar(42);
+        state int;
+      };
+      count int;
+        item varchar(42)[5];
+      state int;
+    };
+    BYOSELNUM {
+      numdata number(4);
+    };
+    BYOMEI {
+      textdata varchar(100);
+    };
+    HOSOKU {
+      textdata varchar(40);
+    };
+    CHKSELNUM {
+      numdata number(4);
+    };
+    sw1 {
+      ERRLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(20);
+            column3 varchar(100);
+            column4 varchar(20);
+            column5 varchar(220);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    sw2 {
+      BYOLST {
+        BYOLST_TITLE {
+          textdata varchar(50);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(101);
+            column3 varchar(10);
+            column4 varchar(10);
+            column5 varchar(10);
+            column6 varchar(10);
+            column7 varchar(2);
+            column8 varchar(14);
+            column9 varchar(2);
+            column10 varchar(40);
+          }[300];
+          selectdata bool[300];
+      };
+    };
+    sw3 {
+      CHKLST {
+        LBLCHKMST {
+          textdata varchar(40);
+        };
+        LBLCOMPKBN {
+          textdata varchar(10);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(101);
+            column3 varchar(12);
+          }[501];
+          selectdata bool[501];
+      };
+    };
+  };
+};

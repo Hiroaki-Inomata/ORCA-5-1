@@ -1,0 +1,73 @@
+P02E {
+  fixed10 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    ADRS1 {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    ADRS2 {
+      textdata varchar(100);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    NENREI {
+      textdata varchar(8);
+    };
+    SEX {
+      textdata varchar(4);
+    };
+    GRPHOSPNUM_COMB {
+      GRPHOSPNUM {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[9];
+    };
+    MIDASI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      KOHLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(10);
+            column2 varchar(10);
+            column3 varchar(20);
+          }[10];
+          selectdata bool[10];
+      };
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      HKNLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(10);
+            column2 varchar(8);
+            column3 varchar(20);
+            column4 varchar(20);
+          }[5];
+          selectdata bool[5];
+      };
+    };
+    B03 {
+      state int;
+      label varchar(20);
+    };
+    B10 {
+      state int;
+      label varchar(20);
+    };
+  };
+};

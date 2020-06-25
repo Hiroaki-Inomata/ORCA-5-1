@@ -1,0 +1,33 @@
+tbl_sskijyo {
+	SYOJYOUCD			char(7);
+	SYOJYOU				varchar(2048);
+	SAYOKIJYO	     		varchar(2048);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+primary	{
+	SYOJYOUCD;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_sskijyo_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sskijyo
+			WHERE   SYOJYOUCD   =   :SYOJYOUCD
+                ;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE tbl_sskijyo_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sskijyo
+;
+	};
+};

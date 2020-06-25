@@ -1,0 +1,16 @@
+name	niigata;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU1511"	"OpenCOBOL";
+bind	"SEIKYU1517"	"OpenCOBOL";
+bind	"SEIKYU1519"	"OpenCOBOL";
+bind	"SEIKYU1521"	"OpenCOBOL";
+bind	"SOKATU1510"	"OpenCOBOL";
+bind	"SOKATU1515"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

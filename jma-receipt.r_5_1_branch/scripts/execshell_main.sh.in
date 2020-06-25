@@ -1,0 +1,87 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+case "$1" in
+  daily)
+    PATH=$SITESCRIPTSDIR/daily:$PATCHSCRIPTSDIR/daily:$SCRIPTSDIR/daily:$PATH
+    ;;
+  monthly)
+    PATH=$SITESCRIPTSDIR/monthly:$PATCHSCRIPTSDIR/monthly:$SCRIPTSDIR/monthly:$PATH
+    ;;
+  allways)
+    PATH=$SITESCRIPTSDIR/allways:$PATCHSCRIPTSDIR/allways:$SCRIPTSDIR/allways:$PATH
+    ;;
+  claim)
+    PATH=$SITESCRIPTSDIR/claim:$PATCHSCRIPTSDIR/claim:$SCRIPTSDIR/claim:$PATH
+    ;;
+  shell)
+    PATH=$PATH
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+export PATH
+
+SHELL_NAME=$(basename $2)
+LOG_FILE=${SHELL_NAME%.sh}.log
+LOG_GZ=${LOGDIR}/${LOG_FILE}.gz
+LOG_TEMP=$(mktemp ${LOGDIR}/${SHELL_NAME%.sh}.XXXXXX)
+LOG_LOCK=${LOGDIR}/.jma-log.lock
+
+trap "rm ${LOG_TEMP}" 1 2 3 15
+
+echo $(date +"%Y-%m-%d %H:%M:%S") $(printf "[%s]" "$$" "BGN" "$@") >> ${LOG_TEMP}
+
+LOGSH="log_shell.sh"
+LOGSHDIR=$SCRIPTSDIR/allways
+[ -e ${PATCHSCRIPTSDIR}/allways/${LOGSH} ] && LOGSHDIR=${PATCHSCRIPTSDIR}/allways
+[ -e ${SITESCRIPTSDIR}/allways/${LOGSH} ]  && LOGSHDIR=${SITESCRIPTSDIR}/allways
+
+${LOGSHDIR}/${LOGSH} "$$" "BGN" "$@" &
+
+bash -c "$2 \"$3\" \"$4\" \"$5\" \"$6\" \"$7\" \"$8\" \"$9\" \"${10}\" \"${11}\" \"${12}\" \"${13}\" \"${14}\" \
+        \"${15}\" \"${16}\" \"${17}\" \"${18}\" \"${19}\" \"${20}\" \"${21}\" \"${22}\" \"${23}\" \"${24}\" \
+        \"${25}\" \"${26}\" \"${27}\" \"${28}\" \"${29}\" \"${30}\" \"${31}\" \"${32}\" \"${33}\" \"${34}\" \
+        \"${35}\" \"${36}\" \"${37}\" \"${38}\" \"${39}\" \"${40}\" \"${41}\" \"${42}\"" 2>&1 | tee -a ${LOG_TEMP}
+RET=$?
+
+echo $(date +"%Y-%m-%d %H:%M:%S") $(printf "[%s]" "$$" "END")  >>  ${LOG_TEMP}
+
+if [ ${MCP_MIDDLEWARE_NAME} == "ginbee" ]; then
+  cat ${LOG_TEMP} >> "${MCP_LOGFILE_PREFIX}${LOG_FILE}"
+  chmod a+r "${MCP_LOGFILE_PREFIX}${LOG_FILE}"
+  rm  ${LOG_TEMP} 
+else
+  (
+    flock -w 10 -x 200 || {
+      echo "ERROR: $2 lock timeout"
+      exit 1;
+    }
+    gzip -c ${LOG_TEMP} >> ${LOG_GZ}
+    rm  ${LOG_TEMP} 
+    if [ -f ${LOG_GZ} ];  then
+      if [ $(stat -c "%s" ${LOG_GZ}) -ge 524288 ] ; then
+    	  mv ${LOG_GZ}  ${LOG_GZ}.0
+   	    for NUM in $(seq 1 -1 1)
+        do
+          LOG_NEW="${LOG_GZ}.${NUM}"
+          NUM=$(expr ${NUM} - 1)
+          LOG_OLD="${LOG_GZ}.${NUM}"
+          mv ${LOG_OLD} ${LOG_NEW} 2>/dev/null
+        done
+      fi
+    fi
+  ) 200> "${LOG_LOCK}" &
+fi
+
+${LOGSHDIR}/${LOGSH} "$$" "END" "$@" &
+
+exit ${RET}

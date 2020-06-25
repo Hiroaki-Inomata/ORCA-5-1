@@ -1,0 +1,64 @@
+xml_patientlst7v2res {
+    context         int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	patientlst7res {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(3);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+#-----> 患者情報
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        	};
+#---   	基準日
+	Base_Date		varchar(10);
+#-----> メモ情報
+	Patient_Memo_Information	{
+#----->	 	診療科
+        	Department_Code		varchar(2);
+		Department_Name		varchar(40);
+#----->	 	メモ内容
+        	Patient_Memo		varchar(1000);
+#----->         受付情報
+		Accept_Information	{
+#----->	 	    診療科
+        	    Department_Code		varchar(2);
+		    Department_Name		varchar(40);
+#----->             保険組合せ情報
+		    HealthInsurance_Information	{
+	 		Insurance_Combination_Number	varchar(04);
+#----->                 保険組合せ非表示区分
+			Insurance_Nondisplay		varchar(01);
+#----->                 保険情報
+			InsuranceProvider_Class			varchar(03);
+            		InsuranceProvider_Number		varchar(08);
+            		InsuranceProvider_WholeName		varchar(20);
+            		HealthInsuredPerson_Symbol		varchar(80);
+            		HealthInsuredPerson_Number		varchar(80);
+            		HealthInsuredPerson_Continuation	varchar(01);
+            		HealthInsuredPerson_Assistance		varchar(01);
+	            	RelationToInsuredPerson			varchar(01);
+			HealthInsuredPerson_WholeName		varchar(100);
+	            	Certificate_StartDate			varchar(10);
+ 	           	Certificate_ExpiredDate			varchar(10);
+#----->                 公費情報
+            		PublicInsurance_Information   {
+               		 	PublicInsurance_Class		varchar(03);
+                		PublicInsurance_Name		varchar(20);
+                		PublicInsurer_Number		varchar(08);
+                		PublicInsuredPerson_Number	varchar(20);
+                		Certificate_IssuedDate		varchar(10);
+                		Certificate_ExpiredDate		varchar(10);
+	            		} [4];
+	                };
+   	            };
+      	    } [10];
+   	};
+};

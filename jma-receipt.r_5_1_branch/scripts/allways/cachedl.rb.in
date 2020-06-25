@@ -1,0 +1,90 @@
+#!%RUBY%
+# coding : utf-8
+
+$:.unshift(File.dirname(__FILE__))
+
+require "digest/md5"
+require "zlib"
+
+require "orcadt_verify"
+
+module OrcaMNT
+  class Command
+    def initialize()
+      if File.exist?(PATCHDIR+PACKAGEFILE)
+        File.delete(PATCHDIR+PACKAGEFILE)
+      end
+      if File.exist?(PATCHDIR+PACKAGEFILE.gsub(/\.gz$/, ""))
+        File.delete(PATCHDIR+PACKAGEFILE.gsub(/\.gz$/, ""))
+      end
+
+      @options = {}
+      @options["do_verify"] = true
+      @options["dir"] = PATCHDIR
+      @options["cacert"] = CACERTFILE
+    end
+
+    def caverify(url, opts)
+      begin
+        OrcaDT::Verifier.verify(url, opts)
+      rescue Exception => ex
+        STDERR.puts "[ERROR] #{ex.message}"
+        STDERR.puts ex.backtrace
+        return false
+      else
+        return true
+      end
+    end
+
+    def dl_patchkanri()
+      return caverify(PRGPATH+PACKAGEFILE+".p7m", @options)
+    end
+
+    def dl_patchfile()
+      plist = File.open(PATCHLIST,"w")
+      Zlib::GzipReader.open(PATCHDIR+PACKAGEFILE) {|tmp|
+        if tmp.eof
+          plist.close
+          return false
+        end
+        tmp.each do |data|
+          tmp1 = data.split(/,/)
+          file = tmp1[0].to_s
+          plist.puts file
+          md5sum = tmp1[1].gsub(/\n/, "").to_s
+
+          if File.exist?(PATCHDIR+file)
+            if md5sum == Digest::MD5.hexdigest(File.open(PATCHDIR+file).read).to_s
+              next
+            end
+            File.delete(PATCHDIR+file)
+          end
+
+          unless caverify(PRGPATH+file+".p7m", @options)
+            return false
+          end
+        end
+      }
+      plist.close
+      return true
+    end
+
+    def download()
+      if dl_patchkanri()
+        dl_patchfile()
+      end
+    end
+
+    def self.main(argv)
+      mnt = self.new
+      exit!(mnt.download ? 0 : 1)
+    end
+  end
+end
+
+PACKAGEFILE = ENV['PACKAGEFILE']
+PATCHDIR = ENV['PATCHDIR'] + "/"
+PRGPATH = ENV['PRGPATH'] + "/"
+CACERTFILE = ENV['CACERTFILE']
+PATCHLIST = ENV['PATCHLIST']
+OrcaMNT::Command.main(ARGV) if $0 == __FILE__

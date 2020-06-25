@@ -1,0 +1,150 @@
+tbl_adrs {
+	HOSPNUM				number(2,0);
+	LPUBCD				char(5);
+	POST				char(7);
+	RENNUM				number(2);
+	PREFKANA			varchar(40);
+	CITYKANA			varchar(200);
+	TOWNKANA			varchar(400);
+	PREFNAME			varchar(20);
+	CITYNAME			varchar(100);
+	TOWNNAME			varchar(200);
+	EDITADRS_KANA		varchar(640);
+	EDITADRS_NAME		varchar(320);
+	TOWNDIVFLG			char(1);
+	MANYTOWNFLG			char(1);
+	TOWNNAME2			varchar(1200);
+};
+
+primary	{
+	HOSPNUM,LPUBCD,POST,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   LPUBCD    =   :LPUBCD
+			AND   POST        =   :POST
+			AND   RENNUM      =   :RENNUM
+;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   POST      =   :POST
+			ORDER  BY  LPUBCD,
+                                   RENNUM
+;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE   HOSPNUM      =   :HOSPNUM;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND   (LPUBCD   LIKE :LPUBCD)
+			ORDER  BY  LPUBCD,
+                                   POST,
+                                   RENNUM
+;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND   (POST   LIKE :POST)
+			ORDER  BY  LPUBCD,
+                                   POST,
+                                   RENNUM
+;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND   (LPUBCD LIKE :LPUBCD)  AND
+			        (POST   LIKE :POST)
+			ORDER  BY  LPUBCD,
+                                   POST,
+                                   RENNUM
+;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND   (POST   LIKE :POST)
+			ORDER  BY  POST,
+                       LPUBCD,
+                       RENNUM;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND ( POST        =   :POST   )   AND
+                  ( LPUBCD      =   :LPUBCD )
+			ORDER   BY  RENNUM  DESC;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND  ((EDITADRS_NAME   LIKE :EDITADRS_NAME)
+			OR    (PREFNAME || CITYNAME || TOWNNAME2  LIKE :EDITADRS_NAME))
+			ORDER  BY  POST,
+                                   RENNUM
+;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   	POST	     =   :POST
+			AND   	RENNUM	     =   :RENNUM
+			ORDER  BY  LPUBCD;
+	};
+};

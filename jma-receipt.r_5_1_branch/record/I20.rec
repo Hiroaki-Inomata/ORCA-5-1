@@ -1,0 +1,143 @@
+I20 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B10 {
+      state int;
+    };
+    B11 {
+      state int;
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    STNYUINYMD {
+      textdata varchar(10);
+    };
+    NAME {
+      textdata varchar(30);
+    };
+    EDNYUINYMD {
+      textdata varchar(10);
+    };
+    STTAIINYMD {
+      textdata varchar(10);
+    };
+    EDTAIINYMD {
+      textdata varchar(10);
+    };
+    ADRS {
+      textdata varchar(100);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    EDAGECOMBO {
+      EDAGE {
+        textdata varchar(13);
+      };
+      count int;
+        item varchar(13)[14];
+    };
+    STAGECOMBO {
+      STAGE {
+        textdata varchar(13);
+      };
+      count int;
+        item varchar(13)[14];
+    };
+    SRYKA_COMBO {
+      SRYKA {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[99];
+    };
+    BTUNUMCOMBO {
+      BTUNUM {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[50];
+    };
+    JOTAICOMBO {
+      JOTAI {
+        textdata varchar(14);
+      };
+      count int;
+        item varchar(14)[5];
+    };
+    CHKTESTPT {
+      isactive bool;
+    };
+    TAIINCDCOMBO {
+      TAIINCD {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[50];
+    };
+    DEATHKBNCOMBO {
+      DEATHKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[5];
+    };
+    SRT1KBNCOMBO {
+      SRT1KBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[10];
+    };
+    SRT2KBNCOMBO {
+      SRT2KBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[10];
+    };
+    SRT3KBNCOMBO {
+      SRT3KBN {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[10];
+    };
+    KJNYMDMES {
+      textdata varchar(10);
+    };
+    TOTAL {
+      textdata varchar(22);
+    };
+    scrolledwindow28 {
+      KANJYALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(30);
+            column4 varchar(2);
+            column5 varchar(8);
+            column6 varchar(50);
+            column7 varchar(20);
+            column8 varchar(8);
+            column9 varchar(9);
+            column10 varchar(9);
+            column11 varchar(10);
+            column12 varchar(20);
+            column13 varchar(8);
+            column14 varchar(50);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

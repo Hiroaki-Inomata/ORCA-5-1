@@ -1,0 +1,90 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *    ½»½êÅÐÏ¿ ¶¦ÄÌ²èÌÌ£Ó£Ð£Á  
+      *****************************************************************
+      *****************************************************************
+      *  ¥×¥í¥°¥é¥à½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      *****************************************************************
+       01  SPA-N31SCRAREA.
+      *
+           03  SPA-GMN-CUR             PIC 9(04).
+      *
+      *    ½»½êÅÐÏ¿¡Ê£Î£³£±¡Ë
+           03  SPA-N31-AREA.
+               05  SPA-GMN-AREA.
+      *            Í¹ÊØÈÖ¹æ
+                   07  SPA-GMN-POST           PIC X(07).
+      *            ÁªÂòÈÖ¹æ
+                   07  SPA-GMN-SELNUM         PIC 9(03).
+      *
+                   07  SPA-GMN-INPUT-G.
+      *            »ÔÄ®Â¼Ì¾¥«¥Ê
+                       09  SPA-GMN-CITYKANA       PIC X(100).
+      *            Ä®°èÌ¾¥«¥Ê
+                       09  SPA-GMN-TOWNKANA       PIC X(100).
+      *            »ÔÄ®Â¼Ì¾
+                       09  SPA-GMN-CITYNAME       PIC X(50).
+      *            Ä®°èÌ¾
+                       09  SPA-GMN-TOWNNAME       PIC X(50).
+      *            ÄÌ¤êÌ¾
+                       09  SPA-GMN-TOWNNAME2      PIC X(600).
+      *            ¥Ç¡¼¥¿¶èÊ¬
+                       09  SPA-NAI-DATAKBN        PIC X(01).
+      *            ÅÔÆ»ÉÜ¸©£Ã£Ä
+                   07  SPA-GMN-PREFCD-G.
+                       09  SPA-GMN-PREFCD         PIC X(02).
+                       09  SPA-GMN-FILLER1        PIC X(01).
+                       09  SPA-GMN-PREFMEI        PIC X(10).
+      *            ÅÔÆ»ÉÜ¸©Ì¾¥«¥Ê
+                   07  SPA-GMN-PREFKANA       PIC X(20).
+      *            ÅÔÆ»ÉÜ¸©Ì¾
+                   07  SPA-GMN-PREFNAME       PIC X(10).
+      *            ÅÔÆ»ÉÜ¸©£Ã£Ä¥³¥ó¥Ü
+                   07  SPA-GMN-PREFCD-LIST    OCCURS  47.
+                       09  SPA-GMN-PREFCDL        PIC X(02).
+                       09  SPA-GMN-FILLER2        PIC X(01).
+                       09  SPA-GMN-PREFMEIL       PIC X(10).
+                   07  SPA-GMN-PREFCD-MAX         PIC 9(03).
+      *            Ä®°è¥ê¥¹¥È
+                   07  SPA-GMN-CYOIKI-G.
+                       09  SPA-GMN-CYOIKI-TBL     OCCURS  200.
+                           11  SPA-GMN-CYO-HEN        PIC X(02).
+                           11  SPA-GMN-CYO-CD         PIC 9(03).
+                           11  SPA-GMN-CYO-POST       PIC X(07).
+                           11  SPA-GMN-CYO-ADRS       PIC X(100).
+                           11  SPA-GMN-CYO-TOWNNAME2  PIC X(600).
+                           11  SPA-GMN-CYO-LPUBCD     PIC X(05).
+                           11  SPA-GMN-CYO-EDANUM     PIC 9(02).
+      *H29.9               ¥Ç¡¼¥¿¶èÊ¬
+                           11  SPA-NAI-TDATAKBN       PIC X(01).
+      *
+                       09  SPA-GMN-CYOIKI-MAX         PIC 9(04).
+      *        ÆâÉôÎÎ°è
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-POST            PIC X(07).
+                   07  SPA-NAI-PAGE            PIC 9(05).
+                   07  SPA-MAE-PAGE            PIC 9(05).
+                   07  SPA-NAI-NEXTKBN         PIC 9(01).
+      *            ¥·¥¹¥Æ¥à´ÉÍý¡¡ÅÔÆ»ÉÜ¸©¥³¡¼¥É
+                   07  SPA-NAI-PREFNUM         PIC X(02).
+      *            07  SPA-NAI-BACK            PIC 9(05).
+      *            07  SPA-NAI-NEXT            PIC 9(05).
+      *            07  SPA-NAI-BACK2           PIC 9(05).
+      *            07  SPA-NAI-NEXT2           PIC 9(05).

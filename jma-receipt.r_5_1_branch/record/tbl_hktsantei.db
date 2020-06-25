@@ -1,0 +1,56 @@
+tbl_hktsantei {
+	KANRICD   			number(3);
+	YUKOSTYMD  			char(8);
+	YUKOEDYMD	  		char(8);
+	SRYCD				char(9);
+	SANTEIKBN			char(1);
+	KENTAIKBN			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	KANRICD,YUKOSTYMD,YUKOEDYMD,SRYCD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsantei_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsantei
+			WHERE   KANRICD    =   :KANRICD
+			AND   YUKOSTYMD    <=  :YUKOSTYMD
+			AND   YUKOEDYMD    >=  :YUKOEDYMD
+			AND   SRYCD        =   :SRYCD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsantei_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsantei
+			WHERE   KANRICD     =   :KANRICD
+			AND   YUKOSTYMD    <=   :YUKOSTYMD
+			AND   YUKOEDYMD    >=   :YUKOEDYMD
+			ORDER   BY         SRYCD
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hktsantei_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hktsantei
+			ORDER   BY         KANRICD,
+			                   YUKOSTYMD,
+			                   SRYCD
+                       
+ 		;
+	};
+};

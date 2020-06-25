@@ -1,0 +1,101 @@
+tbl_pttokki {
+    HOSPNUM             number(2,0);
+    NYUGAIKBN           char(1);
+    PTID                number(10,0);
+    RENNUM              number(2,0);
+    CD                  char(2);
+    NAIYO               char(12);
+    STYM                char(6);
+    EDYM                char(6);
+    TERMID              varchar(16);
+    OPID                varchar(16);
+    CREYMD              char(8);
+    UPYMD               char(8);
+    UPHMS               char(6);
+};
+primary {
+    HOSPNUM,NYUGAIKBN,PTID,RENNUM;
+};
+
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_pttokki_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pttokki
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     RENNUM         =   :RENNUM
+		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_pttokki_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pttokki
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     PTID           =   :PTID
+		;
+	};
+};
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_pttokki_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pttokki
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND     PTID           =   :PTID
+			ORDER   BY       STYM  DESC,
+                                         EDYM  DESC,
+                                         RENNUM
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_pttokki_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pttokki
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_pttokki
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_pttokki
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key4		{
+	DBSELECT	{
+		DECLARE tbl_pttokki_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pttokki
+			WHERE   HOSPNUM        =   :HOSPNUM
+			AND     NYUGAIKBN      <>  :NYUGAIKBN
+			AND     PTID           =   :PTID
+			AND     STYM           <=  :STYM
+			AND     EDYM           >=  :EDYM
+			ORDER   BY       STYM  DESC,
+			                 EDYM  DESC,
+			                 RENNUM
+		;
+	};
+};

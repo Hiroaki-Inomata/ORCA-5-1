@@ -1,0 +1,1685 @@
+tbl_sryacct_main {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	SRYKBN				char(2);
+	ZAINUM				number(8,0);
+	HKNCOMBI			number(4,0);
+	JIHOKBN                 char(1);
+	ZAITEN				number(8,0);
+	SRYCDTOTAL			number(14,0);
+	SURYOUTOTAL			number(12,5);
+	MEISAISU			number(7,0);
+	ZAIKAISU			number(7,0);
+	SYUTEN1				number(7,0);
+	SYUTEN2				number(7,0);
+	YKZTEN				number(7,0);
+	KIZAITEN			number(7,0);
+	DRCD				char(5);
+	ZAIREQFLG			char(1);
+	TEIGENRATE			number(3,0);
+	RENNUMMAX			number(3,0);
+	DAY_1				number(3,0);
+	DAY_2				number(3,0);
+	DAY_3				number(3,0);
+	DAY_4				number(3,0);
+	DAY_5				number(3,0);
+	DAY_6				number(3,0);
+	DAY_7				number(3,0);
+	DAY_8				number(3,0);
+	DAY_9				number(3,0);
+	DAY_10				number(3,0);
+	DAY_11				number(3,0);
+	DAY_12				number(3,0);
+	DAY_13				number(3,0);
+	DAY_14				number(3,0);
+	DAY_15				number(3,0);
+	DAY_16				number(3,0);
+	DAY_17				number(3,0);
+	DAY_18				number(3,0);
+	DAY_19				number(3,0);
+	DAY_20				number(3,0);
+	DAY_21				number(3,0);
+	DAY_22				number(3,0);
+	DAY_23				number(3,0);
+	DAY_24				number(3,0);
+	DAY_25				number(3,0);
+	DAY_26				number(3,0);
+	DAY_27				number(3,0);
+	DAY_28				number(3,0);
+	DAY_29				number(3,0);
+	DAY_30				number(3,0);
+	DAY_31				number(3,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 検索用項目
+    STSRYYM 			char(6),virtual;
+    EDSRYYM 			char(6),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,ZAINUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			ORDER   BY      ZAINUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY      SRYYM,
+                                        SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER   BY      SRYKBN
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,SRYKBN
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0
+			AND  (YKZTEN      >   0    OR
+		 	      SRYKBN      =   '21' OR
+		 	      SRYKBN      =   '22' OR
+		 	      SRYKBN      =   '23' OR
+		 	      SRYKBN      =   '95' OR
+		 	      SRYKBN      =   '96' )
+			ORDER  BY  SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key11	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER   BY      ZAINUM
+		;
+	};
+};
+
+path	key12	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key13 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key14 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			ORDER   BY      ZAINUM
+		;
+	};
+};
+
+path	key15 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM      >=   :SRYYM
+			ORDER   BY      SRYYM
+		;
+	};
+};
+
+path	key16 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key17 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYKBN    =   :SRYKBN
+			ORDER  BY   SRYYM,
+                                    SRYKA
+		;
+	};
+};
+
+
+path	key18	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key18_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYKA       =   :SRYKA
+			AND   A.SRYYM       =   :SRYYM
+                        AND   A.HOSPNUM    = B.HOSPNUM
+                        AND   A.NYUGAIKBN = B.NYUGAIKBN
+                        AND   A.PTID      = B.PTID
+                        AND   A.SRYKA     = B.SRYKA
+                        AND   A.SRYYM     = B.SRYYM
+                        AND   A.ZAINUM    = B.ZAINUM
+                        AND   1           = B.RENNUM
+			ORDER   BY      A.SRYKBN,
+                                        B.SRYSYUKBN, 
+                                        A.ZAINUM
+		;
+	};
+};
+
+path	key19	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key19_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       =   :SRYYM
+                        AND   A.HOSPNUM    = B.HOSPNUM
+                        AND   A.NYUGAIKBN = B.NYUGAIKBN
+                        AND   A.PTID      = B.PTID
+                        AND   A.SRYYM     = B.SRYYM
+                        AND   A.ZAINUM    = B.ZAINUM
+                        AND   1           = B.RENNUM
+			ORDER  BY   A.SRYKA,
+                                    A.SRYKBN,
+                                    B.SRYSYUKBN,
+                                    A.ZAINUM
+		;
+	};
+};
+
+path	key20	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key20_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       =   :SRYYM
+                        AND   A.HOSPNUM    = B.HOSPNUM
+                        AND   A.NYUGAIKBN = B.NYUGAIKBN
+                        AND   A.PTID      = B.PTID
+                        AND   A.SRYYM     = B.SRYYM
+                        AND   A.ZAINUM    = B.ZAINUM
+                        AND   1           = B.RENNUM
+			ORDER  BY   A.HKNCOMBI,
+                        A.SRYKBN,
+                        B.SRYSYUKBN,
+                        A.ZAINUM
+		;
+	};
+};
+
+path	key21	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key21_csr CURSOR FOR
+		SELECT  A.PTID,0 AS RENNUMMAX
+		FROM tbl_ptnum B 
+		JOIN tbl_sryacct_main A ON A.HOSPNUM=B.HOSPNUM AND A.PTID=B.PTID  
+			WHERE  A.HOSPNUM	    =  :HOSPNUM
+			AND    A.NYUGAIKBN  =  :NYUGAIKBN
+			AND    A.SRYYM      =  :SRYYM 
+			AND    A.ZAITEN     <> 0
+			AND    A.ZAIKAISU   <> 0
+			GROUP BY A.PTID,B.PTNUM 
+			ORDER BY B.PTNUM;
+	};
+};
+
+path	key22 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key23 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAITEN     <> 0
+			AND   ZAIKAISU   <> 0
+			ORDER  BY   SRYKA
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM    =   :SRYYM
+		;
+	};
+};
+
+path	key24 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key24_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+                        AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key25 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key25_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+                        AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER   BY      SRYYM,
+                                        SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key26 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key26_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_ptinf B
+			WHERE  A.HOSPNUM    =   :HOSPNUM
+			AND    A.SRYYM     =   :SRYYM
+			AND    A.HOSPNUM    =   B.HOSPNUM
+			AND    A.PTID      =   B.PTID
+			AND    B.TSTPTNUMKBN   <>  '1'
+			ORDER  BY   A.SRYKA,
+                        A.SRYKBN,
+                        A.ZAINUM
+		;
+	};
+};
+
+#HOSPNUM,PTIDのみ取得
+path	key27 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key27_csr CURSOR FOR
+		SELECT HOSPNUM,PTID,0 AS RENNUMMAX
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAITEN     <> 0
+			AND   ZAIKAISU   <> 0
+			GROUP BY HOSPNUM,PTID
+		;
+	};
+};
+
+path	key28 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key28_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY  HKNCOMBI,SRYKA,ZAINUM
+		;
+	};
+};
+
+path	key29 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key29_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key30 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key30_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key31 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key31_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER   BY      SRYKBN
+		;
+	};
+};
+
+path	key32 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key32_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key33 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key33_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key34 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key34_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   NYUGAIKBN   >   '0'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :STSRYYM
+			AND   SRYYM       <=  :EDSRYYM
+			AND   ZAIKAISU    >   0
+			AND   SRYKBN      =   :SRYKBN
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   SRYYM,SRYKA,ZAINUM
+		;
+	};
+};
+
+path	key35 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key35_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   NYUGAIKBN   >   '0'
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       >=  :STSRYYM
+			AND   SRYYM       <=  :EDSRYYM
+			AND   ZAIKAISU    >   0
+			AND   SRYKBN      =   :SRYKBN
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   SRYYM,SRYKA,ZAINUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key36 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key36_csr CURSOR FOR
+		SELECT HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN,0 AS RENNUMMAX,
+                       SUM(DAY_1) AS DAY_1,
+                       SUM(DAY_2) AS DAY_2,
+                       SUM(DAY_3) AS DAY_3,
+                       SUM(DAY_4) AS DAY_4,
+                       SUM(DAY_5) AS DAY_5,
+                       SUM(DAY_6) AS DAY_6,
+                       SUM(DAY_7) AS DAY_7,
+                       SUM(DAY_8) AS DAY_8,
+                       SUM(DAY_9) AS DAY_9,
+                       SUM(DAY_10) AS DAY_10,
+                       SUM(DAY_11) AS DAY_11,
+                       SUM(DAY_12) AS DAY_12,
+                       SUM(DAY_13) AS DAY_13,
+                       SUM(DAY_14) AS DAY_14,
+                       SUM(DAY_15) AS DAY_15,
+                       SUM(DAY_16) AS DAY_16,
+                       SUM(DAY_17) AS DAY_17,
+                       SUM(DAY_18) AS DAY_18,
+                       SUM(DAY_19) AS DAY_19,
+                       SUM(DAY_20) AS DAY_20,
+                       SUM(DAY_21) AS DAY_21,
+                       SUM(DAY_22) AS DAY_22,
+                       SUM(DAY_23) AS DAY_23,
+                       SUM(DAY_24) AS DAY_24,
+                       SUM(DAY_25) AS DAY_25,
+                       SUM(DAY_26) AS DAY_26,
+                       SUM(DAY_27) AS DAY_27,
+                       SUM(DAY_28) AS DAY_28,
+                       SUM(DAY_29) AS DAY_29,
+                       SUM(DAY_30) AS DAY_30,
+                       SUM(DAY_31) AS DAY_31
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			GROUP  BY  HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA
+		;
+	};
+};
+
+path	key37 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key37_csr CURSOR FOR
+		SELECT HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN,0 AS RENNUMMAX,
+                       SUM(DAY_1) AS DAY_1,
+                       SUM(DAY_2) AS DAY_2,
+                       SUM(DAY_3) AS DAY_3,
+                       SUM(DAY_4) AS DAY_4,
+                       SUM(DAY_5) AS DAY_5,
+                       SUM(DAY_6) AS DAY_6,
+                       SUM(DAY_7) AS DAY_7,
+                       SUM(DAY_8) AS DAY_8,
+                       SUM(DAY_9) AS DAY_9,
+                       SUM(DAY_10) AS DAY_10,
+                       SUM(DAY_11) AS DAY_11,
+                       SUM(DAY_12) AS DAY_12,
+                       SUM(DAY_13) AS DAY_13,
+                       SUM(DAY_14) AS DAY_14,
+                       SUM(DAY_15) AS DAY_15,
+                       SUM(DAY_16) AS DAY_16,
+                       SUM(DAY_17) AS DAY_17,
+                       SUM(DAY_18) AS DAY_18,
+                       SUM(DAY_19) AS DAY_19,
+                       SUM(DAY_20) AS DAY_20,
+                       SUM(DAY_21) AS DAY_21,
+                       SUM(DAY_22) AS DAY_22,
+                       SUM(DAY_23) AS DAY_23,
+                       SUM(DAY_24) AS DAY_24,
+                       SUM(DAY_25) AS DAY_25,
+                       SUM(DAY_26) AS DAY_26,
+                       SUM(DAY_27) AS DAY_27,
+                       SUM(DAY_28) AS DAY_28,
+                       SUM(DAY_29) AS DAY_29,
+                       SUM(DAY_30) AS DAY_30,
+                       SUM(DAY_31) AS DAY_31
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			GROUP  BY  HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA
+		;
+	};
+};
+
+path	key38	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key38_csr CURSOR FOR
+		SELECT  A.PTID,0 AS RENNUMMAX
+		FROM tbl_ptnum B 
+		JOIN tbl_sryacct_main A ON A.HOSPNUM=B.HOSPNUM AND A.PTID=B.PTID  
+			WHERE  A.HOSPNUM	    =  :HOSPNUM
+			AND    A.NYUGAIKBN  =  :NYUGAIKBN
+			AND    A.SRYYM      =  :SRYYM
+			AND    A.ZAIKAISU   > 0
+			AND (( A.ZAITEN     > 0 )
+			 OR  ( A.ZAITEN     = 0 
+			  AND  EXISTS 
+			     ( SELECT * FROM TBL_SRYACT
+			       WHERE HOSPNUM =  A.HOSPNUM
+			        AND  NYUGAIKBN = A.NYUGAIKBN
+			        AND  PTID   =  A.PTID
+			        AND  SRYKA  =  A.SRYKA
+			        AND  SRYYM  =  A.SRYYM
+			        AND  ZAINUM =  A.ZAINUM
+			        AND  SRYKBN =  A.SRYKBN
+			        AND((SRYCD1 LIKE '6%' )
+			         OR (SRYCD2 LIKE '6%' )
+			         OR (SRYCD3 LIKE '6%' )
+			         OR (SRYCD4 LIKE '6%' )
+			         OR (SRYCD5 LIKE '6%')))))
+			GROUP BY A.PTID,B.PTNUM
+			ORDER BY B.PTNUM;
+	};
+};
+
+path	key39 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key39_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    =   0
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key40	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key40_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER   BY      ZAINUM
+		;
+	};
+};
+
+path    del3    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_sryacct_main
+                        WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   PTID        =   :PTID
+                        AND   SRYYM       =   :SRYYM
+                ;
+        };
+};
+
+path	key41	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key41_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       =   :SRYYM
+                        AND   A.HOSPNUM    = B.HOSPNUM
+                        AND   A.NYUGAIKBN = B.NYUGAIKBN
+                        AND   A.PTID      = B.PTID
+                        AND   A.SRYYM     = B.SRYYM
+                        AND   A.ZAINUM    = B.ZAINUM
+                        AND   1           = B.RENNUM
+			ORDER  BY   A.SRYKBN,
+                                    B.SRYSYUKBN,
+                                    A.SRYKA,
+                                    A.ZAINUM
+		;
+	};
+};
+
+#SRYKAのみ取得
+path	key42	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key42_csr CURSOR FOR
+		SELECT  A.SRYKA,0 AS RENNUMMAX
+		FROM tbl_sryacct_main A
+			WHERE  A.HOSPNUM	    =  :HOSPNUM
+			AND    A.NYUGAIKBN  =  :NYUGAIKBN
+			AND    A.PTID       =  :PTID
+			AND    A.SRYYM      =  :SRYYM
+			AND    A.ZAIKAISU   > 0
+			AND (( A.ZAITEN     > 0 )
+			 OR  ( A.ZAITEN     = 0 
+			  AND  EXISTS 
+			     ( SELECT * FROM TBL_SRYACT
+			       WHERE HOSPNUM =  A.HOSPNUM
+			        AND  NYUGAIKBN = A.NYUGAIKBN
+			        AND  PTID   =  A.PTID
+			        AND  SRYKA  =  A.SRYKA
+			        AND  SRYYM  =  A.SRYYM
+			        AND  ZAINUM =  A.ZAINUM
+			        AND  SRYKBN =  A.SRYKBN
+			        AND((SRYCD1 LIKE '6%' )
+			         OR (SRYCD2 LIKE '6%' )
+			         OR (SRYCD3 LIKE '6%' )
+			         OR (SRYCD4 LIKE '6%' )
+			         OR (SRYCD5 LIKE '6%')))))
+			GROUP BY SRYKA
+		;
+	};
+};
+
+#PTID,SRYKAのみ取得
+path	key43	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key43_csr CURSOR FOR
+		SELECT  A.PTID,A.SRYKA,0 AS RENNUMMAX
+		FROM tbl_sryacct_main A
+		JOIN tbl_ptinf  B ON A.HOSPNUM=B.HOSPNUM AND A.PTID=B.PTID  
+			WHERE  A.HOSPNUM	    =  :HOSPNUM
+			AND    A.NYUGAIKBN  =  :NYUGAIKBN
+			AND    A.SRYYM      =  :SRYYM
+			AND    A.ZAIKAISU   > 0
+			AND (( A.ZAITEN     > 0 )
+			 OR  ( A.ZAITEN     = 0 
+			  AND  EXISTS 
+			     ( SELECT * FROM TBL_SRYACT
+			       WHERE HOSPNUM =  A.HOSPNUM
+			        AND  NYUGAIKBN = A.NYUGAIKBN
+			        AND  PTID   =  A.PTID
+			        AND  SRYKA  =  A.SRYKA
+			        AND  SRYYM  =  A.SRYYM
+			        AND  ZAINUM =  A.ZAINUM
+			        AND  SRYKBN =  A.SRYKBN
+			        AND((SRYCD1 LIKE '6%' )
+			         OR (SRYCD2 LIKE '6%' )
+			         OR (SRYCD3 LIKE '6%' )
+			         OR (SRYCD4 LIKE '6%' )
+			         OR (SRYCD5 LIKE '6%')))))
+			AND B.TSTPTNUMKBN <> '1'
+			GROUP BY A.PTID,A.SRYKA
+			ORDER BY A.PTID
+		;
+	};
+};
+
+path	key44 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key44_csr CURSOR FOR
+		SELECT HKNCOMBI,SRYKA,SRYCDTOTAL,ZAITEN,ZAIKAISU,ZAINUM,SRYKBN,ZAIREQFLG,0 AS RENNUMMAX
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAITEN      >    0
+			AND   ZAIKAISU    >    0
+			AND   SRYKBN      NOT IN ('90','92','95','96','97','99')
+			AND   HKNCOMBI    <>  '9999'
+			AND   JIHOKBN     <>  '1'
+			ORDER  BY   HKNCOMBI,SRYKA,ZAINUM
+		;
+	};
+};
+
+path	key45 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key45_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>  '1'
+			AND  (SRYCDTOTAL  =   197001210  OR
+		 	      SRYCDTOTAL  =   197000470  OR
+		 	      SRYCDTOTAL  =   197001570)
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key46	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key46_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+                        AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       >=  :STSRYYM
+			AND   A.SRYYM       <=  :EDSRYYM
+			AND   A.ZAIKAISU    >   0
+                        AND   A.HOSPNUM    = B.HOSPNUM
+                        AND   A.NYUGAIKBN = B.NYUGAIKBN
+                        AND   A.PTID      = B.PTID
+                        AND   A.SRYYM     = B.SRYYM
+                        AND   A.ZAINUM    = B.ZAINUM
+		        AND  ((SRYCD1 LIKE '6%' )
+			   OR (SRYCD2 LIKE '6%' )
+			   OR (SRYCD3 LIKE '6%' )
+			   OR (SRYCD4 LIKE '6%' )
+			   OR (SRYCD5 LIKE '6%' ))
+			ORDER  BY   A.SRYYM DESC,
+                                    A.ZAINUM
+		;
+	};
+};
+
+path	key47 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key47_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       =   :SRYYM
+			AND   A.HKNCOMBI    =   :HKNCOMBI
+			AND   A.ZAIKAISU    >   0
+			AND   A.ZAITEN      >   0
+                        AND   A.HOSPNUM     = B.HOSPNUM
+                        AND   A.NYUGAIKBN  = B.NYUGAIKBN
+                        AND   A.PTID       = B.PTID
+                        AND   A.SRYYM      = B.SRYYM
+                        AND   A.ZAINUM     = B.ZAINUM
+                        AND   1            = B.RENNUM
+			ORDER  BY   A.SRYKBN,
+                                    B.SRYSYUKBN,
+                                    A.ZAINUM
+		;
+	};
+};
+
+path	key48 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key48_csr CURSOR FOR
+		SELECT a.* from (
+			SELECT *
+			FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			UNION
+			SELECT *
+			FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '2'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			) a
+		;
+	};
+};
+
+path	key49 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key49_csr CURSOR FOR
+		SELECT  *
+		FROM tbl_sryacct_main
+		WHERE   HOSPNUM      =   :HOSPNUM
+		AND     NYUGAIKBN   =   :NYUGAIKBN
+		AND     PTID        =   :PTID
+		AND     SRYYM       >=  :STSRYYM
+		AND     SRYYM       <=  :EDSRYYM
+		AND     SRYKBN IN ('95','96')
+		AND     HKNCOMBI   <>  '9999'
+		AND     JIHOKBN    <>   '1'
+		;
+	};
+};
+
+path	key50 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key50_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+            		AND     NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :STSRYYM
+			AND   SRYYM       <=  :EDSRYYM
+			AND   ZAIKAISU    >   0
+			AND   SRYKBN      =   :SRYKBN
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   SRYYM,SRYKA,ZAINUM
+		;
+	};
+};
+
+
+path	key51	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key51_csr CURSOR FOR
+		SELECT  A.PTID,A.SRYKA,0 AS RENNUMMAX,
+                       SUM(DAY_1) AS DAY_1,
+                       SUM(DAY_2) AS DAY_2,
+                       SUM(DAY_3) AS DAY_3,
+                       SUM(DAY_4) AS DAY_4,
+                       SUM(DAY_5) AS DAY_5,
+                       SUM(DAY_6) AS DAY_6,
+                       SUM(DAY_7) AS DAY_7,
+                       SUM(DAY_8) AS DAY_8,
+                       SUM(DAY_9) AS DAY_9,
+                       SUM(DAY_10) AS DAY_10,
+                       SUM(DAY_11) AS DAY_11,
+                       SUM(DAY_12) AS DAY_12,
+                       SUM(DAY_13) AS DAY_13,
+                       SUM(DAY_14) AS DAY_14,
+                       SUM(DAY_15) AS DAY_15,
+                       SUM(DAY_16) AS DAY_16,
+                       SUM(DAY_17) AS DAY_17,
+                       SUM(DAY_18) AS DAY_18,
+                       SUM(DAY_19) AS DAY_19,
+                       SUM(DAY_20) AS DAY_20,
+                       SUM(DAY_21) AS DAY_21,
+                       SUM(DAY_22) AS DAY_22,
+                       SUM(DAY_23) AS DAY_23,
+                       SUM(DAY_24) AS DAY_24,
+                       SUM(DAY_25) AS DAY_25,
+                       SUM(DAY_26) AS DAY_26,
+                       SUM(DAY_27) AS DAY_27,
+                       SUM(DAY_28) AS DAY_28,
+                       SUM(DAY_29) AS DAY_29,
+                       SUM(DAY_30) AS DAY_30,
+                       SUM(DAY_31) AS DAY_31
+		FROM tbl_sryacct_main A
+		JOIN tbl_ptinf  B ON A.HOSPNUM=B.HOSPNUM AND A.PTID=B.PTID  
+			WHERE  A.HOSPNUM	    =  :HOSPNUM
+			AND    A.NYUGAIKBN  =  :NYUGAIKBN
+			AND    A.SRYYM      =  :SRYYM
+			AND    A.ZAIKAISU   > 0
+			AND (( A.ZAITEN     > 0 )
+			 OR  ( A.ZAITEN     = 0 
+			  AND  EXISTS 
+			     ( SELECT * FROM TBL_SRYACT
+			       WHERE HOSPNUM =  A.HOSPNUM
+			        AND  NYUGAIKBN = A.NYUGAIKBN
+			        AND  PTID   =  A.PTID
+			        AND  SRYKA  =  A.SRYKA
+			        AND  SRYYM  =  A.SRYYM
+			        AND  ZAINUM =  A.ZAINUM
+			        AND  SRYKBN =  A.SRYKBN
+			        AND((SRYCD1 LIKE '6%' )
+			         OR (SRYCD2 LIKE '6%' )
+			         OR (SRYCD3 LIKE '6%' )
+			         OR (SRYCD4 LIKE '6%' )
+			         OR (SRYCD5 LIKE '6%')))))
+			AND B.TSTPTNUMKBN <> '1'
+			GROUP BY A.PTID,A.SRYKA
+			ORDER BY A.PTID
+		;
+	};
+};
+
+path	key52 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key52_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :STSRYYM
+			AND   SRYYM       <=  :EDSRYYM
+			AND   HKNCOMBI    <>  '9999'
+			AND   ZAITEN      =  0
+			AND   ZAIKAISU    >  0
+	    		AND   SRYKBN IN ('14','21','22','23','98')
+			ORDER  BY   SRYKA,
+                                    HKNCOMBI,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key53 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key53_csr CURSOR FOR
+		SELECT HOSPNUM,NYUGAIKBN,PTID,HKNCOMBI
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>   '1'
+			AND   ZAITEN * ZAIKAISU   >  0
+			AND   SRYKBN      NOT IN ('95','96')
+		GROUP BY HOSPNUM,NYUGAIKBN,PTID,HKNCOMBI
+		;
+	};
+};
+
+path	key54 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key54_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>  '1'
+			AND   SRYCDTOTAL  =   197000470
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key55 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key55_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			AND   JIHOKBN    <>  '1'
+			AND   SRYCDTOTAL  =   197001570
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key56 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key56_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_sryacct_main A,tbl_sryact B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.NYUGAIKBN   =   :NYUGAIKBN
+			AND   A.PTID        =   :PTID
+			AND   A.SRYYM       =   :SRYYM
+			AND   A.HKNCOMBI    =   :HKNCOMBI
+			AND   A.ZAIKAISU    >   0
+                        AND   A.HOSPNUM     = B.HOSPNUM
+                        AND   A.NYUGAIKBN  = B.NYUGAIKBN
+                        AND   A.PTID       = B.PTID
+                        AND   A.SRYYM      = B.SRYYM
+                        AND   A.ZAINUM     = B.ZAINUM
+                        AND   1            = B.RENNUM
+			ORDER  BY   A.SRYKBN,
+                                    B.SRYSYUKBN,
+                                    A.ZAINUM
+		;
+	};
+};
+
+path	key57 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key57_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE HOSPNUM  =   :HOSPNUM
+			AND   PTID     =   :PTID
+                        AND   ZAINUM   =   :ZAINUM
+		;
+	};
+};
+
+path	key58 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key58_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+		        AND   SRYKBN IN ('90','92')
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   ZAINUM
+		;
+	};
+};
+
+path	key59 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key59_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     NYUGAIKBN  LIKE     :NYUGAIKBN
+			AND     SRYYM     >=   :STSRYYM
+			AND     SRYYM     <=   :EDSRYYM
+			AND     SRYKBN    LIKE :SRYKBN
+			ORDER   BY PTID,SRYYM,ZAINUM
+		;
+	};
+};
+
+path	key60 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key60_csr CURSOR FOR
+		SELECT HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN,0 AS RENNUMMAX,
+                       SUM(DAY_1) AS DAY_1,
+                       SUM(DAY_2) AS DAY_2,
+                       SUM(DAY_3) AS DAY_3,
+                       SUM(DAY_4) AS DAY_4,
+                       SUM(DAY_5) AS DAY_5,
+                       SUM(DAY_6) AS DAY_6,
+                       SUM(DAY_7) AS DAY_7,
+                       SUM(DAY_8) AS DAY_8,
+                       SUM(DAY_9) AS DAY_9,
+                       SUM(DAY_10) AS DAY_10,
+                       SUM(DAY_11) AS DAY_11,
+                       SUM(DAY_12) AS DAY_12,
+                       SUM(DAY_13) AS DAY_13,
+                       SUM(DAY_14) AS DAY_14,
+                       SUM(DAY_15) AS DAY_15,
+                       SUM(DAY_16) AS DAY_16,
+                       SUM(DAY_17) AS DAY_17,
+                       SUM(DAY_18) AS DAY_18,
+                       SUM(DAY_19) AS DAY_19,
+                       SUM(DAY_20) AS DAY_20,
+                       SUM(DAY_21) AS DAY_21,
+                       SUM(DAY_22) AS DAY_22,
+                       SUM(DAY_23) AS DAY_23,
+                       SUM(DAY_24) AS DAY_24,
+                       SUM(DAY_25) AS DAY_25,
+                       SUM(DAY_26) AS DAY_26,
+                       SUM(DAY_27) AS DAY_27,
+                       SUM(DAY_28) AS DAY_28,
+                       SUM(DAY_29) AS DAY_29,
+                       SUM(DAY_30) AS DAY_30,
+                       SUM(DAY_31) AS DAY_31
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			GROUP  BY  HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA
+		;
+	};
+};
+
+path	key61 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key61_csr CURSOR FOR
+		SELECT HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN,0 AS RENNUMMAX,
+                       SUM(DAY_1) AS DAY_1,
+                       SUM(DAY_2) AS DAY_2,
+                       SUM(DAY_3) AS DAY_3,
+                       SUM(DAY_4) AS DAY_4,
+                       SUM(DAY_5) AS DAY_5,
+                       SUM(DAY_6) AS DAY_6,
+                       SUM(DAY_7) AS DAY_7,
+                       SUM(DAY_8) AS DAY_8,
+                       SUM(DAY_9) AS DAY_9,
+                       SUM(DAY_10) AS DAY_10,
+                       SUM(DAY_11) AS DAY_11,
+                       SUM(DAY_12) AS DAY_12,
+                       SUM(DAY_13) AS DAY_13,
+                       SUM(DAY_14) AS DAY_14,
+                       SUM(DAY_15) AS DAY_15,
+                       SUM(DAY_16) AS DAY_16,
+                       SUM(DAY_17) AS DAY_17,
+                       SUM(DAY_18) AS DAY_18,
+                       SUM(DAY_19) AS DAY_19,
+                       SUM(DAY_20) AS DAY_20,
+                       SUM(DAY_21) AS DAY_21,
+                       SUM(DAY_22) AS DAY_22,
+                       SUM(DAY_23) AS DAY_23,
+                       SUM(DAY_24) AS DAY_24,
+                       SUM(DAY_25) AS DAY_25,
+                       SUM(DAY_26) AS DAY_26,
+                       SUM(DAY_27) AS DAY_27,
+                       SUM(DAY_28) AS DAY_28,
+                       SUM(DAY_29) AS DAY_29,
+                       SUM(DAY_30) AS DAY_30,
+                       SUM(DAY_31) AS DAY_31
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0 
+			AND   HKNCOMBI   <>  '9999'
+			GROUP  BY  HOSPNUM,PTID,HKNCOMBI,SRYKA,SRYYM,NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA
+		;
+	};
+};
+
+path	key62 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key62_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key63 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key63_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI   <>  '9999'
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key64 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key64_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   ZAIKAISU    >    0 
+			AND   JIHOKBN    <>   '1'
+			AND   SRYKBN      NOT IN ('95','96')
+			ORDER  BY   SRYKBN,ZAINUM
+		;
+	};
+};
+
+path	key65 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key65_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   SRYKBN      =   :SRYKBN
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   ZAINUM
+		;
+	};
+};
+
+path	key66 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key66_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   SRYKBN      =   :SRYKBN
+			AND   JIHOKBN    <>   '1'
+			ORDER  BY   ZAINUM
+		;
+	};
+};
+
+path	key67 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key67_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   ZAIKAISU    >    0 
+			AND   JIHOKBN    <>   '1'
+			AND   SRYKBN      IN ('99')
+			ORDER  BY   SRYKBN,ZAINUM
+		;
+	};
+};
+
+path	key68 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key68_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0
+			AND   HKNCOMBI   <>  '9999'
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	tmpkey 	{
+	DBCREATE	{
+		CREATE TEMP TABLE tbl_sryacct_main ON COMMIT PRESERVE ROWS AS
+		SELECT *
+		FROM   tbl_sryacct_main
+		WHERE  HOSPNUM	  = :HOSPNUM
+		AND ( CASE WHEN :PTID <> 0  THEN PTID = :PTID ELSE 1 = 1 END)
+		AND	   SRYYM      = :SRYYM
+		;
+	};
+	DBCREATEINDEX	{
+		CREATE INDEX idx_tmp_sryacct_main_ptid ON pg_temp.tbl_sryacct_main (ptid)
+		;
+	};
+	DBDROP	{
+		DROP TABLE pg_temp.tbl_sryacct_main
+		;
+	};
+};
+
+path	tmpupd1 	{
+	DBUPDATE	{
+		UPDATE pg_temp.tbl_sryacct_main
+			SET DAY_1  = (CASE WHEN :DAY_1  = 0 THEN 0 ELSE DAY_1 END ),
+			    DAY_2  = (CASE WHEN :DAY_2  = 0 THEN 0 ELSE DAY_2 END ),
+			    DAY_3  = (CASE WHEN :DAY_3  = 0 THEN 0 ELSE DAY_3 END ),
+			    DAY_4  = (CASE WHEN :DAY_4  = 0 THEN 0 ELSE DAY_4 END ),
+			    DAY_5  = (CASE WHEN :DAY_5  = 0 THEN 0 ELSE DAY_5 END ),
+			    DAY_6  = (CASE WHEN :DAY_6  = 0 THEN 0 ELSE DAY_6 END ),
+			    DAY_7  = (CASE WHEN :DAY_7  = 0 THEN 0 ELSE DAY_7 END ),
+			    DAY_8  = (CASE WHEN :DAY_8  = 0 THEN 0 ELSE DAY_8 END ),
+			    DAY_9  = (CASE WHEN :DAY_9  = 0 THEN 0 ELSE DAY_9 END ),
+			    DAY_10 = (CASE WHEN :DAY_10 = 0 THEN 0 ELSE DAY_10 END ),
+			    DAY_11 = (CASE WHEN :DAY_11 = 0 THEN 0 ELSE DAY_11 END ),
+			    DAY_12 = (CASE WHEN :DAY_12 = 0 THEN 0 ELSE DAY_12 END ),
+			    DAY_13 = (CASE WHEN :DAY_13 = 0 THEN 0 ELSE DAY_13 END ),
+			    DAY_14 = (CASE WHEN :DAY_14 = 0 THEN 0 ELSE DAY_14 END ),
+			    DAY_15 = (CASE WHEN :DAY_15 = 0 THEN 0 ELSE DAY_15 END ),
+			    DAY_16 = (CASE WHEN :DAY_16 = 0 THEN 0 ELSE DAY_16 END ),
+			    DAY_17 = (CASE WHEN :DAY_17 = 0 THEN 0 ELSE DAY_17 END ),
+			    DAY_18 = (CASE WHEN :DAY_18 = 0 THEN 0 ELSE DAY_18 END ),
+			    DAY_19 = (CASE WHEN :DAY_19 = 0 THEN 0 ELSE DAY_19 END ),
+			    DAY_20 = (CASE WHEN :DAY_20 = 0 THEN 0 ELSE DAY_20 END ),
+			    DAY_21 = (CASE WHEN :DAY_21 = 0 THEN 0 ELSE DAY_21 END ),
+			    DAY_22 = (CASE WHEN :DAY_22 = 0 THEN 0 ELSE DAY_22 END ),
+			    DAY_23 = (CASE WHEN :DAY_23 = 0 THEN 0 ELSE DAY_23 END ),
+			    DAY_24 = (CASE WHEN :DAY_24 = 0 THEN 0 ELSE DAY_24 END ),
+			    DAY_25 = (CASE WHEN :DAY_25 = 0 THEN 0 ELSE DAY_25 END ),
+			    DAY_26 = (CASE WHEN :DAY_26 = 0 THEN 0 ELSE DAY_26 END ),
+			    DAY_27 = (CASE WHEN :DAY_27 = 0 THEN 0 ELSE DAY_27 END ),
+			    DAY_28 = (CASE WHEN :DAY_28 = 0 THEN 0 ELSE DAY_28 END ),
+			    DAY_29 = (CASE WHEN :DAY_29 = 0 THEN 0 ELSE DAY_29 END ),
+			    DAY_30 = (CASE WHEN :DAY_30 = 0 THEN 0 ELSE DAY_30 END ),
+			    DAY_31 = (CASE WHEN :DAY_31 = 0 THEN 0 ELSE DAY_31 END )
+		;
+	};
+};
+
+path	tmpupd2 	{
+	DBUPDATE	{
+		UPDATE pg_temp.tbl_sryacct_main
+			SET ZAIKAISU  = DAY_1 + DAY_2 + DAY_3 + DAY_4 + DAY_5
+			              + DAY_6 + DAY_7 + DAY_8 + DAY_9 + DAY_10
+			              + DAY_11 + DAY_12 + DAY_13 + DAY_14 + DAY_15
+			              + DAY_16 + DAY_17 + DAY_18 + DAY_19 + DAY_20
+			              + DAY_21 + DAY_22 + DAY_23 + DAY_24 + DAY_25
+			              + DAY_26 + DAY_27 + DAY_28 + DAY_29 + DAY_30
+			              + DAY_31
+		;
+	};
+};
+
+path	key69 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key69_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   HKNCOMBI    =   :HKNCOMBI
+			ORDER   BY      SRYYM,
+                                        SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key70 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key70_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   ZAIKAISU    >    0 
+			AND   SRYKBN      NOT IN ('95','96')
+			ORDER  BY   SRYKBN,ZAINUM
+		;
+	};
+};
+
+path	key71 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key71_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   ZAIKAISU    >    0 
+			AND   JIHOKBN     =   '1'
+			AND   SRYKBN      NOT IN ('95','96')
+			ORDER  BY   SRYKBN,ZAINUM
+		;
+	};
+};
+
+path	key72 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_main_key72_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBI    =   :HKNCOMBI
+			AND   ZAITEN      >    0
+			AND   ZAIKAISU    >    0 
+			AND   JIHOKBN    <>   '1'
+			AND   SRYKBN      NOT IN ('95','96')
+			ORDER  BY   SRYKBN,ZAINUM
+		;
+	};
+};

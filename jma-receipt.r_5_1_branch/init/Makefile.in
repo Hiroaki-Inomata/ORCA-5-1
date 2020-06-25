@@ -1,0 +1,40 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_DATA = @INSTALL_DATA@
+
+initdump_files = \
+             orca_dbkanri_orig.dump
+
+init_sources = \
+        orca-db-create.sh \
+        orca-db-init.sh \
+        orca-db-install.sh
+
+init_scripts = $(init_sources:.sh.in=.sh)
+
+.SUFFIXES: .sh.in .sh
+
+all:   $(init_scripts)
+
+.sh.in.sh: 
+	sed -e 's,\@jma-receipt-env\@,$(sysconfdir)\/jma-receipt\.env,g' \
+	    -e 's,\@VERSION\@,$(VERSION),g' \
+	$< > $@
+
+filecheck:
+
+clean: 
+	-rm -f $(init_scripts)
+
+distclean: clean
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(initdir)
+	$(INSTALL_SCRIPT) $(init_scripts) $(initdir)
+	$(INSTALL_DATA) $(initdump_files) $(initdir)
+

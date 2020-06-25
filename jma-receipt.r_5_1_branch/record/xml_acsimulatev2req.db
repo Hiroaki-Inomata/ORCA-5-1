@@ -1,0 +1,47 @@
+xml_acsimulatev2req {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	acsimulatereq {
+	Patient_ID		varchar(20);
+	Perform_Date		varchar(10);
+	Time_Class		varchar(1);
+	Diagnosis_Information  {
+		Department_Code		varchar(2);
+		Combination_Number	varchar(4);
+		HealthInsurance_Information  {
+			InsuranceProvider_Class		varchar(03);
+			InsuranceProvider_Number	varchar(08);
+			InsuranceProvider_WholeName	varchar(20);
+			HealthInsuredPerson_Symbol	varchar(80);
+			HealthInsuredPerson_Number	varchar(80);
+			HealthInsuredPerson_Continuation	varchar(01);
+			HealthInsuredPerson_Assistance	varchar(01);
+			RelationToInsuredPerson		varchar(01);
+			HealthInsuredPerson_WholeName	varchar(100);
+			Certificate_StartDate		varchar(10);
+			Certificate_ExpiredDate		varchar(10);
+			PublicInsurance_Information   {
+				PublicInsurance_Class	varchar(03);
+				PublicInsurance_Name	varchar(20);
+				PublicInsurer_Number	varchar(08);
+				PublicInsuredPerson_Number	varchar(20);
+				Certificate_IssuedDate	varchar(10);
+				Certificate_ExpiredDate	varchar(10);
+			} [4];
+		} ;
+		Medical_Information  {
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(50);
+			Medical_Class_Number		varchar(50);
+			Medication_info   {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(80);
+				Medication_Number	varchar(40);
+				Medication_Generic_Flg	varchar(03);
+			} [40];
+		}[40] ;
+		};
+   	};
+};

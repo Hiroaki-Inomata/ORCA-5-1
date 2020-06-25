@@ -1,0 +1,87 @@
+tbl_etensu_2_sample_master {
+	H_GROUP 			varchar(7);
+	SRYCD				char(9);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	RENNUM				number(2);
+	SAMPLECD			char(9);
+	CHGYMD   			char(8);
+#-----> 主キー更新用項目
+	UPH_GROUP 			varchar(7),virtual;
+	UPSRYCD				char(9),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD			char(8),virtual;
+	UPRENNUM			number(2),virtual;
+};
+primary	{
+	H_GROUP,SRYCD,YUKOSTYMD,YUKOEDYMD,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_2_sample_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_etensu_2_sample
+			WHERE   H_GROUP   =  :H_GROUP
+			AND     SRYCD     =  :SRYCD
+ 			AND     YUKOSTYMD <= :YUKOSTYMD
+			AND     YUKOEDYMD >= :YUKOEDYMD
+			AND     RENNUM    =  :RENNUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_etensu_2_sample
+			VALUES(
+				:H_GROUP,
+				:SRYCD,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:RENNUM,
+				:SAMPLECD,
+				:CHGYMD
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_etensu_2_sample
+			SET
+				H_GROUP   = :H_GROUP,
+				SRYCD     = :SRYCD,
+				YUKOSTYMD = :YUKOSTYMD,
+				YUKOEDYMD = :YUKOEDYMD,
+				RENNUM    = :RENNUM,
+				SAMPLECD  = :SAMPLECD,
+				CHGYMD    = :CHGYMD
+			WHERE 	H_GROUP   = :UPH_GROUP
+			AND	SRYCD     = :UPSRYCD
+			AND	YUKOSTYMD = :UPYUKOSTYMD
+			AND	YUKOEDYMD = :UPYUKOEDYMD
+			AND	RENNUM    = :UPRENNUM
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_etensu_2_sample
+			WHERE   H_GROUP   = :H_GROUP
+			AND     SRYCD     = :SRYCD
+ 			AND     YUKOSTYMD = :YUKOSTYMD
+			AND     YUKOEDYMD = :YUKOEDYMD
+			AND     RENNUM    = :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_2_sample_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_etensu_2_sample
+			WHERE   H_GROUP = :H_GROUP
+			AND     SRYCD   = :SRYCD
+			ORDER   BY	YUKOSTYMD,
+					RENNUM
+		;
+	};
+};

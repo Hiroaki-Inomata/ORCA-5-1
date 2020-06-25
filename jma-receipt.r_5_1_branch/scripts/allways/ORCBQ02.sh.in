@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+LOG_FILE=/var/log/jma-receipt/"$5"orcb013_2.log
+
+[ -e "${LOG_FILE}" ] &&  rm ${LOG_FILE}
+
+
+#-------------------------------------------#
+#        明細書連携データ作成
+#        $1  パラメータファイル名
+#        $2  TERMID
+#        $3  SYSYMD
+#        $4  SYSDATE
+#        $5  HOSPNUM
+#        $6  OPID
+#        $7  エラーファイル
+#        $8  ジョブＩＤ
+#        $9  シェルＩＤ
+#        $10  シェルＩＤ（バッチパラメタ用）
+#        $11  ID(for MONBLOB)
+#
+#-------------------------------------------#
+PARA_FILE_BASE=$1
+PARA_FILE_FULL=${MCP_TEMPDIR}/${PARA_FILE_BASE}
+
+${MONBLOB} -dir ${LDDIRECTORY} -export ${11} -output ${PARA_FILE_FULL} && ${MONBLOB} -dir ${LDDIRECTORY} -delete ${11}
+
+ERR_FILE_BASE=$7
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+
+
+##      エラーファイル削除
+	echo ${ERR_FILE_FULL}
+        if  [ -e $${ERR_FILE_FULL} ]; then
+            rm  $${ERR_FILE_FULL}
+        fi
+##
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBQ02 -parameter ${PARA_FILE_BASE},$2,$3,$4,$5,$6,${ERR_FILE_BASE},$8,$9,${10}
+        if  [ -e $7 ]; then
+            exit
+        fi
+
+##      パラメータファイル削除
+        if  [ -e ${PARA_FILE_FULL} ]; then
+            rm  ${PARA_FILE_FULL}
+        fi
+
+       $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBE$8$9,$5"
+
+        exit

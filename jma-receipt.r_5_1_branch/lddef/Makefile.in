@@ -1,0 +1,108 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+LDFILE = \
+	orca00.ld \
+	orca01.ld \
+	orca02.ld \
+	orca03.ld \
+	orca04.ld \
+	orca06.ld \
+	orca07.ld \
+	orca11.ld \
+	orca12.ld \
+	orca13.ld \
+	orca14.ld \
+	orca18.ld \
+	orca19.ld \
+	orca21.ld \
+	orca22.ld \
+	orca23.ld \
+	orca24.ld \
+	orca25.ld \
+	orca29.ld \
+	orca41.ld \
+	orca42.ld \
+	orca43.ld \
+	orca44.ld \
+	orca51.ld \
+	orca71.ld \
+	orca61.ld \
+	orca101.ld \
+	orca102.ld \
+	orca103.ld \
+	orca104.ld \
+	orca107.ld \
+	session.ld \
+	api21.ld \
+	orca31.ld \
+	orca32.ld \
+	orca33.ld \
+	orca34.ld \
+	orca36.ld \
+	api01rv2.ld \
+	orca901.ld
+
+BDFILE = \
+	orcabt.bd \
+	migv51.bd
+
+
+DIRECTORYFILE_in = directory.in
+DIRECTORYFILE = directory
+
+DIRMIGV51FILE_in = dirmigv51.in
+DIRMIGV51FILE = dirmigv51
+
+ORCADBFILE= orcadb.inc orcadbh.inc
+
+INSTALL_LDFILE = $(LDFILE) $(BDFILE) $(DIRECTORYFILE) $(DIRMIGV51FILE) \
+                 $(ORCADBFILE)
+
+.SUFFIXES: .ld.in .bd.in .ld .bd 
+
+all: $(LDFILE) $(BDFILE) $(DIRECTORYFILE) $(DIRMIGV51FILE) dbgroup.inc kentan.inc orcadbs.inc
+
+filecheck:
+
+directory: directory.in
+	sed -e 's,\@ORCA_DIR\@,$(ORCA_DIR),g' \
+	    -e 's,\@lddefdir\@,$(lddefdir),g' \
+	    -e 's,\@recorddir\@,$(recorddir),g' \
+	    -e 's,\@patchdir\@,$(PATCHDIR),g' \
+	    -e 's,\@patchlddefdir\@,$(PATCHLDDEFDIR),g' \
+	    -e 's,\@patchrecorddir\@,$(PATCHRECORDDIR),g' \
+	    -e 's,\@sitedir\@,$(SITEDIR),g' \
+	    -e 's,\@sitelddefdir\@,$(SITELDDEFDIR),g' \
+	    -e 's,\@siterecorddir\@,$(SITERECORDDIR),g' \
+                    $(DIRECTORYFILE_in) > $(DIRECTORYFILE)
+
+dirmigv51: dirmigv51.in
+	sed -e 's,\@ORCA_DIR\@,$(ORCA_DIR),g' \
+	    -e 's,\@lddefdir\@,$(lddefdir),g' \
+	    -e 's,\@recorddir\@,$(recorddir),g' \
+	    -e 's,\@patchlddefdir\@,$(PATCHLDDEFDIR),g' \
+	    -e 's,\@patchrecorddir\@,$(PATCHRECORDDIR),g' \
+                    $(DIRMIGV51FILE_in) > $(DIRMIGV51FILE)
+
+dbgroup.inc: 
+	ln -sf ../etc/dbgroup.inc .
+
+orcadbs.inc:
+	ln -sf ../etc/orcadbs.inc .
+
+kentan.inc:
+	ln -sf ../etc/kentan.inc .
+
+clean: 
+	-rm -f directory dirmigv51 dbgroup.inc kentan.inc orcadbs.inc
+
+distclean: clean
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(lddefdir)
+	$(INSTALL_DATA) $(INSTALL_LDFILE) $(lddefdir)

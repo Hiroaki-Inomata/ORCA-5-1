@@ -1,0 +1,29 @@
+kanri_cd    : "1012"
+name        : "診療内容情報"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "SRYNAIYO"
+  item_jp   : "診療内容"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "SRYNAIYODSP"
+  item_jp   : "診療内容表示用"
+  type      : "X"
+  start     : 41
+  length    : 24
+- item_no   : 3
+  item      : "SRYNAIYOHYOJI"
+  item_jp   : "初期表示用"
+  type      : "X"
+  start     : 65
+  length    : 1
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 66
+  length    : 435

@@ -1,0 +1,104 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *  Æþ±¡Ä¢É¼°õºþ ºÞÆâÍÆ£Ó£Ð£Á ¡Ê£Ë£Á£°£²¡¢£Ë£Á£°£²£±¡Ë
+      *----------------------------------------------------------*
+      ************************************************************
+      *  ¥³¥Ô¡¼¶ç½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      * 05.00.00     NACL-Â¿¡¹Ç¼  20/03/XX  £Ò£°£±Ç¯£´·î²þÀµÂÐ±þ
+      ************************************************************
+      *
+       01  SPA-KA02-DATA.
+      *    ¼õ¿ÇÍúÎòÆâÍÆÎÎ°è
+           03  SPA-NAI-WKSRY-TBL.
+               07  SPA-NAI-WKSRYREC            OCCURS   100.
+                   09  SPA-WKSRY-SELFLG            PIC  9(01).
+                   09  SPA-WKSRY-ZAINUM            PIC  9(08).
+                   09  SPA-WKSRY-SRYSYUKBN         PIC  X(03).
+                   09  SPA-WKSRY-SRYKBN            PIC  X(02).
+      *            ºÞÅÀ¿ô·×
+                   09  SPA-WKSRY-ZAITENKEI         PIC  9(08).
+                   09  SPA-WKSRY-ZAIKAIKEI         PIC  9(07).
+                   09  SPA-WKSRY-DAY-G.
+                       11  SPA-WKSRY-DAY           PIC  9(03)
+                                                   OCCURS   31.
+                   09  SPA-WKSRY-SINRYO-TBL        OCCURS   50.
+                       11  SPA-WKSRY-SRYCD         PIC  X(09).
+      *R02.4           11  SPA-WKSRY-NAME          PIC  X(80).
+                       11  SPA-WKSRY-NAME          PIC  X(140).
+                       11  SPA-WKSRY-SRYSURYO      PIC  9(05)V9(05).
+                       11  SPA-WKSRY-KANSURYO      PIC  9(05)V9(05).
+                       11  SPA-WKSRY-SRYKAISU      PIC  9(03).
+                       11  SPA-WKSRY-ZAIKAISU      PIC  9(08).
+                       11  SPA-WKSRY-INPUTNUM      PIC  9(03).
+      *R02.4           11  SPA-WKSRY-INPUTCOMENT   PIC  X(80).
+                       11  SPA-WKSRY-INPUTCOMENT   PIC  X(140).
+                       11  SPA-WKSRY-AUTOKBN       PIC  X(01).
+      *
+                       11  SPA-WKSRY-KANZANCHI     PIC  9(05)V9(5).
+                       11  SPA-WKSRY-KANZANTANINAME
+                                                   PIC  X(08).
+      *H28.5
+                       11  SPA-WKSRY-GENE-NAME     PIC  X(80).
+      *
+      *                ÍÑË¡¥³¡¼¥ÉÍÑ
+                       11  SPA-WKSRY-KENTAICOMMENT PIC  X(01).
+                       11  SPA-WKSRY-YSETKBN       PIC  9(01).
+      *H28.11          ÍÑË¡¥³¡¼¥É¿ôÎÌ
+                       11  SPA-WKSRY-INPUTCHI-G.
+      *R02.4               13  SPA-WKSRY-INPUTCHI  PIC  X(08)
+                           13  SPA-WKSRY-INPUTCHI  PIC  X(10)
+                                                   OCCURS   5.
+      *
+                       11  SPA-WKSRY-ERRKBN        PIC  9(01).
+      *
+      *     Ä¢É¼ÊÔ½¸ÆâÍÆ¥¹¥ÑÎÎ°è
+           03  SPA-KA02-PRT.
+               05  SPA-PARA-ZAI-REC             OCCURS   100.
+                   09  SPA-PARA-SELFLG            PIC  9(01).
+                   09  SPA-PARA-ZAINUM            PIC  9(08).
+                   09  SPA-PARA-SRYSYUKBN         PIC  X(03).
+                   09  SPA-PARA-SRYKBN            PIC  X(02).
+      *            ºÞÅÀ¿ô·×
+                   09  SPA-PARA-ZAITENKEI           PIC  9(08).
+                   09  SPA-PARA-ZAIKAIKEI           PIC  9(07).
+                   09  SPA-PARA-SINRYO-TBL        OCCURS   50.
+                           11  SPA-PARA-SRYCD         PIC  X(09).
+                           11  SPA-PARA-SRYSURYO      PIC  9(05)V9(05).
+                           11  SPA-PARA-KANSURYO      PIC  9(05)V9(05).
+                           11  SPA-PARA-SRYKAISU      PIC  9(03).
+                           11  SPA-PARA-ZAIKAISU      PIC  9(08).
+                           11  SPA-PARA-INPUTNUM      PIC  9(03).
+      *R02.4               11  SPA-PARA-INPUTCOMENT   PIC  X(80).
+                           11  SPA-PARA-INPUTCOMENT   PIC  X(140).
+                           11  SPA-PARA-AUTOKBN       PIC  X(01).
+      *
+                           11  SPA-PARA-KANZANCHI     PIC  9(05)V9(5).
+                           11  SPA-PARA-KANZANTANINAME
+                                                      PIC  X(08).
+      *                    ÍÑË¡¥³¡¼¥ÉÍÑ
+                           11  SPA-PARA-KENTAICOMMENT PIC  X(01).
+                           11  SPA-PARA-YSETKBN       PIC  X(01).
+      *H28.11              ÍÑË¡¥³¡¼¥É¿ôÎÌ
+                           11  SPA-PARA-INPUTCHI-G.
+                               13  SPA-PARA-INPUTCHI  PIC  X(10)
+                                                      OCCURS   5.
+      *
+                           11  SPA-PARA-ERRKBN        PIC  9(01).
+      *

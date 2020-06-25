@@ -1,0 +1,321 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_DATA = @INSTALL_DATA@
+RUBY = @RUBY@
+
+noinst_shell_sources = \
+	sample.sh.in \
+
+utf8_shell_sources = \
+	allways/site-upgrade.sh.in \
+	allways/ORCBQ01.sh.in \
+	allways/orcbsd01.sh.in \
+	allways/orcbse01.sh.in \
+	allways/orcbsf01.sh.in \
+	allways/orcbsf02.sh.in \
+	allways/orcbsf03.sh.in \
+	allways/orhcml09.sh.in \
+	allways/print.sh.in \
+	allways/print_stop.sh.in \
+	allways/preprint.sh.in \
+	allways/orc_file_del.sh.in \
+	allways/orc_putcsv.sh.in \
+	allways/tensu.sh.in \
+	allways/program_upgrade_online.sh.in \
+	allways/program_upgrade_restart.sh.in \
+	allways/cronselect.sh.in \
+	allways/logupload.sh.in \
+	daily/HCALL.sh.in \
+	daily/HC01.sh.in \
+	daily/HCALL2.sh.in \
+	daily/toukei2.sh.in \
+	monthly/recept1.sh.in \
+	monthly/recept2.sh.in \
+	monthly/recept3.sh.in \
+	monthly/recept4.sh.in \
+	monthly/recept4_fd.sh.in \
+	monthly/recept4_kobetu.sh.in \
+	monthly/recept41.sh.in \
+	monthly/recept41_kobetu.sh.in \
+	monthly/recept5.sh.in \
+	monthly/recept50.sh.in \
+	monthly/recept6.sh.in \
+	monthly/recept60.sh.in \
+	monthly/recept7.sh.in \
+	monthly/recept8.sh.in \
+	monthly/recept9.sh.in \
+	monthly/recept10.sh.in \
+	monthly/recept11.sh.in \
+	monthly/recept12.sh.in \
+	monthly/recept13.sh.in \
+	monthly/recept14.sh.in \
+	monthly/recept15.sh.in \
+	monthly/recept16.sh.in \
+	monthly/recept17.sh.in \
+	monthly/sokatsu.sh.in \
+	monthly/teiki1.sh.in \
+	monthly/teiki2.sh.in \
+	monthly/toukei1.sh.in \
+	monthly/receden_sokatu.sh.in \
+	monthly/collectdata1.sh.in \
+	claim/HL01.sh.in \
+	claim/HL02.sh.in \
+	claim/HL03.sh.in \
+	claim/ORC_CLAIM_SERVER.sh.in \
+	allways/orcbi201.sh.in \
+	allways/chkmst.sh.in \
+	allways/orcbs01.sh.in \
+	monthly/receipt_prv.sh.in \
+	allways/cachedl.sh.in \
+	monthly/teiki3.sh.in \
+	allways/ykjmst.sh.in \
+	allways/ORCBQ02.sh.in \
+	monthly/prtdbdel.sh.in \
+	allways/ykjchk.sh.in \
+	allways/chkmst2.sh.in \
+	tools/db-backup.sh.in \
+	monthly/receipt_export.sh.in \
+	allways/orc_cups_del.sh.in \
+	daily/infectiondata1.sh.in \
+	allways/plugin.sh.in \
+	execshell.sh.in \
+	allways/ORCBQ03.sh.in \
+	monthly/dtck_prv.sh.in \
+	daily/infectiondata2.sh.in \
+	daily/infectionagree.sh.in \
+	allways/orcbs02.sh.in \
+	tools/orcred2conv.sh.in \
+	allways/orcbi202.sh.in \
+	allways/log_shell.sh.in \
+	monthly/recept42.sh.in \
+	daily/push_form.sh.in \
+	allways/orcbi203.sh.in \
+	monthly/upload_jibai_receipt.sh.in \
+	monthly/recept43.sh.in \
+	execshell_main.sh.in \
+	allways/zaiko01.sh.in \
+	allways/client_print.sh.in \
+	allways/disease_masterlst.sh.in \
+	allways/medication_masterlst.sh.in \
+	allways/patient_basis_all.sh.in \
+	allways/patient_disease_all.sh.in \
+	monthly/recept4_renkei2.sh.in \
+	allways/patient_medical_all.sh.in \
+	allways/address_masterlst.sh.in \
+	allways/haori_monblobapi.sh.in \
+
+
+shell_sources = \
+	allways/master_standard_upgrade.sh.in \
+	allways/master_license_upgrade.sh.in \
+	tools/run_master_upgrade.sh.in \
+	allways/program_upgrade_check_log.sh.in \
+	allways/master_get.sh.in \
+	allways/siori_pull.sh.in \
+	allways/medphoto_copy.sh.in \
+	allways/master_upgrade.sh.in \
+	allways/das-check.sh.in \
+	allways/das-profile.sh.in \
+	monthly/das-upload.sh.in \
+	daily/das-infection.sh.in \
+	daily/das-infection2.sh.in \
+	allways/store_mnote.sh.in \
+	tools/run_renkei_data_2.sh.in \
+	allways/jmamr.sh.in \
+	daily/execoprg.sh.in \
+	allways/HL04.sh.in \
+	allways/HL05.sh.in \
+	allways/mask.sh.in \
+	allways/get_license_access_key.sh.in \
+	allways/convert_image.sh.in \
+	allways/orc_print_dmy.sh.in \
+	allways/print_prv.sh.in \
+	daily/HCALL_prv.sh.in \
+	daily/online-reprint.sh.in \
+	daily/red2pdf.sh.in \
+	daily/import_blob.sh.in \
+	daily/export_blob.sh.in \
+	daily/rpmain1.sh.in \
+	monthly/recept1_mis.sh.in \
+	monthly/recept4_mis.sh.in \
+	monthly/recept41_mis.sh.in \
+	monthly/recept6_mis.sh.in \
+	monthly/recept9_mis.sh.in \
+	monthly/recept10_mis.sh.in \
+	tools/run_mis.sh.in \
+	tools/run_receipt_mis_ika.sh.in \
+	tools/run_receipt_mis_rou.sh.in \
+	allways/export_monblob.sh.in \
+	tools/run_jmamr_mis.sh.in \
+	tools/run_mis_past.sh.in \
+	allways/migrate-v51_master_upgrade_ctrl.sh.in \
+	allways/migrate-v51_master_upgrade.sh.in \
+	allways/migrate-v51_master_standard_upgrade.sh.in \
+	allways/migrate-v51_master_license_upgrade.sh.in \
+	allways/migrate-v51_migrate_ctrl.sh.in \
+	allways/migrate-v51_migrate.sh.in \
+	allways/master_export.sh.in \
+	allways/delete_tempdir.sh.in \
+	allways/set_contract.sh.in \
+
+ruby_sources = \
+	daily/print_parent2.rb.in \
+	daily/print_parent_prv.rb.in \
+	daily/print_parent_common.rb.in \
+	allways/cachedl.rb.in \
+	allways/run.rb.in \
+	allways/orcadt_verify.rb.in \
+	allways/das-profile.rb.in \
+	monthly/das-upload.rb.in \
+	monthly/lib/orcadas/command.rb.in \
+	monthly/lib/orcadas/formdata.rb.in \
+	monthly/lib/orcadas/utils.rb.in \
+	allways/program_upgrade_patchmd5.rb.in \
+	allways/program_upgrade_verify.rb.in \
+	daily/das-upload2.rb.in \
+	allways/mksqldata.rb.in \
+	tools/orcred2textview.rb.in \
+	tools/redinspector.rb.in \
+	monthly/receden_check.rb.in \
+	monthly/receden_common.rb.in \
+	monthly/receden_common_const.rb.in \
+	monthly/receden_const.rb.in \
+	monthly/receden_error.rb.in \
+	monthly/receden.rb.in \
+	monthly/rosai_receden.rb.in \
+	monthly/rosai_receden_check.rb.in \
+	monthly/rosai_receden_common.rb.in \
+	monthly/rosai_receden_common_const.rb.in \
+	monthly/rosai_receden_error.rb.in \
+	daily/shrink_rp.rb.in \
+	allways/get_license_access_key.rb.in \
+	allways/tru8.rb.in \
+	allways/get_license_info.rb.in \
+
+claim_sources = \
+	claim/rb/clm_rcv.rb.in \
+	claim/rb/clm_snd.rb.in \
+	claim/rb/orca_jcnv.rb.in \
+	claim/rb/orca_lib.rb.in \
+	claim/rb/orca_make_xml.rb.in \
+	claim/rb/xml_jcnv.rb.in \
+	claim/rb/xml_valid.rb.in \
+	claim/rb2/claim2_decode.rb.in \
+	claim/rb2/claim2_lib.rb.in \
+	claim/rb2/hircnv.rb.in \
+
+claim_data = \
+	claim/def/orca_layout_accounting.def \
+	claim/def/orca_layout_front.def \
+	claim/def/orca_decode.hir \
+	claim/dtd/MML1014_euc.dtd \
+	claim/rb/claim_empty_elem.list \
+	claim/template/orca_base_accounting.xml \
+	claim/template/orca_base_front.xml 
+
+noinst_claim_file = \
+	claim/soc/template/orca_base_accounting_soc.xml \
+	claim/soc/template/orca_base_front_soc.xml \
+	claim/soc/def/orca_decode_soc.hir \
+	claim/soc/def/orca_layout_accounting_soc.def \
+	claim/soc/def/orca_layout_front_soc.def 
+
+shell_scripts = \
+	$(utf8_shell_sources:.sh.in=.sh) \
+	$(shell_sources:.sh.in=.sh)
+
+utf8_shell_scripts = \
+	$(utf8_shell_sources:.sh.in=.sh) \
+
+noinst_shell_scripts = $(noinst_shell_sources:.sh.in=.sh)
+
+ruby_scripts = \
+	$(ruby_sources:.rb.in=.rb)
+
+claim_scripts = \
+	$(claim_sources:.rb.in=.rb)
+
+.SUFFIXES: .sh.in .sh .rb.in .rb
+
+.sh.in.sh: 
+	sed -e 's,\@jma-receipt-env\@,$(sysconfdir)\/jma-receipt\.env,g' \
+	    -e 's,\@VERSION\@,$(VERSION),g' \
+	    -e 's,%RUBY%,$(RUBY),g' \
+	$< > $@
+	chmod +x $@
+
+.rb.in.rb: 
+	sed -e 's,%RUBY%,$(RUBY),' $< > $@
+	chmod +x $@
+
+all:$(noinst_shell_scripts) $(shell_scripts) convutf8 \
+	$(ruby_scripts) $(claim_scripts)
+
+convutf8:
+	touch convutf8
+	echo $(utf8_shell_scripts) | xargs nkf -Ewm0 --overwrite
+
+filecheck:
+	@(for i in $(noinst_shell_sources) $(noinst_claim_file)\
+		  $(shell_sources) $(ruby_scripts) $(claim_scripts) $(claim_data) \
+			;do echo "make	`basename $${i}`"; done ; \
+	find . \
+	-name "." -o \
+	-name "CVS" -prune -o \
+	-name "Makefile*" -o \
+	-name ".cvsignore" -o \
+	-name "*.bak" -o \
+	-name "*.sh" -o \
+	-name "build-stamp" -o \
+	-name "allways" -o \
+	-name "daily" -o \
+	-name "monthly" -o \
+	-name "tools" -o \
+	-name "claim" -o \
+	-name "def" -o \
+	-name "dtd" -o \
+	-name "rb" -o \
+	-name "rb2" -o \
+	-name "template" -o \
+	-name "soc" -o \
+	-name "lib" -o \
+	-name "orcadas" -o \
+	-printf "file\t%f\n") \
+	|sort -k2 |uniq -u -f1
+
+clean: 
+	-rm -f $(noinst_shell_scripts)
+	-rm -f $(shell_scripts)
+	-rm -f convutf8
+	-rm -f $(ruby_scripts)
+	-rm -f $(claim_scripts)
+
+distclean: clean
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(scriptsdir)
+	$(INSTALL) -d $(scriptsdir)/allways
+	$(INSTALL) -d $(scriptsdir)/daily
+	$(INSTALL) -d $(scriptsdir)/tools
+	$(INSTALL) -d $(scriptsdir)/monthly
+	$(INSTALL) -d $(scriptsdir)/monthly/lib
+	$(INSTALL) -d $(scriptsdir)/monthly/lib/orcadas
+	$(INSTALL) -d $(scriptsdir)/claim
+	$(INSTALL) -d $(scriptsdir)/claim/def
+	$(INSTALL) -d $(scriptsdir)/claim/dtd
+	$(INSTALL) -d $(scriptsdir)/claim/rb
+	$(INSTALL) -d $(scriptsdir)/claim/rb2
+	$(INSTALL) -d $(scriptsdir)/claim/template
+	for file in $(shell_scripts) $(ruby_scripts) $(claim_scripts); do \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  $(INSTALL) $$file $(scriptsdir)/$$dir; \
+	done
+	for file in $(claim_data); do \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  $(INSTALL_DATA) $$file $(scriptsdir)/$$dir; \
+	done

@@ -1,0 +1,11 @@
+push_found{
+	event				varchar(50);
+	body	{
+		Kerte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+#---> 処理件数（データ）
+		All_Number_Of_Records  varchar(10);
+#---> 処理件数（帳票）
+		All_Number_Of_Sheets   varchar(10);
+	};
+};

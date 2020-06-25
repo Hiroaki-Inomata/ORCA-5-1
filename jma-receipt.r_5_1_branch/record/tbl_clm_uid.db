@@ -1,0 +1,76 @@
+tbl_clm_uid {
+	HOSPNUM				number(2,0);
+	PTID     			number(10,0);
+	SRYKA                           char(2);
+	UID_NEW				char(36);
+	HKNCOMBI1			number(4,0);
+	UID1				char(36);
+	HKNCOMBI2			number(4,0);
+	UID2				char(36);
+	HKNCOMBI3			number(4,0);
+	UID3				char(36);
+	HKNCOMBI4			number(4,0);
+	UID4				char(36);
+	HKNCOMBI5			number(4,0);
+	UID5				char(36);
+	HKNCOMBI6			number(4,0);
+	UID6				char(36);
+	HKNCOMBI7			number(4,0);
+	UID7				char(36);
+	HKNCOMBI8			number(4,0);
+	UID8				char(36);
+	HKNCOMBI9			number(4,0);
+	UID9				char(36);
+	HKNCOMBI10			number(4,0);
+	UID10				char(36);
+	HKNCOMBI11			number(4,0);
+	UID11				char(36);
+	HKNCOMBI12			number(4,0);
+	UID12				char(36);
+	HKNCOMBI13			number(4,0);
+	UID13				char(36);
+	HKNCOMBI14			number(4,0);
+	UID14				char(36);
+	HKNCOMBI15			number(4,0);
+	UID15				char(36);
+	HKNCOMBI16			number(4,0);
+	UID16				char(36);
+	HKNCOMBI17			number(4,0);
+	UID17				char(36);
+	HKNCOMBI18			number(4,0);
+	UID18				char(36);
+	HKNCOMBI19			number(4,0);
+	UID19				char(36);
+	HKNCOMBI20			number(4,0);
+	UID20				char(36);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,PTID,SRYKA;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_clm_uid_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_clm_uid
+			WHERE	HOSPNUM	=   :HOSPNUM
+			AND	PTID	=   :PTID
+			AND	SRYKA	=   :SRYKA
+		;
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_clm_uid_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_clm_uid
+			WHERE	HOSPNUM	=   :HOSPNUM
+		;
+	};
+};
+

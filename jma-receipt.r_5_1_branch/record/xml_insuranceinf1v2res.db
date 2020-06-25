@@ -1,0 +1,39 @@
+xml_insuranceinf1v2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	insuranceinfres {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Insurance_Information	{
+	Base_Date		varchar(10);
+#---    保険情報
+	HealthInsurance_Information	{
+#---    	保険の種類
+		InsuranceProvider_Class		varchar(03);
+        	InsuranceProvider_WholeName	varchar(20);
+#---    	法別区分
+        	InsuranceProvider_Identification_Number	varchar(02);
+#---    	補助区分
+		HealthInsuredPerson_Assistance_Info	{
+        	        HealthInsuredPerson_Assistance		varchar(01);
+           	 	HealthInsuredPerson_Assistance_Name	varchar(20);
+           	 	HealthInsuredPerson_Assistance_Mode	varchar(1);
+	        	} [30];
+	        } [99];
+#---    公費情報
+       	PublicInsurance_Information   {
+                PublicInsurance_Class		varchar(03);
+                PublicInsurance_Name		varchar(20);
+#---    	法別区分
+        	PublicInsurance_Identification_Number	varchar(02);
+#---    	支払区分(未使用　老人公費用）
+        	PublicInsurance_Paykbn_Number	varchar(02);
+	    	} [200];
+   	};
+   	};
+};

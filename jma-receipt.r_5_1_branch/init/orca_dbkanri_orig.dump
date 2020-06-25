@@ -1,0 +1,36 @@
+--
+-- Name: tbl_dbkanri; Type: TABLE;
+--
+
+CREATE TABLE tbl_dbkanri (
+    kanricd character(8) NOT NULL,
+    version character varying(64),
+    dbsversion1 character varying(64),
+    dbsversion2 character varying(64),
+    termid character varying(32),
+    opid character varying(16),
+    creymd character(8),
+    upymd character(8),
+    uphms character(6)
+);
+
+
+INSERT INTO tbl_dbkanri VALUES(
+    'ORCADB00',
+    '000000-0',
+    'S-000000-0-00000000-0',
+    'S-000000-0-00000000-0',
+    '',
+    '',
+    to_char(now(),'yyyymmdd'),
+    '00000000',
+    '000000');
+
+
+--
+-- Name: tbl_dbkanri_primary_key; Type: CONSTRAINT;
+--
+
+ALTER TABLE ONLY tbl_dbkanri
+    ADD CONSTRAINT tbl_dbkanri_primary_key PRIMARY KEY (kanricd);
+

@@ -1,0 +1,47 @@
+xml_hsconfbasev2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date varchar(10);
+		Information_Time varchar(8);
+		Api_Result       varchar(2);
+		Api_Result_Message varchar(100);
+		Meal_Cost_Class{
+			Label	varchar(30);
+			Data	varchar(9);
+			Name	varchar(30);
+		};
+		Evaluation_Nutrition_Administration{
+			Label	varchar(30);
+			Data	varchar(1);
+			Name	varchar(30);
+		};
+		Consumption_Tax_Room_Charge{
+			Label	varchar(30);
+			Data	varchar(1);
+			Name	varchar(30);
+		};
+		Insufficient_Doctors{
+			Label	varchar(30);
+			Data	varchar(1);
+			Name	varchar(30);
+		};
+		Constant_Overhead{
+			Label	varchar(30);
+			Data	varchar(1);
+			Name	varchar(30);
+		};
+		Additional_Hospital_Charge{
+			Label	varchar(30);
+			Data		varchar(9);
+			Name		varchar(50);
+		}[21];
+		Over180days_Default{
+			Label	varchar(30);
+			Data	varchar(1);
+			Name	varchar(30);
+		};
+	};
+};

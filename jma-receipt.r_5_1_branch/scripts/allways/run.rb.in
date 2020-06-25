@@ -1,0 +1,31 @@
+#!%RUBY%
+# coding : utf-8
+require 'date'
+require 'syslog'
+
+lockdir = '/tmp/jma-receipt-lock'
+CRONSELECT = File.dirname(__FILE__) + '/' + "cronselect.sh"
+
+list = `#{CRONSELECT}`.split("\n").map{|r|
+  r = r.split(/,/).map{|c| c = "." * c.length if c =~ /^\*/; c }
+  [sprintf("%s %s/%s/.. %s", r[0], r[1], r[2], r[3]), r[4..-1].join(" ")]
+}
+time = DateTime.now.strftime("%w %D %H")
+list.each {|cmd|
+  next unless /#{cmd[0]}/ =~ time
+  begin
+    Dir.mkdir(lockdir)
+    `#{cmd[1]}`
+    Dir.rmdir(lockdir)
+  rescue Errno::EEXIST
+    Syslog.open("jma-receipt-cron") {|s|
+      s.log(Syslog::LOG_CRIT, "found #{lockdir}. jma-receipt-cron locking now. don't execute #{cmd[1]}")
+    }
+    next
+  rescue => e
+    Syslog.open("jma-receipt-cron") {|s|
+      s.log(Syslog::LOG_CRIT, e.to_s)
+    }
+    abort
+  end
+}

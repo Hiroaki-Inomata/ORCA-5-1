@@ -1,0 +1,107 @@
+tbl_odritem {
+	HOSPNUM			 	number(2,0);
+	KARTE_KEY			varchar(36);
+	ORDERNUM			number(2,0);
+	ITEMNUM				number(2,0);
+	ITEMID				char(5);
+	ITEM 	  			varchar(10);
+	MEMO 	  			varchar(128);
+	ERRCD				char(4);
+	STATUS				number(1,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,KARTE_KEY,ORDERNUM,ITEMNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_odritem_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_odritem
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   KARTE_KEY   =   :KARTE_KEY
+			AND   ORDERNUM    =   :ORDERNUM
+			AND   ITEMNUM     =   :ITEMNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_odritem_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_odritem
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   KARTE_KEY   =   :KARTE_KEY
+			AND   ORDERNUM    =   :ORDERNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_odritem_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_odritem
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     KARTE_KEY =   :KARTE_KEY
+			AND     ORDERNUM  =   :ORDERNUM
+			AND     STATUS    =   :STATUS
+			ORDER   BY  ITEMNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_odritem
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     KARTE_KEY =   :KARTE_KEY
+			AND     ORDERNUM  =   :ORDERNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_odritem_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_odritem
+		WHERE  HOSPNUM        = :HOSPNUM
+		AND    KARTE_KEY     = :KARTE_KEY
+		AND    ORDERNUM      = :ORDERNUM
+		ORDER  BY  ITEMNUM
+		;
+	};
+};
+
+path	 all	{
+	DBSELECT	{
+		DECLARE tbl_odritem_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_odritem
+		WHERE  HOSPNUM        = :HOSPNUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_odritem
+			WHERE   (HOSPNUM,KARTE_KEY,ORDERNUM) in (
+         SELECT HOSPNUM,KARTE_KEY,ORDERNUM
+         FROM tbl_order
+         WHERE HOSPNUM       =  :HOSPNUM
+         AND   UKEYMD        <  :CREYMD
+		)
+        ;
+	};
+};
+

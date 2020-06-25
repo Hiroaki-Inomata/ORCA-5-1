@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+RENNUM=0
+#-------------------------------------------#
+#    ÌôºÞ¾ðÊó¥Þ¥¹¥¿°ìÍ÷ºîÀ®
+#        $1-${11} °õºþ£Ä£ÂÍÑ¸ÇÄê°ú¿ô
+#        ${12} ¥¸¥ç¥Ö£É£Ä
+#        ${13} ¥·¥§¥ë£É£Ä
+#        ${14} °åÎÅµ¡´Ø£Î£Õ£Í
+#        ${15} ¾ò·ïÍ­Ìµ
+#        ${16} ¾ò·ï¶èÊ¬
+#        ${17} ÌôºÞ¶èÊ¬
+#        ${18} ½ÐÎÏ½ç
+#        ${19} ÌôºÞÌ¾¾Î
+#        ${20} ÌôºÞ£Ã£Ä
+#        ${21} ÆþÎÏ£Ã£Ä
+#        ${22} ¥¨¥é¡¼¥Õ¥¡¥¤¥ëÌ¾ 
+#-------------------------------------------#
+#
+##      ¥¨¥é¡¼¥Õ¥¡¥¤¥ëºï½ü
+	echo $#
+	echo "echo " ${22}
+        if  [ -e ${22} ]; then
+            rm  ${22}
+        fi
+        
+        RENNUM=$(expr $RENNUM + 1) 
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBN21 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16},${17},${18},${19},${20},${21},${22}
+        if  [ -e ${22} ]; then
+            exit
+        fi
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${14}
+        exit 

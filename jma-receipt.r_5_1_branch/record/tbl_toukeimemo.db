@@ -1,0 +1,124 @@
+tbl_toukeimemo {
+	HOSPNUM				number(2,0);
+	PGID		            char(20);
+	KANRICD		            char(4);
+	KBNCD                   char(8);
+	STYUKYMD                char(8);
+	EDYUKYMD                char(8);
+	PARA1                   varchar(20);
+	PARA2                   varchar(20);
+	PARA3                   varchar(20);
+	PARA4                   varchar(20);
+	PARA5                   varchar(20);
+	PARA6                   varchar(20);
+	PARA7                   varchar(20);
+	PARA8                   varchar(20);
+	MEMO                    varchar(6000);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+	SAVEPARA		char(1);
+	PARA9                   varchar(20);
+	PARA10                  varchar(20);
+	USERMEMO                varchar(5000);
+};
+
+primary	{
+	HOSPNUM,PGID,KANRICD,KBNCD,STYUKYMD,EDYUKYMD ;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeimemo_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   PGID      =  :PGID
+			AND     KANRICD   =  :KANRICD
+			AND     KBNCD     =  :KBNCD
+			AND     STYUKYMD  =  :STYUKYMD
+			AND     EDYUKYMD  =  :EDYUKYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeimemo_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   PGID      =  :PGID
+			AND     KANRICD   =  :KANRICD
+			AND     KBNCD     =  :KBNCD
+			AND     STYUKYMD <=  :STYUKYMD
+			AND     EDYUKYMD >=  :EDYUKYMD
+		;
+	};
+};
+
+path	del1		{ 	
+	DBDELETE	{
+		DELETE	FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =  :KANRICD
+			AND     KBNCD     =  :KBNCD
+			AND     STYUKYMD  =  :STYUKYMD
+			AND     EDYUKYMD  =  :EDYUKYMD
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeimemo_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+
+path	del2		{ 	
+	DBDELETE	{
+		DELETE	FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =  :KANRICD
+			AND     KBNCD     =  :KBNCD
+			AND     STYUKYMD  <=  :STYUKYMD
+			AND     EDYUKYMD  >=  :EDYUKYMD
+		;
+	};
+};
+
+path	del3		{ 	
+	DBDELETE	{
+		DELETE	FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =  :KANRICD
+			AND     KBNCD     >=  :KBNCD
+			AND     KBNCD     <=  :UPYMD
+			AND     STYUKYMD  <=  :STYUKYMD
+			AND     EDYUKYMD  >=  :EDYUKYMD
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeimemo_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeimemo
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD   =  :KANRICD
+			AND     KBNCD     >=  :KBNCD
+			AND     KBNCD     <=  :UPYMD
+			AND     STYUKYMD  <=  :STYUKYMD
+			AND     EDYUKYMD  >=  :EDYUKYMD
+            ORDER BY KBNCD,STYUKYMD
+		;
+	};
+};
+

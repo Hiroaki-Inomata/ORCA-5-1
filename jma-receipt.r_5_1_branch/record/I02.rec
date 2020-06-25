@@ -1,0 +1,87 @@
+I02 {
+  fixed4 {
+    B05 {
+      state int;
+    };
+    SHOKAI {
+      textdata varchar(4);
+    };
+    JYOTAI {
+      textdata varchar(40);
+    };
+    BTUNAME {
+      textdata varchar(20);
+    };
+    BRMNUM {
+      textdata varchar(6);
+    };
+    NYUINYMD {
+      textdata varchar(9);
+    };
+    LBLTIMEKBN_IN {
+      textdata varchar(10);
+    };
+    TAIINYMD {
+      textdata varchar(9);
+    };
+    TAIINCD {
+      textdata varchar(10);
+    };
+    LBLTIMEKBN_OT {
+      textdata varchar(10);
+    };
+    NYUINKA {
+      textdata varchar(20);
+    };
+    DR {
+      textdata varchar(24);
+    };
+    SANTEI {
+      textdata varchar(60);
+    };
+    scrolledwindow2 {
+      TENKALST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(20);
+            column2 varchar(20);
+            column3 varchar(6);
+            column4 varchar(9);
+            column5 varchar(9);
+            column6 varchar(5);
+            column7 varchar(5);
+            column8 varchar(40);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    CMB_NYUGAI {
+      NYUGAI {
+        textdata varchar(8);
+        state int;
+      };
+      count int;
+        item varchar(8)[5];
+      state int;
+    };
+    scrolledwindow1 {
+      BYOMEILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(4);
+            column3 varchar(20);
+            column4 varchar(50);
+            column5 varchar(9);
+            column6 varchar(9);
+            column7 varchar(4);
+          }[500];
+          selectdata bool[500];
+      };
+    };
+  };
+};

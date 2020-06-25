@@ -1,0 +1,55 @@
+prefix = @prefix@
+exec_prefix= @exec_prefix@
+sysconfdir = @sysconfdir@
+orcalibdir  = @libdir@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+
+VERSION = @VERSION@
+
+ORCA_DIR = ${exec_prefix}
+
+docdir = ${ORCA_DIR}/doc
+orcadatadir = ${ORCA_DIR}/data
+formdir = ${ORCA_DIR}/form
+initdir = ${ORCA_DIR}/init
+lddefdir = ${ORCA_DIR}/lddef
+recorddir = ${ORCA_DIR}/record
+screendir = ${ORCA_DIR}/screen
+scriptsdir = ${ORCA_DIR}/scripts
+copydir = ${ORCA_DIR}/cobol/copy
+bindir = ${ORCA_DIR}/bin
+libdir = ${ORCA_DIR}/lib
+
+COPYGEN = @COPYGEN@
+
+PATCHDIR = @patchdir@
+PATCHLIBDIR = @patchlibdir@
+
+PATCHCOPYDIR = ${PATCHDIR}/cobol/copy
+PATCHDATADIR = ${PATCHDIR}/data
+PATCHFORMDIR = ${PATCHDIR}/form
+PATCHINITDIR = ${PATCHDIR}/init
+PATCHLDDEFDIR = ${PATCHDIR}/lddef
+PATCHRECORDDIR = ${PATCHDIR}/record
+PATCHSCREENDIR = ${PATCHDIR}/screen
+PATCHSCRIPTSDIR = ${PATCHDIR}/scripts
+
+SITEDIR = @sitedir@
+SITESRCDIR = @sitesrcdir@
+SITELIBDIR = @sitelibdir@
+
+SITECOPYDIR = ${SITEDIR}/cobol/copy
+SITEDATADIR = ${SITEDIR}/data
+SITEFORMDIR = ${SITEDIR}/form
+SITEINITDIR = ${SITEDIR}/init
+SITELDDEFDIR = ${SITEDIR}/lddef
+SITERECORDDIR = ${SITEDIR}/record
+SITESCREENDIR = ${SITEDIR}/screen
+SITESCRIPTSDIR = ${SITEDIR}/scripts
+
+allwaysscripts = ${scriptsdir}/allways
+dailyscripts = ${scriptsdir}/daily
+monthlyscripts = ${scriptsdir}/monthly
+printscripts = ${scriptsdir}/daily/print-data.rb

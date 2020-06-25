@@ -1,0 +1,48 @@
+tbl_dpc_cdchg {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	CD					varchar(20);
+	SRYCD				char(9);
+};
+
+primary	{
+	CD,SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_cdchg_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_cdchg
+		WHERE CD        =   :CD
+		 AND  SRYCD     =   :SRYCD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_cdchg_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_cdchg
+		WHERE CD        =   :CD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_cdchg_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_cdchg
+		WHERE SRYCD          =  :SRYCD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+

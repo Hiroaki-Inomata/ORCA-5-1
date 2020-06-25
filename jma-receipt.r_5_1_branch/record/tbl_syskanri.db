@@ -1,0 +1,542 @@
+tbl_syskanri	{
+	HOSPNUM				number(2,0);
+	KANRICD		char(4);
+	KBNCD		char(8);
+	STYUKYMD	char(8);
+	EDYUKYMD	char(8);
+	KANRITBL	varchar(500);
+	TERMID		varchar(16);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM	number(2,0),virtual;
+	UPKANRICD	char(4),virtual;
+	UPKBNCD	char(8),virtual;
+	UPSTYUKYMD	char(8),virtual;
+	UPEDYUKYMD	char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,KANRICD,KBNCD,STYUKYMD,EDYUKYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			AND		KBNCD        LIKE   :KBNCD
+			AND		STYUKYMD     <=  :STYUKYMD
+			AND		EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			ORDER BY KBNCD
+		;
+	};
+};
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND		STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			AND     KANRITBL     LIKE  :KANRITBL
+		;
+	};
+};
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD          LIKE   :KBNCD
+			ORDER	BY	KBNCD,STYUKYMD
+		;
+	};
+};
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			ORDER	BY	KBNCD,STYUKYMD
+		;
+	};
+};
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key6_csr CURSOR FOR
+		SELECT DISTINCT ON (KBNCD) *
+		FROM tbl_syskanri 
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			ORDER	BY	KBNCD
+		;
+	};
+};
+
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY	KBNCD
+		;
+	};
+};
+
+path	key8	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD          =   :KBNCD
+			ORDER	BY	STYUKYMD DESC
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			AND	KBNCD        LIKE   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY	KBNCD
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			AND	KBNCD        =   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syskanri 
+				SET	
+#					:*
+					HOSPNUM   	= :HOSPNUM,
+					KANRICD      =   :KANRICD,
+					KBNCD     	 =   :KBNCD,
+					STYUKYMD     =   :STYUKYMD,
+					EDYUKYMD     =   :EDYUKYMD,
+					KANRITBL     =   :KANRITBL,
+					TERMID       =   :TERMID,
+					OPID         =   :OPID,
+					CREYMD       =   :CREYMD,
+					UPYMD        =   :UPYMD,
+					UPHMS        =   :UPHMS
+		WHERE 	HOSPNUM	= :UPHOSPNUM
+			AND   KANRICD      =   :UPKANRICD
+			AND		KBNCD        =   :UPKBNCD
+			AND		STYUKYMD     =   :UPSTYUKYMD
+			AND		EDYUKYMD     =   :UPEDYUKYMD
+		;
+	};
+};
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+      		;
+	};
+};
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			AND		STYUKYMD   LIKE  :STYUKYMD
+			ORDER	BY	STYUKYMD
+		;
+	};
+};
+
+path	key12		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key12_csr CURSOR FOR
+		SELECT KANRICD,STYUKYMD,EDYUKYMD
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			GROUP BY KANRICD,STYUKYMD,EDYUKYMD
+			ORDER	BY	STYUKYMD
+		;
+	};
+};
+
+path	upd2	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syskanri 
+				SET	
+					STYUKYMD     =   :STYUKYMD,
+					EDYUKYMD     =   :EDYUKYMD,
+					UPYMD        =   :UPYMD,
+					UPHMS        =   :UPHMS
+		WHERE 	HOSPNUM	= :UPHOSPNUM
+			AND   KANRICD      =   :UPKANRICD
+			AND		STYUKYMD     =   :UPSTYUKYMD
+			AND		EDYUKYMD     =   :UPEDYUKYMD
+		;
+	};
+};
+
+path	key13	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			ORDER	BY	KBNCD DESC
+		;
+	};
+};
+path	key14	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key14_csr CURSOR FOR
+		SELECT DISTINCT ON (KBNCD) *
+		FROM tbl_syskanri 
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND	KBNCD        LIKE   :KBNCD
+			ORDER	BY	KBNCD
+		;
+	};
+};
+
+path	key15	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			ORDER BY KANRITBL,
+                                 KBNCD
+		;
+	};
+};
+
+path	key16	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     KBNCD        =   :KBNCD
+			AND     STYUKYMD     <   :STYUKYMD
+			ORDER	BY	STYUKYMD DESC
+		;
+	};
+};
+
+path	key17	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			ORDER	BY	STYUKYMD,
+                                        KBNCD
+		;
+	};
+};
+
+path	key18	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key18_csr CURSOR FOR
+		SELECT STYUKYMD,EDYUKYMD
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     KBNCD        <   :KBNCD
+			GROUP   BY	STYUKYMD,EDYUKYMD
+			ORDER	BY	STYUKYMD DESC,EDYUKYMD
+		;
+	};
+};
+
+path	key19		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE    KANRICD      =   :KANRICD 
+			AND   KBNCD        =   :KBNCD
+			AND   STYUKYMD     <=  :STYUKYMD
+			AND   EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY	HOSPNUM
+		;
+	};
+};
+
+path	key20	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key20_csr CURSOR FOR
+		SELECT DISTINCT ON (KBNCD) *
+		FROM tbl_syskanri 
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND	KBNCD        LIKE   :KBNCD
+			ORDER	BY	KBNCD,
+                                        STYUKYMD DESC
+		;
+	};
+};
+
+path	key21	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key21_csr CURSOR FOR
+		SELECT DISTINCT ON (KBNCD) *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD     LIKE   :KBNCD
+			AND   STYUKYMD    <= :STYUKYMD
+			AND   EDYUKYMD    >=  :EDYUKYMD
+			ORDER	BY	KBNCD,
+                                        STYUKYMD DESC
+		;
+	};
+};
+
+path	key22	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD     LIKE   :KBNCD
+			ORDER	BY	KBNCD DESC
+		;
+	};
+};
+
+
+path	key23	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			ORDER	BY	OPID,KBNCD
+		;
+	};
+};
+
+path	key24	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key24_csr CURSOR FOR
+		SELECT STYUKYMD,KBNCD
+		FROM ( SELECT DISTINCT(STYUKYMD),'1' AS KBNCD
+               FROM   tbl_syskanri
+               WHERE  HOSPNUM =  :HOSPNUM
+               AND    KANRICD =  :KANRICD
+               UNION
+		       SELECT DISTINCT(EDYUKYMD),'2' AS KBNCD
+               FROM   tbl_syskanri
+               WHERE  HOSPNUM =  :HOSPNUM
+               AND    KANRICD =  :KANRICD
+             ) as kikan
+        ORDER  BY STYUKYMD,KBNCD
+        ; 
+	};
+};
+
+path	abort	{
+	DBSELECT	{
+		error
+ 		;
+	};
+};
+
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD       >=   :KBNCD
+			AND   KBNCD       <=   :UPKBNCD
+			AND   STYUKYMD    <=   :STYUKYMD
+			AND   EDYUKYMD    >=   :EDYUKYMD
+		;
+	};
+};
+
+path	key25	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key25_csr CURSOR FOR
+		SELECT *
+		FROM      tbl_syskanri
+		WHERE 	  HOSPNUM	   = :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD       >=   :KBNCD
+			AND   KBNCD       <=   :UPKBNCD
+			AND   STYUKYMD    <=   :STYUKYMD
+			AND   EDYUKYMD    >=   :EDYUKYMD
+        ORDER  BY KBNCD,STYUKYMD
+		;
+	};
+};
+
+path	key26		{ 	
+	DBSELECT	{
+		DECLARE tbl_syskanri_key26_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD 
+			AND	KBNCD        =   :KBNCD
+			AND	STYUKYMD     <=  :STYUKYMD
+			AND	EDYUKYMD     >=  :EDYUKYMD
+        ORDER  BY STYUKYMD DESC
+		;
+	};
+};
+
+path	key27	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key27_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE   (case when :HOSPNUM <> 0 then HOSPNUM	= :HOSPNUM else TRUE end)
+			AND   KANRICD      =   :KANRICD
+			AND		STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			AND     KANRITBL     LIKE  :KANRITBL
+        ORDER  BY STYUKYMD DESC
+		;
+	};
+};
+
+path	key28	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key28_csr CURSOR FOR
+		SELECT  KBNCD
+		FROM ( SELECT to_char(generate_series(1,9999),'FM0000') AS KBNCD) AS USABLE_NUM
+				WHERE KBNCD NOT IN ( SELECT substr(KBNCD,2,4) FROM tbl_syskanri
+									WHERE        HOSPNUM   = :HOSPNUM
+										AND      KANRICD   = '1010' 
+										AND      KBNCD     LIKE substr(:KBNCD,1,1) || '%'
+										AND      STYUKYMD <=  :STYUKYMD
+										AND      EDYUKYMD >=  :EDYUKYMD 
+                                   UNION
+                                     SELECT '0001' WHERE substr(:KBNCD,1,1) = '0'
+                                    )
+										ORDER BY KBNCD  LIMIT 1;
+	};
+};
+
+path	key29	{
+	DBSELECT	{
+		DECLARE tbl_syskanri_key29_csr CURSOR FOR
+		SELECT *
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      LIKE   :KANRICD
+			AND     STYUKYMD     <=  :STYUKYMD
+			AND     EDYUKYMD     >=  :EDYUKYMD
+			ORDER BY KANRICD,KBNCD
+		;
+	};
+};
+
+path	del3	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_syskanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =   :KANRICD
+			AND   KBNCD       LIKE :KBNCD
+			AND   STYUKYMD    <=   :STYUKYMD
+			AND   EDYUKYMD    >=   :EDYUKYMD
+		;
+	};
+};
+
+path	upd3	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_syskanri 
+				SET	EDYUKYMD     =   :EDYUKYMD,
+					OPID         =   :OPID,
+					UPYMD        =   :UPYMD,
+					UPHMS        =   :UPHMS
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   KANRICD      =      :KANRICD
+			AND   KBNCD        =      :KBNCD
+			AND		STYUKYMD     <=   :STYUKYMD
+			AND		EDYUKYMD     >=   :EDYUKYMD
+		;
+	};
+};
+

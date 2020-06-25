@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+#-------------------------------------------#
+#    定期請求一括削除
+#
+#        $1    エラーファイル
+#        $2    HOSPNUM
+#        $3    TERMID
+#        $4    OPID
+#        $5    SYSYMD
+#        $6    JOBID
+#        $7    SHELLID
+#        $8    SRYYM
+#        $9    KBT
+#        ${10} SKYSTYMD
+#        ${11} SKYEDYMD
+#-------------------------------------------#
+##      エラーファイル削除
+
+ERR_FILE_BASE=$(basename $1)
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+
+
+[ -e ${ERR_FILE_FULL} ] && rm  ${ERR_FILE_FULL} 
+
+##   -- ORCT0070 START --  
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0070 -parameter "${ERR_FILE_BASE},$2,$3,$4,$5,$6,$7,$8,$9,${10},${11}"
+        if  [ -e ${ERR_FILE_FULL} ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCT0050 -parameter "$2,$6,$7,${ERR_FILE_BASE}"
+            exit  
+        fi 
+
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$6$7,$2
+	
+        exit
+

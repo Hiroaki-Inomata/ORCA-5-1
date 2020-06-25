@@ -1,0 +1,61 @@
+        01  HCM43V02A.
+            02  HCM43V02A-NO    PIC X(7).
+            02  HCM43V02A-LBLKKN    PIC X(10).
+            02  HCM43V02A-SRYYM PIC X(40).
+            02  HCM43V02A-KNJNAMW   PIC X(30).
+            02  HCM43V02A-KNJNO PIC X(20).
+            02  HCM43V02A-MIDASI    PIC X(20).
+            02  HCM43V02A-HAKYMD    PIC X(22).
+            02  HCM43V02A-HOKEN PIC X(20).
+            02  HCM43V02A-FUTAN PIC X(3).
+            02  HCM43V02A-MEISAI
+                    PIC X(20)   OCCURS  15 TIMES.
+            02  HCM43V02A-HKNRYO1   PIC X(18).
+            02  HCM43V02A-HKNRYO2   PIC X(18).
+            02  HCM43V02A-HKNRYO3   PIC X(18).
+            02  HCM43V02A-HKNRYO4   PIC X(18).
+            02  HCM43V02A-HKNRYO5   PIC X(18).
+            02  HCM43V02A-HKNRYO6   PIC X(18).
+            02  HCM43V02A-HKNRYO7   PIC X(18).
+            02  HCM43V02A-HKNRYO8   PIC X(18).
+            02  HCM43V02A-HKNRYO9   PIC X(18).
+            02  HCM43V02A-HKNRYO10  PIC X(18).
+            02  HCM43V02A-HKNRYO11  PIC X(18).
+            02  HCM43V02A-HKNRYO12  PIC X(18).
+            02  HCM43V02A-HKNRYO13  PIC X(18).
+            02  HCM43V02A-HKNRYO14  PIC X(18).
+            02  HCM43V02A-HKNRYO15  PIC X(18).
+            02  HCM43V02A-GOKTEN    PIC X(18).
+            02  HCM43V02A-JIHIBUN
+                    PIC X(18)   OCCURS  15 TIMES.
+            02  HCM43V02A-HOKENBUN  PIC X(18).
+            02  HCM43V02A-HOKENGAI  PIC X(18).
+            02  HCM43V02A-HOKENZEI  PIC X(18).
+            02  HCM43V02A-JIHIMSG1  PIC X(20).
+            02  HCM43V02A-JIHIMSG2  PIC X(20).
+            02  HCM43V02A-JIHIMSG3  PIC X(20).
+            02  HCM43V02A-JIHIMSG4  PIC X(20).
+            02  HCM43V02A-JIHIMSG5  PIC X(20).
+            02  HCM43V02A-JIHIMSG6  PIC X(20).
+            02  HCM43V02A-JIHIMSG7  PIC X(20).
+            02  HCM43V02A-JIHIMSG8  PIC X(20).
+            02  HCM43V02A-JIHIMSG9  PIC X(20).
+            02  HCM43V02A-JIHIMSG10 PIC X(20).
+            02  HCM43V02A-JIHI
+                    PIC X(18)   OCCURS  12 TIMES.
+            02  HCM43V02A-YAKUZAI   PIC X(18).
+            02  HCM43V02A-ROUJIN    PIC X(18).
+            02  HCM43V02A-KOUHI PIC X(18).
+            02  HCM43V02A-CHOSEI    PIC X(18).
+            02  HCM43V02A-KONSEIKYU PIC X(18).
+            02  HCM43V02A-SEIKYUZEI PIC X(18).
+            02  HCM43V02A-ZENMISYU  PIC X(18).
+            02  HCM43V02A-GOUKEIGAK PIC X(18).
+            02  HCM43V02A-KONNYUKIN PIC X(18).
+            02  HCM43V02A-IRYOADRS  PIC X(60).
+            02  HCM43V02A-IRYOMEI   PIC X(40).
+            02  HCM43V02A-IRYOTEL   PIC X(15).
+            02  HCM43V02A-MIDASHI   PIC X(10).
+            02  HCM43V02A-RSIMIDASI PIC X(16).
+            02  HCM43V02A-RSIBUN    PIC X(18).
+            02  HCM43V02A-RSIEN PIC X(2).

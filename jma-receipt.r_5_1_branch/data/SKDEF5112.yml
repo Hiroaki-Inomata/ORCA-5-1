@@ -1,0 +1,29 @@
+kanri_cd    : "5112"
+name        : "°åÎÅ´Ñ»¡Ë¡Æş±¡°å³Ø´ÉÍıÎÁ"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "SRYCD"
+  item_jp   : "¿ÇÎÅ¥³¡¼¥É"
+  type      : "X"
+  start     : 1
+  length    : 9
+- item_no   : 2
+  item      : "KANSATUMEI"
+  item_jp   : "°åÎÅ´Ñ»¡Ë¡Æş±¡°å³Ø´ÉÍıÎÁÌ¾¾Î"
+  type      : "X"
+  start     : 10
+  length    : 60
+- item_no   : 3
+  item      : "KANSATUMEI2"
+  item_jp   : "°åÎÅ´Ñ»¡Ë¡Æş±¡°å³Ø´ÉÍıÎÁÌ¾¾Î£²"
+  type      : "X"
+  start     : 70
+  length    : 30
+- item_no   : 4
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 100
+  length    : 401

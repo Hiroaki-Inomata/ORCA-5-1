@@ -1,0 +1,102 @@
+UDR { #GtkWindow
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(256);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed1 { #GtkFixed
+    B01 { #GtkButton
+      state int;
+    };
+    B02 { #GtkButton
+      state int;
+    };
+    B03 { #GtkButton
+      state int;
+      label varchar(10);
+    };
+    B04 { #GtkButton
+      state int;
+    };
+    B05 { #GtkButton
+      state int;
+      label varchar(10);
+    };
+    B06 { #GtkButton
+      state int;
+    };
+    B07 { #GtkButton
+      state int;
+    };
+    B08 { #GtkButton
+      state int;
+    };
+    B09 { #GtkButton
+      state int;
+      label varchar(10);
+    };
+    B10 { #GtkButton
+      state int;
+    };
+    B11 { #GtkButton
+      state int;
+      label varchar(10);
+    };
+    B12 { #GtkButton
+      state int;
+    };
+    SRYKA_COMB { #GtkPandaCombo
+      count int;
+      item varchar(21)[99];
+      SRYKA { #GtkPandaEntry
+        textdata varchar(21);
+      };
+    };
+    scrolledwindow1 { #GtkScrolledWindow
+      DRLIST { #GtkPandaCList
+        count int;
+        row int;
+        selectdata bool[200];
+        fgcolor varchar(20)[200];
+        bgcolor varchar(20)[200];
+        item {
+          column1 varchar(3);
+          column2 varchar(3);
+          column3 varchar(4);
+          column4 varchar(80);
+          column5 varchar(20);
+          column6 varchar(20);
+          column7 varchar(20);
+          column8 varchar(20);
+          column9 varchar(20);
+          column10 varchar(10);
+        }[200];
+      };
+    };
+    MIDASI { #GtkLabel
+      style varchar(20);
+      textdata varchar(30);
+    };
+    MIDASI2 { #GtkLabel
+      style varchar(20);
+      textdata varchar(50);
+    };
+    MIDASI3 { #GtkLabel
+      style varchar(20);
+      textdata varchar(100);
+    };
+    NEXT { #GtkLabel
+      style varchar(20);
+      textdata varchar(20);
+    };
+    BUP { #GtkButton
+      state int;
+    };
+    BDW { #GtkButton
+      state int;
+    };
+    SELNUM { #GtkNumberEntry
+      numdata number(3);
+    };
+  };
+};

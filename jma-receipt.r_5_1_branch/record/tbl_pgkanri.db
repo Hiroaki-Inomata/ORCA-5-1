@@ -1,0 +1,64 @@
+tbl_pgkanri {
+	DEBIANVERSION                   varchar(24);
+	SYSTEMVERSION                   varchar(10);
+	PGNO                            char(3);
+	RELEASEYMD                      char(8);
+	PGNAME                          varchar(64);
+	UPDATEFLG                       char(1);
+	RESTARTFLG                      char(1);
+	INSTALLDIR                      varchar(256);
+	COMMENT                         varchar(400);
+	TERMID  	        	varchar(32);
+	OPID             		varchar(16);
+	CREYMD  	        	char(8);
+	UPYMD   	        	char(8);
+	UPHMS		        	char(6);
+};
+
+primary	{
+	DEBIANVERSION,SYSTEMVERSION,PGNO;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_pgkanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pgkanri
+			WHERE   DEBIANVERSION  =  :DEBIANVERSION
+			AND     SYSTEMVERSION  =  :SYSTEMVERSION
+			AND     PGNO           =  :PGNO
+			ORDER	BY  PGNO
+                ;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_pgkanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pgkanri
+			WHERE   UPDATEFLG  =  'F'
+			ORDER	BY  PGNO
+                ;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_pgkanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pgkanri
+			ORDER	BY  PGNO  DESC
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_pgkanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pgkanri
+			ORDER	BY  PGNO
+		;
+	};
+};

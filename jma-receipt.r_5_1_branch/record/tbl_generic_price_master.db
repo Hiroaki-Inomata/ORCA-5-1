@@ -1,0 +1,76 @@
+tbl_generic_price_master {
+	YAKKAKJNCD			char(12);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	PRICE   			number(12,3);
+	GECODE				char(12);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+#-----> 主キー更新用項目
+	UPYAKKAKJNCD			char(12),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD 			char(8),virtual;
+};
+primary	{YAKKAKJNCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_generic_price
+			WHERE   YAKKAKJNCD =  :YAKKAKJNCD
+			AND     YUKOSTYMD  <= :YUKOSTYMD
+			AND     YUKOEDYMD  >= :YUKOEDYMD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_generic_price
+			VALUES(
+				:YAKKAKJNCD,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:PRICE,
+				:CREYMD,
+				:UPYMD,
+				:GECODE
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_generic_price
+			SET
+				YAKKAKJNCD = :YAKKAKJNCD,
+				YUKOSTYMD  = :YUKOSTYMD,
+				YUKOEDYMD  = :YUKOEDYMD,
+				PRICE      = :PRICE,
+				GECODE     = :GECODE,
+				CREYMD     = :CREYMD,
+				UPYMD      = :UPYMD
+			WHERE   YAKKAKJNCD = :UPYAKKAKJNCD
+			AND     YUKOSTYMD  = :UPYUKOSTYMD
+			AND     YUKOEDYMD  = :UPYUKOEDYMD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_generic_price
+			WHERE   YAKKAKJNCD = :YAKKAKJNCD
+			AND     YUKOSTYMD  = :YUKOSTYMD
+			AND     YUKOEDYMD  = :YUKOEDYMD
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_generic_price_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_generic_price
+			WHERE   YAKKAKJNCD = :YAKKAKJNCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};

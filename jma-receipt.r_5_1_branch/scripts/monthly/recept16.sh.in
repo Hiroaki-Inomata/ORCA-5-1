@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+RENNUM=0
+#-------------------------------------------#
+#    ¸ø³²¿ÇÎÅÊó½·ÀÁµá½ñºîÀ®
+#        $1-${11} °õºþ£Ä£ÂÍÑ¸ÇÄê°ú¿ô
+#        ${12} ¥¸¥ç¥Ö£É£Ä
+#        ${13} ¥·¥§¥ë£É£Ä
+#        ${14} HOSPNUM
+#        ${15} ¥¨¥é¡¼¥Õ¥¡¥¤¥ëÌ¾ 
+#        ${16} ¸ø³²¿ÇÎÅÊó½·ÀÁµá½ñ¶èÊ¬
+#        00:É¸½à 01:Ì¾¸Å²°»Ô 02:ËÌ¶å½£»Ô  
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${14}recept16.log"
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+        echo "arg15  = [" ${15}  "]"
+        echo "arg16  = [" ${16}  "]"
+
+##      ¥¨¥é¡¼¥Õ¥¡¥¤¥ëºï½ü
+	echo "errfile = [" ${MCP_TEMPDIR}/${15}  "]"
+        rm  -f ${MCP_TEMPDIR}/${15}
+
+        RENNUM=$(expr $RENNUM + 1)
+        case ${16} in
+            00)    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM034 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15}
+                   ;;
+            01)    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM040 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15}
+                   ;;
+            02)    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM041 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15}
+                   ;;
+        esac
+        if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+            exit 
+        else
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${14}
+	    fi
+	
+        exit 

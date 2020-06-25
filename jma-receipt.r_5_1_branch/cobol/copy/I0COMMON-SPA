@@ -1,0 +1,93 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      *****************************************************************
+      *¶¦ÄÌÎÎ°è
+       01  SPA-I0KYOUTU.
+         03  SPA-I0-PTINF.
+           05  SPA-I0-PTID                     PIC 9(10).
+      *    ·Ù¹ð¥á¥Ã¥»¡¼¥¸
+         03  SPA-I0IDCD                        PIC X(04).
+      *    ·Ù¹ð²èÌÌ¤è¤ê
+         03  SPA-I0ID1-AREA. 
+           05  SPA-I0ID1-FLG                   PIC X(02).
+      *
+      *    ·Ù¹ð¥á¥Ã¥»¡¼¥¸
+         03  SPA-I0IDCD2                       PIC X(04).
+      *    ·Ù¹ð²èÌÌ¤è¤ê
+         03  SPA-I0ID2-AREA. 
+           05  SPA-I0ID2-FLG                   PIC X(02).
+      *
+      *    Æþ±¡¥«¥¦¥ó¥È
+         03  SPA-I03-NYUIN-COUNT               PIC 9(06).
+      *    Æþ±¡ÍúÎòÆüÉÕÊÑ¹¹¥Õ¥é¥°
+         03  SPA-I03-UPDFLG                    PIC X(01).
+      *    ÊÑ¹¹Á°ÄÌ»»ÂÐ¾ÝÆü¿ô
+         03  SPA-I03-WKTAISYONISSU             PIC 9(05).
+      *
+      *    Ìá¤êÀè
+         03  SPA-I0-MOTOPG                     PIC X(08).
+         03  SPA-I0-MOTOPG2                    PIC X(08).
+      *      £É£°£±¢«¢ª£É£°£²Á«°Ü¾ðÊó
+         03  SPA-I01-I02-AREA.
+      *        ´µ¼Ô£É£Ä
+           05  SPA-I01-I02-PTID                PIC 9(10).
+      *        Æþ±¡ÍúÎòÈÖ¹æ
+           05  SPA-I01-I02-PTRRKNUM            PIC 9(03).
+      *        Âà±¡Æü
+           05  SPA-I01-I02-TAIINYMD            PIC X(08).
+      *        Âà±¡»öÍ³
+           05  SPA-I01-I02-TAIINCD             PIC X(02).
+      *
+      *      £É£°£±¢«¢ª£É£°£³Á«°Ü¾ðÊó
+         03  SPA-I01-I03-AREA.
+      *       ½èÍý¶èÊ¬¡Ê£±¡§ÅÐÏ¿¡¿£²¡§½¤Àµ¡¿£³¡§½¤Àµ¡ÊÆüÉÕÊÑ¹¹ÉÔ²Ä¡Ë¡Ë
+           05  SPA-I01-I03-SYORIKBN            PIC X(1).
+      *          ´µ¼Ô£É£Ä
+           05  SPA-I01-I03-PTID                PIC 9(10).
+      *          Æþ±¡ÍúÎòÈÖ¹æ
+           05  SPA-I01-I03-PTRRKNUM            PIC 9(03).
+      *          Á°²óÂà±¡Æü
+           05  SPA-I01-I03-TAIINYMD            PIC X(08).
+      *          ½èÍý¶èÊ¬
+           05  SPA-I01-I03-SYORIKBN-CD         PIC X(02).
+      *          ½é²óÈÖ¹æ
+           05  SPA-I01-I03-SHONUM              PIC 9(03).
+      *          £É£°£±Ìá¤ê»þ²¡²¼¥Ü¥¿¥ó("B01" or "B12")
+           05  SPA-I01-I03-BTN                 PIC X(03).
+      *      £É£°£±¢«¢ª£É£°£´Á«°Ü¾ðÊó
+         03  SPA-I01-I04-AREA.
+           05  SPA-I01-I04-SYORIKBN            PIC X(02).
+           05  SPA-I01-I04-PROCKBN             PIC X(01).
+           05  SPA-I01-I04-RRKNUM              PIC 9(03).
+           05  SPA-I01-I04-RRKEDANUM           PIC 9(03).
+           05  SPA-I01-I04-KJNYMD              PIC X(08).
+           05  SPA-I01-I04-HKNCOMBI            PIC X(04).
+           05  SPA-I01-I04-NYUINKA             PIC X(02).
+           05  SPA-I01-I04-NYUINYMD            PIC X(08).
+           05  SPA-I01-I04-TAIINYMD            PIC X(08).
+           05  SPA-I01-I04-TAIINCD             PIC X(02).
+           05  SPA-I01-I04-SKYSTYMD            PIC X(08).
+           05  SPA-I01-I04-SKYEDYMD            PIC X(08).
+           05  SPA-I01-I04-TORIKESI-FLG        PIC 9(01).
+           05  SPA-I01-I04-BTN                 PIC X(03).
+           05  SPA-I01-I04-BUNBENFTN-FLG       PIC 9(01).
+      *      £É£°£²¢«¢ª£É£°£µÁ«°Ü¾ðÊó
+         03  SPA-I02-I05-AREA.
+           05  SPA-I02-I05-PTID                PIC 9(10).
+           05  SPA-I02-I05-PTRRKNUM            PIC 9(03).
+           05  SPA-I02-I05-TAIINYMD            PIC X(08).
+           05  SPA-I02-I05-TAIINCD             PIC X(02).

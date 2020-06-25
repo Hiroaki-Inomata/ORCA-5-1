@@ -1,0 +1,92 @@
+X91 {
+  fixed2 {
+    KJNYMD {
+      textdata varchar(10);
+    };
+    CHKYKZBYO {
+      isactive bool;
+    };
+    CHKSRYBYO {
+      isactive bool;
+    };
+    CHKYKZHEI {
+      isactive bool;
+    };
+    CHKSRYHEI {
+      isactive bool;
+    };
+    CHKYKZKNKBYO {
+      isactive bool;
+    };
+    CHKSRYSNT {
+      isactive bool;
+    };
+    CHKSRYHEIA {
+      isactive bool;
+    };
+    CHKSRYHEIB {
+      isactive bool;
+    };
+    CHKTEKBYOYKZ {
+      isactive bool;
+    };
+    CHKTEKBYOSRY {
+      isactive bool;
+    };
+    CHKSRYRANGE {
+      isactive bool;
+    };
+    STSRYCD {
+      textdata varchar(9);
+      state int;
+    };
+    STSRYNAME {
+      textdata varchar(100);
+      style varchar(20);
+      state int;
+    };
+    EDSRYCD {
+      textdata varchar(9);
+      state int;
+    };
+    CMB_SORT {
+      SORT {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CHKBYOYKZ {
+      isactive bool;
+    };
+    CHKBYOSRY {
+      isactive bool;
+    };
+    CHKKAISU {
+      isactive bool;
+    };
+    CMB_MOREKIKAN {
+      MOREKIKAN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[5];
+    };
+    CHKMOREYKZBYO {
+      isactive bool;
+    };
+    CHKMOREKENSA {
+      isactive bool;
+    };
+    CHKMOREBUI {
+      isactive bool;
+    };
+    CMB_MORESORT {
+      MORESORT {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+  };
+};

@@ -1,0 +1,22 @@
+#!/bin/bash
+echo $0 | logger
+echo `pwd`  | logger
+
+JMARECEIPT_ENV="/etc/jma-receipt/jma-receipt.env"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#rm
+echo -n "rm start" | logger
+for d in cobol data doc form lddef init record screen scripts; do
+  m='module ${d}'
+  for f in ${m}; do
+    if test -f "${SITESRCDIR}/${f}" ; then
+       echo -n "rm ${SITESRCDIR}/${f}..." | logger
+       rm  ${SITESRCDIR}/${f}
+    fi
+  done
+done

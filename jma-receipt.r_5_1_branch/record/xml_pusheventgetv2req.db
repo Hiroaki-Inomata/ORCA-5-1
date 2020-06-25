@@ -1,0 +1,13 @@
+xml_pusheventgetv2req {
+  context         int;
+  object          object;
+  mode            int;
+  recordname      varchar(128);
+  pusheventgetv2req {
+      event       varchar(64);
+      user        varchar(32);
+      start_time  varchar(16);
+      end_time    varchar(16);
+	};
+};
+

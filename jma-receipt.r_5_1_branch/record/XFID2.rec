@@ -1,0 +1,10 @@
+XFID2 {
+  fixed1 {
+    ID2CODE {
+      textdata varchar(10);
+    };
+    ID2MSG {
+      textdata varchar(80);
+    };
+  };
+};

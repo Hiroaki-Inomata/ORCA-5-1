@@ -1,0 +1,121 @@
+tbl_rece_puth {
+	HOSPNUM				number(2,0);
+	PREFKBN_PRTJYUN 		char(1);
+	HKNJANUM_PRTJYUN		char(1);
+	HKNJANUM			char(8);
+	HKNJANUM_PRTKBN 		char(1);
+	SRT_01_1			char(2);
+	KKHKBN_1			char(2);
+	CHOUKI_1			char(1);
+	ZAITAKU_1			char(1);
+	KOUGAKU_TEN_1			number(7);
+	SRT_LAST_1			char(1);
+	SRT_01_2			char(2);
+	KKHKBN_2			char(2);
+	CHOUKI_2			char(1);
+	ZAITAKU_2			char(1);
+	KOUGAKU_TEN_2			number(7);
+	SRT_LAST_2			char(1);
+	STYUKYMD			char(8);
+	EDYUKYMD			char(8);
+	TERMID   			varchar(64);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPSTYUKYMD			char(8),virtual;
+	UPEDYUKYMD			char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,STYUKYMD,EDYUKYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_rece_puth_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_puth
+			WHERE   HOSPNUM	        =   :HOSPNUM
+			AND   STYUKYMD	        <=  :STYUKYMD
+			AND   EDYUKYMD	        >=  :EDYUKYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_rece_puth_key2_csr CURSOR FOR
+		SELECT STYUKYMD,EDYUKYMD
+		FROM tbl_rece_puth
+			WHERE   HOSPNUM	=   :HOSPNUM
+			GROUP BY STYUKYMD,EDYUKYMD
+			ORDER BY STYUKYMD,EDYUKYMD
+		;
+	};
+};
+
+path    upd1    {
+	DBUPDATE        {
+		UPDATE  tbl_rece_puth
+			SET
+#                       :*
+			PREFKBN_PRTJYUN  =   :PREFKBN_PRTJYUN,
+			HKNJANUM_PRTJYUN =   :HKNJANUM_PRTJYUN,
+			HKNJANUM         =   :HKNJANUM,
+			HKNJANUM_PRTKBN  =   :HKNJANUM_PRTKBN,
+			SRT_01_1           =   :SRT_01_1,
+			KKHKBN_1           =   :KKHKBN_1,
+			CHOUKI_1           =   :CHOUKI_1,
+			ZAITAKU_1          =   :ZAITAKU_1,
+			KOUGAKU_TEN_1      =   :KOUGAKU_TEN_1,
+			SRT_LAST_1         =   :SRT_LAST_1,
+			SRT_01_2           =   :SRT_01_2,
+			KKHKBN_2           =   :KKHKBN_2,
+			CHOUKI_2           =   :CHOUKI_2,
+			ZAITAKU_2          =   :ZAITAKU_2,
+			KOUGAKU_TEN_2      =   :KOUGAKU_TEN_2,
+			SRT_LAST_2         =   :SRT_LAST_2,
+			STYUKYMD         =   :STYUKYMD,
+			EDYUKYMD         =   :EDYUKYMD,
+			TERMID           =   :TERMID,
+			OPID             =   :OPID,
+			CREYMD           =   :CREYMD,
+			UPYMD            =   :UPYMD,
+			UPHMS            =   :UPHMS
+		WHERE   STYUKYMD         =   :UPSTYUKYMD
+		AND     EDYUKYMD         =   :UPEDYUKYMD
+		AND     HOSPNUM          =   :HOSPNUM
+                ;
+        };
+};
+
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_rece_puth_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rece_puth
+		WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+
+path    upd2    {
+	DBUPDATE        {
+		UPDATE  tbl_rece_puth
+			SET
+			STYUKYMD         =   :STYUKYMD,
+			EDYUKYMD         =   :EDYUKYMD,
+			TERMID           =   :TERMID,
+			OPID             =   :OPID,
+			UPYMD            =   :UPYMD,
+			UPHMS            =   :UPHMS
+		WHERE   STYUKYMD         =   :UPSTYUKYMD
+		AND     EDYUKYMD         =   :UPEDYUKYMD
+		AND     HOSPNUM          =   :HOSPNUM
+		;
+	};
+};

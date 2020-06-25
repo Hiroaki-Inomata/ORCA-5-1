@@ -1,0 +1,10 @@
+xml_hsptevalv2req {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Patient_ID			varchar(20);
+		Perform_Month		varchar(07);
+	};
+};

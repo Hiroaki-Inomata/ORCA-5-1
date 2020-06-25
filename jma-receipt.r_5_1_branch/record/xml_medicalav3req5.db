@@ -1,0 +1,44 @@
+xml_medicalav3req4 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3req5 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Patient_ID		varchar(20);
+    		Perform_Date		varchar(07);
+#---     入院調剤料
+		Ad_Dispensing_Information  {
+		   Ad_Dispensing_Info  {
+#-----             診療科・保険組合せ情報
+			Department_Code		varchar(02);
+		        Insurance_Combination_Number	varchar(04);
+#---               剤番号
+			Medical_Number		varchar(08);
+#---               診療種別区分
+			Medical_Class		varchar(03);
+			Medical_Class_Name	varchar(40);
+#---               算定日（合計）
+			Medical_Day_Information  {
+			    Medical_Day_Info     {
+				Medical_Class_Number	varchar(03);
+				} [31] ;
+			} [1] ;
+#---               同日再入院日
+			Readmission_Day_Information  {
+			    Readmission_Day_Info     {
+				Readmission_Day		varchar(02);
+				Readmission_Class_Number	varchar(03);
+				} [31] ;
+			};
+			Medication_Info   {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(80);
+				Medication_Auto_Addition	varchar(01);
+			} [5] ;
+		    };
+		};
+	};
+};

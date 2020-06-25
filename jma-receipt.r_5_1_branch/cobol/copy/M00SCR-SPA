@@ -1,0 +1,54 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ************************************************************
+      *    業務選択 画面ＳＰＡ     (M00,M95) 
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      ************************************************************
+      *
+       01  SPA-M00.
+           03  SPA-M00-AREA.
+               05  SPA-CTLSEQ          PIC 9(02).
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-MAX         PIC 9(02).
+               05  SPA-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-GSEL    PIC 9(02).
+                   07  SPA-GMN-LBLMSG  PIC X(60).
+                   07  SPA-GMN-LBLMSG2 PIC X(100).
+                   07  SPA-GMN-MNTYMD  PIC X(09).
+                   07  SPA-GMN-MNTMSG-STYLE
+                                       PIC X(20).
+                   07  SPA-GMN-MNTMSG  PIC X(70).
+                   07  SPA-GMN-MLIYMD  PIC X(09).
+                   07  SPA-GMN-MLIMSG-STYLE
+                                       PIC X(20).
+                   07  SPA-GMN-MLIMSG  PIC X(70).
+                   07  SPA-GMN-ERRCD   PIC X(04).
+                   07  SPA-NAI-REDL    PIC 9(01).
+      *
+        03  SPA-ERR-FLG                 PIC 9(01).
+      ***      05  SPA-M95GMN-AREA.
+      *            07  SPA-M95-CUR         PIC 9(02).
+      *            07  SPA-GMN-SYSYMD      PIC X(10).
+      *            07  SPA-NAI-SYSYMD      PIC X(08).
+      *
+      ****         07  SPA-NAI-SYSYMDW     PIC X(07).
+      *

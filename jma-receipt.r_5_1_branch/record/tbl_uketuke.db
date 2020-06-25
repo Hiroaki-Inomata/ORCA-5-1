@@ -1,0 +1,216 @@
+tbl_uketuke {
+	HOSPNUM				number(2,0);
+	UKEYMD  			char(8);
+	UKEID    			number(5,0);
+	UKETIME 			char(6);
+	PTID	   			number(10,0);
+	NAME	 			varchar(100);
+	SRYKA   			char(2);
+	DRCD    			char(5);
+	SRYNAIYO			char(2);
+	HKNCOMBI			number(4,0);
+	KAIKEITIME			number(4,0);
+	KEYYYKTIME			number(4,0);
+	YYKTIME 			number(4,0);
+	YYKID   			number(2);
+	HYOJIJUN  			number(4);
+	KAKREN  			char(2);
+	SRFLG    			char(2);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,UKEYMD,UKEID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   UKEID       =   :UKEID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			ORDER   BY  UKEID
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   PTID        =   :PTID
+			AND   UKETIME     =   :UKETIME
+		;
+	};
+};
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   PTID        =   :PTID
+			AND   UKETIME     =   :UKETIME
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del12 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+                        AND   UKEID      <>   0
+		;
+	};
+};
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY        UKEID,
+                                          UKETIME
+		;
+	};
+};
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBI    =   :HKNCOMBI
+                        AND   UKEID       <>  0
+                        AND   KAIKEITIME  =   0
+			ORDER   BY        UKEID,
+                                          UKETIME
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+                        AND   UKEID       <>  0
+                        AND   KAIKEITIME  =   0
+			ORDER   BY  UKEID
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+                        AND   UKEID       <>  0
+                        AND   KAIKEITIME  <>  0
+			ORDER   BY  KAIKEITIME DESC,
+                                    UKEID
+		;
+	};
+};
+
+path	key9	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+                        AND   UKEID       <>  0
+                        AND   KAIKEITIME  <>  0
+			ORDER   BY  KAIKEITIME,
+                                    UKEID
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_uketuke_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      <=   :UKEYMD
+			ORDER   BY  UKEID
+		;
+	};
+};
+path	del10 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_uketuke
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD       =   :UKEYMD
+			AND   UKEID        =   :UKEID
+		;
+	};
+};
+path	upd1	{
+	DBUPDATE	{
+		UPDATE	tbl_uketuke
+		SET	SRFLG			= :SRFLG,
+			UPYMD    		= :UPYMD,
+			UPHMS			= :UPHMS
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   UKEYMD      =   :UKEYMD
+			AND   UKEID       =   :UKEID
+		;
+	};
+};
+

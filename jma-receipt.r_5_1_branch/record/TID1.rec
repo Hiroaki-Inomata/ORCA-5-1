@@ -1,0 +1,16 @@
+TID1 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    B01 {
+      label varchar(6);
+    };
+    ID1MSG {
+      textdata varchar(80);
+    };
+    B12 {
+      label varchar(6);
+    };
+  };
+};

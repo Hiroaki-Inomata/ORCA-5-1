@@ -1,0 +1,29 @@
+monbatch_clog {
+	id		varchar(37);
+	num		integer;
+	clog		varchar(410000);
+);
+
+primary	{
+    id, num;
+};
+
+path	log1		{
+	DBSELECT	{
+		DECLARE monbatch_clog_log1_csr CURSOR FOR
+		SELECT *
+		FROM monbatch_clog
+		WHERE id = :id
+                ORDER BY num
+		;
+	};
+};
+
+path	all		{
+	DBSELECT	{
+		DECLARE monbatch_clog_all_csr CURSOR FOR
+		SELECT *
+		FROM monbatch_clog
+		;
+	};
+};

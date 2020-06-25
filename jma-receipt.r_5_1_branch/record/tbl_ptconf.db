@@ -1,0 +1,51 @@
+tbl_ptconf {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	CKEY				varchar(25);
+	CDATA 				varchar(10);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,CKEY;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_ptconf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptconf
+			WHERE   HOSPNUM     =   :HOSPNUM
+			 AND	PTID  		=   :PTID
+			 AND	CKEY  		=   :CKEY
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_ptconf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptconf
+			WHERE   HOSPNUM     =   :HOSPNUM
+			 AND	PTID  		=   :PTID
+			 	ORDER	 BY	 CKEY
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptconf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+

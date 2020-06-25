@@ -1,0 +1,241 @@
+KA02 {
+  fixed1 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SELNUM1 {
+      numdata number(3);
+    };
+    SRYYMD {
+      textdata varchar(9);
+    };
+    SELNUM2 {
+      numdata number(3);
+    };
+    INPUT01 {
+      textdata varchar(80);
+    };
+    INPUT02 {
+      textdata varchar(80);
+    };
+    INPUT03 {
+      textdata varchar(80);
+    };
+    INPUT04 {
+      textdata varchar(80);
+    };
+    INPUT05 {
+      textdata varchar(80);
+    };
+    NISUU {
+      numdata number(3);
+    };
+    SRYKA {
+      textdata varchar(12);
+    };
+    SUURYO1 {
+      textdata varchar(12);
+    };
+    SUURYO2 {
+      textdata varchar(12);
+    };
+    SUURYO3 {
+      textdata varchar(12);
+    };
+    SUURYO4 {
+      textdata varchar(12);
+    };
+    SUURYO5 {
+      textdata varchar(12);
+    };
+    HKNCOMBI_COMB {
+      HKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[30];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[99];
+    };
+    KOUFUYMD {
+      textdata varchar(11);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      RRKLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(16);
+            column3 varchar(6);
+            column4 varchar(4);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      MEILIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(2);
+            column3 varchar(2);
+            column4 varchar(200);
+          }[600];
+          selectdata bool[600];
+      };
+    };
+    NYUINKIKAN {
+      textdata varchar(30);
+    };
+    INNAI {
+      style varchar(20);
+      textdata varchar(16);
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    DAY01 {
+      textdata varchar(3);
+    };
+    DAY02 {
+      textdata varchar(3);
+    };
+    DAY03 {
+      textdata varchar(3);
+    };
+    DAY04 {
+      textdata varchar(3);
+    };
+    DAY05 {
+      textdata varchar(3);
+    };
+    DAY06 {
+      textdata varchar(3);
+    };
+    DAY07 {
+      textdata varchar(3);
+    };
+    DAY08 {
+      textdata varchar(3);
+    };
+    DAY09 {
+      textdata varchar(3);
+    };
+    DAY10 {
+      textdata varchar(3);
+    };
+    DAY11 {
+      textdata varchar(3);
+    };
+    DAY12 {
+      textdata varchar(3);
+    };
+    DAY13 {
+      textdata varchar(3);
+    };
+    DAY14 {
+      textdata varchar(3);
+    };
+    DAY15 {
+      textdata varchar(3);
+    };
+    DAY16 {
+      textdata varchar(3);
+    };
+    DAY17 {
+      textdata varchar(3);
+    };
+    DAY18 {
+      textdata varchar(3);
+    };
+    DAY19 {
+      textdata varchar(3);
+    };
+    DAY20 {
+      textdata varchar(3);
+    };
+    DAY21 {
+      textdata varchar(3);
+    };
+    DAY22 {
+      textdata varchar(3);
+    };
+    DAY23 {
+      textdata varchar(3);
+    };
+    DAY24 {
+      textdata varchar(3);
+    };
+    DAY25 {
+      textdata varchar(3);
+    };
+    DAY26 {
+      textdata varchar(3);
+    };
+    DAY27 {
+      textdata varchar(3);
+    };
+    DAY28 {
+      textdata varchar(3);
+    };
+    DAY29 {
+      textdata varchar(3);
+    };
+    DAY30 {
+      textdata varchar(3);
+    };
+    DAY31 {
+      textdata varchar(3);
+    };
+    KEISUURYO1 {
+      textdata varchar(12);
+    };
+    KEISUURYO2 {
+      textdata varchar(12);
+    };
+    KEISUURYO3 {
+      textdata varchar(12);
+    };
+    KEISUURYO4 {
+      textdata varchar(12);
+    };
+    KEISUURYO5 {
+      textdata varchar(12);
+    };
+    B04 {
+      label varchar(10);
+    };
+    B09S {
+      state int;
+      label varchar(10);
+    };
+    B05S {
+      state int;
+      label varchar(10);
+    };
+  };
+};

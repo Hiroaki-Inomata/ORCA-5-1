@@ -1,0 +1,43 @@
+M97 {
+  fixed1 {
+    ONKBN {
+      isactive bool;
+    };
+    OFFKBN {
+      state int;
+      isactive bool;
+    };
+    OFFCOMBO {
+      OFFNAIYO {
+        textdata varchar(14);
+      };
+      state int;
+      count int;
+        item varchar(14)[2];
+    };
+    scrolledwindow1 {
+      NAIYOLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(9);
+            column2 varchar(8);
+            column3 varchar(100);
+          }[99];
+          selectdata bool[99];
+      };
+    };
+    MESSEGE {
+      style varchar(20);
+      textdata varchar(122);
+    };
+    pandatimer1 {
+      duration int;
+    };
+    CONTRACTMSG {
+      style varchar(20);
+      textdata varchar(10);
+    };
+  };
+};

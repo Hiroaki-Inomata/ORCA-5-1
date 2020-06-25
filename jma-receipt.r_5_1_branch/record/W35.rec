@@ -1,0 +1,44 @@
+W35 {
+  fixed12 {
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    SELNUM1 {
+      numdata number(3);
+    };
+    SELNUM2 {
+      numdata number(3);
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      KENSALIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(80);
+          }[110];
+          selectdata bool[110];
+      };
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      DATALIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(80);
+          }[110];
+          selectdata bool[110];
+      };
+    };
+  };
+};

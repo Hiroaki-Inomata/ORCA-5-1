@@ -1,0 +1,19 @@
+name	tottori;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU3103"	"OpenCOBOL";
+bind	"SEIKYU3105"	"OpenCOBOL";
+bind	"SEIKYU3107"	"OpenCOBOL";
+bind	"SEIKYU3109"	"OpenCOBOL";
+bind	"SEIKYU3111"	"OpenCOBOL";
+bind	"SOKATU3100"	"OpenCOBOL";
+bind	"SOKATU3110"	"OpenCOBOL";
+bind	"SOKATU3115"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

@@ -1,0 +1,77 @@
+xml_medicalv2res {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalres {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+        Perform_Date				varchar(10);
+        Perform_Time				varchar(8);
+	Medical_Uid				varchar(36);
+	Admission_Date				varchar(10);
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+        Physician_Code				varchar(5);
+        Physician_WholeName			varchar(80);
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Admission			varchar(04);
+			Money_Admission			varchar(06);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+            	} [4];
+        	};
+    	};
+	Medical_Message_Information {
+        Medical_Result				varchar(2);
+        Medical_Result_Message			varchar(100);
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(3);
+       		 Medical_Warning_Message	varchar(100);
+       		 Medical_Warning_Position      	varchar(2);
+       		 Medical_Warning_Item_Position  varchar(2);
+       		 Medical_Warning_Code		varchar(9);
+            	} [50];
+        };
+	Disease_Message_Information {
+        Disease_Result				varchar(2);
+        Disease_Result_Message			varchar(100);
+        Disease_Warning_Info {
+       		 Disease_Warning        	varchar(3);
+       		 Disease_Warning_Message	varchar(100);
+       		 Disease_Warning_Item_Position  varchar(2);
+       		 Disease_Warning_Name		varchar(80);
+       		 Disease_Warning_Code		varchar(50);
+       		 Disease_Warning_Change 	varchar(2);
+            	} [50];
+        };
+   	};
+};

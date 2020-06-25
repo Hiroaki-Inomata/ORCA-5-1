@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+export HOME=/home/orca
+export PATH=$SITESCRIPTSDIR/daily:$PATCHSCRIPTSDIR/daily:$SCRIPTSDIR/daily:$PATH
+
+#----------------------------------------------------------------------#
+#       引数	
+#       1:DATAファイル名称
+#       2:エンコーディング(1:EUC-JP/2:UTF8/3:OTHER)
+#----------------------------------------------------------------------#
+
+	echo	`date`
+	echo	$1
+
+PRT_FILE_BASE=$1
+PRT_FILE_FULL=${MCP_TEMPDIR}/${PRT_FILE_BASE}
+
+
+print_parent2.rb ${PRT_FILE_FULL} ${FORMDIR} ${RECORDDIR} ${SITEFORMDIR} ${SITERECORDDIR} ${PATCHFORMDIR}
+
+	rm -f ${PRT_FILE_FULL}
+	echo	`date`

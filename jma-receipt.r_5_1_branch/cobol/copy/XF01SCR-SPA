@@ -1,0 +1,135 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *  メモ登録画面 画面ＳＰＡ
+      *----------------------------------------------------------*
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      ************************************************************
+       01  SPA-XF01.
+           03  SPA-HZN-MOTOPG              PIC X(08).
+           03  SPA-XF01GMN-AREA.
+               05  SPA-GMN-PAGE                  PIC 9(04).
+               05  SPA-GMN-NEXT                  PIC 9(01).
+               05  SPA-GMN-CUR                   PIC 9(03).
+               05  SPA-GMN-AREA.
+      *        見出領域
+                   07  SPA-GMN-PTNUM           PIC X(20).
+                   07  SPA-GMN-PTID            PIC 9(10).
+                   07  SPA-GMN-NAME            PIC X(50).
+                   07  SPA-GMN-KANANAME        PIC X(50).
+                   07  SPA-GMN-SEX             PIC X(02).
+                   07  SPA-GMN-BIRTHDAY        PIC X(10).
+                   07  SPA-GMN-NENREI          PIC X(10).
+                   07  SPA-GMN-SYSYMD          PIC X(22).
+      *            受付情報
+                   07  SPA-GMN-UKEMEI          PIC X(50).
+      *
+               05  SPA-GMN-TBLG.
+                   07  SPA-GMN-TBL             OCCURS  100.
+                       09  SPA-GMN-TNUM            PIC 9(03).
+                       09  SPA-GMN-TSYSYMD         PIC X(10).
+                       09  SPA-GMN-TSRYKA          PIC X(20).
+                       09  SPA-GMN-TMEMO           PIC X(200).
+      *
+                       09  SPA-NAI-TSYSYMD         PIC X(08).
+                       09  SPA-NAI-TRENNUM         PIC 9(02).
+                       09  SPA-NAI-TSRYKA          PIC X(02).
+                   07  SPA-TBL-MAX                 PIC 9(04).
+      *
+               05  SPA-GMN-INPUT.
+      *            メモ１
+                   07  SPA-GMN-SRYKA01-G.
+                       09  SPA-GMN-SRYKA01         PIC X(02).
+                       09  SPA-GMN-F1              PIC X(01).
+                       09  SPA-GMN-SRYKA01MEI      PIC X(12).
+                   07  SPA-GMN-MEMO01              PIC X(1000).
+      *            内部連番
+                   07  SPA-NAI-RENNUM01            PIC 9(02).
+      *            メモ２
+                   07  SPA-GMN-SRYKA02-G.
+                       09  SPA-GMN-SRYKA02         PIC X(02).
+                       09  SPA-GMN-F2              PIC X(01).
+                       09  SPA-GMN-SRYKA02MEI      PIC X(12).
+                   07  SPA-GMN-MEMO02              PIC X(1000).
+      *            内部連番
+                   07  SPA-NAI-RENNUM02            PIC 9(02).
+      *            選択番号
+                   07  SPA-GMN-SELNUM              PIC 9(03).
+      *
+      *        診療科
+               05  SPA-GMN-SRYKA-LISTG.
+                   07  SPA-GMN-SRYKA-LIST      OCCURS  41.
+                       09  SPA-GMN-SRYKAL          PIC X(02).
+                       09  SPA-GMN-F1L             PIC X(01).
+                       09  SPA-GMN-SRYKAMEIL       PIC X(12).
+                   07  SPA-SRYKA-MAX               PIC 9(04).
+      *
+           03  SPA-NAI-AREA.
+               05  SPA-NAI-SYSYMD                  PIC X(08).
+               05  SPA-NAI-MEMOKBN                 PIC 9(01).
+      *
+           03  SPA-XFID1-AREA.
+      *警告メッセージ
+               05  SPA-XFIDCD              PIC  X(04).
+      *警告画面より
+               05  SPA-XFID1-AREA.
+                   07  SPA-XFID1-FLG       PIC  X(02).
+           03  SPA-XFID2-AREA.
+      *警告メッセージ
+               05  SPA-XFIDCD2             PIC  X(04).
+      *警告画面より
+               05  SPA-XFID2-AREA.
+                   07  SPA-XFID2-FLG       PIC  X(03).
+      *
+      *    文例選択画面用
+           03  SPA-XF011-AREA.
+               05  SPA-XF011-CUR            PIC 9(02).
+               05  SPA-XF011-BUNNREI-G.
+                   07  SPA-XF011-BUNNREI-LIST      OCCURS  200.
+                       09  SPA-XF011-TRENNUM       PIC 9(03).
+                       09  SPA-XF011-TCOMMENT      PIC X(400).
+                   07  SPA-XF011-BUNREIMAX         PIC 9(04).
+               05  SPA-XF011-SELNUM       PIC 9(03).
+               05  SPA-XF011-TBL          PIC 9(03).
+      *
+               05  SPA-XF011-PAGE         PIC 9(03).
+               05  SPA-XF011-NEXT         PIC 9(01).
+      *
+      *    ＣＬＡＩＭ画面
+           03  SPA-CLAIM-FLG                        PIC 9(01).
+           03  SPA-CLAIM-MULTIHOST                  PIC 9(01).
+           03  SPA-XF01X-AREA.
+               05  SPA-XF01X-FLG                        PIC X(02).
+               05  SPA-XF01X-CODE                       PIC X(01).
+               05  SPA-XF01X-CUR                        PIC 9(02).
+      *
+               05  SPA-XF01X-GMN-SEL                    PIC 9(03).
+               05  SPA-XF01X-GMN-ADRLST.
+                   07  SPA-U02X-GMN-ADR-TBL        OCCURS  20.
+                       09  SPA-XF01X-GMN-SELNOL     PIC 9(03).
+                       09  SPA-XF01X-GMN-ADRL       PIC X(22).
+                       09  SPA-XF01X-GMN-PORTL      PIC X(22).
+                       09  SPA-XF01X-GMN-MEMOL      PIC X(22).
+                   07  SPA-XF01X-GMN-MAX            PIC 9(04).
+               05  SPA-GMN-SCODE-G.
+                   07  SPA-GMN-SCODE           PIC X(01).
+                   07  SPA-GMN-F1              PIC X(01).
+                   07  SPA-GMN-SCODEMEI        PIC X(18).
+      *

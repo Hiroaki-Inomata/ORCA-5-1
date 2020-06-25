@@ -1,0 +1,16 @@
+CID3 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    MSG {
+      textdata varchar(80);
+    };
+    B12 {
+      label varchar(24);
+    };
+    B11 {
+      label varchar(24);
+    };
+  };
+};

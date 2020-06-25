@@ -1,0 +1,79 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    住所マスタ返却
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} 医療機関番号 
+#        ${15} エラーファイル名 
+#        ${16} 県番号
+#        ${17} MONBLOB-ID
+#        ${18} EVENT
+#-------------------------------------------#
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+        if  [ -n "${ORCA_UID}" ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+        fi
+}
+trap cleanup EXIT
+
+RENNUM=0
+
+ERR_FILE_BASE=$(basename ${15})
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+
+LOG_FILE=/var/log/jma-receipt/${14}address_masterlst.log
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+echo $(basename ${LOG_FILE})
+
+[ -e ${ERR_FILE_FULL} ] && rm  ${ERR_FILE_FULL} 
+
+echo $#
+echo "arg17  = [" ${17} "]" 
+
+RENNUM=$(expr $RENNUM + 1) 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORAPI052BR8V3 -parameter "$1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16}"
+
+FILENM1="address_masterlst.xml"
+if  [ -e "${MCP_TEMPDIR}/${FILENM1}" ]; then
+    cd ${MCP_TEMPDIR}/
+    FILENM="address_masterlst.zip"
+    echo "filenm=[" $FILENM "]"
+    zip -r ${FILENM} ${FILENM1}
+    RC=$?
+    echo "--- zip end   ---[" $RC  "]" 
+    if  [ $RC -ne '0' ]; then
+        ERRCD='0000'$RC
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13}'  '${ERRCD:${#ERRCD}-4:4},${14} 
+        echo "--- zip err   ---" 
+        exit
+     fi
+     $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},$FILENM,"zip",${17}
+     if  [ -e ${ERR_FILE_FULL} ]; then
+         exit
+     fi
+fi
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPUSH -parameter "${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},${18},${19},${20},${21},${22},${23},${24},${25},${26},${27},${28}"
+if  [ -e ${ERR_FILE_FULL} ]; then
+     exit
+fi
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBE${12}${13},${14}"
+exit 
+

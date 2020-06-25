@@ -1,0 +1,112 @@
+K081 {
+  fixed32 {
+    CHUSYA_COMB {
+      CHUSYA {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[99];
+    };
+    CHK11 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK12 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK13 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK14 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK21 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK22 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK23 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK24 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK31 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK32 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK33 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK34 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    SIJISEN_COMB {
+      SIJISEN {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    SYOHOU_COMB {
+      SYOHOU {
+        textdata varchar(12);
+      };
+      count int;
+        item varchar(12)[2];
+    };
+    USERPG_COMB {
+      state int;
+      USERPG {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[2];
+    };
+  };
+};

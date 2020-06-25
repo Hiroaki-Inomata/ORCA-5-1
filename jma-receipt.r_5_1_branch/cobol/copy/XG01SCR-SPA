@@ -1,0 +1,122 @@
+      *****************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      *****************************************************************
+      *
+      *    統計ＣＳＶ出力画面ＳＰＡ     (SPA-FREE の内容)
+      *
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+       01  SPA-XG01FREE.
+           03  SPA-XG01-AREA.
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-MAX         PIC 9(03).
+               05  SPA-GMN-CUR         PIC 9(02).
+      *
+               05  SPA-GMN-AREA.
+                   07  SPA-GMN-TBL.
+                       09  SPA-GMN-OCC             OCCURS  100.
+                           11  SPA-GMN-TNO         PIC 9(03).
+                           11  SPA-GMN-TTBL-GROUP  PIC X(14).
+                           11  SPA-GMN-TRENNUM     PIC 9(04).
+                           11  SPA-GMN-TSHORI-RENNUM
+                                                   PIC 9(04).
+                           11  SPA-GMN-TKENSU      PIC 9(05).
+                           11  SPA-GMN-TSRYYM      PIC X(06).
+                           11  SPA-GMN-TSRYYMD     PIC X(09).
+                           11  SPA-GMN-TNYUGAIKBN  PIC X(02).
+                           11  SPA-GMN-TSHORI-TITLE
+                                                   PIC X(20).
+                           11  SPA-GMN-TPRT-TITLE  PIC X(100).
+                           11  SPA-GMN-TPUTFLG     PIC X(02).
+                   07  SPA-GMN-BODY.        
+                       09  SPA-GMN-SELNUM          PIC 9(03).
+                       09  SPA-GMN-BODY1.
+                           11  SPA-GMN-TBL-GROUP   PIC X(14).
+                           11  SPA-GMN-RENNUM      PIC 9(04).
+                           11  SPA-GMN-SHORI-RENNUM
+                                                   PIC 9(04).
+      *                 
+               05  SPA-NAI-AREA.
+                   07  SPA-NAI-BODY.        
+                       09  SPA-NAI-SELNUM          PIC 9(03).      
+                   07  SPA-NAI-TBL.
+                       09  SPA-NAI-OCC             OCCURS  100.
+                           11  SPA-NAI-TTBL-KEY    PIC X(08).
+                           11  SPA-NAI-TTBL-GROUP  PIC X(14).
+                           11  SPA-NAI-TPUTFLG     PIC X(01).
+                           11  SPA-NAI-TTO-FOLDER  PIC X(200).
+                           11  SPA-NAI-TTO-DATA    PIC X(200).
+                           11  SPA-NAI-TCODE-TYPE  PIC X(01).
+                           11  SPA-NAI-TSRYYM      PIC X(06).
+                           11  SPA-NAI-TSRYYMD     PIC X(08).
+      *
+               05  SPA-NAI-FILENO                  PIC 9(03).
+               05  SPA-NAI-XG04-TBL-KEY            PIC X(08).
+      *
+           03  SPA-XG02-AREA.
+               05  SPA-GMN-XG02-CUR    PIC 9(05).
+      *
+               05  SPA-GMN-XG02-AREA.
+                   07  SPA-GMN-XG02-FILENAME       PIC X(100).
+      *
+                   07  SPA-GMN-XG02-FILELST            OCCURS  6.
+                       09  SPA-GMN-XG02-FILEL      PIC X(01).
+                       09  SPA-GMN-XG02-F1L        PIC X(01).
+                       09  SPA-GMN-XG02-FILEMEIL   PIC X(20).
+                   07  SPA-GMN-XG02-FILE-MAX       PIC 9(02).
+      *
+                   07  SPA-GMN-XG02-FILE-G.
+                       09  SPA-GMN-XG02-FILE       PIC X(01).
+                       09  SPA-GMN-XG02-F1         PIC X(01).
+                       09  SPA-GMN-XG02-FILEMEI    PIC X(20).
+      *
+                   07  SPA-GMN-XG02-CDKBNLST           OCCURS  6.
+                       09  SPA-GMN-XG02-CDKBNL     PIC X(01).
+                       09  SPA-GMN-XG02-F1L        PIC X(01).
+                       09  SPA-GMN-XG02-CDKBNMEIL  PIC X(20).
+                   07  SPA-GMN-XG02-CDKBN-MAX      PIC 9(02).
+      *
+                   07  SPA-GMN-XG02-CDKBN-G.
+                       09  SPA-GMN-XG02-CDKBN      PIC X(01).
+                       09  SPA-GMN-XG02-F1         PIC X(01).
+                       09  SPA-GMN-XG02-CDKBNMEI   PIC X(20).
+      *
+               05  SPA-NAI-XG02-AREA.
+                   07  SPA-NAI-XG02-TO-FOLDER      PIC X(200).
+                   07  SPA-NAI-XG02-TO-DATA        PIC X(200).
+      *
+      *        クライアント保存可否フラグ
+               05  SPA-XG02-CLIENT-SAVE            PIC X(01).
+      *
+               05  SPA-NAI-XG02-FILENAME           PIC X(100).
+      *
+           03  SPA-XG99-AREA.
+               05  SPA-SFILESV-AREA.
+                   07 SPA-SFILESV-OCC             OCCURS  100.
+                       09  SPA-SFILESV-TITLE       PIC X(100).
+                       09  SPA-SFILESV-CNT-ALL     PIC 9(07).
+                       09  SPA-SFILESV-FOR-FOLDER  PIC X(200).
+                       09  SPA-SFILESV-FOR-DATA    PIC X(200).
+                       09  SPA-SFILESV-TO-FOLDER   PIC X(200).
+                       09  SPA-SFILESV-TO-DATA     PIC X(200).
+                       09  SPA-SFILESV-CODE-TYPE   PIC X(01).
+                       09  SPA-SFILESV-DATA-TYPE   PIC X(01).
+                   07  SPA-SFILESV-IDX             PIC 9(03).
+                   07  SPA-SFILESV-MAX             PIC 9(03).

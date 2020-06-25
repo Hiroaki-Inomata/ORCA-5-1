@@ -1,0 +1,50 @@
+xml_contraindication_checkv2res {
+    context         int;
+    object  object;
+    mode	int;
+    recordname	varchar(128);
+    contraindication_checkres {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+        Perform_Month				varchar(7);
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+        };
+	Medical_Information  {
+#---            ÌôºÞ¥³¡¼¥É
+		Medication_Code			varchar(09);
+		Medication_Name			varchar(80);
+        	Medical_Result			varchar(2);
+        	Medical_Result_Message		varchar(80);
+		Medical_Info  {
+#---            ¶Ø´÷ÌôºÞ¥³¡¼¥É
+			Contra_Code		varchar(09);
+			Contra_Name		varchar(80);
+#---            ¾É¾õ¾Üµ­¶èÊ¬
+			Interact_Code		varchar(7);
+#---            ÅêÍ¿Æü
+			Administer_Date		varchar(10);
+#---            º£²óÅêÍ¿¶èÊ¬
+			Administer_Class	varchar(1);
+#---            Êý¸þÀ­(-> : before . <-:after)
+			Context_Class		varchar(6);
+			} [30];
+		} [30];
+#---    ¾É¾õ¾Üµ­ÆâÍÆ
+	Symptom_Information  {
+#---            ¾É¾õ¾Üµ­¶èÊ¬
+		Symptom_Code		varchar(7);
+#---            ¾É¾õ
+		Symptom_Content		varchar(2048);
+#---            ºîÍÑµ¡Í¿
+		Symptom_Detail		varchar(2048);
+		} [50];
+   	};
+};

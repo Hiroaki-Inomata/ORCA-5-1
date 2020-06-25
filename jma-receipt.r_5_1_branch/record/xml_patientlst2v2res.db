@@ -1,0 +1,51 @@
+xml_patientlst2v2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientlst2res {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Target_Patient_Count	varchar(03);
+	No_Target_Patient_Count	varchar(03);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		Home_Address_Information	{
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(200);
+			WholeAddress2		varchar(200);
+			PhoneNumber1		varchar(15);
+			PhoneNumber2		varchar(15);
+        	};
+		Outpatient_Class		varchar(1);
+		HealthInsurance_Information	{
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_WholeName		varchar(20);
+            	InsuranceProvider_Number		varchar(08);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+        	} [3];
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+            	} [4];
+    	} [100];
+   	};
+};

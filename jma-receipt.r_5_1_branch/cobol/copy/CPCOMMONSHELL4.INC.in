@@ -1,0 +1,51 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    シェル用領域          CPCOMMONSHELL4.INC
+      *            
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SHELL-AREA.
+           03  SHELL-NAME.
+               05  FILLER             PIC  X(@dailyscripts_len@) VALUE
+           "@dailyscripts@".
+               05  SHELL-ID           PIC  X(10).
+               05  FILLER             PIC  X(60) VALUE SPACE.
+           03  SHELL-ARG1.
+               05  FILLER             PIC  X(@printscripts_len@) VALUE 
+           "@printscripts@".
+               05  FILLER             PIC  X(57) VALUE SPACE.
+           03  SHELL-ARG2.
+               05  FILLER             PIC  X(@formdir_len@) VALUE
+           "@formdir@".
+               05  SHELL-DIA          PIC  X(50).
+               05  FILLER             PIC  X(29) VALUE SPACE.
+           03  SHELL-ARG3.
+               05  FILLER             PIC  X(@recorddir_len@) VALUE
+           "@recorddir@".
+               05  SHELL-DEF          PIC  X(50).
+               05  FILLER             PIC  X(27) VALUE SPACE.
+           03  SHELL-ARG4.
+               05  SHELL-DAT          PIC  X(90).
+               05  FILLER             PIC  X(10) VALUE SPACE.
+           03  SHELL-ARG5.
+               05  SHELL-PRTNM        PIC  X(16).
+               05  FILLER             PIC  X(84) VALUE SPACE.

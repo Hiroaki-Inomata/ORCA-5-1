@@ -1,0 +1,19 @@
+I4ID2 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(200);
+    };
+    B01 {
+      label varchar(20);
+    };
+    B11 {
+      label varchar(50);
+    };
+    B12 {
+      label varchar(20);
+    };
+  };
+};

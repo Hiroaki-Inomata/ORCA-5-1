@@ -1,0 +1,24 @@
+C12 {
+  fixed6 {
+    scrolledwindow28 {
+      hpos int;
+      vpos int;
+      BYOMEILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(4);
+            column3 varchar(50);
+            column4 varchar(9);
+            column5 varchar(9);
+            column6 varchar(8);
+            column7 varchar(9);
+            column8 varchar(16);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

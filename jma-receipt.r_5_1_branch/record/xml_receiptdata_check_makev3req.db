@@ -1,0 +1,33 @@
+xml_receiptdata_check_makev3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	receiptdata_check_makev3req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Perform_Date		varchar(10);
+#---     診療年月(2016-09)
+                Perform_Month           varchar(07);
+#---     請求年月日
+		Ac_Date			varchar(10);
+#---     作成モード(Check:点検用 Ckeck以外:提出用)
+		Create_Mode		varchar(6);
+#---     提出先(1:社保 2:国保 3:広域 4:労災)
+		Submission_Mode		varchar(2);
+#---     レセ電データチェック(Yes:チェックする Yes以外:チェックしない)
+		Check_Mode		varchar(3);
+#---     保険者番号(00000000:直接請求する保険者以外 00000000以外:直接請求する保険者以外)
+        	InsuranceProvider_Number	varchar(8);
+#---     期間指定
+		Start_Month		varchar(7);
+		End_Month		varchar(7);
+#---     個別対象患者一覧
+		Patient_Information {
+			Patient_ID      varchar(20);
+			Patient_Perform_Month   varchar(7);
+			Patient_InOut		varchar(2);
+		} [100];
+	};
+};

@@ -1,0 +1,33 @@
+xml_medicalsetv2req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalsetreq {
+		Request_Number		varchar(2);
+    		Base_Date		varchar(10);
+		Set_Code   		varchar(06);
+		Set_Code_Name		varchar(80);
+    		Start_Date		varchar(10);
+		Ende_Date		varchar(10);
+		InOut			varchar(1);
+		Medical_Information  {
+			Medical_Info  {
+				Medical_Class		varchar(03);
+				Medical_Class_Name	varchar(40);
+				Medical_Class_Number	varchar(03);
+				Medication_Info   {
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(140);
+				Medication_Number	varchar(11);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info  {
+					Medication_Input_Code	varchar(10);
+					} [5] ;
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+				} [40] ;
+			} [40] ;
+		};
+	};
+};

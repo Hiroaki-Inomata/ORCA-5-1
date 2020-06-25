@@ -1,0 +1,10 @@
+push_print001	{
+	event				varchar(50);
+	User_ID				varchar(16);
+	body	{
+		Form_ID		varchar(20);
+		Custom_ID		varchar(20);
+		Form_Name		varchar(100);
+		Data_ID			varchar(80);
+	}[10];
+};

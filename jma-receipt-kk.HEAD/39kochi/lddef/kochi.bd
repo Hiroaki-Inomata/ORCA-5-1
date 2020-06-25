@@ -1,0 +1,23 @@
+name	kochi;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU3901"	"OpenCOBOL";
+bind	"SEIKYU3903"	"OpenCOBOL";
+bind	"SEIKYU3905"	"OpenCOBOL";
+bind	"SEIKYU3907"	"OpenCOBOL";
+bind	"SEIKYU3911"	"OpenCOBOL";
+bind	"SEIKYU3913"	"OpenCOBOL";
+bind	"SEIKYU3915"	"OpenCOBOL";
+bind	"SEIKYU3917"	"OpenCOBOL";
+bind	"SEIKYU3919"	"OpenCOBOL";
+bind	"SEIKYU3921"	"OpenCOBOL";
+bind	"SEIKYU3923"	"OpenCOBOL";
+bind	"SOKATU3900"	"OpenCOBOL";
+bind	"SOKATU3905"	"OpenCOBOL";
+bind	"SOKATU3920"	"OpenCOBOL";
+bind	"SOKATU3925"	"OpenCOBOL";
+
+
+#include "orcadb.inc"

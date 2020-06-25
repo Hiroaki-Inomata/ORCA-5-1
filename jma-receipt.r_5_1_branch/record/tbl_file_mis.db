@@ -1,0 +1,91 @@
+tbl_file_mis	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			varchar(8);
+	RENNUM  		number(4,0);
+	TBL_GROUP		varchar(14);
+	SHORI_RENNUM		number(4,0);
+	SHELLID			varchar(20);
+	SRYYM			varchar(06);
+	SRYYMD   		varchar(08);
+	CNT  			number(7,0);
+	NYUGAIKBN		varchar(1);
+	TO_FOLDER		varchar(200);
+	TO_DATA			varchar(200);
+	CODE_TYPE		varchar(1);
+	PUTFLG			varchar(1);
+	TITLE			varchar(100);
+	TBL_UUID 		varchar(36);
+	CREYMD 			varchar(8);
+	UPYMD 			varchar(8);
+	UPHMS			varchar(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_file_mis_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_mis
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		;
+	};
+};
+
+path	key2		{
+	DBSELECT	{
+		DECLARE tbl_file_mis_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_mis
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		ORDER BY  TBL_GROUP desc,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path    del_monblob   {
+	DBDELETE        {
+		DELETE
+		FROM monblob
+		WHERE	ID	=
+		(	SELECT TBL_UUID
+			FROM tbl_file_mis
+			WHERE 	HOSPNUM		=	:HOSPNUM
+			AND	TBL_KEY		=	:TBL_KEY
+			AND	RENNUM		=	:RENNUM
+			AND	TBL_GROUP	=	:TBL_GROUP
+			AND	SHORI_RENNUM	=	:SHORI_RENNUM
+		)
+                ;
+	};
+};
+
+path    del1   {
+	DBDELETE        {
+		DELETE
+		FROM tbl_file_mis
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+                ;
+        };
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_file_mis_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_mis
+		WHERE 	HOSPNUM		=	 :HOSPNUM
+ 		;
+	};
+};

@@ -1,0 +1,19 @@
+       01 CSV-REC.
+          03  CSV-SKYYM           PIC X(06).
+          03  CSV-SRYKA           PIC X(02).
+          03  CSV-SYOKBN          PIC X(01).
+          03  CSV-TEISYUTU        PIC X(01).
+          03  CSV-HKNJANUM        PIC X(08).
+          03  CSV-HKNJANAME       PIC X(200).
+          03  CSV-NYUGAIKBN       PIC X(01).
+          03  CSV-ZAIKBN          PIC X(01).
+          03  CSV-SRYYM           PIC X(06).
+          03  CSV-SYUBETUKBN      PIC X(01).
+          03  CSV-KBN             PIC X(03).
+          03  CSV-PTNUM           PIC X(20).
+          03  CSV-RENNUM          PIC 9(01).
+          03  CSV-NAME            PIC X(26).
+          03  CSV-NISSU           PIC X(6).
+          03  CSV-TENSU           PIC X(10).
+          03  CSV-RYOYOHI         PIC X(9).
+          03  CSV-SHOKUJIFTN      PIC X(9).

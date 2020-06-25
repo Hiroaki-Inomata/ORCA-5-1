@@ -1,0 +1,123 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        マスタデータ取得処理
+#        $1    医療機関番号
+#        $2    ジョブＩＤ
+#        $3    シェルＩＤ
+#        $4    エラーファイル名
+#        $5    マスタＩＤ
+#        $6    マスタ名
+#        $7    DATA_ID
+#        $8    基準日
+#        $9    PUSH用ファイル名
+#-------------------------------------------#
+
+HOSPNUM=$1
+JOBID=$2
+SHELLID=$(printf "%-8s\n" $3)
+ERR_FILE_BASE=$4
+MASTER_ID=$5
+MASTER_NAME=$6
+DATA_ID=$7
+WHERE=""
+[ -n "$8" ] && WHERE="where upymd >= '$8'"
+PUSH_FILE_FULL=${MCP_TEMPDIR}/$9
+
+MONPUSHEVENT="/usr/lib/panda/bin/monpushevent"
+RECFILE=push_batch01.db
+RECDIR=${RECORDDIR}
+if [ -e ${PATCHRECORDDIR}/${RECFILE} ]; then
+  RECDIR=${PATCHRECORDDIR}
+fi
+
+TEMPORARY_TABLE="for_export"
+
+CSV_FILE=${MCP_TEMPDIR}/${MASTER_ID}.csv
+ZIP_FILE=${CSV_FILE%%.csv}.zip
+
+NUMBER_OF_ROWS=0
+
+error(){
+  ERRMSG="ＣＳＶファイルの作成に失敗しました"
+  [ -n "$2" ] && ERRMSG=$2
+  ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "STE${JOBID}${SHELLID},${HOSPNUM},${ERR_FILE_BASE},,,0,"
+  ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}$1,${HOSPNUM},${ERR_FILE_BASE},,${ERRMSG}"
+}
+
+do_monsql(){
+  ${MONSQL} -dir ${LDDIRECTORY} -o CSV -c "$1"
+}
+
+do_push(){
+  sed -ie "s/@COUNT@/$(printf "%010d" ${NUMBER_OF_ROWS})/" ${PUSH_FILE_FULL}
+  ${MONPUSHEVENT} ${RECDIR}/${RECFILE} ${PUSH_FILE_FULL}
+}
+
+drop_temporary_table(){
+  ${MONSQL} -dir ${LDDIRECTORY} -c "drop table if exists ${TEMPORARY_TABLE}"
+}
+
+cleanup(){
+  drop_temporary_table
+  find ${MCP_TEMPDIR} -type f -print0 | xargs  -r -0 rm
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+}
+
+trap cleanup EXIT
+
+# comment out if debug
+# MCP_TEMPDIR=.
+
+${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "STS${JOBID}${SHELLID},${HOSPNUM},${ERR_FILE_BASE},マスタ取得（$(echo ${MASTER_NAME}| nkf -w)）  ,"
+
+COLUMNS=($(do_monsql "select column_name from information_schema.columns where table_schema ='public' and table_name = '${MASTER_ID}' order by columns.ordinal_position" ))
+[ $? -ne 0 ] && error "0001" && exit 1
+
+echo $(IFS=,; echo "${COLUMNS[*]}" | tr "[:upper:]" "[:lower:]") > ${CSV_FILE}
+
+EXISTS_TEMPORARY="$(/usr/lib/panda/bin/monsql  -o CSV -dir ./lddef/directory -c "SELECT CASE WHEN EXISTS(SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname = 'public' AND c.relname = '${TEMPORARY_TABLE}' ) THEN 'true' ELSE 'false' END" | tr -d '"')"
+
+[ ${EXISTS_TEMPORARY} == "true" ] && drop_temporary_table
+
+do_monsql "create table ${TEMPORARY_TABLE} as select row_number() over() as exp_id ,* from ${MASTER_ID} ${WHERE}"
+[ $? -ne 0 ] && error "0002" && exit 2
+NUMBER_OF_ROWS=$(do_monsql "select count(*) from ${TEMPORARY_TABLE}" | tr -d '"')
+[ $? -ne 0 ] && error "0003" && exit 3
+
+NUMBER_OF_ROWS=$(expr ${NUMBER_OF_ROWS} + 0)
+
+OFFSET=0
+LIMIT=10000
+while [ ${OFFSET} -lt ${NUMBER_OF_ROWS} ]; do
+
+  do_monsql "select * from ${TEMPORARY_TABLE} order by exp_id limit ${LIMIT} offset ${OFFSET} " | cut -d "," -f 2- >> ${CSV_FILE}
+  [ ${PIPESTATUS[0]} -ne 0 ] && error "0004" && exit 4
+
+  OFFSET=$(( OFFSET + ${LIMIT} ))
+  echo "$(date +"%Y-%m-%d %H:%M:%S") ${OFFSET}" 
+done
+
+if [ ${NUMBER_OF_ROWS} -gt 0 ]; then
+  zip -j ${ZIP_FILE}  ${CSV_FILE}
+  [ $? -ne 0 ] && error "0005" && exit 5
+
+  ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBMBIMPORT -parameter "${DATA_ID},${ZIP_FILE},zip"
+  [ $? -ne 0 ] && error "0006" && exit 6
+
+  do_push
+  ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "STE${JOBID}${SHELLID},${HOSPNUM},${ERR_FILE_BASE},,,${NUMBER_OF_ROWS},"
+  ${DBSTUB}  -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 -parameter "JBE${JOBID}${SHELLID},${HOSPNUM},${ERR_FILE_BASE},,"
+else
+  do_push
+  error "9998" "処理対象のデータがありませんでした"
+fi

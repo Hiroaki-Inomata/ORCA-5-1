@@ -1,0 +1,13 @@
+KERR2 {
+  fixed1 {
+    ERRCODE {
+      textdata varchar(10);
+    };
+    ERRMSG {
+      textdata varchar(80);
+    };
+    ERRMSG2 {
+      textdata varchar(80);
+    };
+  };
+};

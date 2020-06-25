@@ -1,0 +1,16 @@
+xml_patientlst7v2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientlst7req {
+		Request_Number		varchar(2);
+		Patient_ID		varchar(20);
+#---   		Šî€“ú
+		Base_Date		varchar(10);
+#---   		f—Ã‰È
+		Department_Code		varchar(2);
+#---   		ƒƒ‚‹æ•ª
+		Memo_Class		varchar(1);
+	};
+};

@@ -1,0 +1,115 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : 端末ＩＤ
+# $3 : ジョブＩＤ
+# $4 : シェルＩＤ
+# $5 : マスターＩＤ
+# $6 : コード１
+# $7 : コード２
+# $8 : コード３
+# $9 : コード４
+# $10: コード５
+#------------------------------------
+
+HOSPNUM=${1}
+TERMID=${2}
+JOBID=${3}
+SHELLID=$(printf "%-8s" ${4})
+
+MASTERID=${5}
+CODE1=${6}
+CODE2=${7}
+CODE3=${8}
+CODE4=${9}
+CODE5=${10}
+
+# MCP_TEMPDIRをTMPDIRとする
+TMPDIR=${MCP_TEMPDIR}
+
+LOG="$LOGDIR"/${HOSPNUM}master_get.log
+
+# echo message (default character-code EUC)
+echomsg() {
+  echo `echo ${1} | nkf`
+}
+
+jobend() {
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOB2 \
+            -parameter "JBE${4}${5}${2},${3},,,${6}"
+  echomsg "${6}" ${7} 
+  exit ${1}
+}
+
+rm -f ${LOG}
+
+# disk space check
+VOLSIZE=`df -m ${MCP_TEMPDIR} | tail -1 | sed 's/\s\{1,\}/ /g' | cut -d' ' -f4`
+echo "${VOLSIZE}"
+echo "${MINSIZE}"
+if [ -z "$MINSIZE" ]; then
+#set default 500MB
+  MINSIZE=500
+fi
+if [ $VOLSIZE -lt $MINSIZE ]; then
+  ERRMSG="The space capacity of the disk is insufficient. [ ${VOLSIZE}MB ]"
+  jobend 99 8901 ${HOSPNUM} "${JOBID}" "${SHELLID}" "${ERRMSG}" ${LOG}
+fi
+
+case "${MASTERID}" in
+  HKNNUM)
+    FILENAME=hknnum-"${CODE1}"-"${CODE2}".dat
+    MSTURL="${MSTSRVPATH}"/hknnum/v01
+    ;;
+  SIORI)
+    FILENAME="${CODE1}"-siori.dat
+    MSTURL="${MSTSRVPATH}"/siori/data
+    ;;
+  *)
+    FILENAME=
+    MSTURL=
+    ;;
+esac
+
+echomsg "${MSTURL}/${FILENAME}.p7m" ${LOG}
+LOGMSG=`orcadt_verify.rb --dir ${MCP_TEMPDIR} --cacert ${CACERTFILE} ${MSTURL}/${FILENAME}.p7m 2>&1`
+RESULT=`echo "$LOGMSG" | head -1`
+if [ "[ERROR]" = "${RESULT:0:7}" ] ; then
+  echomsg "${LOGMSG}" ${LOG} 
+  jobend 99 9902 ${HOSPNUM} "${JOBID}" "${SHELLID}" "${RESULT}" ${LOG}
+fi
+
+creymd=`date +'%Y%m%d'`
+sed -e "s/:HOSPNUM:/${HOSPNUM}/g" \
+    -e "s/:TERMID:/${TERMID}/g" \
+    -e "s/:CREYMD:/${creymd}/g" \
+    -e "s/:HKNNUM:/${CODE3}/g" \
+    ${MCP_TEMPDIR}/${FILENAME} > ${MCP_TEMPDIR}/${FILENAME}.sql
+rm -f ${MCP_TEMPDIR}/${FILENAME}
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBSQL1 \
+          -parameter ${HOSPNUM},${MCP_TEMPDIR}/${FILENAME}.sql
+if [ $? -ne 0 ] ; then 
+  rm -f ${MCP_TEMPDIR}/${FILENAME}.sql
+  ERRMSG="マスター登録処理でエラーが発生しました"
+  jobend 99 9903 ${HOSPNUM} "${JOBID}" "${SHELLID}" "${ERRMSG}" ${LOG}
+fi
+
+rm -f ${MCP_TEMPDIR}/${FILENAME}.sql
+
+MSG="マスター取得処理が終了しました"
+if [ "${MASTERID}" = "SIORI" ] ; then
+  echomsg "${MSG}" ${LOG} 
+else
+  jobend 0 0000 ${HOSPNUM} "${JOBID}" "${SHELLID}" "${MSG}" ${LOG}
+fi
+
+exit 0

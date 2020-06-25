@@ -1,0 +1,231 @@
+xml_patient_basis_all {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	Patient_Basis_All	{
+		Patient_Information     {
+			Patient_ID		varchar(20);
+			WholeName		varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate		varchar(10);
+			Sex			varchar(1);
+			HouseHolder_WholeName	varchar(100);
+			Relationship 		varchar(60);
+			Home_Address_Information	{
+				Address_ZipCode		varchar(07);
+				WholeAddress1		varchar(200);
+				WholeAddress2		varchar(200);
+				PhoneNumber1		varchar(15);
+				PhoneNumber2		varchar(15);
+			};
+		};
+#--- 勤務先
+		WorkPlace_Information	{
+			WholeName		varchar(50);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber		varchar(15);
+		};
+#--- 連絡先
+		Contact_Information	{
+			WholeName		varchar(50);
+			Relationship 		varchar(30);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber1		varchar(15);
+			PhoneNumber2		varchar(15);
+        	};
+#--- 帰省先
+		Home2_Information	{
+			WholeName		varchar(50);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber		varchar(15);
+        	};
+		Contraindication1		varchar(100);
+		Contraindication2		varchar(100);
+		Allergy1			varchar(100);
+		Allergy2			varchar(100);
+		Infection1			varchar(100);
+		Infection2			varchar(100);
+		Comment1			varchar(100);
+		Comment2			varchar(100);
+#-----> テスト患者区分
+		TestPatient_Flag		varchar(01);
+#-----> 死亡区分
+		Death_Flag			varchar(01);
+#-----> 職業
+		Occupation     			varchar(20);
+#-----> 通称名
+		NickName			varchar(50);
+#-----> 携帯電話番号
+		CellularNumber			varchar(15);
+#-----> ＦＡＸ番号
+		FaxNumber			varchar(15);
+#-----> 電子メールアドレス
+		EmailAddress			varchar(50);
+#---->  減免事由
+		Reduction_Reason		varchar(02);
+		Reduction_Reason_Name		varchar(20);
+#---->  割引率
+		Discount			varchar(02);
+		Discount_Name			varchar(14);
+#---->  状態１から３
+		Condition1			varchar(02);
+		Condition1_Name			varchar(20);
+		Condition2			varchar(02);
+		Condition2_Name			varchar(20);
+		Condition3			varchar(02);
+		Condition3_Name			varchar(20);
+#---   入金方法区分
+		Ic_Code				varchar(2);
+		Ic_Code_Name			varchar(20);
+#-----> 地域連携
+		Community_Cid			varchar(20);
+		Community_Cid_Agree		varchar(5);
+#-----> 初回来院日等
+		FirstVisit_Date			varchar(10);
+		LastVisit_Date			varchar(10);
+		Outpatient_Class		varchar(1);
+		Admission_Date			varchar(10);
+		Discharge_Date			varchar(10);
+#-----> 
+		HealthInsurance_Information	{
+#-----> 保険組合せ番号
+			Insurance_Combination_Number		varchar(04);
+#-----> 保険組合せ期間
+			Insurance_Combination_StartDate		varchar(10);
+			Insurance_Combination_ExpiredDate	varchar(10);
+#-----> 保険組合せ負担割合
+			Insurance_Combination_Rate_Admission	varchar(04);
+			Insurance_Combination_Rate_Outpatient	varchar(04);
+#-----> 保険組合せ非表示区分
+			Insurance_Nondisplay			varchar(01);
+#-----> 保険情報
+			InsuranceProvider_Class			varchar(03);
+			InsuranceProvider_Number		varchar(08);
+			InsuranceProvider_WholeName		varchar(20);
+			HealthInsuredPerson_Symbol		varchar(80);
+			HealthInsuredPerson_Number		varchar(80);
+			HealthInsuredPerson_Continuation	varchar(01);
+			HealthInsuredPerson_Assistance		varchar(01);
+			HealthInsuredPerson_Assistance_Name	varchar(20);
+			RelationToInsuredPerson			varchar(01);
+			HealthInsuredPerson_WholeName		varchar(100);
+			Certificate_StartDate			varchar(10);
+			Certificate_ExpiredDate			varchar(10);
+#-----> 資格取得日
+			Certificate_GetDate			varchar(10);
+#-----> 最終確認日
+			Certificate_CheckDate			varchar(10);
+#-----> 公費情報
+			PublicInsurance_Information   {
+				PublicInsurance_Class		varchar(03);
+				PublicInsurance_Name		varchar(20);
+				PublicInsurer_Number		varchar(08);
+				PublicInsuredPerson_Number	varchar(20);
+				Rate_Admission			varchar(04);
+				Money_Admission			varchar(06);
+				Rate_Outpatient			varchar(04);
+				Money_Outpatient		varchar(06);
+				Certificate_IssuedDate		varchar(10);
+				Certificate_ExpiredDate		varchar(10);
+				Certificate_CheckDate		varchar(10);
+			} [4];
+#-----> 労災情報
+			Accident_Insurance_Information	{
+				Accident_Insurance_WholeName	varchar(50);
+				Disease_Location		varchar(100);
+				Disease_Date			varchar(10);
+#-----> 	労働保険番号
+				Accident_Insurance_Number	varchar(14);
+#-----> 	年金証書番号
+				PensionCertificate_Number	varchar(09);
+#-----> 	災害区分名称
+				Accident_Class			varchar(20);
+#-----> 	労働基準監督署コード
+				Labor_Station_Code		varchar(05);
+				Labor_Station_Code_Name		varchar(50);
+				Liability_Office_Information	{
+#-----> 	        事業所名称
+					L_WholeName			varchar(80);
+#-----> 	        所在地都道府県
+					Prefecture_Information	{
+						P_WholeName		varchar(20);
+						P_Class			varchar(01);
+						P_Class_Name		varchar(02);
+					};
+#-----> 	        所在地郡市
+					City_Information	{
+						C_WholeName		varchar(80);
+						C_Class			varchar(01);
+						C_Class_Name		varchar(02);
+					};
+				};
+#-----> 	自賠責保険会社名
+				Liability_Insurance_Office_Name	varchar(80);
+#-----> 	アフターケア  健康管理手帳番号
+				PersonalHealthRecord_Number	varchar(13);
+				Damage_Class	{
+					D_Code			varchar(03);
+					D_WholeName		varchar(100);
+				};
+			};
+		} [40];
+		Care_Information {
+			Insurance	{
+				InsuranceProvider_Number	varchar(06);
+				HealthInsuredPerson_Number	varchar(10);
+				Certificate_StartDate		varchar(10);
+				Certificate_ExpiredDate		varchar(10);
+			} [10];
+			Certification  {
+				Need_Care_State_Code		varchar(02);
+				Need_Care_State			varchar(20);
+				Certification_Date		varchar(10);
+				Certificate_StartDate		varchar(10);
+				Certificate_ExpiredDate		varchar(10);
+			} [50];
+		};
+		Community_Disease  {
+			Target_Disease				varchar(05);
+		} [4];
+#-----> 個人番号情報
+		Individual_Number  {
+			In_Id			varchar(10);
+			In_Number		varchar(20);
+			In_Description		varchar(100);
+		} [20];
+#--->   患者個別情報
+		Personally_Information	{
+#--->   	妊婦設定
+			Pregnant_Class		varchar(05);
+#--->   	認知症地域包括診療
+			Community_Disease2	varchar(05);
+#--->    	小児かかりつけ診療
+			Community_Disease3	varchar(05);
+    		};
+#-----> 管理料自動算定
+		Auto_Management_Information  {
+			Medication_Code		varchar(09);
+			Medication_Name		varchar(80);
+			Medication_EndDate	varchar(10);
+		} [3];
+#---    患者禁忌薬剤情報
+		Patient_Contra_Information	{
+			Patient_Contra_Info	{
+#---    		薬剤コード
+				Medication_Code		varchar(09);
+				Medication_Name		varchar(80);
+#---    		薬剤コード終了日
+				Medication_EndDate	varchar(10);
+#---    		禁忌開始日付
+				Contra_StartDate	varchar(10);
+			} [100];
+		};
+	} [39];
+};

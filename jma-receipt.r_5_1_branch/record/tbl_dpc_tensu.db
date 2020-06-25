@@ -1,0 +1,83 @@
+tbl_dpc_tensu {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	DPC_CD				char(14);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+	BYOTAI_CD			char(1);
+	AGE_CD				char(1);
+	OPE_CD				char(2);
+	ACT1_CD				char(1);
+	ACT2_CD				char(1);
+	SUBBYO_CD			char(1);
+	JUSHO_CD			char(1);
+	BYOMEI				varchar(120);
+	OPE					varchar(160);
+	ACT1				varchar(30);
+	ACT2				varchar(30);
+	SUBBYO				varchar(30);
+	JUSHO				varchar(50);
+	KIKAN1				number(3,0);
+	KIKAN2				number(3,0);
+	KIKAN3				number(3,0);
+	TEN1				number(8,0);
+	TEN2				number(8,0);
+	TEN3				number(8,0);
+	SORT_VALUE			char(14);
+	NO				    number(5,0) , virtual;
+};
+
+primary	{
+	DPC_CD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_tensu_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_tensu
+		WHERE DPC_CD        =   :DPC_CD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_tensu_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_tensu
+		WHERE MDC_CD        =   :MDC_CD
+		 AND  BUNRUI_CD     =   :BUNRUI_CD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER BY SORT_VALUE
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_tensu_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_tensu
+		WHERE DPC_CD     LIKE   :DPC_CD
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER BY SORT_VALUE
+		;
+	};
+};
+
+path	no		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_tensu_no_csr CURSOR FOR
+		SELECT COUNT(*) AS NO
+		FROM tbl_dpc_tensu
+		WHERE SORT_VALUE    <=  :SORT_VALUE
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+   		 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};

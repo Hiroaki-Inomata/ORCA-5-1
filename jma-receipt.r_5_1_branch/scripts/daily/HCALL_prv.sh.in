@@ -1,0 +1,79 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+export HOME=/home/orca
+export PATH=$SITESCRIPTSDIR/daily:$PATCHSCRIPTSDIR/daily:$SCRIPTSDIR/daily:$PATH
+export RUBYLIB=$SITESCRIPTSDIR:$PATCHSCRIPTSDIR:$SCRIPTSDIR:$RUBYLIB
+export MONBLOB
+export MONUPLOAD
+export LDDIRECTORY
+
+#----------------------------------------------------------------------#
+#       引数	
+#       1:DATAファイル名称
+#       2:HOSPNUM
+#       3:エンコーディング(1:EUC-JP/2:UTF8/3:OTHER)
+#       4:プレビュー管理編集フラグ（1:編集する/1以外:編集しない）
+#       5:帳票表題（クライアント印刷用）
+#       6:ダイアログ表示区分（1:ダイアログ表示　クライアント印刷用）
+#       7:PDF保持区分（1:保持）
+#       8:PDFファイル名（大容量API返却用）
+#----------------------------------------------------------------------#
+
+PRT_FILE_BASE=$1
+HOSPNUM=$2
+PRT_FILE_FULL=${MCP_TEMPDIR}/${PRT_FILE_BASE}
+YAML_FILE=$(mktemp --suffix=.yaml ${MCP_TEMPDIR}/print_parent_prv.XXXXX)
+
+REPORT_TITLE=""
+[ -n "$5" ] && REPORT_TITLE=$(echo $5 | nkf -w)
+LOG_FILE=${LOGDIR}/${HOSPNUM}$(basename ${0%.*}).log
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+echo  `date`
+echo  $#  
+
+
+ cat << EOS > ${YAML_FILE}
+hospnum: "${HOSPNUM}"
+data_file: "${PRT_FILE_FULL}"
+form_dir: "${FORMDIR}"
+site_form_dir: "${SITEFORMDIR}"
+patch_form_dir: "${PATCHFORMDIR}"
+mcp_temp_dir: "${MCP_TEMPDIR}"
+report_title: "${REPORT_TITLE}"
+show_dialog: "$6"
+keep_pdf: "$7"
+pdf_name: "$8"
+orca_version: $([[ $(cat ${DOCDIR}/version) =~ version.*\(([0-9\-]*)\) ]] && echo ${BASH_REMATCH[1]})
+EOS
+
+echo "yaml"  
+cat ${YAML_FILE} 
+echo "--" 
+
+if [ "$4"  == "1" ]; then
+  $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPREV -parameter ${PRT_FILE_BASE},$2
+else
+  echo "ORCBPREV skipped"
+fi
+
+print_parent_prv.rb ${YAML_FILE}
+[ -e ${YAML_FILE} ] && rm ${YAML_FILE}
+
+#------ お薬手帳、処方せんQRイメージ削除
+#       （一時ディレクトリに作成されたpngファイルを削除）
+grep -Eo "${MCP_TEMPDIR}/([0-9a-zA-Z]|\.|\-|\_)+\.png" ${PRT_FILE_FULL} | xargs -r rm -f  
+[ -e ${PRT_FILE_FULL} ] && rm ${PRT_FILE_FULL}
+
+echo `date`
+echo "HCALL end"
+

@@ -1,0 +1,35 @@
+kanri_cd    : "1043"
+name        : "会計照会機能情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "SRYKBN-FLG"
+  item_jp   : "全科の表示順"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "SRYKA-FLG"
+  item_jp   : "診療科の初期表示"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "RESPRVFLG"
+  item_jp   : "レセプトブレビュー"
+  type      : "X"
+  start     : 3
+  length    : 1
+- item_no   : 4
+  item      : "PRVLAYOUT"
+  item_jp   : "レセプトレイアウト"
+  type      : "X"
+  start     : 4
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 5
+  length    : 496

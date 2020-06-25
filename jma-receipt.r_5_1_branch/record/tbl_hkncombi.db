@@ -1,0 +1,272 @@
+tbl_hkncombi {
+	HOSPNUM				number(2,0);
+	PTID				number(10);
+	HKNCOMBINUM			number(4,0);
+	HKNID				number(10);
+	HKNNUM				char(3);
+	HONKZKKBN			char(1);
+	HOJOKBN				char(1);
+	CONTKBN				char(1);
+	KOH1ID				number(10);
+	KOH1HKNNUM			char(3);
+	KOH1PAYKBN      		char(2);
+	KOH2ID				number(10);
+	KOH2HKNNUM			char(3);
+	KOH2PAYKBN      		char(2);
+	KOH3ID				number(10);
+	KOH3HKNNUM			char(3);
+	KOH3PAYKBN      		char(2);
+	KOH4ID				number(10);
+	KOH4HKNNUM			char(3);
+	KOH4PAYKBN      		char(2);
+	TEKSTYMD			char(8);
+	TEKEDYMD			char(8);
+	SYU_TANSEIDONAME		varchar(40);
+	SYU_HKNKOHSBTKBN        	char(1);
+	SYU_GAIJGNKBN			char(1);
+	SYU_NYUJGNKBN			char(1);
+	KOH1_TANSEIDONAME		varchar(20);
+	KOH1_HKNKOHSBTKBN      		char(1);
+	KOH1_GAIJGNKBN			char(1);
+	KOH1_NYUJGNKBN			char(1);
+	KOH2_TANSEIDONAME		varchar(20);
+	KOH2_HKNKOHSBTKBN       	char(1);
+	KOH2_GAIJGNKBN			char(1);
+	KOH2_NYUJGNKBN			char(1);
+	KOH3_TANSEIDONAME		varchar(20);
+	KOH3_HKNKOHSBTKBN       	char(1);
+	KOH3_GAIJGNKBN			char(1);
+	KOH3_NYUJGNKBN			char(1);
+	KOH4_TANSEIDONAME		varchar(20);
+	KOH4_HKNKOHSBTKBN       	char(1);
+	KOH4_GAIJGNKBN			char(1);
+	KOH4_NYUJGNKBN			char(1);
+	GAI_FTNKBN			char(1);
+	GAI_KFTNRATE			number(3);
+	GAI_KKOTGAK			number(6);
+	GAI_KJGNGAK			number(6);
+	GAI_DJGNGAK			number(6);
+	GAI_DJGNCNT			number(2);
+	GAI_MNAIJGNGAK		number(6);
+	GAI_MGAIJGNGAK		number(6);
+	GAI_MJGNCNT			number(2);
+	GAI_YKZFTNKBN			char(1);
+	NYU_FTNKBN			char(1);
+	NYU_KFTNRATE			number(3);
+	NYU_KKOTGAK			number(6);
+	NYU_KJGNGAK			number(6);
+	NYU_DJGNGAK			number(6);
+	NYU_DJGNCNT			number(2);
+	NYU_MJGNGAK			number(6);
+	NYU_MJGNCNT			number(2);
+	NYU_SKJRYOKBN			char(1);
+	TSY_GAIFTNKBN			char(1);
+	TSY_GAIKFTNRATE			number(3);
+	TSY_GAIKKOTGAK			number(6);
+	TSY_GAIKJGNGAK			number(6);
+	TSY_GAIDJGNGAK			number(6);
+	TSY_GAIDJGNCNT			number(2);
+	TSY_GAIMNAIJGNGAK		number(6);
+	TSY_GAIMGAIJGNGAK		number(6);
+	TSY_GAIMJGNCNT			number(2);
+	TSY_GAIYKZFTNKBN		char(1);
+	TSY_NYUFTNKBN			char(1);
+	TSY_NYUKFTNRATE			number(3);
+	TSY_NYUKKOTGAK			number(6);
+	TSY_NYUKJGNGAK			number(6);
+	TSY_NYUDJGNGAK			number(6);
+	TSY_NYUDJGNCNT			number(2);
+	TSY_NYUMJGNGAK			number(6);
+	TSY_NYUMJGNCNT			number(2);
+	TSY_NYUSKJRYOKBN		char(1);
+	TNK_GAIFTNKBN			char(1);
+	TNK_GAIKFTNRATE			number(3);
+	TNK_GAIKKOTGAK			number(6);
+	TNK_GAIKJGNGAK			number(6);
+	TNK_GAIDJGNGAK			number(6);
+	TNK_GAIDJGNCNT			number(2);
+	TNK_GAIMNAIJGNGAK   	number(6);
+	TNK_GAIMGAIJGNGAK		number(6);
+	TNK_GAIMJGNCNT			number(2);
+	TNK_GAIYKZFTNKBN		char(1);
+	TNK_NYUFTNKBN			char(1);
+	TNK_NYUKFTNRATE			number(3);
+	TNK_NYUKKOTGAK			number(6);
+	TNK_NYUKJGNGAK			number(6);
+	TNK_NYUDJGNGAK			number(6);
+	TNK_NYUDJGNCNT			number(2);
+	TNK_NYUMJGNGAK			number(6);
+	TNK_NYUMJGNCNT			number(2);
+	TNK_NYUSKJRYOKBN		char(1);
+	TENTNK				number(4);
+	TAXKBN				char(1);
+	CHGKBN				char(1);
+	DELKBN				char(1);
+	HYOJIKBN			char(1);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,HKNCOMBINUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+			AND   HKNCOMBINUM   =   :HKNCOMBINUM
+		;
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key3	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+			AND   DELKBN        =   :DELKBN
+			ORDER   BY  HKNID,
+						HKNNUM,
+						HONKZKKBN,
+						HOJOKBN,
+						CONTKBN,
+						KOH1ID,
+						KOH1HKNNUM,
+						KOH2ID,
+						KOH2HKNNUM,
+						KOH3ID,
+						KOH3HKNNUM,
+						KOH4ID,
+						KOH4HKNNUM,
+						TEKSTYMD,
+						TEKEDYMD
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+                        AND  ((KOH1ID       =   :KOH1ID)
+                         OR   (KOH2ID       =   :KOH2ID)
+                         OR   (KOH3ID       =   :KOH3ID)
+                         OR   (KOH4ID       =   :KOH4ID))
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     PTID        =   :PTID
+                        AND     HKNID       =   :HKNID
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key6	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+                        AND   TEKSTYMD      <=  :TEKSTYMD
+                        AND   TEKEDYMD      >=  :TEKEDYMD
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key7	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+			AND   KOH1HKNNUM    =   '970'
+			AND   DELKBN        <>  '1'
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key8	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID          =   :PTID
+			AND   KOH1HKNNUM    =   '970'
+			ORDER   BY  HKNCOMBINUM
+		;
+	};
+};
+
+path	key9	{ 	
+	DBSELECT	{
+		DECLARE tbl_hkncombi_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hkncombi
+			WHERE   HOSPNUM     =   :HOSPNUM
+			AND   PTID          =   :PTID
+			AND   KOH1HKNNUM    =   '970'
+			AND   DELKBN        <>  '1'
+			ORDER   BY  TEKSTYMD
+		;
+	};
+};
+
+

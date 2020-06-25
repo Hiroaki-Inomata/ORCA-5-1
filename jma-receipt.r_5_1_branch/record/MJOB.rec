@@ -1,0 +1,63 @@
+MJOB {
+  fixed12 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    B08 {
+      state int;
+    };
+    B11 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    nb1 {
+      pageno int;
+      fixed16 {
+        scrolledwindow26 {
+          hpos int;
+          vpos int;
+          LIST {
+            count int;
+            row int;
+              item {
+                column1 varchar(16);
+                column2 varchar(5);
+                column3 varchar(256);
+                column4 varchar(22);
+                column5 varchar(22);
+                column6 varchar(35);
+                column7 varchar(35);
+              }[100];
+              selectdata bool[100];
+          };
+        };
+      };
+      fixed17 {
+        sw1 {
+          hpos int;
+          vpos int;
+          dataview {
+            textdata varchar(63000);
+          };
+        };
+        MIDASI {
+          textdata varchar(18);
+        };
+        CNTHEN {
+          textdata varchar(28);
+        };
+      };
+    };
+    LOGDATE { #GtkPandaEntry
+      textdata varchar(10);
+    };
+    MIDASI1 {
+      textdata varchar(18);
+    };
+  };
+};

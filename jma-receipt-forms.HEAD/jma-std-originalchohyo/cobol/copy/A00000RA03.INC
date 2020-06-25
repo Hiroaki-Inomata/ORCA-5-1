@@ -1,0 +1,9 @@
+        01  A00000RA03.
+            02  A00000RA03-PTNUM   PIC X(23).
+            02  A00000RA03-NAME    PIC X(56).
+            02  A00000RA03-NAME2   PIC X(64).
+            02  A00000RA03-HUKUYO  PIC X(4).
+            02  A00000RA03-NAIYO-G     OCCURS  22 TIMES.
+              03  A00000RA03-NAIYO   PIC X(40).
+              03  A00000RA03-NAIYO2  PIC X(40).
+            02  A00000RA03-SRYYMD  PIC X(22).

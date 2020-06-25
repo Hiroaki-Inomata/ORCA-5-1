@@ -1,0 +1,36 @@
+kanri_cd    : "1901"
+name        : "医療機関編集情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "HOSPNAME1"
+  item_jp   : "医療機関名称（１行目）"
+  type      : "X"
+  start     : 1
+  length    : 160
+- item_no   : 2
+  item      : "HOSPNAME2"
+  item_jp   : "医療機関名称（２行目）"
+  type      : "X"
+  start     : 161
+  length    : 160
+- item_no   : 3
+  item      : "HOSPNAME3"
+  item_jp   : "医療機関名称（３行目）"
+  type      : "X"
+  start     : 321
+  length    : 160
+- item_no   : 4
+  item      : "HOSPNAME1MOJI"
+  item_jp   : "医療機関名称（１行目）文字数"
+  type      : "9"
+  start     : 481
+  length    : 2
+  precision : 0
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 501
+  length    : 18

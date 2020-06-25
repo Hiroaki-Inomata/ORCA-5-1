@@ -1,0 +1,120 @@
+#!%RUBY%
+# coding : utf-8
+
+# claim client script
+#   args  0:[server ip or hostname] 
+#         1:[port]
+#         2:[send file path_name]
+#         3:[send file J-code ( u8 | ecu | sjis | jis )]
+# 
+# version 1.3.0
+#                  '01-10-30 by Yamamoto
+
+require 'socket'
+$server, $port, $file_path_name, $out_code = ARGV
+
+$logfl = "/tmp/claim_snd.log"
+
+#----- Define Classes ----------------------------------------
+
+class FileSend
+  def initialize(fl, s)
+    @fl_path_name = fl
+    @sckt = s
+    @eot = 0x04.chr
+  end
+
+  def start
+    open(@fl_path_name, "rb") do |f|
+      buf = f.read(File.size(@fl_path_name))
+      @sckt << buf
+    end
+  end
+
+  def end
+    @sckt << @eot
+  end
+end
+
+class RcvRsp
+  def initialize(s)
+    @sckt = s
+    @ack = 0x06.chr
+    @nak = 0x15.chr
+  end
+
+  def rcv
+    buf = @sckt.read(1)
+    @ans = if buf == @ack
+             "OK"
+           elsif buf == @nak
+             "NG"
+           else
+             "N/A"
+           end
+  end
+end
+
+#----- Main --------------------------------------------------
+
+if !File.exists?($file_path_name)
+  print "ERR: no file [ " + $file_path_name + " ]\n"
+  exit
+end
+unless $out_code == "u8" || $out_code == "euc" || $out_code == "sjis" || $out_code == "jis"
+  $out_code = "no arg" unless $out_code
+  print "ERR: invalid out_code [ " + $out_code + " ]\n"
+  exit
+end
+
+#----- convert claim data J-code to $out_code ----------
+print "Convert J-code to #{$out_code}\n"
+snd_file = $file_path_name.gsub(/.xml$/, "_#{$out_code}_snd.xml")
+`%RUBY% xml_jcnv.rb #{$file_path_name} to#{$out_code} -f > #{snd_file}`  
+#-------------------------------------------------------
+
+logmsg = Time.now.strftime("%Y-%m-%dT%H:%M:%S") + "\n"
+logmsg = logmsg + "  Send to [" + $server + "] port [" + $port + "]\n"
+
+return_code = 0
+
+begin
+  sock = TCPSocket.open($server, $port)
+  puts "Connected"
+
+  flsnd = FileSend.new(snd_file, sock)
+  resp = RcvRsp.new(sock)
+
+  print "Strat sending file [" + snd_file + "]\n"
+
+  flsnd.start
+  flsnd.end
+  print "Complete sending file [" + snd_file + "]\n"
+  logmsg = logmsg + "  Send File [" + snd_file + "]\n"
+
+  ans = resp.rcv
+  print "  Receive respons from server [ " + ans + " ]\n"
+  logmsg = logmsg + "  Receive respons from server [ " + ans + " ]\n\n"
+  
+  sock.close
+  if ans == "OK"
+    return_code = 0
+  else
+    return_code = 02
+  end
+
+rescue
+  puts "ERR: Can't open socket to server(0)"
+  logmsg = logmsg + "  ERR: Can't open socket to server(0)\n\n"
+  return_code = 01
+ensure
+  "(nothing)"
+end
+
+open($logfl, "a") do |log|
+  log.puts logmsg
+end
+
+exit return_code
+
+#----- Script end -------------------------------------------

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#    °õºþ£Ä£Â¤«¤é¤Î°õºþ½èÍý
+#        $1-${11} °õºþ£Ä£ÂÍÑ¸ÇÄê°ú¿ô
+#        ${12} Ì¤ÀßÄê
+#        ${13} ¥¸¥ç¥Ö£É£Ä
+#        ${14} ¥·¥§¥ë£É£Ä
+#        ${15} °õºþ³«»ÏÊÇ
+#        ${16} °õºþ½ªÎ»ÊÇ
+#-------------------------------------------#
+#
+	echo $#
+        
+    if [ "${17}" == "1" ]; then
+      ${MONUPLOAD} -t report -p ${16} ${15}
+    else
+      lpr -P ${16} ${15}
+    fi
+
+        exit 

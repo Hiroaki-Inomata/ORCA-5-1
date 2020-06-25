@@ -1,0 +1,44 @@
+K04 {
+  fixed31 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    KANANAME {
+      textdata varchar(30);
+    };
+    NAME {
+      textdata varchar(30);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    SRYYM {
+      textdata varchar(9);
+    };
+    SRYKA {
+      textdata varchar(10);
+    };
+    SANTEILIST {
+      count int;
+      row int;
+      rowattr int;
+        item {
+          column1 varchar(50);
+          column2 varchar(8);
+          column3 varchar(9);
+          column4 varchar(9);
+          column5 varchar(3);
+          column6 varchar(4);
+          column7 varchar(2);
+          column8 varchar(2);
+        }[30];
+        selectdata bool[30];
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+  };
+};

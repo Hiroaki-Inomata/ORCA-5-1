@@ -1,0 +1,76 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+umask 022
+
+# compile COBOL programs
+for f in `ls ${SITESRCDIR}/cobol`; do
+  if test "x`echo -n $f | grep 'CBL$'`" != "x"; then
+    m=`echo $f | sed 's/CBL$/so/'`
+    echo -n "Building ${m}..."
+    ${COBOL} ${COBOLFLAGS} -o ${SITELIBDIR}/${m} \
+         -I ${PATCHCOPYDIR} \
+         -I ${COPYDIR} \
+         -I ${SITESRCDIR}/cobol/copy \
+        ${SITESRCDIR}/cobol/${f}
+    echo "done"
+  fi
+done
+
+# copy scripts file
+echo -n "Copying scripts files..."
+for d in scripts/daily  scripts/kaisei scripts/monthly  \
+	 scripts/kentan scripts/allways scripts/tools; do
+  if test -d "${SITESRCDIR}/${d}"; then
+    mkdir -p "${SITEDIR}/${d}"
+    for f in `ls ${SITESRCDIR}/${d}`; do 
+      if test -f "${SITESRCDIR}/${d}/${f}"; then
+	sed -e 's,\@jma-receipt-env\@,@jma-receipt-env@,g' \
+        < "${SITESRCDIR}/${d}/${f}" > "${SITEDIR}/${d}/${f}"
+	chmod +x "${SITEDIR}/${d}/${f}"
+      fi
+    done
+  fi
+done
+echo "done"
+
+# copy lddef file
+echo -n "Copying lddef files..."
+mkdir -p "${SITEDIR}/lddef"
+for f in `ls ${SITESRCDIR}/lddef`; do 
+  if test -f "${SITESRCDIR}/lddef/${f}"; then
+    $CPP -I"${LDDEFDIR}" -x c "${SITESRCDIR}/lddef/${f}" > "${SITEDIR}/lddef/${f}"
+  fi
+done
+echo "done"
+
+# copy data files
+echo -n "Copying data files..."
+for d in data doc form init record screen ; do
+  if test -d "${SITESRCDIR}/${d}"; then
+    mkdir -p "${SITEDIR}/${d}"
+    for f in `ls ${SITESRCDIR}/${d}`; do 
+      if test -f "${SITESRCDIR}/${d}/${f}"; then
+        cp "${SITESRCDIR}/${d}/${f}" "${SITEDIR}/${d}"
+      fi
+    done
+  fi
+done
+echo "done"
+
+#copy etc files
+echo -n "Copying etc files..."
+for f in `ls ${SITESRCDIR}/etc`; do 
+  if test -f "${SITESRCDIR}/etc/${f}"; then
+    cp "${SITESRCDIR}/etc/${f}" "${SYSCONFDIR}/"
+  fi
+done
+echo "done"

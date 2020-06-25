@@ -1,0 +1,5 @@
+---
+ - [data1/1.txt , 1.txt]
+ - [data1/2.txt , 2.txt]
+ - [data2/data3/3.txt , ./]
+ - [data2/data3/4.txt , ./]

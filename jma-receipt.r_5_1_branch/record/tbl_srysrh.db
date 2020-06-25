@@ -1,0 +1,746 @@
+tbl_srysrh {
+	HOSPNUM				number(2,0);
+	TERMID				char(64);
+	PTID				number(10,0);
+	ZAINUM 				number(9,0);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	HKNCOMBINUM			number(4,0);
+	SRYKBN				char(2);
+	SRYSYUKBN			char(3);
+	SRYYMD				char(8);
+	ZAIKAISU 			number(5,0);
+	SURYOTOTAL 			number(12,5);
+	RENNUM				number(2,0);
+	SRYCD1				char(9);
+	SRYSURYO1 			number(10,5);
+	SRYCD2				char(9);
+	SRYSURYO2 			number(10,5);
+	SRYCD3				char(9);
+	SRYSURYO3 			number(10,5);
+	SRYCD4				char(9);
+	SRYSURYO4 			number(10,5);
+	SRYCD5				char(9);
+	SRYSURYO5 			number(10,5);
+	HOKATSUKBN			char(1);
+	ACCTKBN				char(1);
+	CREYMD				char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+	PTNUM				varchar(20),virtual;
+	KANANAME			varchar(100),virtual;
+	SEX					char(1),virtual;
+	BIRTHDAY			char(8),virtual;
+	STSRYYMD			char(8),virtual;
+	EDSRYYMD			char(8),virtual;
+	STSRYYM				char(6),virtual;
+	EDSRYYM				char(6),virtual;
+	DRCD				  char(5),virtual;
+	SQL                             dbcode(15000),virtual;
+	YMDHMS				varchar(12),virtual;
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_srysrh_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srysrh
+	    WHERE	HOSPNUM    =    :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_srysrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+ 		;
+	};
+};
+
+path    key     {
+        DBSELECT        {
+                DECLARE tbl_srysrh_key_csr CURSOR FOR
+                :SQL
+                ;
+        };
+};
+
+path	ins1_1 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       ZAINUM,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       ZAIKAISU,
+	       SURYOTOTAL,
+	       RENNUM,
+	       SRYCD1,
+	       SRYSURYO1,
+	       SRYCD2,
+	       SRYSURYO2,
+	       SRYCD3,
+	       SRYSURYO3,
+	       SRYCD4,
+	       SRYSURYO4,
+	       SRYCD5,
+	       SRYSURYO5,
+	       HOKATSUKBN,
+	       ACCTKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+	SELECT HOSPNUM,
+	      :TERMID,
+	       PTID,
+	       ZAINUM,
+	       NYUGAIKBN,
+	       SRYKA,
+	       0,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       '',
+	       0,
+	       0.0,
+	       RENNUM,
+	       SRYCD1,
+	       SRYSURYO1,
+	       SRYCD2,
+	       SRYSURYO2,
+	       SRYCD3,
+	       SRYSURYO3,
+	       SRYCD4,
+	       SRYSURYO4,
+	       SRYCD5,
+	       SRYSURYO5,
+	       '0',
+	       '1',
+	      :CREYMD,
+	      :UPYMD,
+	      :UPHMS
+	FROM  TBL_SRYACT
+	WHERE HOSPNUM = :HOSPNUM
+	 AND  NYUGAIKBN LIKE :NYUGAIKBN
+	 AND  SRYKA     LIKE :SRYKA
+         AND SRYKBN LIKE :SRYKBN
+         AND SRYSYUKBN LIKE :SRYSYUKBN
+	 AND(
+	     (:SRYCD1 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD2 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD3 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD4 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD5 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	    )
+		;
+	};
+};
+path	ins1_2 	{
+	DBUPDATE	{
+	UPDATE TBL_SRYSRH
+	SET    HKNCOMBINUM = A.HKNCOMBI,
+	       HOKATSUKBN  = A.JIHOKBN
+	FROM   TBL_SRYACCT_MAIN AS A
+	WHERE  TBL_SRYSRH.HOSPNUM = A.HOSPNUM
+	 AND   TBL_SRYSRH.PTID    = A.PTID
+	 AND   TBL_SRYSRH.ZAINUM  = A.ZAINUM
+	;
+	};
+};
+path	ins1_3	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       ZAINUM,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       ZAIKAISU,
+	       SURYOTOTAL,
+	       RENNUM,
+	       SRYCD1,
+	       SRYSURYO1,
+	       SRYCD2,
+	       SRYSURYO2,
+	       SRYCD3,
+	       SRYSURYO3,
+	       SRYCD4,
+	       SRYSURYO4,
+	       SRYCD5,
+	       SRYSURYO5,
+	       HOKATSUKBN,
+	       ACCTKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+	SELECT HOSPNUM,
+	      :TERMID,
+	       PTID,
+	       ZAINUM,
+	       '1',
+	       SRYKA,
+	       cast(HKNCOMBINUM as smallint),
+	       SRYKBN,
+	       '',
+	       '',
+	       1,
+	       SRYSURYO,
+	       1,
+	       SRYCD,
+	       SRYSURYO,
+	       '',
+	       0.0,
+	       '',
+	       0.0,
+	       '',
+	       0.0,
+	       '',
+	       0.0,
+	      '0',
+	      '2',
+	      :CREYMD,
+	      :UPYMD,
+	      :UPHMS
+	FROM  TBL_NSRYSRH
+	WHERE HOSPNUM = :HOSPNUM
+	 AND  SRYKA     LIKE :SRYKA
+         AND  SRYKBN LIKE :SRYKBN
+	 AND  SRYCD  IN ( :SRYCD1,:SRYCD2,:SRYCD3,:SRYCD4,:SRYCD5)
+	;
+	};
+};
+
+path	ins2_1 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       ZAINUM,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       ZAIKAISU,
+	       SURYOTOTAL,
+	       RENNUM,
+	       SRYCD1,
+	       SRYSURYO1,
+	       SRYCD2,
+	       SRYSURYO2,
+	       SRYCD3,
+	       SRYSURYO3,
+	       SRYCD4,
+	       SRYSURYO4,
+	       SRYCD5,
+	       SRYSURYO5,
+	       HOKATSUKBN,
+	       ACCTKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+        SELECT
+        A.HOSPNUM,
+        :TERMID,
+        A.PTID,
+        A.ZAINUM,
+        A.NYUGAIKBN,
+        A.SRYKA,
+        C.HKNCOMBI,
+        A.SRYKBN,
+        A.SRYSYUKBN,
+        B.SRYYMD,
+        1,
+        0.0,
+        A.RENNUM,
+        A.SRYCD1,
+        A.SRYSURYO1,
+        A.SRYCD2,
+        A.SRYSURYO2,
+        A.SRYCD3,
+        A.SRYSURYO3,
+        A.SRYCD4,
+        A.SRYSURYO4,
+        A.SRYCD5,
+        A.SRYSURYO5,
+        C.JIHOKBN,
+        '1',
+	:CREYMD,
+	:UPYMD,
+	:UPHMS
+      FROM TBL_SRYACT A,
+           TBL_JYURRK B,
+           TBL_SRYACCT_MAIN C
+     WHERE A.HOSPNUM   = :HOSPNUM
+       AND A.NYUGAIKBN LIKE :NYUGAIKBN
+       AND A.SRYKA     LIKE :SRYKA
+       AND A.SRYKBN    LIKE :SRYKBN
+       AND A.SRYSYUKBN LIKE :SRYSYUKBN
+       AND A.SRYYM    >= :STSRYYM
+       AND A.SRYYM    <= :EDSRYYM
+       AND A.HOSPNUM   = C.HOSPNUM
+       AND A.PTID      = C.PTID
+       AND A.ZAINUM    = C.ZAINUM
+       AND A.HOSPNUM   = B.HOSPNUM
+       AND A.PTID      = B.PTID
+       AND A.NYUGAIKBN = B.NYUGAIKBN
+       AND A.SRYKA     = B.SRYKA
+       AND B.DRCD      LIKE :DRCD
+       AND B.SRYYMD   >= :STSRYYMD
+       AND B.SRYYMD   <= :EDSRYYMD
+       AND A.ZAINUM in
+         ( B.ZAINUM1 ,
+           B.ZAINUM2 ,
+           B.ZAINUM3 ,
+           B.ZAINUM4 ,
+           B.ZAINUM5 ,
+           B.ZAINUM6 ,
+           B.ZAINUM7 ,
+           B.ZAINUM8 ,
+           B.ZAINUM9 ,
+           B.ZAINUM10 ,
+           B.ZAINUM11 ,
+           B.ZAINUM12 ,
+           B.ZAINUM13 ,
+           B.ZAINUM14 ,
+           B.ZAINUM15 )
+	 AND(
+	     (:SRYCD1 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD2 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD3 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD4 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	   OR
+	     (:SRYCD5 IN
+	     ( SRYCD1,
+	      SRYCD2,
+	      SRYCD3,
+	      SRYCD4,
+	      SRYCD5
+	     ))
+	    )
+     ;
+	};
+};
+
+path	ins2_2 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       ZAINUM,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       ZAIKAISU,
+	       SURYOTOTAL,
+	       RENNUM,
+	       SRYCD1,
+	       SRYSURYO1,
+	       SRYCD2,
+	       SRYSURYO2,
+	       SRYCD3,
+	       SRYSURYO3,
+	       SRYCD4,
+	       SRYSURYO4,
+	       SRYCD5,
+	       SRYSURYO5,
+	       HOKATSUKBN,
+	       ACCTKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+        SELECT A.HOSPNUM,
+               :TERMID,
+               A.PTID,
+	       A.ZAINUM,
+               '1',
+               B.SRYKA,
+	       cast(B.HKNCOMBINUM as smallint),
+               B.SRYKBN,
+               '',
+               A.SRYYMD,
+               1,
+               B.SRYSURYO,
+               1,
+               B.SRYCD,
+               B.SRYSURYO,
+               '',
+               0.0,
+               '',
+               0.0,
+               '',
+               0.0,
+               '',
+               0.0,
+               '0',
+               '2',
+               :CREYMD,
+               :UPYMD,
+               :UPHMS
+      FROM TBL_NRRKSRH A,
+           TBL_NSRYSRH B 
+     WHERE A.HOSPNUM =    :HOSPNUM
+       AND B.SRYKA   LIKE :SRYKA
+       AND B.SRYKBN  LIKE :SRYKBN
+       AND B.SRYYM    >= :STSRYYM
+       AND B.SRYYM    <= :EDSRYYM
+       AND A.HOSPNUM =   B.HOSPNUM
+       AND A.PTID    =   B.PTID 
+       AND A.ZAINUM  =   B.ZAINUM
+       AND A.SRYYMD   >= :STSRYYMD
+       AND A.SRYYMD   <= :EDSRYYMD
+       AND  SRYCD  IN ( :SRYCD1,:SRYCD2,:SRYCD3,:SRYCD4,:SRYCD5)
+	;
+	};
+};
+
+#-----> 診療区分、診療種別のみでの検索
+path	ins3_1 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       NYUGAIKBN,
+	       SRYKA,
+           HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       SRYCD1,
+	       SRYCD2,
+	       SRYCD3,
+	       SRYCD4,
+	       SRYCD5,
+	       HOKATSUKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+	SELECT DISTINCT ON (A.HOSPNUM,A.PTID,A.NYUGAIKBN,A.SRYKA,B.HKNCOMBI,A.SRYKBN,A.SRYSYUKBN,B.JIHOKBN) 
+	       A.HOSPNUM,
+	      :TERMID,
+	       A.PTID,
+	       A.NYUGAIKBN,
+	       A.SRYKA,
+               B.HKNCOMBI,
+	       A.SRYKBN,
+	       A.SRYSYUKBN,
+	       '',
+	       A.SRYCD1,
+	       A.SRYCD2,
+	       A.SRYCD3,
+	       A.SRYCD4,
+	       A.SRYCD5,
+	       B.JIHOKBN,
+	      :CREYMD,
+	      :UPYMD,
+	      :UPHMS
+	FROM  TBL_SRYACT AS A JOIN TBL_SRYACCT_MAIN AS B USING (HOSPNUM,PTID,ZAINUM)
+	WHERE A.HOSPNUM = :HOSPNUM
+	 AND  A.NYUGAIKBN LIKE :NYUGAIKBN
+	 AND  A.SRYKA     LIKE :SRYKA
+         AND A.SRYKBN LIKE :SRYKBN
+         AND A.SRYSYUKBN LIKE :SRYSYUKBN
+	;
+	};
+};
+path	ins3_2 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       NYUGAIKBN,
+	       SRYKA,
+               HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       SRYCD1,
+	       SRYCD2,
+	       SRYCD3,
+	       SRYCD4,
+	       SRYCD5,
+	       HOKATSUKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+	SELECT DISTINCT ON (HOSPNUM,PTID,SRYKA,HKNCOMBINUM,SRYKBN) 
+	       HOSPNUM,
+	      :TERMID,
+	       PTID,
+	       '1',
+	       SRYKA,
+	       cast(HKNCOMBINUM as smallint),
+	       SRYKBN,
+	       '',
+	       '',
+	       SRYCD,
+	       '',
+	       '',
+	       '',
+	       '',
+	       '0',
+	      :CREYMD,
+	      :UPYMD,
+	      :UPHMS
+	FROM  TBL_NSRYSRH
+	WHERE HOSPNUM = :HOSPNUM
+	 AND  SRYKA     LIKE :SRYKA
+         AND  SRYKBN LIKE :SRYKBN
+	;
+	};
+};
+
+#-----> 診療区分、診療種別のみでの検索
+path	ins4_1 	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       SRYCD1,
+	       SRYCD2,
+	       SRYCD3,
+	       SRYCD4,
+	       SRYCD5,
+	       HOKATSUKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+	SELECT DISTINCT ON (A.HOSPNUM,A.PTID,A.NYUGAIKBN,A.SRYKA,C.HKNCOMBI,A.SRYKBN,B.SRYYMD,A.SRYSYUKBN,C.JIHOKBN) 
+        A.HOSPNUM,
+        :TERMID,
+        A.PTID,
+        A.NYUGAIKBN,
+        A.SRYKA,
+        C.HKNCOMBI,
+        A.SRYKBN,
+        A.SRYSYUKBN,
+        B.SRYYMD,
+        A.SRYCD1,
+        A.SRYCD2,
+        A.SRYCD3,
+        A.SRYCD4,
+        A.SRYCD5,
+        C.JIHOKBN,
+	:CREYMD,
+	:UPYMD,
+	:UPHMS
+      FROM TBL_SRYACT A,
+           TBL_JYURRK B ,
+           TBL_SRYACCT_MAIN C
+     WHERE A.HOSPNUM   = :HOSPNUM
+       AND A.NYUGAIKBN LIKE :NYUGAIKBN
+       AND A.SRYKA     LIKE :SRYKA
+       AND A.SRYKBN    LIKE :SRYKBN
+       AND A.SRYSYUKBN LIKE :SRYSYUKBN
+       AND A.SRYYM    >= :STSRYYM
+       AND A.SRYYM    <= :EDSRYYM
+       AND A.HOSPNUM   = C.HOSPNUM
+       AND A.PTID      = C.PTID
+       AND A.ZAINUM    = C.ZAINUM
+       AND A.HOSPNUM   = B.HOSPNUM
+       AND A.PTID      = B.PTID
+       AND A.NYUGAIKBN = B.NYUGAIKBN
+       AND A.SRYKA     = B.SRYKA
+       AND B.DRCD      LIKE :DRCD
+       AND B.SRYYMD   >= :STSRYYMD
+       AND B.SRYYMD   <= :EDSRYYMD
+       AND A.ZAINUM in
+         ( B.ZAINUM1 ,
+           B.ZAINUM2 ,
+           B.ZAINUM3 ,
+           B.ZAINUM4 ,
+           B.ZAINUM5 ,
+           B.ZAINUM6 ,
+           B.ZAINUM7 ,
+           B.ZAINUM8 ,
+           B.ZAINUM9 ,
+           B.ZAINUM10 ,
+           B.ZAINUM11 ,
+           B.ZAINUM12 ,
+           B.ZAINUM13 ,
+           B.ZAINUM14 ,
+           B.ZAINUM15 )
+     ;
+	};
+};
+path	ins4_2	{
+	DBINSERT	{
+	INSERT INTO TBL_SRYSRH
+	    ( 
+	       HOSPNUM,
+	       TERMID,
+	       PTID,
+	       NYUGAIKBN,
+	       SRYKA,
+	       HKNCOMBINUM,
+	       SRYKBN,
+	       SRYSYUKBN,
+	       SRYYMD,
+	       SRYCD1,
+	       SRYCD2,
+	       SRYCD3,
+	       SRYCD4,
+	       SRYCD5,
+	       HOKATSUKBN,
+	       CREYMD,
+	       UPYMD,
+	       UPHMS
+	)
+        SELECT DISTINCT ON (A.HOSPNUM,A.PTID,B.SRYKA,B.HKNCOMBINUM,B.SRYKBN,A.SRYYMD) 
+               A.HOSPNUM,
+               :TERMID,
+               A.PTID,
+               '1',
+               B.SRYKA,
+	       cast(HKNCOMBINUM as smallint),
+               B.SRYKBN,
+               '',
+               A.SRYYMD,
+               B.SRYCD,
+               '',
+               '',
+               '',
+               '',
+               '0',
+               :CREYMD,
+               :UPYMD,
+               :UPHMS
+      FROM TBL_NRRKSRH A,
+           TBL_NSRYSRH B 
+     WHERE A.HOSPNUM =    :HOSPNUM
+       AND B.SRYKA   LIKE :SRYKA
+       AND B.SRYKBN  LIKE :SRYKBN
+       AND B.SRYYM    >= :STSRYYM
+       AND B.SRYYM    <= :EDSRYYM
+       AND A.HOSPNUM =   B.HOSPNUM
+       AND A.PTID    =   B.PTID 
+       AND A.ZAINUM  =   B.ZAINUM
+       AND A.SRYYMD   >= :STSRYYMD
+       AND A.SRYYMD   <= :EDSRYYMD
+	;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_srysrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     CREYMD    <     :CREYMD
+		;
+	};
+};
+
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_srysrh
+		WHERE  HOSPNUM      =   :HOSPNUM
+		AND    UPYMD||UPHMS <   :YMDHMS
+		;
+	};
+};

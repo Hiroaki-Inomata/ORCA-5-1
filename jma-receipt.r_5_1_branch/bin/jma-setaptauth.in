@@ -1,0 +1,108 @@
+#!/bin/bash
+
+usage(){
+  cat <<EOF  >&2
+Usage:
+    $0 [<opions>] [FILE]
+
+Options:
+    --directory, -d   設定ファイルの場所 (default: "/etc/apt/auth.conf.d")
+    --file, -f        設定ファイル (default: "jma_apt_auth.conf")
+    --server, -s      サーバー名 (default: "dl.orca.med.or.jp")
+    --help, -h        このヘルプを表示
+EOF
+  exit 1
+}
+
+err () {
+  MSG="\e[1;31mERROR:\e[m $1"
+  NUM=$2
+  echo -e $MSG >&2
+  exit ${NUM}
+}
+
+DIRNAME="/etc/apt/auth.conf.d"
+FILENAME="jma_apt_auth.conf"
+DLSERVER="dl.orca.med.or.jp"
+
+GETOPT=`getopt -o d:f:s:h -l directory:,file:,server:,help -- "$@"`
+if [ "$?" -ne 0 ] ; then
+  usage
+fi
+
+eval set -- "$GETOPT"
+while true
+do
+  case $1 in
+    -d|--directory) DIRNAME="${2}" ; shift 2
+      ;;
+    -f|--file) FILENAME="${2}" ; shift 2
+      ;;
+    -s|--server) DLSERVER="${2}" ; shift 2
+      ;;
+    -h|--help) usage
+      ;;
+    --)
+      shift ; break
+      ;;
+    *)
+      exit 2
+      ;;
+  esac
+done
+
+FLAG=`id -u`
+if [ ${FLAG} -ne 0 ]; then
+  echo "NOTICE: root権限で実行してください。"
+  exit 1
+fi
+IDFILE=orcaid.txt
+if [ $# -ne 0 ]; then
+  IDFILE=${1}
+fi
+if [ ! -e ${IDFILE} ]; then
+  err "${IDFILE} ファイルが見つかりません。" 1
+fi
+if [ ! -e ${DIRNAME} ]; then
+  err "${DIRNAME} ディレクトリが見つかりません。" 1
+fi
+
+read -p "認証設定ファイルを作成します。よろしいですか？(y/N): " yn
+case "$yn" in [yY]*) ;; *) echo "キャンセルしました。" ; exit 0 ;; esac
+
+FILEVAL=`cat ${IDFILE}`
+HOSPID=`echo ${FILEVAL} | cut -d , -f 1`
+ACCESSKEY=`echo ${FILEVAL} | cut -d , -f 2`
+
+if [ ${#HOSPID} -ne 15 ]; then
+  err "医療機関IDが正しくありません。" 1
+fi
+if [ "${HOSPID:0:3}" != "JPN" ]; then
+  err "医療機関IDが正しくありません。" 1
+fi
+if [[ ! "${HOSPID:3:12}" =~ ^[0-9]+$ ]]; then
+  err "医療機関IDが正しくありません。" 1
+fi
+if [ ${#ACCESSKEY} -ne 64 ]; then
+  err "アクセスキーが正しくありません。" 1
+fi
+
+CONFFILE=${DIRNAME}/${FILENAME}
+FEX=0
+if [ -e ${CONFFILE} ]; then
+  FEX=1
+  read -p "認証設定ファイルを上書きします。よろしいですか？(y/N): " yn
+  case "$yn" in [yY]*) ;; *) echo "キャンセルしました。" ; exit 0 ;; esac
+fi
+
+echo "machine ${DLSERVER}" > ${CONFFILE}
+echo "login ${HOSPID}" >> ${CONFFILE}
+echo "password ${ACCESSKEY}" >> ${CONFFILE}
+
+if [ ${FEX} -eq 1 ]; then
+  echo "認証設定ファイルを上書きしました。"
+else
+  echo "認証設定ファイルを作成しました。"
+fi
+
+exit 0

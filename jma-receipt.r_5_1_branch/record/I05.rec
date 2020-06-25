@@ -1,0 +1,11 @@
+I05 {
+  fixed4 {
+    CMB_TAIINCD {
+      TAIINCD {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[50];
+    };
+  };
+};

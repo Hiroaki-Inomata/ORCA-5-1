@@ -1,0 +1,96 @@
+shell	{
+	name		varchar(200);
+	id   		varchar(64);
+	comment 	varchar(200);
+	groupname   varchar(64);
+	extra		varchar(512);
+	repos_name	varchar(256);
+	pgid 		int;
+	starttime	varchar(32);
+	arg1		varchar(150);
+	arg2		varchar(150);
+	arg3		varchar(150);
+	arg4		varchar(150);
+	arg5		varchar(150);
+	arg6		varchar(150);
+	arg7		varchar(150);
+	arg8		varchar(150);
+	arg9		varchar(150);
+	arg10		varchar(150);
+	arg11		varchar(150);
+	arg12		varchar(150);
+	arg13		varchar(150);
+	arg14		varchar(150);
+	arg15		varchar(150);
+	arg16		varchar(150);
+	arg17		varchar(150);
+	arg18		varchar(150);
+	arg19		varchar(150);
+	arg20		varchar(150);
+	arg21		varchar(100);
+	arg22		varchar(100);
+	arg23		varchar(100);
+	arg24		varchar(100);
+	arg25		varchar(100);
+	arg26		varchar(100);
+	arg27		varchar(100);
+	arg28		varchar(100);
+	arg29		varchar(100);
+	arg30		varchar(100);
+	arg31		varchar(100);
+	arg32		varchar(100);
+	arg33		varchar(100);
+	arg34		varchar(100);
+	arg35		varchar(100);
+	arg36		varchar(100);
+	arg37		varchar(100);
+	arg38		varchar(100);
+	arg39		varchar(100);
+	arg40		varchar(100);
+};
+
+path	shell	{
+	SHELL	{
+		"@scriptsdir@/execshell.sh" "shell" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+	EXCOMMAND	{
+		"@scriptsdir@/execshell.sh" "shell" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+};
+path	command	{
+	COMMAND	{
+		:name :arg1;
+	};
+};
+path	daily	{
+	SHELL	{
+		"@scriptsdir@/execshell.sh" "daily" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+	EXCOMMAND	{
+		"@scriptsdir@/execshell.sh" "daily" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+};
+path	monthly	{
+	SHELL	{
+		"@scriptsdir@/execshell.sh" "monthly" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+	EXCOMMAND	{
+		"@scriptsdir@/execshell.sh" "monthly" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+};
+path	allways	{
+	SHELL	{
+		"@scriptsdir@/execshell.sh" "allways" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+	EXCOMMAND	{
+		"@scriptsdir@/execshell.sh" "allways" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+};
+path	claim	{
+	SHELL	{
+		"@scriptsdir@/execshell.sh" "claim" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+	EXCOMMAND	{
+		"@scriptsdir@/execshell.sh" "claim" :name :arg1 :arg2 :arg3 :arg4 :arg5 :arg6 :arg7 :arg8 :arg9 :arg10 :arg11 :arg12 :arg13 :arg14 :arg15 :arg16 :arg17 :arg18 :arg19 :arg20 :arg21 :arg22 :arg23 :arg24 :arg25 :arg26 :arg27 :arg28 :arg29 :arg30 :arg31 :arg32 :arg33 :arg34 :arg35 :arg36 :arg37 :arg38 :arg39 :arg40;
+	};
+};

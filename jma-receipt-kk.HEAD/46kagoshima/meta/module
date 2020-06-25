@@ -1,0 +1,17 @@
+#!/usr/bin/ruby
+
+require "yaml"
+
+prefix = ARGV[0]
+
+member = YAML.load(File.read("link"))
+
+member.each {|a, b|
+  if a.index(prefix) != nil
+    if prefix == "CBL"
+      puts File.basename(a)
+    else
+      puts a
+    end
+  end
+}

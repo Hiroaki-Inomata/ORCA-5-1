@@ -1,0 +1,17 @@
+kanri_cd    : "5114"
+name        : "ÊÝ°é»Î¿Í¿ô¶èÊ¬"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "BTU-HIKSISUKBN-NM"
+  item_jp   : "ÊÝ°é»Î¿Í¿ô¶èÊ¬Ì¾¾Î"
+  type      : "X"
+  start     : 1
+  length    : 10
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 11
+  length    : 490

@@ -1,0 +1,31 @@
+KA021 {
+  fixed1 {
+    SELNUM {
+      numdata number(4);
+    };
+    scrolledwindow3 {
+      hpos int;
+      vpos int;
+      MEILIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(2);
+            column3 varchar(200);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    PRTYMD {
+      textdata varchar(30);
+    };
+    BTUNAME {
+      textdata varchar(40);
+    };
+  };
+};

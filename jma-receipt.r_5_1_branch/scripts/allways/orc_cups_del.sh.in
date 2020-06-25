@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#       CUPS スプール削除
+#-------------------------------------------#
+#
+	cancel -u orca -a
+	cancel -u orca -a -x
+	exit 

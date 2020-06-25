@@ -1,0 +1,76 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *----------------------------------------------------------*
+      *    Æþ±¡²ñ·× ºÞÊÑ¹¹£Ó£Ð£Á
+      *----------------------------------------------------------*
+      ************************************************************
+      *  ¥³¥Ô¡¼¶ç½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      *
+      ************************************************************
+      *
+       01  SPA-I44.
+           03  SPA-I44-REC.
+      *
+               05  SPA-GMN-IDX                 PIC 9(04).
+               05  SPA-GMN-CUR                 PIC 9(02).
+               05  SPA-GMN-PAGE                PIC 9(04).
+               05  SPA-MAX-PAGE                PIC 9(04).
+               05  SPA-MAP-IDX                 PIC 9(02).
+      *
+      *£É£´£¸²èÌÌÍÑ
+           03  SPA-I48GMN-AREA.
+               05  SPA-I48-GMN-MAX            PIC 9(04).
+               05  SPA-I48-GMN-CUR            PIC 9(02).
+               05  SPA-I48-NEXT               PIC 9(04).
+               05  SPA-I48-GMN-SELNUM-G.
+                   07  SPA-I48-GMN-SELNUM     PIC X(03).
+               05  SPA-I48-NAI-SELNUM-G.
+                   07  SPA-I48-NAI-SELNUM     PIC 9(03).
+               05  SPA-I48-GMN-INPUT          PIC X(22).
+               05  SPA-I48-GMN-SYORI          PIC X(01).
+               05  SPA-I48-GMN-SYORI2         PIC X(01).
+               05  SPA-I48-GMN-SYORI3         PIC X(02).
+               05  SPA-I48-NAI-KENSA.
+                   07  SPA-I48-NAI-KENSANO    PIC 9(02).
+                   07  SPA-I48-NAI-HOUKATU    PIC X(01).
+               05  SPA-I48-GMN-ALL            PIC X(01).
+               05  SPA-I48-GMN-TBL.
+                   07  SPA-I48-GMN-TBLREC     OCCURS   200.
+                       09  SPA-I48-GMN-NO         PIC 9(03).
+                       09  SPA-I48-GMN-NO-X       REDEFINES
+                           SPA-I48-GMN-NO         PIC X(03).
+                       09  SPA-I48-GMN-INPUTCD    PIC X(20).
+                       09  SPA-I48-GMN-SRYCD      PIC X(09).
+                       09  SPA-I48-GMN-NAME       PIC X(70).
+                       09  SPA-I48-GMN-TANI       PIC X(10).
+                       09  SPA-I48-GMN-KISOTEN    PIC 9(07)V99.
+                       09  SPA-I48-NAI-NO         PIC 9(03).
+      *¥æ¡¼¥¶¡¼ÅÐÏ¿
+               05  SPA-I48-USER-G.
+                   07  SPA-I48-USER           PIC X(01).
+               05  SPA-I48-USER-COB           OCCURS  10.
+                   07  SPA-I48-USERLST        PIC X(20).
+      *£É£´£¹²èÌÌÍÑ
+           03  SPA-I49GMN-AREA.
+               05  SPA-I49-IDX             PIC 9(04).
+               05  SPA-I49-PED.
+                   07  SPA-I49-PEDX        PIC X(02)  OCCURS  10.
+      *£É£´£´²èÌÌÍÑ
+           03  SPA-I44GMN-AREA.
+               05  SPA-I44-DATA                PIC X(157000).

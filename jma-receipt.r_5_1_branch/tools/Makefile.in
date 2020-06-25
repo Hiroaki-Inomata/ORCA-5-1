@@ -1,0 +1,42 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+RUBY = @RUBY@
+
+SHFILE_sources = \
+	monitor.sh.in
+
+SHFILE_scripts = $(SHFILE_sources:.sh.in=.sh)
+
+noinst_ruby_sources = \
+	analyzecbl.rb.in \
+	schema_dump.rb.in
+
+noinst_ruby_scripts = $(noinst_ruby_sources:.rb.in=.rb)
+
+.SUFFIXES: .sh.in .sh .rb.in .rb
+
+.sh.in.sh: 
+	sed -e 's,\@jma-receipt-env\@,$(sysconfdir)\/jma-receipt\.env,g' \
+	$< > $@
+	chmod +x monitor.sh
+
+.rb.in.rb: 
+	sed -e 's,%RUBY%,$(RUBY),' $< > $@
+	chmod +x $@
+
+all: $(SHFILE_scripts) $(noinst_ruby_scripts)
+
+filecheck:
+
+clean: 
+	-rm -f monitor.sh
+	-rm -f $(noinst_ruby_scripts)
+
+distclean: 
+	-rm -f Makefile
+	-rm -f monitor.sh
+
+install: all

@@ -1,0 +1,18 @@
+sytem {	
+	id				varchar(256);
+	user				varchar(256);
+	host				varchar(256);
+	agent				varchar(256);
+	window				varchar(256);
+	widget				varchar(256);
+	event				varchar(256);
+	in_process			varchar(256);
+	create_time			varchar(256);
+	access_time			varchar(256);
+	process_time			varchar(256);
+	total_process_time		varchar(256);
+	count				varchar(256);
+	popup				varchar(256);
+	dialog				varchar(256);
+	abort				varchar(256);
+};

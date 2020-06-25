@@ -1,0 +1,61 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    請求管理 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.01.03    NACL-藤原    03/02/12  補助区分の追加
+      *
+      *  04.04.01    NACL-藤原    09/12/10  返戻対応
+      *
+      *  04.06.01    NACL-藤原    10/10/12  公費単独のレセ分離対応
+      *                                     キーにkohid 追加
+      *  04.06.02    NACL-藤原    12/10/26  特記事項０７（老併）及び
+      *                                     ０８（老健）のレセプト対応
+      *                                     receipt_kbn 追加 
+      *****************************************************************
+       01  SPA-H01KYOUTU.
+      *
+      *処理区分（１：返戻確認時）
+           05  SPA-H01-SYOKBN              PIC  9(01).
+      *警告メッセージ
+           05  SPA-HIDCD                   PIC  X(04).
+      *警告画面より
+           05  SPA-HID1-FLG                PIC  X(02).
+           05  SPA-H02-FLG                 PIC  X(02).
+      *
+      *入力位置
+           05  SPA-H01-CUR                 PIC 9(03).
+      *Ｈ９９画面より
+           05  SPA-H99-AREA.
+               07  SPA-H99-KEY. 
+                   09  SPA-H99-HOSPNUM      PIC  9(02).
+                   09  SPA-H99-SRYYM        PIC  9(06).
+                   09  SPA-H99-NYUGAIKBN    PIC  X(01).
+                   09  SPA-H99-PTID         PIC  9(10).
+                   09  SPA-H99-RECEKA       PIC  X(02).
+                   09  SPA-H99-TEISYUTUSAKI PIC  9(01).
+                   09  SPA-H99-RECESYUBETU  PIC  X(04).
+                   09  SPA-H99-HKNJANUM     PIC  X(08).
+                   09  SPA-H99-HOJOKBN      PIC  X(01).
+                   09  SPA-H99-KOHID-KEY    PIC  9(10).
+                   09  SPA-H99-TEKSTYMD     PIC  X(08).
+                   09  SPA-H99-RECEIPT-KBN  PIC  X(10).

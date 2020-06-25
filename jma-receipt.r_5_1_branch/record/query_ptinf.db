@@ -1,0 +1,56 @@
+query_ptinf {
+	HOSPNUM				number(2,0);
+	PTID						number(10,0);
+	KANANAME			varchar(100);
+	NAME 						varchar(100);
+	SEX        			char(1);
+	BIRTHDAY 				char(8);
+	HOME_POST			varchar(7);
+	HOME_ADRS			varchar(200);
+	HOME_BANTI 			varchar(200);
+	HOME_TEL1 			varchar(15);
+	TSTPTNUMKBN 			char(1);
+	PTNUM		 				char(20);
+	TOTAL						number(10,0);
+	SQL		          dbcode(15000),virtual;
+	dbescapestring			varchar(500),virtual;
+	};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE query_ptinf_key_csr CURSOR FOR
+		SELECT distinct a.ptid,
+										a.kananame,
+										a.name,
+										a.sex,
+										a.birthday,
+										a.home_post,
+										a.home_adrs,
+										a.home_banti,
+										a.home_tel1,
+										a.tstptnumkbn,
+										h.ptnum
+					 FROM tbl_ptinf a,tbl_ptnum h :SQL
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE query_ptinf_key2_csr CURSOR FOR
+		:SQL
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		:SQL INTO :TOTAL
+		;
+	};
+};
+

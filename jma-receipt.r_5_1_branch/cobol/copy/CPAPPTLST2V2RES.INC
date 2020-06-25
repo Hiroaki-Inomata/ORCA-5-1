@@ -1,0 +1,78 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ******************************************************************
+      *    £Á£Ð£É¥ì¥¹¥Ý¥ó¥¹´µ¼ÔÍ½Ìó¾õ¶· (xml2)
+      *                                    COPY (CPACCPTLST2V2RES.INC)
+      ******************************************************************
+        01  XML-APPOINTLST2RES.
+            02  APLST2RES-CONTEXT           PIC S9(9)   BINARY.
+            02  APLST2RES-OBJECT            PIC X(36).
+            02  APLST2RES-MODE              PIC S9(9)   BINARY.
+            02  APLST2RES-RECORDNAME        PIC X(128).
+            02  APLST2RES-APPOINTRES.
+      *       ¼Â»ÜÆü
+              03  APLST2RES-INFORMATION-DATE  PIC X(10).
+      *       ¼Â»Ü»þ´Ö
+              03  APLST2RES-INFORMATION-TIME  PIC X(8).
+      *       ÊÖµÑ¥³¡¼¥É
+              03  APLST2RES-API-RESULT        PIC X(2).
+      *       ÊÖµÑ¥á¥Ã¥»¡¼¥¸
+              03  APLST2RES-API-RESULT-MSG    PIC X(100).
+      *
+              03  APLST2RES-RESKEY            PIC X(100).
+      *
+      *       ´ð½àÆü
+              03  APLST2RES-BASE-DATE         PIC X(10).
+      *       ´µ¼Ô¾ðÊó
+              03  APLST2RES-PATIENT-INFOMATION.
+      *           ´µ¼ÔÈÖ¹æ
+                  05  APLST2RES-PATIENTID         PIC X(20).
+      *           ´µ¼Ô»áÌ¾
+                  05  APLST2RES-NAME              PIC X(100).
+      *           ´µ¼Ô¥«¥Ê»áÌ¾
+                  05  APLST2RES-KANANAME          PIC X(100).
+      *           ÃÂÀ¸Æü
+                  05  APLST2RES-BIRTHDAY          PIC X(10).
+      *           À­ÊÌ
+                  05  APLST2RES-SEX               PIC X(1).
+      *       Í½ÌóÆâÍÆ
+              03  APLST2RES-APPOINT-LST-G.
+                  05  APLST2RES-APPOINT-LST     OCCURS   50.
+      *               Í½ÌóÆü
+                      07  APLST2RES-APPOINT-DATE        PIC X(10).
+      *               Í½Ìó»þ´Ö
+                      07  APLST2RES-APPOINT-TIME        PIC X(8).
+      *               ¿ÇÎÅÆâÍÆ¶èÊ¬
+                      07  APLST2RES-APPOINT-MED-INFO    PIC X(2).
+      *               ¿ÇÎÅÆâÍÆÌ¾¾Î
+                      07  APLST2RES-APPOINT-MED-NAME    PIC X(80).
+      *               ¿ÇÎÅ²Ê
+                      07  APLST2RES-APPOINT-DEP-CODE    PIC X(2).
+      *               ¿ÇÎÅ²ÊÌ¾¾Î
+                      07  APLST2RES-APPOINT-DEP-NAME    PIC X(80).
+      *               ¥É¥¯¥¿¡¼¥³¡¼¥É
+                      07  APLST2RES-APPOINT-DR-CODE     PIC X(5).
+      *               ¥É¥¯¥¿¡¼»áÌ¾
+                      07  APLST2RES-APPOINT-DR-NAME     PIC X(80).
+      *               Íè±¡ºÑ¶èÊ¬
+                      07  APLST2RES-VISIT-INFO          PIC X(1).
+      *H29.11         Í½ÌóID
+                      07  APLST2RES-APPOINT-ID          PIC X(2).
+      *               Í½Ìó¥á¥â
+                      07  APLST2RES-APPOINT-MEMO        PIC X(100).
+      *

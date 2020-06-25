@@ -1,0 +1,364 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+LDDIRECTORY=${LDDEFDIR}/dirmigv51
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : スーパーバイザー
+# $3 : 医療機関識別番号(HOSPID)
+# $4 : エラーファイル名
+# $5 : ジョブＩＤ
+# $6 : シェルＩＤ
+# $7 : アクセスキー
+#------------------------------------
+
+HOSPNUM=$1
+ERR_FILE_BASE=$(basename $4)
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+JOBID=$5
+SHELLID=$(printf "%-8s" $6)
+
+MSTDIR=lics-$(date +%Y%m%d)
+WGETRCFL=${MCP_TEMPDIR}/.wgetrc.license-master
+LIUPWD=$3
+ACCESSKEY=$7
+
+KANRIFILE=ORCADBR-LI.DAT
+UPDKANRIFILE=info/${KANRIFILE}
+
+DOMAINC=$(echo ${DBLICENSEPATH} | sed -E 's/^.*(http|https|ftp):\/\/([^/]+).*/\2/g')
+if [ "${DOMAINC}" = "ftp.orca.med.or.jp" ]; then
+  DBLICENSEPATH=http://lmaster.orca.med.or.jp/pub/orca_data/license_master
+else
+  echo "URL:[ ${DBLICENSEPATH} ]"
+fi
+
+if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ]; then
+  MASTERDIR="${MCP_TEMPDIR}"
+fi
+UPDFILE=${MASTERDIR}/${HOSPNUM}/${MSTDIR}/ORCADBR.OUT
+LEN=100
+PRFFILE=${MCP_TEMPDIR}/MSTMLI.PRF.$$
+
+
+orcawget () {
+#受信ファイル削除
+    if [ -e $1 ] ; then
+#	echo "rm start" $1
+	rm $1;
+    fi
+    if [ -n "$OBSOLETEDL" ] ; then
+	echo "http_user="${LIUPWD:0:5} > ${WGETRCFL}
+	echo "http_passwd="${LIUPWD:0:5} >> ${WGETRCFL}
+	export WGETRC=${WGETRCFL}
+	wget -q ${WGETOPTION} ${DBLICENSEPATH}/$1
+    else
+	orcadt_verify.rb --dir . --cacert ${CACERTFILE} --user ${LIUPWD} --password ${ACCESSKEY} ${DBLICENSEPATH}/$1.p7m
+    fi
+#接続確認
+    if [ $? -eq 0 ] ; then
+#	echo "wget end OK"
+	if [ -n	"$OBSOLETEDL" ] ; then
+	    rm	${WGETRCFL}
+	fi
+#ファイルサイズチェック
+	if [ -s ./`basename $1` ] ; then
+	    return 0;
+	else
+	    return 1;
+	fi
+    else
+	if [ -n "$OBSOLETEDL" ] ; then
+	    rm	${WGETRCFL}
+	fi
+	return 1;
+    fi
+}
+
+orcacp () {
+    if [ -e $1 ] ; then
+	rm $1;
+    fi
+    if [ -n "$OBSOLETEDL" ] ; then
+	cp $1 ./
+    else
+	orcadt_verify.rb --dir . --cacert ${CACERTFILE} $1.p7m
+    fi
+    if [ $? -eq 0 ] ; then
+#ファイルサイズチェック
+	if [ -s ./`basename $1`	] ; then
+	    return 0;
+	else
+	    return 1;
+	fi
+    else
+	return 1;
+    fi
+}
+
+orcatar () {
+    TARFL=$(echo $1 | awk '{i=split($0,arr,"/"); print arr[i]} ')
+    TAR=$(echo ${TARFL} | awk '{i=split($0,arr,"."); print arr[i-1] arr[i]} ' )
+    LOCALFL=$(echo ${TARFL} | awk '{i=split($0,arr,"."); print arr[1]".dat"} ' )     echo ${LOCALFL} "LOCALFL"
+    echo ${TARFL} "TARFL"
+#受信ファイル削除
+    echo $1
+    if [ ${TAR} = "targz" ] ; then
+	echo ${TAR} "TAR"
+	tar zxf ${TARFL}
+		#tar確認
+	if [ $? -eq 0 ] ; then
+	    echo "tar end OK"
+	else
+	    echo "tar end NG"
+	    return 1;
+	fi
+    else
+	echo "NO tar end"
+	return 0;
+    fi
+#ファイルサイズチェック
+    if [ -s ${LOCALFL} ] ; then
+	return 0;
+    else
+	return 1;
+    fi
+}
+
+cleanup () {
+    if	[ -d ${MASTERDIR}/${HOSPNUM}/${MSTDIR} ] ; then
+	rm -r ${MASTERDIR}/${HOSPNUM}/${MSTDIR}
+    fi
+
+    if [ -e ${PRFFILE} ] ; then
+	rm ${PRFFILE}
+    fi
+}
+
+execupdate () {
+  #更新用ダウンロードファイル受信
+  #ファイルサイズチェック
+  if [ -s ${UPDFILE} ] ; then
+      echo "更新用ダウンロードファイルの作成が終了しました"
+  else
+      echo "更新用ダウンロードファイルは作成されませんでした"
+      ${DBSTUB}  -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}8001,${HOSPNUM},${ERR_FILE_BASE},,"
+      return 0
+  fi
+
+  UPDLIST=$(awk '{gsub(/\t| |;/,""); print} ' ${UPDFILE})
+  MSTCOUNT=$(echo ${UPDLIST} |wc -w)
+  MSTSEQ=0
+  for UPD in ${UPDLIST}
+  do
+      MSTSEQ=$(expr ${MSTSEQ} + 1)
+      ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "STS${JOBID}${SHELLID}0000,${HOSPNUM},${ERR_FILE_BASE},更新データを取得しています $(printf "%d/%d" ${MSTSEQ} ${MSTCOUNT})"
+      if [ -e ${ERR_FILE_FULL} ] ; then
+  	return 99
+      fi
+      echo ${UPD:35:${LEN}}
+      if  [ ${OFFLINE} = "offline" ]; then
+  	if  orcacp ${OFFLINEPATH}/${UPD:35:${LEN}} ; then
+  	    echo ${UPD:35:${LEN}} "複写が終了しました"
+  	else
+  	    echo ${UPD:35:${LEN}} "複写に失敗しました"
+  	    ${DBSTUB}  -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0007,${HOSPNUM},${ERR_FILE_BASE},,複写に失敗しました"
+  	    return 99
+  	fi
+      else
+          LOGMSG=`orcawget ${UPD:35:${LEN}} 2>&1`
+          RESULT=`echo "${LOGMSG}" | head -1`
+          if [ "[SUCCESS]" = "${RESULT:0:9}" ]; then
+  	    echo ${UPD:35:${LEN}} "ダウンロードが終了しました"
+  	else
+              echo "${LOGMSG}"
+  	    echo ${UPD:35:${LEN}} "ダウンロードに失敗しました"
+  	    ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0008,${HOSPNUM},${ERR_FILE_BASE},,${RESULT}"
+  	    return 99
+  	fi
+      fi
+  done
+
+  DATLIST=""
+  for UPD in ${UPDLIST}
+  do
+  #	echo ${UPD}
+      if orcatar ${UPD} ; then
+  	echo ${UPD} "解凍処理が終了しました"
+      else
+  	${DBSTUB}  -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0009,${HOSPNUM},${ERR_FILE_BASE},,解凍処理に失敗しました"
+  	echo ${UPD} "解凍処理に失敗しました"
+  	return 99
+      fi
+      DAT=$(echo ${UPD} | awk '{i=split($0,arr,"/");gsub(/.tar.gz/,".dat",arr[i]); print arr[i]} ')
+      DAT=${UPD}$(wc -l ${DAT} | awk '{i=split($0,arr," ");printf("#%06d",arr[1])}')
+      DATLIST=${DATLIST}" "${DAT}
+  done
+  #DB構造変更処理
+  UPDCOUNT=0
+  MSTSEQ=0
+  for UPD in ${DATLIST}
+  do
+      MSTSEQ=$(expr ${MSTSEQ} + 1)
+      UPD1=$(echo ${UPD} | awk '{i=split($0,arr,"#");gsub(/.tar.gz/,".dat",arr[1]); print arr[1] } ')
+      COUNT=$(echo ${UPD} | awk '{i=split($0,arr,"#"); print arr[i]} ' )
+      UPDCOUNT=$(expr ${UPDCOUNT} + ${COUNT})
+      MSTCNTMSG=$(printf "%d/%d" ${MSTSEQ} ${MSTCOUNT})
+      echo ${UPD1} "DB更新"
+  #ダウンロードファイル生成
+      XRMST4PG=ORCXRMST4
+      if [ "${1}" = "org" ]; then
+        XRMST4PG=ORCXRMST4MIGV51
+      fi
+      ${DBSTUB}  -dir ${LDDIRECTORY} -bd migv51 ${XRMST4PG} -parameter "${HOSPNUM}${MSTDIR}${UPD1}*****************************************************,$(printf "%06d" ${MSTCOUNT}),$(printf "%06d" ${MSTSEQ}),${MSTCNTMSG},${COUNT},${ERR_FILE_BASE},${JOBID},${SHELLID},${PRFFILE}"
+  	if [ $? -ne 0 ]	; then
+      	echo "処理が中止されました"
+  		${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0006,${HOSPNUM},${ERR_FILE_BASE},,処理が中止されました"
+  		return 99
+  	fi
+      if [ -e ${ERR_FILE_FULL} ] ; then
+  		return 99
+      fi
+  done
+}
+
+if [ "${LIUPWD:3:2}" != "50" ]; then
+  if [ -z ${ACCESSKEY} ]; then
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}8102,${HOSPNUM},${ERR_FILE_BASE},,アクセスキーがありません"
+    echo "${ERRMSG}"
+    exit 99
+  fi
+else
+  if [ -z ${ACCESSKEY} ]; then
+    ACCESSKEY=${LIUPWD} 
+  fi
+fi
+
+# disk space check
+VOLSIZE=`df -m /var | tail -1 | sed 's/\s\{1,\}/ /g' | cut -d' ' -f4`
+if [ -z "$MINSIZE" ]; then
+#set default 500MB
+    MINSIZE=500
+fi
+if [ $VOLSIZE -lt $MINSIZE ]; then
+    ERRMSG="The space capacity of the disk is insufficient. [ ${VOLSIZE}MB ]"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}8101,${HOSPNUM},${ERR_FILE_BASE},,${ERRMSG}"
+    echo "${ERRMSG}"
+    exit 99
+fi
+
+#オフラインメンテナンスであるかチェック
+OFFLINEPATH=$(echo ${DBLICENSEPATH} | sed -ne 's#file://##p')
+if [ -z ${OFFLINEPATH} ] ; then
+    OFFLINE="online"
+else
+    OFFLINE="offline"
+fi
+
+echo ${MSTDIR}
+echo ${UPDFILE}
+
+if [ -e ${ERR_FILE_FULL} ] ; then
+    rm ${ERR_FILE_FULL}
+fi
+
+if [ -e ${PRFFILE} ] ; then
+    rm ${PRFFILE}
+fi
+touch ${PRFFILE}
+
+
+if ! [	-d ${MASTERDIR}/${HOSPNUM}/${MSTDIR} ] ; then
+    mkdir -p ${MASTERDIR}/${HOSPNUM}/${MSTDIR}
+fi
+if ! [ -d ${MASTERDIR}/${HOSPNUM}/orca-mstlog	] ; then
+    mkdir -p ${MASTERDIR}/${HOSPNUM}/orca-mstlog
+fi
+
+if [ $(pgrep -fo "$0 $HOSPNUM") -ne $$ ]; then
+    echo "マスタ更新処理は既に実行中です"
+    exit 1
+fi
+
+
+cd ${MASTERDIR}/${HOSPNUM}/${MSTDIR}
+
+${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "STS${JOBID}${SHELLID},${HOSPNUM},${ERR_FILE_BASE},ＤＢレコード管理情報を取得しています,"
+if [ -e ${ERR_FILE_FULL} ] ; then
+    cleanup
+    exit 99
+fi
+
+rm -f *.*
+if  [ ${OFFLINE} = "offline" ] ; then
+    if  orcacp ${OFFLINEPATH}/${UPDKANRIFILE} ; then
+	echo "DBレコード管理情報を複写しました"
+    else
+	echo "DBレコード管理情報がありませんでした"
+	${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0001,${HOSPNUM},${ERR_FILE_BASE},,ＤＢレコード管理情報がありませんでした"
+	cleanup
+	exit 99
+    fi
+else
+#センタからのDB構造体ダウンロード
+    LOGMSG=`orcawget ${UPDKANRIFILE} 2>&1`
+    RESULT=`echo "${LOGMSG}" | head -1`
+    if	[ "[SUCCESS]" = "${RESULT:0:9}" ] ; then
+	echo "センタからのDBレコード管理情報のダウンロードが終了しました"
+    else
+        echo "${LOGMSG}"
+	echo "センタからのDBレコード管理情報のダウンロードに失敗しました"
+	${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}8002,${HOSPNUM},${ERR_FILE_BASE},,${RESULT}"
+	cleanup
+        exit 99
+    fi
+    if  [ -s ${MASTERDIR}/${HOSPNUM}/${MSTDIR}/${KANRIFILE} ]
+    then
+	echo "センタからのDBレコード管理情報は正常でした"
+    else
+	echo "センタからのDBレコード管理情報は空でした"
+	${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0003,${HOSPNUM},${ERR_FILE_BASE},,ＤＢレコード管理情報は未設定でした"
+	cleanup
+        exit 99
+    fi
+fi
+
+#ダウンロードファイル生成
+${DBSTUB}  -dir ${LDDIRECTORY} -bd migv51 ORCXRMST3MIGV51 -parameter "${HOSPNUM}$2${MSTDIR}"
+if [ $? -ne 0 ]	; then
+    echo "ダウンロードファイル生成に失敗しました"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0005,${HOSPNUM},${ERR_FILE_BASE},,ダウンロードファイル生成に失敗しました"
+    cleanup
+    exit 99
+fi
+#標準に対するマスタ更新
+mv ${UPDFILE}1 ${UPDFILE}
+execupdate std
+if [ $? -ne 0 ]; then
+  echo -e "\e[1;31mライセンス（標準）マスタのマスタ更新処理が異常終了しました\e[m"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0003,${HOSPNUM},${ERR_FILE_BASE},,ライセンス（標準）マスタ更新処理が異常終了しました"
+  cleanup
+  exit 99
+fi
+
+#_orgに対するマスタ更新
+mv ${UPDFILE}2 ${UPDFILE}
+execupdate org
+if [ $? -ne 0 ]; then
+  echo -e "\e[1;31mライセンス（移行前）マスタのマスタ更新処理が異常終了しました\e[m"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0003,${HOSPNUM},${ERR_FILE_BASE},,ライセンス（移行前）マスタ更新処理が異常終了しました"
+  cleanup
+  exit 99
+fi
+
+echo  "全ての処理が完了しました"
+cleanup
+${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBJOB2 -parameter "JBE${JOBID}${SHELLID}0000,${HOSPNUM},${ERR_FILE_BASE},,マスタ更新処理が終了しました"
+
+exit 0

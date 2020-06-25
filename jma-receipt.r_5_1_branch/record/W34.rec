@@ -1,0 +1,53 @@
+W34 {
+  fixed1 {
+    B07 {
+      state int;
+    };
+    B06 {
+      state int;
+    };
+    PRGID {
+      textdata varchar(25);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      PRGLST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(25);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    KBNCD_COMB {
+      KBNCD {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[50];
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      EXPLANTION {
+        textdata varchar(44000);
+      };
+    };
+    scrolledwindow3 {
+      hpos int;
+      vpos int;
+      OPTION {
+        textdata varchar(44000);
+      };
+    };
+    label215 {
+      style varchar(20);
+    };
+  };
+};

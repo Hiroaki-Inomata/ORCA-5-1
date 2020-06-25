@@ -1,0 +1,81 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+PRT_FILE=${MCP_TEMPDIR}/$4
+
+export HOME=/home/orca
+printf %-20000s "$(cat ${PRT_FILE})" > ${PRT_FILE}.tmp
+mv ${PRT_FILE}.tmp ${PRT_FILE}
+
+LAYEROPTION=""
+[[ $(cat ${PRT_FILE}) =~ MonpeLayerIn(.*)MonpeLayerOut ]]
+if [ -n "${BASH_REMATCH[0]}" ]; then
+  LAYEROPTION=$(echo "${BASH_REMATCH[1]}" | sed -e "s/ *-L */,/g" | sed -e "s/,/-H /")
+  sed -i -e "s/${BASH_REMATCH[0]}/$(printf %-$(expr length "${BASH_REMATCH[0]}")s ' ')/"  ${PRT_FILE}
+fi
+
+echo "printed file=>" ${PRT_FILE}
+
+#
+#-------> path switch st
+file=`basename ${2}`
+patch_file=$PATCHFORMDIR/$file
+normal_file=$FORMDIR/$file
+site_file=$SITEFORMDIR/$file
+usr_form=$2
+remove_images=$3
+
+if ! test -f $site_file
+then
+  if test -f $patch_file
+  then
+    usr_form=$patch_file
+  fi
+fi
+#-------> path switch ed
+
+	if	[ $1 = 'red2ps' ];then
+		RED2IFILE=${PRT_FILE}.red2
+		PDFFILE=${PRT_FILE}.pdf
+		FILE=${PRT_FILE}.pdf
+		PRINTER=$5
+		OFFSETX=$6
+		OFFSETY=$7
+
+		[ -z $PRINTER  ] && PRINTER=lp1
+		[ -z $OFFSETX  ] && OFFSETX=0
+		[ -z $OFFSETY  ] && OFFSETY=0
+
+		red2embed $usr_form ${PRT_FILE} -o $RED2IFILE
+		monpe $LAYEROPTION -x $OFFSETX -y $OFFSETY $RED2IFILE -e $PDFFILE
+	 	lpr -P $PRINTER $PDFFILE
+
+		[ -e $RED2IFILE ] && rm $RED2IFILE
+		[ -e $PDFFILE ]   && rm $PDFFILE
+	else	
+		%RUBY% $1 $2 $3 ${PRT_FILE} $5
+	fi
+#----------------------------------------------------------------------#
+#	ファイル削除処理
+#----------------------------------------------------------------------#
+
+  if [ -e ${PRT_FILE} ]	;then
+    echo ${PRT_FILE}
+#------ イメージ削除
+    [ "${remove_images}" == "T" ] &&  grep -Eo "${MCP_TEMPDIR}[^ ]*\.(jpg|png)" ${PRT_FILE} |  xargs -r rm -f
+	rm ${PRT_FILE}
+  fi
+#----------------------------------------------------------------------#
+#	終了処理
+#----------------------------------------------------------------------#
+	echo "The end"
+exit $RET
+

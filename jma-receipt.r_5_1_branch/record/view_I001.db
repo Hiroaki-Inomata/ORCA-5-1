@@ -1,0 +1,81 @@
+view_I001 {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	RRKNUM			number(3,0);
+	RRKEDANUM		number(3,0);
+	RRKEDANUM_MAX	number(3,0);
+	PTNUM			char(20);
+	KANANAME			varchar(100);
+	NAME 				varchar(100);
+	SEX        			char(1);
+	BIRTHDAY 			char(8);
+	HOME_POST			varchar(7);
+	HOME_ADRS			varchar(200);
+	HOME_BANTI 			varchar(200);
+	DEATHKBN 			char(1);
+	BTUNUM			char(2);
+	BRMNUM			char(8);
+	NYUINKA			char(2);
+	NYUINYMD		char(8);
+	TAIINYMD		char(8);
+	TAIINCD			char(2);
+	TENNYUYMD		char(8);
+	TENSTUYMD		char(8);
+	TSTPTNUMKBN			char(1);
+# ----- 取得件数退避用 -----------------------------
+	COUNT			number(10,0);	
+# --------------------------------------------------
+  SQL		dbcode(15000),virtual;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE view_I001_key_csr CURSOR FOR
+		SELECT * FROM  view_I001 where :SQL
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE view_I001_key2_csr CURSOR FOR
+		SELECT * FROM  view_I001
+	    WHERE	HOSPNUM    =    :HOSPNUM
+		AND     NYUINYMD  <=   :NYUINYMD
+		AND     TAIINYMD  =   '99999999'
+		ORDER BY BRMNUM,PTNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE view_I001_key3_csr CURSOR FOR
+		SELECT * FROM  view_I001
+	    WHERE	HOSPNUM    =    :HOSPNUM
+		AND     NYUINYMD  <=   :NYUINYMD
+		AND     TAIINYMD  =   '99999999'
+		ORDER BY BRMNUM,NYUINKA,PTNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE view_I001_all_csr CURSOR FOR
+		SELECT *
+		FROM view_I001
+	    WHERE	HOSPNUM    =    :HOSPNUM
+ 		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE view_I001_key4_csr CURSOR FOR
+		SELECT COUNT(*) AS COUNT
+		FROM  VIEW_I001 WHERE :SQL
+		;
+	};
+};
+

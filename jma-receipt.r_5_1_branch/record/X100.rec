@@ -1,0 +1,17 @@
+X100 {
+  fixed6 {
+    scrolledwindow28 {
+      BYOMEICDLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(11);
+            column3 varchar(100);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

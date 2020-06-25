@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#----------------------------------------------------------------------#
+#       arguments
+#       1:data file name
+#       2:hospnum
+#----------------------------------------------------------------------#
+
+MONPUSHEVENT="/usr/lib/panda/bin/monpushevent"
+
+DATA_FILE_BASE=$1
+HOSPNUM=$2
+DATA_FILE_FULL=${MCP_TEMPDIR}/${DATA_FILE_BASE}
+
+RECFILE=push_print001.db
+RECDIR=${RECORDDIR}
+
+if [ -e ${SITERECORDDIR}/${RECFILE} ]; then
+  RECDIR=${SITERECORDDIR}
+elif [ -e ${PATCHRECORDDIR}/${RECFILE} ]; then
+  RECDIR=${PATCHRECORDDIR}
+fi
+
+echo ${MONPUSHEVENT} ${RECDIR}/${RECFILE} ${DATA_FILE_FULL}
+${MONPUSHEVENT} ${RECDIR}/${RECFILE} ${DATA_FILE_FULL}
+
+
+[ -e ${DATA_FILE_FULL} ] && rm ${DATA_FILE_FULL}

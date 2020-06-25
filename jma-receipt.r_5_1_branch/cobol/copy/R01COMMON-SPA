@@ -1,0 +1,232 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    レセプト作成指示 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-藤原     02.02.26  管理ファイルの変更により修正
+      *  01.00.02    MCC-藤原     02/06/17  労災・自賠責に項目を変更
+      *　入院機能追加　
+      *  01.01.01    NACL-藤原    02/09/30  入外区分・処理区分の追加
+      *  01.01.02    NACL-藤原    02/09/30  処理画面区分を追加
+      *　プレビュー機能追加
+      *  01.02.01    NACL-藤原    03/07/07  SPA-RIDCD3の追加
+      *  中止処理追加
+      *  01.03.01    NACL-藤原    04/09/28 中止ボタン状態フラグ等追加
+      *  01.03.02    NACL-藤原    05/01/13 処理種別・日付指定追加
+      *
+      *  02.07.02    NACL-藤原    05/12/12  国保レセプト編綴順対応
+      *
+      *  03.00.01    NACL-藤原    06/05/29  印刷時のプリンター指定対応
+      *
+      *  03.02.01    NACL-藤原    06/08/01  国保主科対応
+      *
+      *  03.04.01    NACL-藤原    06/12/05  未請求レセ対応
+      *  03.04.02    NACL-藤原    07/01/16  プリンタ一括設定対応
+      *  03.04.03    NACL-藤原    07/03/01  国保レセプト編綴順詳細設定対応
+      *
+      *  03.05.01    NACL-藤原    07/04/19  グループ診療対応
+      *
+      *  04.01.01    NACL-藤原    07/11/22  公害レセプト対応
+      *
+      *  04.02.01    NACL-藤原    08/03/25  平成２０年４月改正対応
+      *
+      *  04.03.01    NACL-藤原    08/06/19  医師別出力対応
+      *  04.03.02    NACL-藤原    08/07/09  仮レセ作成（院外処方含む）対応
+      *
+      *  04.05.01    NACL-藤原    09/06/11  病棟別出力対応
+      *  04.05.02    NACL-藤原    09/06/18  社保レセプト遍綴順対応
+      *  04.05.03    NACL-藤原    11/10/24  「請求しない」設定の請求管理
+      *                                     の削除処理の有無対応
+      *
+      *  04.06.01    NACL-藤原    10/06/23  レセ電請求時の受付エラー分の
+      *                                     種別不明レセ対応
+      *  04.06.02    NACL-藤原    11/12/12  点検レセ０点公費印字対応
+      *
+      *  04.07.01    NACL-藤原    12/02/13  健保組合への直接請求と審査
+      *                                     支払機関請求対応
+      *  04.07.02    NACL-藤原    12/12/03  ターミナルデジットによる出力対応
+      *  04.07.03    NACL-藤原    13/12/01  医療情報連係基盤対応
+      *  04.07.04    NACL-藤原    13/09/20  第三者行為対応
+      *  04.07.05    NACL-藤原    14/04/22  ＥＦファイル作成対応
+      *
+      *  04.08.01    NACL-藤原    12/01/08  包括診療分の点検用レセプト記
+      *                                     載対応
+      *
+      *  04.09.01    NACL-藤原    16/12/12  ＨＡＯＲＩ対応
+      *****************************************************************
+       01  SPA-R01KYOUTU.
+      *
+      *処理区分
+           05  SPA-R01-SYOKBN              PIC  X(01).
+      *ファイル区分（１：一括　２：個別）
+           05  SPA-R01-FILEKBN             PIC  X(01).
+      *診療年月
+           05  SPA-R01-SRYYM               PIC  9(06).
+      *対象データ区分
+      *    （一括作成分　０：医保全件　１：社保　２：国保
+      *                　３：労災全件　４：自賠責（新様式）
+      *                　５：自賠責（従来様式）　６：公害
+      *                  ７：広域連合　８：自賠責（第三者行為））
+           05  SPA-R01-RECEKBN             PIC  X(01).
+      *入外区分
+           05  SPA-R01-NYUGAIKBN           PIC  X(01).
+      *レセプト作成区分（１：提出用レセ、２：点検用レセ
+      *                  ３：点検用レセ（０点公費））
+      *                  ４：点検用レセ（包括算定分））
+      *                  ５：点検用レセ（０点公費・包括算定分）
+      *                  ８：ＥＦファイル、９：連係基盤用）
+           05  SPA-R01-PRTKBN              PIC  X(01).
+      *処理画面区分
+           05  SPA-R01-GMNKBN              PIC  X(03).
+      *
+      *戻り先
+           05  SPA-R01-MOTOPG              PIC  X(08).
+      *     
+      *ＫＥＹ（対象のファイル）
+           05  SPA-R01-RECE07-KEY.
+               07  SPA-R01-RECE07-HOSPNUM  PIC 9(2).
+      *帳票ＩＤ
+               07  SPA-R01-RECE07-PRTID    PIC  X(04).
+      *処理区分（１：一括、２：個別）
+               07  SPA-R01-RECE07-SYOKBN   PIC  X(01).
+      *作成日
+               07  SPA-R01-RECE07-CREYMD   PIC  X(08).
+      *作成時間
+               07  SPA-R01-RECE07-CREHMS   PIC  X(06).
+      *審査支払機関
+               07  SPA-R01-RECE07-TEISYUTUSAKI
+                                           PIC  X(01).
+      *主科コード
+               07  SPA-R01-RECE07-SRYKA    PIC  X(02).
+      *県内県外印刷順（国保のみ使用）
+               07  SPA-R01-PREFKBN-SRT     PIC  X(02).
+      *保険者印刷順（国保のみ使用）
+               07  SPA-R01-HKNJANUM-SRT    PIC  X(01).
+      *保険者番号（国保　編綴順設定）
+               07  SPA-R01-RECE07-HKNJANUM PIC  X(08).
+      *レセプト種別
+               07  SPA-R01-RECE07-RECESYUBETU
+                                           PIC  X(04).
+      *在総診（未使用）
+               07  SPA-R01-RECE07-ZAITAKU  PIC  X(01).
+      *長期（長期高額療養費）（未使用）
+               07  SPA-R01-RECE07-CHOUKI   PIC  X(01).
+      *主科コード（国保）
+           05  SPA-R01-RECE07-SRYKA-KOKUHO PIC  X(02).
+      *主科コード（広域連合）
+           05  SPA-R01-RECE07-SRYKA-KOUIKI PIC  X(02).
+      *データ区分
+           05  SPA-R01-RECE07-RECEKBN      PIC  X(01).
+      *診療年月（一括：診療年月、個別：先頭の診療年月）
+           05  SPA-R01-RECE07-SRYYM        PIC  X(06).
+      *入外区分
+           05  SPA-R01-RECE07-NYUGAIKBN    PIC  X(01).
+      *処理種別
+           05  SPA-R01-RECE07-SYORISBT     PIC  X(01).
+      *日付指定（開始）
+           05  SPA-R01-RECE07-STYMD        PIC  X(08).
+      *日付指定（終了）
+           05  SPA-R01-RECE07-EDYMD        PIC  X(08).
+      *編綴順情報（国保）
+           05  SPA-R01-RECE07-HSEQNUM      PIC  X(08).
+      *編綴順詳細設定（国保）
+           05  SPA-R01-RECE07-RECE-PUTH    OCCURS  2.
+      *在総診
+               07  SPA-R01-RECE07-ZAITAKU-KBN
+                                           PIC  X(01).
+      *長期（長期高額療養費）
+               07  SPA-R01-RECE07-CHOUKI-KBN
+                                           PIC  X(01).
+      *最終出力順
+               07  SPA-R01-RECE07-SRT-LAST PIC  X(01).
+      *高額点数
+               07  SPA-R01-RECE07-KOUGAKU-TEN
+                                           PIC  9(07).
+      *医師別出力情報
+           05  SPA-R01-RECE08-DRCD-SRYKA   PIC  X(02).
+      *病棟別出力情報
+           05  SPA-R01-RECE08-SORT-1       PIC  X(10).
+      *ターミナルデジット出力情報
+           05  SPA-R01-RECE08-SORT-2       PIC  X(50).
+      *編綴順情報（社保）
+           05  SPA-R01-RECE08-RECESYUBETU-SRT
+                                           PIC  X(03).
+      *種別不明分頁
+           05  SPA-R01-RECE07-FUMEI-PAGE   PIC  9(05).
+      *直接請求する健康保険組合（社保）
+           05  SPA-R01-RECE07-HKNJANUM-SYAHO-T.
+      *直接請求する健康保険組合設定の有無（８：有　９：無）
+               07  SPA-R01-RECE07-HKNJANUM-SRT
+                                           PIC  X(01).
+      *直接請求する健康保険組合設定の有無
+               07  SPA-R01-RECE07-HKNJANUM-MAX
+                                           PIC  9(02).
+      *直接請求する健康保険組合の保険者番号
+               07  SPA-R01-RECE07-HKNJANUM-SYAHO
+                                           PIC  X(08)  OCCURS  10.
+      *
+      *起動ジョブ数
+           05  SPA-R01-JOBCNT              PIC  9(03).
+      *
+      *自動遷移区分
+           05  SPA-R01-AUTODSPKBN          PIC  X(01).
+      *
+      *点検用レセプト０点公費記載区分
+           05  SPA-R01-INSPECT-ZERO-KBN    PIC X(01).
+      *
+      *点検用レセプト包括算定分記載区分
+           05  SPA-R01-INSPECT-INCLUDE-KBN PIC X(01).
+      *
+      *印刷管理ＤＢのキー値
+           05  SPA-R01-PRTKANRI-TBL-GROUP  PIC  X(14). 
+      *
+      *中止ボタン状態フラグ
+           05  SPA-R01-STOPFLG             PIC  9(01).
+      *
+      *出力先設定用プリンタ
+           05  SPA-R01-PRTNM-G.
+               09  SPA-R01-PRTNM           PIC X(02).
+               09  SPA-R01-FIL             PIC X(01).
+               09  SPA-R01-PRTNMMEI        PIC X(16).
+           05  SPA-R01-PRTNM-N-G.
+               09  SPA-R01-PRTNM-N         PIC X(02).
+               09  SPA-R01-FIL-N           PIC X(01).
+               09  SPA-R01-PRTNM-NMEI      PIC X(16).
+     *
+      *警告メッセージ
+           05  SPA-RIDCD-AREA.
+               07  SPA-RIDCD               PIC  X(04).
+               07  SPA-RIDCD2              PIC  X(04).
+               07  SPA-RIDCD3              PIC  X(04).
+               07  SPA-RIDCD4              PIC  X(04).
+      *警告画面より
+           05  SPA-RID1-AREA. 
+               07  SPA-RID1-FLG            PIC  X(02).
+               07  SPA-RID4-FLG            PIC  X(03).
+               07  SPA-R99-FLG             PIC  X(02).
+               07  SPA-R99-CANCEL          PIC  X(03).
+      *
+           05  SPA-R01-JOB-PARAM.
+               07  SPA-R01-JOB-ORCA-UID    PIC X(36).
+               07  SPA-R01-JOB-KARTE-UID   PIC X(36).
+      *
+           05  SPA-R01-MONBLOB-ID          PIC X(37).

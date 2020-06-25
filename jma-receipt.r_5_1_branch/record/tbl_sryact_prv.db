@@ -1,0 +1,398 @@
+tbl_sryact_prv {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	ZAINUM				number(8,0);
+	RENNUM                  number(2,0);
+	SRYSYUKBN			char(3);
+	SRYKBN				char(2);
+	JIHIMONEYTOTAL			number(7,0);
+	SRYCD1				char(9);
+	SRYSURYO1			number(10,5);
+	SRYKAISU1			number(3,0);
+	MEISKYFLG1			char(1);
+	AUTOKBN1			char(1);
+	INPUTNUM1			number(3,0);
+	JIHIMONEY1			number(7,0);
+	KANSURYO1			number(10,5);
+	SRYCD2				char(9);
+	SRYSURYO2			number(10,5);
+	SRYKAISU2			number(3,0);
+	MEISKYFLG2			char(1);
+	AUTOKBN2			char(1);
+	INPUTNUM2			number(3,0);
+	JIHIMONEY2			number(7,0);
+	KANSURYO2			number(10,5);
+	SRYCD3				char(9);
+	SRYSURYO3			number(10,5);
+	SRYKAISU3			number(3,0);
+	MEISKYFLG3			char(1);
+	AUTOKBN3			char(1);
+	INPUTNUM3			number(3,0);
+	JIHIMONEY3			number(7,0);
+	KANSURYO3			number(10,5);
+	SRYCD4				char(9);
+	SRYSURYO4			number(10,5);
+	SRYKAISU4			number(3,0);
+	MEISKYFLG4			char(1);
+	AUTOKBN4			char(1);
+	INPUTNUM4			number(3,0);
+	JIHIMONEY4			number(7,0);
+	KANSURYO4			number(10,5);
+	SRYCD5				char(9);
+	SRYSURYO5			number(10,5);
+	SRYKAISU5			number(3,0);
+	MEISKYFLG5			char(1);
+	AUTOKBN5			char(1);
+	INPUTNUM5			number(3,0);
+	JIHIMONEY5			number(7,0);
+	KANSURYO5			number(10,5);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,SRYKA,SRYYM,ZAINUM,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER  BY  RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY  SRYKA,
+                                   ZAINUM,
+                                   RENNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY  SRYKA,
+                                   ZAINUM,
+                                   RENNUM
+		;
+	};
+};
+
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			ORDER   BY        SRYKA,
+                                          SRYYM,
+                                          ZAINUM,
+                                          RENNUM
+		;
+	};
+};
+
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND ((SRYCD1      =   :SRYCD1)
+			 OR  (SRYCD2      =   :SRYCD2)
+			 OR  (SRYCD3      =   :SRYCD3)
+			 OR  (SRYCD4      =   :SRYCD4)
+			 OR  (SRYCD5      =   :SRYCD5))
+			ORDER   BY        SRYKA,
+                                          SRYYM,
+                                          ZAINUM,
+                                          RENNUM
+		;
+	};
+};
+
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND ((SRYCD1      =   :SRYCD1)
+			 OR  (SRYCD2      =   :SRYCD2)
+			 OR  (SRYCD3      =   :SRYCD3)
+			 OR  (SRYCD4      =   :SRYCD4)
+			 OR  (SRYCD5      =   :SRYCD5))
+			ORDER   BY        SRYKA,
+                                          SRYYM,
+                                          ZAINUM,
+                                          RENNUM
+		;
+	};
+};
+
+path	key8	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			AND ((SRYCD1      =   :SRYCD1)
+			 OR  (SRYCD2      =   :SRYCD2)
+			 OR  (SRYCD3      =   :SRYCD3)
+			 OR  (SRYCD4      =   :SRYCD4)
+			 OR  (SRYCD5      =   :SRYCD5))
+			ORDER   BY        SRYKA,
+                                          SRYYM,
+                                          ZAINUM,
+                                          RENNUM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER  BY  RENNUM
+		;
+	};
+};
+
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del12 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM    =   :SRYYM
+		;
+	};
+};
+
+
+#sitekey
+path	st_key1 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_st_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYYM     =   :SRYYM
+			ORDER  BY  NYUGAIKBN,PTID,SRYKA,ZAINUM
+		;
+	};
+};
+
+#sitekey
+path	st_key2 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_st_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYYM     =   :SRYYM
+			ORDER  BY  SRYKA,NYUGAIKBN,PTID,ZAINUM
+		;
+	};
+};
+
+#sitekey
+path	st_key3 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_st_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYYM     =   :SRYYM
+			ORDER  BY  PTID,NYUGAIKBN,SRYKA,ZAINUM
+		;
+	};
+};
+
+#sitekey
+path	st_key4 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_st_key4_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_sryact_prv a,tbl_ptinf b
+		WHERE   a.HOSPNUM        =  :HOSPNUM
+		AND     a.SRYYM         =  :SRYYM
+		AND     a.HOSPNUM        =  b.HOSPNUM
+		AND     a.PTID          =  b.PTID
+		AND     b.TSTPTNUMKBN  <> '1'
+		ORDER   BY a.PTID,a.SRYKA,a.ZAINUM
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			AND(( SRYCD1   LIKE   :SRYCD1)
+			 OR ( SRYCD2   LIKE   :SRYCD2)
+			 OR ( SRYCD3   LIKE   :SRYCD3)
+			 OR ( SRYCD4   LIKE   :SRYCD4)
+			 OR ( SRYCD5   LIKE   :SRYCD5))
+		;
+	};
+};
+
+path	key11 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key11_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_sryact_prv a,tbl_ptinf b
+		WHERE   a.HOSPNUM        =  :HOSPNUM
+		AND     a.SRYYM         =  :SRYYM
+		AND     a.HOSPNUM        =  b.HOSPNUM
+		AND     a.PTID          =  b.PTID
+		AND     b.TSTPTNUMKBN  <> '1'
+		AND   ((a.SRYCD1  LIKE '6%')
+		 OR    (a.SRYCD2  LIKE '6%')
+		 OR    (a.SRYCD3  LIKE '6%')
+		 OR    (a.SRYCD4  LIKE '6%')
+		 OR    (a.SRYCD5  LIKE '6%'))
+		ORDER   BY	a.SRYKA,
+					a.SRYKBN,
+					a.ZAINUM,
+					a.RENNUM
+		;
+	};
+};
+
+path	key12 	{
+	DBSELECT	{
+		DECLARE tbl_sryact_prv_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	delprv 	{
+	DBDELETE	{
+		DELETE  FROM tbl_sryact_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};

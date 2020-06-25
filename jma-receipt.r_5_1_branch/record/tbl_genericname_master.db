@@ -1,0 +1,68 @@
+tbl_genericname_master {
+	YAKKAKJNCD			char(12);
+	YUKOKETA			number(2,0);
+	GENERICNAME			char(200);
+	TANICD				char(3);
+	TANINAME			char(24);
+	KANZANCHI			number(10,5);
+	TERMID   			char(16);
+	OPID     			char(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	YAKKAKJNCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_genericname_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_genericname
+			WHERE	YAKKAKJNCD = :YAKKAKJNCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_genericname
+			VALUES(
+				:YAKKAKJNCD,
+				:YUKOKETA,
+				:GENERICNAME,
+				:TANICD,
+				:TANINAME,
+				:KANZANCHI,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_genericname
+			SET
+				YAKKAKJNCD  = :YAKKAKJNCD,
+				YUKOKETA    = :YUKOKETA,
+				GENERICNAME = :GENERICNAME,
+				TANICD      = :TANICD,
+				TANINAME    = :TANINAME,
+				KANZANCHI   = :KANZANCHI,
+				TERMID      = :TERMID,
+				OPID        = :OPID,
+				CREYMD      = :CREYMD,
+				UPYMD       = :UPYMD,
+				UPHMS       = :UPHMS
+			WHERE	YAKKAKJNCD = :YAKKAKJNCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_genericname
+			WHERE	YAKKAKJNCD = :YAKKAKJNCD
+		;
+	};
+};

@@ -1,0 +1,10 @@
+# name: BLOB操作用データ領域
+blob {
+    object  object;
+    file    text;
+};
+
+# Local Variables:
+# indent-tabs-mode: nil
+# tab-width: 4
+# End:

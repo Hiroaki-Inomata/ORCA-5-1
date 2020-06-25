@@ -1,0 +1,48 @@
+tbl_passwd	{
+	USERID		varchar(16);
+	PASSWORD	varchar(256);
+	UPD_USERID	varchar(16),virtual;
+};
+
+primary	{
+	USERID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_passwd_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_passwd
+		WHERE 	USERID     =   :USERID
+		;
+	};
+};
+
+path	all_users		{ 	
+	DBSELECT	{
+		DECLARE tbl_passwd_all_users_csr CURSOR FOR
+		SELECT   USERID
+		FROM tbl_passwd
+		WHERE ( CASE WHEN TRIM(:USERID) <> '' THEN USERID  =   :USERID
+						     ELSE TRUE
+						END)
+		UNION 
+		SELECT   USERID 
+		FROM tbl_sysuser
+		WHERE ( CASE WHEN TRIM(:USERID) <> '' THEN USERID  =   :USERID
+						     ELSE TRUE
+						END)
+		ORDER BY USERID
+		;
+	};
+};
+
+
+path	upd1		{ 	
+	DBUPDATE	{
+		UPDATE  tbl_passwd
+		SET		USERID     =   :UPD_USERID
+		WHERE 	USERID     =   :USERID
+		;
+	};
+};

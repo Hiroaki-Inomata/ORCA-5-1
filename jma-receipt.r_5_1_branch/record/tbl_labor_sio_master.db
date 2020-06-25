@@ -1,0 +1,85 @@
+tbl_labor_sio_master {
+	SYOCD			char(5);
+	YUKOSTYMD		char(8);
+	YUKOEDYMD		char(8);
+	NAME			varchar(50);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			varchar(8);
+	UPYMD			varchar(8);
+	UPHMS			varchar(6);
+#-----> 主キー更新用項目
+	UPSYOCD			char(5),virtual;
+	UPYUKOSTYMD		char(8),virtual;
+	UPYUKOEDYMD		char(8),virtual;
+};
+
+primary	{
+	SYOCD,YUKOSTYMD,YUKOEDYMD;
+
+};
+
+path	key	{
+	DBSELECT	{
+		DECLARE tbl_labor_sio_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_labor_sio
+			WHERE	SYOCD     =  :SYOCD
+			AND	YUKOSTYMD <= :YUKOSTYMD
+			AND	YUKOEDYMD >= :YUKOEDYMD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_labor_sio
+			VALUES(
+				:SYOCD,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:NAME,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_labor_sio
+			SET
+				SYOCD     = :SYOCD,
+				YUKOSTYMD = :YUKOSTYMD,
+				YUKOEDYMD = :YUKOEDYMD,
+				NAME      = :NAME,
+				TERMID    = :TERMID,
+				OPID      = :OPID,
+				CREYMD    = :CREYMD,
+				UPYMD     = :UPYMD,
+				UPHMS     = :UPHMS
+			WHERE 	SYOCD     = :UPSYOCD
+			AND	YUKOSTYMD = :UPYUKOSTYMD
+			AND	YUKOEDYMD = :UPYUKOEDYMD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_labor_sio
+			WHERE	SYOCD     = :SYOCD
+			AND	YUKOSTYMD = :YUKOSTYMD
+			AND	YUKOEDYMD = :YUKOEDYMD
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_labor_sio_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_labor_sio
+			WHERE	SYOCD = :SYOCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};

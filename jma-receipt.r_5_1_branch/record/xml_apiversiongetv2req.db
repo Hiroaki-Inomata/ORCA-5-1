@@ -1,0 +1,10 @@
+xml_apiversiongetv2req {
+  context         int;
+  object          object;
+  mode            int;
+  recordname      varchar(128);
+  apiversiongetv2req {
+    Api_Id        varchar(32);
+  };
+};
+

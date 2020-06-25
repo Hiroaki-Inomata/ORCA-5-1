@@ -1,0 +1,64 @@
+xml_hsacsimulatev2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date 		varchar(10);
+		Information_Time 		varchar(08);
+		Api_Result	     		varchar(02);
+		Api_Result_Message 		varchar(100);
+		Start_Date 				varchar(10);
+		End_Date 				varchar(10);
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate			varchar(10);
+			Sex					varchar(01);
+		};
+		Admission_Date			varchar(10);
+		Acsimulate_Information	{
+			Information_Class {
+				Label			varchar(20);
+				Data			varchar(01);
+				Name			varchar(20);
+			};
+			Perform_Month		varchar(07);
+			Department_Code		varchar(02);
+			Department_Name		varchar(30);
+			HealthInsurance_Information	{
+			 	Insurance_Combination_Number	varchar(04);
+				InsuranceProvider_Class			varchar(03);
+				InsuranceProvider_Number		varchar(08);
+				InsuranceProvider_WholeName		varchar(20);
+				HealthInsuredPerson_Symbol		varchar(80);
+				HealthInsuredPerson_Number		varchar(80);
+				PublicInsurance_Information	{
+					PublicInsurance_Class		varchar(03);
+					PublicInsurance_Name		varchar(20);
+					PublicInsurer_Number		varchar(08);
+					PublicInsuredPerson_Number	varchar(20);
+				}[4];
+			};
+			Cd_Information  {
+				Ac_Money	varchar(10);
+				Ai_Money	varchar(10);
+				Oe_Money	varchar(10);
+				Om_Smoney	varchar(10);
+				Pi_Smoney	varchar(10);
+				Ml_Smoney	varchar(10);
+				Lsi_Total_Money varchar(10);
+			   	Dis_Money	varchar(10);
+			};
+			Ac_Point_Information  {
+				Ac_Ttl_Point	varchar(10);
+				Ac_Point_Detail   {
+					AC_Point_Name	varchar(30);
+					AC_Point	varchar(10);
+		 		} [16];
+			};
+			Ml_Cost				varchar(10);
+		}[13];
+	};
+};

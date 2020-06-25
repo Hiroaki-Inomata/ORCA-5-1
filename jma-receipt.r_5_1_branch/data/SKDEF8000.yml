@@ -1,0 +1,68 @@
+kanri_cd    : "8000"
+name        : "印刷データ等削除機能情報"
+class_cd    : "*"
+item_max    : 10
+item_list   :
+- item_no   : 1
+  item      : "DAILY"
+  item_jp   : "日次帳票"
+  type      : "9"
+  start     : 1
+  length    : 3
+  precision : 0
+- item_no   : 2
+  item      : "DAILY-YM"
+  item_jp   : "　　保有月数"
+  type      : "X"
+  start     : 4
+  length    : 6
+- item_no   : 3
+  item      : "DAILY-UPYMD"
+  item_jp   : "　　更新年月日"
+  type      : "X"
+  start     : 10
+  length    : 8
+- item_no   : 4
+  item      : "MONTHLY"
+  item_jp   : "月次帳票"
+  type      : "9"
+  start     : 18
+  length    : 3
+  precision : 0
+- item_no   : 5
+  item      : "MONTHLY-YM"
+  item_jp   : "　　保有月数"
+  type      : "X"
+  start     : 21
+  length    : 6
+- item_no   : 6
+  item      : "MONTHLY-UPYMD"
+  item_jp   : "　　更新年月日"
+  type      : "X"
+  start     : 27
+  length    : 8
+- item_no   : 7
+  item      : "NORDER"
+  item_jp   : "入院オーダー"
+  type      : "9"
+  start     : 35
+  length    : 3
+  precision : 0
+- item_no   : 8
+  item      : "NORDER-YM"
+  item_jp   : "　　保有月数"
+  type      : "X"
+  start     : 38
+  length    : 6
+- item_no   : 9
+  item      : "NORDER-UPYMD"
+  item_jp   : "　　更新年月日"
+  type      : "X"
+  start     : 44
+  length    : 8
+- item_no   : 10
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 52
+  length    : 449

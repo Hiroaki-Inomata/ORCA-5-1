@@ -1,0 +1,35 @@
+kanri_cd    : "1044"
+name        : "帳票オフセット情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "FORMID"
+  item_jp   : "帳票ＩＤ（ｍｏｎｐｅ）"
+  type      : "X"
+  start     : 1
+  length    : 20
+- item_no   : 2
+  item      : "PRTNM"
+  item_jp   : "出力プリンタ名"
+  type      : "X"
+  start     : 21
+  length    : 16
+- item_no   : 3
+  item      : "OFFSET-X"
+  item_jp   : "オフセット（ｘ方向）"
+  type      : "X"
+  start     : 37
+  length    : 5
+- item_no   : 4
+  item      : "OFFSET-Y"
+  item_jp   : "オフセット（ｙ方向）"
+  type      : "X"
+  start     : 42
+  length    : 5
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 47
+  length    : 454

@@ -1,0 +1,507 @@
+tbl_rececom {
+	HOSPNUM				number(2,0);
+	PTID				number(10);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	HKNCOMBI			number(4);
+	SRYDD				char(2);
+	SJKBN				char(2);
+	RENNUM				number(2);
+	COMMENT        			varchar(4800);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPPTID 				number(10),virtual;
+	UPNYUGAIKBN			char(1),virtual;
+	UPSRYKA				char(2),virtual;
+	UPSRYYM				char(6),virtual;
+	UPHKNCOMBI			number(4),virtual;
+	UPSRYDD				char(2),virtual;
+	UPSJKBN				char(2),virtual;
+	UPRENNUM			number(2),virtual;
+};
+primary	{
+	HOSPNUM,PTID,NYUGAIKBN,SRYKA,SRYYM,HKNCOMBI,SRYDD,SJKBN,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYKA     =   :SRYKA
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+			AND     SRYDD     =   :SRYDD
+			AND     SJKBN     =   :SJKBN
+			AND     RENNUM    =   :RENNUM
+		;
+	};
+};
+
+path	key1		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER BY HKNCOMBI,SRYDD
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER   BY        SRYYM  DESC
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYDD     =   :SRYDD
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+			ORDER   BY        SRYKA
+		;
+	};
+};
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			ORDER   BY        SRYYM  DESC,
+                                          NYUGAIKBN,
+                                          SRYKA,
+                                          HKNCOMBI,
+                                          SRYDD,
+                                          SJKBN,
+                                          RENNUM
+		;
+	};
+};
+
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYKA     =   :SRYKA
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+                        AND     SRYDD     =   :SRYDD
+			ORDER   BY        SJKBN,
+                                          RENNUM
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     =   '99'
+			ORDER BY HKNCOMBI,SRYDD,RENNUM
+		;
+	};
+};
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     <   '07'
+			ORDER BY SJKBN,HKNCOMBI,SRYDD,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     >=  '07'
+			AND     SJKBN     <=  '09'
+			ORDER BY HKNCOMBI,SJKBN,SRYDD,RENNUM
+		;
+	};
+};
+
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYDD     =   :SRYDD
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYKA     =   :SRYKA
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+                        AND     SRYDD     =   :SRYDD
+		;
+	};
+};
+
+path	key12		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     >=  '50'
+			AND     SJKBN     <=  '52'
+			ORDER BY HKNCOMBI,SJKBN,SRYDD,RENNUM
+		;
+	};
+};
+
+path	key13		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER BY HKNCOMBI,SRYDD,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key14		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYKA     =   :SRYKA
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+                        AND     SRYDD     =   :SRYDD
+                        AND     SJKBN     =   :SJKBN
+			ORDER   BY        RENNUM  DESC
+		;
+	};
+};
+
+path	key15		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYKA     =   :SRYKA
+			AND     SRYYM     =   :SRYYM
+			AND     HKNCOMBI  =   :HKNCOMBI
+                        AND     SRYDD     =   :SRYDD
+                        AND     SJKBN     =   :SJKBN
+			ORDER   BY        RENNUM
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_rececom 
+				SET	
+                   HOSPNUM             = :HOSPNUM,
+                   PTID                = :PTID,
+		   NYUGAIKBN           = :NYUGAIKBN,
+                   SRYKA               = :SRYKA,
+                   SRYYM               = :SRYYM,
+                   HKNCOMBI            = :HKNCOMBI,
+                   SRYDD               = :SRYDD,
+                   SJKBN               = :SJKBN,
+                   RENNUM              = :RENNUM,
+                   COMMENT             = :COMMENT,
+                   TERMID              = :TERMID,
+                   OPID                = :OPID,
+                   CREYMD              = :CREYMD,
+                   UPYMD               = :UPYMD,
+                   UPHMS               = :UPHMS
+               WHERE   HOSPNUM       =   :UPHOSPNUM
+                 AND   PTID          =   :UPPTID
+ 	  	 AND   NYUGAIKBN     =   :UPNYUGAIKBN
+                 AND   SRYKA         =   :UPSRYKA 
+                 AND   SRYYM         =   :UPSRYYM
+                 AND   HKNCOMBI      =   :UPHKNCOMBI
+                 AND   SRYDD         =   :UPSRYDD
+                 AND   SJKBN         =   :UPSJKBN
+                 AND   RENNUM        =   :UPRENNUM
+		;
+	};
+};
+
+path	key16		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     =   :SJKBN
+			ORDER BY HKNCOMBI,SRYDD,RENNUM
+		;
+	};
+};
+
+path	key17		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SRYDD     =   :SRYDD
+			AND     SJKBN     =   :SJKBN
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key18		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key18_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     <   '07'
+			AND     SRYDD     =   :SRYDD
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key19		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     >=  '07'
+			AND     SJKBN     <=  '09'
+			AND     SRYDD     =   :SRYDD
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key20		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key20_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     >=  '50'
+			AND     SJKBN     <=  '52'
+			AND     SRYDD     =   :SRYDD
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key21		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key21_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER BY HKNCOMBI,(SJKBN <> 'AA'),(SJKBN <> '99'),(SJKBN <> 'BB'),SJKBN,SRYDD,RENNUM
+		;
+	};
+};
+
+path	key22		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			ORDER BY HKNCOMBI,SRYDD,(SJKBN <> 'AA'),(SJKBN <> '99'),(SJKBN <> 'BB'),SJKBN,RENNUM
+		;
+	};
+};
+
+path	key23		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     in ( '50','51','52','90')
+			ORDER BY HKNCOMBI,SJKBN,SRYDD,RENNUM
+		;
+	};
+};
+
+path	key24		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key24_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			AND     NYUGAIKBN =   :NYUGAIKBN
+			AND     SJKBN     in ( '50','51','52','90')
+			AND     SRYDD     =   :SRYDD
+			ORDER BY HKNCOMBI,SJKBN,RENNUM
+		;
+	};
+};
+
+path	key25		{ 	
+	DBSELECT	{
+		DECLARE tbl_rececom_key25_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rececom
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID      =   :PTID
+			AND     SRYYM     =   :SRYYM
+			ORDER BY SRYKA,
+			         NYUGAIKBN,
+                                 HKNCOMBI,
+                                 SRYDD,
+                                 SJKBN,
+                                 RENNUM
+		;
+	};
+};
+

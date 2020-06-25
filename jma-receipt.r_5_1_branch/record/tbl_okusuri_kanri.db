@@ -1,0 +1,102 @@
+tbl_okusuri_kanri {
+	HOSPNUM		number(2,0);
+	PTID		number(10,0);
+	SRYYMD		varchar(8);
+	HOSPCD		varchar(7);
+	RENNUM		number(3,0);
+	NAME		varchar(100);
+	SEX		varchar(1);
+	BIRTHDAY	varchar(8);
+	HOSPNAME	varchar(200);
+	DATA_KEY	number(16,0);
+	TERMID   	varchar(16);
+	OPID     	varchar(16);
+	CREYMD   	varchar(8);
+	UPYMD    	varchar(8);
+	UPHMS		varchar(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SRYYMD,HOSPCD,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_kanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM = :HOSPNUM
+			 AND	PTID    = :PTID
+			 AND	SRYYMD  = :SRYYMD
+			 AND	HOSPCD  = :HOSPCD
+			 AND	RENNUM  = :RENNUM
+		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_kanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM = :HOSPNUM
+			 AND	PTID    = :PTID
+		         	ORDER   BY    SRYYMD,
+			                      HOSPCD,
+                                              RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_kanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM   = :HOSPNUM
+			 AND	PTID      = :PTID
+			 AND	SEX       = :SEX
+			 AND	BIRTHDAY  = :BIRTHDAY
+		         	ORDER   BY    SRYYMD,
+                                              RENNUM,
+			                      HOSPCD
+		;
+	};
+};
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_kanri_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM = :HOSPNUM
+			 AND	PTID    = :PTID
+			 AND	SRYYMD  = :SRYYMD
+			 AND	HOSPCD  = :HOSPCD
+		         	ORDER   BY    RENNUM DESC
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_okusuri_kanri_key5_csr CURSOR FOR
+		SELECT
+			MAX(RENNUM) AS RENNUM
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM = :HOSPNUM
+			 AND	PTID    = :PTID
+			 AND	SRYYMD  = :SRYYMD
+			 AND	HOSPCD  = :HOSPCD
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_okusuri_kanri
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+

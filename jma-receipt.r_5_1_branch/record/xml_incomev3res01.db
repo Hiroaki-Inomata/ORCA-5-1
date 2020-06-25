@@ -1,0 +1,50 @@
+xml_incomev3res01{
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  incomev3res{
+    Information_Date               varchar(10);
+    Information_Time               varchar(8);
+    Api_Result                     varchar(5);
+    Api_Result_Message             varchar(100);
+    Request_Number                 varchar(2);
+    Request_Mode                   varchar(2);
+    Response_Number                varchar(2);
+    Karte_Uid                      varchar(36);
+    Orca_Uid                       varchar(36);
+    Patient_ID                     varchar(20);
+    Income_Information_Overflow    varchar(05);
+    Income_Information  {
+      Perform_Date                 varchar(10);
+      Perform_End_Date             varchar(10);
+      IssuedDate                   varchar(10);
+      InOut                        varchar(1);
+      Invoice_Number               varchar(7);
+      Group_Invoice_Number         varchar(7);
+      Insurance_Combination_Number varchar(4);
+      Rate_Cd                      varchar(3);
+      Department_Code              varchar(2);
+      Ac_Money                     varchar(10);
+      Ic_Money                     varchar(10);
+      Unpaid_Money                 varchar(10);
+      State                        varchar(1);
+      State_Name                   varchar(10);
+      Type                         varchar(1);
+      Type_Name                    varchar(10);
+      Caution                      varchar(1);
+      Caution_Name                 varchar(20);
+      Error_Code                   varchar(5);
+      Error_Message                varchar(100);
+    }[500];
+    Unpaid_Money_Total_Information    {
+      Unpaid_Money_Total_Admission     varchar(10);
+      Overpaid_Money_Total_Admission   varchar(10);
+      Unpaid_Money_Total_Outpatient    varchar(10);
+      Overpaid_Money_Total_Outpatient  varchar(10);
+    };
+    Data_Id_Information {
+      Data_Id                          varchar(37);
+    };
+  };
+};

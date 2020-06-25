@@ -1,0 +1,120 @@
+tbl_ptrsiinf {
+	HOSPNUM				number(2,0);
+	PTID				number(10);
+	HKNID				number(10);
+	KOHID				number(10);
+        HKNKBN  			char(1);
+        HKNNUM  			char(3);
+        KOFUNUM  			char(14);
+        HIHKNJANAME			varchar(100);
+        JIGYOUNAME			varchar(80);
+        PREFNAME			varchar(20);
+        PREFKBN			        char(1);
+        CITYNAME			varchar(80);
+        CITYKBN			        char(1);
+        SINKEI  			char(1);
+        TENKI           	        char(1);
+        SHOBYOYMD 			char(8);
+        SISIKBN			        char(1);
+        RYOSTYMD			char(8);
+        RYOEDYMD        	        char(8);
+        SONSHOUKBN 			char(2);
+        SONSHOUKBN_EDANUM               char(1);
+        SINSATUYMD			char(8);
+        SINSATUEND                      char(8);
+        KAKUNINYMD			char(8);
+	SAKUJOKBN			char(1);
+        COMMENT  			varchar(200);
+        SAIGAIKBN                       char(1);
+        JIBAISEIKBN                     char(1);
+        DRCD			        char(5);
+        HOKENNAME			varchar(80);
+        KIJYUNYM			char(6);
+        KAISU				number(03);
+	SYOCD				char(5);
+	DAISAN_GENBTKBN 		char(1);
+	DAISAN_TOKKIKBN			char(1);
+	JIBAIKBN			char(1);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,HKNID,KOHID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptrsiinf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNID       =   :HKNID
+			AND   KOHID       =   :KOHID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptrsiinf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNKBN      =   :HKNKBN
+			ORDER BY  SINSATUYMD
+		;
+	};
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptrsiinf_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptrsiinf_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER BY  SINSATUYMD
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptrsiinf_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptrsiinf
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNKBN      =   :HKNKBN
+			AND   SHOBYOYMD   =   :SHOBYOYMD
+			AND   SAKUJOKBN   <>  '1'
+		;
+	};
+};

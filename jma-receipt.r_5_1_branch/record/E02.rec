@@ -1,0 +1,35 @@
+E02 {
+  fixed6 {
+    SRYYM {
+      textdata varchar(7);
+    };
+    scrolledwindow1 {
+      CLIST1 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 char(25);
+          }[900];
+          selectdata bool[900];
+      };
+    };
+    scrolledwindow2 {
+      CLIST2 {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 char(25);
+          }[900];
+          selectdata bool[900];
+      };
+    };
+    CHKMSG000 {
+      textdata varchar(48);
+    };
+    FILENAME {
+      textdata varchar(129);
+    };
+  };
+};

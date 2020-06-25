@@ -1,0 +1,213 @@
+P98 {
+  fixed1 {
+    ADRS {
+      textdata varchar(100);
+    };
+    POST {
+      textdata varchar(7);
+    };
+    CHK_TADRS011 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS012 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS013 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS014 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS015 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS021 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS022 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS023 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS024 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS025 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS031 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS032 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS033 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS034 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS035 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS041 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS042 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS043 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS044 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS045 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS051 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS052 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS053 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS054 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS055 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS061 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS062 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS063 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS064 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS065 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS071 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS072 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS073 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS074 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS075 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS081 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS082 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS083 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS084 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS085 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS091 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS092 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS093 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS094 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS095 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS101 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS102 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS103 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS104 {
+      style varchar(20);
+      label varchar(20);
+    };
+    CHK_TADRS105 {
+      style varchar(20);
+      label varchar(20);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+  };
+};

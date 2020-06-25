@@ -1,0 +1,70 @@
+fm_invoice_receipt_h {
+  context  int;
+  object  object;
+  mode  int;
+  recordname  varchar(128);
+  data {
+    Form_ID              varchar(30);
+    Custom_ID            varchar(30);
+    Printer              varchar(20);
+    Order_Class          varchar(02);
+    Simulation_Flg       varchar(01);
+    Patient  {
+      ID                 varchar(20);
+      Name               varchar(50);
+      KanaName           varchar(50);
+    };
+    Hospital  {
+      Name               varchar(120)[3];
+      ZipCode            varchar(7);
+      Address            varchar(200)[3];
+      PhoneNumber        varchar(15);
+    };
+    Perform_Date         varchar(10);
+    Perform_End_Date     varchar(10);
+    IssuedDate           varchar(10);
+    Ward_Number          varchar(02);
+    Ward_Name            varchar(20);
+    Room_Number          varchar(6);
+    Department_Name      varchar(30);
+    Insurance_Name       varchar(40);
+    Insurance_Rate       varchar(6);
+    Invoice_Number       varchar(7);
+    Repirint_Sign_Flg    varchar(1);
+    Me{
+      Code               varchar(03);
+      Name               varchar(20);
+      Point              varchar(10);
+      Money               varchar(10);
+    }[16];
+    Total_Point          varchar(10);
+    Ai_Money             varchar(10);
+    Label_Lsi_Total_Money    varchar(20);
+    Lsi_Total_Money_In_Ai_Money varchar(10);
+    Pi_Smoney            varchar(10);
+    Meal_Cost            varchar(10);
+    Meal_Smoney          varchar(10);
+    Living_Cost          varchar(10);
+    Living_Smoney        varchar(10);
+    Total_Me_Money       varchar(10);
+    Tax_In_Total_Me_Money varchar(10);
+    Oe_Etc{
+      Name               varchar(20);
+      Money              varchar(10);
+    }[10];
+    Total_Oe_Etc_Money   varchar(10);
+    Tax_In_Total_Oe_Etc_Money varchar(10);
+    Room_Charge          varchar(10);
+    Tax_In_Room_Charge   varchar(10);
+    Ad_Money1            varchar(10);
+    Ad_Money2            varchar(10);
+    Ac_Money             varchar(10);
+    Tax_In_Ac_Money      varchar(10);
+    Ic_Money             varchar(10);
+    Unpaid_Money_Admission varchar(10);
+    Unpaid_Money_Outpatient varchar(10);
+    Caution              varchar(100);
+    Memo                 varchar(80)[10];
+  };
+};
+

@@ -1,0 +1,13 @@
+xml_patientlst6v2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientlst6req {
+		Reqest_Number		varchar(2);
+		Patient_ID		varchar(20);
+		Base_Date		varchar(10);
+		Start_Date		varchar(7);
+		End_Date		varchar(7);
+	};
+};

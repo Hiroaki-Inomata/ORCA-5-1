@@ -1,0 +1,24 @@
+xml_statistics_formv3req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	statistics_formv3req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Statistics_Mode		varchar(7);
+		Statistics_Processing_List_Information {
+			Statistics_Program_No	varchar(3);
+			Statistics_Program_Name	varchar(24);
+			Statistics_Program_Label	varchar(80);
+			Statistics_Parameter_Information {
+				Statistics_Parm_No	varchar(2);
+				Statistics_Parm_Class	varchar(10);
+				Statistics_Parm_Label	varchar(20);
+				Statistics_Parm_Required_Item	varchar(5);
+				Statistics_Parm_Value	varchar(20);
+			} [10];
+		} [10];
+	};
+};

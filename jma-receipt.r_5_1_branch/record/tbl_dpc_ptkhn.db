@@ -1,0 +1,169 @@
+tbl_dpc_ptkhn {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	DPCRRKNUM			number(3,0);
+	DPCRRKEDANUM			number(3,0);
+	DPCMAXEDANUM			number(3,0);
+	DPCTEKKBN			char(1);
+	TEKSTYMD			char(8);
+	TEKSTKBN			char(1);
+	TEKEDYMD			char(8);
+	TEKEDKBN			char(1);
+	SAINYUKBN			char(1);
+	DPC_CD				varchar(14);
+	DPCTENKIKBN			char(1);
+	COD				varchar(100);
+	TERMID				varchar(16);
+	OPID				varchar(16);
+	CREYMD				char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+	RRKNUM				number(3,0),virtual;
+	SORTFLG				number(1,0),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,DPCRRKNUM,DPCRRKEDANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		 AND  DPCRRKEDANUM   =   :DPCRRKEDANUM
+		;
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		ORDER BY DPCRRKEDANUM 
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+	    UPDATE tbl_dpc_ptkhn
+			SET DPCMAXEDANUM  = A.DPCRRKEDANUM,
+				UPYMD	   = :UPYMD,
+				UPHMS	   = :UPHMS
+			FROM (SELECT HOSPNUM ,PTID,DPCRRKNUM,MAX(DPCRRKEDANUM) AS DPCRRKEDANUM
+			     FROM tbl_dpc_ptkhn 
+					WHERE   HOSPNUM		=  :HOSPNUM
+					AND	PTID	   		=  :PTID
+					AND	DPCRRKNUM			=  :DPCRRKNUM
+					GROUP BY HOSPNUM,PTID,DPCRRKNUM
+			     ) A
+			WHERE   tbl_dpc_ptkhn.HOSPNUM   =   A.HOSPNUM
+			AND	tbl_dpc_ptkhn.PTID	   		=   A.PTID
+			AND	tbl_dpc_ptkhn.DPCRRKNUM	    =   A.DPCRRKNUM
+		;
+	};
+};
+
+path	key3	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		ORDER BY DPCRRKEDANUM  DESC
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		ORDER BY DPCRRKNUM,DPCRRKEDANUM 
+		;
+	};
+};
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		ORDER BY DPCRRKEDANUM  DESC
+		;
+	};
+};
+
+path	key6	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+	 	ORDER BY DPCRRKEDANUM
+		;
+	};
+
+};
+path	del1	{ 	
+	DBDELETE	{
+		DELETE 
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		;
+	};
+};
+
+path	key7	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		 AND  DPCTEKKBN      LIKE :DPCTEKKBN
+		 AND  ( DPCRRKEDANUM  <  :DPCRRKEDANUM
+               OR :DPCRRKEDANUM  =   0 )
+		ORDER BY
+               (CASE :SORTFLG  WHEN 0 THEN DPCRRKEDANUM ELSE 0 END) ASC,
+               (CASE :SORTFLG  WHEN 1 THEN DPCRRKEDANUM ELSE 0 END) DESC
+		;
+	};
+};
+
+path	key8	{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_ptkhn_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_ptkhn
+		WHERE HOSPNUM        =   :HOSPNUM
+		 AND  PTID           =   :PTID
+		 AND  DPCRRKNUM      =   :DPCRRKNUM
+		 AND  TEKSTYMD		<=   :TEKSTYMD
+		 AND  TEKEDYMD		>=   :TEKEDYMD
+	 	ORDER BY DPCRRKEDANUM DESC
+		;
+	};
+};
+

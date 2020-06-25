@@ -1,0 +1,41 @@
+kanri_cd    : "2002"
+name        : "レセプト作成指示（個別作成）コード"
+class_cd    : "*"
+item_max    : 6
+item_list   :
+- item_no   : 1
+  item      : "PTNUM"
+  item_jp   : "患者番号"
+  type      : "X"
+  start     : 1
+  length    : 20
+- item_no   : 2
+  item      : "PTID"
+  item_jp   : "患者ＩＤ"
+  type      : "X"
+  start     : 21
+  length    : 10
+- item_no   : 3
+  item      : "SRYYM"
+  item_jp   : "診療年月"
+  type      : "X"
+  start     : 31
+  length    : 6
+- item_no   : 4
+  item      : "NYUGAIKBN"
+  item_jp   : "入外区分"
+  type      : "X"
+  start     : 27
+  length    : 1
+- item_no   : 5
+  item      : "RECEKBN"
+  item_jp   : "レセプト種類区分"
+  type      : "X"
+  start     : 28
+  length    : 1
+- item_no   : 6
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 29
+  length    : 462

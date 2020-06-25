@@ -1,0 +1,42 @@
+xml_medicalv3req5 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3req5 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Patient_ID		varchar(20);
+		Orca_Uid		varchar(36);
+#---    開始日選択
+		Perform_Information  {
+#---    処理区分
+			Perform_Mode		varchar(6);
+#---    開始日予約コード
+			Medication_Code		varchar(09);
+			Medication_Name		varchar(80);
+#---    算定年月
+			Perform_Date		varchar(7);
+#---    保険組合せ番号
+			Insurance_Combination_Number	varchar(04);
+#---    算定日
+			Perform_Day_Info {
+				Perform_Day	varchar(02);
+			} [31];
+		};
+#---   コメント
+		Comment_Information  {
+			Comment_Mode		varchar(6);
+			Comment_Day_Info {
+				Comment_Day		varchar(02);
+				Perform_EndDate		varchar(10);
+				Comment_Info   {
+#---    コメント
+				Comment			varchar(80);
+#---    コメント終了日
+				Comment_EndDate		varchar(10);
+ 				} [50];
+ 			} [31];
+		};
+	};
+};

@@ -1,0 +1,47 @@
+kanri_cd    : "1022"
+name        : "病名頻用検索−病名コード"
+class_cd    : "*"
+item_max    : 7
+item_list   :
+- item_no   : 1
+  item      : "BYOMEICD1"
+  item_jp   : "病名コード１"
+  type      : "X"
+  start     : 1
+  length    : 5
+- item_no   : 2
+  item      : "BYOMEICD2"
+  item_jp   : "病名コード２"
+  type      : "X"
+  start     : 6
+  length    : 5
+- item_no   : 3
+  item      : "BYOMEICD3"
+  item_jp   : "病名コード３"
+  type      : "X"
+  start     : 11
+  length    : 5
+- item_no   : 4
+  item      : "BYOMEICD4"
+  item_jp   : "病名コード４"
+  type      : "X"
+  start     : 16
+  length    : 5
+- item_no   : 5
+  item      : "BYOMEICD5"
+  item_jp   : "病名コード５"
+  type      : "X"
+  start     : 21
+  length    : 5
+- item_no   : 6
+  item      : "BYOMEICD6"
+  item_jp   : "病名コード６"
+  type      : "X"
+  start     : 26
+  length    : 5
+- item_no   : 7
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 31
+  length    : 470

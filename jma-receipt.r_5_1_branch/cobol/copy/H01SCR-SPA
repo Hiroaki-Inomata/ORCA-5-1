@@ -1,0 +1,430 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    請求管理医 画面ＳＰＡ     (SPA-FREE の内容)
+      *
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC-藤原     01/10/01  請求区分、訂正区分の修正      
+      *
+      *  01.01.01    NACL-藤原    02/10/07  年齢・給付割合の追加
+      *  01.01.02    NACL-藤原    02/10/17  在宅区分の追加
+      *  01.01.03    NACL-藤原    03/02/12  補助区分の追加
+      *                                     入院対応
+      *  ver.2.6.0
+      *  01.02.01    NACL-藤原    05/04/11  本人家族区分の追加
+      *
+      *  02.07.01    NACL-藤原    05/08/20  特別療養費対応
+      *                                     レセプト種別の桁数変更
+      *
+      *  04.01.01    NACL-藤原    07/11/22  公害レセプト対応
+      *
+      *  04.03.01    NACL-藤原    08/05/07  公費４種までの併用の記録対応
+      *  04.03.02    NACL-藤原    08/06/06  レセプト種別名称、作成日の追加
+      *  04.03.03    NACL-藤原    08/06/18  公費請求分の請求年月等の追加
+      *
+      *  04.04.01    NACL-藤原    09/12/10  返戻対応
+      *
+      *  04.05.01    NACL-藤原    11/08/25  公費単独対応
+      *                                     公費を最大５０に変更
+      *  04.05.02    NACL-藤原    12/06/05  レセ電データ無し時のエラー表示
+      *
+      *  04.06.01    NACL-藤原    10/10/12  公費単独のレセ分離対応
+      *                                     キーにkohid 追加
+      *  04.06.02    NACL-藤原    10/12/20  保険者からの返戻対応
+      *  04.06.03    NACL-藤原    11/12/12  点検レセ０点公費印字対応
+      *  04.06.04    NACL-藤原    12/10/26  特記事項０７（老併）及び
+      *                                     ０８（老健）のレセプト対応
+      *                                     receipt_kbn 追加 
+      *
+      *  04.07.01    NACL-藤原    11/09/02  労災請求書作成対応
+      *  04.07.02    NACL-藤原    13/02/07  労災レセ電対応
+      *  04.07.03    NACL-藤原    13/10/07  労災レセ電返戻対応
+      *
+      *  04.08.01    NACL-藤原    15/08/25  作成時間の表示追加
+      *  04.08.02    NACL-藤原    15/09/14  返戻データ取込一覧対応
+      *  04.08.03    NACL-藤原    16/08/08  災害該当分（非減免対象と減免対象）
+      *                                     レセプトの分割対応
+      *  04.08.04    NACL-藤原    16/06/27  医療機関コード変更時のレセ電
+      *                                     データ等の作成対応
+      *                                      （１日からの変更のみ）
+      *  04.08.05    NACL-藤原    16/10/07  自賠責ＰＤＦファイル作成対応
+      *  04.08.08    NACL-藤原    17/04/10  患者単位での点数算定設定
+      *                                     （労災準拠又は健保準拠）対応
+      *****************************************************************
+       01  SPA-H01FREE.
+         02  SPA-H01FREE-AREA.
+      *    第一画面ＳＰＡエリア
+           03  SPA-H01-AREA.
+               05  SPA-H01GMN-MAX                     PIC 9(04).
+               05  SPA-H01GMN-PAGE                    PIC 9(02).
+               05  SPA-H01GMN-CUR                     PIC 9(03).
+               05  SPA-H01GMN-AREA.
+                   07  SPA-H01GMN-MIDASI-AREA.
+                       09  SPA-H01GMN-MIDASI-TBL      OCCURS  38.
+                           11  SPA-H01GMN-MIDASI      PIC X(18).
+                           11  SPA-H01GMN-MIDASI-STYLE
+                                                      PIC X(05).
+                       09  SPA-H01GMN-SHOMIDASI-TBL   OCCURS  3.
+                           11  SPA-H01GMN-SHOMIDASI   PIC X(14).
+                       09  SPA-H01GMN-TENMIDASI-TBL   OCCURS  4.
+                           11  SPA-H01GMN-TENMIDASI   PIC X(14).
+      * 
+                   07  SPA-H01GMN-SRYYM               PIC X(07).
+                   07  SPA-H01GMN-KOUMOKU1.
+                       09  SPA-H01GMN-PTNUM           PIC X(20).
+                       09  SPA-H01GMN-NAME            PIC X(24).
+                       09  SPA-H01GMN-SRYKA           PIC X(02).
+                       09  SPA-H01GMN-SRYKANAME       PIC X(18).
+                       09  SPA-H01GMN-TITLE-HKNJANUM  PIC X(16).
+                       09  SPA-H01GMN-TITLE-KIGO      PIC X(10).
+      *
+                   07  SPA-H01GMN-KOUMOKU.
+                       09  SPA-H01GMN-HNYUGAIKBN      PIC X(06).
+                       09  SPA-H01GMN-HTEISYUTUSAKI   PIC X(10).
+                       09  SPA-H01GMN-HRECESYUBETU    PIC X(14).
+                       09  SPA-H01GMN-HHKNJANUM       PIC X(14).
+                       09  SPA-H01GMN-HHOJOKBN        PIC X(08).
+                       09  SPA-H01GMN-HKIGO           PIC X(20).
+                       09  SPA-H01GMN-HCREYMD         PIC X(19).
+                       09  SPA-H01GMN-HRECEIPT-KBN    PIC X(10).
+                       09  SPA-H01GMN-SKYYM           PIC X(07).
+                       09  SPA-H01GMN-SKYYM-KOHSKY    PIC X(07).
+                       09  SPA-H01GMN-HENREIYM        PIC X(07).
+                       09  SPA-H01GMN-HENREIYM-OLD    PIC X(07).
+                       09  SPA-H01GMN-HENREIYM-KOHSKY PIC X(07).
+                       09  SPA-H01GMN-SKYKBN-G.
+                           11  SPA-H01GMN-SKYKBN      PIC X(01).
+                           11  SPA-H01GMN-F1          PIC X(01).
+                           11  SPA-H01GMN-SKYKBNMEI   PIC X(10).
+                       09  SPA-H01GMN-TEISEIKBNNM     PIC X(14).
+                       09  SPA-H01GMN-AGE             PIC 9(03).
+                       09  SPA-H01GMN-KYURATE         PIC 9(03).
+                       09  SPA-H01GMN-ZAITAKU         PIC X(20).
+                       09  SPA-H01GMN-HONKZKKBN       PIC X(04).
+                       09  SPA-H01GMN-HENREI-SIJI-FLG PIC X(01).
+                       09  SPA-H01GMN-HENREI-SIJI-FLG-STE
+                                                      PIC S9(9) BINARY.
+      *                 
+                   07  SPA-H01GMN-SKYKBNLST          OCCURS  3.
+                       09  SPA-H01GMN-SKYKBNL        PIC X(01).
+                       09  SPA-H01GMN-F1L            PIC X(01).
+                       09  SPA-H01GMN-SKYKBNMEIL     PIC X(10).
+      *
+                   07  SPA-H01GMN-TABLE. 
+                       09  SPA-H01GMN-TBL             OCCURS  38.
+                           11  SPA-H01GMN-KHNTEN      PIC 9(08).
+                           11  SPA-H01GMN-KAISU       PIC 9(05).
+                           11  SPA-H01GMN-NKHNTEN     PIC 9(08).
+                           11  SPA-H01GMN-NKAISU      PIC 9(05).
+                       09  SPA-H01GMN-TENSU-TBL       OCCURS  3.
+                           11  SPA-H01GMN-TENSU-G1    OCCURS  38.
+                               13  SPA-H01GMN-TENSU   PIC S9(08).
+      *
+                       09  SPA-H01GMN-TBL1            OCCURS  5.
+                           11  SPA-H01GMN-TOTALTEN    PIC 9(08).
+                           11  SPA-H01GMN-FTNMONEY    PIC 9(08).
+                           11  SPA-H01GMN-YKZFTN      PIC 9(08).
+                           11  SPA-H01GMN-JNISSU      PIC 9(08).
+                           11  SPA-H01GMN-NTOTALTEN   PIC 9(08).
+                           11  SPA-H01GMN-NFTNMONEY   PIC 9(08).
+                           11  SPA-H01GMN-NYKZFTN     PIC 9(08).
+                           11  SPA-H01GMN-NJNISSU     PIC 9(08).
+                           11  SPA-H01GMN-SHORYOYOHI  PIC 9(08).
+                           11  SPA-H01GMN-SHOFTN      PIC 9(08).
+                           11  SPA-H01GMN-SHONISSU    PIC 9(02).
+                           11  SPA-H01GMN-NSHORYOYOHI PIC 9(08).
+                           11  SPA-H01GMN-NSHOFTN     PIC 9(08).
+                           11  SPA-H01GMN-NSHONISSU   PIC 9(02).
+                       09  SPA-H01GMN-SHO-STATE       PIC S9(9) BINARY.
+                       09  SPA-H01GMN-TENSU-TBL1      OCCURS  3.
+                           11  SPA-H01GMN-NTENSU-G1   OCCURS  38.
+                               13  SPA-H01GMN-NTENSU  PIC S9(08).
+      * 
+                   07  SPA-UPDFLG                     PIC X(01).
+                   07  SPA-HENFLG                     PIC X(01).
+      *
+               05  SPA-H01NAI-AREA.
+                   07  SPA-H01NAI-SRYYM     PIC 9(06). 
+                   07  SPA-H01NAI-KOUMOKU1.
+                       09  SPA-H01NAI-PTID      PIC 9(10).
+                       09  SPA-H01NAI-KOHSKY-FLG
+                                                PIC 9(01).
+                       09  SPA-H01NAI-HENREI-MSG
+                                                PIC 9(01).
+                       09  SPA-H01NAI-RECEDEN-MSG
+                                                PIC 9(01).
+                       09  SPA-H01NAI-JIBAI-PDF-MSG
+                                                PIC 9(01).
+                   07  SPA-H01NAI-KOUMOKU.
+                       09  SPA-H01NAI-SKYYM     PIC 9(06). 
+                       09  SPA-H01NAI-SKYYM-KOHSKY
+                                                PIC 9(06). 
+                       09  SPA-H01NAI-HENREIYM  PIC 9(06).
+                       09  SPA-H01NAI-HENREIYM-KOHSKY
+                                                PIC 9(06). 
+                       09  SPA-H01NAI-HENREIYM-OLD
+                                                PIC 9(06).
+                       09  SPA-H01NAI-SKYKBN-RECEDEN
+                                                PIC X(01).
+      *
+               05  SPA-RECE10-AREA. 
+                   07  SPA-RECE10-KEY. 
+                       09  SPA-RECE10-HOSPNUM  PIC  9(02).
+                       09  SPA-RECE10-SRYYM    PIC  9(06).
+                       09  SPA-RECE10-NYUGAIKBN
+                                               PIC  X(01).
+                       09  SPA-RECE10-PTID     PIC  9(10).
+                       09  SPA-RECE10-RECEKA   PIC  X(02).
+                       09  SPA-RECE10-TEISYUTUSAKI
+                                               PIC  9(01).
+                       09  SPA-RECE10-RECESYUBETU
+                                               PIC  X(04).
+                       09  SPA-RECE10-HKNJANUM PIC  X(08).
+                       09  SPA-RECE10-HOJOKBN  PIC  X(01).
+                       09  SPA-RECE10-KOHID-KEY
+                                               PIC  9(10).
+                       09  SPA-RECE10-TEKSTYMD PIC  X(08).
+                       09  SPA-RECE10-RECEIPT-KBN
+                                               PIC  X(10).
+                   07  SPA-RECE10-HKNNUM       PIC  X(03).
+                   07  SPA-RECE10-KIGO         PIC  X(80).
+                   07  SPA-RECE10-NUM          PIC  X(80).
+                   07  SPA-RECE10-FTNJANUM     PIC  X(08).
+                   07  SPA-RECE10-JKYSNUM      PIC  X(07).
+                   07  SPA-RECE10-SKYYM        PIC  X(06).
+                   07  SPA-RECE10-DISASTER     PIC 9(02).
+      *
+               05  SPA-SYS-1001-HOSPSBT1       PIC 9(01).
+      *
+               05  SPA-NAI-2009-SYUKA-SYAHO    PIC X(01).
+               05  SPA-NAI-2009-SYUKA-KOKUHO   PIC X(01).
+               05  SPA-NAI-2009-SYUKA-KOUIKI   PIC X(01).
+               05  SPA-NAI-2005-KKHRECEKBN     PIC X(01).
+               05  SPA-NAI-2005-SYARECEKBN     PIC X(01).
+               05  SPA-NAI-200501-KOUIKIRECEKBN
+                                               PIC X(01).
+               05  SPA-NAI-200501-ROURECEKBN   PIC X(01).
+               05  SPA-NAI-200501-RECEDEN-DISASTER
+                                               PIC X(01).
+               05  SPA-NAI-200501-JIBAI-PDF    PIC X(01).
+      *
+               05  SPA-NAI-4001-T.
+                   07  SPA-NAI-4001-OCC            OCCURS  100.
+                       09  SPA-NAI-4001-STYUKYMD   PIC X(08).
+                       09  SPA-NAI-4001-EDYUKYMD   PIC X(08).
+                       09  SPA-NAI-4001-RSIIRYOKBN PIC X(01).
+                   07  SPA-NAI-4001-MAX            PIC 9(03).
+               05  SPA-NAI-4001-RSIIRYOKBN-FLG     PIC 9(01).
+      *
+      *Ｈ０２画面
+           03  SPA-H02-AREA.
+               05  SPA-H02GMN-MAX             PIC 9(04).
+               05  SPA-H02GMN-CUR             PIC 9(03).
+      *
+               05  SPA-H02GMN-AREA.
+                   07  SPA-H02GMN-SELNUM      PIC 9(02).
+                   07  SPA-H02GMN-SELNUM-OLD  PIC 9(02).
+      *
+               05  SPA-H02GMN-LABEL           PIC X(10).
+               05  SPA-H02GMN-SYORIYM         PIC X(06).
+               05  SPA-H02GMN-NYUGAIKBN       PIC X(06).
+               05  SPA-H02GMN-RECESYUBETU     PIC X(10).
+               05  SPA-H02GMN-HKNJANUM        PIC X(14).
+               05  SPA-H02GMN-KIGO            PIC X(20).
+               05  SPA-H02GMN-ERR             PIC X(100).
+      *
+               05  SPA-H02GMN-TBL.
+                   07  SPA-H02GMN-G           OCCURS  30.
+                       09  SPA-H02GMN-TRENNUM      PIC 9(2).
+                       09  SPA-H02GMN-TSYORIYM     PIC X(7).
+                       09  SPA-H02GMN-TNYUGAIKBN   PIC X(2).
+                       09  SPA-H02GMN-TTEISYUTUSAKI2
+                                                   PIC X(2).
+                       09  SPA-H02GMN-TRECESYUBETU PIC X(10).
+                       09  SPA-H02GMN-THKNJANUM    PIC X(8).
+                       09  SPA-H02GMN-TKIGO        PIC X(20).
+                       09  SPA-H02GMN-TRECEIPT-KBN PIC X(4).
+                       09  SPA-H02GMN-TDISASTER    PIC X(2).
+                       09  SPA-H02GMN-TERR         PIC X(100).
+      *
+                       09  SPA-H02GMN-TS-MAKE-FLG  PIC X(2).
+                       09  SPA-H02GMN-TS-SKYYM     PIC X(6).
+                       09  SPA-H02GMN-TS-NYUGAIKBN PIC X(2).
+                       09  SPA-H02GMN-TS-KIGO      PIC X(20).
+                       09  SPA-H02GMN-TS-HOJOKBN-KEY
+                                                   PIC X(2).
+                       09  SPA-H02GMN-TS-HENREI-SIJI-FLG
+                                                   PIC X(2).
+                       09  SPA-H02GMN-TS-RECEIPT-KBN
+                                                   PIC X(4).
+                       09  SPA-H02GMN-TS-DISASTER  PIC X(2).
+                       09  SPA-H02GMN-TS-RECESYUBETU
+                                                   PIC X(10).
+      *
+               05  SPA-H02NAI-AREA.
+                   07  SPA-H02NAI-SELNUM           PIC 9(02).
+                   07  SPA-H02NAI-SELNUM-OLD       PIC 9(02).
+      *
+               05  SPA-H02NAI-TBL.
+                   07  SPA-H02NAI-G           OCCURS  30.
+                       09  SPA-H02NAI-TINDEX       PIC 9(02). 
+                       09  SPA-H02NAI-TSYORIYM     PIC 9(06).
+                       09  SPA-H02NAI-TNYUGAIKBN   PIC X(01).
+                       09  SPA-H02NAI-TTEISYUTUSAKI2
+                                                   PIC 9(01).
+                       09  SPA-H02NAI-TTEISYUTUSAKI
+                                                   PIC 9(01).
+                       09  SPA-H02NAI-TRECEIPT-NO  PIC X(06).
+      *
+                       09  SPA-H02NAI-TS-MAKE-FLG  PIC 9(01).
+                       09  SPA-H02NAI-TS-HENREI-SIJI-FLG
+                                                   PIC 9(01).
+      *
+                       09  SPA-H02NAI-TS-TEISYUTUSAKI
+                                                   PIC X(01).
+                       09  SPA-H02NAI-TS-NYUGAIKBN PIC X(01).
+                       09  SPA-H02NAI-TS-RECEKA    PIC X(02).
+                       09  SPA-H02NAI-TS-RECESYUBETU
+                                                   PIC X(04).
+                       09  SPA-H02NAI-TS-HKNJANUM  PIC X(08).
+                       09  SPA-H02NAI-TS-HOJOKBN-KEY
+                                                   PIC X(01).
+                       09  SPA-H02NAI-TS-KOHID-KEY PIC 9(10).
+                       09  SPA-H02NAI-TS-TEKSTYMD  PIC X(08).
+                       09  SPA-H02NAI-TS-RECEIPT-KBN
+                                                   PIC X(10).
+      *    Ｈ０３画面
+           03  SPA-H03-AREA.
+               05  SPA-GMN-H03-CUR                 PIC 9(02).
+      *
+               05  SPA-GMN-H03-AREA.
+                   07  SPA-GMN-H03-KANRI-TBL.
+                       09  SPA-GMN-H03-KANRI-G     OCCURS  100.
+                           11  SPA-GMN-H03-K-TSEQNUM   PIC 9(3).
+                           11  SPA-GMN-H03-K-TSYORIYM  PIC X(6).
+                           11  SPA-GMN-H03-K-TTEISYUTUSAKI
+                                                       PIC X(10).
+                           11  SPA-GMN-H03-K-TTEISYUTUSAKI2
+                                                       PIC X(2).
+                           11  SPA-GMN-H03-K-TCNT      PIC 9(4).
+                           11  SPA-GMN-H03-K-THOSPCD   PIC X(2).
+                           11  SPA-GMN-H03-K-TERRCD    PIC X(03).
+                           11  SPA-GMN-H03-K-TCREYMD   PIC X(9).
+                       09  SPA-GMN-H03-KANRI-MAX       PIC 9(03).
+      *
+                   07  SPA-GMN-H03-B-HYODAI            PIC X(14).
+                   07  SPA-GMN-H03-BODY-TBL.
+                       09  SPA-GMN-H03-BODY-G      OCCURS  100.
+                           11  SPA-GMN-H03-B-TSEQNUM   PIC 9(3).
+                           11  SPA-GMN-H03-B-TPTNUM    PIC X(20).
+                           11  SPA-GMN-H03-B-TNAME     PIC X(40).
+                           11  SPA-GMN-H03-B-TSRYYM    PIC X(6).
+                           11  SPA-GMN-H03-B-THKNJANUM PIC X(8).
+                           11  SPA-GMN-H03-B-TKIGO     PIC X(40).
+                           11  SPA-GMN-H03-B-TERR      PIC X(100).
+                           11  SPA-GMN-H03-B-TERRCD    PIC X(03).
+                       09  SPA-GMN-H03-BODY-MAX        PIC 9(04).
+      *
+                   07  SPA-GMN-H03-KOUMOKU.
+                       09  SPA-GMN-H03-SELNUM      PIC 9(04).
+      *
+               05  SPA-NAI-H03-AREA.
+                   07  SPA-NAI-H03-KANRI-TBL.
+                       09  SPA-NAI-H03-KANRI-G     OCCURS   100.
+                           11  SPA-NAI-H03-K-TSYORIYM  PIC 9(06).
+                           11  SPA-NAI-H03-K-TTEISYUTUSAKI
+                                                       PIC X(01).
+                           11  SPA-NAI-H03-K-TTEISYUTUSAKI2
+                                                       PIC X(01).
+                           11  SPA-NAI-H03-K-THOSPCD   PIC X(07).
+      *
+                   07  SPA-NAI-H03-BODY-TBL.
+                       09  SPA-NAI-H03-BODY-G      OCCURS  100.
+                           11  SPA-NAI-H03-B-TNYUGAIKBN
+                                                       PIC X(1).
+                           11  SPA-NAI-H03-B-TPTID     PIC 9(10).
+                           11  SPA-NAI-H03-B-TSRYYM    PIC X(6).
+                           11  SPA-NAI-H03-B-TRECESYUBETU
+                                                       PIC X(10).
+                           11  SPA-NAI-H03-B-TRECEIPT-KBN
+                                                       PIC X(4).
+                           11  SPA-NAI-H03-B-TDISASTER PIC X(2).
+                           11  SPA-NAI-H03-B-TERRFLG   PIC 9(1).
+      *
+                   07  SPA-NAI-H03-KOUMOKU.
+                       09  SPA-NAI-H03-SELNUM      PIC 9(04).
+      *
+      *Ｈ９９画面
+           03  SPA-H99GMN-AREA.
+               05  SPA-H99GMN-MAX             PIC 9(04).
+               05  SPA-H99GMN-PAGE            PIC 9(02).
+               05  SPA-H99GMN-CUR             PIC 9(03).
+      *
+               05  SPA-H99GMN-PTNUM           PIC X(20).
+               05  SPA-H99GMN-NAME            PIC X(24).
+               05  SPA-H99GMN-SRYYM           PIC X(07).
+               05  SPA-H99GMN-SRYKA           PIC X(02).
+               05  SPA-H99GMN-SRYKANAME       PIC X(18).
+               05  SPA-H99GMN-SELNUM          PIC 9(02).
+      *
+               05  SPA-H99GMN-TBL.
+                   07  SPA-H99GMN-G           OCCURS  50.
+                       09  SPA-H99GMN-TRENNUM     PIC X(2).
+                       09  SPA-H99GMN-TNYUGAIKBN  PIC X(6).
+                       09  SPA-H99GMN-TSRYKA      PIC X(10).
+                       09  SPA-H99GMN-TTEISYUTUSAKI
+                                                  PIC X(10).
+                       09  SPA-H99GMN-TRECESYUBETU
+                                                  PIC X(44).
+                       09  SPA-H99GMN-THKNJANUM   PIC X(14).
+                       09  SPA-H99GMN-THOJOKBN    PIC X(8).
+                       09  SPA-H99GMN-TKIGO       PIC X(20).
+                       09  SPA-H99GMN-TRECEIPT-KBN
+                                                  PIC X(10).
+                       09  SPA-H99GMN-TDISASTER   PIC X(2).
+                       09  SPA-H99GMN-TCREYMD     PIC X(9).
+      *
+               05  SPA-H99NAI-SRYYM           PIC 9(06).
+               05  SPA-H99NAI-PTID            PIC 9(10).
+      *
+               05 SPA-H99NAI-TBL.
+                   07  SPA-H99NAI-RECE10-KEY  OCCURS  50.
+                       09  SPA-H99NAI-RECE10-HOSPNUM PIC 9(02).
+                       09  SPA-H99NAI-RECE10-SRYYM   PIC 9(06).
+                       09  SPA-H99NAI-RECE10-NYUGAIKBN
+                                                     PIC X(01).
+                       09  SPA-H99NAI-RECE10-PTID    PIC 9(10).
+                       09  SPA-H99NAI-RECE10-RECEKA  PIC X(02).
+                       09  SPA-H99NAI-RECE10-TEISYUTUSAKI
+                                                     PIC 9(01).
+                       09  SPA-H99NAI-RECE10-RECESYUBETU
+                                                     PIC X(04).
+                       09  SPA-H99NAI-RECE10-HKNJANUM
+                                                     PIC X(08).
+                       09  SPA-H99NAI-RECE10-HOJOKBN PIC X(01).
+                       09  SPA-H99NAI-RECE10-KOHID-KEY
+                                                     PIC  9(10).
+                       09  SPA-H99NAI-RECE10-TEKSTYMD
+                                                     PIC X(08).
+                       09  SPA-H99NAI-RECE10-RECEIPT-KBN
+                                                     PIC X(10).
+                   07  SPA-H99NAI-SKYKBN-RECEDEN     PIC X(01)
+                                              OCCURS  50.

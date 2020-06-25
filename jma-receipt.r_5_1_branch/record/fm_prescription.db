@@ -1,0 +1,105 @@
+fm_prescription {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	data {
+		Form_ID				varchar(30);
+		Custom_ID				varchar(30);
+		Printer					varchar(20);
+		Order_Class			varchar(01);
+ 		Perform_Date		varchar(10);
+		IssuedDate			varchar(10);
+		Department_Code			varchar(02);
+		Department_Name			varchar(40);
+		EditPageNumber_Flg 		varchar(01);
+#--　分割調剤
+		Split_Count	 		varchar(01);
+		Split_Number	 		varchar(01);
+		Patient	{
+			ID	 				    varchar(20);
+			Name 				    varchar(50);
+			KanaName  			varchar(50);
+			BirthDate 			varchar(10);
+			Sex					    varchar(1);
+			Taboo           varchar(100)[2];
+			Allergy         varchar(100)[2];
+			Infection       varchar(100)[2];
+			Comment         varchar(100)[2];
+		};
+		Insurance_Combination_Information	{
+			Number									varchar(04);
+			InsuranceProvider_Class	varchar(03);
+			InsuranceProvider_Name	varchar(20);
+#--　保険年齢
+			HealthInsuredPerson_Age	varchar(03);
+#--　負担割合
+			HealthInsuredPerson_Rate	varchar(03);
+			HealthInsuredPerson_Rate_Class	varchar(01);
+			Partial_Cost_Payment_Class	varchar(01);
+			HealthInsurance_Information	 {
+				InsuranceProvider_Number						varchar(08);
+				HealthInsuredPerson_Symbol					varchar(80);
+				HealthInsuredPerson_Number					varchar(80);
+				HealthInsuredPerson_Branch_Number		varchar(2);
+				HealthInsuredPerson_Assistance			varchar(01);
+				RelationToInsuredPerson							varchar(01);
+				Certificate_StartDate								varchar(10);
+				Certificate_ExpiredDate							varchar(10);
+			};
+			PublicInsurance_Information		{
+					PublicInsurance_Class			varchar(03);
+					PublicInsurance_Name			varchar(20);
+					PublicInsurer_Number			varchar(08);
+					PublicInsuredPerson_Number	varchar(20);
+					Certificate_IssuedDate		varchar(10);
+					Certificate_ExpiredDate		varchar(10);
+			}[4];
+			Accident_Insurance_Information	{
+				Accident_Insurance_Class		varchar(01);
+				Accident_Insurance_Number 	varchar(14);
+				Accident_StartDate					varchar(10);
+				Accident_ExpiredDate				varchar(10);
+				Disease_Date								varchar(10);
+			};
+		};
+		Hospital	{
+			Prefectures_Number  varchar(2);
+			Code								varchar(7);
+			Name								varchar(120)[3];
+			ZipCode         		varchar(7);
+			Address							varchar(200)[3];
+			PhoneNumber					varchar(15);
+			FaxNumber					varchar(15);
+		};
+		Doctor	{
+			Code								varchar(5);
+			Name 								varchar(50);
+			KanaName 						varchar(50);
+			Drug_Permission_ID	varchar(15);
+		};
+		Check_Leftover_Class	varchar(1);
+		IncludingNarcotic_Flg	varchar(1);
+		IncludingUnchangeable_Flg	varchar(1);
+		Rp	{
+			Medical_Class		varchar(2);
+			Count				varchar(3);
+			Unit_Name			varchar(4);
+#--　分割総投与日数
+			Split_Total_Count	varchar(3);
+			Medication	{
+				Name				varchar(210);
+				Amount			varchar(12);
+				Unit_Name		varchar(12);
+				Code				varchar(9);
+				Generic_Flg	 varchar(1);
+				Generic_Code varchar(13);
+				Unchangeable_Flg	varchar(1);
+			}[50];
+		}[50];
+		Memo2						varchar(40)[4];
+		Memo						varchar(100)[50];
+		Qr_ID   					varchar(80);
+	};
+};
+

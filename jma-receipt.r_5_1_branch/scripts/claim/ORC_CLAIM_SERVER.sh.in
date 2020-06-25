@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+	if [ $# -ne 2 ] ; then
+	  echo "argument miss match"
+          exit 0
+	fi
+ORCASCRIPT=$ORCA_DIR/scripts/claim/rb
+#   orca_CLAIM_SERVER 
+  export COB_LIBRARY_PATH=.:/usr/lib/panda:"$ORCALIBDIR":/usr/lib/open-cobol
+  cd $ORCASCRIPT
+     %RUBY% clm_rcv.rb $1 
+#-------------------------------------------#
+# Add End
+#-------------------------------------------#
+
+        exit 

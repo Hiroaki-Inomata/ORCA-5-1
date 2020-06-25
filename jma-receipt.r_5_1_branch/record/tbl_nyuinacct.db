@@ -1,0 +1,1270 @@
+tbl_nyuinacct {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	SRYKBN				char(2);
+	ZAINUM				number(8,0);
+	ZAISKBKBN			char(1);
+	HKNCOMBI			number(4,0);
+	ZAITEN				number(8,0);
+	SRYCDTOTAL			number(14,0);
+	SURYOTOTAL			number(10,3);
+	MEISAISU			number(7,0);
+	ZAIKAISU			number(7,0);
+	SYUTEN1				number(7,0);
+	SYUTEN2				number(7,0);
+	YKZTEN				number(7,0);
+	KIZAITEN			number(7,0);
+	DRCD				char(5);
+	DAY_1				number(3,0);
+	DAY_2				number(3,0);
+	DAY_3				number(3,0);
+	DAY_4				number(3,0);
+	DAY_5				number(3,0);
+	DAY_6				number(3,0);
+	DAY_7				number(3,0);
+	DAY_8				number(3,0);
+	DAY_9				number(3,0); DAY_10				number(3,0);
+	DAY_11				number(3,0);
+	DAY_12				number(3,0);
+	DAY_13				number(3,0);
+	DAY_14				number(3,0);
+	DAY_15				number(3,0);
+	DAY_16				number(3,0);
+	DAY_17				number(3,0);
+	DAY_18				number(3,0);
+	DAY_19				number(3,0);
+	DAY_20				number(3,0);
+	DAY_21				number(3,0);
+	DAY_22				number(3,0);
+	DAY_23				number(3,0);
+	DAY_24				number(3,0);
+	DAY_25				number(3,0);
+	DAY_26				number(3,0);
+	DAY_27				number(3,0);
+	DAY_28				number(3,0);
+	DAY_29				number(3,0);
+	DAY_30				number(3,0);
+	DAY_31				number(3,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,SRYKA,SRYYM,SRYKBN,ZAINUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			ORDER   BY      SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			ORDER   BY      ZAINUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY      SRYYM,
+                                        SRYKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER   BY      SRYKBN
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,SRYKBN
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   SRYKA,
+                                    SRYKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAIKAISU    >   0
+			AND  (YKZTEN      >   0    OR
+		 	      SRYKBN      =   '95' OR
+		 	      SRYKBN      =   '96' )
+			ORDER  BY  SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key11 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			ORDER   BY      SRYKBN,
+                                        ZAISKBKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key12 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   SRYKBN,
+                                    ZAISKBKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key13 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYYM     =   :SRYYM
+			AND   ( ZAISKBKBN =   '1'   OR
+			        ZAISKBKBN =   '5'       )   
+			ORDER  BY   PTID,SRYKA,ZAISKBKBN
+		;
+	};
+};
+
+path	key14 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   '1'
+			AND     PTID        =   :PTID
+			AND     SRYYM       =   :SRYYM
+			AND   ( ZAISKBKBN   =   '1'   OR
+			        ZAISKBKBN   =   '5'       )   
+			ORDER  BY   SRYKA,ZAISKBKBN
+		;
+	};
+};
+
+path	key15 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			ORDER   BY      ZAISKBKBN,
+                                        ZAINUM
+		;
+	};
+};
+
+path	key16 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			ORDER  BY   ZAISKBKBN,
+                                    ZAINUM
+		;
+	};
+};
+
+path	key17 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   '1'
+			AND     PTID        =   :PTID
+			AND     SRYYM       =   :SRYYM
+			AND     ZAISKBKBN   =   :ZAISKBKBN
+			ORDER  BY   SRYKA,SRYCDTOTAL	
+		;
+	};
+};
+
+path	key18 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key18_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			ORDER  BY  PTID,
+			           ZAISKBKBN,
+			           HKNCOMBI,
+			           SRYKA,
+			           SRYKBN
+		;
+	};
+};
+
+path	key19 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   :NYUGAIKBN
+			AND     PTID        =   :PTID
+			AND     SRYYM      <=   :SRYYM
+			AND     ZAISKBKBN   =   :ZAISKBKBN
+			ORDER  BY   SRYYM   DESC
+		;
+	};
+};
+
+
+path	upd1 	{
+	DBUPDATE	{
+		UPDATE tbl_nyuinacct
+		SET
+	HOSPNUM				=	:HOSPNUM,
+	NYUGAIKBN			=	:NYUGAIKBN,
+	PTID				=	:PTID,
+	SRYKA				=	:SRYKA,
+	SRYYM				=	:SRYYM,
+	SRYKBN				=	:SRYKBN,
+	ZAINUM				=	:ZAINUM,
+	ZAISKBKBN			=	:ZAISKBKBN,
+	HKNCOMBI			=	:HKNCOMBI,
+	ZAITEN				=	:ZAITEN,
+	SRYCDTOTAL			=	:SRYCDTOTAL,
+	SURYOTOTAL			=	:SURYOTOTAL,
+	MEISAISU			=	:MEISAISU,
+	ZAIKAISU			=	:ZAIKAISU,
+	SYUTEN1				=	:SYUTEN1,
+	SYUTEN2				=	:SYUTEN2,
+	YKZTEN				=	:YKZTEN,
+	KIZAITEN			=	:KIZAITEN,
+	DRCD				=	:DRCD,
+	DAY_1				=	:DAY_1,
+	DAY_2				=	:DAY_2,
+	DAY_3				=	:DAY_3,
+	DAY_4				=	:DAY_4,
+	DAY_5				=	:DAY_5,
+	DAY_6				=	:DAY_6,
+	DAY_7				=	:DAY_7,
+	DAY_8				=	:DAY_8,
+	DAY_9				=	:DAY_9,
+	DAY_10				=	:DAY_10,
+	DAY_11				=	:DAY_11,
+	DAY_12				=	:DAY_12,
+	DAY_13				=	:DAY_13,
+	DAY_14				=	:DAY_14,
+	DAY_15				=	:DAY_15,
+	DAY_16				=	:DAY_16,
+	DAY_17				=	:DAY_17,
+	DAY_18				=	:DAY_18,
+	DAY_19				=	:DAY_19,
+	DAY_20				=	:DAY_20,
+	DAY_21				=	:DAY_21,
+	DAY_22				=	:DAY_22,
+	DAY_23				=	:DAY_23,
+	DAY_24				=	:DAY_24,
+	DAY_25				=	:DAY_25,
+	DAY_26				=	:DAY_26,
+	DAY_27				=	:DAY_27,
+	DAY_28				=	:DAY_28,
+	DAY_29				=	:DAY_29,
+	DAY_30				=	:DAY_30,
+	DAY_31				=	:DAY_31,
+	TERMID   			=	:TERMID,
+	OPID     			=	:OPID,
+	CREYMD   			=	:CREYMD,
+	UPYMD    			=	:UPYMD,
+	UPHMS				=	:UPHMS
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM    =   :SRYYM
+		;
+	};
+};
+
+#HOSPNUM,PTIDのみ取得
+path	key20 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key20_csr CURSOR FOR
+		SELECT HOSPNUM,PTID
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			GROUP  BY  HOSPNUM,PTID
+		;
+	};
+};
+
+path	key21 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key21_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_nyuinacct a join tbl_ptnum b using (HOSPNUM,ptid) 
+			WHERE a.HOSPNUM    =   :HOSPNUM
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYYM       >=  :SRYYM
+			ORDER BY b.PTNUM,A.SRYYM
+		;
+	};
+};
+
+path	key22	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  =   99999916
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key23	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999913
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key24	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key24_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >   :SRYYM
+            AND   ZAISKBKBN   =   '1'
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key25	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key25_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       <   :SRYYM
+			ORDER BY  SRYYM   DESC
+		;
+	};
+};
+
+path	key26	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key26_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '2'
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key27 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key27_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM       =   :SRYYM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   ZAISKBKBN   =   :ZAISKBKBN
+		;
+	};
+};
+
+path	key28	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key28_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999913
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+		;
+	};
+};
+
+path	key29	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key29_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND ((  ZAISKBKBN   =   '2'        ) OR
+                             (( ZAISKBKBN   =   '4'       ) AND
+                              ((SRYCDTOTAL  =    99999918) OR
+                               (SRYCDTOTAL  =    99999919) OR
+                               (SRYCDTOTAL  =    99999920) OR
+                               (SRYCDTOTAL  =   197000570))))           
+			ORDER  BY  ZAINUM
+		;
+	};
+};
+
+path	key30	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key30_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999918
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key31	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key31_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999919
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key32	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key32_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999920
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key33	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key33_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND  ((SRYCDTOTAL =    99999918) OR
+                              (SRYCDTOTAL =    99999919) OR
+                              (SRYCDTOTAL =    99999920))
+			ORDER  BY  ZAINUM
+		;
+	};
+};
+
+path	key34	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key34_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>   99999916
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key35	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key35_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>   99999916
+			AND   ZAIKAISU    >   0 
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key36 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key36_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>  99999916
+			ORDER  BY   SRYCDTOTAL
+		;
+	};
+};
+
+path	key37 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key37_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  =   99999916
+		;
+	};
+};
+
+path	key38 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key38_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   <>   '1'
+			ORDER  BY   ZAISKBKBN,
+                                    SRYCDTOTAL
+		;
+	};
+};
+
+path	key39 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key39_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>  99999916
+			ORDER  BY   ZAINUM
+		;
+	};
+};
+
+path	abort	{
+	DBSELECT	{
+		error
+ 		;
+	};
+};
+
+path	key40 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key40_csr CURSOR FOR
+		SELECT  *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+                        AND   ZAISKBKBN   =   '5'
+                        AND   SRYYM       >=  :SRYYM
+                        ORDER  BY   SRYYM
+		;
+	};
+};
+
+path	key41 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key41_csr CURSOR FOR
+		SELECT  *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+                        AND   ZAISKBKBN   =   '5'
+                        AND   SRYYM       >=  :SRYYM
+                        ORDER  BY   SRYYM,
+                                    PTID
+		;
+	};
+};
+
+path	key42 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key42_csr CURSOR FOR
+		SELECT  *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   ZAISKBKBN   =   :ZAISKBKBN
+                        AND   SRYYM       >=  :SRYYM
+                        AND   SRYYM       <=  :CREYMD
+		;
+	};
+};
+
+path	key43	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key43_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   197000570
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key44	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key44_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190134270
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key45	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key45_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190135670
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key46	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key46_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190135470
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key47	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key47_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190116990
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key48	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key48_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190143370
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key49	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key49_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190142970
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key50	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key50_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190152470
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key51	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key51_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+            AND   SRYYM       >=  :SRYYM
+            AND   SRYYM       <=  :CREYMD
+			ORDER  BY  SRYYM,ZAISKBKBN 
+		;
+	};
+};
+
+path	key52	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key52_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190177170
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key53	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key53_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>   99999916
+			ORDER  BY  PTID,HKNCOMBI,SRYKA,
+                                   ZAINUM
+		;
+	};
+};
+
+path	key54 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key54_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM     =   :HOSPNUM
+			AND     NYUGAIKBN   =   :NYUGAIKBN
+			AND     PTID        =   :PTID
+			AND     ZAISKBKBN   =   :ZAISKBKBN
+			ORDER  BY   SRYYM   DESC
+		;
+	};
+};
+
+path	key55 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key55_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   :NYUGAIKBN
+			AND     PTID        =   :PTID
+                        AND     ZAISKBKBN   =   '1'
+                        AND     SRYCDTOTAL  <>   99999916
+			AND     ZAIKAISU    >    0 
+			ORDER  BY   SRYYM   DESC
+		;
+	};
+};
+
+path	key56	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key56_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  =   :SRYCDTOTAL
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key57 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key57_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   ( CASE WHEN :PTID = 0 THEN TRUE ELSE (PTID = :PTID) END ) 
+			AND   ( SRYYM     =   :SRYYM )
+			AND   ( ZAISKBKBN =   '1'   OR
+			        ZAISKBKBN =   '5'       )   
+			ORDER  BY   PTID,SRYKA,ZAISKBKBN
+		;
+	};
+};
+
+
+path	key58 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key58_csr CURSOR FOR
+		SELECT a.PTID, max(a.SRYYM) as SRYYM
+		FROM tbl_nyuinacct a JOIN tbl_ptnum b using (HOSPNUM, PTID)
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   ( CASE WHEN :PTID = 0 THEN TRUE ELSE (PTID = :PTID) END ) 
+			AND     ZAISKBKBN =   '5'
+			AND   ( HOSPNUM, PTID )
+				 IN ( SELECT HOSPNUM, PTID
+			        FROM   tbl_ptnyuinrrk
+		          WHERE  RRKEDANUM = 1
+		          AND  ( TAIINYMD  = '99999999' OR :UPYMD = '99999999')
+			      AND	 JTIKBN	NOT IN ('5','6')
+                  )
+		  GROUP  BY  a.PTID, b.PTNUM
+			ORDER  BY  max(a.SRYYM), b.PTNUM
+		;
+	};
+};
+
+path	key59 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key59_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYKBN      =   :SRYKBN
+			AND   ZAISKBKBN   =   :ZAISKBKBN
+			AND   SRYCDTOTAL  =   :SRYCDTOTAL
+		;
+	};
+};
+
+path	key60	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key60_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190201870
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key61	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key61_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '6'
+                        AND   SRYCDTOTAL  =   190212470
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key62 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key62_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   '1'
+			AND     PTID        =   :PTID
+			AND     SRYYM       =   :SRYYM
+			AND     ZAISKBKBN   =   :ZAISKBKBN
+			ORDER  BY  (SRYCDTOTAL = :SRYCDTOTAL) DESC
+		;
+	};
+};
+
+path	key63	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key63_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999918
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key64	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key64_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999919
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key65	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key65_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   PTID        =   :PTID
+			AND   SRYYM       >   :SRYYM
+                        AND   ZAISKBKBN   =   '4'
+                        AND   SRYCDTOTAL  =   99999920
+			ORDER  BY  SRYYM
+		;
+	};
+};
+
+path	key66	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key66_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   NYUGAIKBN   =   '1'
+			AND   SRYYM       >=  :SRYYM
+                        AND   ZAISKBKBN   =   '1'
+                        AND   SRYCDTOTAL  <>   99999916
+			ORDER  BY  PTID,SRYYM,SRYKBN,ZAINUM
+		;
+	};
+};
+
+path	key67 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key67_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     NYUGAIKBN   =   '1'
+			AND     PTID        =   :PTID
+			AND     SRYYM       =   :SRYYM
+			AND   ( ZAISKBKBN   =   '1'   OR
+			        ZAISKBKBN   =   '4'   OR      
+			        ZAISKBKBN   =   '5'       )   
+			ORDER  BY   SRYKA,ZAISKBKBN
+		;
+	};
+};
+
+path	key68 	{
+	DBSELECT	{
+		DECLARE tbl_nyuinacct_key68_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinacct
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       BETWEEN :SRYYM AND :CREYMD
+	        AND   ZAISKBKBN	  =   :ZAISKBKBN
+			ORDER  BY   SRYKA,SRYKBN,ZAINUM
+		;
+	};
+};
+

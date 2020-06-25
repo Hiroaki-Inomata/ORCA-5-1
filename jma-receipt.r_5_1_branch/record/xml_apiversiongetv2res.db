@@ -1,0 +1,19 @@
+xml_apiversiongetv2req {
+  context         int;
+  object          object;
+  mode            int;
+  recordname      varchar(128);
+  apiversiongetv2res {
+     Information_Date      varchar(10);
+     Information_Time      varchar(8);
+     Api_Result            varchar(4);
+     Api_Result_Message    varchar(100);
+     Api_Information{
+       Api_Url             varchar(64);
+       Api_Name            varchar(64);
+       Api_Version         varchar(16);
+       Haori_Name          varchar(64);
+	 }[200];
+  };
+};
+

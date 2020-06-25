@@ -1,0 +1,55 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+SUBDIRS = bin lib etc screen form record lddef cobol scripts init data doc tools
+
+all filecheck clean:
+	@failcom='exit 1'; \
+	for f in x $$MAKEFLAGS; do \
+	  case $$f in \
+	    *=* | --[!k]*);; \
+	    *k*) failcom='fail=yes';; \
+	  esac; \
+	done; \
+	for i in $(SUBDIRS); \
+	  do $(MAKE) -C $$i $@ || eval $$failcom; \
+	done
+
+distclean: 
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i distclean; done
+	-rm -f Makefile Makefile.directories
+	-rm -f config.cache config.log config.status
+
+VERSION=@VERSION@
+PACKAGE=@PACKAGE@
+
+distdir=$(PACKAGE)-$(VERSION)
+
+dist: $(distdir).tar.gz
+	-rm -rf $(distdir)
+
+$(distdir).tar.gz: distdir
+	tar czf $@ $(distdir)
+
+distdir:
+	-rm -rf $(distdir)
+	for x in `cd $(top_srcdir) && find . -name CVS -prune -o -print`; do \
+	  file=`expr X$$x : 'X\./\(.*\)'`; \
+	  if test -d "$(top_srcdir)/$$file" ; then \
+	    mkdir "$(distdir)/$$file" && chmod 777 "$(distdir)/$$file";	\
+	  else \
+	    ln "$(top_srcdir)/$$file" "$(distdir)/$$file" >/dev/null 2>&1 \
+	      || cp "$(top_srcdir)/$$file" "$(distdir)/$$file"; \
+	  fi || exit; \
+	done
+
+	make -C $(distdir) distclean
+
+snapshot:
+	$(MAKE) dist distdir=$(PACKAGE)-`date +"%Y%m%d"`
+
+install installdirs:
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
+
+install-copys install-copydirs: 
+	$(MAKE) -C cobol $@

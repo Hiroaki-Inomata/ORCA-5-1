@@ -1,0 +1,45 @@
+tbl_sysbase {
+	GRPNUM		number(2,0);
+	HOSPNUM		number(2,0);
+	HOSPNAME	char(120);
+	KIGEN		char(8);
+	HONBUNGRP	number(2,0);
+	HONBUNKBN	char(1);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+};
+primary	{
+	GRPNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sysbase_key_csr CURSOR FOR
+		SELECT	*
+		FROM	tbl_sysbase
+		WHERE	HOSPNUM		=	:HOSPNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sysbase_all_csr CURSOR FOR
+		SELECT	*
+		FROM	tbl_sysbase
+		ORDER	BY	HOSPNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sysbase_key2_csr CURSOR FOR
+		SELECT	*
+		FROM	tbl_sysbase
+		WHERE	HONBUNGRP	=	:HONBUNGRP
+			ORDER   BY        HOSPNUM
+		;
+	};
+};

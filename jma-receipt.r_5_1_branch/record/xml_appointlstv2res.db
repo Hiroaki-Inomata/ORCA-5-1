@@ -1,0 +1,34 @@
+xml_appointlstv2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	appointlstres {
+        Information_Date					varchar(10);
+        Information_Time					varchar(8);
+        Api_Result						varchar(2);
+        Api_Result_Message					varchar(100);
+        Reskey							varchar(100);
+        Appointment_Date					varchar(10);
+	Appointlst_Information {
+        	Appointment_Time				varchar(08);
+		Medical_Information				varchar(02);
+        	Department_Code					varchar(2);
+        	Department_WholeName				varchar(80);
+        	Physician_Code					varchar(5);
+        	Physician_WholeName				varchar(80);
+        	Visit_Information				varchar(1);
+	        Appointment_Id					varchar(2);
+		Patient_Information {
+        		Patient_ID				varchar(20);
+        		WholeName				varchar(100);
+        		WholeName_inKana			varchar(100);
+        		BirthDate				varchar(10);
+        		Sex					varchar(1);
+        		Home_Address_Information    {
+           		 	PhoneNumber1			varchar(15);
+        		};
+        	};
+        	} [500];
+    	};
+};

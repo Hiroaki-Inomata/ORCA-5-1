@@ -1,0 +1,57 @@
+tbl_srycdchg_org {
+	HOSPNUM			number(2,0);
+	IPNSRYCD   		char(9);
+	RJNSRYCD  		char(9);
+	TERMID  		varchar(16);
+	OPID    		varchar(16);
+	CREYMD  		char(8);
+	UPYMD   		char(8);
+	UPHMS			char(6);
+};
+primary	{
+	HOSPNUM,IPNSRYCD,RJNSRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_org_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srycdchg_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   IPNSRYCD  =   :IPNSRYCD
+			AND   RJNSRYCD    =   :RJNSRYCD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_org_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srycdchg_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   IPNSRYCD  =   :IPNSRYCD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_org_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srycdchg_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   RJNSRYCD  =   :RJNSRYCD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_srycdchg_org_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_srycdchg_org
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};

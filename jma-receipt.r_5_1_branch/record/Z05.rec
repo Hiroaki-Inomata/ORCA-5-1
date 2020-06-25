@@ -1,0 +1,187 @@
+Z05 {
+  fixed7 {
+    JGNAGE {
+      textdata varchar(2);
+    };
+    KGNAGE {
+      textdata varchar(2);
+    };
+    SRYCDH {
+      textdata varchar(9);
+    };
+    NAMEH {
+      textdata varchar(100);
+    };
+    YUKOSTYMDH {
+      textdata varchar(9);
+    };
+    YUKOEDYMDH {
+      textdata varchar(9);
+    };
+    KANANAME {
+      textdata varchar(100);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    TEN {
+      numdata number(10,2);
+    };
+    OLDTEN {
+      numdata number(10,2);
+    };
+    YUKOSTYMD {
+      textdata varchar(10);
+    };
+    YUKOEDYMD {
+      textdata varchar(10);
+    };
+    JGNTEN {
+      numdata number(7);
+    };
+    KOUHYOJYUNNUM {
+      numdata number(9);
+    };
+    FORMALNAME {
+      textdata varchar(200);
+    };
+    SHONAME {
+      textdata varchar(200);
+    };
+    TENSIKIBETUCOB {
+      TENSIKIBETU {
+        textdata varchar(26);
+      };
+      count int;
+        item varchar(26)[7];
+    };
+    OLDTENSKBCOB {
+      OLDTENSKB {
+        textdata varchar(26);
+      };
+      count int;
+        item varchar(26)[7];
+    };
+    TANICDCOB {
+      TANICD {
+        textdata varchar(28);
+      };
+      count int;
+        item varchar(28)[200];
+    };
+    MEIUSESKBCOB {
+      MEIUSESKB {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[3];
+    };
+    TOKUKIZAIAGEKSNKBNCOB {
+      TOKUKIZAIAGEKSNKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[2];
+    };
+    DATAKBNCOB {
+      DATAKBN {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[3];
+    };
+    TOKUKIZAISBT1COB {
+      TOKUKIZAISBT1 {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[4];
+    };
+    TOKUKIZAISBT2COB {
+      TOKUKIZAISBT2 {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[2];
+    };
+    SANSOKBNCOB {
+      SANSOKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[7];
+    };
+    KEIKASOCHIYMD {
+      textdata varchar(10);
+    };
+    CDKBN_BU {
+      textdata varchar(2);
+    };
+    CDKBN_KBNNUM {
+      textdata varchar(3);
+    };
+    COPYCD {
+      state int;
+      textdata varchar(9);
+    };
+    B06 {
+      state int;
+      label varchar(10);
+    };
+    B09 {
+      state int;
+      label varchar(10);
+    };
+    B03 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    SELNUM    {
+      numdata number(3);
+    };
+    scrolledwindow1 { #GtkScrolledWindow
+      PRICELIST { #GtkPandaCList
+        count int;
+        row int;
+        selectdata bool[50];
+        fgcolor varchar(20)[50];
+        bgcolor varchar(20)[50];
+        item {
+          column1 varchar(3);
+          column2 varchar(10);
+          column3 varchar(10);
+          column4 varchar(12);
+        }[50];
+      };
+    };
+    PRCYUKOSTYMD { #GtkPandaEntry
+      textdata varchar(10);
+    };
+    PRCYUKOEDYMD { #GtkPandaEntry
+      textdata varchar(10);
+    };
+    PRICE { 
+      textdata varchar(12);
+    };
+    BS03 { #GtkButton
+      state int;
+    };
+    BS12 { #GtkButton
+      state int;
+    };
+    PRICEMSG { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    USER_TANICD { #GtkPandaEntry
+      style varchar(20);
+      textdata varchar(28);
+    };
+  };
+};

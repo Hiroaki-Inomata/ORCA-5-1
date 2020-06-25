@@ -1,0 +1,73 @@
+tbl_toukeicsv_b	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			char(8);
+	RENNUM			number(4);
+	TBL_GROUP		char(14);
+	SHORI_RENNUM		number(4);
+	SHELLID			varchar(20);
+	SRYYM			varchar(6);
+	SRYYMD			varchar(8);
+	PTID			number(10);
+	SEQ_NO			number(8);
+	CSVDATA			varchar(20000);
+	CREYMD			varchar(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM,SEQ_NO;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeicsv_b_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeicsv_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		AND	SEQ_NO		=	:SEQ_NO
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_toukeicsv_b_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeicsv_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		ORDER	 BY	SEQ_NO 
+		;
+	};
+};
+
+path    del1   {
+	DBDELETE        {
+		DELETE
+		FROM tbl_toukeicsv_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_toukeicsv_b_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_toukeicsv_b
+		WHERE 	HOSPNUM		=	 :HOSPNUM
+		;
+	};
+};

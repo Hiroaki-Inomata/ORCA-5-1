@@ -1,0 +1,7 @@
+---
+:root: /var/lib/jma-receipt/plugin
+:list:
+ - http://ftp.orca.med.or.jp/pub/receipt/plugin/@VERSION@/jpplist1.yml
+ - http://ftp.orca.med.or.jp/pub/receipt/plugin/@VERSION@/jpplist2.yml
+:linkprefix: /usr/local/site-jma-receipt
+:verify: true

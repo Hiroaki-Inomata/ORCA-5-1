@@ -1,0 +1,54 @@
+kanri_cd    : "1045"
+name        : "予約・受付機能情報"
+class_cd    : "*"
+item_max    : 8
+item_list   :
+- item_no   : 1
+  item      : "INIT-DRCD"
+  item_jp   : "初期表示ドクター"
+  type      : "X"
+  start     : 1
+  length    : 5
+- item_no   : 2
+  item      : "YYKINIT-FLG"
+  item_jp   : "予約一覧の初期表示"
+  type      : "X"
+  start     : 6
+  length    : 1
+- item_no   : 3
+  item      : "YYKMAXCNT"
+  item_jp   : "予約枠件数"
+  type      : "9"
+  start     : 7
+  length    : 2
+  precision : 0
+- item_no   : 4
+  item      : "YYKHYO-KBN"
+  item_jp   : "予約票発行区分"
+  type      : "X"
+  start     : 9
+  length    : 1
+- item_no   : 5
+  item      : "YYKPTNUM-KBN"
+  item_jp   : "患者番号連動"
+  type      : "X"
+  start     : 10
+  length    : 1
+- item_no   : 6
+  item      : "YYKUKE-KBN"
+  item_jp   : "予約・受付番号連動区分"
+  type      : "X"
+  start     : 11
+  length    : 1
+- item_no   : 7
+  item      : "UKEHKNCHK-KBN"
+  item_jp   : "保険組合せ設定区分"
+  type      : "X"
+  start     : 12
+  length    : 1
+- item_no   : 8
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 13
+  length    : 488

@@ -1,0 +1,101 @@
+tbl_preview	{
+	HOSPNUM				number(2,0);
+	TBL_KEY			char(8);
+	RENNUM			number(4);
+	TBL_GROUP		char(14);
+	SHORI_RENNUM		number(4);
+	SHELLID			varchar(20);
+	PRTID			varchar(20);
+	SRYYM			varchar(06);
+	SKYYMD  		varchar(08);
+	PTID	   		number(10);
+	PAGE	   		number(5);
+	PRTNM	  		varchar(16);
+	PRTDATA			varchar(100000);
+	TERMID			varchar(64);
+	OPID			varchar(16);
+	CREYMD			varchar(08);
+	UPYMD			varchar(08);
+	UPHMS			varchar(06);
+#-----> 検索用項目
+	STPAGE			number(5),virtual;
+	EDPAGE			number(5),virtual;
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,SHORI_RENNUM,PAGE;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_preview_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_preview
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY	=	:TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         =   :PAGE 
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_preview_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_preview
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    ORDER BY  RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_preview_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         >=  :STPAGE
+                    AND     PAGE         <=  :EDPAGE
+                    ORDER BY PAGE    
+		;
+	};
+};
+
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_preview
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+		;
+	};
+};
+
+path	del12	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_preview
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+		;
+	};
+};
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_preview_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_preview
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};

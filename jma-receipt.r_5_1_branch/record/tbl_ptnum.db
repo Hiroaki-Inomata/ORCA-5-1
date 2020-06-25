@@ -1,0 +1,124 @@
+tbl_ptnum {
+	HOSPNUM		    number(2,0);
+	PTID		    number(10);
+	PTNUM		    char(20);
+	HKNID		    number(10);
+	KOHID		    number(10);
+	AUTOCOMBINUM    number(4);
+	MANUCOMBINUM	number(4);
+	TSTPTNUMKBN	    char(1);
+	TERMID		    varchar(16);
+	OPID		    varchar(16);
+	CREYMD		    char(8);
+	UPYMD		    char(8);
+	UPHMS		    char(6);
+};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE   HOSPNUM        =   :HOSPNUM  AND
+					PTID          =   :PTID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE  (HOSPNUM       =   :HOSPNUM)  AND
+			(PTNUM      LIKE  :PTNUM)
+		;
+	};
+};
+
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE   (HOSPNUM       =   :HOSPNUM)  AND
+		        	(PTNUM       >= :PTNUM)
+			ORDER  BY  PTNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptnum
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE  HOSPNUM       =   :HOSPNUM
+			AND    PTNUM        =   :PTNUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE  HOSPNUM       =   :HOSPNUM
+			AND    CREYMD LIKE :CREYMD
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE  HOSPNUM       =   :HOSPNUM
+			AND  ( CREYMD        >=  :CREYMD
+			  OR   UPYMD         >=  :UPYMD )
+			ORDER  BY  UPYMD,
+				   UPHMS,
+				   CREYMD,
+				   PTNUM
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_ptnum_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptnum
+			WHERE  HOSPNUM       =   :HOSPNUM
+			AND    CREYMD        >=  :CREYMD
+			ORDER  BY  CREYMD,
+				   PTNUM
+		;
+	};
+};

@@ -1,0 +1,125 @@
+kanri_cd    : "2005"
+name        : "•Ï•ª•◊•» ‘Ω∏∂Ë ¨"
+class_cd    : "05"
+item_max    : 20
+item_list   :
+- item_no   : 1
+  item      : "HKNJANUM1"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£±"
+  type      : "X"
+  start     : 1
+  length    : 8
+- item_no   : 2
+  item      : "HKNJANUM-631"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£±"
+  type      : "X"
+  start     : 9
+  length    : 8
+- item_no   : 3
+  item      : "HKNJANUM2"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£≤"
+  type      : "X"
+  start     : 17
+  length    : 8
+- item_no   : 4
+  item      : "HKNJANUM-632"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£≤"
+  type      : "X"
+  start     : 25
+  length    : 8
+- item_no   : 5
+  item      : "HKNJANUM3"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£≥"
+  type      : "X"
+  start     : 33
+  length    : 8
+- item_no   : 6
+  item      : "HKNJANUM-633"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£≥"
+  type      : "X"
+  start     : 41
+  length    : 8
+- item_no   : 7
+  item      : "HKNJANUM4"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£¥"
+  type      : "X"
+  start     : 49
+  length    : 8
+- item_no   : 8
+  item      : "HKNJANUM-634"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£¥"
+  type      : "X"
+  start     : 57
+  length    : 8
+- item_no   : 9
+  item      : "HKNJANUM5"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£µ"
+  type      : "X"
+  start     : 65
+  length    : 8
+- item_no   : 10
+  item      : "HKNJANUM-635"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£µ"
+  type      : "X"
+  start     : 73
+  length    : 8
+- item_no   : 11
+  item      : "HKNJANUM6"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∂"
+  type      : "X"
+  start     : 81
+  length    : 8
+- item_no   : 12
+  item      : "HKNJANUM-636"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∂"
+  type      : "X"
+  start     : 89
+  length    : 8
+- item_no   : 13
+  item      : "HKNJANUM7"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∑"
+  type      : "X"
+  start     : 97
+  length    : 8
+- item_no   : 14
+  item      : "HKNJANUM-637"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∑"
+  type      : "X"
+  start     : 105
+  length    : 8
+- item_no   : 15
+  item      : "HKNJANUM8"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∏"
+  type      : "X"
+  start     : 113
+  length    : 8
+- item_no   : 16
+  item      : "HKNJANUM-638"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£∏"
+  type      : "X"
+  start     : 121
+  length    : 8
+- item_no   : 17
+  item      : "HKNJANUM9"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£π"
+  type      : "X"
+  start     : 129
+  length    : 8
+- item_no   : 18
+  item      : "HKNJANUM-639"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£π"
+  type      : "X"
+  start     : 137
+  length    : 8
+- item_no   : 19
+  item      : "HKNJANUM10"
+  item_jp   : "∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£±£∞"
+  type      : "X"
+  start     : 145
+  length    : 8
+- item_no   : 20
+  item      : "HKNJANUM-6310"
+  item_jp   : "∆√ƒÍ∑ÚπØ ›∏±¡»πÁ§Œ ›∏±º‘»÷πÊ£±£∞"
+  type      : "X"
+  start     : 153
+  length    : 8

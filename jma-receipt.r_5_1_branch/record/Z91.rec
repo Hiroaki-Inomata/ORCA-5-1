@@ -1,0 +1,126 @@
+Z91 {
+  fixed2 {
+    B11 {
+      state int;
+    };
+    SRYCHK {
+      isactive bool;
+    };
+    SRY1 {
+      isactive bool;
+    };
+    SRY2 {
+      isactive bool;
+    };
+    SRYSTRCOMBO {
+      SRYSTR {
+        textdata varchar(17);
+      };
+      state int;
+      count int;
+        item varchar(17)[14];
+    };
+    SRYENDCOMBO {
+      SRYEND {
+        textdata varchar(17);
+      };
+      state int;
+      count int;
+        item varchar(17)[14];
+    };
+    IYKCHKALL {
+      isactive bool;
+    };
+    IPNCHKALL {
+      isactive bool;
+    };
+    IYKCHK1 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK2 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK3 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK4 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK5 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK6 {
+      isactive bool;
+      state int;
+    };
+    IYKCHK7 {
+      isactive bool;
+      state int;
+    };
+    TOKCHK {
+      isactive bool;
+    };
+    HOKACHK {
+      isactive bool;
+    };
+    KZICHK {
+      isactive bool;
+    };
+    COMCHKALL {
+      isactive bool;
+    };
+    COMCHK1 {
+      isactive bool;
+    };
+    COMCHK2 {
+      isactive bool;
+    };
+    COMCHK3 {
+      isactive bool;
+    };
+    JIHCHK {
+      isactive bool;
+    };
+    MSTYMD {
+      textdata varchar(10);
+    };
+    KEI1 {
+      isactive bool;
+    };
+    KEI2 {
+      isactive bool;
+    };
+    CYU1 {
+      isactive bool;
+      state int;
+    };
+    CYU2 {
+      isactive bool;
+    };
+    CYU3 {
+      isactive bool;
+    };
+    IPN {
+      isactive bool;
+      state int;
+    };
+    SYU1 {
+      isactive bool;
+    };
+    SYU2 {
+      isactive bool;
+    };
+    SYU3 {
+      isactive bool;
+    };
+    SYU4 {
+      isactive bool;
+      state int;
+    };
+  };
+};

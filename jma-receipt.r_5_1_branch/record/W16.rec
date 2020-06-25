@@ -1,0 +1,130 @@
+W16 {
+  fixed6 {
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    KBNNUM01 {
+      numdata number(2);
+    };
+    KBNNUM02 {
+      numdata number(2);
+    };
+    KBNNUM03 {
+      numdata number(2);
+    };
+    KBNNUM04 {
+      numdata number(2);
+    };
+    KBNNUM05 {
+      numdata number(2);
+    };
+    KBNNUM06 {
+      numdata number(2);
+    };
+    KBNNUM07 {
+      numdata number(2);
+    };
+    KBNNUM08 {
+      numdata number(2);
+    };
+    KBNNUM09 {
+      numdata number(2);
+    };
+    KBNNUM10 {
+      numdata number(2);
+    };
+    KBNNUM11 {
+      numdata number(2);
+    };
+    KBNNUM12 {
+      numdata number(2);
+    };
+    KBNNUM13 {
+      numdata number(2);
+    };
+    KBNNUM14 {
+      numdata number(2);
+    };
+    KBNNUM15 {
+      numdata number(2);
+    };
+    KBNNUM16 {
+      numdata number(2);
+    };
+    KBNNUM17 {
+      numdata number(2);
+    };
+    KBNNUM18 {
+      numdata number(2);
+    };
+    KBNNUM19 {
+      numdata number(2);
+    };
+    KBNNUM20 {
+      numdata number(2);
+    };
+    BUNRUIMEI01 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI02 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI03 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI04 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI05 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI06 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI07 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI08 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI09 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI10 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI11 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI12 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI13 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI14 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI15 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI16 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI17 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI18 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI19 {
+      textdata varchar(40);
+    };
+    BUNRUIMEI20 {
+      textdata varchar(40);
+    };
+  };
+};

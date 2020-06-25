@@ -1,0 +1,114 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *    医療機関情報ー入院基本画面ＳＰＡ    (SPA-FREE の内容)
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+       01  SPA-W10FREE.
+         02  SPA-W10.
+           03  SPA-W10-AREA.
+      *
+               05  SPA-GMN-W10-PAGE                PIC 9(02).
+               05  SPA-GMN-W10-LINE                PIC 9(02).
+               05  SPA-GMN-W10-MAX                 PIC 9(03).
+               05  SPA-GMN-W10-CUR                 PIC 9(03).
+      *
+               05  SPA-W10-STYUKYMD                PIC X(08).
+               05  SPA-W10-EDYUKYMD                PIC X(08).
+               05  SPA-W10-STYUKYMDH               PIC X(09).
+               05  SPA-W10-EDYUKYMDH               PIC X(09).
+      *
+               05  SPA-W10-SELNUM                  PIC 9(03).
+               05  SPA-W10-PRGNAME                 PIC X(24).
+               05  SPA-W10-SEL-STYUKYMD            PIC X(08).
+               05  SPA-W10-SEL-EDYUKYMD            PIC X(08).
+      *
+               05  SPA-W10-KANRICD                 PIC X(04).
+               05  SPA-W10-KANRICD2                 PIC X(04).
+               05  SPA-W10-KBNCD                   PIC X(08).
+               05  SPA-W10-MODE                    PIC 9(01).
+               05  SPA-W10-CUSTOM-ENABLED          PIC X(01).
+               05  SPA-W10-PARA-MAX                PIC 9(03).
+      *
+               05  SPA-GMN-W10-AREA.
+                   07  SPA-GMN-W10-STYUKYMD        PIC X(09).
+                   07  SPA-GMN-W10-EDYUKYMD        PIC X(09).
+                   07  SPA-GMN-W10-PARA-AREA.
+                       09  SPA-GMN-W10-HCNUM       PIC 9(03).
+                       09  SPA-GMN-W10-CHK-SAVEPARA PIC X(1).
+                       09  SPA-GMN-W10-HCNAME      PIC X(80).
+                       09  SPA-GMN-W10-PRGNAME     PIC X(24).
+                       09  SPA-GMN-W10-REPOS-NAME  PIC X(256).
+                       09  SPA-GMN-W10-PARA-G      OCCURS  10.
+                           11  SPA-GMN-W10-PARAHYOJI
+                                                   PIC X(20).
+                           11  SPA-GMN-W10-PARA    PIC X(10).
+                       09  SPA-GMN-W10-OPTHISSU-KBN-G
+                                                   OCCURS  10.
+                           11  SPA-GMN-W10-OPTHISSU
+                                                   PIC X(01).
+                           11  SPA-GMN-W10-OPTNINI
+                                                   PIC X(01).
+                       09  SPA-GMN-W10-MEMO        PIC X(6000).
+      *
+               05  SPA-NAI-W10-AREA.
+                   07  SPA-NAI-W10-STYUKYMD        PIC 9(08).
+                   07  SPA-NAI-W10-EDYUKYMD        PIC 9(08).
+                   07  SPA-NAI-W10-B08-CNT         PIC 9(02).
+                   07  SPA-NAI-W10-B11-CNT         PIC 9(02).
+                   07  SPA-NAI-W10-W19-SENI-FLG    PIC 9(01).
+         02  SPA-W19.
+           03  SPA-W19-AREA.
+               05  SPA-GMN-W19-CUR                 PIC 9(03).
+      *
+               05  SPA-GMN-W19-AREA.
+                   07  SPA-GMN-W19-SELNUM          PIC 9(03).
+                   07  SPA-GMN-W19-TYOHYOKBN-G.
+                       09  SPA-GMN-W19-TYOHYOKBN   PIC X(01).
+                       09  SPA-GMN-W19-TYOHYOKBNFL PIC X(01).
+                       09  SPA-GMN-W19-TYOHYOKBNMEI
+                                                   PIC X(20).
+                   07  SPA-GMN-W19-TYOHYOKBNLST-G.
+                       09  SPA-GMN-W19-TYOHYOKBN-MAX
+                                                   PIC 9(03).
+                       09  SPA-GMN-W19-TYOHYOKBNLST
+                                                   OCCURS  2.
+                           11  SPA-GMN-W19-TYOHYOKBNL
+                                                   PIC X(01).
+                           11  SPA-GMN-W19-TYOHYOKBNFLL
+                                                   PIC X(01).
+                           11  SPA-GMN-W19-TYOHYOKBNMEIL
+                                                   PIC X(20).
+      *
+               05  SPA-GMN-W19-TYOHYOLST-AREA.
+                   07  SPA-GMN-W19-TYOHYOLST-MAX   PIC 9(05).
+                   07  SPA-GMN-W19-TYOHYOLST-SEL   PIC 9(05).
+                   07  SPA-GMN-W19-TYOHYOLST-OCC   OCCURS  200.
+                       09  SPA-GMN-W19-TNUM        PIC 9(03).
+                       09  SPA-GMN-W19-THCNAME     PIC X(80).
+                       09  SPA-GMN-W19-TPRGNAME    PIC X(20).
+                       09  SPA-GMN-W19-TSTATUS     PIC 9(01).
+               05  SPA-NAI-W19-AREA.
+                   07  SPA-NAI-W19-RET             PIC 9(01).
+                   07  SPA-NAI-W19-KANRICD         PIC X(04).
+                   07  SPA-NAI-W19-KBNCD           PIC X(08).
+               05  SPA-NAI-W19-TYOHYOLST-AREA.
+                   07  SPA-NAI-W19-TYOHOLST-OCC    OCCURS  200.
+                       09  SPA-NAI-W19-TKANRICD    PIC X(04).
+                       09  SPA-NAI-W19-TKBNCD      PIC X(08).

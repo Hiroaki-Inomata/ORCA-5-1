@@ -1,0 +1,56 @@
+xml_hsptinfmodv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	private_objects {
+		Save_Request	varchar(1);
+		Request_Number	varchar(2);
+		Force_Update		varchar(5);
+		Patient_ID		varchar(20);
+		Admission_Date		varchar(10);
+		Update_Date			varchar(10);
+		Discharge_Date		varchar(10);
+		Discharge_Reason	varchar(02);
+		Ward_Number			varchar(02);
+		Room_Number			varchar(06);
+		Room_Charge			varchar(07);
+		Over180days_Hospital_Stay varchar(01);
+		Department_Code		varchar(02);
+		Last_Admission_Date	varchar(10);
+		From_Nursing_Care	varchar(01);
+		Doctor_Code			varchar(05)[3];
+		HealthInsurance_Information  {
+			Insurance_Combination_Number_Temporary_Set	varchar(01);
+			Insurance_Combination_Number	varchar(04);
+			InsuranceProvider_Class			varchar(03);
+			InsuranceProvider_Number		varchar(08);
+			InsuranceProvider_WholeName		varchar(20);
+			HealthInsuredPerson_Symbol		varchar(80);
+			HealthInsuredPerson_Number		varchar(80);
+			HealthInsuredPerson_Continuation	varchar(01);
+			HealthInsuredPerson_Assistance		varchar(01);
+			RelationToInsuredPerson			varchar(01);
+			HealthInsuredPerson_WholeName		varchar(100);
+			Certificate_StartDate			varchar(10);
+			Certificate_ExpiredDate			varchar(10);
+			PublicInsurance_Information	{
+				PublicInsurance_Class		varchar(03);
+				PublicInsurance_Name		varchar(20);
+				PublicInsurer_Number		varchar(08);
+				PublicInsuredPerson_Number	varchar(20);
+				Certificate_IssuedDate		varchar(10);
+				Certificate_ExpiredDate		varchar(10);
+			}[4];
+		};
+		Hospital_Charge_Auto_Set		    varchar(01);
+		Hospital_Charge						varchar(09);
+		Hospital_Charge_NotApplicable		varchar(01);
+		Editing_Hospital_Charge				varchar(01);
+		Delivery							varchar(1);
+		Direct_Payment						varchar(1);
+		Additional_Hospital_Charge			varchar(09)[3];
+		Recurring_Billing					varchar(01);
+		Search_Function						varchar(01);
+	};
+};

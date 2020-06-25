@@ -1,0 +1,18 @@
+<data>
+<private_objects type ="record">
+   <Save_Request type ="string">@Save_Request@</Save_Request>
+   <Request_Number type ="string">@Request_Number@</Request_Number>
+   <Patient_ID type ="string">@Patient_ID@</Patient_ID>
+   <Admission_Date type ="string">@Admission_Date@</Admission_Date>
+   <Perform_Date type ="string">@Perform_Date@</Perform_Date>
+   <End_Date type ="string">@End_Date@</End_Date>
+   <Meal_Information type ="array">
+      <Meal_Information_child type ="record">
+         <Meal_Time type ="string">@Meal_Time@</Meal_Time>
+         <Meal_Type type ="string">@Meal_Type@</Meal_Type>
+         <Meal_Dates type ="string">@Meal_Dates@</Meal_Dates>
+      </Meal_Information_child>
+   </Meal_Information>
+   <Patient_Status type ="string">@Patient_Status@</Patient_Status>
+</private_objects>
+</data>

@@ -1,0 +1,31 @@
+        01  HCG016.
+            02  HCG016-SRYNAME
+                        PIC X(100).
+            02  HCG016-SRYYM
+                        PIC X(16).
+            02  HCG016-SAKYMD
+                        PIC X(22).
+            02  HCG016-PAGE
+                        PIC X(3).
+            02  HCG016-NYUGAIKBN
+                        PIC X(8).
+            02  HCG016-SRYKA
+                        PIC X(50).
+            02  HCG016-SRYAREA
+                                        OCCURS 52 TIMES.
+              03  HCG016-RENNUM
+                        PIC X(4).
+              03  HCG016-NAME
+                        PIC X(20).
+              03  HCG016-PTNUM
+                        PIC X(10).
+              03  HCG016-PTNUM2
+                        PIC X(20).
+              03  HCG016-LASTYMD
+                        PIC X(10).
+              03  HCG016-HKNCOMBI
+                        PIC X(20).
+              03  HCG016-DAY
+                        PIC X(4)        OCCURS 32 TIMES.
+            02  HCG016-HOKATSUKBN
+                        PIC X(80).

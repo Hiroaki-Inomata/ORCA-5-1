@@ -1,0 +1,87 @@
+J03 {
+  fixed19 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    KANANAME {
+      textdata varchar(30);
+    };
+    NAME {
+      textdata varchar(30);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    scrolledwindow2 {
+      SRYACTCNT {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(7);
+            column2 varchar(40);
+            column3 varchar(5);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    scrolledwindow1 {
+      SRYACTYMD {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(10);
+            column2 varchar(40);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    NYUGAIKBN_COMB {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    SRYKA_COMB {
+      SRYKA {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[100];
+    };
+    HHKNCOMBI_COMB {
+      HHKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[40];
+    };
+    MIDASI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    TENSU {
+      textdata varchar(10);
+    };
+    RSITENSU {
+      textdata varchar(10);
+    };
+    JIHIKIN {
+      textdata varchar(10);
+    };
+    SRYYM {
+      textdata varchar(6);
+    };
+    NYUTENSU {
+      textdata varchar(10);
+    };
+    MIDASIN {
+      textdata varchar(10);
+    };
+  };
+};

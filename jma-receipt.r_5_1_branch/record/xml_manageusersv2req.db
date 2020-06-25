@@ -1,0 +1,26 @@
+xml_manageusersv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	manageusersreq {
+		Request_Number	varchar(02);
+		Base_Date		varchar(10);
+		User_Information{
+			User_Id					varchar(16);
+			User_Password			varchar(16);
+			Group_Number			varchar(1);
+			Full_Name				varchar(80);
+			Kana_Name				varchar(80);
+			New_User_Id				varchar(16);
+			New_User_Password		varchar(16);
+			New_Full_Name			varchar(80);
+			New_Kana_Name			varchar(80);
+			Administrator_Privilege varchar(1);
+			Menu_Item_Information{
+				Menu_Item_Number    varchar(3);
+				Menu_Item_Privilege  varchar(1);
+			}[50];
+		};
+	};
+};

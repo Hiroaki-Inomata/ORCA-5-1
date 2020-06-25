@@ -1,0 +1,119 @@
+tbl_byomei_master {
+	BYOMEICD			char(7);
+	BYOMEI				varchar(200);
+	BYOMEIMOJI			number(3);
+	TANBYOMEI			varchar(200);
+	TANBYOMEIMOJI			number(3);
+	BYOMEIKANA			varchar(200);
+	IKOSAKICD			varchar(7);
+	TOKSKNCD			number(2);
+	NANBYOCD			number(2);
+	UTAGAIFLG			char(1);
+	TANDOKUKBN			number(2);
+	HKNSKYKBN			number(1);
+	HYOJUNCD        		varchar(8);
+	SAITAKUKBN			char(1);
+	BYOMEICHGCD			varchar(4);
+	ICD10_1   			varchar(5);
+	ICD10_2   			varchar(5);
+	ICD10_1_2   			varchar(5);
+	ICD10_2_2   			varchar(5);
+	SYUSAIYMD			varchar(8);
+	CHGYMD				varchar(8);
+	HAISIYMD			varchar(8);
+	TERMID  			varchar(32);
+	OPID    			varchar(16);
+	CREYMD  			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	BYOMEICD;
+};
+
+path	key	{ 	
+	DBSELECT	{
+		DECLARE tbl_byomei_master_key_csr CURSOR FOR
+		SELECT *
+		FROM	master.tbl_byomei
+			WHERE BYOMEICD = :BYOMEICD
+		;
+
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_byomei
+			VALUES(
+				:BYOMEICD,
+				:BYOMEI,
+				:BYOMEIMOJI,
+				:TANBYOMEI,
+				:TANBYOMEIMOJI,
+				:BYOMEIKANA,
+				:IKOSAKICD,
+				:TOKSKNCD,
+				:UTAGAIFLG,
+				:TANDOKUKBN,
+				:HKNSKYKBN,
+				:HYOJUNCD,
+				:SAITAKUKBN,
+				:BYOMEICHGCD,
+				:ICD10_1,
+				:SYUSAIYMD,
+				:CHGYMD,
+				:HAISIYMD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS,
+				:ICD10_2,
+				:NANBYOCD,
+				:ICD10_1_2,
+				:ICD10_2_2
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_byomei
+			SET
+				BYOMEICD = :BYOMEICD,
+				BYOMEI = :BYOMEI,
+				BYOMEIMOJI = :BYOMEIMOJI,
+				TANBYOMEI = :TANBYOMEI,
+				TANBYOMEIMOJI = :TANBYOMEIMOJI,
+				BYOMEIKANA = :BYOMEIKANA,
+				IKOSAKICD = :IKOSAKICD,
+				TOKSKNCD = :TOKSKNCD,
+				NANBYOCD = :NANBYOCD,
+				UTAGAIFLG = :UTAGAIFLG,
+				TANDOKUKBN = :TANDOKUKBN,
+				HKNSKYKBN = :HKNSKYKBN,
+				HYOJUNCD = :HYOJUNCD,
+				SAITAKUKBN = :SAITAKUKBN,
+				BYOMEICHGCD = :BYOMEICHGCD,
+				ICD10_1 = :ICD10_1,
+				ICD10_2 = :ICD10_2,
+				ICD10_1_2 = :ICD10_1_2,
+				ICD10_2_2 = :ICD10_2_2,
+				SYUSAIYMD = :SYUSAIYMD,
+				CHGYMD = :CHGYMD,
+				HAISIYMD = :HAISIYMD,
+				TERMID = :TERMID,
+				OPID = :OPID,
+				CREYMD = :CREYMD,
+				UPYMD = :UPYMD,
+				UPHMS = :UPHMS
+			WHERE
+				BYOMEICD = :BYOMEICD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_byomei
+			WHERE
+				BYOMEICD = :BYOMEICD
+		;
+	};
+};

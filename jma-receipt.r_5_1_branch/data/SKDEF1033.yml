@@ -1,0 +1,131 @@
+kanri_cd    : "1033"
+name        : "∏©∆‚∞∑§§ ›∏±º‘»÷πÊ"
+class_cd    : "*"
+item_max    : 21
+item_list   :
+- item_no   : 1
+  item      : "HKNJANUM1"
+  item_jp   : " ›∏±º‘»÷πÊ£±"
+  type      : "X"
+  start     : 1
+  length    : 8
+- item_no   : 2
+  item      : "HKNJANUM2"
+  item_jp   : " ›∏±º‘»÷πÊ£≤"
+  type      : "X"
+  start     : 9
+  length    : 8
+- item_no   : 3
+  item      : "HKNJANUM3"
+  item_jp   : " ›∏±º‘»÷πÊ£≥"
+  type      : "X"
+  start     : 17
+  length    : 8
+- item_no   : 4
+  item      : "HKNJANUM4"
+  item_jp   : " ›∏±º‘»÷πÊ£¥"
+  type      : "X"
+  start     : 25
+  length    : 8
+- item_no   : 5
+  item      : "HKNJANUM5"
+  item_jp   : " ›∏±º‘»÷πÊ£µ"
+  type      : "X"
+  start     : 33
+  length    : 8
+- item_no   : 6
+  item      : "HKNJANUM6"
+  item_jp   : " ›∏±º‘»÷πÊ£∂"
+  type      : "X"
+  start     : 41
+  length    : 8
+- item_no   : 7
+  item      : "HKNJANUM7"
+  item_jp   : " ›∏±º‘»÷πÊ£∑"
+  type      : "X"
+  start     : 49
+  length    : 8
+- item_no   : 8
+  item      : "HKNJANUM8"
+  item_jp   : " ›∏±º‘»÷πÊ£∏"
+  type      : "X"
+  start     : 57
+  length    : 8
+- item_no   : 9
+  item      : "HKNJANUM9"
+  item_jp   : " ›∏±º‘»÷πÊ£π"
+  type      : "X"
+  start     : 65
+  length    : 8
+- item_no   : 10
+  item      : "HKNJANUM10"
+  item_jp   : " ›∏±º‘»÷πÊ£±£∞"
+  type      : "X"
+  start     : 73
+  length    : 8
+- item_no   : 11
+  item      : "HKNJANUM11"
+  item_jp   : " ›∏±º‘»÷πÊ£±£±"
+  type      : "X"
+  start     : 81
+  length    : 8
+- item_no   : 12
+  item      : "HKNJANUM12"
+  item_jp   : " ›∏±º‘»÷πÊ£±£≤"
+  type      : "X"
+  start     : 89
+  length    : 8
+- item_no   : 13
+  item      : "HKNJANUM13"
+  item_jp   : " ›∏±º‘»÷πÊ£±£≥"
+  type      : "X"
+  start     : 97
+  length    : 8
+- item_no   : 14
+  item      : "HKNJANUM14"
+  item_jp   : " ›∏±º‘»÷πÊ£±£¥"
+  type      : "X"
+  start     : 105
+  length    : 8
+- item_no   : 15
+  item      : "HKNJANUM15"
+  item_jp   : " ›∏±º‘»÷πÊ£±£µ"
+  type      : "X"
+  start     : 113
+  length    : 8
+- item_no   : 16
+  item      : "HKNJANUM16"
+  item_jp   : " ›∏±º‘»÷πÊ£±£∂"
+  type      : "X"
+  start     : 121
+  length    : 8
+- item_no   : 17
+  item      : "HKNJANUM17"
+  item_jp   : " ›∏±º‘»÷πÊ£±£∑"
+  type      : "X"
+  start     : 129
+  length    : 8
+- item_no   : 18
+  item      : "HKNJANUM18"
+  item_jp   : " ›∏±º‘»÷πÊ£±£∏"
+  type      : "X"
+  start     : 137
+  length    : 8
+- item_no   : 19
+  item      : "HKNJANUM19"
+  item_jp   : " ›∏±º‘»÷πÊ£±£π"
+  type      : "X"
+  start     : 145
+  length    : 8
+- item_no   : 20
+  item      : "HKNJANUM20"
+  item_jp   : " ›∏±º‘»÷πÊ£≤£∞"
+  type      : "X"
+  start     : 153
+  length    : 8
+- item_no   : 21
+  item      : "YOBI"
+  item_jp   : "ÕΩ»˜"
+  type      : "X"
+  start     : 161
+  length    : 339

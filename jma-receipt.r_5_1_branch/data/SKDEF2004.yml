@@ -1,0 +1,23 @@
+kanri_cd    : "2004"
+name        : "レセプト作成指示（レセプト種別）"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "SYUBETUNAME"
+  item_jp   : "レセプト種別名称"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "PRTJYUNI"
+  item_jp   : "レセプト出力順"
+  type      : "X"
+  start     : 41
+  length    : 2
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 43
+  length    : 458

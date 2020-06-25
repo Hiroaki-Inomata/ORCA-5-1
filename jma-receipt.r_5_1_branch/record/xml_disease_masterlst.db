@@ -1,0 +1,34 @@
+xml_disease_masterlst {
+	context int;
+	object object;
+	mode int;
+	recordname	varchar(128);
+	disease_masterlst {
+		Disease_Code		varchar(7);
+		Disease_Name		varchar(200);
+		Disease_Name_Count	varchar(3);
+		Disease_Abbreviation_Name	varchar(200);
+		Disease_Abbreviation_Name_Count	varchar(3);
+		Disease_Name_inKana	varchar(200);
+		Disease_Migration_Code	varchar(7);
+		Disease_Class		varchar(2);
+		Disease_Class1		varchar(2);
+		Disease_SuspectedFlag	varchar(1);
+		Disease_Single_Use	varchar(2);
+		Disease_Out_Of_Insurance_Claims	varchar(1);
+		Disease_Control_Number	varchar(8);
+		Disease_Adoption_Category	varchar(1);
+		Disease_Exchange_Code	varchar(4);
+		Disease_Icd10_1		varchar(5);
+		Disease_Icd10_2		varchar(5);
+		Disease_Icd10_1_2	varchar(5);
+		Disease_Icd10_2_2	varchar(5);
+		Disease_ListingDate	varchar(10);
+		Disease_ChangeDate	varchar(10);
+		Disease_DeprecatedDate	varchar(10);
+		Disease_CreatedDate	varchar(10);
+		Disease_UpdateDate	varchar(10);
+		Disease_UpdateTime	varchar(8);
+	} [1000];
+};
+

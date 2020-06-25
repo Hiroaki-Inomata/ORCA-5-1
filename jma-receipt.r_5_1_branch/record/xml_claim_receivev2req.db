@@ -1,0 +1,146 @@
+xml_claim_receivev2req	{
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	claim_receivev2req {
+# MmlHeader[1]/mmlCi:CreatorInfo[1]/mmlPsi:PersonalizedInfo[1]/mmlFc:Facility[1]/mmlCm:Id[1]
+# LF04-CRE001-FACILITYID
+		Hospital_Id		varchar(20);
+# MmlHeader[1]/masterId[1]/mmlCm:Id[1]
+# LF04-PTID1
+		Patient_ID		varchar(20);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:information[1]@claim:orderTime
+# LF04-ORDER-TIME オーダー発行日時 
+    		Order_Date		varchar(19);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:information[1]@claim:performTime
+# LF04-PERFORM-TIME 実施日時
+    		Perform_Date		varchar(19);
+# MmlHeader[1]/mmlCi:CreatorInfo[1]/mmlPsi:PersonalizedInfo[1]/mmlDp:Department[1]/mmlCm:Id[1]
+# LF04-CRE001-DPERTID 診療科ID
+		Department_Code		varchar(20);
+		Diagnosis_Information  {
+			HealthInsurance_Information  {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:insuranceClass[1]
+# LF04-HKN-HKNSBT
+				InsuranceProvider_WholeName	varchar(20);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:insuranceClass[1]@mmlHi:ClassCode
+# LF04-HKN-HKNSBTCODE
+				InsuranceProvider_Class		varchar(02);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:insuranceNumber[1]
+# LF04-HKN-HKNJANUM
+				InsuranceProvider_Number	varchar(08);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:clientId[1]/mmlHi:group[1]
+# LF04-HKN-KIGO
+				HealthInsuredPerson_Symbol	varchar(80);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:clientId[1]/mmlHi:number[1]
+# LF04-HKN-NUM
+				HealthInsuredPerson_Number	varchar(80);
+				PublicInsurance_Information   {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:publicInsurance[1]/mmlHi:publicInsuranceItem[1]/mmlHi:providerName
+# LF04-HKNKOH-PROVIDER
+					PublicInsurance_Name	varchar(20);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:publicInsurance[1]/mmlHi:publicInsuranceItem[6]/mmlHi:provider
+# LF04-HKNKOH-FTNJANUM
+					PublicInsurer_Number	varchar(08);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlHi:HealthInsuranceModule[1]/mmlHi:publicInsurance[1]/mmlHi:publicInsuranceItem[6]/mmlHi:recipient
+#LF04-HKNKOH-JKYSNUM
+					PublicInsuredPerson_Number	varchar(20);
+				} [4];
+			} ;
+# 病名モジュール
+		Disease_Information  {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:diagnosis[1]@mmlRd:code
+# LF04-SND-SPICOD 疾患コード (mmlRd:code)
+			Disease_Code			varchar(50);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:diagnosis
+# LF04-SND-SPINAME1 疾患名
+			Disease_Name			varchar(80);
+			Disease_Single	{
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:diagnosisContents[1]/mmlRd:dxItem[1]/mmlRd:name[1]@mmlRd:code
+# LF04-SNDSPITBL-SPICOD2 疾患コード (mmlRd:code)
+				Disease_Single_Code	varchar(10);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:diagnosisContents[1]/mmlRd:dxItem[1]/mmlRd:name
+# LF04-SNDSPITBL-SPINAME2 疾患名
+				Disease_Single_Name	varchar(20);
+			}[6] ;
+# LF04-SNDBNRTBL 分類
+			Disease_Category_Information {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:categories[1]/mmlRd:category[1]@mmlRd:tableId
+# LF04-SNDBNRTBL-BNRTBL1 分類の種類コード (mmlRd:tableId)
+				Disease_Category	varchar(7);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:categories[1]/mmlRd:category
+# LF04-SNDBNRTBL-BNRNAME1 分類名
+				Disease_SuspectedFlag	varchar(30);
+			}[4] ;
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:startDate
+# LF04-SND-SKNSTARTDATE 疾患開始日
+			Disease_StartDate		varchar(10);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:endDate
+# LF04-SND-SKNENDDATE 疾患終了日
+			Disease_EndDate			varchar(10);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:outcome
+# LF04-SND-TENKI 転帰
+			Disease_OutCome			varchar(20);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/mmlRd:RegisteredDiagnosisModule[1]/mmlRd:InOutPatient
+# LF04-SND-NYUGAIKBND 入外区分 (mmlRd:InOutPatient)
+			Disease_InOut			varchar(20);
+		}[50] ;
+# MmlBody[1]/MmlModuleItem[X]/docInfo[1]/docId[1]/uid[1]
+# LF04-UID8 文書ユニークID
+		Uid8_Code		varchar(36);
+# MmlBody[1]/MmlModuleItem[X]/docInfo[1]/mmlCi:CreatorInfo[1]/mmlPsi:PersonalizedInfo[1]/mmlCm:Id[1]
+# LF04-DOCCD
+		Physician_Code		varchar(10);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:information[1]@claim:admitFlag
+# LF04-NYUGAIKBN
+		InOut			varchar(5);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:information[1]@claim:timeClass
+# LF04-JIKANNGAIKBN
+    		Time_Class		varchar(01);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:information[1]@claim:insuranceUid
+# LF04-HOKEN-UID 使用保険ＵＩＤ (claim:insuranceUid)
+    		Diagnosis_Uid		varchar(36);
+		Medical_Information  {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]@claim:classCode
+# LF04-SRYCD
+			Medical_Class			varchar(03);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]@claim:classCodeId
+# LF04-SRYCDTBL 診療行為区分コードのテーブル名 (claim:classCodeId) (Claim002)
+			Medical_Class_Codeid		varchar(08);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:administration[1]@claim:adminCode
+# LF04-ADMINCODE 用法コード (claim:adminCode)
+			Medical_Admin_Codeid		varchar(09);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:admMemo[1]
+# LF04-ADMMEMO 用法コメント
+			Medical_Admin_Memo		varchar(100);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:bundleNumber[1]
+# LF04-KAISU 回数
+			Medical_Class_Number		varchar(50);
+			Medication_info   {
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]@claim:code
+# LF04-IJICD 医事請求コード(S + 診療行為コード) (claim:code)
+				Medication_Code		varchar(10);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]@claim:tableId
+# LF04-TBLID 医事請求コードのテーブル名 (claim:tableId)
+				Medication_Tableid	varchar(20);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]/claim:name[1]
+# LF04-ALSNAME
+				Medication_Name		varchar(80);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]/claim:number[1]
+# LF04-SURYO 数量
+				Medication_Number	varchar(40);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]/claim:number[1]@claim:numberCode
+# LF04-SURYOCD 数量コード (claim:numberCode)
+				Medication_Nuber_Code 	varchar(02);
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:item[1]/claim:memo[1]
+# LF04-SRYMEMO 診療項目メモ
+				Medication_Memo 	varchar(100);
+			} [40];
+# MmlBody[1]/MmlModuleItem[X]/content[1]/claim:ClaimModule[1]/claim:bundle[1]/claim:memo[1]
+# LF04-MEMO 診療括りメモ
+			Medication_Memo_G 	varchar(100);
+		}[40] ;
+   		};
+	};
+};

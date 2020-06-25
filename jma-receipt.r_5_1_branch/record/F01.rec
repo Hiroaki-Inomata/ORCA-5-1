@@ -1,0 +1,731 @@
+F01 {
+  fixed6 {
+    FILENAME {
+      textdata varchar(129);
+    };
+    CHKBTN001 {
+      isactive bool;
+    };
+    CHKBTN002 {
+      isactive bool;
+    };
+    CHKBTN003 {
+      isactive bool;
+    };
+    CHKBTN004 {
+      isactive bool;
+    };
+    CHKBTN005 {
+      isactive bool;
+    };
+    CHKBTN006 {
+      isactive bool;
+    };
+    CHKBTN007 {
+      isactive bool;
+    };
+    CHKBTN008 {
+      isactive bool;
+    };
+    CHKBTN009 {
+      isactive bool;
+    };
+    CHKBTN010 {
+      isactive bool;
+    };
+    CHKBTN011 {
+      isactive bool;
+    };
+    CHKBTN012 {
+      isactive bool;
+    };
+    CHKBTN013 {
+      isactive bool;
+    };
+    CHKBTN014 {
+      isactive bool;
+    };
+    CHKBTN015 {
+      isactive bool;
+    };
+    CHKBTN016 {
+      isactive bool;
+    };
+    CHKBTN017 {
+      isactive bool;
+    };
+    CHKBTN018 {
+      isactive bool;
+    };
+    CHKBTN019 {
+      isactive bool;
+    };
+    CHKBTN020 {
+      isactive bool;
+    };
+    CHKBTN021 {
+      isactive bool;
+    };
+    CHKBTN022 {
+      isactive bool;
+    };
+    CHKBTN023 {
+      isactive bool;
+    };
+    CHKBTN024 {
+      isactive bool;
+    };
+    CHKBTN025 {
+      isactive bool;
+    };
+    CHKBTN026 {
+      isactive bool;
+    };
+    CHKBTN027 {
+      isactive bool;
+    };
+    CHKBTN028 {
+      isactive bool;
+    };
+    CHKBTN029 {
+      isactive bool;
+    };
+    CHKBTN030 {
+      isactive bool;
+    };
+    CHKBTN031 {
+      isactive bool;
+    };
+    CHKBTN032 {
+      isactive bool;
+    };
+    CHKBTN033 {
+      isactive bool;
+    };
+    CHKBTN034 {
+      isactive bool;
+    };
+    CHKBTN035 {
+      isactive bool;
+    };
+    CHKBTN036 {
+      isactive bool;
+    };
+    CHKBTN037 {
+      isactive bool;
+    };
+    CHKBTN038 {
+      isactive bool;
+    };
+    CHKBTN039 {
+      isactive bool;
+    };
+    CHKBTN040 {
+      isactive bool;
+    };
+    CHKBTN041 {
+      isactive bool;
+    };
+    CHKBTN042 {
+      isactive bool;
+    };
+    CHKBTN043 {
+      isactive bool;
+    };
+    CHKBTN044 {
+      isactive bool;
+    };
+    CHKBTN045 {
+      isactive bool;
+    };
+    CHKBTN046 {
+      isactive bool;
+    };
+    CHKBTN047 {
+      isactive bool;
+    };
+    CHKBTN048 {
+      isactive bool;
+    };
+    CHKBTN049 {
+      isactive bool;
+    };
+    CHKBTN050 {
+      isactive bool;
+    };
+    CHKBTN051 {
+      isactive bool;
+    };
+    CHKBTN052 {
+      isactive bool;
+    };
+    CHKBTN053 {
+      isactive bool;
+    };
+    CHKBTN054 {
+      isactive bool;
+    };
+    CHKBTN055 {
+      isactive bool;
+    };
+    CHKBTN056 {
+      isactive bool;
+    };
+    CHKBTN057 {
+      isactive bool;
+    };
+    CHKBTN058 {
+      isactive bool;
+    };
+    CHKBTN059 {
+      isactive bool;
+    };
+    CHKBTN060 {
+      isactive bool;
+    };
+    CHKBTN061 {
+      isactive bool;
+    };
+    CHKBTN062 {
+      isactive bool;
+    };
+    CHKBTN063 {
+      isactive bool;
+    };
+    CHKBTN064 {
+      isactive bool;
+    };
+    CHKBTN065 {
+      isactive bool;
+    };
+    CHKBTN066 {
+      isactive bool;
+    };
+    CHKBTN067 {
+      isactive bool;
+    };
+    CHKBTN068 {
+      isactive bool;
+    };
+    CHKBTN069 {
+      isactive bool;
+    };
+    CHKBTN070 {
+      isactive bool;
+    };
+    CHKBTN071 {
+      isactive bool;
+    };
+    CHKBTN072 {
+      isactive bool;
+    };
+    CHKBTN073 {
+      isactive bool;
+    };
+    CHKBTN074 {
+      isactive bool;
+    };
+    CHKBTN075 {
+      isactive bool;
+    };
+    CHKBTN076 {
+      isactive bool;
+    };
+    CHKBTN077 {
+      isactive bool;
+    };
+    CHKBTN078 {
+      isactive bool;
+    };
+    CHKBTN079 {
+      isactive bool;
+    };
+    CHKBTN080 {
+      isactive bool;
+    };
+    CHKBTN081 {
+      isactive bool;
+    };
+    CHKBTN082 {
+      isactive bool;
+    };
+    CHKBTN083 {
+      isactive bool;
+    };
+    CHKBTN084 {
+      isactive bool;
+    };
+    CHKBTN085 {
+      isactive bool;
+    };
+    CHKBTN086 {
+      isactive bool;
+    };
+    CHKBTN087 {
+      isactive bool;
+    };
+    CHKBTN088 {
+      isactive bool;
+    };
+    CHKBTN089 {
+      isactive bool;
+    };
+    CHKBTN090 {
+      isactive bool;
+    };
+    CHKBTN091 {
+      isactive bool;
+    };
+    CHKBTN092 {
+      isactive bool;
+    };
+    CHKBTN093 {
+      isactive bool;
+    };
+    CHKBTN094 {
+      isactive bool;
+    };
+    CHKBTN095 {
+      isactive bool;
+    };
+    CHKBTN096 {
+      isactive bool;
+    };
+    CHKBTN097 {
+      isactive bool;
+    };
+    CHKBTN098 {
+      isactive bool;
+    };
+    CHKBTN099 {
+      isactive bool;
+    };
+    CHKBTN100 {
+      isactive bool;
+    };
+    CHKBTN101 {
+      isactive bool;
+    };
+    CHKBTN102 {
+      isactive bool;
+    };
+    CHKBTN103 {
+      isactive bool;
+    };
+    CHKBTN104 {
+      isactive bool;
+    };
+    CHKBTN105 {
+      isactive bool;
+    };
+    CHKBTN106 {
+      isactive bool;
+    };
+    CHKBTN107 {
+      isactive bool;
+    };
+    CHKBTN108 {
+      isactive bool;
+    };
+    CHKBTN109 {
+      isactive bool;
+    };
+    CHKBTN110 {
+      isactive bool;
+    };
+    CHKBTN111 {
+      isactive bool;
+    };
+    CHKBTN112 {
+      isactive bool;
+    };
+    CHKBTN113 {
+      isactive bool;
+    };
+    CHKBTN114 {
+      isactive bool;
+    };
+    CHKBTN115 {
+      isactive bool;
+    };
+    CHKBTN116 {
+      isactive bool;
+    };
+    CHKBTN117 {
+      isactive bool;
+    };
+    CHKBTN118 {
+      isactive bool;
+    };
+    CHKBTN119 {
+      isactive bool;
+    };
+    CHKBTN120 {
+      isactive bool;
+    };
+    CHKMSG01 {
+      textdata char(30);
+    };
+    CHKMSG02 {
+      textdata char(30);
+    };
+    CHKMSG03 {
+      textdata char(30);
+    };
+    CHKMSG04 {
+      textdata char(30);
+    };
+    CHKMSG05 {
+      textdata char(30);
+    };
+    CHKMSG06 {
+      textdata char(30);
+    };
+    CHKMSG07 {
+      textdata char(30);
+    };
+    CHKMSG08 {
+      textdata char(30);
+    };
+    CHKMSG09 {
+      textdata char(30);
+    };
+    CHKMSG10 {
+      textdata char(30);
+    };
+    CHKMSG11 {
+      textdata char(30);
+    };
+    CHKMSG12 {
+      textdata char(30);
+    };
+    CHKMSG13 {
+      textdata char(30);
+    };
+    CHKMSG14 {
+      textdata char(30);
+    };
+    CHKMSG15 {
+      textdata char(30);
+    };
+    CHKMSG16 {
+      textdata char(30);
+    };
+    CHKMSG17 {
+      textdata char(30);
+    };
+    CHKMSG18 {
+      textdata char(30);
+    };
+    CHKMSG19 {
+      textdata char(30);
+    };
+    CHKMSG20 {
+      textdata char(30);
+    };
+    CHKMSG21 {
+      textdata char(30);
+    };
+    CHKMSG22 {
+      textdata char(30);
+    };
+    CHKMSG23 {
+      textdata char(30);
+    };
+    CHKMSG24 {
+      textdata char(30);
+    };
+    CHKMSG25 {
+      textdata char(30);
+    };
+    CHKMSG26 {
+      textdata char(30);
+    };
+    CHKMSG27 {
+      textdata char(30);
+    };
+    CHKMSG28 {
+      textdata char(30);
+    };
+    CHKMSG29 {
+      textdata char(30);
+    };
+    CHKMSG30 {
+      textdata char(30);
+    };
+    CHKMSG31 {
+      textdata char(30);
+    };
+    CHKMSG32 {
+      textdata char(30);
+    };
+    CHKMSG33 {
+      textdata char(30);
+    };
+    CHKMSG34 {
+      textdata char(30);
+    };
+    CHKMSG35 {
+      textdata char(30);
+    };
+    CHKMSG36 {
+      textdata char(30);
+    };
+    CHKMSG37 {
+      textdata char(30);
+    };
+    CHKMSG38 {
+      textdata char(30);
+    };
+    CHKMSG39 {
+      textdata char(30);
+    };
+    CHKMSG40 {
+      textdata char(30);
+    };
+    CHKMSG41 {
+      textdata char(30);
+    };
+    CHKMSG42 {
+      textdata char(30);
+    };
+    CHKMSG43 {
+      textdata char(30);
+    };
+    CHKMSG44 {
+      textdata char(30);
+    };
+    CHKMSG45 {
+      textdata char(30);
+    };
+    CHKMSG46 {
+      textdata char(30);
+    };
+    CHKMSG47 {
+      textdata char(30);
+    };
+    CHKMSG48 {
+      textdata char(30);
+    };
+    CHKMSG49 {
+      textdata char(30);
+    };
+    CHKMSG50 {
+      textdata char(30);
+    };
+    CHKMSG51 {
+      textdata char(30);
+    };
+    CHKMSG52 {
+      textdata char(30);
+    };
+    CHKMSG53 {
+      textdata char(30);
+    };
+    CHKMSG54 {
+      textdata char(30);
+    };
+    CHKMSG55 {
+      textdata char(30);
+    };
+    CHKMSG56 {
+      textdata char(30);
+    };
+    CHKMSG57 {
+      textdata char(30);
+    };
+    CHKMSG58 {
+      textdata char(30);
+    };
+    CHKMSG59 {
+      textdata char(30);
+    };
+    CHKMSG60 {
+      textdata char(30);
+    };
+    CHKMSG61 {
+      textdata char(30);
+    };
+    CHKMSG62 {
+      textdata char(30);
+    };
+    CHKMSG63 {
+      textdata char(30);
+    };
+    CHKMSG64 {
+      textdata char(30);
+    };
+    CHKMSG65 {
+      textdata char(30);
+    };
+    CHKMSG66 {
+      textdata char(30);
+    };
+    CHKMSG67 {
+      textdata char(30);
+    };
+    CHKMSG68 {
+      textdata char(30);
+    };
+    CHKMSG69 {
+      textdata char(30);
+    };
+    CHKMSG70 {
+      textdata char(30);
+    };
+    CHKMSG71 {
+      textdata char(30);
+    };
+    CHKMSG72 {
+      textdata char(30);
+    };
+    CHKMSG73 {
+      textdata char(30);
+    };
+    CHKMSG74 {
+      textdata char(30);
+    };
+    CHKMSG75 {
+      textdata char(30);
+    };
+    CHKMSG76 {
+      textdata char(30);
+    };
+    CHKMSG77 {
+      textdata char(30);
+    };
+    CHKMSG78 {
+      textdata char(30);
+    };
+    CHKMSG79 {
+      textdata char(30);
+    };
+    CHKMSG80 {
+      textdata char(30);
+    };
+    CHKMSG81 {
+      textdata char(30);
+    };
+    CHKMSG82 {
+      textdata char(30);
+    };
+    CHKMSG83 {
+      textdata char(30);
+    };
+    CHKMSG84 {
+      textdata char(30);
+    };
+    CHKMSG85 {
+      textdata char(30);
+    };
+    CHKMSG86 {
+      textdata char(30);
+    };
+    CHKMSG87 {
+      textdata char(30);
+    };
+    CHKMSG88 {
+      textdata char(30);
+    };
+    CHKMSG89 {
+      textdata char(30);
+    };
+    CHKMSG90 {
+      textdata char(30);
+    };
+    CHKMSG91 {
+      textdata char(30);
+    };
+    CHKMSG92 {
+      textdata char(30);
+    };
+    CHKMSG93 {
+      textdata char(30);
+    };
+    CHKMSG94 {
+      textdata char(30);
+    };
+    CHKMSG95 {
+      textdata char(30);
+    };
+    CHKMSG96 {
+      textdata char(30);
+    };
+    CHKMSG97 {
+      textdata char(30);
+    };
+    CHKMSG98 {
+      textdata char(30);
+    };
+    CHKMSG99 {
+      textdata char(30);
+    };
+    CHKMSG100 {
+      textdata char(30);
+    };
+    CHKMSG101 {
+      textdata char(30);
+    };
+    CHKMSG102 {
+      textdata char(30);
+    };
+    CHKMSG103 {
+      textdata char(30);
+    };
+    CHKMSG104 {
+      textdata char(30);
+    };
+    CHKMSG105 {
+      textdata char(30);
+    };
+    CHKMSG106 {
+      textdata char(30);
+    };
+    CHKMSG107 {
+      textdata char(30);
+    };
+    CHKMSG108 {
+      textdata char(30);
+    };
+    CHKMSG109 {
+      textdata char(30);
+    };
+    CHKMSG110 {
+      textdata char(30);
+    };
+    CHKMSG111 {
+      textdata char(30);
+    };
+    CHKMSG112 {
+      textdata char(30);
+    };
+    CHKMSG113 {
+      textdata char(30);
+    };
+    CHKMSG114 {
+      textdata char(30);
+    };
+    CHKMSG115 {
+      textdata char(30);
+    };
+    CHKMSG116 {
+      textdata char(30);
+    };
+    CHKMSG117 {
+      textdata char(30);
+    };
+    CHKMSG118 {
+      textdata char(30);
+    };
+    CHKMSG119 {
+      textdata char(30);
+    };
+    CHKMSG120 {
+      textdata char(30);
+    };
+    LBLCAUTION {
+      style varchar(20);
+      textdata varchar(100);
+    };
+  };
+};

@@ -1,0 +1,73 @@
+tbl_cron {
+	CRONID				number(4,0);
+	RUN				char(1);
+	NAME				varchar(30);
+	CRNMIN				char(02);
+	CRNHOUR				char(02);
+	CRNDOM				char(02);
+	CRNMON				char(02);
+	CRNDOW				char(01);
+	SCRIPT				varchar(100);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+	STCRONID			number(4,0),virtual;
+	EDCRONID			number(4,0),virtual;
+};
+
+primary	{
+	CRONID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_cron_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_cron
+			WHERE    CRONID     =   :CRONID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_cron_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_cron
+                WHERE CRONID >= :STCRONID
+                 AND  CRONID <= :EDCRONID
+			ORDER   BY     CRONID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_cron_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_cron
+			ORDER   BY     CRONID
+		;
+	};
+};
+
+path    del1    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_cron
+                ;
+        };
+};
+
+path    del2    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_cron
+                WHERE CRONID >= :STCRONID
+                 AND  CRONID <= :EDCRONID
+                ;
+        };
+};
+

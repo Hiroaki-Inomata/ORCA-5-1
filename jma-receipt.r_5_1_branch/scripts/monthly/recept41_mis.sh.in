@@ -1,0 +1,133 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    診療情報システム提供用
+#    recept41.sh を複写
+#    留意事項
+#      ${22} 症状詳記作成区分
+#      を毎日と確定の処理区分として流用する
+#      0:毎日、1:確定
+#-------------------------------------------#
+#    労災レセ電ファイル作成処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        $12 労災指定医療機関
+#        $13 レセ電ファイル出力先
+#        $14 JOBID 
+#        $15 SHELLID
+#        $16 エラーファイル名 
+#        $17 ファイル出力先区分
+#        $18 端末ｉｐアドレス
+#        $19 入外区分
+#        ${20} HOSPNUM
+#        ${21} レセプト作成区分
+#            1:提出用レセ、2:点検用レセ
+#        ${22} 症状詳記作成区分
+#            1:作成する
+#        ${23} 光ディスク等送付書作成区分
+#            0:作成する
+#        ${24} レセ電データ履歴保存設定区分
+#            1:履歴保存する
+#        ${26} レセ電データチェックの有無
+#            1:チェックする
+#        ${29} MONBLOB-ID(data-id)
+#-------------------------------------------#
+
+echo "arg3 =  [" ${3} "]"
+echo "arg5 =  [" ${5} "]"
+echo "arg12 = [" ${12} "]"
+echo "arg13 = [" ${13} "]"
+echo "arg16 = [" ${16} "]"
+echo "arg17 = [" ${17} "]"
+echo "arg18 = [" ${18} "]"
+echo "arg19 = [" ${19} "]"
+echo "arg20 = [" ${20} "]"
+echo "arg21 = [" ${21} "]"
+echo "arg22 = [" ${22} "]"
+echo "arg23 = [" ${23} "]"
+echo "arg24 = [" ${24} "]"
+echo "arg26 = [" ${26} "]"
+echo "arg29 = [" ${29} "]"
+#    echo "hostname =  [" `hostname`  "]"
+
+rennum=0
+##  2HD flesize
+fixedsize=1441500
+
+##  エラーファイル削除
+echo "errfile = [" ${MCP_TEMPDIR}/${16}  "]"
+rm  -f ${MCP_TEMPDIR}/${16}
+
+if  [ ${22} -eq '1' ]; then
+    DCKBN="C"
+else
+    DCKBN="D"
+fi
+#if  [ ${19} -eq '1' ]; then
+#    NGKBN="N"
+#else
+#    NGKBN="G"
+#fi
+#RECEFILE1="RREC${DCKBN}${NGKBN}"
+RECEFILE1="RREC${DCKBN}"
+RECEFILE2="TENKENT"
+
+#   該当ファイル削除
+#rm -fr ${13}${20}${RECEFILE1}*.UKE
+rm -fr ${MCP_TEMPDIR}/${RECEFILE1}*.UKE
+rm -fr ${MCP_TEMPDIR}/${20}${RECEFILE2}*.txt
+
+#   レセ電ファイル作成
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM701 -parameter $1,$2,$3,$rennum,$5,$6,$7,$8,$9,${10},${11},${13},${14},${15},${19},${17},$fixedsize,${21},${12},${20},${16}
+if  [ -e ${MCP_TEMPDIR}/${16} ]; then
+    echo "--- BM701 err file exist ---"
+    exit
+fi
+
+#   漢字コード変換
+echo "ファイルの処理(sjis変換)"
+
+cd ${MCP_TEMPDIR}/
+
+if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ] && [ "${18}" = "cron" ]; then
+  DATADIR=""
+else
+  DATADIR="${13}"
+fi
+
+all=`ls  ${20}${RECEFILE2}*.txt`
+ 
+for f in $all ; do
+    echo "f= " $f
+##  echo "mm = " ${f:9:2}
+##  echo "nn = " ${f:11:2}
+
+    if ( [ ${17} -eq '3' ]|| [ ${17} -eq '4' ] ) && [ ${24} -eq '0' ]; then
+        echo ${DATADIR}${RECEFILE1}${f:9:2}${f:11:2}${5}${3}.UKE
+        nkf -s $f > ${DATADIR}${RECEFILE1}${f:9:2}${f:11:2}${5}${3}.UKE
+        chmod g+rw ${DATADIR}${RECEFILE1}${f:9:2}${f:11:2}${5}${3}.UKE
+    fi
+
+    if [ "${MCP_MIDDLEWARE_NAME}" = "ginbee" ] && [ "${18}" = "cron" ]; then
+      CSVFILE="${RECEFILE1}${f:9:2}${f:11:2}${5}${3}.UKE"
+      if [ -s ${CSVFILE} ]; then
+        RECCNT="$(wc -l ${CSVFILE} | awk '{i=split($0,arr," ");printf("%06d",arr[1])}')"
+        ${MONBLOB} -dir ${LDDIRECTORY} -import ${CSVFILE} > blobid-$$
+        MONBLOBID=`cat blobid-$$`
+
+        PARAM="${1},${2},${3},${f:9:2}${f:11:2},${5},${3:0:8},${7},1,${9},${10},${11},${12},${14},${15},${20},${19},${MCP_TEMPDIR},${CSVFILE},${RECCNT},${MONBLOBID}"
+
+        ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBFILEMIS -parameter "${PARAM}"
+      fi
+    fi
+done
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${14}${15},${20}
+
+exit

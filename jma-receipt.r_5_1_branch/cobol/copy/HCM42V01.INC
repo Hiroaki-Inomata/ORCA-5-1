@@ -1,0 +1,28 @@
+        01  HCM42V01.
+            02  HCM42V01-NYUGAI PIC X(10).
+            02  HCM42V01-SRTKBN PIC X(20).
+            02  HCM42V01-KKNYM  PIC X(100).
+            02  HCM42V01-SAKYMD PIC X(22).
+            02  HCM42V01-PAGE   PIC X(3).
+            02  HCM42V01-LBLCHOSEIP PIC X(12).
+            02  HCM42V01-LBLCHOSEIM PIC X(12).
+            02  HCM42V01-LBLCHOSEI  PIC X(20).
+            02  HCM42V01-NAIYO-TBL      OCCURS  30 TIMES.
+              03  HCM42V01-PTNUM  PIC X(20).
+              03  HCM42V01-NAME   PIC X(36).
+              03  HCM42V01-DENPNUM    PIC X(7).
+              03  HCM42V01-SRYKA  PIC X(10).
+              03  HCM42V01-SRYMD  PIC X(12).
+              03  HCM42V01-SKYKKN PIC X(20).
+              03  HCM42V01-CHOSEIP    PIC X(11).
+              03  HCM42V01-CHOSEIM    PIC X(11).
+            02  HCM42V01-LBLTTLKNS  PIC X(10).
+            02  HCM42V01-LBLTTLCHOSEIP  PIC X(12).
+            02  HCM42V01-LBLTTLCHOSEIM  PIC X(12).
+            02  HCM42V01-LBLTTLCHOSEI   PIC X(10).
+            02  HCM42V01-TTL-G          OCCURS  6 TIMES.
+              03  HCM42V01-TTLTITLE   PIC X(20).
+              03  HCM42V01-TTLKNS PIC X(6).
+              03  HCM42V01-TTLCHOSEIP PIC X(11).
+              03  HCM42V01-TTLCHOSEIM PIC X(11).
+              03  HCM42V01-TTLCHOSEI  PIC X(11).

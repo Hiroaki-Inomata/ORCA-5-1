@@ -1,0 +1,177 @@
+tbl_jobkanri	{
+	HOSPNUM				number(2,0);
+#--> ジョブＩＤ
+	JOBID			number(7,0);
+#--> シェルＩＤ
+	SHELLID			char(8);
+	RUN_OPID		char(16);
+#--> シェルメッセージ
+	SHELLMSG		char(100);
+	TERMID			varchar(32);
+	OPID			varchar(16);
+	PGID	 		char(20);
+	STARTYMD		char(8);
+	ENDYMD			char(8);
+	JOBSTARTTIME	char(8);
+	JOBENDTIME		char(8);
+	STEPSTARTTIME	char(8);
+	STEPENDTIME		char(8);
+	PARAM			char(256);
+	ERRCD			char(4);
+	SYOKBN 			char(1);
+	SRYYM 			char(6);
+	NYUGAIKBN		char(1);
+	SRYYMD			char(8);
+	PTID			number(10,0);
+	UPDCNT			number(10,0);
+	STEPCNT			number(3,0);
+	STOPFLG 		number(1,0);
+	PID1	 		number(5,0);
+	PID2	 		number(5,0);
+	PID3	 		number(5,0);
+	PID4	 		number(5,0);
+	UPDCNT1			number(10,0);
+	UPDCNT2			number(10,0);
+	KARTE_UID		varchar(36);
+	ORCA_UID		varchar(36);
+	YOBI			varchar(500);
+#-----> 主キー更新用項目
+#	UPSHELLID	char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,JOBID,SHELLID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_jobkanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=   :SHELLID 
+			ORDER   BY        JOBID	DESC 
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_jobkanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=   :SHELLID 
+			AND		JOBID		=  :JOBID
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_jobkanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=  :SHELLID 
+			AND		JOBID		=  :JOBID
+			AND		TERMID		=  :TERMID
+		;
+	};
+};
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_jobkanri 
+				SET
+					HOSPNUM		= :HOSPNUM,
+					SHELLMSG	=	:SHELLMSG,
+					TERMID		=	:TERMID,
+					OPID		=	:OPID,
+					PGID		=   :PGID,
+					STARTYMD	=	:STARTYMD,
+					ENDYMD		=	:ENDYMD,
+					JOBSTARTTIME	=	:JOBSTARTTIME,
+					JOBENDTIME	=	:JOBENDTIME,
+					STEPSTARTTIME	=	:STEPSTARTTIME,
+					STEPENDTIME	=	:STEPENDTIME,
+					PARAM		=	:PARAM,
+					ERRCD		=	:ERRCD,
+					SRYYMD		=	:SRYYMD,
+					PTID		=	:PTID,
+					UPDCNT		=	:UPDCNT,
+					STEPCNT		=	:STEPCNT,
+					STOPFLG		=	:STOPFLG,
+					PID1		=	:PID1,
+					PID2		=	:PID2,
+					PID3		=	:PID3,
+					PID4		=	:PID4,
+					YOBI		=	:YOBI,
+					UPDCNT1		=	:UPDCNT1,
+					UPDCNT2		=	:UPDCNT2,
+					KARTE_UID	=	:KARTE_UID,
+					ORCA_UID	=	:ORCA_UID
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=   :SHELLID 
+			AND		JOBID			=  :JOBID
+		;
+	};
+};
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=   :SHELLID 
+			AND		JOBID			=  :JOBID
+		;
+	};
+};
+path	del12	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SHELLID		=   :SHELLID 
+		;
+	};
+};
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_jobkanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+path	all02	{
+	DBSELECT	{
+		DECLARE tbl_jobkanri_all02_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY        STARTYMD DESC,
+			                  ENDYMD,
+			                  SHELLID,
+			                  JOBID
+ 		;
+	};
+};
+path	abort	{
+	DBSELECT	{
+		error
+ 		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_jobkanri_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jobkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY SHELLID,JOBID
+		;
+	};
+};
+

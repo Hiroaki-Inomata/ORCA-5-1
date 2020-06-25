@@ -1,0 +1,576 @@
+tbl_ptinf {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	KANANAME			varchar(100);
+	NAME 				varchar(100);
+	NICKNAME			varchar(100);
+	SEX        			char(1);
+	BIRTHDAY 			char(8);
+	DEATHKBN			char(1);
+	HOME_POST			varchar(7);
+	HOME_ADRS			varchar(200);
+	HOME_BANTI 			varchar(200);
+	HOME_TEL1 			varchar(15);
+	HOME_TEL2 			varchar(15);
+	SETAINUSI			varchar(100);
+	ZOKUGARA			varchar(60);
+	JOB 		        varchar(40);
+	KEITAI_TEL			varchar(15);
+	FAX				varchar(15);
+	EMAIL				varchar(50);
+	DISCOUNT			char(2);
+	DISCOUNT_RATE			char(2);
+	CONDITION_1			char(2);
+	CONDITION_2			char(2);
+	CONDITION_3			char(2);
+	COMMENT_1			varchar(200);
+	COMMENT_2			varchar(200);
+	TABOO_1				varchar(200);
+	TABOO_2				varchar(200);
+	ALLERGY_1			varchar(200);
+	ALLERGY_2			varchar(200);
+	KANSENSYO_1			varchar(200);
+	KANSENSYO_2			varchar(200);
+	RENRAKU_NAME			varchar(100);
+	RENRAKU_ZOKUGARA		varchar(60);
+	RENRAKU_POST 			varchar(7);
+	RENRAKU_ADRS			varchar(200);
+	RENRAKU_BANTI			varchar(200);
+	RENRAKU_TEL1			varchar(15);
+	RENRAKU_TEL2			varchar(15);
+	OFFICE_NAME 			varchar(100);
+	OFFICE_POST			varchar(7);
+	OFFICE_ADRS 			varchar(200);
+	OFFICE_BANTI			varchar(200);
+	OFFICE_TEL 			varchar(15);
+	KISEI_NAME 			varchar(100);
+	KISEI_POST 			varchar(7);
+	KISEI_ADRS 			varchar(200);
+	KISEI_BANTI			varchar(200);
+	KISEI_TEL  			varchar(15);
+	TSTPTNUMKBN			char(1);
+	NYUKIN_HOHO			char(2);
+	MAXZAINUM   			number(8,0);
+	RRKNUM					number(3,0);
+	RRKEDANUM				number(3,0);
+	SKYPRTFLG  			char(1);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> virtual項目
+	ST_SRYYMD			char(8),virtual;
+	ED_SRYYMD			char(8),virtual;
+	NYUGAIKBN			char(1),virtual;
+	HKNKBN				char(1),virtual;
+	SRYYMD				char(8),virtual;
+	SRYYM				char(6),virtual;
+	HKNKBN2				char(1),virtual;
+	VPTNUM				char(20),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_ptinf_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE   HOSPNUM      =   :HOSPNUM  AND
+					PTID  		=   :PTID
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE  (HOSPNUM    = :HOSPNUM) AND
+					NAME   LIKE :NAME
+			ORDER BY NAME
+		;
+	};
+};
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE  (HOSPNUM    = :HOSPNUM) AND
+			(KANANAME  LIKE :KANANAME)
+			ORDER BY   KANANAME
+		;
+	};
+};
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+			((NAME   LIKE :NAME  ) OR
+			(KANANAME  LIKE :KANANAME))
+			ORDER BY   KANANAME
+		;
+	};
+};
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE   HOSPNUM      =   :HOSPNUM 
+ 		;
+	};
+};
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( SEX       =   :SEX    )  AND
+                              ( BIRTHDAY  LIKE  :BIRTHDAY )  AND
+			((NAME   LIKE :NAME  ) OR
+			(KANANAME  LIKE :KANANAME))
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( SEX       =   :SEX    )  AND
+                              ( BIRTHDAY  LIKE  :BIRTHDAY )
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+path	key8	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( SEX       =   :SEX    )
+			ORDER BY  KANANAME
+		;
+	};
+};
+path	key9	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( BIRTHDAY  LIKE  :BIRTHDAY )
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+path	key10	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key10_csr CURSOR FOR
+		SELECT distinct a.*,b.ptnum
+		FROM tbl_jyurrk c,tbl_ptinf a,tbl_ptnum b
+			WHERE     c.HOSPNUM     =   :HOSPNUM
+               AND    c.SRYYMD    >=  :UPYMD
+               AND    c.SRYYMD    <=  :CREYMD
+               AND    a.HOSPNUM    =   :HOSPNUM
+               AND    a.PTID      =   c.PTID
+               AND    b.HOSPNUM    =   :HOSPNUM
+               AND    b.PTID      =   c.PTID
+			ORDER BY  b.PTNUM
+		;
+	};
+};
+path	key11	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key11_csr CURSOR FOR
+		SELECT a.ptid from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND (sryymd 	<=	:ED_SRYYMD 
+		AND sryymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND hknkbn	=	:HKNKBN 
+		group by ptid) b 
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key12	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key12_csr CURSOR FOR
+		SELECT a.* from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND (sryymd 	<=	:ED_SRYYMD 
+		AND sryymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND hknkbn	=	:HKNKBN 
+		group by ptid) b 
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key13	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key13_csr CURSOR FOR
+		SELECT a.ptid from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryymd	LIKE	:SRYYMD
+		AND (upymd 	<=	:ED_SRYYMD 
+		AND upymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND hknkbn	=	:HKNKBN 
+		group by ptid 
+		UNION
+		SELECT distinct ptid from tbl_receupd
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryym 	=	:SRYYM 
+		AND nyugaikbn	=	:NYUGAIKBN 
+                AND (upymd      <=      :ED_SRYYMD
+                AND upymd       >=      :ST_SRYYMD)
+		AND hknkbn	=	:HKNKBN 
+		group by ptid) b
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key14	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key14_csr CURSOR FOR
+		SELECT a.* from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryymd	LIKE	:SRYYMD
+		AND (upymd 	<=	:ED_SRYYMD 
+		AND upymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND hknkbn	=	:HKNKBN 
+		group by ptid 
+		UNION
+		SELECT distinct ptid from tbl_receupd
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryym 	=	:SRYYM 
+		AND nyugaikbn	=	:NYUGAIKBN 
+                AND (upymd      <=      :ED_SRYYMD
+                AND upymd       >=      :ST_SRYYMD)
+		AND hknkbn	=	:HKNKBN 
+		group by ptid) b
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key15	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key15_csr CURSOR FOR
+		SELECT distinct a.*,b.ptnum
+		FROM tbl_ptnyuinrrk c,tbl_ptinf a,tbl_ptnum b
+			WHERE     c.HOSPNUM     =   :HOSPNUM
+               AND    c.TAIINYMD  >=  :UPYMD
+               AND    a.HOSPNUM    =   :HOSPNUM
+               AND    a.PTID      =   c.PTID
+               AND    b.HOSPNUM    =   :HOSPNUM
+               AND    b.PTID      =   c.PTID
+			ORDER BY  b.PTNUM
+		;
+	};
+};
+path	key16	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key16_csr CURSOR FOR
+		SELECT a.ptid from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND (sryymd 	<=	:ED_SRYYMD 
+		AND sryymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid) b 
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key17	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key17_csr CURSOR FOR
+		SELECT a.* from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND (sryymd 	<=	:ED_SRYYMD 
+		AND sryymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid) b 
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key18	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key18_csr CURSOR FOR
+		SELECT a.ptid from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryymd	LIKE	:SRYYMD
+		AND (upymd 	<=	:ED_SRYYMD 
+		AND upymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid 
+		UNION
+		SELECT distinct ptid from tbl_receupd
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryym 	=	:SRYYM 
+		AND nyugaikbn	=	:NYUGAIKBN 
+                AND (upymd      <=      :ED_SRYYMD
+                AND upymd       >=      :ST_SRYYMD)
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid) b
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	key19	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key19_csr CURSOR FOR
+		SELECT a.* from tbl_ptinf a, 
+		(SELECT distinct ptid from tbl_jyurrk 
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryymd	LIKE	:SRYYMD
+		AND (upymd 	<=	:ED_SRYYMD 
+		AND upymd 	>=	:ST_SRYYMD) 
+		AND nyugaikbn	=	:NYUGAIKBN 
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid 
+		UNION
+		SELECT distinct ptid from tbl_receupd
+		WHERE HOSPNUM	=	:HOSPNUM 
+		AND sryym 	=	:SRYYM 
+		AND nyugaikbn	=	:NYUGAIKBN 
+                AND (upymd      <=      :ED_SRYYMD
+                AND upymd       >=      :ST_SRYYMD)
+		AND (hknkbn	=	:HKNKBN  OR
+		     hknkbn	=	:HKNKBN2)
+		group by ptid) b
+		WHERE a.HOSPNUM	=	:HOSPNUM 
+		AND a.ptid	=	b.ptid 
+		AND a.tstptnumkbn	<>	'1'
+		;
+	};
+};
+path	upd1	{
+	DBUPDATE	{
+		UPDATE	tbl_ptinf
+		SET		RRKNUM			= :RRKNUM,
+				RRKEDANUM		= :RRKEDANUM,
+				OPID	   		= :OPID,
+				UPYMD    		= :UPYMD,
+				UPHMS			= :UPHMS
+		WHERE   HOSPNUM      =   :HOSPNUM
+		AND		PTID  		=   :PTID
+		;
+	};
+};
+
+path	st_key1	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_st_key1_csr CURSOR FOR
+		SELECT A.*
+		FROM TBL_PTINF A JOIN  TBL_PTNUM B USING (HOSPNUM,PTID)
+		WHERE  A.HOSPNUM  = :HOSPNUM
+		AND    A.CREYMD  = :CREYMD
+		AND    A.TSTPTNUMKBN    <>      '1'
+		ORDER BY  B.PTNUM
+        ;
+	};
+};
+path	key20	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key20_csr CURSOR FOR
+		SELECT distinct a.*,b.ptnum
+		FROM tbl_jyurrk c,tbl_ptinf a,tbl_ptnum b
+			WHERE     c.HOSPNUM     =   :HOSPNUM
+               AND    c.SRYYMD    >=  :UPYMD
+               AND    c.SRYYMD    <=  :CREYMD
+               AND    a.HOSPNUM    =   :HOSPNUM
+               AND    a.PTID      =   c.PTID
+               AND    b.HOSPNUM    =   :HOSPNUM
+               AND    b.PTID      =   c.PTID
+               AND    b.PTNUM     =    :VPTNUM
+			ORDER BY  b.PTNUM
+		;
+	};
+};
+path	key21	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key21_csr CURSOR FOR
+		SELECT distinct a.*,b.ptnum
+		FROM tbl_ptnyuinrrk c,tbl_ptinf a,tbl_ptnum b
+			WHERE     c.HOSPNUM     =   :HOSPNUM
+               AND    c.TAIINYMD  >=  :UPYMD
+               AND    a.HOSPNUM    =   :HOSPNUM
+               AND    a.PTID      =   c.PTID
+               AND    b.HOSPNUM    =   :HOSPNUM
+               AND    b.PTID      =   c.PTID
+               AND    b.PTNUM     =    :VPTNUM
+			ORDER BY  b.PTNUM
+		;
+	};
+};
+
+path	key22	{
+	DBSELECT	{
+	DECLARE tbl_ptinf_key22_csr CURSOR FOR
+		SELECT A.HOSPNUM,A.PTID,A.NAME,A.KANANAME,C.JRRK_SRYYMD AS CREYMD,D.NRRK_SRYYMD AS UPYMD FROM TBL_PTINF A
+		LEFT JOIN
+		(SELECT HOSPNUM ,PTID,'1' AS FLG FROM TBL_JYURRK
+		WHERE  HOSPNUM = :HOSPNUM
+		  AND  HKNCOMBINUM <>  '9999'
+		  AND  EDANUM      =   1
+		  AND  SRYYMD >= :ST_SRYYMD
+		  AND  SRYYMD <= :ED_SRYYMD
+		UNION
+		SELECT HOSPNUM ,PTID,'1'  AS FLG FROM TBL_PTNYUINRRK
+		WHERE  HOSPNUM = :HOSPNUM
+		  AND  HKNCOMBINUM <>  '9999'
+		  AND  RRKEDANUM      =   1
+		  AND  TAIINYMD >= :ST_SRYYMD
+		  AND  NYUINYMD <= :ED_SRYYMD
+		) B ON (A.HOSPNUM = B.HOSPNUM AND A.PTID=B.PTID)
+		LEFT  JOIN
+		(SELECT HOSPNUM ,PTID, MAX(SRYYMD) AS JRRK_SRYYMD FROM TBL_JYURRK
+		WHERE  HOSPNUM = :HOSPNUM
+		  AND  HKNCOMBINUM <>  '9999'
+		  GROUP BY HOSPNUM,PTID
+		) C ON (C.HOSPNUM = A.HOSPNUM AND C.PTID = A.PTID)
+		LEFT  JOIN
+		(SELECT HOSPNUM ,PTID, MAX(TAIINYMD) AS NRRK_SRYYMD FROM TBL_PTNYUINRRK
+		WHERE  HOSPNUM = :HOSPNUM
+		  AND  RRKEDANUM  = 1
+		  GROUP BY HOSPNUM,PTID
+		) D ON (D.HOSPNUM = A.HOSPNUM AND D.PTID = A.PTID)
+		WHERE A.HOSPNUM = :HOSPNUM
+		 AND  A.TSTPTNUMKBN <> '1'
+		 AND( A.CREYMD  = '        ' OR
+		      A.CREYMD <=    :ED_SRYYMD )
+		 AND  B.FLG IS  NULL
+		ORDER BY PTID
+		;
+	};
+};
+
+path	key23	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =    :HOSPNUM  )
+			  AND ( BIRTHDAY  LIKE  :BIRTHDAY )
+			  AND ( NAME      LIKE  :NAME     )
+			ORDER BY   KANANAME,BIRTHDAY
+		;
+	};
+};
+
+path	key6a	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key6a_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( SEX       =   :SEX    )  AND
+                              ( BIRTHDAY  >=  :BIRTHDAY )  AND
+                              ( BIRTHDAY  <=  :ED_SRYYMD )  AND
+			      ((NAME     LIKE :NAME  ) OR
+			      (KANANAME  LIKE :KANANAME))
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+path	key7a	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key7a_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( SEX       =   :SEX    )  AND
+                              ( BIRTHDAY  >=  :BIRTHDAY )  AND
+                              ( BIRTHDAY  <=  :ED_SRYYMD )
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+
+path	key8a	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key8a_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( BIRTHDAY  >=  :BIRTHDAY )  AND
+                              ( BIRTHDAY  <=  :ED_SRYYMD )  AND
+			      ((NAME     LIKE :NAME  ) OR
+			      (KANANAME  LIKE :KANANAME))
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};
+path	key9a	{
+	DBSELECT	{
+		DECLARE tbl_ptinf_key9a_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptinf
+			WHERE ( HOSPNUM    =   :HOSPNUM )  AND
+                              ( BIRTHDAY  >=  :BIRTHDAY )  AND
+                              ( BIRTHDAY  <=  :ED_SRYYMD )
+			ORDER BY   BIRTHDAY,
+                                   KANANAME
+		;
+	};
+};

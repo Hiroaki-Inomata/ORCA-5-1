@@ -1,0 +1,47 @@
+kanri_cd    : "1005"
+name        : "¿ÇÎÅ²ÊÌÜ¾ðÊó"
+class_cd    : "*"
+item_max    : 7
+item_list   :
+- item_no   : 1
+  item      : "SRYKANAME"
+  item_jp   : "¿ÇÎÅ²ÊÌ¾"
+  type      : "X"
+  start     : 1
+  length    : 80
+- item_no   : 2
+  item      : "SRYKANAME1"
+  item_jp   : "Ã»½ÌÌ¾£±"
+  type      : "X"
+  start     : 81
+  length    : 20
+- item_no   : 3
+  item      : "SRYKANAME2"
+  item_jp   : "Ã»½ÌÌ¾£²"
+  type      : "X"
+  start     : 101
+  length    : 12
+- item_no   : 4
+  item      : "SRYKANAME3"
+  item_jp   : "Ã»½ÌÌ¾£³"
+  type      : "X"
+  start     : 113
+  length    : 4
+- item_no   : 5
+  item      : "RECESRYKA"
+  item_jp   : "¥ì¥»ÅÅ¿ÇÎÅ²Ê¥³¡¼¥É"
+  type      : "X"
+  start     : 117
+  length    : 2
+- item_no   : 6
+  item      : "JIKANKSN1-40"
+  item_jp   : "½èÃÖ»þ´Ö³°²Ã»»Åù£±»»Äê"
+  type      : "X"
+  start     : 119
+  length    : 1
+- item_no   : 7
+  item      : "JIKANKSN1-50"
+  item_jp   : "¼ê½Ñ»þ´Ö³°²Ã»»Åù£±»»Äê"
+  type      : "X"
+  start     : 120
+  length    : 1

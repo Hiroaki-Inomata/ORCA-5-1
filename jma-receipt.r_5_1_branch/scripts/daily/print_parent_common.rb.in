@@ -1,0 +1,82 @@
+#!%RUBY%
+# coding : euc-jp
+
+class String
+  def blank?
+    self.to_s.empty?
+  end
+end
+
+#LP名を省略された際に使用するプリンタ名
+DEFAULT_LP = 'lp1'
+
+#クライアント印刷最大ページ数（ダイアログ表示しない場合）
+MAX_PAGES = 50
+
+#最大スレッド数
+MAX_THREADS = 2
+
+#プレビュー枠あり、印刷枠なし変換
+REPLACED_FORMS = { 'HCM22V04.red' => 'HCM22V04P.red',
+  'HCM24V04.red' => 'HCM24V04P.red',
+  'HCM21V04.red' => 'HCM21V04P.red',
+  'HCM18V04.red' => 'HCM18V04P.red',
+  'HCM20V04.red' => 'HCM20V04P.red',
+  'HCN22V04.red' => 'HCN22V04P.red',
+  'HCN21V04.red' => 'HCN21V04P.red',
+  'HCN50.red' => 'HCN50P.red',
+  'HCN51.red' => 'HCN51P.red',
+  'HCM22V05.red' => 'HCM22V05P.red',
+  'HCM24V05.red' => 'HCM24V05P.red',
+  'HCM21V05.red' => 'HCM21V05P.red',
+  'HCM18V05.red' => 'HCM18V05P.red',
+  'HCM20V05.red' => 'HCM20V05P.red',
+  'HCN22V05.red' => 'HCN22V05P.red',
+  'HCN21V05.red' => 'HCN21V05P.red',
+  'HCN50V01.red' => 'HCN50V01P.red',
+  'HCN51V01.red' => 'HCN51V01P.red',
+  'HCM23V04.red' => 'HCM48.red',
+  'HCM29V02.red' => 'HCM49.red',
+  'HCM53.red' => 'HCM54.red',
+  'HCN23V04.red' => 'HCN48.red',
+  'HCN53.red' => 'HCN54.red',
+  'HCN23V05.red' => 'HCN48V01.red',
+  'HCM29V03.red' => 'HCM49V01.red',
+  'HCM53V01.red' => 'HCM54V01.red',
+  'HCM23V05.red' => 'HCM48V01.red',
+  'HCN53V01.red' => 'HCN54V01.red',
+  'HCM22V06.red' => 'HCM22V06P.red',
+  'HCN50V02.red' => 'HCN50V02P.red',
+  'HCM24V06.red' => 'HCM24V06P.red',
+  'HCM21V06.red' => 'HCM21V06P.red',
+  'HCN51V02.red' => 'HCN51V02P.red',
+  'HCM18V06.red' => 'HCM18V06P.red',
+  'HCM20V06.red' => 'HCM20V06P.red',
+  'HCM23V06.red' => 'HCM48V02.red',
+  'HCN23V06.red' => 'HCN48V02.red',
+  'HCM29V04.red' => 'HCM49V02.red',
+  'HCM53V02.red' => 'HCM54V02.red',
+  'HCN53V02.red' => 'HCN54V02.red',
+  'HCN50V03.red' => 'HCN50V03P.red',
+  'HCN51V03.red' => 'HCN51V03P.red',
+  'HCN23V07.red' => 'HCN48V03.red',
+  'HCN53V03.red' => 'HCN54V03.red',
+  'HCN50V04.red' => 'HCN50V04P.red',
+  'HCN51V04.red' => 'HCN51V04P.red',
+  'HCN23V08.red' => 'HCN48V04.red',
+  'HCN53V04.red' => 'HCN54V04.red',
+  'HCM79.red' => 'HCM80.red',
+  'HCM81.red' => 'HCM82.red',
+  'HCM83.red' => 'HCM83P.red',
+  'HCM84.red' => 'HCM84P.red',
+  'HCM85.red' => 'HCM85P.red',
+  'HCM86.red' => 'HCM86P.red',
+  'HCM87.red' => 'HCM87P.red',
+  'HCM89.red' => 'HCM89P.red',
+  'HCN72.red' => 'HCN72P.red',
+  'HCN73.red' => 'HCN73P.red',
+  'HCN74.red' => 'HCN74P.red',
+}
+
+# overlay layer名
+OVERLAY_LAYER_PREFIX="O_"

@@ -1,0 +1,41 @@
+xml_receiptdata_makev3res {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	receiptdata_makev3res {
+		Request_Number		varchar(02);
+		Response_Number		varchar(02);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Information_Date	varchar(10);
+		Information_Time	varchar(8);
+		Api_Result		varchar(3);
+		Api_Result_Message	varchar(100);
+		Reskey			varchar(100);
+		Submission_Mode		varchar(2);
+		Perform_Month		varchar(7);
+		Start_Month		varchar(7);
+		End_Month		varchar(7);
+		InsuranceProvider_Number	varchar(8);
+		Data_Id_Information {
+			Data_Id         varchar(37);
+			Print_Id        varchar(37);
+		} [10];
+		Receiptdata_Warning_Info {
+			Receiptdata_Warning		varchar(3);
+			Receiptdata_Warning_Message	varchar(100);
+		} [5];
+		Effective_Period_Information{
+			Info_Period_Start_Month	varchar(7);
+			Info_Period_End_Month	varchar(7);
+			Info_Period_Select_Mode	varchar(2);
+		}[10];
+		InsuranceProvider_Information{
+			Info_InsuranceProvider_Number	varchar(8);
+			Info_InsuranceProvider_Name	varchar(30);
+		}[10];
+		All_Count		varchar(05);
+		All_Number_Of_Sheets	varchar(05);
+	};
+};

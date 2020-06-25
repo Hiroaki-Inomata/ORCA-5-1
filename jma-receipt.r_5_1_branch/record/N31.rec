@@ -1,0 +1,67 @@
+N31 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    POST {
+      textdata varchar(7);
+    };
+    scrolledwindow1 {
+      CYOIKILST {
+        label554 {
+          textdata varchar(2);
+        };
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(4);
+            column3 varchar(7);
+            column4 varchar(100);
+            column5 varchar(600);
+          }[200];
+          selectdata bool[200];
+          fgcolor varchar(16)[200];
+          bgcolor varchar(16)[200];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    PREFCDCOMBO {
+      PREFCD {
+        textdata varchar(13);
+      };
+      count int;
+        item varchar(13)[47];
+    };
+    PREFNAME {
+      textdata varchar(10);
+    };
+    PREFKANA {
+      textdata varchar(20);
+    };
+    CITYKANA {
+      textdata varchar(100);
+    };
+    TOWNKANA {
+      textdata varchar(100);
+    };
+    CITYNAME {
+      textdata varchar(50);
+    };
+    TOWNNAME {
+      textdata varchar(50);
+    };
+    TOWNNAME2 {
+      textdata varchar(600);
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

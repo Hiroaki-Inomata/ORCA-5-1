@@ -1,0 +1,64 @@
+P02K {
+  fixed10 {
+    SELNUM {
+      numdata number(3);
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    FTNMONEY {
+      numdata number(7);
+    };
+    MSG01 {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    MSG02 {
+      textdata varchar(30);
+    };
+    SRYDD {
+      numdata number(2);
+    };
+    NYUGAIKBN_COMB {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      KOHFTNLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(10);
+            column4 varchar(4);
+            column5 varchar(10);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+    MSG03 {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    MSG04 {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    MSG05 {
+      textdata varchar(30);
+    };
+    MSG06 {
+      textdata varchar(50);
+    };
+    MSG07 {
+      style varchar(20);
+      textdata varchar(30);
+    };
+  };
+};

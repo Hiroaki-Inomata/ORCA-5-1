@@ -1,0 +1,16 @@
+P014 {
+  fixed1 {
+    PTNUM1 {
+      state int;
+      textdata varchar(20);
+    };
+    PTNUM2 {
+      state int;
+      textdata varchar(20);
+    };
+    PTNUM3 {
+      state int;
+      textdata varchar(20);
+    };
+  };
+};

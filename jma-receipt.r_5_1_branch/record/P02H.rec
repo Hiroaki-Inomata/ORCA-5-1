@@ -1,0 +1,24 @@
+P02H {
+  fixed10 {
+    HBTNUM {
+      textdata varchar(3);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      HBTNUMLST {
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(3);
+            column3 varchar(20);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+  };
+};

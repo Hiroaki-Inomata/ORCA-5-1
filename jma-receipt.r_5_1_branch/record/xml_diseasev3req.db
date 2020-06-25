@@ -1,0 +1,58 @@
+xml_diseasev3req {
+	context int;
+	object  object;
+	mode	int;
+	recordname	varchar(128);
+	diseasereq {
+		Patient_ID		varchar(20);
+		Base_Month		varchar(7);
+		Perform_Date		varchar(10);
+		Perform_Time		varchar(8);
+		Diagnosis_Information  {
+			Department_Code		varchar(2);
+		};
+		Disease_Information  {
+			Disease_Insurance_Class		varchar(1);
+			Disease_Code			varchar(155);
+			Disease_Name			varchar(80);
+			Disease_Single	{
+				Disease_Single_Code	varchar(7);
+				Disease_Single_Name	varchar(20);
+			}[21] ;
+			Disease_Supplement_Name		varchar(40);
+			Disease_Supplement_Single	{
+				Disease_Supplement_Single_Code	varchar(10);
+			}[3] ;
+#---------------> 入外区分
+			Disease_InOut			varchar(1);
+#---------------> 主病
+			Disease_Category		varchar(2);
+#---------------> 疑いフラグ
+			Disease_SuspectedFlag		varchar(1);
+			Disease_AcuteFlag		varchar(1);
+			Disease_StartDate		varchar(10);
+			Disease_EndDate			varchar(10);
+#---------------> 転帰区分
+			Disease_OutCome			varchar(2);
+#---------------> これ以降「None」対応項目
+#---------------> カルテ病名
+			Disease_Karte_Name		varchar(80);
+#---------------> 疾患区分
+			Disease_Class			varchar(4);
+#---------------> 保険適用
+			Insurance_Combination_Number	varchar(4);
+#---------------> レセプト表示
+			Disease_Receipt_Print		varchar(4);
+#---------------> 表示期間
+			Disease_Receipt_Print_Period	varchar(4);
+#---------------> 保険病名
+			Insurance_Disease		varchar(4);
+#---------------> 退院証明書
+			Discharge_Certificate		varchar(4);
+#---------------> 原疾患区分
+			Main_Disease_Class		varchar(4);
+#---------------> 合併症区分
+			Sub_Disease_Class		varchar(4);
+		}[50];
+	};
+};

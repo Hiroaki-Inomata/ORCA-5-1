@@ -1,0 +1,67 @@
+xml_subjectiveslstv2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	subjectiveslstres {
+		Information_Date		varchar(10);
+		Information_Time		varchar(8);
+		Api_Result			varchar(3);
+		Api_Result_Message		varchar(100);
+		Reskey				varchar(100);
+		Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+        	};
+#---    診療年月
+		Perform_Date			varchar(07);
+#---    症状詳記リスト
+		Subjectives_Information {
+		    InOut				varchar(1);
+#---                診療科
+		    Department_Code			varchar(2);
+		    Department_Name			varchar(80);
+#---                保険組合せ情報
+		    HealthInsurance_Information  {
+#---                    保険組合せ番号
+	                Insurance_Combination_Number		varchar(4);
+#---                    保険組合せ有効期間
+                        Insurance_Combination_StartDate		varchar(10);
+       	     	        Insurance_Combination_ExpiredDate	varchar(10);
+		        InsuranceProvider_Class			varchar(03);
+			InsuranceProvider_WholeName		varchar(20);
+			InsuranceProvider_Number		varchar(08);
+			HealthInsuredPerson_Symbol		varchar(80);
+			HealthInsuredPerson_Number		varchar(80);
+#---            	補助区分
+            		HealthInsuredPerson_Assistance		varchar(01);
+            		HealthInsuredPerson_Assistance_WholeName	varchar(30);
+#---            	本人家族区分
+            		RelationToInsuredPerson			varchar(01);
+#---            	公費情報
+            		PublicInsurance_Information   {
+                		PublicInsurance_Class		varchar(03);
+                		PublicInsurance_Name		varchar(20);
+                		PublicInsurer_Number		varchar(08);
+                		PublicInsuredPerson_Number	varchar(20);
+	            		} [4];
+#---    保険組合せ状態
+			Insurance_Combination_Mode      varchar(01);
+        	    	} ;
+#---    診療日
+	            Perform_Day			varchar(2);
+#---    症状詳記区分
+	            Subjectives_Detail_Record	varchar(2);
+		    Subjectives_Detail_Record_WholeName	varchar(50);
+#---    連番
+		    Subjectives_Number		varchar(2);
+		} [50];
+#---    症状詳記内容
+		Subjectives_Code_Information {
+		    Subjectives_Code		varchar(4800);
+		};
+	};
+};

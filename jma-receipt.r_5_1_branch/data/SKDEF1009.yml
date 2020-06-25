@@ -1,0 +1,102 @@
+kanri_cd    : "1009"
+name        : "患者番号構成管理情報"
+class_cd    : "*"
+item_max    : 15
+item_list   :
+- item_no   : 1
+  item      : "PTNUMKSIKBN"
+  item_jp   : "患者番号構成区分"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "JIYKSIKBN"
+  item_jp   : "1.自由構成−区分"
+  type      : "X"
+  start     : 2
+  length    : 1
+- item_no   : 3
+  item      : "JIYKSIKETA"
+  item_jp   : "　　　　　　桁数"
+  type      : "9"
+  start     : 3
+  length    : 2
+  precision : 0
+- item_no   : 4
+  item      : "HJNKSIKBN"
+  item_jp   : "2.標準構成−区分"
+  type      : "X"
+  start     : 5
+  length    : 1
+- item_no   : 5
+  item      : "HJNKSINENKBN"
+  item_jp   : "　　　　　　年区分"
+  type      : "X"
+  start     : 6
+  length    : 1
+- item_no   : 6
+  item      : "HJNKSIRENNUMKBN"
+  item_jp   : "　　　　　　連番初期化区分"
+  type      : "X"
+  start     : 7
+  length    : 1
+- item_no   : 7
+  item      : "HJNKSIRENNUMKETA"
+  item_jp   : "　　　　　　連番号桁数"
+  type      : "9"
+  start     : 8
+  length    : 2
+  precision : 0
+- item_no   : 8
+  item      : "KKCKSIKBN"
+  item_jp   : "3.拡張構成−区分"
+  type      : "X"
+  start     : 10
+  length    : 1
+- item_no   : 9
+  item      : "KKCKSIMAEKETA"
+  item_jp   : "　　　　　　前桁数"
+  type      : "9"
+  start     : 11
+  length    : 2
+  precision : 0
+- item_no   : 10
+  item      : "KKCKSIRENNUMKETA"
+  item_jp   : "　　　　　　連番号桁数"
+  type      : "9"
+  start     : 13
+  length    : 2
+  precision : 0
+- item_no   : 11
+  item      : "KKCKSIATOKETA"
+  item_jp   : "　　　　　　後桁数"
+  type      : "9"
+  start     : 15
+  length    : 2
+  precision : 0
+- item_no   : 12
+  item      : "NEN"
+  item_jp   : "年"
+  type      : "X"
+  start     : 17
+  length    : 4
+- item_no   : 13
+  item      : "RENNUM"
+  item_jp   : "連番号"
+  type      : "9"
+  start     : 21
+  length    : 10
+  precision : 0
+- item_no   : 14
+  item      : "PTID"
+  item_jp   : "患者ＩＤ"
+  type      : "9"
+  start     : 31
+  length    : 10
+  precision : 0
+- item_no   : 15
+  item      : "NENTUKI"
+  item_jp   : "年切替え月"
+  type      : "X"
+  start     : 41
+  length    : 2

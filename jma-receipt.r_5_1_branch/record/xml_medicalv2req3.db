@@ -1,0 +1,17 @@
+xml_medicalv2req3 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv2req3 {
+		Request_Number		varchar(2);
+#---    	´µ¼ÔÈÖ¹æ
+		Patient_ID		varchar(20);
+#---    	½é¿Ç»»ÄêÆü
+		First_Calculation_Date	varchar(10);
+#---    	ºÇ½ªÍè±¡Æü
+		LastVisit_Date		varchar(10);
+#---   		¿ÇÎÅ²Ê
+		Department_Code		varchar(2);
+	};
+};

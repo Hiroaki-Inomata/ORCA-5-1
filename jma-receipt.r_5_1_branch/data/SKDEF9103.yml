@@ -1,0 +1,23 @@
+kanri_cd    : "9103"
+name        : "処方せんデータ連携情報"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "EFOUT"
+  item_jp   : "処方せん連携用データ作成"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "FILE-DIR"
+  item_jp   : "処方せん連携用デイレクトリ"
+  type      : "X"
+  start     : 2
+  length    : 200
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 202
+  length    : 298

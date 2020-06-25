@@ -1,0 +1,138 @@
+tbl_sryacct_sub {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	ZAINUM				number(8,0);
+	RENNUM				number(3,0);
+	DATE_HI				number(2,0);
+	DAY_CNT				number(3,0);
+#-----> 検索用項目
+	VNYUGAIKBN 			char(1),virtual;
+	VSRYYM 				char(6),virtual;
+	VFROM				number(2,0),virtual;
+	VTO					number(2,0),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,ZAINUM,RENNUM,DATE_HI;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_sub_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_sub
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+			AND   RENNUM      =   :RENNUM
+			AND   DATE_HI        =   :DATE_HI
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_sub_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_sub
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path    del    {
+        DBDELETE        {
+                DELETE
+		FROM tbl_sryacct_sub
+		WHERE HOSPNUM =   :HOSPNUM
+		AND   PTID    =   :PTID
+		AND   ZAINUM  =   :ZAINUM
+		;
+        };
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacct_sub
+		WHERE   HOSPNUM    =   :HOSPNUM
+		AND     PTID       =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacct_sub
+		WHERE (HOSPNUM,PTID,ZAINUM) in (
+		SELECT HOSPNUM,PTID,ZAINUM
+		FROM tbl_sryacct_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =    :VNYUGAIKBN
+			AND   PTID        =    :PTID
+		);
+	};
+};
+
+path    del3    {
+        DBDELETE        {
+                DELETE
+		FROM tbl_sryacct_sub
+		WHERE (HOSPNUM,PTID,ZAINUM) in (
+		SELECT HOSPNUM,PTID,ZAINUM
+                FROM tbl_sryacct_main
+                        WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   NYUGAIKBN   =   :VNYUGAIKBN
+                        AND   PTID        =   :PTID
+                        AND   SRYYM       =   :VSRYYM
+		);
+        };
+};
+
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sryacct_sub_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacct_sub
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+
+path	tmpkey 	{
+	DBCREATE	{
+		CREATE TEMP TABLE tbl_sryacct_sub ON COMMIT PRESERVE ROWS AS
+		SELECT *
+		FROM   tbl_sryacct_sub
+		WHERE ( HOSPNUM,PTID,ZAINUM ) IN (
+		SELECT  HOSPNUM,PTID,ZAINUM
+		FROM   tbl_sryacct_main
+		WHERE  HOSPNUM	  = :HOSPNUM
+		AND ( CASE WHEN :PTID <> 0  THEN PTID = :PTID ELSE 1 = 1 END)
+		AND	   SRYYM      = :VSRYYM
+		);
+	};
+	DBCREATEINDEX	{
+		CREATE INDEX idx_tmp_sryacct_sub_ptid ON pg_temp.tbl_sryacct_main (ptid,zainum)
+		;
+	};
+	DBDROP	{
+		DROP TABLE pg_temp.tbl_sryacct_sub
+		;
+	};
+};
+
+path	tmpupd1 	{
+	DBUPDATE	{
+		UPDATE pg_temp.tbl_sryacct_sub
+			SET DAY_CNT  = 0
+			WHERE   (DATE_HI < :VFROM
+			     OR  DATE_HI > :VTO )
+		;
+	};
+};

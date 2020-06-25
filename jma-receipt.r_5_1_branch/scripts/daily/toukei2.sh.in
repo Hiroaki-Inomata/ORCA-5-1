@@ -1,0 +1,95 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    日次統計データ作成
+#        $1  TERMID 
+#        $2  HOSPID
+#        $3  HOSPCD   
+#        $4  県番号
+#        $5  SRYYM 
+#        $6  NYUGAIKBN 
+#        $7  FILENM1
+#        $8  FILENM2 
+#        $9  DATAKBN
+#        ${10} HOUKATUKBN
+#        ${11} KOJINKBN
+#        ${12} CDKBN
+#        ${13} JOBID
+#        ${14} SHELLID
+#        ${15} ERRFILENM
+#        ${16} ファイル出力先区分（診療）
+#        ${19} HOSPNUM
+#        ${20} FILENM1 FOLDER（未使用）
+#-------------------------------------------#
+
+export  PATH=$SITESCRIPTSDIR/allways:$PATCHSCRIPTSDIR/allways:$SCRIPTSDIR/allways:$PATH
+
+        LOG_FILE="/var/log/jma-receipt/${19}toukei2.log"
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+        echo "arg7  = [" ${7}  "]"
+        echo "arg8  = [" ${8}  "]"
+        echo "arg12 = [" ${12} "]"
+        echo "arg15 = [" ${15} "]"
+        echo "arg16 = [" ${16} "]"
+        echo "arg19 = [" ${19} "]"
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${15}  "]"
+        rm  -f ${MCP_TEMPDIR}/${15}
+
+        rm  -f ${MCP_TEMPDIR}/${19}TOKEI1*
+
+
+e2sjis(){
+  echo "--- nkf  [" $1 " sjis =>" $2 "]"
+  nkf -s -Lw $1 > $2
+}
+
+e2utf8(){
+  echo "--- nkf  [" $1 " utf8 =>" $2 "]"
+  nkf --ic=EUC-JIS-2004 --oc=UTF-8 -Lu $1 | tru8.rb > $2
+}
+
+
+        
+        if  [ ${6} -eq '2' ]; then
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBT110 -parameter $1,$2,$4,$5,$6,$9,${10},${13},${14},${19},${15}
+        else
+	    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBT120 -parameter $1,$2,$4,$5,$6,$9,${10},${13},${14},${19},${15}
+        fi
+        
+        if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+            exit 
+        else
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBT130 -parameter $1,${11},${13},${14},${19},${15},${7},${16},${20}
+	    fi
+
+        if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+            exit 
+        fi
+
+#       漢字コード変換
+        case ${12} in
+          2)
+            e2sjis "${MCP_TEMPDIR}/${19}toukei11.dat" "${MCP_TEMPDIR}/$7"
+            ;;
+          3)
+            e2utf8 "${MCP_TEMPDIR}/${19}toukei11.dat" "${MCP_TEMPDIR}/$7"
+            ;;
+          *)
+            echo "--- cp   [" ${MCP_TEMPDIR}/${19}toukei11.dat "=>" ${MCP_TEMPDIR}/$7 "]"
+            cp  ${MCP_TEMPDIR}/${19}toukei11.dat ${MCP_TEMPDIR}/$7 
+        esac
+         
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${13}${14},${19}
+        exit 

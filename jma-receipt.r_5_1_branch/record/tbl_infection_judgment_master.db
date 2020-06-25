@@ -1,0 +1,59 @@
+tbl_infection_judgment_master {
+	ID		number(5,0);
+	DISEASE		number(2,0);
+	JUDGMENT_CODE	varchar(9);
+	CODE_KBN	number(1,0);
+	SRYKBN		varchar(2);
+	CREYMD		varchar(8);
+	UPYMD		varchar(8);
+	UPHMS		varchar(6);
+};
+primary	{
+	ID;
+};
+
+path	key		{
+	DBSELECT	{
+		DECLARE tbl_infection_judgment_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_infection_judgment
+			WHERE   ID = :ID
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_infection_judgment
+			VALUES(
+				:ID,
+				:DISEASE,
+				:JUDGMENT_CODE,
+				:CODE_KBN,
+				:SRYKBN,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_infection_judgment
+			SET
+				ID            = :ID,
+				DISEASE       = :DISEASE,
+				JUDGMENT_CODE = :JUDGMENT_CODE,
+				CODE_KBN      = :CODE_KBN,
+				SRYKBN        = :SRYKBN,
+				CREYMD        = :CREYMD,
+				UPYMD         = :UPYMD,
+				UPHMS         = :UPHMS
+			WHERE   ID = :ID
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_infection_judgment
+			WHERE   ID = :ID
+		;
+	};
+};

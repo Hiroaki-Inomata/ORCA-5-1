@@ -1,0 +1,26 @@
+name	wakayama;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU3003"	"OpenCOBOL";
+bind	"SEIKYU30031"	"OpenCOBOL";
+bind	"SEIKYU30032"	"OpenCOBOL";
+bind	"SEIKYU3004"	"OpenCOBOL";
+bind	"SEIKYU3005"	"OpenCOBOL";
+bind	"SEIKYU3006"	"OpenCOBOL";
+bind	"SEIKYU3007"	"OpenCOBOL";
+bind	"SEIKYU30071"	"OpenCOBOL";
+bind	"SEIKYU30072"	"OpenCOBOL";
+bind	"SEIKYU3008"	"OpenCOBOL";
+bind	"SEIKYU3009"	"OpenCOBOL";
+bind	"SEIKYU3010"	"OpenCOBOL";
+bind	"SEIKYU3011"	"OpenCOBOL";
+bind	"SEIKYU3012"	"OpenCOBOL";
+bind	"SOKATU3000"	"OpenCOBOL";
+bind	"SOKATU3005"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

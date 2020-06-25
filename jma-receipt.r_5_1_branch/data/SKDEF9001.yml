@@ -1,0 +1,35 @@
+kanri_cd    : "9001"
+name        : "ＣＬＡＩＭ通信相手先情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "ADDRESS"
+  item_jp   : "送信アドレス"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "PORT1"
+  item_jp   : "ポート−受付"
+  type      : "X"
+  start     : 41
+  length    : 5
+- item_no   : 3
+  item      : "PORT2"
+  item_jp   : "ポート−請求"
+  type      : "X"
+  start     : 46
+  length    : 5
+- item_no   : 4
+  item      : "MEMO"
+  item_jp   : "メモ"
+  type      : "X"
+  start     : 51
+  length    : 40
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 91
+  length    : 409

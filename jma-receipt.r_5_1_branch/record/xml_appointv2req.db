@@ -1,0 +1,19 @@
+xml_appointv2req {
+	context	  int;
+	object	  object;
+	mode	  int;
+	recordname	varchar(128);
+	appointreq {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+		Appointment_Date		varchar(10);
+		Appointment_Time		varchar(8);
+		Appointment_Id			varchar(5);
+		Department_Code			varchar(2);
+		Physician_Code			varchar(5);
+		Medical_Information		varchar(2);
+		Appointment_Information		varchar(2);
+		Appointment_Note		varchar(100);
+	};
+};

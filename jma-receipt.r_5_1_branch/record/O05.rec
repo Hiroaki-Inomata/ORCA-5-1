@@ -1,0 +1,17 @@
+O05 {
+  fixed17 {
+    B12 {
+      state int;
+    };
+    KBT {
+      textdata varchar(22);
+    };
+    KIKAN {
+      textdata varchar(20);
+    };
+    LBLMSG {
+      style varchar(20);
+      textdata varchar(50);
+    };
+  };
+};

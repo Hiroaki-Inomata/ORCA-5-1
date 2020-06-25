@@ -1,0 +1,11 @@
+xml_visitptlstv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	visitptlstreq {
+		Request_Number		varchar(2);
+    		Visit_Date		varchar(10);
+		Department_Code		varchar(2);
+   	};
+};

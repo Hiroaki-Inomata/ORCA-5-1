@@ -1,0 +1,202 @@
+tbl_sryacctplus {
+	HOSPNUM				number(2,0);
+	NYUGAIKBN			char(1);
+	PTID				number(10,0);
+	SRYKA				char(2);
+	SRYYM				char(6);
+	ZAINUM				number(8,0);
+	RENNUM				number(2,0);
+	PLUSKBN				number(1,0);
+	RSIKINGAKU			number(7,0);
+	SRYCD1		                char(9);
+	SYUTEN1				number(7,0);
+	YKZTEN1				number(7,0);
+	KIZAITEN1			number(7,0);
+	FIRTEN1				number(7,0);
+	SRYCD2		                char(9);
+	SYUTEN2				number(7,0);
+	YKZTEN2				number(7,0);
+	KIZAITEN2			number(7,0);
+	FIRTEN2				number(7,0);
+	SRYCD3		                char(9);
+	SYUTEN3				number(7,0);
+	YKZTEN3				number(7,0);
+	KIZAITEN3			number(7,0);
+	FIRTEN3				number(7,0);
+	SRYCD4		                char(9);
+	SYUTEN4				number(7,0);
+	YKZTEN4				number(7,0);
+	KIZAITEN4			number(7,0);
+	FIRTEN4				number(7,0);
+	SRYCD5		                char(9);
+	SYUTEN5				number(7,0);
+	YKZTEN5				number(7,0);
+	KIZAITEN5			number(7,0);
+	FIRTEN5				number(7,0);
+	SANSOTEN			number(7,0);
+	CHISOTEN			number(7,0);
+	INGAITEN			number(7,0);
+	GRP_ZAINUM1			number(8,0);
+	GRP_ZAINUM2			number(8,0);
+	GRP_ZAINUM3			number(8,0);
+	GRP_ZAINUM4			number(8,0);
+	GRP_ZAINUM5			number(8,0);
+	GRP_ZAINUM6			number(8,0);
+	GRP_ZAINUM7			number(8,0);
+	GRP_ZAINUM8			number(8,0);
+	GRP_ZAINUM9			number(8,0);
+	GRP_ZAINUM10			number(8,0);
+	GRP_ZAINUM11			number(8,0);
+	GRP_ZAINUM12			number(8,0);
+	GRP_ZAINUM13			number(8,0);
+	GRP_ZAINUM14			number(8,0);
+	GRP_ZAINUM15			number(8,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,NYUGAIKBN,PTID,SRYKA,SRYYM,ZAINUM,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER   BY      RENNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY      HOSPNUM,
+                                        NYUGAIKBN,
+                                        PTID,
+                                        SRYKA,
+                                        SRYYM,
+                                        ZAINUM,
+                                        RENNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   ZAINUM      =   :ZAINUM
+			ORDER   BY      RENNUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   LIKE :NYUGAIKBN
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_sryacctplus_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_sryacctplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   LIKE :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+		;
+	};
+};

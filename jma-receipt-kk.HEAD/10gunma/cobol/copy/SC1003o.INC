@@ -1,0 +1,86 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * ∆¸∞Â…∏Ω‡•Ï•ª•◊•»•Ω•’•»° JMA standard receipt software°À
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+       01  SC03o.
+      *    ∞ÂŒ≈µ°¥ÿ≈¿øÙ…Ω∂Ë ¨
+           03  SC03o-TENSUHYO            PIC  X(02) OCCURS 4.
+      *    ∞ÂŒ≈µ°¥ÿ•≥°º•…
+           03  SC03o-HOSPCDN             PIC  X(40).
+      *    ∞ı∫˛∆¸…’
+           03  SC03o-PRTYM               PIC  X(16).
+      *    ª‘ƒÆ¬ºÃæ
+           03  SC03o-CITYNAME            PIC  X(30).
+      *    ¿¡µ·∆¸…’
+           03  SC03o-SEIYMD              PIC  X(22).
+      *    Õπ ÿ»÷πÊ
+      *     03  SC03o-POST                PIC  X(18).
+      *    ΩÍ∫ﬂ√œ
+           03  SC03o-ADRS                PIC  X(100).
+      *    ∞ÂŒ≈µ°¥ÿÃææŒ
+           03  SC03o-HOSPNAME            PIC  X(100).
+      *    ≈≈œ√»÷πÊ
+           03  SC03o-TEL                 PIC  X(15).
+      *    µÎ…’≥‰πÁ
+           03  SC03o-KYURATE-TBL        OCCURS  8.
+               05  SC03o-KYURATE         PIC  X(02).
+      *    §Ω§Œ¬æ∏¯»Ò»÷πÊ
+           03  SC03o-ETCKOHNUM           PIC  X(04).
+      *    ºıµÎº‘ªÒ≥ æ⁄µ≠πÊ
+           03  SC03o-JKYSKIGO            PIC  X(02).
+      *
+           03  SC03o-MEISAI-TBL         OCCURS  12.
+      *    ºıµÎº‘»÷πÊ
+               05  SC03o-JKYSNUM         PIC  X(14).
+      *     ›∏±ºÔ Ã
+               05  SC03o-HKNKBN-TBL     OCCURS  5.
+                   07  SC03o-HKNKBN      PIC  X(02).
+      *    ª·Ãæ
+               05  SC03o-NAME            PIC  X(30).
+      *    ¿≠ Ã
+               05  SC03o-SEX-TBL        OCCURS  2.
+                   07  SC03o-SEX         PIC  X(02).
+      *    ¿∏«Ø∑Ó∆¸
+               05  SC03o-BIRTHDAY-TBL.
+                   07  SC03o-NENGO-TBL  OCCURS  4.
+                       09  SC03o-NENGO   PIC  X(02).
+                   07  SC03o-BIRTHDAY    PIC  X(14).
+      *    ≈¿øÙ
+               05  SC03o-TENSU-TBL      OCCURS 2.
+                   07  SC03o-TENSU       PIC  X(07).
+      *    ÃÙ∫ﬁ∞Ï…Ù…È√¥∂‚
+      *         05  SC03o-YKZFTN          PIC  X(06).
+      *     °ª„∞ÂŒ≈»Ò¿¡µ·≥€
+               05  SC03o-SEIKYUGK        PIC  X(07).
+      *    »˜πÕ
+               05  SC03o-BIKO            PIC  X(06).
+      *    »˜πÕ£≤
+               05  SC03o-BIKO2           PIC  X(10).
+      *    »˜πÕ£≥
+               05  SC03o-BIKO3           PIC  X(06).
+      *    »˜πÕ° ¿«°¢¬ø°À
+               05  SC03o-TEI-TBL        OCCURS 2.
+                   07  SC03o-TEI         PIC  X(02).
+                   07  SC03o-MARU        PIC  X(02).
+      *    πÁ∑◊
+           03  SC03o-GOKEI-TBL.
+      *    πÁ∑◊°›≈¿øÙ
+               05  SC03o-GTENSU-TBL     OCCURS 2.
+                   07  SC03o-GTENSU      PIC  X(09).
+      *    πÁ∑◊°›ÃÙ∫ﬁ∞Ï…Ù…È√¥∂‚
+               05  SC03o-GYKZFTN         PIC  X(07).
+      *    πÁ∑◊°› °ª„∞ÂŒ≈»Ò¿¡µ·≥€
+               05  SC03o-GSEIKYUGK       PIC  X(09).

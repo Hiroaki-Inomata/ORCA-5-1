@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+export HOME=/home/orca
+
+echo	`date`
+echo	$1
+echo	$2
+echo	$3
+echo	$4
+echo	$5
+
+%RUBY% $SCRIPTSDIR/daily/print_parent.rb "temp.tmp" "%RUBY% ${SCRIPTSDIR}/print-data.rb " $1 $2 $3 $4 $5
+
+echo	`date`

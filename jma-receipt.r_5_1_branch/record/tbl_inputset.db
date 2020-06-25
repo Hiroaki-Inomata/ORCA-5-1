@@ -1,0 +1,185 @@
+tbl_inputset {
+	HOSPNUM				number(2,0);
+	SETCD   			char(6);
+	YUKOSTYMD  			char(8);
+	YUKOEDYMD	  		char(8);
+	SETSEQ  			number(3);
+	INPUTCD				char(9);
+	SURYO1  			number(12,5);
+	SURYO2				number(12,5);
+	KAISU				number(3);
+	COMENT				varchar(140);
+	ATAI1				char(10);
+	ATAI2				char(10);
+	ATAI3				char(10);
+	ATAI4				char(10);
+	ATAI5				char(10);
+	INPUTKBN			char(1);
+	KANSURYO			number(10,5);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,SETCD,YUKOSTYMD,YUKOEDYMD,SETSEQ;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+			AND   SETSEQ      =   :SETSEQ
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+			ORDER   BY        SETSEQ
+		;
+	};
+};
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			AND   YUKOSTYMD   =   :YUKOSTYMD
+			AND   YUKOEDYMD   =   :YUKOEDYMD
+		;
+	};
+};
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_inputset_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        SETCD,
+                                          YUKOSTYMD,
+                                          YUKOEDYMD,
+                                          SETSEQ
+ 		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        SETCD,
+                                          YUKOSTYMD,
+			                  SETSEQ
+		;
+	};
+};
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+                        AND     SETCD     >=  :SETCD
+                        AND     SETCD     <=  :UPHMS
+			ORDER   BY        SETCD,
+                                          YUKOSTYMD,
+			                  SETSEQ
+		;
+	};
+};
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			AND   SETSEQ      =   1
+			ORDER   BY        YUKOSTYMD,
+			                  SETSEQ
+		;
+	};
+};
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			ORDER   BY        YUKOSTYMD,
+			                  SETSEQ
+		;
+	};
+};
+
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key7_csr CURSOR FOR
+		SELECT * FROM (
+		SELECT DISTINCT ON (YUKOSTYMD,INPUTCD)  *
+		FROM tbl_inputset
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			AND   YUKOSTYMD  <=   :YUKOSTYMD
+			AND   YUKOEDYMD  >=   :YUKOEDYMD
+		) a     ORDER BY YUKOSTYMD,SETSEQ
+		;
+	};
+};
+
+path	key8	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND    (INPUTCD   LIKE '101%'
+                          OR    INPUTCD   LIKE '78888%' )
+			ORDER   BY        SETCD,
+					  YUKOSTYMD,
+			                  SETSEQ
+		;
+	};
+};
+
+path	key9	{
+	DBSELECT	{
+		DECLARE tbl_inputset_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_inputset
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+			ORDER   BY        YUKOSTYMD  DESC,
+			                  SETSEQ
+		;
+	};
+};
+
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_inputset
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SETCD       =   :SETCD
+		;
+	};
+};
+

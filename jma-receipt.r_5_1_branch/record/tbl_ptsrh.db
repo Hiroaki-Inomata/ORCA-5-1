@@ -1,0 +1,289 @@
+tbl_ptsrh {
+	HOSPNUM				number(2,0);
+	TERMID				char(64);
+	PTID				number(10,0);
+	PTNUM				varchar(20);
+	KANANAME			varchar(100);
+	SEX				    char(1);
+	BIRTHDAY			char(8);
+	JKYSNUM				varchar(20);
+	NYUGAIKBN			char(1); 
+	HKNNUM				char(3); 
+	KOHNUM1				char(3); 
+	KOHNUM2				char(3); 
+	TOTALTEN			number(10,0);
+	SRYCD				char(9);
+	SRYNAME				varchar(100);
+	SRYKANANAME			varchar(100);
+	SRYSEQ				number(1,0);
+	MEMO				varchar(30000);
+	DATAKBN				char(1);
+	SEQNUM				number(7,0);
+	CREYMD				char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+	UPDATAKBN			char(1),virtual;
+	SQL				dbcode(15000),virtual;
+	dbescapestring			varchar(500),virtual;
+	KENSU			    number(8,0),virtual;
+	VTEXT				varchar(1000),virtual;
+	VSTR1				varchar(64),virtual;
+	VSTR2				varchar(64),virtual;
+	VSTR3				varchar(64),virtual;
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsrh
+	        WHERE	HOSPNUM    =    :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+ 		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     CREYMD    <     :CREYMD
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    in  ('0','1')
+ 		;
+	};
+};
+
+path	ins1 	{
+	DBINSERT	{
+        :SQL
+	;
+	};
+};
+
+path	ins2 	{
+	DBINSERT	{
+		INSERT INTO  tbl_ptsrh (
+		HOSPNUM,
+		TERMID,
+		PTID,
+		PTNUM,
+		KANANAME,
+		SEX,
+		BIRTHDAY,
+		JKYSNUM,
+		NYUGAIKBN,
+		HKNNUM,
+		KOHNUM1,
+		KOHNUM2,
+		TOTALTEN,
+		SRYCD,
+		SRYNAME,
+		SRYKANANAME,
+		SRYSEQ,
+		SEQNUM,
+		MEMO,
+		DATAKBN,
+		CREYMD,
+		UPYMD,
+		UPHMS
+		)
+                SELECT
+		HOSPNUM,
+		TERMID,
+		PTID,
+		PTNUM,
+		KANANAME,
+		SEX,
+		BIRTHDAY,
+		JKYSNUM,
+		NYUGAIKBN,
+		HKNNUM,
+		KOHNUM1,
+		KOHNUM2,
+		TOTALTEN,
+		SRYCD,
+		SRYNAME,
+		SRYKANANAME,
+		SRYSEQ,
+		SEQNUM,
+		MEMO,
+                :DATAKBN,
+                :CREYMD,
+                :UPYMD,
+                :UPHMS
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :UPDATAKBN
+		AND     UPYMD      =    :UPYMD
+		AND     UPHMS      =    :UPHMS
+ 		;
+	};
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_key_csr CURSOR FOR
+        	:SQL
+ 		;
+	};
+};
+
+path	cnt 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_cnt_csr CURSOR FOR
+                SELECT COUNT(PTID) AS PTID,
+                       COUNT(DISTINCT PTID) AS TOTALTEN,
+               TO_CHAR(COUNT(DISTINCT to_char(PTID,'0000000000'||SRYCD)),'00000000') AS KENSU
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+		AND     UPYMD      LIKE :UPYMD
+		AND     UPHMS      LIKE :UPHMS
+	;
+	};
+};
+
+path	odr 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_odr_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsrh
+	        WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+		AND     UPYMD      LIKE :UPYMD
+		AND     UPHMS      LIKE :UPHMS
+		:SQL
+ 		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsrh
+	        WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+		AND     UPYMD      LIKE :UPYMD
+		AND     UPHMS      LIKE :UPHMS
+ 		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptsrh
+	        WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+		AND     UPYMD      LIKE :UPYMD
+		AND     UPHMS      LIKE :UPHMS
+        ORDER BY TOTALTEN
+ 		;
+	};
+};
+
+path	regexp_replace 	{
+	DBSELECT	{
+		DECLARE tbl_ptsrh_regexp_replace_csr CURSOR FOR
+		SELECT regexp_replace(:VTEXT,:VSTR1,:VSTR2,:VSTR3) as SQL;
+	};
+};
+
+path	upd1 	{
+	DBUPDATE	{
+		UPDATE  tbl_ptsrh
+         SET MEMO =  a.COUNT_DATA || SUBSTR(MEMO,31)
+         FROM (SELECT to_char(COUNT(PTID),'FM0000000000')||
+                     to_char(COUNT(DISTINCT PTID),'FM0000000000')||
+                     to_char(COUNT(DISTINCT to_char(PTID,'FM0000000000'|| SRYCD)),'FM0000000000') as COUNT_DATA
+               FROM     tbl_ptsrh
+               WHERE	  HOSPNUM    =    :HOSPNUM
+                AND     TERMID     =    :TERMID
+                AND     DATAKBN    =    '1'
+                AND     UPYMD      =    :UPYMD
+                AND     UPHMS      =    :UPHMS
+               ) a
+		WHERE	  HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    =    :DATAKBN
+		AND     UPYMD      =    :UPYMD
+		AND     UPHMS      =    :UPHMS
+	;
+	};
+};
+
+path	upd2 	{
+	DBUPDATE	{
+		UPDATE  tbl_ptsrh
+		SET MEMO =  :MEMO
+		WHERE	  HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     PTID	     =    :PTID
+		AND     DATAKBN    =    :DATAKBN
+		AND     SEQNUM     =    :SEQNUM
+		AND     UPYMD      =    :UPYMD
+		AND     UPHMS      =    :UPHMS
+	;
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE  HOSPNUM      =   :HOSPNUM
+		AND    UPYMD||UPHMS <   :VSTR1
+   ;
+	};
+};
+
+path	del5 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    in  (:VSTR1,:VSTR2)
+   ;
+	};
+};
+
+path	del6 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptsrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+		AND     DATAKBN    <>   :DATAKBN
+   ;
+	};
+};
+

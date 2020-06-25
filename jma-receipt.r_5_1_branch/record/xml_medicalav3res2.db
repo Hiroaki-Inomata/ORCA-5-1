@@ -1,0 +1,159 @@
+xml_medicalav3res2 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3res2 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 診療日付
+	Perform_Date				varchar(10);
+	Perform_Time				varchar(8);
+#--- 確認選択あり
+	Medical_Select_Flag			varchar(05);
+#--- 入院日
+	Admission_Date				varchar(10);
+#--- 退院日
+	Discharge_Date				varchar(10);
+#---   同日再入院区分（連番）
+	Sequential_Number			varchar(1);
+	Modify_Information  {
+#--- 訂正対象診療科
+		Modify_Department_Code		varchar(02);
+		Modify_Insurance_Combination_Number	varchar(04);
+		};
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+#--- 患者情報
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate		varchar(03);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+            	} [4];
+        	};
+    	};
+#--- 送信内容
+	Medical_Req_OffTime		varchar(1);
+	Medical_Req_Information  {
+		Medical_Req_Info  {
+			Medical_Req_Class		varchar(03);
+			Medical_Req_Class_Name		varchar(40);
+			Medical_Req_Class_Number	varchar(03);
+#-----  算定日
+			Medical_Req_Calendar   		varchar(31);
+			Medication_Req_Info    {
+				Medication_Req_Code	varchar(09);
+				Medication_Req_Name	varchar(140);
+				Medication_Req_Number	varchar(11);
+				Medication_Req_Money 	varchar(07);
+				Medication_Req_Input_Info {
+					Medication_Req_Input_Code	varchar(10);
+				} [5];
+#----->                         フィルム分画数
+				Medication_Req_Film_Comp_Number	varchar(03);
+				Medication_Req_Continue		varchar(01);
+				Medication_Req_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_Req_No_Addition_Class	varchar(03);
+				Medication_Req_Auto_Addition 	varchar(01);
+			} [50];
+		}[110] ;
+	};
+#--- メッセージ
+	Medical_Req_Message_Information {
+           Medical_Req_Message_Info {
+       		 Medical_Req_Result       	varchar(3);
+       		 Medical_Req_Result_Message    	varchar(100);
+       		 Medical_Req_Position           varchar(3);
+       		 Medical_Req_Item_Position      varchar(2);
+            	} [100];
+        };
+#--- 診療内容
+	Medical_Information  {
+		Medical_Info  {
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+			Medical_Class_Number		varchar(03);
+#-----  算定日
+			Medical_Calendar	        varchar(31);
+			Medical_Point 			varchar(08);
+			Medical_Money			varchar(08);
+			Medical_Inclusion_Class		varchar(05);
+#----->                 包括検査の検査数
+			Medical_Examination_Count	varchar(02);
+#----->                 剤削除可能連番
+			Medical_Delete_Number		varchar(02);
+			Medication_Info    {
+				Medication_Code	varchar(09);
+				Medication_Name	varchar(140);
+				Medication_Number	varchar(11);
+#----->                         単位コード
+				Medication_Unit_Code		varchar(3);
+				Medication_Unit_Code_Name	varchar(24);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info {
+					Medication_Input_Code	varchar(10);
+				} [5];
+#----->                         フィルム分画数
+				Medication_Film_Comp_Number	varchar(03);
+				Medication_Generic		varchar(1);
+     				Medication_Generic_Name		varchar(200);
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_No_Addition_Class	varchar(03);
+				Medication_Auto_Addition	varchar(01);
+			} [50];
+		}[120] ;
+	};
+#--- メッセージ
+	Medical_Message_Information {
+        Medical_Result			varchar(4);
+        Medical_Result_Message1		varchar(100);
+        Medical_Result_Message2		varchar(100);
+        Medical_Position	        varchar(3);
+        Medical_Item_Position		varchar(2);
+        Medical_Result_Code		varchar(9);
+        Medical_Warning_Info {
+       		 Medical_Warning        	varchar(4);
+       		 Medical_Warning_Message1	varchar(100);
+       		 Medical_Warning_Message2	varchar(100);
+	         Medical_Warning_Position	varchar(3);
+	         Medical_Warning_Item_Position	varchar(2);
+       		 Medical_Warning_Code		varchar(9);
+            	} [100];
+        };
+#--- 確認メッセージ
+	Medical_Select_Information {
+        Medical_Select			varchar(4);
+        Medical_Select_Message		varchar(100);
+	};
+	};
+};

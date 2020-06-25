@@ -1,0 +1,199 @@
+tbl_tensuplus {
+	HOSPNUM				number(2,0);
+	SRYCD				char(9);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	SHOYUKOKETA			number(2,0);
+	SHONAME				varchar(200);
+	SAIKETUKBN			number(1,0);
+	INPCHKKBN			number(1,0);
+	TENPUYAKKBN			varchar(2);
+	ALLSURYOKBN			varchar(1);
+	KANZANTANICD			varchar(3);
+	KANZANTANINAME			varchar(24);
+	KANZANCHI			number(10,5);
+	SANTEIRRKKBN			number(1,0);
+	JGNCNT				number(3,0);
+	JGNCNT1D			number(3,0);
+	JGNCNT1W			number(3,0);
+	JGNCNTERR			number(1,0);
+	JGNCNTETCM			number(2,0);
+	JGNCNTETC			number(3,0);
+	SOURYOHENKBN 			number(1,0);
+	IPNKISAIKBN			number(1,0);
+	IPNKANZANTANICD			varchar(3);
+	IPNKANZANTANINAME		varchar(24);
+	IPNKANZANCHI			number(10,5);
+	ZENKNSKBN			number(1,0);
+	SIPPURYO1			number(3,0);
+	SIPPUIRISU1			number(3,0);
+	SIPPURYO2			number(3,0);
+	SIPPUIRISU2			number(3,0);
+	USERTANICD			varchar(3);
+	USERTANINAME	    		varchar(24);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPSRYCD				char(9),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD			char(8),virtual;
+};
+primary	{
+	HOSPNUM,SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+ 			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_tensuplus 
+				SET	
+	HOSPNUM	=	:HOSPNUM,
+	SRYCD	=	:SRYCD,
+	YUKOSTYMD	=	:YUKOSTYMD,
+	YUKOEDYMD	=	:YUKOEDYMD,
+	SHOYUKOKETA	=	:SHOYUKOKETA,
+	SHONAME 	=	:SHONAME,
+	SAIKETUKBN	=	:SAIKETUKBN,
+	INPCHKKBN	=	:INPCHKKBN,
+	TENPUYAKKBN	=	:TENPUYAKKBN,
+	ALLSURYOKBN	=	:ALLSURYOKBN,
+	KANZANTANICD	=	:KANZANTANICD,
+	KANZANTANINAME	=	:KANZANTANINAME,
+	KANZANCHI	=	:KANZANCHI,
+	SANTEIRRKKBN	=	:SANTEIRRKKBN,
+	JGNCNT		=	:JGNCNT,
+	JGNCNT1D	=	:JGNCNT1D,
+	JGNCNT1W	=	:JGNCNT1W,
+	JGNCNTERR	=	:JGNCNTERR,
+	JGNCNTETCM	=	:JGNCNTETCM,
+	JGNCNTETC	=	:JGNCNTETC,
+	SOURYOHENKBN	=	:SOURYOHENKBN,
+	IPNKISAIKBN	=	:IPNKISAIKBN,
+	IPNKANZANTANICD	=	:IPNKANZANTANICD,
+	IPNKANZANTANINAME	=	:IPNKANZANTANINAME,
+	IPNKANZANCHI	=	:IPNKANZANCHI,
+	ZENKNSKBN	=	:ZENKNSKBN,
+	SIPPURYO1	=	:SIPPURYO1,
+	SIPPUIRISU1	=	:SIPPUIRISU1,
+	SIPPURYO2	=	:SIPPURYO2,
+	SIPPUIRISU2	=	:SIPPUIRISU2,
+	USERTANICD	=	:USERTANICD,
+	USERTANINAME	=	:USERTANINAME,
+	TERMID 			=	:TERMID,
+	OPID 			=	:OPID,
+	CREYMD 			=	:CREYMD,
+	UPYMD 			=	:UPYMD,
+	UPHMS			=	:UPHMS
+		WHERE 	HOSPNUM	= :UPHOSPNUM
+			AND   SRYCD      =   :UPSRYCD
+			AND		YUKOSTYMD     =  :UPYUKOSTYMD
+			AND		YUKOEDYMD     =  :UPYUKOEDYMD
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+			ORDER   BY  YUKOSTYMD
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+ 			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+            AND   EXISTS (
+		SELECT *
+		FROM tbl_tensu
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+ 			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		) ;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+			ORDER   BY  YUKOSTYMD DESC
+		;
+	};
+};
+path    del1    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_tensuplus
+                        WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+                ;
+        };
+};
+
+path	srycdlist 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_srycdlist_csr CURSOR FOR
+		SELECT SRYCD
+		FROM tbl_tensuplus
+			WHERE HOSPNUM    =   :HOSPNUM
+			GROUP	BY  SRYCD
+			ORDER   BY  SRYCD
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_tensuplus_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tensuplus
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   SRYCD    =   :SRYCD
+ 			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+			ORDER   BY  YUKOEDYMD DESC
+		;
+	};
+};
+

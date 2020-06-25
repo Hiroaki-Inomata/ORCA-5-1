@@ -1,0 +1,56 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+
+. $JMARECEIPT_ENV
+#-------------------------------------------#
+#        オンラインからのお薬手帳ＣＳＶ作成処理
+#        $1    TERMID
+#        $2    HOSPNUM
+#        $3    MODE
+#        $4    TBL-KEY
+#        $5    RENNUM
+#        $6    TBL-GROUP
+#        $7    SHORI-RENNUM
+#        $8    SHELLID
+#        $9    SRYYM
+#        ${10} SRYYMD
+#        ${11} PUTFLG
+#        ${12} NYUGAIKBN
+#        ${13} PTID
+#        ${14} DRCD
+#        ${15} TO-FOLDER
+#        ${16} TO-DATA
+#        ${17} CODE-TYPE
+#        ${18} TITLE
+#        ${19} CSVFILE
+#        ${20} TBL-UUID
+#        ${21} GYOUMU-CD
+#        ${22} LOCATION-CD
+#        ${23} DATA-VERSION
+#        ${24} OPID
+#-------------------------------------------#
+#
+
+BASENAME=$(basename ${0%%.sh})
+LOG_FILE=/var/log/jma-receipt/$2${BASENAME}.log
+CSV_FILE_BASE=${19}
+CSV_FILE_FULL=${MCP_TEMPDIR}/${CSV_FILE_BASE}
+
+[ -e "${LOG_FILE}" ] && rm -f ${LOG_FILE}
+
+echo $(printf "argv=")$(printf "[%s]" "$@")
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBMNOTE -parameter $(printf "%s," "$@")
+
+[ -e "${CSV_FILE_FULL}" ] && rm -f ${CSV_FILE_FULL}
+
+echo "CHECK AND DELETE OLD CSVFILES "
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELMNOTE -parameter $(printf "%s," "$@")
+

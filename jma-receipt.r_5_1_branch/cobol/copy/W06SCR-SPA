@@ -1,0 +1,412 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *    職員情報登録ＳＰＡ  (W06,W061)
+      ********************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+      *    画面用ＳＰＡ
+       01  SPA-W06.
+      *職員登録（Ｗ０６）
+           03  SPA-W06-AREA.
+               05  SPA-GMN-PAGE        PIC 9(02).
+               05  SPA-GMN-LINE        PIC 9(02).
+               05  SPA-GMN-CUR         PIC 9(03).
+      *
+               05  SPA-GMN-PAGENO      PIC 9(02).
+               05  SPA-GMN-SYORI       PIC 9(01).
+      *
+               05  SPA-GMN-AREA.
+      *            職員区分
+                   07  SPA-GMN-SYOKUKBN-G.
+                       09  SPA-GMN-SYOKUKBN       PIC X(01).
+                       09  SPA-GMN-SYOKUKBNF      PIC X(01).
+                       09  SPA-GMN-SYOKUKBNMEI    PIC X(18).
+      *            職員コード
+                   07  SPA-GMN-SYOKUCOD-G.
+                       09  SPA-GMN-SYOKUCOD       PIC X(04).
+                       09  SPA-GMN-SYOKUCODF      PIC X(01).
+                       09  SPA-GMN-SYOKUCOD-MEI   PIC X(30).
+                   07  SPA-GMN-SYOKUCOD-LIST-G.
+                       09  SPA-GMN-SYOKUCOD-LIST  OCCURS   200.
+                           11  SPA-GMN-TSYOKUCOD      PIC X(04).
+                           11  SPA-GMN-TSYOKUCODF     PIC X(01).
+                           11  SPA-GMN-TSYOKUCOD-MEI  PIC X(30).
+                       09  SPA-SYOKUCOD-MAX       PIC 9(04).
+      *
+               05  SPA-GMN-AREA2.
+                   07  SPA-GMN-STYUKYMD       PIC X(10).
+                   07  SPA-GMN-EDYUKYMD       PIC X(10).
+      *
+                   07  SPA-GMN-KIKANTBL.
+                       09  SPA-GMN-TBLO          OCCURS  10.
+                           11  SPA-GMN-TBANGO     PIC 9(02).
+                           11  SPA-GMN-TSTYUKYMD  PIC X(09).
+                           11  SPA-GMN-TEDYUKYMD  PIC X(09).
+      *
+                           11  SPA-NAI-TSTYUKYMD  PIC X(08).
+                           11  SPA-NAI-TEDYUKYMD  PIC X(08).
+                       09  SPA-GMN-TBL-MAX        PIC 9(04).
+                   07  SPA-GMN-SELNUM             PIC 9(02).
+      *
+                   07  SPA-GMN-AREA3.
+                       09  SPA-GMN-USERID         PIC X(16).
+                       09  SPA-GMN-KANANAME       PIC X(80).
+                       09  SPA-GMN-NAME           PIC X(80).
+                       09  SPA-GMN-PASSWORD1      PIC X(16).
+                       09  SPA-GMN-PASSWORD2      PIC X(16).
+      *
+                   07  SPA-GMN-KOUMOKU.
+                       09  SPA-GMN-MAYAKULICENSE  PIC X(40).
+                       09  SPA-GMN-ISEKINUM       PIC X(08).
+                       09  SPA-GMN-HKNDRNUMS      PIC X(08).
+                       09  SPA-GMN-HKNDRNUMK      PIC X(12).
+      *                業務権限
+                       09  SPA-GMN-CHK-G.
+                           11  SPA-GMN-CHK        PIC X     OCCURS  36.
+      *            専門科
+                   07  SPA-GMN-SEMONKACD-G    OCCURS  5.
+                       09  SPA-GMN-SEMONKACD       PIC X(02).
+                       09  SPA-GMN-SEMONKACD-FL    PIC X(01).
+                       09  SPA-GMN-SEMONKACD-MEI   PIC X(14).
+      *            管理者権限
+                   07  SPA-GMN-KANRIAUTHFLG-G. 
+                       09  SPA-GMN-KANRIAUTH-MEI    PIC X(12).
+                   07  SPA-NAI-KANRIAUTHFLG         PIC X(01).
+      *            診療行為初期表示
+                   07  SPA-GMN-ORCA21FLG-G. 
+                       09  SPA-GMN-ORCA21FLG       PIC X(01).
+                       09  SPA-GMN-ORCA21FLGF1     PIC X(01).
+                       09  SPA-GMN-ORCA21FLG-MEI   PIC X(10).
+      *            表示区分
+                   07  SPA-GMN-HYOJIFLG-G. 
+                       09  SPA-GMN-HYOJIFLG-MEI   PIC X(10).
+                   07  SPA-NAI-HYOJIFLG           PIC X(01).
+      *
+      *----(04.07.01)--ADD-START---
+      *            スーパーバイザー
+                   07  SPA-NAI-SUPERVISOR          PIC X(01).
+      *----(04.07.01)--ADD-END-----
+      *
+      *        診療科テーブル
+               05  SPA-GMN-SEMONKACD-AREA.
+                   07  SPA-GMN-SEMONKACD-TBL  OCCURS 99.
+                       09  SPA-GMN-SRYKA      PIC X(02).
+                       09  SPA-GMN-FL2        PIC X(01).
+                       09  SPA-GMN-SRYKAMEI   PIC X(14).
+                   07  SPA-SRYKA-MAX          PIC 9(04).
+                   07  SPA-SRYKA-YMD          PIC X(08).
+      *
+               05  SPA-GMN-INIT-G.
+      *            職員区分名称
+                   07  SPA-GMN-SYOKUKBN-LIST      PIC X(20)
+                                                  OCCURS   10.
+                   07  SPA-SYOKUKBN-MAX       PIC 9(04).
+      *            管理者権限
+                   07  SPA-GMN-KANRIAUTH-LSTG.
+                       09  SPA-GMN-KANRIAUTH-LST  PIC X(12)
+                                                  OCCURS  2. 
+                   07  SPA-KANRIAUTHFLG-MAX       PIC 9(04).  
+      *            診療行為初期表示
+                   07  SPA-GMN-ORCA21FLG-LSTG.
+                       09  SPA-GMN-ORCA21FLG-LST   PIC X(12)
+                                                   OCCURS  2. 
+                   07  SPA-ORCA21FLG-MAX       PIC 9(04).  
+      *            表示区分
+                   07  SPA-GMN-HYOJIFLG-LSTG.
+                       09  SPA-GMN-HYOJIFLG-LST   PIC X(12)
+                                                   OCCURS  2. 
+                   07  SPA-HYOJIFLG-MAX       PIC 9(02).
+      *
+      *            請求書初期表示
+                   07  SPA-GMN-SKYPRTFLG-LSTG.
+                       09  SPA-GMN-SKYPRTFLG-LST   PIC X(32)
+                                                   OCCURS  9.
+                   07  SPA-SKYPRTFLG-MAX       PIC 9(04).  
+      *            院外処方せん
+                   07  SPA-GMN-SYOHOPRTFLG-LSTG.
+                       09  SPA-GMN-SYOHOPRTFLG-LST   PIC X(30)
+                                                   OCCURS  5. 
+                   07  SPA-SYOHOPRTFLG-MAX      PIC 9(04).  
+      *            薬剤情報発行
+                   07  SPA-GMN-YAKUJYOFLG-LSTG.
+                       09  SPA-GMN-YAKUJYOFLG-LST   PIC X(30)
+                                                   OCCURS  5. 
+                   07  SPA-YAKUJYOFLG-MAX      PIC 9(04).  
+      *            診療費明細書
+                   07  SPA-GMN-MEIPRTFLG-LSTG.
+                       09  SPA-GMN-MEIPRTFLG-LST   PIC X(32)
+                                                   OCCURS  9. 
+                   07  SPA-MEIPRTFLG-MAX      PIC 9(04).  
+      *            検査正式名称表示
+                   07  SPA-GMN-FORMALFLG-LSTG.
+                       09  SPA-GMN-FORMALFLG-LST   PIC X(40)
+                                                   OCCURS  5. 
+                   07  SPA-FORMALFLG-MAX      PIC 9(04).  
+      *
+      *            入力スクロール行数
+                   07  SPA-GMN-GLINECNT       PIC 9(02).
+                   07  SPA-GMN-NLINECNT       PIC 9(02).
+      *
+      *            クライアント保存可否
+                   07  SPA-GMN-CLIENT-SAVE-LSTG.
+                       09  SPA-GMN-CLIENT-SAVE-LST PIC X(40)
+                                                   OCCURS  2. 
+                   07  SPA-CLIENT-SAVE-MAX    PIC 9(04).  
+      *            ユーザーログイン権限
+                   07  SPA-GMN-USER-KANRI-LSTG.
+                       09  SPA-GMN-USER-KANRI-LST  PIC X(40)
+                                                   OCCURS  5. 
+                   07  SPA-USER-KANRI-MAX      PIC 9(04).  
+      *            クライアント印刷可否
+                   07  SPA-GMN-CLIENT-PRT-LSTG.
+                       09  SPA-GMN-CLIENT-PRT-LST  PIC X(40)
+                                                   OCCURS  2. 
+                   07  SPA-CLIENT-PRT-MAX      PIC 9(04).  
+      *            プリンタへのデータ送信単位
+                   07  SPA-GMN-PRTCONF-LSTG.
+                       09  SPA-GMN-PRTCONF-LST    PIC X(40)
+                                                   OCCURS  2. 
+                   07  SPA-PRTCONF-MAX            PIC 9(04).  
+      *            ダイアログ表示
+                   07  SPA-GMN-DIALOGFLG-LSTG.
+                       09  SPA-GMN-DIALOGFLG-LST   PIC X(40)
+                                                   OCCURS  2. 
+                   07  SPA-DIALOGFLG-MAX       PIC 9(04).  
+                   07  SPA-GMN-ICCARDRW-LSTG.
+                       09  SPA-GMN-ICCARDRW-LST   PIC X(40)
+                                                   OCCURS  2. 
+                   07  SPA-ICCARDRW-MAX           PIC 9(04).  
+      *            基本情報の発行区分
+                   07  SPA-1001-SKYPRTFLG      PIC  X(01).
+                   07  SPA-1001-SYOHOPRTFLG    PIC  X(01).
+                   07  SPA-1001-YAKUJYOPRTFLG  PIC  X(01).
+                   07  SPA-1001-MEIPRTFLG      PIC  X(01).
+                   07  SPA-1038-FORMALFLG      PIC  X(01).
+      *
+               05  SPA-PAGE2-G.
+      *            請求書
+                   07  SPA-GMN-SKYPRTFLG-G. 
+                       09  SPA-GMN-SKYPRTFLG       PIC X(01).
+                       09  SPA-GMN-SKYPRTFLG-F1    PIC X(01).
+                       09  SPA-GMN-SKYPRTFLG-MEI   PIC X(30).
+      *            院外処方せん
+                   07  SPA-GMN-SYOHOPRTFLG-G. 
+                       09  SPA-GMN-SYOHOPRTFLG       PIC X(01).
+                       09  SPA-GMN-SYOHOPRTFLG-F1    PIC X(01).
+                       09  SPA-GMN-SYOHOPRTFLG-MEI   PIC X(28).
+      *            薬剤情報発行
+                   07  SPA-GMN-YAKUJYOFLG-G. 
+                       09  SPA-GMN-YAKUJYOFLG       PIC X(01).
+                       09  SPA-GMN-YAKUJYOFLG-F1    PIC X(01).
+                       09  SPA-GMN-YAKUJYOFLG-MEI   PIC X(28).
+      *            診療費明細書
+                   07  SPA-GMN-MEIPRTFLG-G. 
+                       09  SPA-GMN-MEIPRTFLG        PIC X(01).
+                       09  SPA-GMN-MEIPRTFLG-F1     PIC X(01).
+                       09  SPA-GMN-MEIPRTFLG-MEI    PIC X(30).
+      *            検査正式名称表示
+                   07  SPA-GMN-FORMALFLG-G. 
+                       09  SPA-GMN-FORMALFLG        PIC X(01).
+                       09  SPA-GMN-FORMALFLG-F1     PIC X(01).
+                       09  SPA-GMN-FORMALFLG-MEI    PIC X(24).
+      *            クライアント保存可否
+                   07  SPA-GMN-CLIENT-SAVE-G. 
+                       09  SPA-GMN-CLIENT-SAVE      PIC X(01).
+                       09  SPA-GMN-CLIENT-SAVE-F1   PIC X(01).
+                       09  SPA-GMN-CLIENT-SAVE-MEI  PIC X(24).
+      *            ユーザーログイン権限
+                   07  SPA-GMN-USER-KANRI-G. 
+                       09  SPA-GMN-USER-KANRI      PIC X(01).
+                       09  SPA-GMN-USER-KANRI-F1   PIC X(01).
+                       09  SPA-GMN-USER-KANRI-MEI  PIC X(24).
+      *            クライアント印刷可否
+                   07  SPA-GMN-CLIENT-PRT-G. 
+                       09  SPA-GMN-CLIENT-PRT      PIC X(01).
+                       09  SPA-GMN-CLIENT-PRT-F1   PIC X(01).
+                       09  SPA-GMN-CLIENT-PRT-MEI  PIC X(24).
+      *            プリンタへのデータ送信単位
+                   07  SPA-GMN-PRTCONF-G. 
+                       09  SPA-GMN-PRTCONF        PIC X(01).
+                       09  SPA-GMN-PRTCONF-F1     PIC X(01).
+                       09  SPA-GMN-PRTCONF-MEI    PIC X(24).
+      *            ダイアログ表示
+                   07  SPA-GMN-DIALOGFLG-G. 
+                       09  SPA-GMN-DIALOGFLG       PIC X(01).
+                       09  SPA-GMN-DIALOGFLG-F1    PIC X(01).
+                       09  SPA-GMN-DIALOGFLG-MEI   PIC X(24).
+      *            ＩＣカードリーダ／ライタ
+                   07  SPA-GMN-ICCARDRW-G. 
+                       09  SPA-GMN-ICCARDRW        PIC X(01).
+                       09  SPA-GMN-ICCARDRW-F1     PIC X(01).
+                       09  SPA-GMN-ICCARDRW-MEI    PIC X(24).
+      *
+               05  SPA-PAGE3-G.
+      *            他院医療機関情報
+                   07  SPA-GMN-GRPHOSP-G.
+                       09  SPA-GMN-GRPHOSP-MAX      PIC 9(02).
+                       09  SPA-GMN-GRPHOSP-OCC      OCCURS 9.
+                           11  SPA-GMN-GRPUSERID    PIC X(16).
+      *
+               05  SPA-NAIB-AREA.
+                   07  SPA-NAI-STYUKYMD       PIC X(08).
+                   07  SPA-NAI-EDYUKYMD       PIC X(08).
+                   07  SPA-MAE-STYUKYMD       PIC X(08).
+                   07  SPA-MAE-EDYUKYMD       PIC X(08).
+                   07  SPA-NAI-KEIFLG         PIC 9(01).
+                   07  SPA-NAI-PASSWD         PIC 9(01).
+      *
+      *----(04.07.01)--ADD-START---
+      *        変更項目領域
+               05  SPA-MAE-AREA.
+                   07  SPA-MAE-STYUKYMD2      PIC X(10).
+                   07  SPA-MAE-EDYUKYMD2      PIC X(10).
+      *
+                   07  SPA-MAE-USERID         PIC X(16).
+                   07  SPA-MAE-KANANAME       PIC X(80).
+                   07  SPA-MAE-NAME           PIC X(80).
+                   07  SPA-MAE-MAYAKULICENSE  PIC X(40).
+                   07  SPA-MAE-ISEKINUM       PIC X(08).
+                   07  SPA-MAE-HKNDRNUMS      PIC X(08).
+                   07  SPA-MAE-HKNDRNUMK      PIC X(12).
+                   07  SPA-MAE-CHK-G.
+                       09  SPA-MAE-CHK        PIC X     OCCURS  36.
+      *
+                   07  SPA-MAE-SEMONKACD-G    OCCURS  5.
+                       09  SPA-MAE-SEMONKACD       PIC X(02).
+                       09  SPA-MAE-SEMONKACD-FL    PIC X(01).
+                       09  SPA-MAE-SEMONKACD-MEI   PIC X(14).
+                   07  SPA-MAE-KANRIAUTHFLG-G. 
+                       09  SPA-MAE-KANRIAUTH-MEI   PIC X(12).
+                   07  SPA-MAE-ORCA21FLG-G. 
+                       09  SPA-MAE-ORCA21FLG       PIC X(01).
+                       09  SPA-MAE-ORCA21FLGF1     PIC X(01).
+                       09  SPA-MAE-ORCA21FLG-MEI   PIC X(10).
+      *            表示区分
+                   07  SPA-MAE-HYOJIFLG-G.
+                       09  SPA-MAE-HYOJIFLG-MEI   PIC X(10).
+      *
+                   07  SPA-MAE-SKYPRTFLG-G. 
+                       09  SPA-MAE-SKYPRTFLG       PIC X(01).
+                       09  SPA-MAE-SKYPRTFLG-F1    PIC X(01).
+                       09  SPA-MAE-SKYPRTFLG-MEI   PIC X(30).
+                   07  SPA-MAE-SYOHOPRTFLG-G. 
+                       09  SPA-MAE-SYOHOPRTFLG     PIC X(01).
+                       09  SPA-MAE-SYOHOPRTFLG-F1  PIC X(01).
+                       09  SPA-MAE-SYOHOPRTFLG-MEI PIC X(28).
+                   07  SPA-MAE-YAKUJYOFLG-G. 
+                       09  SPA-MAE-YAKUJYOFLG      PIC X(01).
+                       09  SPA-MAE-YAKUJYOFLG-F1   PIC X(01).
+                       09  SPA-MAE-YAKUJYOFLG-MEI  PIC X(28).
+                   07  SPA-MAE-MEIPRTFLG-G. 
+                       09  SPA-MAE-MEIPRTFLG       PIC X(01).
+                       09  SPA-MAE-MEIPRTFLG-F1    PIC X(01).
+                       09  SPA-MAE-MEIPRTFLG-MEI   PIC X(30).
+                   07  SPA-MAE-FORMALFLG-G. 
+                       09  SPA-MAE-FORMALFLG       PIC X(01).
+                       09  SPA-MAE-FORMALFLG-F1    PIC X(01).
+                       09  SPA-MAE-FORMALFLG-MEI   PIC X(24).
+                   07  SPA-MAE-CLIENT-SAVE-G. 
+                       09  SPA-MAE-CLIENT-SAVE     PIC X(01).
+                       09  SPA-MAE-CLIENT-SAVE-F1  PIC X(01).
+                       09  SPA-MAE-CLIENT-SAVE-MEI PIC X(24).
+                   07  SPA-MAE-USER-KANRI-G. 
+                       09  SPA-MAE-USER-KANRI      PIC X(01).
+                       09  SPA-MAE-USER-KANRI-F1   PIC X(01).
+                       09  SPA-MAE-USER-KANRI-MEI  PIC X(24).
+                   07  SPA-MAE-CLIENT-PRT-G. 
+                       09  SPA-MAE-CLIENT-PRT      PIC X(01).
+                       09  SPA-MAE-CLIENT-PRT-F1   PIC X(01).
+                       09  SPA-MAE-CLIENT-PRT-MEI  PIC X(24).
+                   07  SPA-MAE-PRTCONF-G. 
+                       09  SPA-MAE-PRTCONF        PIC X(01).
+                       09  SPA-MAE-PRTCONF-F1     PIC X(01).
+                       09  SPA-MAE-PRTCONF-MEI    PIC X(24).
+                   07  SPA-MAE-DIALOGFLG-G. 
+                       09  SPA-MAE-DIALOGFLG       PIC X(01).
+                       09  SPA-MAE-DIALOGFLG-F1    PIC X(01).
+                       09  SPA-MAE-DIALOGFLG-MEI   PIC X(24).
+                   07  SPA-MAE-ICCARDRW-G. 
+                       09  SPA-MAE-ICCARDRW        PIC X(01).
+                       09  SPA-MAE-ICCARDRW-F1     PIC X(01).
+                       09  SPA-MAE-ICCARDRW-MEI    PIC X(24).
+      *
+      *            入力スクロール行数
+                   07  SPA-MAE-GLINECNT       PIC 9(02).
+                   07  SPA-MAE-NLINECNT       PIC 9(02).
+      *
+                   07  SPA-MAE-GRPHOSP-G.
+                       09  SPA-MAE-GRPHOSP-MAX     PIC 9(02).
+                       09  SPA-MAE-GRPHOSP-OCC     OCCURS 9.
+                           11  SPA-MAE-GRPUSERID   PIC X(16).
+      *----(04.07.01)--ADD-END-----
+      *H27.10
+      *        入力職員管理者区分
+               05  SPA-NAI-STAFFKANRIKBN   PIC 9(01).
+      *
+      *職員一覧（Ｗ０６１）
+           03  SPA-W061-AREA.
+      *
+               05  SPA-W061-SYORIKBN       PIC X(01).
+               05  SPA-W061-HYOJIKBN       PIC X(01).
+      *
+               05  SPA-W061-CUR            PIC 9(03).
+               05  SPA-W061-PAGE           PIC 9(04).
+               05  SPA-W061-NEXT           PIC 9(01).
+               05  SPA-W061-MAX            PIC 9(04).
+               05  SPA-W061-MIDASI1        PIC X(50).
+               05  SPA-W061-MIDASI2        PIC X(50).
+               05  SPA-W061-MIDASI3        PIC X(30).
+               05  SPA-W061-DATA-LST-G.
+                   07  SPA-W061-DATA-OCC       OCCURS   100.
+                       09  SPA-W061-TNUM           PIC 9(04).
+                       09  SPA-W061-SYOKUCD        PIC X(04).
+                       09  SPA-W061-KANANAME       PIC X(80).
+                       09  SPA-W061-NAME           PIC X(80).
+                       09  SPA-W061-USERID         PIC X(16).
+                       09  SPA-W061-STYUKYMD       PIC X(10).
+                       09  SPA-W061-EDYUKYMD       PIC X(10).
+                       09  SPA-W061-HIHYOUJI       PIC X(01).
+                       09  SPA-W061-BIKOU          PIC X(12).
+      *
+                       09  SPA-W061-PASSWD         PIC X(01).
+      *
+                       09  SPA-NAI061-STYUKYMD     PIC X(08).
+                       09  SPA-NAI061-EDYUKYMD     PIC X(08).
+                       09  SPA-NAI061-KANRIAUTHFLG PIC X(01).
+      *
+                       09  SPA-MAE061-EDYUKYMD     PIC X(08).
+                       09  SPA-MAEW061-EDYUKYMD    PIC X(10).
+                       09  SPA-MAE061-HIHYOUJI     PIC X(01).
+      *
+                       09  SPA-NAI061-UPDKBN       PIC X(01).
+                       09  SPA-NAI061-OKKBN        PIC X(01).
+      *
+               05  SPA-W061-INPUT-G.
+                   07  SPA-W061-SELNUM         PIC 9(04).
+                   07  SPA-W061-SELNUM-X       PIC X(04).
+                   07  SPA-GMN061-EDYUYMD      PIC X(12).
+                   07  SPA-NAI061-EDYUYMD      PIC X(08).
+      *
+      *    選択内容
+               05  SPA-W061-SEL-G.
+                   07  SPA-W061-SEL-SYOKUCD        PIC X(04).
+                   07  SPA-W061-SEL-STYUKYMD       PIC X(08).
+                   07  SPA-W061-SEL-EDYUKYMD       PIC X(08).
+      *

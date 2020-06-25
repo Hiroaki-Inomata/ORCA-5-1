@@ -1,0 +1,115 @@
+        01  HCM69.
+            02  HCM69-TOTALTEN
+                        PIC X(6).
+            02  HCM69-TOTALMONEY
+                        PIC X(10).
+            02  HCM69-TENKI
+                        PIC X(1).
+            02  HCM69-SINKEI
+                        PIC X(1).
+            02  HCM69-JIGYOUNAME
+                        PIC X(80).
+            02  HCM69-KANANAME
+                        PIC X(50).
+            02  HCM69-NAME
+                        PIC X(26).
+            02  HCM69-NAME2
+                        PIC X(50).
+            02  HCM69-NENREI
+                        PIC X(3).
+            02  HCM69-TODOFUKEN
+                        PIC X(6).
+            02  HCM69-GUNSIKU
+                        PIC X(20).
+            02  HCM69-SYOBYOMEI
+                        PIC X(44)       OCCURS 3 TIMES.
+            02  HCM69-SAISINKAISU
+                        PIC X(3).
+            02  HCM69-SHIDOKAISU
+                        PIC X(3).
+            02  HCM69-TEKIYO1
+                        PIC X(28)       OCCURS 9 TIMES.
+            02  HCM69-SRYKBN
+                        PIC X(2)        OCCURS 30 TIMES.
+            02  HCM69-TEKIYO2
+                        PIC X(52)       OCCURS 30 TIMES.
+            02  HCM69-KEIKA
+                        PIC X(54)       OCCURS 4 TIMES.
+            02  HCM69-KOUTEN
+                        PIC X(7)        OCCURS 35 TIMES.
+            02  HCM69-KHNTEN
+                        PIC X(7)        OCCURS 19 TIMES.
+            02  HCM69-KAISU
+                        PIC X(3)        OCCURS 35 TIMES.
+            02  HCM69-RSIIRYOCD
+                        PIC X(30).
+            02  HCM69-HOSPNAME
+                        PIC X(64).
+            02  HCM69-GUNSIKUKBN1
+                        PIC X(2).
+            02  HCM69-GUNSIKUKBN2
+                        PIC X(2).
+            02  HCM69-GUNSIKUKBN3
+                        PIC X(2).
+            02  HCM69-TODOFUKENKBN1
+                        PIC X(2).
+            02  HCM69-TODOFUKENKBN3
+                        PIC X(2).
+            02  HCM69-TODOFUKENKBN2
+                        PIC X(2).
+            02  HCM69-TODOFUKENKBN4
+                        PIC X(2).
+            02  HCM69-SAIGAIKBN
+                        PIC X(8).
+            02  HCM69-SYOSHIN1
+                        PIC X(2).
+            02  HCM69-SYOSHIN2
+                        PIC X(2).
+            02  HCM69-SYOSHIN3
+                        PIC X(2).
+            02  HCM69-KEIZOKUKANRI
+                        PIC X(16).
+            02  HCM69-SYOKEI
+                        PIC X(7).
+            02  HCM69-KINGAKU
+                        PIC X(7)        OCCURS 6 TIMES.
+            02  HCM69-PTNUM
+                        PIC X(20).
+            02  HCM69-TANJYOYMD.
+              03  HCM69-TANJYOYMD-S
+                        PIC X(1)        OCCURS 7 TIMES.
+            02  HCM69-SYOBYOYMD.
+              03  HCM69-SYOBYOYMD-S
+                        PIC X(1)        OCCURS 6 TIMES.
+            02  HCM69-NISSU.
+              03  HCM69-NISSU-S
+                        PIC X(1)        OCCURS 3 TIMES.
+            02  HCM69-GOKEI.
+              03  HCM69-GOKEI-S
+                        PIC X(1)        OCCURS 7 TIMES.
+            02  HCM69-ENDYMD.
+              03  HCM69-ENDYMD-S
+                        PIC X(1)        OCCURS 6 TIMES.
+            02  HCM69-STRYMD.
+              03  HCM69-STRYMD-S
+                        PIC X(1)        OCCURS 6 TIMES.
+            02  HCM69-KOFUNUM.
+              03  HCM69-KOFUNUM-S
+                        PIC X(1)        OCCURS 14 TIMES.
+            02  HCM69-RENNUM
+                        PIC X(7).
+            02  HCM69-KAI
+                        PIC X(3).
+            02  HCM69-PAGE
+                        PIC X(5).
+            02  HCM69-LABEL
+                        PIC X(14).
+            02  HCM69-SYOCD
+                        PIC X(5).
+            02  HCM69-HOSPNAME2
+                        PIC X(94).
+            02  HCM69-LOPTION
+                        PIC X(100).
+            02  HCM69-HEAD-G.
+              03  HCM69-HEAD
+                        PIC X(62)       OCCURS 2 TIMES.

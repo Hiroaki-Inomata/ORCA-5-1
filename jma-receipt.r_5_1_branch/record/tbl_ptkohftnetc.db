@@ -1,0 +1,130 @@
+tbl_ptkohftnetc {
+	HOSPNUM			number(2,0);
+	PTID			number(10);
+	KOHID			number(10);
+	SRYYMD		        char(8);
+	RENNUM			number(2);
+	KOHNUM			char(3);
+	NYUGAIKBN		char(1);
+	FTNMONEY		number(7);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,KOHID,SRYYMD,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SRYYMD     LIKE :SRYYMD
+			ORDER   BY        SRYYMD,RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			ORDER   BY        SRYYMD,RENNUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SRYYMD     LIKE :SRYYMD
+			ORDER   BY        SRYYMD,NYUGAIKBN,RENNUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			ORDER   BY        SRYYMD,NYUGAIKBN,RENNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftnetc_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohftnetc
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SRYYMD     LIKE :SRYYMD
+		;
+	};
+};

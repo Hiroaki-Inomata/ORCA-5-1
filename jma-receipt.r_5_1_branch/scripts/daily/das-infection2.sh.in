@@ -1,0 +1,134 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+HOSPNUM=${1}
+HOSPID=${2}
+KIDONO=${3}
+
+FILE_PREFIX="infection"
+UPLOAD_COMMAND=das-upload2.rb
+LOG=$LOGDIR/"$HOSPNUM"datainfection2.log
+LOG_FILE=$LOGDIR/"$HOSPNUM"datainfection2_real.log
+
+if [ x$MCP_TEMPDIR == "x" ];
+then
+  CSVFILE=/tmp/das-infection2.csv
+else
+  CSVFILE=$MCP_TEMPDIR/das-infection2.csv
+fi
+GZFILE=$CSVFILE.gz
+
+make_csv_file(){
+  UPTARGEFILE=1
+  
+  TIMESTAMP=`basename $file |sed -e "s/${FILE_PREFIX}.csv.\(.*\).gz/\1/"`
+  OBJECTDATE=${TIMESTAMP:8:6}
+
+  zcat $file >> $CSVFILE
+  DFILELIST="$DFILELIST $file" 
+}
+
+make_upload_file(){
+  #if [ -e $LOGFILE ]; then
+  #  cat $LOGFILE >> $LOG
+  #fi
+  rm -f $CSVFILE
+  rm -f $GZFILE
+  
+  UPTARGEFILE=""
+  DFILELIST=""
+
+  FILELIST=`ls "$DASDIR"/"$HOSPNUM"/"$FILE_PREFIX"*.gz 2>/dev/null`
+  for file in $FILELIST
+  do
+    FLINE=`zcat $file | wc -l`
+    if [ $FLINE -eq 1 ]; then
+      if [ x$UPTARGEFILE == "x" ]; then
+        make_csv_file
+      fi 
+      break
+    fi
+
+    make_csv_file
+  done
+  
+  if [ x$UPTARGEFILE == "x" ]; then
+    RESULT="900 No file"
+    echo "${RESULT:0:3}","${RESULT:4}"
+    exit 0
+  fi
+  gzip $CSVFILE
+}
+
+upload(){
+  #if [ -e $LOGFILE ]; then
+  #  cat $LOGFILE >> $LOG
+  #fi
+
+  file=$GZFILE
+  
+  if [ -e $file ]; then
+    RESULT=`$UPLOAD_COMMAND -i $file 2>&1|head -1`
+    if [ "UP $file" = "$RESULT" ]; then
+       echo "000" $RESULT
+       if [ ${KIDONO} -eq 1 ]; then 
+         ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+                   -parameter "das-infec2,2,0,$OBJECTDATE,000,$HOSPNUM,Upload success"
+       fi
+       rm $file
+    else
+       ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBJOBLOG \
+                 -parameter "das-infec2,2,1,$OBJECTDATE,${RESULT:0:3},$HOSPNUM,${RESULT:4:200}"
+       echo "${RESULT:0:3}","${RESULT:4}"
+       exit 1
+    fi
+  fi
+}
+
+get_file_count(){
+  FCOUNT=`ls -1 "$DASDIR"/"$HOSPNUM"/"$FILE_PREFIX"*.gz 2>/dev/null | wc -l`
+}
+
+clean_files(){
+  rm -f $CSVFILE
+  rm -f $GZFILE
+  for file in $DFILELIST
+  do
+    rm -f $file
+  done
+}
+
+# script main
+
+DAS_UPLOAD2_WAIT=600 # 10minutes
+DAS_UPLOAD2_LOCK="/var/lock/das_upload2_${MCP_TENANT}.lock"
+
+(
+  flock -x -n 9
+  if [ $? -ne 0 ]
+  then
+    echo 'other process already running.'
+    exit 0
+  fi
+  
+  # ... commands executed under lock ...
+  sleep $DAS_UPLOAD2_WAIT
+  
+  echo 'processing start'
+  rm -f $LOG_FILE
+  get_file_count
+  until [ $FCOUNT -eq 0 ]
+  do
+    make_upload_file
+    upload
+    clean_files
+    get_file_count
+  done
+  echo 'end'
+) 9>$DAS_UPLOAD2_LOCK

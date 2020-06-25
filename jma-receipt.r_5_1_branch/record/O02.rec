@@ -1,0 +1,46 @@
+O02 {
+  fixed6 {
+    DENPPRTYMD {
+      textdata varchar(10);
+    };
+    RENNUM {
+      numdata number(3);
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    SAKKBN_COMBO {
+      SAKKBN {
+        textdata varchar(16);
+        state int;
+      };
+      count int;
+        item varchar(16)[10];
+      state int;
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    scrolledwindow1 {
+      TEIKILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(20);
+            column3 varchar(50);
+            column4 varchar(7);
+            column5 varchar(14);
+            column6 varchar(21);
+            column7 varchar(9);
+            column8 varchar(9);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

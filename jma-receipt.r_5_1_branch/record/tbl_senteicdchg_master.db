@@ -1,0 +1,59 @@
+tbl_senteicdchg_master {
+	IPNSRYCD   	char(9);
+	SENTEISRYCD  	char(9);
+	TERMID  	varchar(16);
+	OPID    	varchar(16);
+	CREYMD  	char(8);
+	UPYMD   	char(8);
+	UPHMS		char(6);
+};
+primary	{
+	IPNSRYCD,SENTEISRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_senteicdchg_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_senteicdchg
+			WHERE   IPNSRYCD    = :IPNSRYCD
+			AND     SENTEISRYCD = :SENTEISRYCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_senteicdchg
+			VALUES(
+				:IPNSRYCD,
+				:SENTEISRYCD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_senteicdchg
+			SET
+				IPNSRYCD    = :IPNSRYCD,
+				SENTEISRYCD = :SENTEISRYCD,
+				TERMID      = :TERMID,
+				OPID        = :OPID,
+				CREYMD      = :CREYMD,
+				UPYMD       = :UPYMD,
+				UPHMS       = :UPHMS
+			WHERE   IPNSRYCD    = :IPNSRYCD
+			AND     SENTEISRYCD = :SENTEISRYCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_senteicdchg
+			WHERE   IPNSRYCD    = :IPNSRYCD
+			AND     SENTEISRYCD = :SENTEISRYCD
+		;
+	};
+};

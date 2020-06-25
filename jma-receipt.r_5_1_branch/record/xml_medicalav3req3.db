@@ -1,0 +1,32 @@
+xml_medicalav3req3 {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3req3 {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Patient_ID		varchar(20);
+    		Perform_Date		varchar(10);
+		Perform_Time		varchar(8);
+		Orca_Uid		varchar(36);
+#--- 処理区分
+		Patient_Mode		varchar(06);
+		Medical_Mode		varchar(01);
+		Delete_Number_Info    {
+			Delete_Number	varchar(02);
+				} [30];
+		Print_Mode	varchar(10);
+#--- 印刷区分
+		Print_Information    {
+#---    処方せん
+		Print_Prescription_H_Class	varchar(1);
+#---    注射せん
+		Print_Order_Injection_Class	varchar(1);
+#---    指示せん
+		Print_Order_Direction_Class	varchar(1);
+#---    印刷ドクター
+		Print_Physician_Code		varchar(5);
+		};
+	};
+};

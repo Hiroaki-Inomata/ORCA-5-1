@@ -1,0 +1,75 @@
+tbl_hknjainf_care_master {
+	HKNJANUM	varchar(8);
+	HKNJANAME	varchar(200);
+	POST        	varchar(7);
+	ADRS		varchar(200);
+	BANTI 		varchar(200);
+	TEL 		varchar(15);
+	IDOKBN  	varchar(1);
+	IDOYMD  	varchar(8);
+	TERMID   	varchar(16);
+	OPID     	varchar(16);
+	CREYMD   	varchar(8);
+	UPYMD    	varchar(8);
+	UPHMS		varchar(6);
+};
+
+primary	{
+	HKNJANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_care_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_hknjainf_care
+			WHERE   HKNJANUM = :HKNJANUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_hknjainf_care
+			VALUES(
+				:HKNJANUM,
+				:HKNJANAME,
+				:POST,
+				:ADRS,
+				:BANTI,
+				:TEL,
+				:IDOKBN,
+				:IDOYMD,
+				:TERMID,
+				:OPID,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE	{
+		UPDATE	master.tbl_hknjainf_care
+			SET
+				HKNJANUM  = :HKNJANUM,
+				HKNJANAME = :HKNJANAME,
+				POST      = :POST,
+				ADRS      = :ADRS,
+				BANTI     = :BANTI,
+				TEL       = :TEL,
+				IDOKBN    = :IDOKBN,
+				IDOYMD    = :IDOYMD,
+				TERMID    = :TERMID,
+				OPID      = :OPID,
+				CREYMD    = :CREYMD,
+				UPYMD     = :UPYMD,
+				UPHMS     = :UPHMS
+			WHERE   HKNJANUM = :HKNJANUM
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_hknjainf_care
+			WHERE   HKNJANUM = :HKNJANUM
+		;
+	};
+};

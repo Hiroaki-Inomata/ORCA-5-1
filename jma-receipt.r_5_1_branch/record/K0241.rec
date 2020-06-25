@@ -1,0 +1,38 @@
+K0241 { #GtkWindow
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(256);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed1 { #GtkFixed
+    B01 { #GtkButton
+      state int;
+    };
+    scrolledwindow2 { #GtkScrolledWindow
+      KANRILIST { #GtkPandaCList
+        count int;
+        row int;
+        selectdata bool[50];
+        item {
+          column1 varchar(3);
+          column2 varchar(100);
+          column3 varchar(10);
+          column4 varchar(3);
+          column5 varchar(200);
+        }[50];
+      };
+    };
+    SELNUM { #GtkNumberEntry
+      numdata number(3);
+    };
+    B02 { #GtkButton
+      state int;
+    };
+    B12 { #GtkButton
+      state int;
+    };
+    MIDASI { #GtkLabel
+      textdata varchar(80);
+    };
+  };
+};

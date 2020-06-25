@@ -1,0 +1,263 @@
+tbl_santei_prv {
+	HOSPNUM			    number(2,0);
+	PTID				number(10,0);
+	SRYYM				char(6);
+	SRYCD				char(9);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	HKNCOMBINUM			number(4,0);
+	FSANTEIYMD			char(8);
+	MSANTEID			char(2);
+	MSANTEICNT			number(3,0);
+	DAY1				number(3,0);
+	DAY2				number(3,0);
+	DAY3				number(3,0);
+	DAY4				number(3,0);
+	DAY5				number(3,0);
+	DAY6				number(3,0);
+	DAY7				number(3,0);
+	DAY8				number(3,0);
+	DAY9				number(3,0);
+	DAY10				number(3,0);
+	DAY11				number(3,0);
+	DAY12				number(3,0);
+	DAY13				number(3,0);
+	DAY14				number(3,0);
+	DAY15				number(3,0);
+	DAY16				number(3,0);
+	DAY17				number(3,0);
+	DAY18				number(3,0);
+	DAY19				number(3,0);
+	DAY20				number(3,0);
+	DAY21				number(3,0);
+	DAY22				number(3,0);
+	DAY23				number(3,0);
+	DAY24				number(3,0);
+	DAY25				number(3,0);
+	DAY26				number(3,0);
+	DAY27				number(3,0);
+	DAY28				number(3,0);
+	DAY29				number(3,0);
+	DAY30				number(3,0);
+	DAY31				number(3,0);
+	MSANTEIFLG                      number(1,0);
+	MSANTEITEN                      number(8,0);
+	MSANTEITENKBN                   number(1,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SRYYM,SRYCD,NYUGAIKBN,SRYKA,HKNCOMBINUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			ORDER   BY      CREYMD DESC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYCD       =   :SRYCD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+               ORDER   BY
+                       SRYYM    DESC
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYCD       =   :SRYCD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   FSANTEIYMD  =   :FSANTEIYMD
+               ORDER   BY
+                       SRYYM    DESC
+		;
+	};
+};
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   PTID        =   :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			ORDER   BY      HKNCOMBINUM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY      NYUGAIKBN,
+                                        SRYKA
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYCD       =   :SRYCD
+			AND   SRYYM       <=  :SRYYM
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   MSANTEICNT  >   :MSANTEICNT
+			ORDER   BY      SRYYM    DESC,
+                                        NYUGAIKBN,
+                                        SRYKA
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYM    =   :SRYYM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_santei_prv_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   MSANTEIFLG  <>  0
+			AND   MSANTEICNT  >   0
+			ORDER   BY      MSANTEID,
+                                        MSANTEITENKBN
+		;
+	};
+};
+
+path	delprv 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_santei_prv
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path    key11   {
+        DBSELECT        {
+                DECLARE tbl_santei_prv_key11_csr CURSOR FOR
+                SELECT *
+                FROM tbl_santei
+                        WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   PTID        =   :PTID
+                        AND   SRYYM      <=   :SRYYM
+                        AND   MSANTEICNT  >   :MSANTEICNT
+                        AND   SRYCD       IN ('111700110',
+                                              '111000110',
+                                              '111700210',
+                                              '111003610',
+                                              '113003510',
+                                              '113003710',
+                                              '099110001',
+                                              '101110010',
+			                      '111012510',
+			                      '111012710',
+			                      '113019710',
+			                      '113019910'
+                                                         )
+                        ORDER   BY      SRYYM DESC
+                ;
+        };
+};
+

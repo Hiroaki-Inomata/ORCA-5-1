@@ -1,0 +1,14 @@
+J042 {
+  fixed10 {
+    POP_TOUMEI {
+      textdata varchar(40);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      LIST {
+        textdata varchar(2000);
+      };
+    };
+  };
+};

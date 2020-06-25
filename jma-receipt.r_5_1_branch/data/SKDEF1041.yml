@@ -1,0 +1,47 @@
+kanri_cd    : "1041"
+name        : "入金方法情報"
+class_cd    : "*"
+item_max    : 7
+item_list   :
+- item_no   : 1
+  item      : "NYKN-NAME"
+  item_jp   : "入金方法"
+  type      : "X"
+  start     : 1
+  length    : 30
+- item_no   : 2
+  item      : "NYKN-TANNAME"
+  item_jp   : "入金方法（短縮名）"
+  type      : "X"
+  start     : 31
+  length    : 10
+- item_no   : 3
+  item      : "NYKN-BUNRUI"
+  item_jp   : "分類区分"
+  type      : "X"
+  start     : 41
+  length    : 2
+- item_no   : 4
+  item      : "NYKN-JYOTAI"
+  item_jp   : "入金状態−外来"
+  type      : "X"
+  start     : 43
+  length    : 1
+- item_no   : 5
+  item      : "NYKN-JYOTAI-N"
+  item_jp   : "入金状態−入院　退院時"
+  type      : "X"
+  start     : 44
+  length    : 1
+- item_no   : 6
+  item      : "NYKN-JYOTAI-T"
+  item_jp   : "入金状態−入院　定期請求"
+  type      : "X"
+  start     : 45
+  length    : 1
+- item_no   : 7
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 46
+  length    : 455

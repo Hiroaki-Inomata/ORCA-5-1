@@ -1,0 +1,14 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+create_pgpass
+psql ${DBCONNOPTION} ${DBNAME} -At -F ',' -c "SELECT CRNDOW,CRNMON,CRNDOM,CRNHOUR,SCRIPT from tbl_cron where RUN = '1';"
+delete_pgpass
+
+

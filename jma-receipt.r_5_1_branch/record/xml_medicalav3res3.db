@@ -1,0 +1,144 @@
+xml_medicalav3res3 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalav3res3 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 診療日付
+	Perform_Date				varchar(10);
+	Perform_Time				varchar(8);
+#--- 入院日
+	Admission_Date				varchar(10);
+#--- 退院日
+	Discharge_Date				varchar(10);
+#---   同日再入院区分（連番）
+	Sequential_Number			varchar(1);
+#--- 訂正対象
+	Modify_Information  {
+		Modify_Department_Code		varchar(02);
+		Modify_Insurance_Combination_Number	varchar(04);
+		};
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+#---    主治医
+        Physician_Code				varchar(5);
+        Physician_WholeName			varchar(80);
+#---
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+		HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate		varchar(03);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+            	} [4];
+        	};
+    	};
+#--- 診療内容
+	Medical_Information  {
+		Medical_Info  {
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+			Medical_Class_Number		varchar(03);
+#-----  算定日
+			Medical_Calendar	        varchar(31);
+			Medical_Point 			varchar(08);
+			Medical_Money			varchar(08);
+			Medical_Inclusion_Class		varchar(05);
+#----->                 包括検査の検査数
+			Medical_Examination_Count	varchar(02);
+			Medical_Delete_Number		varchar(02);
+			Medical_Delete_Info		varchar(06);
+			Medication_Info    {
+				Medication_Code	varchar(09);
+				Medication_Name	varchar(140);
+				Medication_Number	varchar(11);
+#----->                         単位コード
+				Medication_Unit_Code		varchar(3);
+				Medication_Unit_Code_Name	varchar(24);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info {
+					Medication_Input_Code	varchar(10);
+				} [5];
+#----->                         フィルム分画数
+				Medication_Film_Comp_Number	varchar(03);
+				Medication_Generic	varchar(1);
+     				Medication_Generic_Name		varchar(200);
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_No_Addition_Class	varchar(03);
+				Medication_Auto_Addition 	varchar(01);
+			} [50];
+		}[120] ;
+	};
+#--- メッセージ
+	Medical_Message_Information {
+        Medical_Result			varchar(4);
+        Medical_Result_Message		varchar(100);
+	        };
+#---    入院調剤料内容
+	Ad_Dispensing_fee_Information  {
+		Ad_Dispensing_fee_Info  {
+			Ad_Department_Code		varchar(02);
+			Ad_Insurance_Combination_Number	varchar(04);
+			Ad_Medical_Class_Group		varchar(02);
+			Ad_Medical_Class		varchar(03);
+			Ad_Medical_Class_Name		varchar(40);
+			Ad_Medical_Point_Info 		varchar(08);
+#-----  算定日
+			Ad_Medical_Calendar	        varchar(31);
+			Ad_Medical_Inclusion_Class		varchar(05);
+			Ad_Medication_Info    {
+				Ad_Medication_Code		varchar(09);
+				Ad_Medication_Name		varchar(140);
+				Ad_Medication_Auto_Addition 	varchar(01);
+			} [5];
+		}[10] ;
+	};
+#--- 印刷区分
+	Print_Information    {
+#---    処方せん
+	      Print_Prescription_H_Class	varchar(1);
+	      Print_Prescription_H_Name		varchar(20);
+#---    注射せん
+	      Print_Order_Injection_Class	varchar(1);
+	      Print_Order_Injection_Name 	varchar(20);
+#---    指示せん
+	      Print_Order_Direction_Class	varchar(1);
+	      Print_Order_Direction_Name	varchar(20);
+#---    印刷ドクター
+		Print_Physician_Code		varchar(5);
+		Print_Physician_Code_Name	varchar(80);
+	};
+    Data_Id_Information {
+      Data_Id                          varchar(37);
+        };
+	};
+};

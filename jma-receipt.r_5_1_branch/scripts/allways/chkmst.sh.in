@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    チェックマスタ一覧作成
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} 医療機関番号
+#        ${15} チェック区分
+#        ${16} 並べ替え条件
+#        ${17} 開始診療行為コード
+#        ${18} 終了診療行為コード
+#        ${19} エラーファイル名 
+#        ${20} 基準日
+#-------------------------------------------#
+#
+ERR_FILE=${19}
+HOSPNUM=${14}
+##      エラーファイル削除
+        if  [ -e $ERR_FILE ]; then
+            rm  $ERR_FILE
+        fi
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBX01 -parameter "$1,$2,$3,$4,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16},${17},${18},${19},${20}," 
+        if  [ -e $ERR_FILE ]; then
+            exit
+        fi
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},$HOSPNUM
+        exit 

@@ -1,0 +1,28 @@
+XE01 {
+  fixed10 {
+    SEIDO_KBN {
+      textdata varchar(3);
+    };
+    KIGONUM {
+      textdata varchar(20);
+    };
+    HONKZKKBN {
+      textdata varchar(1);
+    };
+    KANANAME {
+      textdata varchar(28);
+    };
+    SEX {
+      textdata varchar(1);
+    };
+    BIRTHDAY {
+      textdata varchar(7);
+    };
+    NIN {
+      textdata varchar(100);
+    };
+    HKNNUM {
+      textdata varchar(8);
+    };
+  };
+};

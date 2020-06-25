@@ -1,0 +1,109 @@
+tbl_qrcdhkn {
+	HOSPNUM				number(2,0);
+	REGISTYMD  			char(8);
+	REGISTID    			number(5,0);
+	REGISTTIME 			char(6);
+	SEIDOKBN			char(3);
+	HKNJANUM 			char(8);
+	KIGONUM				varchar(40);
+	HONKZKKBN			char(1);
+	KANANAME			varchar(100);
+	SEX				char(1);
+	BIRTHDAY			char(7);
+	KANRINUM			varchar(100);
+	NAME				varchar(100);
+	KYURATE				varchar(02);
+	SAIHAKKU			varchar(50);
+	PTID	   			number(10,0);
+	KIGO				varchar(80);
+	NUM				varchar(80);
+	BIRTHDAYS			char(8);
+	ERRCD    			char(2);
+	MOD_FLG				number(1);
+	MOD_FLG2			number(1);
+	DELKBN 				char(1);
+	TERMID  			varchar(64);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD   			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,REGISTYMD,REGISTID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   REGISTYMD      =   :REGISTYMD
+			AND   REGISTID       =   :REGISTID
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   REGISTYMD      =   :REGISTYMD
+			ORDER BY   REGISTID DESC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   REGISTYMD      =   :REGISTYMD
+			AND   MOD_FLG        =   '0'
+			AND   DELKBN         <>  '1'
+			ORDER BY   REGISTID
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   REGISTYMD      =   :REGISTYMD
+			AND   MOD_FLG        =   '1'
+			AND   DELKBN         <>  '1'
+			ORDER BY   REGISTID
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   MOD_FLG        <>  '1'
+			AND   DELKBN         <>  '1'
+			ORDER BY   REGISTID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_qrcdhkn_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_qrcdhkn
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+

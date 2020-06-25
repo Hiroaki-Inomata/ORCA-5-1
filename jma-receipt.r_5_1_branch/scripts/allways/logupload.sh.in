@@ -1,0 +1,40 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+umask 022
+
+LOGFILE=${1}
+DESCRIPTION=${2}
+FILETYPE=${3}
+DLFILENAME=${4}
+
+TEMP=$(mktemp -p ${MCP_TEMPDIR})
+BASENAME=$(basename ${TEMP})
+
+#SRCCHAR=`nkf -g ${LOGFILE}`
+#echo ${SRCCHAR}
+
+if [ "${FILETYPE}" = "html" ]; then
+  echo "<html><body>" > ${TEMP}
+  sed -e 's/$/<br>/g' ${LOGFILE} >> ${TEMP}
+  echo "</body></html>" >> ${TEMP}
+else
+  #if [ "${SRCCHAR}" = "ASCII" ]; then
+  #  nkf -sLw ${LOGFILE} > ${TEMP}
+  #fi
+  cp -p ${LOGFILE} ${TEMP}
+fi
+
+if [ -z "${DESCRIPTION}" ]; then
+  ${MONUPLOAD} -t misc -f ${DLFILENAME} ${TEMP}
+else
+  ${MONUPLOAD} -t misc -f ${DLFILENAME} -d "${DESCRIPTION}" ${TEMP}
+fi
+
+exit 0

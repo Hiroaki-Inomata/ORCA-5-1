@@ -1,0 +1,2923 @@
+tbl_seikyu_main	{
+HOSPNUM				number(2,0);
+SRYYM				number(6);
+NYUGAIKBN			char(1);
+PTID				number(10);
+RECEKA				char(2);
+TEISYUTUSAKI			number(1,0);
+RECESYUBETU			char(4);
+HKNJANUM			char(8);
+HOJOKBN_KEY     		char(1);
+KOHID_KEY       		number(10);
+TEKSTYMD			char(8);
+RECEIPT_KBN			char(10);
+PTNUM				char(20);
+PREFKBN                 char(1);
+PREFNUM                 char(2);
+AGE                     number(3);
+KYURATE                 number(3);
+ZAITAKU                 char(1);
+SKYYM				char(6);
+HENREIYM			char(6);
+SKYKBN		        char(1);
+SKYKBN_RECEDEN		        char(1);
+TEISEIKBN	        char(1);
+HKNNUM          		char(3);
+HKNID	          		number(10);
+HONKZKKBN          		char(1);
+HOJOKBN          		char(1);
+CONTKBN          		char(1);
+KIGO				varchar(80);
+NUM				varchar(80);
+RJNHKNNUM          		char(3);
+RJNHKNID	          	number(10);
+KOHNUM1          		char(3);
+KOHNUM2          		char(3);
+KOHNUM3          		char(3);
+KOHNUM4          		char(3);
+JNISSU	        		number(2,0);
+KHNTEN1	        		number(8,0);
+KAISU1	        		number(5,0);
+TENSU1        		number(8,0);
+KHNTEN2	        		number(8,0);
+KAISU2	        		number(5,0);
+TENSU2        		number(8,0);
+KHNTEN3	        		number(8,0);
+KAISU3	        		number(5,0);
+TENSU3        		number(8,0);
+KHNTEN4	        		number(8,0);
+KAISU4	        		number(5,0);
+TENSU4        		number(8,0);
+KHNTEN5	        		number(8,0);
+KAISU5	        		number(5,0);
+TENSU5        		number(8,0);
+KHNTEN6	        		number(8,0);
+KAISU6	        		number(5,0);
+TENSU6        		number(8,0);
+KHNTEN7	        		number(8,0);
+KAISU7	        		number(5,0);
+TENSU7        		number(8,0);
+KHNTEN8	        		number(8,0);
+KAISU8	        		number(5,0);
+TENSU8        		number(8,0);
+KHNTEN9	        		number(8,0);
+KAISU9	        		number(5,0);
+TENSU9        		number(8,0);
+KHNTEN10	       	number(8,0);
+KAISU10	        		number(5,0);
+TENSU10        		number(8,0);
+KHNTEN11	       	number(8,0);
+KAISU11	        		number(5,0);
+TENSU11        		number(8,0);
+KHNTEN12	       	number(8,0);
+KAISU12	        		number(5,0);
+TENSU12        		number(8,0);
+KHNTEN13	       	number(8,0);
+KAISU13	        		number(5,0);
+TENSU13        		number(8,0);
+KHNTEN14	       	number(8,0);
+KAISU14	        		number(5,0);
+TENSU14        		number(8,0);
+KHNTEN15	       		number(8,0);
+KAISU15	        		number(5,0);
+TENSU15        		number(8,0);
+KHNTEN16	       		number(8,0);
+KAISU16	        		number(5,0);
+TENSU16        		number(8,0);
+KHNTEN17	       		number(8,0);
+KAISU17	        		number(5,0);
+TENSU17        		number(8,0);
+KHNTEN18	       		number(8,0);
+KAISU18	        		number(5,0);
+TENSU18        		number(8,0);
+KHNTEN19	       		number(8,0);
+KAISU19	        		number(5,0);
+TENSU19        		number(8,0);
+KHNTEN20	       		number(8,0);
+KAISU20	        		number(5,0);
+TENSU20        		number(8,0);
+KHNTEN21	       		number(8,0);
+KAISU21	        		number(5,0);
+TENSU21        		number(8,0);
+KHNTEN22	       		number(8,0);
+KAISU22	        		number(5,0);
+TENSU22        		number(8,0);
+KHNTEN23	       		number(8,0);
+KAISU23	        		number(5,0);
+TENSU23        		number(8,0);
+KHNTEN24	       		number(8,0);
+KAISU24	        		number(5,0);
+TENSU24        		number(8,0);
+KHNTEN25	       		number(8,0);
+KAISU25	        		number(5,0);
+TENSU25        		number(8,0);
+KHNTEN26	       		number(8,0);
+KAISU26	        		number(5,0);
+TENSU26        		number(8,0);
+KHNTEN27	       		number(8,0);
+KAISU27	        		number(5,0);
+TENSU27        		number(8,0);
+KHNTEN28	       		number(8,0);
+KAISU28	        		number(5,0);
+TENSU28        		number(8,0);
+KHNTEN29	       		number(8,0);
+KAISU29	        		number(5,0);
+TENSU29        		number(8,0);
+KHNTEN30	       		number(8,0);
+KAISU30	        		number(5,0);
+TENSU30        		number(8,0);
+KHNTEN31	       		number(8,0);
+KAISU31	        		number(5,0);
+TENSU31        		number(8,0);
+KHNTEN32	       		number(8,0);
+KAISU32	        		number(5,0);
+TENSU32        		number(8,0);
+KHNTEN33	       		number(8,0);
+KAISU33	        		number(5,0);
+TENSU33        		number(8,0);
+KHNTEN34	       		number(8,0);
+KAISU34	        		number(5,0);
+TENSU34        		number(8,0);
+KHNTEN35	       		number(8,0);
+KAISU35	        		number(5,0);
+TENSU35        		number(8,0);
+KHNTEN36	       		number(8,0);
+KAISU36	        		number(5,0);
+TENSU36        		number(8,0);
+KHNTEN37	       		number(8,0);
+KAISU37	        		number(5,0);
+TENSU37        		number(8,0);
+KHNTEN38	       		number(8,0);
+KAISU38	        		number(5,0);
+TENSU38        		number(8,0);
+KHNTEN39	       		number(8,0);
+KAISU39	        		number(5,0);
+TENSU39        		number(8,0);
+KHNTEN40	       		number(8,0);
+KAISU40	        		number(5,0);
+TENSU40        		number(8,0);
+KHNTEN41	       		number(8,0);
+KAISU41	        		number(5,0);
+TENSU41        		number(8,0);
+KHNTEN42	       		number(8,0);
+KAISU42	        		number(5,0);
+TENSU42        		number(8,0);
+KHNTEN43	       		number(8,0);
+KAISU43	        		number(5,0);
+TENSU43        		number(8,0);
+KHNTEN44	       		number(8,0);
+KAISU44	        		number(5,0);
+TENSU44        		number(8,0);
+KHNTEN45	       		number(8,0);
+KAISU45	        		number(5,0);
+TENSU45        		number(8,0);
+TOTALTEN        		number(8,0);
+FTNMONEY        		number(9,0);
+FTNMONEY_FTN        		number(9,0);
+FTNMONEY_KOJ        		number(9,0);
+SHOKUJINISSU       		number(2,0);
+SHOKUJIRYOYOHI       		number(9,0);
+SHOKUJIFTN 			number(9,0);
+SHOKUJIFTNKBN        		char(1);
+YKZFTN	 			number(5,0);
+SKYIRYO_NISSU        		number(2,0);
+SKYIRYO_TOTALTEN        	number(8,0);
+SKYIRYO_ICHIBUFTN        	number(9,0);
+SKYIRYO_HOKENJA        		number(9,0);
+SKYIRYO_KOHFTN       		number(9,0);
+SKYSKJ_KAISU        		number(2,0);
+SKYSKJ_RYOYOHI	        	number(9,0);
+SKYSKJ_ICHIBUFTN        	number(9,0);
+SKYSKJ_HOKENJA        		number(9,0);
+SKYSKJ_KOHFTN       		number(9,0);
+HKNCOMBI1			number(4,0);
+HKNCOMBI2			number(4,0);
+HKNCOMBI3			number(4,0);
+HKNCOMBI4			number(4,0);
+HKNCOMBI5			number(4,0);
+HKNCOMBI6			number(4,0);
+HKNCOMBI7			number(4,0);
+HKNCOMBI8			number(4,0);
+HKNCOMBI9			number(4,0);
+HKNCOMBI10			number(4,0);
+TOKKI1				char(2); 
+TOKKI2				char(2); 
+TOKKI3				char(2); 
+TOKKI4				char(2); 
+TOKKI5				char(2); 
+TOKKINM1			varchar(12);
+TOKKINM2			varchar(12);
+TOKKINM3			varchar(12);
+TOKKINM4			varchar(12);
+TOKKINM5			varchar(12);
+FLG1				number(1,0);
+FLG2				number(1,0);
+FLG3				number(1,0);
+FLG4				number(1,0);
+FLG5				number(1,0);
+RESERVE_AREA			char(50);
+HENREI_SIJI_FLG			number(1,0);
+DIRECT_FLG			char(1);
+ETCCREATEFLG			number(1,0);
+HKNKBN_RSI			char(1);
+HKNNUM_S			char(3); 
+HKNJANUM_S			char(8);
+CREYMD				char(8);
+CREHMS				char(6);
+UPDYMD				char(8);
+UPDHMS				char(6);
+#-----> 主キー更新用項目
+UPHKNJANUM			char(10),virtual;
+#-----> 検索用項目
+XXPREFNUM 			char(2),virtual;
+XXSRYYM 			number(6),virtual;
+XXSTHKNJANUM			char(8),virtual;
+XXEDHKNJANUM			char(8),virtual;
+XXTEISYUTUSAKI			number(1,0),virtual;
+};
+
+primary	{
+	HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   RECEKA      =   :RECEKA 
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   RECESYUBETU =   :RECESYUBETU
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY 
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =    :HOSPNUM
+                  AND   SRYYM       =    :SRYYM
+                  AND   PTID        =    :PTID
+                  AND   RECEKA      like :RECEKA 
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+		;
+	};
+};
+
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM              =   :HOSPNUM
+                AND     RECESYUBETU         <>  '0000'  
+                AND     SRYYM               <=  :SKYYM
+                AND   (     ( SKYKBN        <>  '2'       )
+                         OR (      SKYYM     =   :SKYYM  
+                              AND  SRYYM     <>  :SKYYM   ) )
+                ORDER   BY  NYUGAIKBN,TEISYUTUSAKI,SRYYM,SKYYM,HKNJANUM,PTNUM     
+		;
+	};
+};
+
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM            )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'                 ) 
+                  AND (      RECESYUBETU <>  '0000'               ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))          )
+                  AND (      PREFKBN     =   '1'                  ) 
+                  AND (      PREFNUM     =   :XXPREFNUM           ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM            )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'                 ) 
+                  AND (      RECESYUBETU <>  '0000'               ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))          )
+                  AND (      PREFKBN     =   '2'                  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key8	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       <   :SRYYM      )
+		;
+	};
+};
+
+
+path	key9	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+		;
+	};
+};
+
+path	key10	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+		;
+	};
+};
+
+path	key11 {
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       <   :SRYYM      )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key12	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key13	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key14	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      ZAITAKU     <>  '1'        )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key15		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   RECEKA      =   :RECEKA 
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+		;
+	};
+};
+
+
+path	key16	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM   )
+                  AND (   (  NYUGAIKBN   =   '1'      )
+                       OR (( NYUGAIKBN   =   '2'      ) AND (  ZAITAKU     <>  '1' )))
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key17	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      NYUGAIKBN   =   '2'         )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key18	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key18_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      NYUGAIKBN   =   '1'         )
+		;
+	};
+};
+
+path	key19	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+		;
+	};
+};
+
+
+path	key20	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key20_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM            )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'                 ) 
+                  AND (      RECESYUBETU <>  '0000'               ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))          )
+                  AND (      PREFKBN     =   '1'                  ) 
+                  AND (      PREFNUM     <>  :XXPREFNUM           ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key21	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key21_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key22	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key23	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	key24	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key24_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+		WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+		;
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+		;
+	};
+};
+
+path	del6 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+		;
+	};
+};
+
+path	all2	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+		;
+	};
+};
+
+path	st_key1	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_st_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'
+                        OR   HKNNUM_S    =  '067'        )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S,ZAITAKU
+		;
+	};
+};
+
+path	st_key2	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_st_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'
+                        OR   HKNNUM_S    =  '067'        )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S
+		;
+	};
+};
+
+
+path	key25	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key25_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      NYUGAIKBN   =   :NYUGAIKBN  )
+                  AND (      HKNNUM_S    <>  '060'       )
+                  AND (      HKNNUM_S    <>  '067'       ) 
+                  AND (      HKNNUM_S    <>  '068'       )
+                  AND (      HKNNUM_S    <>  '069'       ) 
+                  AND (      HKNNUM_S    <>  '039'       ) 
+                  AND (      HKNNUM_S    <>  '040'       ) 
+                  AND (      HKNNUM_S    <>  '975'       ) 
+                  AND (      HKNNUM_S    <>  '971'       ) 
+                  AND (      HKNNUM_S    <>  '973'       ) 
+                  AND (      HKNNUM_S    <>  '970'       ) 
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	key26	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key26_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      NYUGAIKBN   =   :NYUGAIKBN  )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	st_key3	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_st_key3_csr CURSOR FOR
+		SELECT a.* FROM tbl_seikyu_main a,tbl_ptinf b
+		WHERE    a.HOSPNUM  =   :HOSPNUM 
+		AND (    a.HKNNUM_S    =  '060'                   
+		OR a.HKNNUM_S    =  '067'        ) 
+		AND (    a.RECESYUBETU <>  '0000'      ) 
+		AND (   (( a.SRYYM       =   :SKYYM   )
+			AND ( a.SKYKBN      <>  '0'      )
+			AND (( a.SKYYM       =  '000000' )
+				OR ( a.SKYYM = :SKYYM )))
+				OR (( a.SKYYM       =   :SKYYM   )
+					AND ( a.SKYKBN      <>  '0'      )) )
+			AND (      a.HKNJANUM_S  >=  :XXSTHKNJANUM  
+			AND   a.HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+		AND (      a.NYUGAIKBN  LIKE  :NYUGAIKBN    )
+		AND (      a.PREFKBN    LIKE  :PREFKBN      )
+		AND (    a.HOSPNUM  =  b.HOSPNUM )
+		AND (    a.PTID    =  b.PTID   )
+		AND (  b.TSTPTNUMKBN <> '1'    )
+		;
+	};
+};
+
+path	key27	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key27_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      ZAITAKU     <>   '1'         )
+                  AND (      HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key28	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key28_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      ZAITAKU     <>   '1'         )
+                  AND (      HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key29	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key29_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      ZAITAKU     =    '1'         )
+                  AND (      HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key30	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key30_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      ZAITAKU     =    '1'         )
+                  AND (      HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key31	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key31_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key32	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key32_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      SRYYM       >=   :SRYYM      )
+                  AND (      SRYYM       <    :XXSRYYM    )
+                  AND (      NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG )
+                  ORDER BY RECEKA
+		;
+	};
+};
+
+path	key33	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key33_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key34	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key34_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key35	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key35_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key36	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key36_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                  ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key37	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key37_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key38	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key38_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key39	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key39_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '068'                   
+                        OR   HKNNUM_S    =  '069'        ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key40	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key40_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '068'                   
+                        OR   HKNNUM_S    =  '069'        ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key41	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key41_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '068'                   
+                        OR   HKNNUM_S    =  '069'        ) 
+                  AND (      RECESYUBETU <>  '0000'      ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key42	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key42_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      SRYYM       <=  :SRYYM      )
+                  AND (      SKYYM       <>  '000000'    )
+                  AND (      SKYYM       <=  :SKYYM      )
+                  AND (      SKYKBN      =   '2'         ) 
+                  AND (      NYUGAIKBN   =   :NYUGAIKBN  )
+                ORDER  BY  PTID,SRYYM
+		;
+	};
+};
+
+
+path	key43		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key43_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY
+                  AND   TEKSTYMD    =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+                  AND   TEISEIKBN   <>  '1'
+                ORDER  BY  SKYKBN DESC
+		;
+	};
+};
+
+path	key44	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key44_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =    :HOSPNUM   )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       ) 
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       ) 
+                  AND (      HKNNUM_S    <>   '039'       ) 
+                  AND (      HKNNUM_S    <>   '040'       ) 
+                  AND (      HKNNUM_S    <>   '975'       ) 
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      RECEKA      LIKE :RECEKA     )
+                  ORDER BY RECEKA,NYUGAIKBN,SRYYM,SKYYM,HKNJANUM,PTNUM   
+		;
+	};
+};
+
+path	key45	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key45_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (       a.HOSPNUM      =    :HOSPNUM   )
+                  AND (       a.HKNNUM_S    <>   '060'       )
+                  AND (       a.HKNNUM_S    <>   '067'       ) 
+                  AND (       a.HKNNUM_S    <>   '068'       )
+                  AND (       a.HKNNUM_S    <>   '069'       ) 
+                  AND (       a.HKNNUM_S    <>   '039'       ) 
+                  AND (       a.HKNNUM_S    <>   '040'       ) 
+                  AND (       a.HKNNUM_S    <>   '975'       ) 
+                  AND (       a.HKNNUM_S    <>   '971'       ) 
+                  AND (       a.HKNNUM_S    <>   '973'       ) 
+                  AND (       a.HKNNUM_S    <>   '970'       ) 
+                  AND (       a.RECESYUBETU <>   '0000'      )
+                  AND (   ((  a.SRYYM       =    :SKYYM   )
+                       AND (  a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR ((  a.SKYYM       =    :SKYYM   )
+                       AND (  a.SKYKBN      <>   '0'      )))
+                  AND (       a.SRYYM       >=   :SRYYM      )
+                  AND (       a.SRYYM       <    :XXSRYYM    )
+                  AND (       a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (       a.ZAITAKU     <>   '1'         )
+                  AND (       a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S    )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG    )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key46	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key46_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     <>   '1'         )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key47	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key47_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     =    '1'         )
+                  AND (      a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key48	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key48_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     =    '1'         )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key49	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key49_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key50	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key50_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a left join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND ((   (  b.ETC_KOHNUM1 <>   '972'    )
+                       AND (  b.ETC_KOHNUM2 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '972'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '972'    )
+                       AND (  b.ETC_KOHNUM1 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM2 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM3 <>   '974'    )  
+                       AND (  b.ETC_KOHNUM4 <>   '974'    )
+                      OR b.HOSPNUM IS NULL ))
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key51	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key51_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     <>   '1'         )
+                  AND (      a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key52	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key52_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     <>   '1'         )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key53	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key53_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     =    '1'         )
+                  AND (      a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key54	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key54_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.ZAITAKU     =    '1'         )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key55	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key55_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.HENREIYM    <>   '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key56	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key56_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_seikyu_main a join tbl_seikyu_etc b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =    :HOSPNUM   )
+                  AND (      a.HKNNUM_S    <>   '060'       )
+                  AND (      a.HKNNUM_S    <>   '067'       ) 
+                  AND (      a.HKNNUM_S    <>   '068'       )
+                  AND (      a.HKNNUM_S    <>   '069'       ) 
+                  AND (      a.HKNNUM_S    <>   '039'       ) 
+                  AND (      a.HKNNUM_S    <>   '040'       ) 
+                  AND (      a.HKNNUM_S    <>   '975'       ) 
+                  AND (      a.HKNNUM_S    <>   '971'       ) 
+                  AND (      a.HKNNUM_S    <>   '973'       ) 
+                  AND (      a.HKNNUM_S    <>   '970'       ) 
+                  AND (      a.RECESYUBETU <>   '0000'      )
+                  AND (   (( a.SRYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =    :SKYYM   )
+                       AND ( a.SKYKBN      <>   '0'      )))
+                  AND (      a.SRYYM       >=   :SRYYM      )
+                  AND (      a.SRYYM       <    :XXSRYYM    )
+                  AND (      a.NYUGAIKBN   LIKE :NYUGAIKBN  )
+                  AND (      a.HENREIYM    =    '000000'    )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S   )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG   )
+                  AND (    ( b.ETC_KOHNUM1 =    '972'    )
+                        OR ( b.ETC_KOHNUM2 =    '972'    )  
+                        OR ( b.ETC_KOHNUM3 =    '972'    )  
+                        OR ( b.ETC_KOHNUM4 =    '972'    )
+                        OR ( b.ETC_KOHNUM1 =    '974'    )  
+                        OR ( b.ETC_KOHNUM2 =    '974'    )  
+                        OR ( b.ETC_KOHNUM3 =    '974'    )  
+                        OR ( b.ETC_KOHNUM4 =    '974'    )  )
+                  ORDER BY a.RECEKA
+		;
+	};
+};
+
+path	key57	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key57_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =    :HOSPNUM   )
+                  AND (      HKNNUM_S    =  '060'
+                        OR   HKNNUM_S    =  '067'
+                        OR   HKNNUM_S    =  '068'
+                        OR   HKNNUM_S    =  '069'        ) 
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      RECEKA      LIKE :RECEKA     )
+                  ORDER BY RECEKA,NYUGAIKBN,SRYYM,SKYYM,HKNJANUM,PTNUM   
+		;
+	};
+};
+
+
+path	key58	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key58_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM            )
+                  AND (      HKNNUM_S    =  '060'                   
+                        OR   HKNNUM_S    =  '067'                 ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))          )
+                  AND (      PREFKBN     =   :PREFKBN             ) 
+                  AND (      SRYYM       >=   :SRYYM              )
+                  AND (      SRYYM       <    :XXSRYYM            )
+                ORDER  BY  HKNJANUM_S   
+		;
+	};
+};
+
+path	key59		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key59_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path    del7    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                ;
+        };
+};
+
+path	key60	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key60_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                ORDER  BY  KIGO
+		;
+	};
+};
+
+path	key61	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key61_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S   ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+path	key62	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key62_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     <>  '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+path	key63	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key63_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+path	key64	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key64_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      ZAITAKU     =   '1'         )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+path	key65	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key65_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    <>  '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+path	key66	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key66_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  ) 
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM  
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  ) 
+                  AND (      HENREIYM    =   '000000'       )
+                ORDER  BY  HKNJANUM_S,RECEKA   
+		;
+	};
+};
+
+
+path	key67	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key67_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      NYUGAIKBN   like   :NYUGAIKBN    )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI
+                        OR   TEISYUTUSAKI =   :XXTEISYUTUSAKI )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )) )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	key68	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key68_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =    :HOSPNUM   )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (   (( SRYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )
+                       AND (( SKYYM       =   '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM   )
+                       AND ( SKYKBN      <>   '0'      )))
+                  AND (      RECEKA      LIKE :RECEKA     )
+                  ORDER BY RECEKA,NYUGAIKBN,SRYYM,SKYYM,HKNJANUM,PTNUM   
+		;
+	};
+};
+
+path	key69	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key69_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =    :HOSPNUM   )
+                  AND (      NYUGAIKBN   like :NYUGAIKBN )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (      SRYYM       <    :SKYYM     )
+                  AND (      SKYKBN      <>   '0'        )
+                  AND (      SKYYM       =    :SKYYM     )
+                  AND (   (  HENREIYM    =    '000000'  )
+                       OR (( HENREIYM    <>   '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     )) )
+                ORDER  BY  NYUGAIKBN,SRYYM,PTNUM
+		;
+	};
+};
+
+path	key70	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key70_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =    :HOSPNUM
+                  AND   PTID         =    :PTID
+                  AND   NYUGAIKBN    like :NYUGAIKBN
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   SRYYM        =  :SRYYM
+                  AND   HKNNUM_S     <>  '040'
+                  AND   HKNNUM_S     <>  '068'
+                  AND   HKNNUM_S     <>  '069'
+		;
+	};
+};
+
+path	key71	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key71_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =    :HOSPNUM
+                  AND   PTID         =    :PTID
+                  AND   NYUGAIKBN    like :NYUGAIKBN
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   SRYYM        =  :SRYYM
+                  AND   SKYYM        =  :SKYYM
+                  AND   HKNNUM_S     <>  '040'
+                  AND   HKNNUM_S     <>  '068'
+                  AND   HKNNUM_S     <>  '069'
+		;
+	};
+};
+
+path st_key4 {
+	DBSELECT {
+		DECLARE tbl_seikyu_main_st_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM             )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND ((SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))          )
+                  AND (      NYUGAIKBN   =   :NYUGAIKBN           )
+                ORDER   BY 
+			TEISYUTUSAKI,NYUGAIKBN,RJNHKNNUM,KYURATE,RECESYUBETU,KOHNUM1,KOHNUM2
+		  ;
+	 };
+};
+
+path	key72	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key72_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =    :HOSPNUM    )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       )
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       )
+                  AND (      HKNNUM_S    <>   '039'       )
+                  AND (      HKNNUM_S    <>   '040'       )
+                  AND (      HKNNUM_S    <>   '975'       )
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (   (( SRYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+                  AND (      NYUGAIKBN   LIKE    :NYUGAIKBN  )
+		;
+	};
+};
+
+path	key73	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key73_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND (      HKNNUM_S    =   '060'
+                        OR   HKNNUM_S    =   '067'       )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )
+                       AND (( SKYYM      =   '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )))
+                  AND (      NYUGAIKBN   LIKE   :NYUGAIKBN  )
+		;
+	};
+};
+
+path	key74	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key74_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND (      HKNNUM_S    =   '039'       )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )
+                       AND (( SKYYM      =   '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )))
+                  AND (      NYUGAIKBN   LIKE   :NYUGAIKBN  )
+		;
+	};
+};
+
+path	key75	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key75_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  )
+                ORDER  BY  HKNJANUM_S,RECEKA
+		;
+	};
+};
+
+path	key76	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key76_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM   )
+                  AND (      HKNNUM_S    =   :HKNNUM
+                        OR   HKNNUM_S    =   :HKNNUM_S  )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      SRYYM       >=  :SRYYM      )
+                  AND (      SRYYM       <   :XXSRYYM    )
+                  AND (      HKNJANUM_S  >=  :XXSTHKNJANUM
+                       AND   HKNJANUM_S  <=  :XXEDHKNJANUM  )
+                ORDER  BY  PREFKBN,HKNJANUM_S,RECEKA
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_seikyu_main
+		SET	PTNUM       =   :PTNUM
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key77	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key77_csr CURSOR FOR
+		SELECT a.*,b.syokaiflg,b.syocd,b.hknkbn
+		FROM tbl_seikyu_main a join tbl_seikyu_rsi b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =   :HOSPNUM      )
+                  AND (      a.TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (   (( a.SRYYM       =   :SKYYM   )
+                       AND ( a.SKYKBN      <>  '0'      )
+                       AND (( a.SKYYM       =  '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =   :SKYYM   )
+                       AND ( a.SKYKBN      <>  '0'      )))
+                ORDER  BY  b.SYOKAIFLG DESC,HKNJANUM_S,PTNUM
+		;
+	};
+};
+
+path	key78	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key78_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM        =    :HOSPNUM
+                  AND   NYUGAIKBN      like :NYUGAIKBN
+                  AND   TEISYUTUSAKI   =    :TEISYUTUSAKI
+                  AND   SKYKBN_RECEDEN =    '1'
+                  AND (   ((  SRYYM       =   :SKYYM   )
+                       AND (  SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR ((  SKYYM       =   :SKYYM   )
+                       AND (  SKYKBN      <>  '0'      )))
+		;
+	};
+};
+
+path	key79	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key79_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM        =    :HOSPNUM
+                  AND   NYUGAIKBN      like :NYUGAIKBN
+                  AND   SKYKBN_RECEDEN =    '1'
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+		;
+	};
+};
+
+path	key80	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key80_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM        )
+                  AND (      NYUGAIKBN   like   :NYUGAIKBN    )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI
+                        OR   TEISYUTUSAKI =   :XXTEISYUTUSAKI )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))      )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     ))      )
+                  AND (      HKNJANUM_S  like :HKNJANUM_S     )
+                  AND (      DIRECT_FLG  like :DIRECT_FLG     )
+                ORDER  BY  RECEKA,PTNUM,SRYYM
+		;
+	};
+};
+
+path	key81	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key81_csr CURSOR FOR
+		SELECT HKNJANUM_S
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM      =   :HOSPNUM        )
+                  AND (      NYUGAIKBN   like   :NYUGAIKBN    )
+                  AND (      TEISYUTUSAKI =   :TEISYUTUSAKI
+                        OR   TEISYUTUSAKI =   :XXTEISYUTUSAKI )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      ))      )
+                  AND (   (  HENREIYM    =   '000000'  )
+                       OR (( HENREIYM    <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1     ))      )
+                  AND (      DIRECT_FLG  =   :DIRECT_FLG      )
+                GROUP  BY  HKNJANUM_S
+                ORDER  BY  HKNJANUM_S
+		;
+	};
+};
+
+path	key82	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key82_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND (      HKNNUM_S  LIKE  :HKNNUM_S   )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )
+                       AND (( SKYYM      =   '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )))
+                  AND (      NYUGAIKBN   LIKE   :NYUGAIKBN  )
+		;
+	};
+};
+
+path	key83	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key83_csr CURSOR FOR
+		SELECT a.*,b.syokaiflg,b.syocd,b.hknkbn
+		FROM tbl_seikyu_main a join tbl_seikyu_rsi b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =   :HOSPNUM      )
+                  AND (      a.TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (      NYUGAIKBN   LIKE   :NYUGAIKBN    )
+                  AND (   (( a.SRYYM        =   :SKYYM   )
+                       AND ( a.SKYKBN       <>  '0'      )
+                       AND (( a.SKYYM       =   '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM        =   :SKYYM   )
+                       AND ( a.SKYKBN       <>  '0'      ))   )
+                  AND (   (  HENREIYM       =   '000000'  )
+                       OR (( HENREIYM       <>  '000000' )
+                       AND ( HENREI_SIJI_FLG =  1        ))   )
+                  AND (    ( HKNKBN         <>  '3'       )
+                       AND ( HKNKBN         <>  '4'       )   )
+                ORDER  BY  b.SYOKAIFLG DESC,HKNJANUM_S,PTNUM
+		;
+	};
+};
+
+path	key84		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key84_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =  :TEISYUTUSAKI
+                  AND   HKNJANUM    =   :HKNJANUM
+                  AND   HOJOKBN_KEY =   :HOJOKBN_KEY
+                  AND   KOHID_KEY   =   :KOHID_KEY
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+                  AND   TEISEIKBN   <>  '1'
+                ORDER  BY  SKYKBN DESC
+		;
+	};
+};
+
+path	del8 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :HKNNUM
+		;
+	};
+};
+
+path	del9 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   HKNNUM       =   :HKNNUM
+		;
+	};
+};
+
+path    del10    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND  (TEISYUTUSAKI =  :TEISYUTUSAKI  OR
+                        TEISYUTUSAKI =  :XXTEISYUTUSAKI)
+                  AND   HKNNUM       =   :HKNNUM
+                ;
+        };
+};
+
+path	key85		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key85_csr CURSOR FOR
+		SELECT count(*) AS FTNMONEY,sum(totalten) AS TOTALTEN
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   TEISYUTUSAKI in  ('1','2','6')
+                  AND   SUBSTRING(RECESYUBETU,1,2) <> '12'
+                  AND   RECESYUBETU  <>  '6666'
+		;
+	};
+};
+
+path	key86		{ 	
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key86_csr CURSOR FOR
+		SELECT count(*) AS FTNMONEY,sum(totalten) AS TOTALTEN
+		from (select sum(totalten) AS TOTALTEN from tbl_seikyu_koh
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   TEISYUTUSAKI =   '1'
+                  AND   SUBSTRING(RECESYUBETU,1,2) ='12'
+                  group by HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) a
+		;
+	};
+};
+
+path	key87	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key87_csr CURSOR FOR
+		SELECT a.*,b.recekbn
+		FROM tbl_seikyu_main a join tbl_seikyu_rsi b using (HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN)
+                WHERE (      a.HOSPNUM      =   :HOSPNUM      )
+                  AND (      a.TEISYUTUSAKI =   :TEISYUTUSAKI )
+                  AND (      NYUGAIKBN   like   :NYUGAIKBN    )
+                  AND (   (( a.SRYYM       =   :SKYYM   )
+                       AND ( a.SKYKBN      <>  '0'      )
+                       AND (( a.SKYYM       =  '000000' ) OR ( a.SKYYM = :SKYYM )))
+                       OR (( a.SKYYM       =   :SKYYM   )
+                       AND ( a.SKYKBN      <>  '0'      )))
+                ORDER  BY  PTNUM,a.NYUGAIKBN,a.SRYYM,b.RECEKBN
+		;
+	};
+};
+
+
+path	key88	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key88_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =    :HOSPNUM    )
+                  AND (      HKNNUM_S    <>   '060'       )
+                  AND (      HKNNUM_S    <>   '067'       )
+                  AND (      HKNNUM_S    <>   '068'       )
+                  AND (      HKNNUM_S    <>   '069'       )
+                  AND (      HKNNUM_S    <>   '039'       )
+                  AND (      HKNNUM_S    <>   '040'       )
+                  AND (      HKNNUM_S    <>   '975'       )
+                  AND (      HKNNUM_S    <>   '971'       ) 
+                  AND (      HKNNUM_S    <>   '973'       ) 
+                  AND (      HKNNUM_S    <>   '970'       ) 
+                  AND (      RECESYUBETU <>   '0000'      )
+                  AND (      NYUGAIKBN   LIKE    :NYUGAIKBN  )
+                  AND ((   (( SRYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+                   OR ( HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) IN
+         (  SELECT      HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM_KEY,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+            FROM  tbl_kohsky
+            WHERE   (      HOSPNUM     =    1    )
+             AND    (   (( SRYYM       =      :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+         ))
+		;
+	};
+};
+
+
+path	key89	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key89_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND (      HKNNUM_S    =   '060'
+                        OR   HKNNUM_S    =   '067'       )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (      NYUGAIKBN   LIKE    :NYUGAIKBN  )
+                  AND ((   (( SRYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+                   OR ( HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) IN
+         (  SELECT      HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM_KEY,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+            FROM  tbl_kohsky
+            WHERE   (      HOSPNUM     =    1    )
+             AND    (   (( SRYYM       =      :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+         ))
+		;
+	};
+};
+
+path	key90	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key90_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND (      HKNNUM_S    =   '039'       )
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (      NYUGAIKBN   LIKE    :NYUGAIKBN  )
+                  AND ((   (( SRYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+                   OR ( HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN) IN
+         (  SELECT      HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM_KEY,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN
+            FROM  tbl_kohsky
+            WHERE   (      HOSPNUM     =    1    )
+             AND    (   (( SRYYM       =      :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )
+                       AND (( SKYYM      =    '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =    :SKYYM    )
+                       AND ( SKYKBN      <>   '0'       )))
+         ))
+		;
+	};
+};
+
+path	key91	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key91_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE (      HOSPNUM     =   :HOSPNUM    )
+                  AND ((     HKNNUM_S  LIKE  :HKNNUM_S  )
+                     OR(     HKNNUM_S  IN  ('040','068','069')))
+                  AND (      RECESYUBETU <>  '0000'      )
+                  AND (   (( SRYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )
+                       AND (( SKYYM      =   '000000'  ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM    )
+                       AND ( SKYKBN      <>  '0'       )))
+                  AND (      NYUGAIKBN   LIKE   :NYUGAIKBN  )
+		;
+	};
+};
+
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :HKNNUM
+                  AND ( HKNKBN_RSI   =   :HKNKBN_RSI  OR
+                        HKNKBN_RSI   =   '' )
+		;
+	};
+};
+
+path    del12    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND   KOHID_KEY    =   :KOHID_KEY
+                ;
+        };
+};
+
+path	del13 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND ( HKNKBN_RSI   =   :HKNKBN_RSI  OR
+                        HKNKBN_RSI   =   '' )
+		;
+	};
+};
+
+path    del14    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND ( HKNKBN_RSI   =   :HKNKBN_RSI  OR
+                        HKNKBN_RSI   =   '' )
+                ;
+        };
+};
+
+path	del15 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   SKYKBN      <>  '0' 
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND   HKNKBN_RSI   =   :HKNKBN_RSI
+		;
+	};
+};
+
+path	del16 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   PTID         =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND   HKNKBN_RSI   =   :HKNKBN_RSI
+		;
+	};
+};
+
+
+path    del17    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+                  AND   HKNNUM       =   :HKNNUM
+                  AND   HKNKBN_RSI   =   :HKNKBN_RSI
+                ;
+        };
+};
+
+path	key92	{
+	DBSELECT	{
+		DECLARE tbl_seikyu_main_key92_csr CURSOR FOR
+		SELECT *
+		FROM tbl_seikyu_main
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   HKNNUM       =   :HKNNUM
+                  AND   KOHID_KEY    =   :KOHID_KEY
+                ;
+        };
+};
+

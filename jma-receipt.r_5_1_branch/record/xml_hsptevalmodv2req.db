@@ -1,0 +1,24 @@
+xml_hsptevalmodv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	private_objects {
+		Save_Request	varchar(1);
+		Patient_ID		varchar(20);
+		Admission_Date		varchar(10);
+		Perform_Date		varchar(10);
+		Medical_Condition {
+			ID				varchar(2);
+			Evaluation      varchar(1);
+			Evaluation_Daily	varchar(128);
+		}[50];
+		ADL_Score	{
+			ID				varchar(1);
+			Evaluation      varchar(1);
+			Evaluation_Daily varchar(128);
+		}[4];
+		Designr_Total_Score_Daily		varchar(128);
+	};
+};
+

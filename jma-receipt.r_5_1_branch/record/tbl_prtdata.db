@@ -1,0 +1,299 @@
+tbl_prtdata	{
+	HOSPNUM				number(2,0);
+	TBL_KEY			char(8);
+	RENNUM  		number(4);
+	TBL_GROUP		char(14);
+	TBL_UUID 		char(36);
+	SHORI_RENNUM		number(4);
+	GYOUMU_CD               number(3);
+	SHELLID			varchar(20);
+	PRTID   		varchar(20);
+	SRYYM			varchar(06);
+	SKYYMD   		varchar(08);
+	PTID			number(10);
+	PRIORITY       		number(4);
+	PAGE        		number(5);
+	PRTFLG			char(1);
+	SITEKBN			char(1);
+	PRTNM			char(16);
+	DATA_TYPE	    varchar(16);
+	API_ID		    varchar(20);
+	PRTDATA			varchar(20000);
+	CREYMD 			varchar(8);
+#-----> 検索用項目
+	STPAGE			number(5),virtual;
+	EDPAGE			number(5),virtual;
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM,PAGE;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtdata_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         =   :PAGE 
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtdata_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    AND     PAGE         >=  :STPAGE
+                    AND     PAGE         <=  :EDPAGE
+                    ORDER BY PAGE    
+		;
+	};
+};
+
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+		;
+	};
+};
+
+path	del12	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        <>  '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	del13	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        =   '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_prtdata_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+
+path	del14	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	del15	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      <>   'DAILY'
+                    AND     TBL_KEY      <>   'ONLINE'
+                    AND     TBL_KEY      <>   'RECEPTX'
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+path	del16	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   ( TBL_KEY      =   'DAILY'   OR
+                            TBL_KEY      =   'ONLINE'     ) 
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtdata_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+                    ORDER BY PAGE
+					OFFSET	:PAGE
+		;
+	};
+};
+
+path	key4		{
+	DBSELECT	{
+		DECLARE tbl_prtdata_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND     RENNUM		=	:RENNUM
+		AND     TBL_GROUP	=	:TBL_GROUP
+		AND     TBL_UUID	=	:TBL_UUID
+		AND     SHORI_RENNUM	=	:SHORI_RENNUM
+		ORDER	BY	 PAGE
+		;
+	};
+};
+
+path	upd1		{ 	
+	DBUPDATE	{
+		UPDATE	tbl_prtdata
+			SET PRTFLG     =   :PRTFLG
+			WHERE 	HOSPNUM	= :HOSPNUM
+            AND   TBL_KEY      =   :TBL_KEY
+            AND     RENNUM       =   :RENNUM
+            AND     TBL_GROUP    =   :TBL_GROUP
+            AND     TBL_UUID     =   :TBL_UUID
+            AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	del17	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     SRYYM        =   '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	del18	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtdata
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND     RENNUM		=	:RENNUM
+		AND     TBL_GROUP	=	:TBL_GROUP
+		AND     TBL_UUID	=	:TBL_UUID
+		AND     SHORI_RENNUM	=	:SHORI_RENNUM
+		AND     PAGE		=	:PAGE
+		;
+	};
+};
+
+path	delmb1	{
+	DBDELETE	{
+		DELETE
+		FROM monblob  where ID  in (
+		SELECT  PRTDATA   FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+		);
+	};
+};
+
+path	delmb2	{
+	DBDELETE	{
+		DELETE
+		FROM monblob  where ID  in (
+		SELECT  PRTDATA   FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		);
+	};
+};
+
+path	delmb3	{
+	DBDELETE	{
+		DELETE
+		FROM monblob  where ID  in (
+		SELECT  PRTDATA   FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   ( TBL_KEY      =   'DAILY'   OR
+                            TBL_KEY      =   'ONLINE'     ) 
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		);
+	};
+};
+
+path	delmb4	{
+	DBDELETE	{
+		DELETE
+		FROM monblob  where ID  in (
+		SELECT  PRTDATA   FROM tbl_prtdata
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      <>   'DAILY'
+                    AND     TBL_KEY      <>   'ONLINE'
+                    AND     TBL_KEY      <>   'RECEPTX'
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		);
+	};
+};
+
+path	delmb5	{
+	DBDELETE	{
+		DELETE
+		FROM monblob  where ID  in (
+		SELECT  PRTDATA   FROM tbl_prtdata
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND     RENNUM		=	:RENNUM
+		AND     TBL_GROUP	=	:TBL_GROUP
+		AND     TBL_UUID	=	:TBL_UUID
+		AND     SHORI_RENNUM	=	:SHORI_RENNUM
+		AND     PAGE		=	:PAGE
+		);
+	};
+};
+
+

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+RENNUM=0
+#-------------------------------------------#
+#    レセ電総括表（国保）作成
+#        $1-${11}
+#              印刷ＤＢ用定固定引数(CPORCSRTLNK.INC)
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} HOSPNUM
+#        ${15} エラーファイル名 
+#        ${16} RECEKBN(総括表の種類)
+#              2:国保 3:広域連合
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${14}receden_sokatu${16}.log"
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+        echo "arg15 = [" ${15} "]"
+        echo "arg16 = [" ${16} "]"
+#
+##      エラーファイル削除
+        echo "errfile = [" ${MCP_TEMPDIR}/${15}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${15}
+
+        
+##      国保
+        if  [ ${16} -eq 2 ]; then
+            RENNUM=$(expr $RENNUM + 1) 
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM031 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${12},${13},${15} 
+            if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+                exit
+            fi
+        fi
+        
+##      広域連合
+        if  [ ${16} -eq 3 ]; then
+            RENNUM=$(expr $RENNUM + 1) 
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM036 -parameter $1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${14},${12},${13},${15} 
+            if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+                exit
+            fi
+        fi
+        
+	$DBSTUB  -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${14} 
+
+

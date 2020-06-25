@@ -1,0 +1,45 @@
+C05 {
+  fixed9 {
+    SELNUM1 {
+      numdata number(5);
+    };
+    EDITBYOMEI {
+      textdata varchar(100);
+    };
+    BYOMEIKEN {
+      textdata varchar(30);
+    };
+    SCR_BYOMEILST {
+      BYOMEILST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(5);
+            column2 varchar(6);
+            column3 varchar(4);
+            column4 varchar(54);
+            column5 varchar(9);
+            column6 varchar(7);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    SELNUM2 {
+      numdata number(2);
+    };
+    SCR_BYOMEICDLST {
+      BYOMEICDLST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(2);
+            column2 varchar(7);
+            column3 varchar(80);
+          }[21];
+          selectdata bool[21];
+      };
+    };
+  };
+};

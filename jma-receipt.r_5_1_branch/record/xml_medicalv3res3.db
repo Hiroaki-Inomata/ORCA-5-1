@@ -1,0 +1,296 @@
+xml_medicalv3res3 {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	medicalv3res3 {
+	Request_Number				varchar(02);
+	Response_Number				varchar(02);
+	Karte_Uid				varchar(36);
+	Orca_Uid				varchar(36);
+	Information_Date			varchar(10);
+	Information_Time			varchar(8);
+	Api_Result				varchar(3);
+	Api_Result_Message			varchar(100);
+	Reskey					varchar(100);
+#--- 診療日付
+	Perform_Date				varchar(10);
+	Perform_Time				varchar(8);
+	Base_Date				varchar(10);
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+        Physician_Code				varchar(5);
+        Physician_WholeName			varchar(80);
+#---
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+#---            保険組合せ情報
+		HealthInsurance_Information  {
+		Insurance_Combination_Number		varchar(04);
+		Insurance_Combination_Rate		varchar(03);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(20);
+            	RelationToInsuredPerson			varchar(01);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+            	} [4];
+        	};
+    	};
+#--- 診療内容
+	Medical_Information  {
+		Medical_Info  {
+#--!!!!!
+#-----  複数科・保険組合せ切替
+			Medication_Change_Info   {
+			    Change_Mode			varchar(03);
+			    Change_Insurance_Combination_Number	varchar(04);
+		            Change_InsuranceProvider_WholeName	varchar(20);
+                            Change_PublicInsurance_Information   {
+                		Change_PublicInsurance_Name	varchar(20);
+		            	} [4];
+			    Change_Department_Code	varchar(02);
+			    Change_Department_Code_Name	varchar(20);
+			    Change_Physician_Code	varchar(5);
+			    Change_Physician_Code_Name	varchar(80);
+			};
+#--!!!!!
+#-----
+			Medical_Class_Group		varchar(02);
+			Medical_Class			varchar(03);
+			Medical_Class_Name		varchar(40);
+			Medical_Class_Number		varchar(03);
+			Medical_Point 			varchar(08);
+			Medical_Money			varchar(08);
+			Medical_Inclusion_Class		varchar(05);
+#----->                 包括検査の検査数
+			Medical_Examination_Count	varchar(02);
+			Medical_Delete_Number		varchar(02);
+			Medical_Delete_Info		varchar(06);
+			Medication_Info    {
+				Medication_Code	varchar(09);
+				Medication_Name	varchar(140);
+				Medication_Number	varchar(11);
+#----->                         単位コード
+				Medication_Unit_Code		varchar(3);
+				Medication_Unit_Code_Name	varchar(24);
+				Medication_Money 	varchar(07);
+				Medication_Input_Info {
+					Medication_Input_Code	varchar(10);
+				} [5];
+#----->                         フィルム分画数
+				Medication_Film_Comp_Number	varchar(03);
+				Medication_Generic	varchar(1);
+     				Medication_Generic_Name		varchar(200);
+				Medication_Continue		varchar(01);
+				Medication_Internal_Kinds	varchar(01);
+#----->                         加算自動算定なし
+				Medication_No_Addition_Class	varchar(03);
+				Medication_Auto_Addition 	varchar(01);
+			} [50];
+		}[120] ;
+		};
+#--- メッセージ
+	Medical_Message_Information {
+        Medical_Result			varchar(4);
+        Medical_Result_Message		varchar(100);
+	        };
+#--- 伝票番号
+        Invoice_Number			varchar(07);
+#--!!!!!
+#-----  送信調整金情報
+	In_Cd_Information   {
+	   In_Change_Info       {
+#-----        複数科・保険組合せ情報
+	      In_Insurance_Combination_Number	varchar(04);
+	      In_Department_Code		varchar(02);
+	      In_Cd_Ic_Money			varchar(10);
+	      In_Cd_Ad_Money1			varchar(10);
+	      In_Cd_Ad_Money2			varchar(10);
+           } [15];
+	   In_Ad_Money1			varchar(10);
+	   In_Ad_Money2			varchar(10);
+	   In_Ic_Money			varchar(10);
+	   In_Re_Money			varchar(10);
+        };
+#-!!!!!
+#--- 収納情報
+	Cd_Information {
+	Ic_Code				varchar(2);
+	Ic_Code_Name			varchar(20);
+#--- 入金取り扱い区分
+	Ic_Request_Code			varchar(1);
+	Ic_Request_Code_Name 		varchar(40);
+#---    今回請求額合計
+	Total_Ac_Money			varchar(10);
+#---    今回入金合計
+	Total_Ic_Money			varchar(10);
+#---    今回返金合計
+	Total_Re_Money			varchar(10);
+#---    今回入金額上限
+	Max_Ac_Money			varchar(10);
+	Cd_Information2 {
+#-!!!!!
+#-----    診療科・保険組合せ番号
+	  Insurance_Combination_Number	varchar(04);
+	  Insurance_Combination_Name	varchar(40);
+	  Department_Code		varchar(02);
+	  Department_Code_Name		varchar(20);
+#-!!!!!
+#---    今回入金額
+	   Ic_Money			varchar(10);
+	   Ad_Money1			varchar(10);
+  	   Ad_Money2			varchar(10);
+#---    今回請求額
+   	   Ac_Money			varchar(10);
+#---    返金額
+	   Re_Money			varchar(10);
+	   Cd_Ac_Information  {
+		Ai_Money		varchar(10);
+		Oe_Money		varchar(10);
+		Dg_Smoney		varchar(10);
+		Om_Smoney		varchar(10);
+		Pi_Smoney		varchar(10);
+		Lsi_Total_Money 	varchar(10);
+		};
+#---    請求点数情報
+	    Ac_Point_Information  {
+		Ac_Ttl_Point	varchar(10);
+		Ac_Point_Detail   {
+			Ac_Point_Name	varchar(30);
+			Ac_Point	varchar(10);
+			Me_Money	varchar(10);
+	 		} [16];
+   	 	 };
+#---           自費明細
+	        Oe_Etc_Information  {
+	             Oe_Etc_Detail    {
+			Oe_Etc_Name		varchar(20);
+			Oe_Etc_Money_Non_Taxable	varchar(10);
+			Oe_Etc_Money_Taxable		varchar(10);
+	 		} [10];
+#---            自費消費税額（再計）
+	  	    Tax_In_Oe_Etc_Ttl_Money_Taxable	varchar(10);
+    	         };
+#---        訂正前情報
+	    Old_Money_Information  {
+		Old_Ic_Money			varchar(10);
+		Old_Ac_Money			varchar(10);
+		Old_Ad_Money1			varchar(10);
+		Old_Ad_Money2			varchar(10);
+	 	};
+ 	    };
+#---        減免情報
+	    Discount_Information  {
+		Discount_Name			varchar(12);
+        	};
+            Old_Total_Information  {
+#---            前回までの未収金
+		Old_Total_Re_Money		varchar(10);
+#---            前回までの過入金
+		Old_Total_Ov_Money		varchar(10);
+    		};
+	};
+#-!!!!!
+#-----  複数科・保険組合せ情報
+	Cd_Sub_Information2 {
+	  Cd_Sub_Info2   {
+              Sub_Change_Info   {
+#-----        複数科・保険組合せ情報
+	      Insurance_Combination_Number	varchar(04);
+	      Department_Code	 		varchar(02);
+	      Department_Code_Name 		varchar(20);
+	      Physician_Code			varchar(05);
+#-------      伝票番号
+              Sub_Invoice_Number		varchar(07);
+	      };
+#---    今回入金額
+	      Ic_Money			varchar(10);
+	      Ad_Money1			varchar(10);
+	      Ad_Money2			varchar(10);
+#---    今回請求額
+   	      Ac_Money			varchar(10);
+#---    返金額
+	      Re_Money			varchar(10);
+	      Cd_Ac_Information  {
+		Ai_Money		varchar(10);
+		Oe_Money		varchar(10);
+		Dg_Smoney		varchar(10);
+		Om_Smoney		varchar(10);
+		Pi_Smoney		varchar(10);
+		Lsi_Total_Money 	varchar(10);
+		};
+#---    請求点数情報
+	      Ac_Point_Information  {
+		Ac_Ttl_Point	varchar(10);
+		Ac_Point_Detail   {
+			Ac_Point_Name	varchar(30);
+			Ac_Point	varchar(10);
+			Me_Money	varchar(10);
+	 		} [16];
+   	 	 };
+#---           自費明細
+	        Oe_Etc_Information  {
+	             Oe_Etc_Detail    {
+			Oe_Etc_Name		varchar(20);
+			Oe_Etc_Money_Non_Taxable	varchar(10);
+			Oe_Etc_Money_Taxable		varchar(10);
+	 		} [10];
+#---            自費消費税額（再計）
+	  	    Tax_In_Oe_Etc_Ttl_Money_Taxable	varchar(10);
+    	         };
+#---        訂正前情報
+	    Old_Money_Information  {
+		Old_Ic_Money			varchar(10);
+		Old_Ac_Money			varchar(10);
+		Old_Ad_Money1			varchar(10);
+		Old_Ad_Money2			varchar(10);
+	 	};
+#---        まとめ入力差額
+	    Grp_Money_Information  {
+		Grp_SGK_Money			varchar(10);
+	 	};
+	 } [15];
+        };
+#-!!!!!
+#--- 発行区分
+	Print_Order_Information    {
+#---            請求書明細書発行区分
+		Order_Invoice_Receipt_Class	varchar(1);
+		Order_Invoice_Receipt_Class_Name	varchar(30);
+		};
+#-!!!!!
+#--- 印刷区分
+	Print_Information    {
+		Print_Prescription_Class		varchar(1);
+		Print_Prescription_Class_Name		varchar(30);
+		Print_Invoice_Receipt_Class		varchar(1);
+		Print_Invoice_Receipt_Class_Name	varchar(30);
+		Print_Statement_Class			varchar(1);
+		Print_Statement_Class_Name		varchar(30);
+		Print_Medicine_Information_Class	varchar(1);
+		Print_Medicine_Information_Class_Name	varchar(30);
+		Print_Medication_Note_Class		varchar(1);
+		Print_Medication_Note_Class_Name	varchar(30);
+		Print_Appointment_Form_Class		varchar(1);
+		Print_Appointment_Form_Class_Name	varchar(30);
+		};
+    Data_Id_Information {
+      Data_Id                          varchar(37);
+        };
+	};
+};

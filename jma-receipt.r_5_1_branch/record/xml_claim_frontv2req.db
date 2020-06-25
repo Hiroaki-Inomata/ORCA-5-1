@@ -1,0 +1,30 @@
+xml_claim_frontv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	claim_frontv2req {
+		Request_Number		varchar(2);
+# 患者番号
+		Patient_ID		varchar(20);
+# 受付日付
+		Accept_Date		varchar(10);
+# 受付時間
+		Accept_Time		varchar(08);
+# 診療科コード
+       		Department_Code		varchar(02);
+# ドクターコード
+		Physician_Code		varchar(05);
+# 保険組合せ
+		Insurance_Combination_Number	varchar(04);
+# 診療内容区分名称
+		Medical_Memo		varchar(16);
+# メモ送信区分
+		Medical_Memo_Info	varchar(02);
+# 受付送信済み区分
+		Send_Status		varchar(2);
+   	};
+};
+
+
+

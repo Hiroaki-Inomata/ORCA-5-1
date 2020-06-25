@@ -1,0 +1,79 @@
+top_builddir = ../../
+include $(top_builddir)/Makefile.directories
+CSRCS = \
+	orcuidset.c \
+	orcfiledel.c \
+	orcfileio.c \
+	cobabort.c \
+	cobalert.c \
+	coblog.c \
+	cobsleep.c \
+	orcsjistoeuc.c \
+	orcfileencode.c \
+	orcmkdir.c \
+	orcsauth.c \
+	orcnop.c \
+	orcaccess.c 
+
+CJQSRCS = orcqrencode.c
+
+CJKANJIOBJS = kanaconv.so orcsstring.so fixreddata.so orcaccess.so
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+CC = @CC@
+QRENCODE_LIB = @qrencode_LIBS@
+PNG_CFLAGS = @png_CFLAGS@
+PNG_LIBS = @png_LIBS@
+XML2_CFLAGS = @xml2_CFLAGS@
+XML2_LIBS = @xml2_LIBS@
+UUID_CFLAGS = @uuid_CFLAGS@
+UUID_LIBS = @uuid_LIBS@
+
+COBJS = ${CSRCS:.c=.so}
+CJQOBJS = ${CJQSRCS:.c=.so}
+
+COBJS += $(CJQOBJS)
+COBJS += $(CJKANJIOBJS)
+
+all: $(COBJS)
+	
+clean: 
+	-rm -f $(COBJS)
+	-rm -f *.o
+
+distclean: 
+	-rm -f $(COBJS)
+
+install: all installdirs
+	for f in $(COBJS) ; do \
+	  $(INSTALL) -m 555 $${f} $(orcalibdir) ; done
+
+installdirs:
+	$(INSTALL) -d $(orcalibdir)
+
+orcsauth.so: orcsauth.c
+	$(CC) -Wl,--no-as-needed -lcrypt -fPIC -shared $< -o $@
+
+orcqrencode.so: orcqrencode.c
+	$(CC) -Wl,--no-as-needed $(QRENCODE_LIB) $(PNG_CFLAGS) $(PNG_LIBS) -fPIC -shared $< -o $@
+
+fixreddata.so: fixreddata.c euc.c
+	$(CC) $(XML2_CFLAGS) -Wl,--no-as-needed $(XML2_LIBS) -fPIC -shared -Wl,-soname,$@ $? -o $@
+
+kanaconv.so: kanaconv.o euc.o
+	$(CC) -shared -Wl,-soname,$@ -o $@ $?
+
+orcsstring.so: orcsstring.o euc.o
+	$(CC) -shared -Wl,-soname,$@ -o $@ $?
+
+orcaccess.so: orcaccess.o euc.o
+	$(CC) -shared -Wl,-soname,$@ -o $@ $?
+
+
+%.so: %.c
+	$(CC) $(UUID_CFLAGS) -Wl,--no-as-needed $(UUID_LIBS) -fPIC -shared $< -o $@
+
+.SUFFIXIES: .c .o
+.c.o:
+	$(CC) -fPIC -c  $<

@@ -1,0 +1,35 @@
+P02Q {
+  fixed1 {
+    SELNUM {
+      numdata number(3);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      QRLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(5);
+            column3 varchar(8);
+            column4 varchar(80);
+            column5 varchar(4);
+            column6 varchar(50);
+            column7 varchar(2);
+            column8 varchar(10);
+            column9 varchar(50);
+            column10 varchar(20);
+            column11 varchar(10);
+          }[50];
+          selectdata bool[50];
+      };
+    };
+    REGISTYMD {
+      textdata varchar(30);
+    };
+    MIDASI {
+      textdata varchar(22);
+    };
+  };
+};

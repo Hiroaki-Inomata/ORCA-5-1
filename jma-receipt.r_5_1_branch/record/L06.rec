@@ -1,0 +1,30 @@
+L06 {
+  fixed {
+    B03 {
+      state int;
+    };
+    LBLSTDATE {
+      style varchar(20);
+      textdata varchar(50);
+    };
+    EDSRYYMD {
+      textdata varchar(10);
+    };
+    EDHR {
+      numdata number(2);
+    };
+    EDMIN {
+      numdata number(2);
+    };
+    LBLPREDATE {
+      textdata varchar(60);
+    };
+    CMB_HOURSKBN {
+      HOURSKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[10];
+    };
+  };
+};

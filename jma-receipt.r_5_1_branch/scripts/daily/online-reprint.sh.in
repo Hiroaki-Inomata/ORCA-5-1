@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    オンライン帳票再印刷用DB格納処理
+#        $1  RENNUM
+#        $2  TBL-KEY
+#        $3  TBL-GROUP
+#        $4  SHORI-RENNUM
+#        $5  SRYYM
+#        $6  SKYYMD
+#        $7  SHELLID
+#        $8  PRIORITY
+#        $9  TERMID
+#        $10 OPID
+#        $11 PRTNM
+#        $12 SRYYMD
+#        $13 UID
+#        $14 PTID
+#        $15 SITE-KBN
+#        $16 GYOUMU-NAME
+#        $17 TITLE
+#-------> FILE-NAME
+#        $18 FORMID
+#        $19 SYOHMS
+#        $20 PARA-CNT
+#        $21 DATASETNAME
+#        $22 TITLE
+#        $23 PRTFLG（再印刷データを作成しない場合"D")
+#        $24 ORGNAME
+#        $25 API-ID
+#            END
+#-------------------------------------------#
+##      エラーファイル削除
+
+DATASETNAME=${MCP_TEMPDIR}/${21}
+ORGNAME=${MCP_TEMPDIR}/${24}
+echo DATASETNAME[${DATASETNAME} ]
+
+# 正規表現文字列はダブルクォートで括らない
+if [[ "$7" =~ ^API(|_01)$ ]]; then
+  shrink_rp.rb ${DATASETNAME}
+  iconv -f UTF-8 -t EUC-JISX0213  ${DATASETNAME} > ${DATASETNAME}.tmp
+  mv ${DATASETNAME}.tmp ${DATASETNAME}
+fi
+
+[ "$7" == "API_01" ] && exit 
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBONPRT -parameter $1,$2,$3,$4,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${15},${16},${17},${18},${19},${20},${21},${22},${23},${25},
+[ -e  ${DATASETNAME} ] && rm ${DATASETNAME}
+[ -e  ${ORGNAME} ] && rm ${ORGNAME}
+exit

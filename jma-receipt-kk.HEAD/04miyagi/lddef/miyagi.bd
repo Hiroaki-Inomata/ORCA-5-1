@@ -1,0 +1,15 @@
+name	miyagi;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU0400"	"OpenCOBOL";
+bind	"SOKATU0410"	"OpenCOBOL";
+bind    "SEIKYU0403"    "OpenCOBOL";
+bind    "SEIKYU0405"    "OpenCOBOL";
+bind	"SOKATU0415"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

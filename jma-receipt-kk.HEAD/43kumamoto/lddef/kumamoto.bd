@@ -1,0 +1,19 @@
+name	kumamoto;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU4300"	"OpenCOBOL";
+bind	"SOKATU4320"	"OpenCOBOL";
+bind	"SOKATU4305"	"OpenCOBOL";
+bind	"SOKATU4325"	"OpenCOBOL";
+bind	"SEIKYU4311"	"OpenCOBOL";
+bind	"SEIKYU4313"	"OpenCOBOL";
+bind	"SEIKYU4315"	"OpenCOBOL";
+bind	"SEIKYU4317"	"OpenCOBOL";
+
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

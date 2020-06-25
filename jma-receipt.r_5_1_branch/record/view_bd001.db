@@ -1,0 +1,38 @@
+view_bd001 {
+	HOSPNUM			number(2,0);
+	PTID			number(10,0);
+	PTNUM		    char(20);
+	NAME 			varchar(100);
+	SEX       		char(1);
+	BIRTHDAY 		char(8);
+	SRYKA			char(2);
+	DENPPRTYMD		char(8);
+	SKYMONEY		number(7,0);
+	NYUKIN_TOTAL   	number(7,0);
+};
+
+primary	{
+	HOSPNUM,PTID;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE view_bd001_key_csr CURSOR FOR
+		SELECT *
+		FROM view_bd001
+			WHERE   HOSPNUM      =   :HOSPNUM
+                    AND     DENPPRTYMD  =   :DENPPRTYMD
+                    ORDER BY  SRYKA,PTNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE view_bd001_all_csr CURSOR FOR
+		SELECT *
+		FROM view_bd001
+			WHERE   HOSPNUM      =   :HOSPNUM
+ 		;
+	};
+};

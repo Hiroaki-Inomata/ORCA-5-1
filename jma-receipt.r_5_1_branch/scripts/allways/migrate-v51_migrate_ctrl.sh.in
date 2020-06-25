@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+# jma-receipt ver5.1.0
+# 
+# バージョンアップによる移行処理
+#
+# データ移行処理の制御
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+if [ `whoami` != "${ORCAUSER}" ]; then
+  echo "データ移行処理は${ORCAUSER}ユーザーで実行してください。"
+  exit 1
+fi
+
+delete_tempdir(){
+  if [ ${FLG_TEMPDIR_GEN} -eq 1 ] ; then
+    rm -R ${MCP_TEMPDIR}
+  fi
+}
+
+LDDIRECTORY=${LDDEFDIR}/dirmigv51
+
+FLG_TEMPDIR_GEN=0
+if [ -z "${MCP_TEMPDIR}" ]; then
+  export MCP_TEMPDIR=/tmp/orca_root/$(uuidgen)
+  mkdir -p ${MCP_TEMPDIR}
+  FLG_TEMPDIR_GEN=1
+fi 
+
+export PATH=${PATCHSCRIPTSDIR}:${SCRIPTSDIR}:$PATH
+export COB_LIBRARY_PATH=${PATCHLIBDIR}:${ORCALIBDIR}:/usr/lib/panda
+
+create_pgpass
+SQL="select hospnum from tbl_sysbase;"
+HNLIST=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+for hospnum in ${HNLIST} ; do
+  HOSPNUM=`printf "%02d" $hospnum`
+  echo "データ移行処理 医療機関識別番号 [ ${HOSPNUM} ] 開始"
+
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="migrate-v51_migrate.sh"
+  export MON_BATCH_GROUPNAME="${HOSPNUM}"
+  export MON_BATCH_EXTRA="0000001MIGRATE"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+  if [ -z ${MCP_MIDDLEWARE_NAME} ] || \
+    ([ "${MCP_MIDDLEWARE_NAME}" != "ginbee" ] && \
+     [ "${MCP_MIDDLEWARE_NAME}" != "panda" ]) ; then
+    export MCP_MIDDLEWARE_NAME="panda"
+  fi
+
+  /usr/lib/panda/bin/monbatch  "execshell.sh \"allways\" \"migrate-v51_migrate.sh\"  \"${HOSPNUM}\" 0000001 MIGRATE"
+  if [ -e ${MCP_TEMPDIR}/migrate-v51_migrate_rc ]; then
+    RC=`cat ${MCP_TEMPDIR}/migrate-v51_migrate_rc`
+  else
+    RC=1
+  fi
+  if [ ${RC} -ne 0 ] ; then
+    echo -e "\e[1;31m医療機関識別番号 [ ${HOSPNUM} ] エラーが発生しました。\e[m"
+    exit ${RC}
+  fi
+  echo "データ移行処理 医療機関識別番号 [ ${HOSPNUM} ] 終了"
+done
+delete_tempdir 
+delete_pgpass
+
+exit ${RC}

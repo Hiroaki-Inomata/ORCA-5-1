@@ -1,0 +1,57 @@
+tbl_dpc_age {
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	MDC_CD				char(2);
+	BUNRUI_CD			char(4);
+	JOKEN_KBN			char(1);
+	JOKEN_NAME          varchar(50);
+	JOKEN_MIN			number(5,0);
+	JOKEN_MAX			number(5,0);
+	AGE_CD				char(1);
+	NOSOTCHU_KBN		varchar(1);
+	NOSOTCHU_NAME 		varchar(50);
+	SEL_DPC_CD			varchar(14),virtual;
+};
+
+primary	{
+	MDC_CD,BUNRUI_CD,JOKEN_KBN,JOKEN_MIN,NOSOTCHU_KBN,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_age_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_dpc_age
+		WHERE MDC_CD        =   :MDC_CD
+		 AND  BUNRUI_CD     =   :BUNRUI_CD
+		 AND  JOKEN_KBN     =   :JOKEN_KBN
+		 AND  JOKEN_MIN     =   :JOKEN_MIN
+		 AND  NOSOTCHU_KBN  =   :NOSOTCHU_KBN
+	   	 AND  YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND  YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_dpc_age_key2_csr CURSOR FOR
+		SELECT  a.*
+		FROM tbl_dpc_age a,
+          ( SELECT AGE_CD FROM tbl_dpc_tensu
+              WHERE DPC_CD     LIKE   :SEL_DPC_CD
+               AND  YUKOSTYMD     <=  :YUKOSTYMD
+               AND  YUKOEDYMD     >=  :YUKOEDYMD
+            GROUP   BY AGE_CD
+          ) b
+		WHERE
+		     A.MDC_CD    = :MDC_CD
+		 AND A.BUNRUI_CD = :BUNRUI_CD
+		 AND A.AGE_CD    =  B.AGE_CD
+	   	 AND A.YUKOSTYMD     <=  :YUKOSTYMD
+	   	 AND A.YUKOEDYMD     >=  :YUKOEDYMD
+		ORDER BY A.AGE_CD,NOSOTCHU_KBN
+		;
+	};
+};
+

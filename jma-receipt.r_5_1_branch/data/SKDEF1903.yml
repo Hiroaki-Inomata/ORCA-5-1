@@ -1,0 +1,17 @@
+kanri_cd    : "1903"
+name        : "医療機関編集情報"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "KAISETUNAME"
+  item_jp   : "開設者名"
+  type      : "X"
+  start     : 1
+  length    : 160
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 161
+  length    : 340

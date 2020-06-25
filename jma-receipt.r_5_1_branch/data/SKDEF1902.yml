@@ -1,0 +1,54 @@
+kanri_cd    : "1902"
+name        : "医療機関編集情報"
+class_cd    : "*"
+item_max    : 8
+item_list   :
+- item_no   : 1
+  item      : "POST"
+  item_jp   : "郵便番号"
+  type      : "X"
+  start     : 1
+  length    : 7
+- item_no   : 2
+  item      : "ADRS1"
+  item_jp   : "所在地（１行目）"
+  type      : "X"
+  start     : 8
+  length    : 152
+- item_no   : 3
+  item      : "ADRS2"
+  item_jp   : "所在地（２行目）"
+  type      : "X"
+  start     : 160
+  length    : 152
+- item_no   : 4
+  item      : "ADRS3"
+  item_jp   : "所在地（３行目）"
+  type      : "X"
+  start     : 312
+  length    : 152
+- item_no   : 5
+  item      : "TEL"
+  item_jp   : "電話番号"
+  type      : "X"
+  start     : 464
+  length    : 15
+- item_no   : 6
+  item      : "FAX"
+  item_jp   : "ＦＡＸ番号"
+  type      : "X"
+  start     : 479
+  length    : 15
+- item_no   : 7
+  item      : "ADRS1MOJI"
+  item_jp   : "所在地（１行目）文字数"
+  type      : "9"
+  start     : 494
+  length    : 2
+  precision : 0
+- item_no   : 8
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 496
+  length    : 5

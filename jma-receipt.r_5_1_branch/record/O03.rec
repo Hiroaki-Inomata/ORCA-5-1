@@ -1,0 +1,484 @@
+O03 {
+  fixed6 {
+    B06 {
+      state int;
+    };
+    B07 {
+      state int;
+    };
+    LBLCREYMD {
+      textdata varchar(6);
+    };
+    SYOKBN {
+      isactive bool;
+      label varchar(8);
+    };
+    PAGE1 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE2 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE3 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE4 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE5 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE6 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE7 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE8 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE9 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE10 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE11 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE12 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE13 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE14 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE15 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE16 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE17 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE18 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE19 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE20 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE21 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE22 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE23 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE24 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE25 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE26 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE27 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE28 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE29 {
+      style varchar(20);
+      numdata number(4);
+    };
+    PAGE30 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU1 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU2 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU3 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU4 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU5 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU6 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU7 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU8 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU9 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU10 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU11 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU12 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU13 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU14 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU15 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU16 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU17 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU18 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU19 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU20 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU21 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU22 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU23 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU24 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU25 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU26 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU27 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU28 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU29 {
+      style varchar(20);
+      numdata number(4);
+    };
+    KENSU30 {
+      style varchar(20);
+      numdata number(4);
+    };
+    CHK01 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK02 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK03 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK04 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK05 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK06 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK07 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK08 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK09 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK10 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK11 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK12 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK13 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK14 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK15 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK16 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK17 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK18 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK19 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK20 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK21 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK22 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK23 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK24 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK25 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK26 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK27 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK28 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK29 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    CHK30 {
+      state int;
+      style varchar(20);
+      isactive bool;
+      label varchar(30);
+    };
+    FILEKBN {
+      textdata varchar(34);
+    };
+    CREYMD {
+      textdata varchar(22);
+    };
+    KENSU {
+      numdata number(4);
+    };
+    PAGE {
+      numdata number(4);
+    };
+    CMB_SKYPRTKBN {
+      SKYPRTKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CMB_SRYPRTKBN {
+      SRYPRTKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CMB_PTINFREFKBN {
+      PTINFREFKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+    CMB_PRTJYUN {
+      PRTJYUN {
+        textdata varchar(25);
+      };
+      count int;
+        item varchar(25)[10];
+    };
+    LBLMSG {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    CHKTAIIN {
+      isactive bool;
+    };
+  };
+};

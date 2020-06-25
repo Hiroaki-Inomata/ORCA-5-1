@@ -1,0 +1,76 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    ¼«ÇåÀÕ¥ì¥»¥×¥È£Ð£Ä£Æ¥¯¥é¥¤¥¢¥ó¥ÈÊÝÂ¸
+#
+#        $1 HOSPNUM
+#        $2 ÀÁµáÇ¯·î
+#        $3 ¥Ç¡¼¥¿¥Õ¥¡¥¤¥ë
+#-------------------------------------------#
+
+LOCAL_DIR=$(uuidgen)
+LOCAL_TEMPDIR=${MCP_TEMPDIR}/${LOCAL_DIR}
+mkdir -p ${LOCAL_TEMPDIR}
+MONTH=JIBAI_RECEIPT_$2
+ZIP_FILE=${MONTH}.zip
+JRP_FILE=${MONTH}-$(date +"%Y%m%d%H%M%S").jrp
+MONTH_DIR=${LOCAL_TEMPDIR}/${MONTH}
+DATA_FILE=${MCP_TEMPDIR}/$3
+ORCA_VERSION=$([[ $(cat ${DOCDIR}/version) =~ version.*\(([0-9\-]*)\) ]] && echo ${BASH_REMATCH[1]})
+
+cleanup () {
+	[ -e "${LOCAL_TEMPDIR}" ] && rm -rf ${LOCAL_TEMPDIR}/*
+    rm -f ${DATA_FILE}
+}
+
+trap "cleanup" EXIT
+
+
+mkdir -p ${MONTH_DIR}
+
+while read -r LINE; do
+  name=$(echo ${LINE:0:42}| sed -e 's/[[:space:]]*$//')
+  sn=${LINE:44:2}
+  tmpfile=${LOCAL_TEMPDIR}/${name}.${sn}.tmp
+  redname=${LINE:100:30}
+  redfile=$(find ${SITEFORMDIR} ${PATCHFORMDIR} ${FORMDIR} -maxdepth 1 -type f -name ${redname} | head -n 1)
+
+  printf '%-20000s' "${LINE:130:20000}" > ${tmpfile}
+
+  layeroption=""
+  [[ $(cat ${tmpfile}) =~ MonpeLayerIn(.*)MonpeLayerOut ]]
+  if [ -n "${BASH_REMATCH[0]}" ]; then
+    layeroption=$(echo "${BASH_REMATCH[1]}" | sed -e "s/ *-L */,/g" | sed -e "s/,/-H /")
+    sed -i -e "s/${BASH_REMATCH[0]}/$(printf %-${#BASH_REMATCH[0]}s ' ')/"  ${tmpfile}
+  fi
+
+  red2embed ${redfile} ${tmpfile} -o ${tmpfile}.red
+  monpe ${layeroption} ${tmpfile}.red -e ${tmpfile}.pdf
+done < ${DATA_FILE}
+
+for f in $(ls ${LOCAL_TEMPDIR}/*.tmp.pdf | cut -b 1-$((${#tmpfile} - 7)) | sort | uniq) ; do
+# Ê¸»úÎó¤ÎÂç¾®Èæ³Ó¤Î°Ù¡¢£²½Å³ç¸Ì¤Ç³ç¤ë
+  [[ "${ORCA_VERSION}" < "050100-1" ]]
+  if [ $? -eq 0 ]; then
+    echo "use pdftk"
+    pdftk  $f*.tmp.pdf cat output ${MONTH_DIR}/$(basename $f).pdf
+  else
+    echo "use qpdf"
+    qpdf --empty --pages  $f*.tmp.pdf -- ${MONTH_DIR}/$(basename $f).pdf
+  fi
+done
+
+pushd ${LOCAL_TEMPDIR}
+zip -r ${ZIP_FILE} ${MONTH}/
+${MONUPLOAD} -t misc -s -f ${JRP_FILE} ${ZIP_FILE} 
+popd
+

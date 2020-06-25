@@ -1,0 +1,79 @@
+P02Y1 {
+  fixed32 {
+    INPUT {
+      textdata varchar(22);
+    };
+    SENTAKU {
+      textdata varchar(30);
+    };
+    SELNUM01 {
+      textdata varchar(3);
+    };
+    SELNUM02 {
+      textdata varchar(3);
+    };
+    SELNUM03 {
+      textdata varchar(3);
+    };
+    SELNUM04 {
+      textdata varchar(3);
+    };
+    SELNUM05 {
+      textdata varchar(3);
+    };
+    SELNUM06 {
+      textdata varchar(3);
+    };
+    SELNUM07 {
+      textdata varchar(3);
+    };
+    SELNUM08 {
+      textdata varchar(3);
+    };
+    SELNUM09 {
+      textdata varchar(3);
+    };
+    SELNUM10 {
+      textdata varchar(3);
+    };
+    JIINCOB {
+      JIIN {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[10];
+    };
+    scrolledwindow26 {
+      hpos int;
+      vpos int;
+      LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(70);
+            column3 varchar(6);
+            column4 varchar(10);
+            column5 varchar(20);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+    NEXT {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    B02 {
+      state int;
+    };
+    B03 {
+      state int;
+    };
+    B04 {
+      state int;
+    };
+    B05 {
+      state int;
+    };
+  };
+};

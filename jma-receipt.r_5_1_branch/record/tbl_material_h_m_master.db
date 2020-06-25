@@ -1,0 +1,74 @@
+tbl_material_h_m_master {
+	KANRINO				number(8,0);
+	JANCD				varchar(13);
+	SNAMECD				number(5,0);
+	KIKAKUCD			number(5,0);
+	SRYCD				char(9);
+	COMPANYCD1			number(5,0);
+	COMPANYCD2			number(5,0);
+	DOCKANRICD			varchar(30);
+	KINOKBNNO			varchar(30);
+	CHGYMD   			varchar(8);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	KANRINO;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_h_m_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_material_h_m
+		WHERE 	KANRINO	= :KANRINO
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_material_h_m
+			VALUES(
+				:KANRINO,
+				:JANCD,
+				:SNAMECD,
+				:KIKAKUCD,
+				:SRYCD,
+				:COMPANYCD1,
+				:COMPANYCD2,
+				:DOCKANRICD,
+				:KINOKBNNO,
+				:CHGYMD,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_material_h_m
+			SET
+				KANRINO    = :KANRINO,
+				JANCD      = :JANCD,
+				SNAMECD    = :SNAMECD,
+				KIKAKUCD   = :KIKAKUCD,
+				SRYCD      = :SRYCD,
+				COMPANYCD1 = :COMPANYCD1,
+				COMPANYCD2 = :COMPANYCD2,
+				DOCKANRICD = :DOCKANRICD,
+				KINOKBNNO  = :KINOKBNNO,
+				CHGYMD     = :CHGYMD,
+				CREYMD     = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE 	KANRINO	   = :KANRINO
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_material_h_m
+			WHERE 	KANRINO = :KANRINO
+		;
+	};
+};

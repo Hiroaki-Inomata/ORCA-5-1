@@ -1,0 +1,28 @@
+P02F {
+  fixed10 {
+    SELNUM {
+      numdata number(3);
+    };
+    KNJKEY {
+      textdata varchar(20);
+    };
+    scrolledwindow1 {
+      KNJLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(22);
+            column3 varchar(50);
+            column4 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    MIDASI {
+      style varchar(20);
+      textdata varchar(24);
+    };
+  };
+};

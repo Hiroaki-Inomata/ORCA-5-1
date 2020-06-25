@@ -1,0 +1,309 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    定期請求業務 画面ＳＰＡ 
+      *****************************************************************
+      *****************************************************************
+      *  プログラム修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+       01  SPA-O01FREE.
+      *    画面用ＳＰＡ
+           03  SPA-O03-AREA.
+               05  SPA-GMN-O03-MAX                     PIC 9(04).
+               05  SPA-GMN-O03-PAGE                    PIC 9(02).
+               05  SPA-GMN-O03-CUR                     PIC 9(03).
+               05  SPA-GMN-O03-AREA.
+                   07  SPA-GMN-O03-SYOKBN              PIC X(01).
+                   07  SPA-GMN-O03-FILEKBN             PIC X(34).
+                   07  SPA-GMN-O03-CREYMD              PIC X(22).
+                   07  SPA-GMN-O03-PAGEH               PIC 9(04).
+                   07  SPA-GMN-O03-KENSUH              PIC 9(04).
+                   07  SPA-GMN-O03-SKYPRTKBN-G.
+                       09  SPA-GMN-O03-SKYPRTKBN       PIC X(01).
+                       09  SPA-GMN-O03-F1              PIC X(01).
+                       09  SPA-GMN-O03-SKYPRTKBNMEI    PIC X(28).
+                   07  SPA-GMN-O03-SRYPRTKBN-G.
+                       09  SPA-GMN-O03-SRYPRTKBN       PIC X(01).
+                       09  SPA-GMN-O03-F1              PIC X(01).
+                       09  SPA-GMN-O03-SRYPRTKBNMEI    PIC X(28).
+                   07  SPA-GMN-O03-PTINFREFKBN-G.
+                       09  SPA-GMN-O03-PTINFREFKBN     PIC X(01).
+                       09  SPA-GMN-O03-F1              PIC X(01).
+                       09  SPA-GMN-O03-PTINFREFKBNMEI  PIC X(28).
+                   07  SPA-GMN-O03-PRTJYUN-G.
+                       09  SPA-GMN-O03-PRTJYUN         PIC X(02).
+                       09  SPA-GMN-O03-F1              PIC X(01).
+                       09  SPA-GMN-O03-PRTJYUNMEI      PIC X(22).
+                   07  SPA-GMN-O03-CHKTAIIN            PIC X(01).
+                   07  SPA-GMN-O03-SKYPRTKBNLST-G.
+                       09  SPA-GMN-O03-SKYPRTKBN-MAX   PIC 9(05).
+                       09  SPA-GMN-O03-SKYPRTKBNLST    OCCURS  5.
+                           11  SPA-GMN-O03-SKYPRTKBNL  PIC X(01).
+                           11  SPA-GMN-O03-F1L         PIC X(01).
+                           11  SPA-GMN-O03-SKYPRTKBNMEIL
+                                                   PIC X(28).
+                   07  SPA-GMN-O03-SRYPRTKBNLST-G.
+                       09  SPA-GMN-O03-SRYPRTKBN-MAX   PIC 9(05).
+                       09  SPA-GMN-O03-SRYPRTKBNLST    OCCURS  5.
+                           11  SPA-GMN-O03-SRYPRTKBNL     PIC X(01).
+                           11  SPA-GMN-O03-F1L            PIC X(01).
+                           11  SPA-GMN-O03-SRYPRTKBNMEIL
+                                                          PIC X(28).
+                   07  SPA-GMN-O03-PTINFREFKBNLST-G.
+                       09  SPA-GMN-O03-PTINFREFKBN-MAX   PIC 9(05).
+                       09  SPA-GMN-O03-PTINFREFKBNLST    OCCURS  5.
+                           11  SPA-GMN-O03-PTINFREFKBNL  PIC X(01).
+                           11  SPA-GMN-O03-F1L           PIC X(01).
+                           11  SPA-GMN-O03-PTINFREFKBNMEIL
+                                                         PIC X(28).
+                   07  SPA-GMN-O03-PRTJYUNLST-G.
+                       09  SPA-GMN-O03-PRTJYUN-MAX     PIC 9(05).
+                       09  SPA-GMN-O03-PRTJYUNLST      OCCURS 10.
+                           11  SPA-GMN-O03-PRTJYUNL    PIC X(02).
+                           11  SPA-GMN-O03-F1L         PIC X(01).
+                           11  SPA-GMN-O03-PRTJYUNMEIL PIC X(22).
+                   07  SPA-GMN-O03-TBL.
+                       09  SPA-GMN-O03-TBL-PAGE-MAX    PIC 9(03).
+                       09  SPA-GMN-O03-TBL-OCC         OCCURS   50.
+                           11  SPA-GMN-O03-TBL-G       OCCURS   30.
+                               13  SPA-GMN-O03-TCHK    PIC X(01).
+                               13  SPA-GMN-O03-TPAGE   PIC 9(04).
+                               13  SPA-GMN-O03-TKENSU  PIC 9(04).
+                               13  SPA-GMN-O03-TSYURUINAME
+                                                       PIC X(20).
+      *
+               05  SPA-NAI-O03-AREA.
+                   07  SPA-NAI-O03-SRYYM               PIC X(06).
+                   07  SPA-NAI-O03-CUSTOM-ENABLED      PIC X(01).
+                   07  SPA-NAI-O03-REPOS-NAME          PIC X(128).
+                   07  SPA-NAI-O03-TBL.
+                       09  SPA-NAI-O03-TBL-OCC         OCCURS  50.
+                           11  SPA-NAI-O03-TBL-G       OCCURS  30.
+                               13  SPA-NAI-O03-BTUNUM
+                                                       PIC X(02).
+                               13  SPA-NAI-O03-BRMNUM
+                                                       PIC X(08).
+      *
+           03  SPA-O04-AREA.
+               05  SPA-GMN-O04-PAGE                    PIC 9(02).
+               05  SPA-GMN-O04-MAX                     PIC 9(02).
+               05  SPA-GMN-O04-CUR                     PIC 9(03).
+               05  SPA-GMN-O04-AREA.
+                   07  SPA-GMN-O04-HEAD-AREA.
+                       09  SPA-GMN-O04-PTNUM           PIC X(20).
+                       09  SPA-GMN-O04-KANANAME        PIC X(100).
+                       09  SPA-GMN-O04-SEX             PIC X(02).
+                       09  SPA-GMN-O04-NAME            PIC X(100).
+                       09  SPA-GMN-O04-BIRTHDAY        PIC X(09).
+                       09  SPA-GMN-O04-SYORIKBN-G.
+                           11  SPA-GMN-O04-SYORIKBN    PIC X(01).
+                           11  SPA-GMN-O04-SYORIKBNFL  PIC X(01).
+                           11  SPA-GMN-O04-SYORIKBNMEI PIC X(10).
+                       09  SPA-GMN-O04-SRYKA           PIC X(16).
+      *
+                   07  SPA-GMN-O04-KINGAKU-AREA.
+                       09  SPA-GMN-O04-KUMI            PIC X(50).
+                       09  SPA-GMN-O04-RITU            PIC X(10).
+                       09  SPA-GMN-O04-SRYYM           PIC X(15).
+                       09  SPA-GMN-O04-JOUTAI          PIC X(10).
+                       09  SPA-GMN-O04-HAKYMD          PIC X(09).
+                       09  SPA-GMN-O04-DENPNO          PIC X(10).
+                       09  SPA-GMN-O04-HKNRYO          PIC 9(07)
+                                                   OCCURS  17.
+                       09  SPA-GMN-O04-TGMONEY         PIC 9(07)
+                                                   OCCURS  16.
+                       09  SPA-GMN-O04-HKNTEKI         PIC 9(10).
+                       09  SPA-GMN-O04-SKJRYOYO        PIC 9(07).
+                       09  SPA-GMN-O04-LIFERYOYO       PIC 9(07).
+                       09  SPA-GMN-O04-SKJFTN          PIC 9(07).
+                       09  SPA-GMN-O04-LIFEFTN         PIC 9(07).
+                       09  SPA-GMN-O04-ROUFTN          PIC 9(07).
+                       09  SPA-GMN-O04-KOHFTN          PIC 9(07).
+                       09  SPA-GMN-O04-JIHI-G          OCCURS  2.
+                           11  SPA-GMN-O04-JIHI        PIC 9(07)
+                                                   OCCURS  10.
+                           11  SPA-GMN-O04-JIHIKEI     PIC 9(07).
+                       09  SPA-GMN-O04-JIHIZEI         PIC 9(07).
+                       09  SPA-GMN-O04-HKNGAI          PIC 9(07).
+                       09  SPA-GMN-O04-ICHIFTN         PIC 9(07).
+                       09  SPA-GMN-O04-YAKFTN          PIC 9(07).
+                       09  SPA-GMN-O04-CHOSEI1         PIC S9(07).
+                       09  SPA-GMN-O04-CHOSEI2         PIC S9(07).
+                       09  SPA-GMN-O04-RMSAGAKU        PIC 9(07).
+                       09  SPA-GMN-O04-SKYMONEY        PIC 9(07).
+                       09  SPA-GMN-O04-ZENMISYU-GAI    PIC 9(07).
+                       09  SPA-GMN-O04-ZENMISYU-NYU    PIC 9(07).
+                       09  SPA-GMN-O04-SEIGOK          PIC S9(07).
+                       09  SPA-GMN-O04-MISYU-ZAN       PIC S9(07).
+                       09  SPA-GMN-O04-NYUKIN-TTL      PIC 9(08).
+                       09  SPA-GMN-O04-JIHIMSG         PIC X(8)
+                                                   OCCURS   10.
+                       09  SPA-GMN-O04-RSISHOSHIN      PIC 9(10).
+                       09  SPA-GMN-O04-RSISAISHIN      PIC 9(10).
+                       09  SPA-GMN-O04-RSISDO          PIC 9(10).
+                       09  SPA-GMN-O04-RSIETC          PIC 9(10).
+      *
+                   07  SPA-GMN-O04-KBT-AREA.
+                       09  SPA-GMN-O04-SKY1ST          PIC S9(10).
+                       09  SPA-GMN-O04-SKY2ND          PIC S9(10).
+                       09  SPA-GMN-O04-SKY3RD          PIC S9(10).
+                       09  SPA-GMN-O04-SKYSGK          PIC S9(10).
+                   07  SPA-GMN-O04-INPUT-AREA.
+                       09  SPA-GMN-O04-CHOSEI1IN       PIC S9(10).
+                       09  SPA-GMN-O04-CHOSEI1INX      PIC X(10).
+                       09  SPA-GMN-O04-CHOSEI2IN       PIC S9(10).
+                       09  SPA-GMN-O04-CHOSEI2INX      PIC X(10).
+                       09  SPA-GMN-O04-SKYMONEYIN      PIC S9(10).
+                       09  SPA-GMN-O04-NYUKIN          PIC S9(10).
+                       09  SPA-GMN-O04-NYUKINX         PIC X(10).
+                       09  SPA-GMN-O04-NYUKINYMD       PIC X(10).
+                       09  SPA-GMN-O04-NYKN-HOHO-G.
+                           11  SPA-GMN-O04-NYKN-HOHO   PIC X(02).
+                           11  SPA-GMN-O04-NYKN-HOHOFL PIC X(01).
+                           11  SPA-GMN-O04-NYKN-HOHOMEI    PIC X(30).
+                   07  SPA-GMN-O04-SYORIKBNLST-G.
+                       09  SPA-GMN-O04-SYORIKBN-MAX    PIC 9(05).
+                       09  SPA-GMN-O04-SYORIKBNLST     OCCURS  5.
+                           11  SPA-GMN-O04-SYORIKBNL   PIC X(01).
+                           11  SPA-GMN-O04-SYORIKBNFLL PIC X(01).
+                           11  SPA-GMN-O04-SYORIKBNMEIL    PIC X(10).
+                   07  SPA-GMN-O04-NYKN-HOHOLST-G.
+                       09  SPA-GMN-O04-NYKN-HOHO-MAX   PIC 9(05).
+                       09  SPA-GMN-O04-NYKN-HOHOLST    OCCURS  50.
+                           11  SPA-GMN-O04-NYKN-HOHOL  PIC X(02).
+                           11  SPA-GMN-O04-NYKN-HOHOFLL PIC X(01).
+                           11  SPA-GMN-O04-NYKN-HOHOMEIL   PIC X(30).
+      *
+                   07  SPA-GMN-O04-SKYPRT-G.
+                       09  SPA-GMN-O04-SKYPRT          PIC X(01).
+                       09  SPA-GMN-O04-SKYPRTFL        PIC X(01).
+                       09  SPA-GMN-O04-SKYPRTMEI       PIC X(22).
+                   07  SPA-GMN-O04-SKYPRTLST-G.
+                       09  SPA-GMN-O04-SKYPRT-MAX      PIC 9(05).
+                       09  SPA-GMN-O04-SKYPRTLST       OCCURS  5.
+                           11  SPA-GMN-O04-SKYPRTL     PIC X(01).
+                           11  SPA-GMN-O04-SKYPRTFLL   PIC X(01).
+                           11  SPA-GMN-O04-SKYPRTMEIL  PIC X(22).
+      *
+                   07  SPA-GMN-O04-SRYPRT-G.
+                       09  SPA-GMN-O04-SRYPRT          PIC X(01).
+                       09  SPA-GMN-O04-SRYPRTFL        PIC X(01).
+                       09  SPA-GMN-O04-SRYPRTMEI       PIC X(22).
+                   07  SPA-GMN-O04-SRYPRTLST-G.
+                       09  SPA-GMN-O04-SRYPRT-MAX      PIC 9(05).
+                       09  SPA-GMN-O04-SRYPRTLST       OCCURS  5.
+                           11  SPA-GMN-O04-SRYPRTL     PIC X(01).
+                           11  SPA-GMN-O04-SRYPRTFLL   PIC X(01).
+                           11  SPA-GMN-O04-SRYPRTMEIL  PIC X(22).
+      *
+               05  SPA-GMN-O04-SMEITBL-AREA.
+                   07  SPA-GMN-O04-SMEILIST-MAX        PIC 9(02).
+                   07  SPA-GMN-O04-SMEILIST-SEL        PIC 9(02).
+                   07  SPA-GMN-O04-SMEITBL-OCC         OCCURS  99.
+                       09  SPA-GMN-O04-TDENPEDANUM     PIC 9(02).
+                       09  SPA-GMN-O04-TSKYMONEY       PIC S9(10).
+                       09  SPA-GMN-O04-TNYUKIN         PIC S9(10).
+                       09  SPA-GMN-O04-TSYORIYMD       PIC X(09).
+                       09  SPA-GMN-O04-TJOUTAI         PIC X(10).
+                       09  SPA-GMN-O04-TNYKN-HOHO      PIC X(10).
+                   07  SPA-GMN-O04-SELNUM              PIC 9(02).
+      *
+               05  SPA-GMN-O04-SKYTBL-AREA.
+                   07  SPA-GMN-O04-SKYLIST-MAX         PIC 9(02).
+                   07  SPA-GMN-O04-SKYLIST-SEL         PIC 9(02).
+                   07  SPA-GMN-O04-SKYTBL-OCC          OCCURS  50.
+                       09  SPA-GMN-O04-TSK-RENNUM      PIC 9(02).
+                       09  SPA-GMN-O04-TSK-SKYKKN      PIC X(10).
+                       09  SPA-GMN-O04-TSK-SRYKAMEI    PIC X(02).
+                       09  SPA-GMN-O04-TSK-HKNCOMBI    PIC 9(04).
+                   07  SPA-GMN-O04-SKYSELNUM           PIC 9(02).
+      *
+               05  SPA-NAI-O04-AREA.
+                   07  SPA-NAI-O04-HEAD-AREA.
+                       09  SPA-NAI-O04-MEIDSPCTRL      PIC X(01).
+                       09  SPA-NAI-O04-MEIDSPKBN       PIC X(01).
+                       09  SPA-NAI-O04-PTID            PIC 9(10).
+                       09  SPA-NAI-O04-NYUGAIKBN       PIC X(01).
+                       09  SPA-NAI-O04-BIRTHDAY        PIC X(08).
+                       09  SPA-NAI-O04-SRYYMD          PIC X(08).
+                       09  SPA-NAI-O04-SKYTBL-PAGE     PIC 9(03).
+                       09  SPA-NAI-O04-SAKKBN          PIC X(01).
+                       09  SPA-NAI-O04-SAKKBN-MAX      PIC X(01).
+                       09  SPA-NAI-O04-SRYKA           PIC X(02).
+                       09  SPA-NAI-O04-DENPNUM         PIC 9(07).
+                       09  SPA-NAI-O04-RRKNUM          PIC 9(03).
+                       09  SPA-NAI-O04-DISCOUNT-KBN        PIC  X(02).
+                       09  SPA-NAI-O04-DISCOUNT-BODY       PIC  X(160).
+                       09  SPA-NAI-O04-DISCOUNT-RATEKBN    PIC  X(02).
+                       09  SPA-NAI-O04-DISCOUNT-TEIRITU    PIC  X(01).
+                       09  SPA-NAI-O04-DISCOUNT-RATE       PIC  9(07).
+                       09  SPA-NAI-O04-DISCOUNT-MONEY      PIC  9(07).
+                   07  SPA-NAI-O04-KINGAKU-AREA.
+                       09  SPA-NAI-O04-DENPPRTYMD      PIC X(08).
+                       09  SPA-NAI-O04-HEAD-DENPJTIKBN PIC X(01).
+                       09  SPA-NAI-O04-HKNNUM          PIC X(03).
+                       09  SPA-NAI-O04-RSI-HKNKBN      PIC X(01).
+                   07  SPA-NAI-O04-INPUT-AREA.
+                       09  SPA-NAI-O04-SKYMONEY-MOTO   PIC S9(10).
+                       09  SPA-NAI-O04-SKYMONEY        PIC S9(10).
+                       09  SPA-NAI-O04-CHOSEI1-MOTO    PIC S9(10).
+                       09  SPA-NAI-O04-CHOSEI2-MOTO    PIC S9(10).
+                       09  SPA-NAI-O04-MEISAIJOUTAIKBN PIC X(01).
+                       09  SPA-NAI-O04-SYURRKNUM       PIC 9(09).
+                       09  SPA-NAI-O04-SYUEDANUM       PIC 9(09).
+                       09  SPA-NAI-O04-SYURRKUPDKBN    PIC X(1).
+                       09  SPA-NAI-O04-NYUKINYMD       PIC X(08).
+                       09  SPA-NAI-O04-NYUKIN-MOTO     PIC S9(10).
+                       09  SPA-NAI-O04-DENPEDANUM      PIC X(02).
+                       09  SPA-NAI-O04-DENPJTIKBN      PIC X(01).
+                       09  SPA-NAI-O04-PROC-FLG        PIC 9(01).
+                   07  SPA-NAI-O04-NYKN-HOHOLST-G.
+                       09  SPA-NAI-O04-NYKN-HOHOLST    OCCURS  50.
+                           11  SPA-NAI-O04-NYKN-HOHOMEIL
+                                                       PIC X(10).
+                           11  SPA-NAI-O04-NYKN-BUNRUIL
+                                                       PIC X(02).
+      *
+               05  SPA-NAI-O04-SMEITBL-AREA.
+                   07  SPA-NAI-O04-SMEITBL-OCC         OCCURS  99.
+                       09  SPA-NAI-O04-TMEISAIJOUTAIKBN
+                                                       PIC X(01).
+                       09  SPA-NAI-O04-TNYKN-HOHO      PIC X(02).
+                       09  SPA-NAI-O04-TJOUTAIKBN      PIC X(1).
+                       09  SPA-NAI-O04-TSYURRKNUM      PIC 9(09).
+                       09  SPA-NAI-O04-TSYUEDANUM      PIC 9(09).
+                       09  SPA-NAI-O04-TSYURRKUPDKBN   PIC X(1).
+                       09  SPA-NAI-O04-TSYORIYMD       PIC X(08).
+                       09  SPA-NAI-O04-TCHOSEI1        PIC S9(10).
+                       09  SPA-NAI-O04-TCHOSEI2        PIC S9(10).
+                       09  SPA-NAI-O04-TPROC-FLG       PIC 9(01).
+      *
+               05  SPA-NAI-O04-SKYTBL-AREA.
+                   07  SPA-NAI-O04-SKYTBL-OCC          OCCURS  50.
+                       09  SPA-NAI-O04-TSK-DENPNUM     PIC 9(07).
+                       09  SPA-NAI-O04-TSK-RRKNUM      PIC 9(03).
+                       09  SPA-NAI-O04-TSK-SRYYM       PIC X(06).
+                       09  SPA-NAI-O04-TSK-SKYSTYMD    PIC X(08).
+                       09  SPA-NAI-O04-TSK-SAKKBN      PIC X(01).
+                       09  SPA-NAI-O04-TSK-SAKKBN-MAX  PIC X(01).
+                       09  SPA-NAI-O04-TSK-SRYKACD     PIC X(02).
+                       09  SPA-NAI-O04-TSK-SRYKAMEI    PIC X(20).
+                   07  SPA-NAI-O04-SKYTBL-NEXT         PIC 9(01).
+      *

@@ -1,0 +1,65 @@
+K09 {
+  fixed1 {
+    DOSEL {
+      textdata varchar(40);
+    };
+    SELNUM {
+      numdata number(4);
+    };
+    scrolledwindow2 {
+      RRKLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(16);
+            column3 varchar(2);
+            column4 varchar(4);
+          }[150];
+          selectdata bool[150];
+      };
+    };
+    scrolledwindow3 {
+      MEILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(90);
+          }[800];
+          selectdata bool[800];
+      };
+    };
+    NYUGAIKBN_COMB {
+      NYUGAIKBN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[2];
+    };
+    SRYKBN_COMB {
+      SRYKBN {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[20];
+    };
+    GRPHOSPNUM_COMB {
+      GRPHOSPNUM {
+        textdata varchar(23);
+      };
+      count int;
+        item varchar(23)[9];
+    };
+    B03 {
+      state int;
+      label varchar(20);
+    };
+    B04 {
+      state int;
+      label varchar(20);
+    };
+  };
+};

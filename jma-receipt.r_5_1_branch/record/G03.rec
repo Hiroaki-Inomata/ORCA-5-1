@@ -1,0 +1,149 @@
+G03 {
+  fixed {
+    B04 {
+      label varchar(8);
+    };
+    MARKHISSU {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    MARKNINI {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    CHK01 {
+      state int;
+      isactive bool;
+      label varchar(80);
+    };
+    PARA0101 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0102 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0103 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0104 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0105 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0106 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0107 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0108 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0109 {
+      state int;
+      textdata varchar(20);
+    };
+    PARA0110 {
+      state int;
+      textdata varchar(20);
+    };
+    PARAHYOJI0101 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0102 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0103 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0104 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0105 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0106 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0107 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0108 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0109 {
+      textdata varchar(20);
+    };
+    PARAHYOJI0110 {
+      textdata varchar(20);
+    };
+    PARAMARK0101 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0102 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0103 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0104 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0105 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0106 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0107 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0108 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0109 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    PARAMARK0110 {
+      style varchar(20);
+      textdata varchar(1);
+    };
+    NUM1 {
+      textdata varchar(3);
+    };
+    PRGNAME {
+      textdata varchar(20);
+    };
+    REPOS_NAME {
+      textdata varchar(256);
+    };
+    scrolledwindow1 {
+      MEMO {
+        textdata varchar(6000);
+      };
+    };
+    scrolledwindow2 {
+      USERMEMO {
+        textdata varchar(5000);
+      };
+    };
+  };
+};

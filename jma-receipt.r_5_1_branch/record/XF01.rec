@@ -1,0 +1,83 @@
+XF01 {
+  fixed1 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    NENREI {
+      textdata varchar(6);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    MEMO01 {
+      textdata varchar(1000);
+    };
+    MEMO02 {
+      textdata varchar(1000);
+    };
+    SYSYMD {
+      textdata varchar(22);
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      MEMOLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(10);
+            column3 varchar(20);
+            column4 varchar(200);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    SRYKA01_COMB {
+      SRYKA01 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[41];
+    };
+    SRYKA02_COMB {
+      SRYKA02 {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[41];
+    };
+    SYORIMEI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    MIDASI {
+      style varchar(20);
+      textdata varchar(30);
+    };
+    SYORI01 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    SYORI02 {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    UKETUKE {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    B12S {
+      state int;
+    };
+  };
+};

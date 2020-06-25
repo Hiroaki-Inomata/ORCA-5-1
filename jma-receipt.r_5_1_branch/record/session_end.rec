@@ -1,0 +1,3 @@
+session_end	{
+	dummy	varchar(256);
+};

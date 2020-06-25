@@ -1,0 +1,92 @@
+tbl_joblog	{
+	HOSPNUM				number(2,0);
+	LOGYMD			char(8);
+	LOGTIME			char(6);
+	PROGNAME		varchar(20);
+	KBNID			char(1);
+	OBJECTYYM		char(6);
+	RESULT			char(1);
+	ERRCD			char(4);
+	MSG			varchar(200);
+};
+
+primary	{
+	HOSPNUM,LOGYMD, LOGTIME, PROGNAME, KBNID;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_joblog_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+			AND   LOGYMD   = 	:LOGYMD
+			  AND   LOGTIME  = 	:LOGTIME
+			  AND   PROGNAME = 	:PROGNAME
+			  AND   KBNID =    	:KBNID
+		;
+	};
+};
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_joblog_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+			AND   PROGNAME = 	:PROGNAME
+			  AND   KBNID =    	:KBNID
+			ORDER   BY        LOGYMD, LOGTIME DESC 
+		;
+	};
+};
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_joblog_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY        LOGYMD DESC, LOGTIME DESC 
+		;
+	};
+};
+path	del1	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+			AND   PROGNAME = 	:PROGNAME
+			  AND   KBNID =    	:KBNID
+			  AND   LOGYMD = 	:LOGYMD
+			  AND	LOGTIME = 	:LOGTIME
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_joblog_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_joblog_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+		AND   PROGNAME = 	:PROGNAME
+		;
+	};
+};
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_joblog
+	WHERE 	HOSPNUM	= :HOSPNUM
+			AND   PROGNAME = 	:PROGNAME
+		;
+	};
+};

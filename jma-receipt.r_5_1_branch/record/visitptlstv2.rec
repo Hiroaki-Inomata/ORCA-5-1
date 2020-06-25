@@ -1,0 +1,9 @@
+visitptlstv2 {
+		arguments {
+			class			varchar(02);
+		};
+    	http_method			varchar(100);
+    	content_type			varchar(100);
+    	body				object;
+	http_status			int;
+};

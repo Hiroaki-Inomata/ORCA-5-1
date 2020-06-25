@@ -1,0 +1,119 @@
+tbl_nyuinkhn	{
+	KHN_SRYCD		char(9);
+	YUKOSTYMD		char(8);
+	YUKOEDYMD		char(8);
+	IPROUKBN		char(1);
+	SSTKIJUNKBN		char(1);
+	BTUSBTKBN		char(2);
+	HEIKINZAIKBN		char(2);
+	KANGOHAICHIKBN	char(2);
+	KANGOHIRITUKBN	char(2);
+	KANGOHOJOHAICHIKBN	char(2);
+	KHN_TEN				number(6,0);
+	KAGEN_SRYCD1		char(9);
+	KAGEN_SRYCD2		char(9);
+	KAGEN_SRYCD3		char(9);
+	KAGEN_SRYCD4		char(9);
+	KAGEN_SRYCD5		char(9);
+	KAGEN_SRYCD6		char(9);
+	KAGEN_SRYCD7		char(9);
+	TERMID		varchar(16);
+	OPID		varchar(16);
+	CREYMD		char(8);
+	UPYMD		char(8);
+	UPHMS		char(6);
+#-----> 主キー更新用項目
+	UPKHN_SRYCD	char(9),virtual;
+	UPYUKOSTYMD	char(8),virtual;
+	UPYUKOEDYMD	char(8),virtual;
+};
+
+primary	{
+	KHN_SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_nyuinkhn_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinkhn
+			WHERE
+						KHN_SRYCD      =  :KHN_SRYCD
+			AND		YUKOSTYMD     <=  :YUKOSTYMD
+			AND		YUKOEDYMD     >=  :YUKOEDYMD
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_nyuinkhn_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinkhn
+			WHERE
+					IPROUKBN      =   :IPROUKBN
+			AND		BTUSBTKBN     =   :BTUSBTKBN 
+			AND		HEIKINZAIKBN  =   :HEIKINZAIKBN
+			AND		KANGOHAICHIKBN =  :KANGOHAICHIKBN
+			AND		KANGOHIRITUKBN =  :KANGOHIRITUKBN
+			AND		KANGOHOJOHAICHIKBN =  :KANGOHOJOHAICHIKBN
+			AND		YUKOSTYMD     <=  :YUKOSTYMD
+			AND		YUKOEDYMD     >=  :YUKOEDYMD
+			ORDER   BY SSTKIJUNKBN
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_nyuinkhn_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinkhn
+      		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_nyuinkhn_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nyuinkhn
+		WHERE 	KHN_SRYCD	= :KHN_SRYCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_nyuinkhn
+				SET
+				KHN_SRYCD      = :KHN_SRYCD,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				IPROUKBN      = :IPROUKBN,
+				SSTKIJUNKBN      = :SSTKIJUNKBN,
+				BTUSBTKBN      = :BTUSBTKBN,
+				HEIKINZAIKBN      = :HEIKINZAIKBN,
+				KANGOHAICHIKBN      = :KANGOHAICHIKBN,
+				KANGOHIRITUKBN      = :KANGOHIRITUKBN,
+				KANGOHOJOHAICHIKBN      = :KANGOHOJOHAICHIKBN,
+				KHN_TEN      = :KHN_TEN,
+				KAGEN_SRYCD1      = :KAGEN_SRYCD1,
+				KAGEN_SRYCD2      = :KAGEN_SRYCD2,
+				KAGEN_SRYCD3      = :KAGEN_SRYCD3,
+				KAGEN_SRYCD4      = :KAGEN_SRYCD4,
+				KAGEN_SRYCD5      = :KAGEN_SRYCD5,
+				KAGEN_SRYCD6      = :KAGEN_SRYCD6,
+				KAGEN_SRYCD7      = :KAGEN_SRYCD7,
+				TERMID      = :TERMID,
+				OPID      = :OPID,
+				CREYMD      = :CREYMD,
+				UPYMD      = :UPYMD,
+				UPHMS      = :UPHMS
+			WHERE 	KHN_SRYCD      =  :UPKHN_SRYCD
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

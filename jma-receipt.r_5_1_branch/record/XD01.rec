@@ -1,0 +1,72 @@
+XD01 {
+  fixed1 {
+    PTNUM {
+      textdata varchar(20);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    BIRTHDAY {
+      textdata varchar(10);
+    };
+    SRYYMD {
+      textdata varchar(10);
+    };
+    scrolledwindow1 {
+      MLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(30);
+            column3 varchar(12);
+            column4 varchar(24);
+            column5 varchar(60);
+            column6 varchar(16);
+          }[10];
+          selectdata bool[10];
+      };
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    PRTNM {
+      textdata varchar(16);
+    };
+    HKNCOMBI_COMB {
+      HKNCOMBI {
+        textdata varchar(65);
+      };
+      count int;
+        item varchar(65)[30];
+    };
+    DRCD_COMB {
+      DRCD {
+        textdata varchar(35);
+      };
+      count int;
+        item varchar(35)[99];
+    };
+    SRYKA_COMB {
+      SRYKA {
+        textdata varchar(15);
+      };
+      count int;
+        item varchar(15)[40];
+    };
+    SYORINM_COMB {
+      SYORINM {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[10];
+    };
+    SYORIMEI {
+      textdata varchar(40);
+    };
+  };
+};

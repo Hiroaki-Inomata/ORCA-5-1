@@ -1,0 +1,93 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    帳票大容量ＡＰＩ作成処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} JOBID 
+#        ${13} SHELLID
+#        ${14} HOSPNUM
+#        ${15} エラーファイル名 
+#        ${16} MONBLOB-ID(print-id)
+#        ${17} EVENT
+#        ${18} PARA (1)
+#        ${19} PARA (2)
+#        ${20} PARA (3)
+#        ${21} PARA (4)
+#        ${22} PARA (5)
+#        ${23} PARA (6)
+#        ${24} PARA (7)
+#        ${25} PARA (8)
+#        ${26} PARA (9)
+#        ${27} PARA (10)
+#-------------------------------------------#
+
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+
+##      一時ディレクトリを削除
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+}
+
+trap cleanup EXIT
+
+    echo "arg2  =  [" ${2} "]"  
+    echo "arg3  =  [" ${3} "]"  
+    echo "arg12 =  [" ${12} "]"  
+    echo "arg13 =  [" ${13} "]"  
+    echo "arg14 =  [" ${14} "]"  
+    echo "arg15 =  [" ${15} "]"  
+    echo "arg16 =  [" ${16} "]"  
+    echo "arg17 =  [" ${17} "]"  
+
+    FILENM="${2}${3}.pdf"
+
+    if [ "$2" =  "ORCBSD1" ]; then
+       KARTE_UID=$(echo "${MON_BATCH_COMMENT}" | xargs )
+       PDF_FILE="${17}_${KARTE_UID}.pdf"
+       DATA_FILE="${17}_${KARTE_UID}.zip"
+       if  [ -e "${MCP_TEMPDIR}/${FILENM}" ]; then
+           mv ${MCP_TEMPDIR}/${FILENM} ${MCP_TEMPDIR}/${PDF_FILE}
+           echo "pdf=["${PDF_FILE}"]"
+           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter ${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},${PDF_FILE},"pdf",${16}
+           if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+               exit
+           fi
+       fi
+       if  [ -e "${MCP_TEMPDIR}/${DATA_FILE}" ]; then
+           echo "zip=["${DATA_FILE}"]"
+           $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter ${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},${DATA_FILE},"zip",${18}
+           if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+               exit
+           fi
+       fi
+    else
+        if  [ -e "${MCP_TEMPDIR}/${FILENM}" ]; then
+            echo "printnm=[" $FILENM "]"
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBBLOBIMPORT -parameter ${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},$FILENM,"pdf",${16}
+            if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+                exit
+            fi
+        fi
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBPUSH -parameter ${1},${2},${3},$rennum,${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},${17},${18},${19},${20},${21},${22},${23},${24},${25},${26},${27}
+    if  [ -e ${MCP_TEMPDIR}/${15} ]; then
+         exit
+    fi
+
+    $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${12}${13},${14}
+
+    exit 

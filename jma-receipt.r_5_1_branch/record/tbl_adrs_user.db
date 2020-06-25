@@ -1,0 +1,101 @@
+tbl_adrs_user {
+	HOSPNUM				number(2,0);
+	LPUBCD				char(5);
+	POST				char(7);
+	RENNUM				number(2);
+	PREFKANA			varchar(40);
+	CITYKANA			varchar(200);
+	TOWNKANA			varchar(400);
+	PREFNAME			varchar(20);
+	CITYNAME			varchar(100);
+	TOWNNAME			varchar(200);
+	EDITADRS_KANA		varchar(640);
+	EDITADRS_NAME		varchar(320);
+	TOWNDIVFLG			char(1);
+	MANYTOWNFLG			char(1);
+	TOWNNAME2			varchar(1200);
+};
+
+primary	{
+	HOSPNUM,LPUBCD,POST,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_user_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_user
+		WHERE   HOSPNUM = :HOSPNUM
+			AND LPUBCD = :LPUBCD
+			AND POST   = :POST
+			AND RENNUM = :RENNUM
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	tbl_adrs_user
+			VALUES(
+				:LPUBCD,
+				:POST,
+				:RENNUM,
+				:PREFKANA,
+				:CITYKANA,
+				:TOWNKANA,
+				:PREFNAME,
+				:CITYNAME,
+				:TOWNNAME,
+				:EDITADRS_KANA,
+				:EDITADRS_NAME,
+				:TOWNDIVFLG,
+				:MANYTOWNFLG,
+				:HOSPNUM,
+				:TOWNNAME2
+			)
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	tbl_adrs_user
+		WHERE   HOSPNUM = :HOSPNUM
+			AND LPUBCD = :LPUBCD
+			AND POST   = :POST
+			AND RENNUM = :RENNUM
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_user_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_user
+		WHERE   HOSPNUM = :HOSPNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_user_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_user
+			WHERE (HOSPNUM      =   :HOSPNUM)
+			AND   (POST   LIKE :POST)
+			ORDER  BY  POST,
+                       LPUBCD,
+                       RENNUM;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_adrs_user_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_adrs_user
+		WHERE   HOSPNUM = :HOSPNUM
+			AND POST   = :POST
+			AND LPUBCD = :LPUBCD
+		ORDER BY RENNUM DESC
+		;
+	};
+};

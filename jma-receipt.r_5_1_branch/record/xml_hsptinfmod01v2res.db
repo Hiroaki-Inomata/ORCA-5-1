@@ -1,0 +1,124 @@
+xml_hsptinfmod01v2res {
+    context	int;
+    object	object;
+    mode	int;
+    recordname	varchar(128);
+	private_objects {
+		Information_Date 			varchar(10);
+		Information_Time 			varchar(08);
+		Api_Results{
+			Api_Result	     		varchar(04);
+			Api_Result_Message 		varchar(100);
+		}[10];
+		Request_Number	{
+			Label			varchar(20);
+			Data			varchar(02);
+			Name			varchar(30);
+		};
+		Patient_Information{
+			Patient_ID			varchar(20);
+			WholeName			varchar(100);
+			WholeName_inKana	varchar(100);
+			BirthDate			varchar(10);
+			Sex					varchar(01);
+		};
+		Hospital_Stay_Infomation{
+			History_Number		varchar(3);
+			Creation_Type{
+				Label			varchar(30);
+				Data			varchar(1);
+				Name			varchar(40);
+			};
+			Admission_Date		varchar(10);
+			Last_Update_Date	varchar(10);
+			Ward_Number	{
+				Label				varchar(20);
+				Data				varchar(02);
+			};
+			Ward_Name	{
+				Label				varchar(20);
+				Data				varchar(20);
+			};
+			Room_Number	{
+				Label				varchar(10);
+				Data				varchar(06);
+			};
+			Department_Code	{
+				Label				varchar(20);
+				Data				varchar(02);
+				Name				varchar(30);
+			};
+			Doctor	{
+				Label				varchar(10);
+				Data				varchar(05);
+				Name				varchar(100);
+			}[3];
+			HealthInsurance_Information{
+			 	Insurance_Combination_Number	varchar(04);
+				InsuranceProvider_Class			varchar(03);
+				InsuranceProvider_Number		varchar(08);
+				InsuranceProvider_WholeName		varchar(20);
+				HealthInsuredPerson_Symbol		varchar(80);
+				HealthInsuredPerson_Number		varchar(80);
+				PublicInsurance_Information	{
+					PublicInsurance_Class		varchar(03);
+					PublicInsurance_Name		varchar(20);
+					PublicInsurer_Number		varchar(08);
+					PublicInsuredPerson_Number	varchar(20);
+				}[4];
+			};
+			First_Admission_Date 	varchar(10);
+			Moving_From_Nursing	{
+				Label				varchar(20);
+				Data				varchar(01);
+				Name				varchar(20);
+			};
+			Room_Charge	{
+				Label			varchar(20);
+				Data			varchar(07);
+				Name			varchar(10);
+			};
+			Over_180days_Hospital_Stay	{
+				Label			varchar(20);
+				Data			varchar(01);
+				Name			varchar(10);
+			};
+			Hospital_Charge	{
+				Label			varchar(40);
+				Data			varchar(09);
+				Name			varchar(100);
+			};
+			Last_Hospital_Charge	{
+				Label			varchar(40);
+				Data			varchar(09);
+				Name			varchar(100);
+			};
+			Editing_Hospital_Charge	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(30);
+			};
+			Delivery	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Direct_Payment	{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Recurring_Billing{
+				Label			varchar(20);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+			Search_Function{
+				Label			varchar(30);
+				Data			varchar(1);
+				Name			varchar(20);
+			};
+		};
+	};
+};
+

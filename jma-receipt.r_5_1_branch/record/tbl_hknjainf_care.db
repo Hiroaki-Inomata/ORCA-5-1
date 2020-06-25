@@ -1,0 +1,40 @@
+tbl_hknjainf_care {
+	HKNJANUM	varchar(8);
+	HKNJANAME	varchar(200);
+	POST        	varchar(7);
+	ADRS		varchar(200);
+	BANTI 		varchar(200);
+	TEL 		varchar(15);
+	IDOKBN  	varchar(1);
+	IDOYMD  	varchar(8);
+	TERMID   	varchar(16);
+	OPID     	varchar(16);
+	CREYMD   	varchar(8);
+	UPYMD    	varchar(8);
+	UPHMS		varchar(6);
+};
+
+primary	{
+	HKNJANUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_care_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_care
+			WHERE   HKNJANUM	=   :HKNJANUM
+		;
+	};
+};
+
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_hknjainf_care_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_hknjainf_care
+			ORDER	BY	HKNJANUM
+ 		;
+	};
+};

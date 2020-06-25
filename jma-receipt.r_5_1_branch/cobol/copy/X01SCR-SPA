@@ -1,0 +1,216 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * Æü°åÉ¸½à¥ì¥»¥×¥È¥½¥Õ¥È¡ÊJMA standard receipt software¡Ë
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    ¥Á¥§¥Ã¥¯¥Þ¥¹¥¿ ²èÌÌ£Ó£Ð£Á 
+      *            ²èÌÌ¡¡£Ø£°£±¡¢£Ø£°£²¡¢£Ø£°£³¡¢£Ø£¹£¹
+      *****************************************************************
+      *****************************************************************
+      *  ¥×¥í¥°¥é¥à½¤ÀµÍúÎò
+      * Maj/Min/Rev  ½¤Àµ¼Ô       ÆüÉÕ      ÆâÍÆ
+      *****************************************************************
+       01  SPA-X01FREE.
+      *
+      *    £Ø£°£³²èÌÌÍÑ
+           03  SPA-X03-GMN-AREA.
+               05  SPA-X03-GMN-UUID                    PIC X(36).
+               05  SPA-X03-GMN-KAKUTEI                 PIC 9(01).
+               05  SPA-X03-GMN-LCHKKBNMEI              PIC X(70).
+               05  SPA-X03-GMN-LYUKOSTYMD              PIC X(09).
+               05  SPA-X03-GMN-LYUKOEDYMD              PIC X(09).
+               05  SPA-X03-GMN-LNAME                   PIC X(70).
+               05  SPA-X03-GMN-LCHKLST.
+                   07  SPA-X03-GMN-LCHKLST-MAX         PIC 9(03).
+                   07  SPA-X03-GMN-LCHKLST-OCC         OCCURS  601.
+                       09  SPA-X03-GMN-TLCHK-NUM       PIC 9(03).
+                       09  SPA-X03-GMN-TLCHK-NAME      PIC X(100).
+                       09  SPA-X03-GMN-TLCHK-JYKN      PIC X(01).
+                       09  SPA-X03-GMN-TLCHK-GRPID     PIC X(01).
+                       09  SPA-X03-GMN-TLCHK-HOSOKU    PIC X(40).
+                       09  SPA-X03-GMN-TLCHK-HOSOKU-JYKN
+                                                       PIC X(01).
+           03  SPA-X03-NAI-AREA.
+               05  SPA-X03-NAI-LCHKLST.
+                   07  SPA-X03-NAI-LCHKLST-OCC         OCCURS  601.
+                       09  SPA-X03-NAI-TLCHK-SRYCD     PIC X(09).
+                       09  SPA-X03-NAI-TLCHK-BYOCD     PIC X(07)
+                                                       OCCURS  21.
+                       09  SPA-X03-NAI-TLCHK-BYOSTATUS PIC X(01).
+                       09  SPA-X03-NAI-TLCHK-UTAGAI    PIC X(01).
+                       09  SPA-X03-NAI-TLCHK-SYORIKBN  PIC X(01).
+                       09  SPA-X03-NAI-TLCHK-NGBNDKBN  PIC X(01).
+                       09  SPA-X03-NAI-TLCHK-CHKERR    PIC 9(01).
+                       09  SPA-X03-NAI-TLCHK-DATAKBN   PIC X(01).
+      *H29.9
+                       09  SPA-X03-NAI-TLCHK-YUKOSTYMD   PIC X(08).
+                       09  SPA-X03-NAI-TLCHK-YUKOEDYMD   PIC X(08).
+      *
+      *    £Ø£°£¶²èÌÌÍÑ
+           03  SPA-GMN-X06-AREA.
+               05  SPA-GMN-X06-PAGE                PIC 9(03).
+               05  SPA-GMN-X06-CUR                 PIC 9(03).
+               05  SPA-GMN-X06-SRYCD               PIC X(09).
+               05  SPA-GMN-X06-NAME                PIC X(100).
+               05  SPA-GMN-X06-TEK-G.
+                   07  SPA-GMN-X06-TEK-MAX         PIC 9(05).
+                   07  SPA-GMN-X06-TEK-OCC         OCCURS  100.
+                       09  SPA-GMN-X06-TEKCD       PIC X(20).
+                       09  SPA-GMN-X06-TEKNAME     PIC X(100).
+                       09  SPA-GMN-X06-TEKCDBF     PIC X(20).
+      *
+      *    £Ø£°£·²èÌÌÍÑ
+           03  SPA-GMN-X07-AREA.
+               05  SPA-GMN-X07-PAGE                PIC 9(05).
+               05  SPA-GMN-X07-CUR                 PIC 9(03).
+               05  SPA-GMN-X07-SELBYOMEI           PIC X(50).
+               05  SPA-GMN-X07-BUNRUICD            PIC 9(03).
+               05  SPA-GMN-X07-SELNUM              PIC 9(05).
+               05  SPA-GMN-X07-INPUT-AREA.
+                   07  SPA-GMN-X07-BYOMEICD-G.
+                       09  SPA-GMN-X07-BYOCD-MAX   PIC 9(03).
+                       09  SPA-GMN-X07-BYOCD       PIC X(20)
+                                                   OCCURS  6.
+                   07  SPA-GMN-X07-BYOMEI          PIC X(400).
+               05  SPA-GMN-X07-BUNLST-AREA.
+                   07  SPA-GMN-X07-BUNLST-SEL      PIC 9(05).
+                   07  SPA-GMN-X07-BUNLST-MAX      PIC 9(05).
+                   07  SPA-GMN-X07-BUNLST-OCC      OCCURS  100.
+                       09  SPA-GMN-X07-BBUNRUICD   PIC X(07).
+                       09  SPA-GMN-X07-BBUNRUIMEI  PIC X(20).
+               05  SPA-GMN-X07-UBYOLST-PAGE        PIC 9(05).
+               05  SPA-GMN-X07-UBYOLST-AREA.
+                   07  SPA-GMN-X07-UBYOLST-NEXT    PIC 9(01).
+                   07  SPA-GMN-X07-UBYOLST-SEL     PIC 9(05).
+                   07  SPA-GMN-X07-UBYOLST-MAX     PIC 9(05).
+                   07  SPA-GMN-X07-UBYOLST-OCC     OCCURS  100.
+                       09  SPA-GMN-X07-TBANGO      PIC 9(05).
+                       09  SPA-GMN-X07-TINPUTCD    PIC X(10).
+                       09  SPA-GMN-X07-TBYOMEI     PIC X(80).
+           03  SPA-NAI-X07-AREA.
+               05  SPA-NAI-X07-INPUT-AREA.
+                   07  SPA-NAI-X07-BYOINF-MAX      PIC 9(03).
+                   07  SPA-NAI-X07-BYOINF-OCC      OCCURS 6.
+                       09  SPA-NAI-X07-BYOIDX      PIC 9(03).
+                       09  SPA-NAI-X07-BYOMEI      PIC X(100).
+                       09  SPA-NAI-X07-BYOSTATUS   PIC X(1).
+                       09  SPA-NAI-X07-BYOCD-G.
+                           11  SPA-NAI-X07-BYOCD-OCC   OCCURS 21.
+                               13  SPA-NAI-X07-BYOCD   PIC X(07).
+      *
+      *    £Ø£¹£¸²èÌÌÍÑ
+           03  SPA-X98-MOTOPG                    PIC X(08).
+           03  SPA-X98GMN-AREA.
+               05  SPA-X98-GMN-MAX               PIC 9(03).
+               05  SPA-X98-NEXT                  PIC 9(04).
+               05  SPA-X98-PAGE                  PIC 9(04).
+               05  SPA-X98-GMN-CUR               PIC 9(03).
+      *
+               05  SPA-X98-GMN-SELNUM-G.
+                   07  SPA-X98-GMN-SELNUM        PIC X(03)
+                                                 OCCURS  5.
+               05  SPA-X98-NAI-SELNUM-G.
+                   07  SPA-X98-NAI-SELNUM        PIC 9(03)
+                                                 OCCURS  5.
+               05  SPA-X98-GMN-INPUT             PIC X(22).
+               05  SPA-X98-GMN-SYORI             PIC X(01).
+               05  SPA-X98-GMN-SYORI2            PIC X(01).
+               05  SPA-X98-GMN-SYORI3            PIC X(02).
+               05  SPA-X98-GMN-KBN               PIC X(01).
+               05  SPA-X98-NAI-KENSA.
+                   07  SPA-X98-NAI-KENSANO       PIC 9(02).
+                   07  SPA-X98-NAI-HOUKATU       PIC X(01).
+      *
+               05  SPA-X98-GMN-TBL.
+                   07  SPA-X98-GMN-TBLREC        OCCURS   200.
+                       11  SPA-X98-GMN-NO         PIC 9(03).
+                       11  SPA-X98-GMN-NO-X       REDEFINES
+                           SPA-X98-GMN-NO         PIC X(03).
+                       11  SPA-X98-GMN-INPUTCD    PIC X(20).
+                       11  SPA-X98-GMN-SRYCD      PIC X(09).
+                       11  SPA-X98-GMN-NAME       PIC X(70).
+                       11  SPA-X98-GMN-TANI       PIC X(10).
+                       11  SPA-X98-GMN-KISOTEN    PIC 9(07)V99.
+      *
+                       11  SPA-X98-NAI-NO         PIC 9(03).
+      *        ¼«±¡ºÎÍÑ
+               05  SPA-X98-JIIN-G.
+                   07  SPA-X98-JIIN               PIC X(01).
+                   07  SPA-X98-JIINF              PIC X(01).
+                   07  SPA-X98-JIINMEI            PIC X(18).
+               05  SPA-X98-JIIN-COB               OCCURS  10.
+                   07  SPA-X98-JIINLST            PIC X(20).
+      *
+               05  SPA-X98-USER-G.
+                   07  SPA-X98-USER               PIC X(01).
+                   07  SPA-X98-USERF              PIC X(01).
+                   07  SPA-X98-USERMEI            PIC X(18).
+               05  SPA-X98-USER-COB               OCCURS  10.
+                   07  SPA-X98-USERLST            PIC X(20).
+      *
+      *    £Ø£¹£¹²èÌÌÍÑ
+           03  SPA-X99-MOTOPG                      PIC X(08).
+           03  SPA-GMN-X99-AREA.
+               05  SPA-GMN-X99-MAX                 PIC 9(03).
+               05  SPA-GMN-X99-SRCBYOLST-PAGE      PIC 9(05).
+               05  SPA-GMN-X99-SRCBYOLST-PTN       PIC X(01).
+               05  SPA-GMN-X99-SRCBYOLST-SRT       PIC X(03).
+               05  SPA-GMN-X99-CUR                 PIC 9(03).
+               05  SPA-GMN-X99-INPUT-AREA.
+                   07  SPA-GMN-X99-SELNUM          PIC X(03).
+                   07  SPA-GMN-X99-SEL-BYOMEI      PIC X(100).
+                   07  SPA-GMN-X99-SRCBYOKBN-G.
+                       09  SPA-GMN-X99-SRCBYOKBN   PIC X(01).
+                       09  SPA-GMN-X99-SRCBYOKBNFL PIC X(01).
+                       09  SPA-GMN-X99-SRCBYOKBNMEI
+                                                   PIC X(20).
+                   07  SPA-GMN-X99-SRTKBN-G.
+                       09  SPA-GMN-X99-SRTKBN      PIC X(03).
+                       09  SPA-GMN-X99-SRTKBNMEI   PIC X(20).
+               05  SPA-GMN-X99-COMBO-AREA.
+                   07  SPA-GMN-X99-SRTKBNLST-G.
+                       09  SPA-GMN-X99-SRTKBN-MAX      PIC 9(03).
+                       09  SPA-GMN-X99-SRTKBNLST       OCCURS    50.
+                           11  SPA-GMN-X99-SRTKBNL     PIC X(03).
+                           11  SPA-GMN-X99-SRTKBNMEIL  PIC X(20).
+                   07  SPA-GMN-X99-SRCBYOKBNLST-G.
+                       09  SPA-GMN-X99-SRCBYOKBN-MAX   PIC 9(03).
+                       09  SPA-GMN-X99-SRCBYOKBNLST    OCCURS    5.
+                           11  SPA-GMN-X99-SRCBYOKBNL  PIC X(01).
+                           11  SPA-GMN-X99-SRCBYOKBNFLL PIC X(01).
+                           11  SPA-GMN-X99-SRCBYOKBNMEIL
+                                                   PIC X(20).
+               05  SPA-GMN-X99-SRCBYOLST-AREA.
+                   07  SPA-GMN-X99-SRCBYOLST-NEXT      PIC 9(01).
+                   07  SPA-GMN-X99-SRCBYOLST-MAX       PIC 9(05).
+                   07  SPA-GMN-X99-SRCBYOLST-OCC       OCCURS  100.
+                       09  SPA-GMN-X99-TSRCBYOMEI      PIC X(100).
+                       09  SPA-GMN-X99-TSRCCD          PIC X(12).
+                   07  SPA-GMN-X99-SRCBYOLST-SELECT-G.
+                       09  SPA-GMN-X99-SRCBYOLST-SELECT
+                                                       PIC X(01)
+                                                       OCCURS  100.
+               05  SPA-NAI-X99-INPUT-AREA.
+                   07  SPA-NAI-X99-SELNUM          PIC 9(03).
+               05  SPA-NAI-X99-SRCBYOLST-AREA.
+                   07  SPA-NAI-X99-SRCBYOLST-OCC       OCCURS  100.
+                       09  SPA-NAI-X99-TSRCBYOSTATUS   PIC X(01).
+                       09  SPA-NAI-X99-TSRCBYOCD-G.
+                           11  SPA-NAI-X99-TSRCBYOCD   PIC X(07)
+                                                       OCCURS  21.
+      *    Â¾¤Î²èÌÌ
+           03  SPA-X01SONOTA                  PIC X(300000). 

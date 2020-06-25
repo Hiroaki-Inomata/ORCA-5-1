@@ -1,0 +1,161 @@
+Z010 { #GtkWindow
+  title varchar(256);
+  popup_summary varchar(256);
+  popup_body varchar(256);
+  popup_icon varchar(256);
+  popup_timeout int;
+  fixed10 { #GtkFixed
+    B01 { #GtkButton
+      state int;
+    };
+    B12 { #GtkButton
+      state int;
+    };
+    SELNUM { #GtkPandaEntry
+      textdata varchar(3);
+    };
+    B02 { #GtkButton
+      state int;
+    };
+    B04 { #GtkButton
+      state int;
+    };
+    SHONAME { #GtkPandaEntry
+      textdata varchar(200);
+    };
+    scrolledwindow1 { #GtkScrolledWindow
+      RRKLIST { #GtkPandaCList
+        count int;
+        row int;
+        selectdata bool[50];
+        fgcolor varchar(20)[50];
+        bgcolor varchar(20)[50];
+        item {
+          column1 varchar(3);
+          column2 varchar(10);
+          column3 varchar(10);
+        }[50];
+      };
+    };
+    YUKOSTYMD { #GtkPandaEntry
+      textdata varchar(10);
+    };
+    YUKOEDYMD { #GtkPandaEntry
+      textdata varchar(10);
+    };
+    SAIKETU_COMB { #GtkPandaCombo
+      count int;
+      item varchar(16)[4];
+      SAIKETUKBN { #GtkPandaEntry
+        textdata varchar(16);
+      };
+    };
+    ZENKNSKBN_COMB { #GtkPandaCombo
+      count int;
+      item varchar(30)[5];
+      ZENKNSKBN { #GtkPandaEntry
+        textdata varchar(30);
+      };
+    };
+    PLUS_SANTEIRRK_COMB { #GtkPandaCombo
+      count int;
+      item varchar(30)[3];
+      PLUS_SANTEIRRK { #GtkPandaEntry
+        textdata varchar(30);
+      };
+    };
+    PLUS_JGNCNTETCM { #GtkNumberEntry
+      numdata number(2);
+    };
+    PLUS_JGNCNT1 { #GtkNumberEntry
+      numdata number(3);
+    };
+    PLUS_JGNCNT1D { #GtkNumberEntry
+      numdata number(3);
+    };
+    PLUS_JGNCNT1W { #GtkNumberEntry
+      numdata number(3);
+    };
+    PLUS_JGNCNTETC { #GtkNumberEntry
+      numdata number(3);
+    };
+    PLUS_JGNCNTERR { #GtkNumberEntry
+      numdata number(1);
+    };
+    SOURYOKBN_COMB { #GtkPandaCombo
+      count int;
+      item varchar(30)[5];
+      SOURYOKBN { #GtkPandaEntry
+        textdata varchar(30);
+      };
+    };
+    IPNKISAIKBN_COMB { #GtkPandaCombo
+      count int;
+      item varchar(30)[5];
+      IPNKISAIKBN { #GtkPandaEntry
+        textdata varchar(30);
+      };
+    };
+    IPNTANICD_COMB { #GtkPandaCombo
+      count int;
+      item varchar(28)[200];
+      IPNTANICD { #GtkPandaEntry
+        textdata varchar(28);
+      };
+    };
+    BUNRUIKBN_COMBO { #GtkPandaCombo
+      count int;
+      item varchar(43)[20];
+      BUNRUIKBN { #GtkPandaEntry
+        textdata varchar(43);
+      };
+    };
+    IPNKANZANCHI { #GtkNumberEntry
+      numdata number(10,5);
+    };
+    ALLSURYOKBN_COMBO { #GtkPandaCombo
+      count int;
+      item varchar(30)[5];
+      ALLSURYOKBN { #GtkPandaEntry
+        textdata varchar(30);
+      };
+    };
+    KANZANTANICD_COMBO { #GtkPandaCombo
+      count int;
+      item varchar(28)[200];
+      KANZANTANICD { #GtkPandaEntry
+        textdata varchar(28);
+      };
+    };
+    KANZANCHI { #GtkNumberEntry
+      numdata number(10,5);
+    };
+    SIPRYOU1 { #GtkNumberEntry
+      numdata number(3);
+    };
+    SIPIRISU1 { #GtkNumberEntry
+      numdata number(3);
+    };
+    SIPRYOU2 { #GtkNumberEntry
+      numdata number(3);
+    };
+    SIPIRISU2 { #GtkNumberEntry
+      numdata number(3);
+    };
+    MIDASHI { #GtkLabel
+      style varchar(20);
+      textdata varchar(80);
+    };
+    MEISHO  { #GtkLabel
+      style varchar(20);
+      textdata varchar(20);
+    };
+    USER_TANICD_COMB { #GtkPandaCombo
+      count int;
+      item varchar(28)[200];
+      USER_TANICD { #GtkPandaEntry
+        textdata varchar(28);
+      };
+    };
+  };
+};

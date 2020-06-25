@@ -1,0 +1,235 @@
+W63 {
+  fixed1 {
+    B06 {
+      state int;
+    };
+    SELNUM {
+      numdata number(2);
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    HKNJANUM {
+      textdata varchar(10);
+    };
+    HKNJANAME {
+      textdata varchar(100);
+    };
+    CMB_JYKNKBN {
+      JYKNKBN {
+        textdata varchar(16);
+      };
+      count int;
+        item varchar(16)[5];
+    };
+    CMB_HKNNUM {
+      HKNNUM {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[50];
+    };
+    CMB_KGCHKPTN {
+      KGCHKPTN {
+        textdata varchar(40);
+      };
+      count int;
+        item varchar(40)[5];
+    };
+    CMB_KGSUJI {
+      KGSUJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGKANJI {
+      KGKANJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGABT {
+      KGABT {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGHYPN {
+      KGHYPN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGKAKKO {
+      KGKAKKO {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGETC {
+      KGETC {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGKANJINASHI {
+      KGKANJINASHI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGKETACHK {
+      KGKETACHK {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_KGKETAMIN {
+      KGKETAMIN {
+        textdata varchar(21);
+        state int;
+      };
+      count int;
+        item varchar(21)[25];
+      state int;
+    };
+    CMB_NM1SUJI {
+      NM1SUJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM1KANJI {
+      NM1KANJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM1ABT {
+      NM1ABT {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM1HYPN {
+      NM1HYPN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM1KAKKO {
+      NM1KAKKO {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM1ETC {
+      NM1ETC {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NMSUJINASHI {
+      NMSUJINASHI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NMKETACHK {
+      NMKETACHK {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NMKETAMIN {
+      NMKETAMIN {
+        textdata varchar(21);
+        state int;
+      };
+      count int;
+        item varchar(21)[15];
+      state int;
+    };
+    CMB_NM2SUJI {
+      NM2SUJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM2KANJI {
+      NM2KANJI {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM2ABT {
+      NM2ABT {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM2HYPN {
+      NM2HYPN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM2KAKKO {
+      NM2KAKKO {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CMB_NM2ETC {
+      NM2ETC {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    CLISTSCROLL {
+      hpos int;
+      vpos int;
+      CHECKLIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(4);
+            column4 varchar(60);
+            column5 varchar(20);
+            column6 varchar(10);
+            column7 varchar(9);
+            column8 varchar(9);
+          }[200];
+          selectdata bool[200];
+      };
+    };
+  };
+};

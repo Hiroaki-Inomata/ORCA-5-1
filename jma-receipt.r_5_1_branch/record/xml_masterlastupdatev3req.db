@@ -1,0 +1,10 @@
+xml_masterlastupdatev3req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	masterlastupdatev3req {
+		Master_Id varchar(64);
+	};
+};
+

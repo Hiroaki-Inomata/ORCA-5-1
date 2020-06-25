@@ -1,0 +1,10 @@
+push_hospital_stay{
+	event			                varchar(50);
+	body	{
+       Request_Number               varchar(02);
+       Patient_ID                   varchar(20);
+       Admission_Date               varchar(10);
+       Discharge_Date               varchar(10);
+	};
+};
+

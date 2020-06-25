@@ -1,0 +1,12 @@
+xml_tmedicalgetv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	tmedicalgetreq {
+		Perform_Date		varchar(10);
+		InOut			varchar(1);
+		Department_Code		varchar(2);
+		Patient_ID		varchar(20);
+   	};
+};

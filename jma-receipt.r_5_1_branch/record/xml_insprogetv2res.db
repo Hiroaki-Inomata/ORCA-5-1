@@ -1,0 +1,33 @@
+xml_insprogetv2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	insprogetres      {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+	TInsuranceProvider_Information  {
+		InsuranceProvider_Number	varchar(8);
+        	InsuranceProvider_WholeName	varchar(200);
+        	InsuranceProvider_Name1		varchar(100);
+        	InsuranceProvider_Name2		varchar(40);
+        	InsuranceProvider_Name3		varchar(40);
+        	Insurance_Number		varchar(3);
+        	Insurance_Number_Name		varchar(20);
+        	InsuranceProvider_Address_ZipCode	varchar(7);
+        	InsuranceProvider_WholeAddress1		varchar(200);
+        	InsuranceProvider_WholeAddress2		varchar(200);
+        	InsuranceProvider_PhoneNumber		varchar(15);
+        	InsuranceProvider_Symbol		varchar(80);
+        	Rate_Outpatient			varchar(3);
+        	Rate_Inpatient			varchar(3);
+        	Rate_Outpatient_F		varchar(3);
+        	Rate_Inpatient_F		varchar(3);
+        	Change_Memo		varchar(10);
+        	Change_Date		varchar(10);
+       	} [2500];
+   	};
+};

@@ -1,0 +1,67 @@
+G02 {
+  fixed6 {
+    B12 {
+      state int;
+    };
+    SRYYM {
+      textdata varchar(7);
+    };
+    FILE1_COMBO {
+      FILE1 {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[6];
+    };
+    FILE2_COMBO {
+      FILE2 {
+        textdata varchar(22);
+      };
+      count int;
+        item varchar(22)[6];
+    };
+    HOUKATUKBN1 {
+      isactive bool;
+    };
+    HOUKATUKBN2 {
+      isactive bool;
+    };
+    KOJINKBN1 {
+      isactive bool;
+    };
+    KOJINKBN2 {
+      isactive bool;
+    };
+    NYUGAIKBNCOMBO {
+      NYUGAIKBN {
+        textdata varchar(8);
+      };
+      count int;
+        item varchar(8)[2];
+    };
+    DATAKBN3 {
+      isactive bool;
+    };
+    DATAKBN2 {
+      isactive bool;
+    };
+    DATAKBN1 {
+      isactive bool;
+    };
+    CDKBN1 {
+      isactive bool;
+    };
+    CDKBN2 {
+      isactive bool;
+    };
+    CDKBN3 {
+      isactive bool;
+    };
+    FILENM1 {
+      textdata varchar(150);
+    };
+    FILENM2 {
+      textdata varchar(150);
+    };
+  };
+};

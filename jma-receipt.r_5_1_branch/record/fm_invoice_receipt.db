@@ -1,0 +1,76 @@
+fm_invoice_receipt {
+  context  int;
+  object  object;
+  mode  int;
+  recordname  varchar(128);
+  data {
+    Form_ID              varchar(30);
+    Custom_ID            varchar(30);
+    Printer              varchar(20);
+    Order_Class          varchar(02);
+    Patient  {
+      ID                 varchar(20);
+      Name               varchar(50);
+      KanaName           varchar(50);
+    };
+    Hospital  {
+      Name               varchar(120)[3];
+      ZipCode            varchar(7);
+      Address            varchar(200)[3];
+      PhoneNumber        varchar(15);
+    };
+    Number_Days          varchar(03);
+    Period_Class         varchar(01);
+    Perform_Month        varchar(07);
+    Perform_Date         varchar(10);
+    Perform_End_Date     varchar(10);
+    IssuedDate           varchar(10);
+    Department_Name      varchar(30);
+    Insurance_Name       varchar(40);
+    Insurance_Rate       varchar(6);
+    Invoice_Number       varchar(7);
+    Repirint_Sign_Flg    varchar(1);
+    Me{
+      Code               varchar(03);
+      Name               varchar(20);
+      Point              varchar(08);
+      Money               varchar(08);
+    }[16];
+    Total_Point          varchar(08);
+    Ai_Money             varchar(08);
+    Label_Lsi_Total_Money    varchar(20);
+    Lsi_Total_Money_In_Ai_Money varchar(08);
+    Pi_Smoney            varchar(08);
+    Total_Me_Money       varchar(08);
+    Tax_In_Total_Me_Money varchar(08);
+    Oe_Etc{
+      Name               varchar(20);
+      Money              varchar(08);
+    }[10];
+    Total_Oe_Etc_Money   varchar(08);
+    Tax_In_Total_Oe_Etc_Money varchar(08);
+    Ad_Money1            varchar(08);
+    Ad_Money2            varchar(08);
+    Ac_Money             varchar(08);
+    Tax_In_Ac_Money      varchar(08);
+    Last_Ac_Money        varchar(08);
+    Total_Ac_Money       varchar(08);
+    Ic_Money             varchar(08);
+    Caution              varchar(100);
+    Memo                 varchar(80)[10];
+    Statement  {
+      Group_Head_Flg      varchar(01);
+      Group_Number        varchar(3);
+      Medical_Class_Name  varchar(10);
+      Description          varchar(150);
+      Yen_Flg        varchar(01);
+      Point        varchar(09);
+      Count        varchar(3);
+      Total_Point      varchar(11);
+      End_Flg          varchar(01);
+    }[2000];
+    Yen_Flg            varchar(1);
+    Statement_Caution  varchar(100);
+  };
+};
+

@@ -1,0 +1,328 @@
+X05 {
+  fixed2 {
+    B03 {
+      state int;
+    };
+    B11 {
+      label varchar(10);
+    };
+    NAME {
+      textdata varchar(100);
+    };
+    NO01 {
+      numdata number(3);
+    };
+    NO02 {
+      numdata number(3);
+    };
+    NO03 {
+      numdata number(3);
+    };
+    NO04 {
+      numdata number(3);
+    };
+    NO05 {
+      numdata number(3);
+    };
+    NO06 {
+      numdata number(3);
+    };
+    NO07 {
+      numdata number(3);
+    };
+    NO08 {
+      numdata number(3);
+    };
+    NO09 {
+      numdata number(3);
+    };
+    NO10 {
+      numdata number(3);
+    };
+    NO11 {
+      numdata number(3);
+    };
+    NO12 {
+      numdata number(3);
+    };
+    NO13 {
+      numdata number(3);
+    };
+    NO14 {
+      numdata number(3);
+    };
+    NO15 {
+      numdata number(3);
+    };
+    NO16 {
+      numdata number(3);
+    };
+    NO17 {
+      numdata number(3);
+    };
+    NO18 {
+      numdata number(3);
+    };
+    NO19 {
+      numdata number(3);
+    };
+    NO20 {
+      numdata number(3);
+    };
+    TEKCD01 {
+      textdata varchar(20);
+    };
+    TEKCD02 {
+      textdata varchar(20);
+    };
+    TEKCD03 {
+      textdata varchar(20);
+    };
+    TEKCD04 {
+      textdata varchar(20);
+    };
+    TEKCD05 {
+      textdata varchar(20);
+    };
+    TEKCD06 {
+      textdata varchar(20);
+    };
+    TEKCD07 {
+      textdata varchar(20);
+    };
+    TEKCD08 {
+      textdata varchar(20);
+    };
+    TEKCD09 {
+      textdata varchar(20);
+    };
+    TEKCD10 {
+      textdata varchar(20);
+    };
+    TEKCD11 {
+      textdata varchar(20);
+    };
+    TEKCD12 {
+      textdata varchar(20);
+    };
+    TEKCD13 {
+      textdata varchar(20);
+    };
+    TEKCD14 {
+      textdata varchar(20);
+    };
+    TEKCD15 {
+      textdata varchar(20);
+    };
+    TEKCD16 {
+      textdata varchar(20);
+    };
+    TEKCD17 {
+      textdata varchar(20);
+    };
+    TEKCD18 {
+      textdata varchar(20);
+    };
+    TEKCD19 {
+      textdata varchar(20);
+    };
+    TEKCD20 {
+      textdata varchar(20);
+    };
+    DSPNAME01 {
+      textdata varchar(100);
+    };
+    DSPNAME02 {
+      textdata varchar(100);
+    };
+    DSPNAME03 {
+      textdata varchar(100);
+    };
+    DSPNAME04 {
+      textdata varchar(100);
+    };
+    DSPNAME05 {
+      textdata varchar(100);
+    };
+    DSPNAME06 {
+      textdata varchar(100);
+    };
+    DSPNAME07 {
+      textdata varchar(100);
+    };
+    DSPNAME08 {
+      textdata varchar(100);
+    };
+    DSPNAME09 {
+      textdata varchar(100);
+    };
+    DSPNAME10 {
+      textdata varchar(100);
+    };
+    DSPNAME11 {
+      textdata varchar(100);
+    };
+    DSPNAME12 {
+      textdata varchar(100);
+    };
+    DSPNAME13 {
+      textdata varchar(100);
+    };
+    DSPNAME14 {
+      textdata varchar(100);
+    };
+    DSPNAME15 {
+      textdata varchar(100);
+    };
+    DSPNAME16 {
+      textdata varchar(100);
+    };
+    DSPNAME17 {
+      textdata varchar(100);
+    };
+    DSPNAME18 {
+      textdata varchar(100);
+    };
+    DSPNAME19 {
+      textdata varchar(100);
+    };
+    DSPNAME20 {
+      textdata varchar(100);
+    };
+    DMKBN01 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN02 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN03 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN04 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN05 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN06 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN07 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN08 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN09 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN10 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN11 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN12 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN13 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN14 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN15 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN16 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN17 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN18 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN19 {
+      numdata number(1);
+      state int;
+    };
+    DMKBN20 {
+      numdata number(1);
+      state int;
+    };
+    SRYCD {
+      textdata varchar(200);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    CHKKBN {
+      textdata varchar(50);
+    };
+    LBLPAGE {
+      textdata varchar(10);
+    };
+    CMB_NYUGAIKBN {
+      NYUGAIKBN {
+        textdata varchar(22);
+        state int;
+      };
+      count int;
+        item varchar(22)[5];
+      state int;
+    };
+    CMB_NYUGAIBNDKBN {
+      NYUGAIBNDKBN {
+        textdata varchar(22);
+        state int;
+      };
+      count int;
+        item varchar(22)[5];
+      state int;
+    };
+    CMB_JYKNKBN {
+      JYKNKBN {
+        textdata varchar(12);
+        state int;
+      };
+      count int;
+        item varchar(12)[5];
+      state int;
+    };
+    LBLSRYCD {
+      textdata varchar(20);
+      style varchar(20);
+    };
+    LBLNYUGAIBND {
+      textdata varchar(20);
+    };
+    LBLJYKN {
+      textdata varchar(20);
+    };
+    LBLDM {
+      textdata varchar(20);
+    };
+  };
+};

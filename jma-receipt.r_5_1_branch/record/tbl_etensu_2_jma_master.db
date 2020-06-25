@@ -1,0 +1,85 @@
+tbl_etensu_2_jma_master {
+	H_GROUP 			varchar(7);
+	SRYCD				char(9);
+	YUKOSTYMD			char(8);
+	YUKOEDYMD			char(8);
+	CHGYMD   			char(8);
+	TOKUREI				number(1,0);
+#-----> 検索キー項目
+	HOSPNUM				number(2,0),virtual;
+	SRYKBN				char(2),virtual;
+	SRYSYUKBN			char(3),virtual;
+	SRYKBN2				char(2),virtual;
+	SRYSYUKBN2			char(3),virtual;
+#-----> 主キー更新用項目
+	UPH_GROUP 			varchar(7),virtual;
+	UPSRYCD				char(9),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD			char(8),virtual;
+};
+primary	{
+	H_GROUP,SRYCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_2_jma_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_etensu_2_jma
+			WHERE   H_GROUP   =  :H_GROUP
+			AND     SRYCD     =  :SRYCD
+ 			AND     YUKOSTYMD <= :YUKOSTYMD
+			AND     YUKOEDYMD >= :YUKOEDYMD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_etensu_2_jma
+			VALUES(
+				:H_GROUP,
+				:SRYCD,
+				:YUKOSTYMD,
+				:YUKOEDYMD,
+				:CHGYMD,
+				:TOKUREI
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_etensu_2_jma
+			SET
+				H_GROUP   = :H_GROUP,
+				SRYCD     = :SRYCD,
+				YUKOSTYMD = :YUKOSTYMD,
+				YUKOEDYMD = :YUKOEDYMD,
+				CHGYMD    = :CHGYMD,
+				TOKUREI   = :TOKUREI
+			WHERE   H_GROUP   = :UPH_GROUP
+			AND     SRYCD     = :UPSRYCD
+			AND     YUKOSTYMD = :UPYUKOSTYMD
+			AND     YUKOEDYMD = :UPYUKOEDYMD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_etensu_2_jma
+			WHERE   H_GROUP   = :H_GROUP
+			AND     SRYCD     = :SRYCD
+ 			AND     YUKOSTYMD = :YUKOSTYMD
+			AND     YUKOEDYMD = :YUKOEDYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_etensu_2_jma_master_key2_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_etensu_2_jma
+			WHERE   H_GROUP = :H_GROUP
+			AND     SRYCD   = :SRYCD
+			ORDER   BY	YUKOSTYMD
+		;
+	};
+};

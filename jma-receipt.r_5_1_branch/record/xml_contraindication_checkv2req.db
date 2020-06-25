@@ -1,0 +1,21 @@
+xml_contraindication_checkv2req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	contraindication_checkreq {
+#---            リクエスト番号
+		Request_Number		varchar(2);
+#---            患者番号
+		Patient_ID		varchar(20);
+#---            診療年月
+    		Perform_Month		varchar(7);
+#---            チェック月数
+    		Check_Term		varchar(2);
+		Medical_Information  {
+#---            薬剤コード
+			Medication_Code		varchar(09);
+			Medication_Name		varchar(80);
+		} [30];
+   	};
+};

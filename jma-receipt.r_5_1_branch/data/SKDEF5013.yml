@@ -1,0 +1,23 @@
+kanri_cd    : "5013"
+name        : "Âà±¡»öÍ³¾ðÊó"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "NAME"
+  item_jp   : "Âà±¡»öÍ³"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "TANNAME"
+  item_jp   : "´µ¼Ô£É£Ä"
+  type      : "X"
+  start     : 41
+  length    : 10
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 51
+  length    : 450

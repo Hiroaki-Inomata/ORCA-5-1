@@ -1,0 +1,68 @@
+xml_acsimulatev2res {
+    context         int;
+    object  object;
+	mode	int;
+	recordname	varchar(128);
+	acsimulateres {
+        Information_Date			varchar(10);
+        Information_Time			varchar(8);
+        Api_Result				varchar(2);
+        Api_Result_Message			varchar(100);
+        Reskey					varchar(100);
+        Perform_Date				varchar(10);
+	Time_Class				varchar(1);
+        Department_Code				varchar(2);
+        Department_Name				varchar(80);
+	Patient_Information {
+		Patient_ID			varchar(20);
+        	WholeName			varchar(100);
+        	WholeName_inKana		varchar(100);
+        	BirthDate			varchar(10);
+        	Sex				varchar(1);
+        	Dis_Rate			varchar(12);
+		HealthInsurance_Information  {
+		Combination_Number		varchar(4);
+		InsuranceProvider_Class			varchar(03);
+            	InsuranceProvider_Number		varchar(08);
+            	InsuranceProvider_WholeName		varchar(20);
+            	HealthInsuredPerson_Symbol		varchar(80);
+            	HealthInsuredPerson_Number		varchar(80);
+            	HealthInsuredPerson_Continuation	varchar(01);
+            	HealthInsuredPerson_Assistance		varchar(01);
+            	HealthInsuredPerson_Assistance_Name	varchar(10);
+            	RelationToInsuredPerson			varchar(01);
+            	HealthInsuredPerson_WholeName		varchar(100);
+            	Certificate_StartDate			varchar(10);
+            	Certificate_ExpiredDate			varchar(10);
+            	PublicInsurance_Information   {
+                	PublicInsurance_Class		varchar(03);
+                	PublicInsurance_Name		varchar(20);
+                	PublicInsurer_Number		varchar(08);
+                	PublicInsuredPerson_Number	varchar(20);
+			Rate_Admission			varchar(04);
+			Money_Admission			varchar(06);
+			Rate_Outpatient			varchar(04);
+			Money_Outpatient		varchar(06);
+                	Certificate_IssuedDate		varchar(10);
+                	Certificate_ExpiredDate		varchar(10);
+            		} [4];
+        	};
+		Cd_Information  {
+			Ac_Money	varchar(10);
+			Ai_Money	varchar(10);
+			Oe_Money	varchar(10);
+			Dg_Smoney	varchar(10);
+			Om_Smoney	varchar(10);
+			Pi_Smoney	varchar(10);
+			Lsi_Total_Money varchar(10);
+		};
+		Ac_Point_Information  {
+			Ac_Ttl_Point	varchar(10);
+			Ac_Point_Detail   {
+				AC_Point_Name	varchar(30);
+				AC_Point	varchar(10);
+	 		} [16];
+		};
+    	};
+   	};
+};

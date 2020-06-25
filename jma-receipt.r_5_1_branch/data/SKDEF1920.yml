@@ -1,0 +1,36 @@
+kanri_cd    : "1920"
+name        : "患者情報通知情報"
+class_cd    : "*"
+item_max    : 5
+item_list   :
+- item_no   : 1
+  item      : "POPUP-TIMEOUT"
+  item_jp   : "予備"
+  type      : "9"
+  start     : 1
+  length    : 3
+  precision : 0
+- item_no   : 2
+  item      : "POPUP-HKNCHK"
+  item_jp   : "保険最終確認日"
+  type      : "X"
+  start     : 4
+  length    : 1
+- item_no   : 3
+  item      : "POPUP-MEMO1"
+  item_jp   : "メモ１"
+  type      : "X"
+  start     : 5
+  length    : 1
+- item_no   : 4
+  item      : "POPUP-MEMO2"
+  item_jp   : "メモ２"
+  type      : "X"
+  start     : 6
+  length    : 1
+- item_no   : 5
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 7
+  length    : 494

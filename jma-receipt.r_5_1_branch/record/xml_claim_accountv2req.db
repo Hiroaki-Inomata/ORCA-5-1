@@ -1,0 +1,28 @@
+xml_claim_accountv2req {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	claim_accountv2req {
+		Request_Number		varchar(2);
+# 送信用コード
+		Send_Character_Code	varchar(1);
+# 患者番号
+		Patient_ID		varchar(20);
+# 診療日付
+		Perform_Date		varchar(10);
+# 診療科コード
+       		Department_Code		varchar(02);
+# ドクターコード
+		Physician_Code		varchar(05);
+# 保険組合せ
+		Insurance_Combination_Number	varchar(04);
+# 伝票番号
+		Invoice_Number		varchar(07);
+# 処理区分（1：訂正）
+		Update_Code		varchar(01);
+   	};
+};
+
+
+

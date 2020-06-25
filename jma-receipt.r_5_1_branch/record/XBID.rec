@@ -1,0 +1,10 @@
+XBID {
+  fixed1 {
+    XBIDCODE {
+      textdata varchar(11);
+    };
+    XBIDMSG {
+      textdata varchar(71);
+    };
+  };
+};

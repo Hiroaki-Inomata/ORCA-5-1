@@ -1,0 +1,79 @@
+N23 {
+  fixed2 {
+    CHK1 {
+      isactive bool;
+    };
+    CHK2 {
+      isactive bool;
+    };
+    CHK3 {
+      isactive bool;
+    };
+    JYO {
+      isactive bool;
+      state int;
+    };
+    KBN1 {
+      isactive bool;
+      state int;
+    };
+    KBN2 {
+      isactive bool;
+      state int;
+    };
+    KBN3 {
+      isactive bool;
+      state int;
+    };
+    KBN4 {
+      isactive bool;
+      state int;
+    };
+    NAME {
+      textdata varchar(30);
+      state int;
+    };
+    SRYCD {
+      textdata char(10);
+      state int;
+    };
+    INPUTCD {
+      textdata char(10);
+      state int;
+    };
+    IYK1 {
+      isactive bool;
+      state int;
+    };
+    IYK2 {
+      isactive bool;
+      state int;
+    };
+    IYK3 {
+      isactive bool;
+      state int;
+    };
+    KIKANCOMBO {
+      KIKAN {
+        textdata varchar(10);
+      };
+      count int;
+        item varchar(10)[3];
+      state int;
+    };
+    CYU {
+      isactive bool;
+      state int;
+    };
+    PRT {
+      isactive bool;
+      state int;
+    };
+    SYU1 {
+      isactive bool;
+    };
+    SYU2 {
+      isactive bool;
+    };
+  };
+};

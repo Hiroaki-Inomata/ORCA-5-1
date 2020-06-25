@@ -1,0 +1,12 @@
+name	sys3004;
+
+base	".";
+
+ddir	"=";
+record	"=:/usr/lib/jma-receipt/patch-lib/record:/usr/lib/jma-receipt/record";
+
+#include	<./dbgroup.inc>
+
+bd	{
+        sys3004;
+};

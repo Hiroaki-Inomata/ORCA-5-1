@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV"; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+## Delete a temporary directory and files under it.
+## Only files created the top level of the directory are deleted.
+
+[ -z $(echo "${MCP_TEMPDIR}" | xargs) ] && exit 1
+
+find "${MCP_TEMPDIR}" -maxdepth 1 -type f | xargs -L 10 -r rm
+
+rmdir --ignore-fail-on-non-empty "${MCP_TEMPDIR}"
+

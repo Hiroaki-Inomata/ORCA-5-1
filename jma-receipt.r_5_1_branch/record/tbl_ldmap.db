@@ -1,0 +1,172 @@
+tbl_ldmap	{
+	HOSPNUM				number(2,0);
+#--> 端末ＩＤ
+	MAP_LDNAME		varchar(20);
+	MAP_GROUPNUM		number(2,0);
+	MAP_EDANUM		number(2,0);
+	MAP_LDMSG		varchar(20);
+	MAP_DSP_FLG		number(1,0);
+	MAP_HAITA_FLG		number(1,0);
+	MAP_TERMID		varchar(64);
+	MAP_OPID		varchar(16);
+	LDMAP	{
+		CHK_LDNAME1	varchar(20);
+		CHK_LDNAME2	varchar(20);
+		CHK_LDNAME3	varchar(20);
+		CHK_LDNAME4	varchar(20);
+		CHK_LDNAME5	varchar(20);
+		CHK_LDNAME6	varchar(20);
+		CHK_LDNAME7	varchar(20);
+		CHK_LDNAME8	varchar(20);
+		CHK_LDNAME9	varchar(20);
+		CHK_LDNAME10	varchar(20);
+		CHK_LDNAME11	varchar(20);
+		CHK_LDNAME12	varchar(20);
+		CHK_LDNAME13	varchar(20);
+		CHK_LDNAME14	varchar(20);
+		CHK_LDNAME15	varchar(20);
+		CHK_LDNAME16	varchar(20);
+		CHK_LDNAME17	varchar(20);
+		CHK_LDNAME18	varchar(20);
+		CHK_LDNAME19	varchar(20);
+		CHK_LDNAME20	varchar(20);
+		CHK_LDNAME21	varchar(20);
+		CHK_LDNAME22	varchar(20);
+		CHK_LDNAME23	varchar(20);
+		CHK_LDNAME24	varchar(20);
+		CHK_LDNAME25	varchar(20);
+		CHK_LDNAME26	varchar(20);
+		CHK_LDNAME27	varchar(20);
+		CHK_LDNAME28	varchar(20);
+		CHK_LDNAME29	varchar(20);
+		CHK_LDNAME30	varchar(20);
+		CHK_LDNAME31	varchar(20);
+		CHK_LDNAME32	varchar(20);
+		CHK_LDNAME33	varchar(20);
+		CHK_LDNAME34	varchar(20);
+		CHK_LDNAME35	varchar(20);
+		CHK_LDNAME36	varchar(20);
+		CHK_LDNAME37	varchar(20);
+		CHK_LDNAME38	varchar(20);
+		CHK_LDNAME39	varchar(20);
+		CHK_LDNAME40	varchar(20);
+		CHK_LDNAME41	varchar(20);
+		CHK_LDNAME42	varchar(20);
+		CHK_LDNAME43	varchar(20);
+		CHK_LDNAME44	varchar(20);
+		CHK_LDNAME45	varchar(20);
+		CHK_LDNAME46	varchar(20);
+		CHK_LDNAME47	varchar(20);
+		CHK_LDNAME48	varchar(20);
+		CHK_LDNAME49	varchar(20);
+		CHK_LDNAME50	varchar(20);
+	};
+};
+
+primary	{
+	HOSPNUM,MAP_LDNAME;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_ldmap_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ldmap
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   MAP_LDNAME		=   :MAP_LDNAME 
+			ORDER   BY        MAP_LDNAME 
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_ldmap_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ldmap
+		WHERE 	HOSPNUM	= :HOSPNUM
+			AND   MAP_LDNAME		=   :MAP_LDNAME 
+            AND    (LDMAP_CHK_LDNAME1 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME2 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME3 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME4 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME5 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME6 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME7 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME8 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME9 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME10 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME11 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME12 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME13 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME14 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME15 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME16 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME17 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME18 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME19 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME20 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME21 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME22 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME23 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME24 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME25 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME26 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME27 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME28 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME29 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME30 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME31 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME32 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME33 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME34 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME35 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME36 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME37 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME38 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME39 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME40 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME41 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME42 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME43 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME44 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME45 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME46 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME47 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME48 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME49 = :LDMAP.CHK_LDNAME1  OR
+                    LDMAP_CHK_LDNAME50 = :LDMAP.CHK_LDNAME1)
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_ldmap_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ldmap
+		WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY        MAP_GROUPNUM,MAP_EDANUM
+		;
+	};
+};
+
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_ldmap_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ldmap
+		WHERE 	HOSPNUM	= :HOSPNUM
+			ORDER   BY        MAP_LDNAME
+		;
+	};
+};
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_ldmap_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ldmap
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};

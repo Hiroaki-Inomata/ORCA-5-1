@@ -1,0 +1,74 @@
+tbl_pthknrrk {
+	HOSPNUM				number(2,0);
+	PTID				number(10);
+	HKNID				number(10);
+	RENNUM				number(1);
+	KAKUNINYMD			char(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,HKNID,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_pthknrrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pthknrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   HKNID        =   :HKNID
+			AND   RENNUM       =   :RENNUM
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_pthknrrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pthknrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   HKNID        =   :HKNID
+			ORDER   BY      RENNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_pthknrrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_pthknrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_pthknrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_pthknrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   HKNID        =   :HKNID
+		;
+	};
+};
+

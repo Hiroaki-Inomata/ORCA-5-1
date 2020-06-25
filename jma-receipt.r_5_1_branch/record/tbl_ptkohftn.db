@@ -1,0 +1,137 @@
+tbl_ptkohftn {
+	HOSPNUM			number(2,0);
+	PTID			number(10);
+	KOHID			number(10);
+	RENNUM			number(3);
+	TEKSTYMD		char(8);
+	TEKEDYMD		char(8);
+	KOHNUM			char(3);
+	PAYKBN			char(2);
+	GAIJGNGAK		number(7);
+	NYUJGNGAK		number(7);
+	TERMID			varchar(16);
+	OPID			varchar(16);
+	CREYMD			char(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPPTID 				number(10,0),virtual;
+	UPKOHID				number(10,0),virtual;
+	UPTEKSTYMD			char(8),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,KOHID,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   RENNUM      =   :RENNUM 
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY        KOHNUM,
+		                          TEKSTYMD DESC
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY        KOHNUM,RENNUM DESC
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			ORDER   BY        RENNUM DESC
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			ORDER   BY        TEKSTYMD DESC
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_ptkohftn_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkohftn
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   TEKSTYMD    LIKE :TEKSTYMD
+			ORDER   BY        TEKSTYMD
+		;
+	};
+};
+
+

@@ -1,0 +1,356 @@
+tbl_prtkanri	{
+	HOSPNUM				number(2,0);
+	TBL_KEY			char(8);
+	RENNUM  		number(4);
+	TBL_GROUP		char(14);
+	TBL_UUID 		char(36);
+	SHORI_RENNUM	number(4);
+	GYOUMU_CD               number(3);
+	SHELLID			varchar(20);
+	SRYYM			varchar(06);
+	SKYYMD  		varchar(08);
+	PRIORITY        number(4);
+	PAGE    		number(5);
+	PRTFLG			char(1);
+	TITLE	        varchar(100);
+	PRTNM			varchar(16);
+	API_ID		    varchar(20);
+	TERMID			varchar(32);
+	OPID			varchar(16);
+	CREYMD 			varchar(8);
+#-----> virtual 項目
+	SELLIMIT		number(8),virtual;
+	SELOFFSET		number(8),virtual;
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     RENNUM       =   :RENNUM
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    ORDER BY  RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND    TBL_KEY    =   :TBL_KEY
+                    ORDER BY  TBL_GROUP desc,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key4_csr CURSOR FOR
+		SELECT distinct hospnum,tbl_key,tbl_group,priority,sryym
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        <>  '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	key5		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key5_csr CURSOR FOR
+		SELECT distinct hospnum,tbl_key,tbl_group,priority,sryym
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        =  '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	del11	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+		;
+	};
+};
+
+path	del12	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        <>  '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	del13	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   'RECEPT2'
+                    AND     SRYYM        =   '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_prtkanri_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+ 		;
+	};
+};
+path	key6		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+		    AND	     CREYMD	=   :CREYMD
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key7		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+		    AND	     CREYMD	=   :CREYMD
+		    AND	     GYOUMU_CD  =   :GYOUMU_CD
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+
+path	key8		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+                    AND	     CREYMD	=   :CREYMD
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key9		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+		    AND	     CREYMD	=   :CREYMD
+		    AND	     GYOUMU_CD  =   :GYOUMU_CD
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	del14	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY      =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	del15	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      <>   'DAILY'
+                    AND     TBL_KEY      <>   'ONLINE'
+                    AND     TBL_KEY      <>   'RECEPTX'
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+
+path	del16	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND    ( TBL_KEY     =   'DAILY'   OR
+                            TBL_KEY      =   'ONLINE'     ) 
+                    AND     substring(TBL_GROUP,1,6) < :SRYYM
+		;
+	};
+};
+
+path	key10		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM		=	:HOSPNUM
+                    AND	TBL_KEY		=	:TBL_KEY
+                    AND	TBL_GROUP	=	:TBL_GROUP
+                    ORDER BY  RENNUM desc,SHORI_RENNUM desc
+		;
+	};
+};
+
+path	key11		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+                    AND	     CREYMD	=   :CREYMD
+					AND	     SHORI_RENNUM <> 99
+					AND      PRTNM        <> 'DUMMY'
+					AND      PRTFLG        <> 'D'
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key12		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+	    	    WHERE 	HOSPNUM	= :HOSPNUM
+                    AND      TBL_KEY    =   :TBL_KEY
+		    AND	     CREYMD	=   :CREYMD
+		    AND	     GYOUMU_CD  =   :GYOUMU_CD
+					AND	     SHORI_RENNUM <> 99
+					AND      PRTNM        <> 'DUMMY'
+					AND      PRTFLG        <> 'D'
+                    ORDER BY  TBL_GROUP desc,TBL_UUID,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key13		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND    TBL_KEY    =   :TBL_KEY
+					AND	     SHORI_RENNUM <> 99
+					AND      PRTNM        <> 'DUMMY'
+					AND      PRTFLG        <> 'D'
+                    ORDER BY  TBL_GROUP desc,RENNUM,SHORI_RENNUM
+		;
+	};
+};
+
+path	key14		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND	TBL_KEY		=	:TBL_KEY
+                    AND	RENNUM		=	:RENNUM
+                    AND	TBL_GROUP	=	:TBL_GROUP
+                    AND	TBL_UUID	=	:TBL_UUID
+                    ORDER BY  SHORI_RENNUM
+		;
+	};
+};
+
+path	del17	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY        =   :TBL_KEY
+                    AND     SRYYM        =   '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	key15		{ 	
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key15_csr CURSOR FOR
+		SELECT distinct hospnum,tbl_key,tbl_group,priority,sryym
+		FROM tbl_prtkanri
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY        =   :TBL_KEY
+                    AND     SRYYM        =   '000000'
+                    AND     TBL_GROUP    <>  :TBL_GROUP
+                    AND     PRIORITY     =   :PRIORITY
+		;
+	};
+};
+
+path	key16		{
+	DBSELECT	{
+		DECLARE tbl_prtkanri_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_prtkanri
+		WHERE	HOSPNUM	=	:HOSPNUM
+		AND	TBL_KEY	=	:TBL_KEY
+		AND	CREYMD	<	:CREYMD
+		ORDER	BY 	RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM
+		;
+	};
+};
+

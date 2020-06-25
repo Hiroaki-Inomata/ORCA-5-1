@@ -1,0 +1,71 @@
+tbl_yykexample {
+	HOSPNUM				number(2,0);
+	RENNUM     	  		number(3);
+	HYOKBN     	  		number(1);
+	COMMENT        			varchar(100);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_yykexample_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykexample
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key1		{ 	
+	DBSELECT	{
+		DECLARE tbl_yykexample_key1_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykexample
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        RENNUM
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_yykexample_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykexample
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY        RENNUM   DESC
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_yykexample_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykexample
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     HYOKBN     <>  0
+			ORDER   BY        HYOKBN,
+                                          RENNUM
+		;
+	};
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_yykexample_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_yykexample
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+

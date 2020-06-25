@@ -1,0 +1,141 @@
+xml_system01_dailyv2res {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+        system01_dailyres {
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(2);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+#--基準日
+	Base_Date		varchar(10);
+#--患者登録関係
+	Patient_Information	{
+#--     二重登録疑いチェック区分
+		Duplication_Class	varchar(1);
+		Duplication_Class_Name	varchar(40);
+#--     郵便番号自動記載区分
+		ZipCode_Auto_Class		varchar(1);
+		ZipCode_Auto_Class_Name		varchar(40);
+#--     都道府県名記載区分
+		P_WholeName_Auto_Class		varchar(1);
+		P_WholeName_Auto_Class_Name	varchar(40);
+	};
+#--診療行為登録関係
+	Medical_Information	{
+	    Medical_Set01_Information	{
+#--     処方区分
+		Outside_Class			varchar(1);
+		Outside_Class_Name		varchar(40);
+#--     消費税端数設定区分
+		Tax_Rounding_Class		varchar(1);
+		Tax_Rounding_Class_Name		varchar(40);
+#--     自費コード端数設定区分
+		Oe_Rounding_Class		varchar(1);
+		Oe_Rounding_Class_Name		varchar(40);
+#--     皮下筋肉注射料変換選択
+		Medical_Change_Class		varchar(1);
+		Medical_Change_Class_Name	varchar(40);
+#--     投薬診療区分変換選択
+		Class_Change_Class		varchar(1);
+		Class_Change_Class_Name		varchar(40);
+#--     セット展開区分
+		Set_Mode_Class		varchar(1);
+		Set_Mode_Class_Name	varchar(40);
+		};
+	    Medical_Set02_Information	{
+#--     診察料自動発生
+		Medical_Auto_Class		varchar(1);
+		Medical_Auto_Class_Name		varchar(40);
+#--     育児栄養指導料自動算定
+		Child_Med_Auto_Class		varchar(1);
+		Child_Med_Auto_Class_Name	varchar(40);
+#--     育児栄養指導料自動算定科
+		Child_Med_Department_Code	varchar(2);
+		Child_Med_Department_Code_Name	varchar(40);
+#--     病名疾患区分からの自動発生
+		Disease_Med_Auto_Class		varchar(1);
+		Disease_Med_Auto_Class_Name	varchar(40);
+#--     療養担当手当（北海道）
+		MeTeratment_Auto_Class		varchar(1);
+		MeTeratment_Auto_Class_Name	varchar(40);
+#--     外来管理加算チェック
+		Outpatient_Med_Chk_Class	varchar(1);
+		Outpatient_Med_Chk_Class_Name	varchar(40);
+#--     時間外加算（小児科特例）
+		Child_Time_Class		varchar(1);
+		Child_Time_Class_Name		varchar(40);
+#--     最終来院日からの期間
+		LastVisit_Term			varchar(2);
+#--     前回保険組合せ相違チェック
+		Combination_Number_Chk_Class		varchar(1);
+		Combination_Number_Chk_Class_Name	varchar(40);
+		};
+	    Medical_Set03_Information	{
+#--     薬剤投与量チェック
+		Dosage_Chk_Class		varchar(1);
+		Dosage_Chk_Class_Name		varchar(40);
+#--     投薬３０日超チェック
+		Dosage_30Over_Chk_Class		varchar(1);
+		Dosage_30Over_Chk_Class_Name	varchar(40);
+#--     薬剤情報提供料チェック
+		DrugInf_Chk_Class		varchar(1);
+		DrugInf_Chk_Class_Name		varchar(40);
+#--     手帳加算確認チェック
+		Medication_Notebook_Chk_Class		varchar(1);
+		Medication_Notebook_Chk_Class_Name	varchar(40);
+#--     時間外緊急院内チェック
+		Time_Chk_Class			varchar(1);
+		Time_Chk_Class_Name		varchar(40);
+#--1038
+#--     精神療法２０未満加算区分
+		Psy20_Addition_Auto_Class	varchar(1);
+		Psy20_Addition_Auto_Class_Name	varchar(40);
+#--     心身療法２０未満加算区分
+		Mind20_Addition_Auto_Class	varchar(1);
+		Mind20_Addition_Auto_Class_Name	varchar(40);
+#--     残量廃棄区分
+		Rem_Addition_Auto_Class		varchar(1);
+		Rem_Addition_Auto_Class_Name	varchar(40);
+#--1007
+#--     調剤技術基本料区分
+		Dispensing_Auto_Class		varchar(1);
+		Dispensing_Auto_Class_Name	varchar(40);
+#--     薬剤情報提供料（一般）
+		DrugInf_Auto_Class		varchar(1);
+		DrugInf_Auto_Class_Name		varchar(40);
+#--     薬剤情報提供料（老人）
+		Om_DrugInf_Auto_Class		varchar(1);
+		Om_DrugInf_Auto_Class_Name	varchar(40);
+#--     特定薬剤治療管理料有無
+		Specific_Drug_Auto_Class	varchar(1);
+		Specific_Drug_Auto_Class_Name	varchar(40);
+#--     訂正時の自動発生（外来）
+		Outpatient_Modify_Auto_Class		varchar(1);
+		Outpatient_Modify_Auto_Class_Name	varchar(40);
+#--     訂正時の自動発生（特定疾患処方管理）
+		Modify_Disease_Med_Auto_Class		varchar(1);
+		Modify_Disease_Med_Auto_Class_Name	varchar(40);
+#--     検体検査加算自動発生
+		Laboratory_text_Med_Auto_Class		varchar(1);
+		Laboratory_text_Med_Auto_Class_Name	varchar(40);
+#--     画像診断管理加算１（写真診断）自動発生
+		Image_Addition_Auto_Class	varchar(1);
+		Image_Addition_Auto_Class_Name	varchar(40);
+		};
+	    Medical_Set04_Information	{
+#--     入金の取扱い区分
+		Ic_Request_Code		varchar(1);
+		Ic_Request_Code_Name	varchar(40);
+#--     入金・返金額設定区分
+		Ic_Re_Code		varchar(1);
+		Ic_Re_Code_Name		varchar(40);
+#--     訂正の請求書金額
+		Modify_Invoice_Receipt_Code	varchar(1);
+		Modify_Invoice_Receipt_Code_Name	varchar(40);
+		};
+	};
+	};
+};

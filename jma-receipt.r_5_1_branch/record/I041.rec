@@ -1,0 +1,54 @@
+I041 {
+  fixed4 {
+    SRYKA01 {
+      textdata varchar(16);
+    };
+    SRYKA02 {
+      textdata varchar(16);
+    };
+    SRYKA03 {
+      textdata varchar(16);
+    };
+    SRYKA04 {
+      textdata varchar(16);
+    };
+    SRYKA05 {
+      textdata varchar(16);
+    };
+    DRCD01_COMB {
+      DRCD01 {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    DRCD02_COMB {
+      DRCD02 {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    DRCD03_COMB {
+      DRCD03 {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    DRCD04_COMB {
+      DRCD04 {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+    DRCD05_COMB {
+      DRCD05 {
+        textdata varchar(29);
+      };
+      count int;
+        item varchar(29)[100];
+    };
+  };
+};

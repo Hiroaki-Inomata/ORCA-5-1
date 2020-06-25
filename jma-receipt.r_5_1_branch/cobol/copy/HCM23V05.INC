@@ -1,0 +1,87 @@
+        01  HCM23V05.
+            02  HCM23V05-HAKKOUYY   PIC X(2).
+            02  HCM23V05-HAKKOUMM   PIC X(2).
+            02  HCM23V05-PTNUM  PIC X(20).
+            02  HCM23V05-NAME   PIC X(50).
+            02  HCM23V05-TANJYOG
+                    PIC X(2)    OCCURS  4 TIMES.
+            02  HCM23V05-TANJYOYY   PIC X(2).
+            02  HCM23V05-SEX
+                    PIC X(2)    OCCURS  2 TIMES.
+            02  HCM23V05-NENREI PIC X(3).
+            02  HCM23V05-SYOBYO
+                    PIC X(50)   OCCURS  3 TIMES.
+            02  HCM23V05-JYUSYOUBI-G.
+              03  HCM23V05-JYUSYOUBIYY    PIC X(2).
+              03  HCM23V05-JYUSYOUBIMM    PIC X(2).
+              03  HCM23V05-JYUSYOUBIDD    PIC X(2).
+            02  HCM23V05-SYOSHINBI-G.
+              03  HCM23V05-SYOSHINBIYY    PIC X(2).
+              03  HCM23V05-SYOSHINBIMM    PIC X(2).
+              03  HCM23V05-SYOSHINBIDD    PIC X(2).
+            02  HCM23V05-STR-G.
+              03  HCM23V05-STRYY  PIC X(2).
+              03  HCM23V05-STRMM  PIC X(2).
+              03  HCM23V05-STRDD  PIC X(2).
+            02  HCM23V05-END-G.
+              03  HCM23V05-ENDYY  PIC X(2).
+              03  HCM23V05-ENDMM  PIC X(2).
+              03  HCM23V05-ENDDD  PIC X(2).
+            02  HCM23V05-JITSUNISSU PIC X(3).
+            02  HCM23V05-TENKI
+                    PIC X(2)    OCCURS  5 TIMES.
+            02  HCM23V05-SYOSHIN
+                    PIC X(2)    OCCURS  4 TIMES.
+            02  HCM23V05-KHNTEN
+                    PIC X(7)    OCCURS  32 TIMES.
+            02  HCM23V05-KAISU
+                    PIC X(3)    OCCURS  32 TIMES.
+            02  HCM23V05-KOUTEN
+                    PIC X(7)    OCCURS  33 TIMES.
+            02  HCM23V05-KOUTENG    PIC X(7).
+            02  HCM23V05-YKZTENSU
+                    PIC X(7)    OCCURS  33 TIMES.
+            02  HCM23V05-YKZTENSUG  PIC X(7).
+            02  HCM23V05-SAISINKAISU    PIC X(2).
+            02  HCM23V05-SHIDOKAISU PIC X(2).
+            02  HCM23V05-KINGAKU
+                    PIC X(7)    OCCURS  6 TIMES.
+            02  HCM23V05-TEKIYO1
+                    PIC X(24)   OCCURS  6 TIMES.
+            02  HCM23V05-SHINDANSYOSUU  PIC X(3).
+            02  HCM23V05-MEISAISYOSUU   PIC X(3).
+            02  HCM23V05-SHINDANSYOMONEY    PIC X(7).
+            02  HCM23V05-MEISAISYOMONEY PIC X(7).
+            02  HCM23V05-SRYKBN
+                    PIC X(2)    OCCURS  26 TIMES.
+            02  HCM23V05-TEKIYO2
+                    PIC X(52)   OCCURS  26 TIMES.
+            02  HCM23V05-SEIKYU-SEISU
+                    PIC X(1)    OCCURS  2 TIMES.
+            02  HCM23V05-SEIKYU
+                    PIC X(2)    OCCURS  2 TIMES.
+            02  HCM23V05-SEIKYUGAKU
+                    PIC X(9)    OCCURS  5 TIMES.
+            02  HCM23V05-TSUIN-TBL.
+              03  HCM23V05-TSUIN-G        OCCURS  2 TIMES.
+                04  HCM23V05-TSUIN
+                        PIC X(2)    OCCURS  31 TIMES.
+              03  HCM23V05-TSUINMM
+                      PIC X(2)    OCCURS  2 TIMES.
+              03  HCM23V05-TSUINSUU
+                      PIC X(2)    OCCURS  2 TIMES.
+            02  HCM23V05-SEIKYUGAKUTOTAL    PIC X(9).
+            02  HCM23V05-SEIKYU-G.
+              03  HCM23V05-SEIKYUYY   PIC X(2).
+              03  HCM23V05-SEIKYUMM   PIC X(2).
+              03  HCM23V05-SEIKYUDD   PIC X(2).
+            02  HCM23V05-HOSPJYUSYO PIC X(100).
+            02  HCM23V05-HOSPNAME   PIC X(80).
+            02  HCM23V05-ISYA   PIC X(40).
+            02  HCM23V05-TEL    PIC X(15).
+            02  HCM23V05-BYOSYOSU   PIC X(4).
+            02  HCM23V05-KANANAME   PIC X(50).
+            02  HCM23V05-RENNUM PIC X(7).
+            02  HCM23V05-HOKENNAME  PIC X(60).
+            02  HCM23V05-PAGE   PIC X(5).
+            02  HCM23V05-LABEL  PIC X(14).

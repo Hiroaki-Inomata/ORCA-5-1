@@ -1,0 +1,202 @@
+#! /bin/bash
+
+####################################################################
+# jma-receiptサーバーをソースの位置から起動する
+# 開発用 monitor
+# monitor.sh [LD名]
+#
+# 例)
+# $ cd jma-receipt
+# $ tools/monitor.sh orca21
+####################################################################
+
+# ディレクトリの移動
+cd `dirname $0`/..
+
+# 環境変数の取り込み
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    echo "環境設定ファイル $JMARECEIPT_ENV が読めません"
+    exit 1
+fi
+
+. $JMARECEIPT_ENV
+
+# ミドルウェア
+# panda or ginbee (default panda)
+#export "__MCP_MIDDLEWARE_NAME=panda"
+#export MCP_TEMPDIR_ROOT=/tmp/panda_root
+#export MON_DIRECTORY_PATH="$ORCA_DIR"/lddef/directory
+
+# glserver を起動するか？
+Start_GLSERVER=true
+
+# dbredirector を起動するか？
+Start_dbredirector=false
+
+# jma-receipt の位置
+#ORCA_DIR=prefix
+LDDEF="$ORCA_DIR"/lddef
+
+# 起動する LDのリスト(引数により上書きされる)
+LD=`ls $LDDEF/*.ld|xargs -I{} basename {} .ld`
+
+# 常に起動するLD
+# このLDは引数に関係なく起動される
+ALWAYS_LD="session orca00"
+
+# トレースするLD
+TRACE_LD="orca11"
+
+# soチェック
+# 起動する時にコンパイル済かチェックする *soファイル
+COB_SO="orca00/ORCGM00.so"
+
+# MCPSUB lib
+COB_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/lib/panda
+# site-libの取り込み
+COB_LIBRARY_PATH=$COB_LIBRARY_PATH:"$SITELIBDIR"
+
+####################################################################
+
+if test -x /usr/local/bin/monsetup; then
+    PANDA_BIN_DIR=/usr/local/bin
+else
+    PANDA_BIN_DIR=/usr/lib/panda/bin
+fi
+if test -x /usr/local/sbin/aps; then
+    PANDA_SERVER_DIR=/usr/local/sbin
+else
+    PANDA_SERVER_DIR=/usr/lib/panda/sbin
+fi
+APS="$PANDA_SERVER_DIR"/aps
+WFC="$PANDA_SERVER_DIR"/wfc
+LISTEN_WFC_PORT="/tmp/wfc.term"
+GLSERVER="$PANDA_SERVER_DIR"/glserver
+DBREDIRECTOR="$PANDA_SERVER_DIR"/dbredirector
+
+DIRECTORY="$ORCA_DIR"/lddef/directory
+SCREEN="$ORCA_DIR"/screen
+RECORD="$ORCA_DIR"/record
+
+if test "x"$1 != "x"; then
+    LD=$@
+fi
+LDLIST=(`echo ${LD} ${ALWAYS_LD};`)
+IFS_BACKUP=$IFS
+IFS=$'\n'
+LDLIST=(`echo "${LDLIST[*]}" | sort|uniq`)
+IFS=$IFS_BACKUP
+####################################################################
+if ! test -d $LDDEF ; then
+    echo "${LDDEF} ディレクトリがありません"
+    exit 1
+fi
+if ! test -f $DIRECTORY; then
+    echo "directory ファイルがありません"
+    exit 1
+fi
+if ! test -d $SCREEN ; then
+    echo "${SCREEN} ディレクトリがありません"
+    exit 1
+fi
+if ! test -f `echo ${SCREEN}/*glade|sed -e "s/ .*//g"` ; then
+    echo "gladeファイルがありません"
+    exit 1
+fi
+if ! test -d $RECORD ; then
+    echo "${RECORD} ディレクトリがありません"
+    exit 1
+fi
+for i in $ALWAYS_LD; do
+    if ! test -d ${ORCA_DIR}/cobol/${i}; then
+        echo "LD(COBOL) ${ORCA_DIR}/cobol/${i} ディレクトリがありません"
+        exit 1
+    fi
+done
+if ! test -f ${ORCA_DIR}/cobol/${COB_SO}; then
+    echo "${ORCA_DIR}/cobol/${COB_SO} がありません"
+    echo "コンパイル前？"
+    exit 1
+fi
+
+####################################################################
+function server_exit() {
+    if test ! -z "$glpid"; then
+	killall glserver
+    fi
+    killall -HUP aps
+    sleep 0.5;
+    killall -HUP wfc
+    if test ! -z "$dbrepid"; then
+	killall -HUP dbredirector
+    fi
+    if test -f $$dbredirector; then
+	rm $$dbredirector
+    fi
+    killall wfc
+    exit 0
+}
+
+####################################################################
+
+if test -x $PANDA_BIN_DIR/monsetup ; then
+    if ! $PANDA_BIN_DIR/monsetup -dir $DIRECTORY ; then
+	echo "monsetup failed"
+	exit 9
+    fi
+fi
+
+for i in "$ORCA_DIR"/cobol/*; do
+    if [ -d $i ] && [ $i != "CVS" ] ; then
+	COB_LIBRARY_PATH=$COB_LIBRARY_PATH:$i
+    fi
+done
+export COB_LIBRARY_PATH
+export JMARECEIPT_ENV="$ORCA_DIR"/etc/jma-receipt.env
+
+trap "server_exit" 2
+
+if test "x"$Start_GLSERVER = "xtrue"; then
+    $GLSERVER -dir $DIRECTORY -api -auth api://localhost/session/session_start -screen $SCREEN -record $RECORD -cache /tmp/cache/ &
+    glpid=$!
+fi
+
+if test "x"$Start_dbredirector = "xtrue"; then
+    $DBREDIRECTOR -dir $DIRECTORY -record $RECORD log|tee $$dbredirector &
+    dbrepid=$!
+    until [ -s $$dbredirector ]
+    do
+	echo "wait..."
+	sleep 1
+    done
+fi
+
+$WFC -dir $DIRECTORY  -base $ORCA_DIR &
+while :
+do
+  if /bin/ss -ax|grep ${LISTEN_WFC_PORT} >/dev/null; then
+    break
+  fi
+  sleep 0.5
+done
+
+for i in ${LDLIST[@]}; do
+  OPT='-nocheck'
+  if [ x$i = x$TRACE_LD ] ; then
+    OPT="${OPT} -timer"
+  fi
+  $APS $OPT -dir $DIRECTORY -record $RECORD -base $ORCA_DIR $i &
+done
+
+while :
+do
+  echo 'Please Type "exit"'
+  read END
+  if [ "$END" == "exit" ]; then
+    server_exit
+    break
+  fi
+done

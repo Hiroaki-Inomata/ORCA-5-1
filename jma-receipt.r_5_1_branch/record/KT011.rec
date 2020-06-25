@@ -1,0 +1,46 @@
+KT011 {
+  fixed10 {
+    SELNUM {
+      textdata varchar(3);
+    };
+    TOUMEI {
+      textdata varchar(100);
+    };
+    KNKMEI {
+      textdata varchar(100);
+    };
+    scrolledwindow3 {
+      hpos int;
+      vpos int;
+      SAYOKIJYO {
+        textdata varchar(2000);
+      };
+    };
+    scrolledwindow2 {
+      hpos int;
+      vpos int;
+      SYOJYOU {
+        textdata varchar(2000);
+      };
+    };
+    scrolledwindow1 {
+      hpos int;
+      vpos int;
+      MEDLIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(40);
+            column3 varchar(40);
+            column4 varchar(9);
+            column5 varchar(7);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+    B12 {
+      state int;
+    };
+  };
+};

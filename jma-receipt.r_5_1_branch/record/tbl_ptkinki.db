@@ -1,0 +1,91 @@
+tbl_ptkinki {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	SRYCD 				char(9);
+	KINKSTYMD			char(8);
+	TOUYOYMD			char(8);
+	TERMID   			varchar(32);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SRYCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_ptkinki_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkinki
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   SRYCD        =   :SRYCD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_ptkinki_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkinki
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY  CREYMD DESC,
+			            UPYMD DESC,
+			            UPHMS DESC
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_ptkinki_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkinki
+			WHERE   HOSPNUM    =   :HOSPNUM
+			ORDER   BY  PTID
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptkinki
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_ptkinki_key3_csr CURSOR FOR
+		SELECT A.*
+		FROM tbl_ptkinki A,tbl_srycdchg B
+			WHERE   A.HOSPNUM    =   :HOSPNUM
+			AND   A.PTID         =   :PTID
+			AND  (A.SRYCD        =   :SRYCD
+			OR   (A.HOSPNUM      =  B.HOSPNUM
+			AND   A.SRYCD        =  B.IPNSRYCD
+			AND   B.RJNSRYCD     =     :SRYCD ))
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_ptkinki_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_ptkinki
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND   SRYCD        =   :SRYCD
+		;
+	};
+};
+

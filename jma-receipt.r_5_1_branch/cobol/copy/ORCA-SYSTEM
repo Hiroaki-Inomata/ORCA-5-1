@@ -1,0 +1,17 @@
+        01  ORCA-SYSTEM.
+            02  ORCA-SYSTEM-ID         PIC X(256).
+            02  ORCA-SYSTEM-USER       PIC X(256).
+            02  ORCA-SYSTEM-HOST       PIC X(256).
+            02  ORCA-SYSTEM-AGENT      PIC X(256).
+            02  ORCA-SYSTEM-WINDOW     PIC X(256).
+            02  ORCA-SYSTEM-WIDGET     PIC X(256).
+            02  ORCA-SYSTEM-EVENT      PIC X(256).
+            02  ORCA-SYSTEM-IN-PROCESS   PIC X(256).
+            02  ORCA-SYSTEM-CREATE-TIME  PIC X(256).
+            02  ORCA-SYSTEM-ACCESS-TIME  PIC X(256).
+            02  ORCA-SYSTEM-PROCESS-TIME PIC X(256).
+            02  ORCA-SYSTEM-TOTAL-PROCESS-TIME   PIC X(256).
+            02  ORCA-SYSTEM-COUNT      PIC X(256).
+            02  ORCA-SYSTEM-POPUP      PIC X(256).
+            02  ORCA-SYSTEM-DIALOG     PIC X(256).
+            02  ORCA-SYSTEM-ABORT      PIC X(256).

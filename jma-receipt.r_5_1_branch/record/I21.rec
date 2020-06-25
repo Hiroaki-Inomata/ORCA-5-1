@@ -1,0 +1,62 @@
+I21 {
+  fixed6 {
+    B04 {
+      state int;
+    };
+    B04S {
+      state int;
+    };
+    B06 {
+      label varchar(8);
+      state int;
+    };
+    B07 {
+      label varchar(8);
+      state int;
+    };
+    B10 {
+      state int;
+    };
+    B11 {
+      state int;
+    };
+    B12 {
+      state int;
+    };
+    pandatimer1 {
+      duration int;
+    };
+    STSRYYMD {
+      textdata varchar(10);
+      state int;
+    };
+    EDSRYYMD {
+      textdata varchar(10);
+      state int;
+    };
+    LBLMSG01 {
+      textdata varchar(100);
+      style varchar(20);
+    };
+    scrolledwindow1 {
+      BTULIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(6);
+            column2 varchar(10);
+            column3 varchar(10);
+            column4 varchar(10);
+            column5 varchar(10);
+            column6 varchar(10);
+            column7 varchar(10);
+            column8 varchar(10);
+            column9 varchar(10);
+            column10 varchar(10);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+  };
+};

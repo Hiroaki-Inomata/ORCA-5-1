@@ -1,0 +1,63 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+ORCASCRIPT=$ORCA_DIR/scripts/claim/rb
+#-------------------------------------------#
+#        $1 KBN        X(01)
+#        $2 PTID       9(10)
+#        $3 SRYKA      X(02)      
+#        $4 DATE       X(08) 
+#        $5 COMBNUM    X(04) 
+#        $6 HOSPID     X(24)
+#        $7 IP-ADDRESS X(05)
+#        $8 PORT       X(05)
+#        $9 DRCD       X(05)
+#        $10 DENPUNUM  X(07)
+#        $11 MODE      X(02)
+#-------------------------------------------#
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCL0020 -parameter $1,$2,$3,$4,$5,$6,$9,${10},${11},END > /tmp/L0020.log 
+#-------------------------------------------#
+# Add Start (2001/08/27)
+#-------------------------------------------#
+# Make XML File Script Execute
+#   orca_layout_front.def - Layout Define File
+#   claim$2.txt           - Input Sequential File
+#   orca_base_front.xml   - Template XML File
+#   orca_send_front.xml   - Output XML File
+echo `date` 
+  cd $ORCASCRIPT
+     ./orca_make_xml.rb ../def/orca_layout_accounting.def /var/tmp/claim${6}$2.txt ../template/orca_base_accounting.xml >/var/tmp/claim_send_accounting${6}$2.xml
+echo `date`
+#-------------------------------------------#
+# Add End
+#-------------------------------------------#
+
+#-------------------------------------------#
+# Add Start (2001/10/29)
+#-------------------------------------------#
+if [ $1 = "1" ]
+  then
+    # --- to EUS  ---
+    ./clm_snd.rb $7 $8  /var/tmp/claim_send_accounting${6}$2.xml euc  
+elif [ $1 = "2" ]
+  then
+    # --- to SJIS ---
+    ./clm_snd.rb $7 $8  /var/tmp/claim_send_accounting${6}$2.xml sjis 
+elif [ $1 = "3" ]
+  then
+    # --- to UTF-8   ---
+    ./clm_snd.rb $7 $8  /var/tmp/claim_send_accounting${6}$2.xml u8 
+fi
+	rm /var/tmp/claim*${6}$2*
+#-------------------------------------------#
+# Add End
+#-------------------------------------------#
+        exit 

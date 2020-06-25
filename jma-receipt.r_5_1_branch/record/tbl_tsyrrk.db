@@ -1,0 +1,114 @@
+tbl_tsyrrk {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	NINSTYMD			char(8);
+	NINEDYMD			char(8);
+	SKJNINSTYMD			char(8);
+	SKJGNSTYMD			char(8);
+	HKNTEKKBN			char(1);
+	KYOUKAISOUKBN			char(1);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPPTID 				number(10,0),virtual;
+	UPNINSTYMD			char(8),virtual;
+};
+
+primary	{
+	HOSPNUM;
+	PTID;
+	NINSTYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_tsyrrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tsyrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NINSTYMD    =   :NINSTYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_tsyrrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tsyrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_tsyrrk_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tsyrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY        NINSTYMD    DESC
+		;
+	};
+};
+path	del11 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_tsyrrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_tsyrrk 
+				SET	
+#					:*
+                   HOSPNUM              = :HOSPNUM,
+                   PTID                = :PTID,
+                   NINSTYMD            = :NINSTYMD,
+                   NINEDYMD            = :NINEDYMD,
+                   SKJNINSTYMD         = :SKJNINSTYMD,
+                   SKJGNSTYMD          = :SKJGNSTYMD,
+                   HKNTEKKBN           = :HKNTEKKBN,
+                   KYOUKAISOUKBN       = :KYOUKAISOUKBN,
+                   TERMID              = :TERMID,
+                   OPID                = :OPID,
+                   CREYMD              = :CREYMD,
+                   UPYMD               = :UPYMD,
+                   UPHMS               = :UPHMS
+               WHERE   HOSPNUM      =   :UPHOSPNUM
+                 AND   PTID        =   :UPPTID
+                 AND   NINSTYMD    =   :UPNINSTYMD
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_tsyrrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tsyrrk
+               WHERE   HOSPNUM      =   :UPHOSPNUM
+		;
+	};
+};
+
+path	all2 	{
+	DBSELECT	{
+		DECLARE tbl_tsyrrk_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_tsyrrk
+               WHERE   HOSPNUM      =   :HOSPNUM
+		;
+	};
+};

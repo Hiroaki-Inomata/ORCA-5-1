@@ -1,0 +1,136 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    公害レセプト作成（入院）
+#        $1  SRYYM TERID SYSYMD
+#        $2  SYOKBN
+#            1:一括作成  2:個別作成
+#        $3  RECEKBN
+#            6:公害
+#        $4  エラーファイル名 
+#        $5  JOBID 
+#        $6  SHELLID
+#        $8  処理年月
+#        $9  作成年月日
+#        $10 作成時間
+#        $16 HOSPNUM 
+#        $18 レセプト作成区分
+#            1:提出用レセ、2:点検用レセ、3:点検用レセ（０点公費記載）
+#            4:点検用レセ（包括算定分記載）、5:点検用レセ（０点公費・包括算定分記載）
+#        $19 請求データ削除区分
+#            0:削除しない、2:削除する
+#-------------------------------------------#
+
+        echo "window  ${MCP_WINDOW}"
+
+        if  [ "${MCP_WINDOW}" == "receiptmakev3" ]; then
+            mkdir -p  ${MCP_TEMPDIR}
+        fi
+
+cleanup(){
+##      パラメータファイル削除
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+##      MCP_WINDOW がAPI のとき、一時ディレクトリを削除
+        if  [ "${MCP_WINDOW}" == "receiptmakev3" ]; then
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBDELTEMPDIR
+        fi
+}
+trap cleanup EXIT
+
+        if [ ${2} -eq  '1' ]; then
+           LOG_FILE="/var/log/jma-receipt/${16}recept15a.log"
+        else
+           LOG_FILE="/var/log/jma-receipt/${16}recept15b.log"
+        fi
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+        echo $(basename ${LOG_FILE})
+
+        echo "arg1  = [" ${1} "]"  
+        echo "arg2  = [" ${2} "]"  
+        echo "arg3  = [" ${3} "]"  
+        echo "arg4  = [" ${4} "]"  
+        echo "arg5  = [" ${5} "]"  
+        echo "arg6  = [" ${6} "]"  
+        echo "arg8  = [" ${8} "]"  
+        echo "arg9  = [" ${9} "]"  
+        echo "arg10 = [" ${10} "]" 
+        echo "arg16 = [" ${16} "]" 
+        echo "arg18 = [" ${18} "]" 
+        echo "arg19 = [" ${19} "]" 
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${4}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${4}
+        
+        rm  -f ${MCP_TEMPDIR}/${16}00RECE7*
+
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0600 -parameter $1$2$3$5$6,${18},${16},${4} 
+        
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1200 -parameter $1$2$3$5$6,${18},${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1210 -parameter $1$5$6,${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1220 -parameter $1$5$6,${18},${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1230 -parameter $1$5$6,${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1240 -parameter $1$5$6,${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1250 -parameter $1$5$6,${16},${4} 
+        fi
+ 
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1260 -parameter $1$5$6,${18},${16},${4} 
+        fi
+
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else 
+            $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR1270 -parameter $9${10}$1$2$3$8$5$6,${18},${19},${16},${4} 
+        fi
+        
+        if  [ -e ${MCP_TEMPDIR}/${4} ]; then
+            exit 
+        else
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$5$6,${16} 
+        
+            rm  -f ${MCP_TEMPDIR}/${16}00RECE7*
+	fi
+	
+        exit 

@@ -1,0 +1,30 @@
+view_Q001 {
+	HOSPNUM					number(2,0);
+	PTID						number(10,0);
+	HKNCOMBINUM			number(4,0);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	SRYYMD					char(8);
+	HKNID						number(10);
+	HKNNUM					char(3);
+	HKNJANUM				char(8);
+	HONKZKKBN				char(1);
+	KIGO						varchar(80);
+	NUM							varchar(80);
+	KOHID						number(10);
+	KOHNUM					char(3);
+	PAYKBN					char(2);
+	FTNJANUM				char(8);
+	JKYSNUM				        char(20);
+	tekstymd				char(08);
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE view_Q001_all_csr CURSOR FOR
+		SELECT *
+		FROM view_Q001
+			WHERE   HOSPNUM      =   :HOSPNUM
+ 		;
+	};
+};

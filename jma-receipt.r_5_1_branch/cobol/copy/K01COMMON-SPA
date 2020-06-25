@@ -1,0 +1,789 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ************************************************************
+      *    診療行為 共通ＳＰＡ     (SPA-WORK の内容  最大RL=1555)
+      *                                                   =18930)
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *  01.00.01    MCC−多々納  01/06/30  当月累計点数の追加
+      *  01.00.02    MCC−多々納  01/09/12  診療科一覧の追加(RL=549)
+      *  01.00.02    MCC−多々納  01/09/12  診療科一覧の追加(RL=559)
+      *  01.00.03    MCC-多々納   02/04/09  労災用追加
+      *  01.00.04    NACL-多々納  02/09/02  併用算定エラーメッセージ
+      *  01.00.05    NACL-多々納  02/08/26  在宅末期・老人区分追加
+      *  01.00.06    NACL-多々納  03/02/19  療養担当手当追加
+      *  01.00.07    NACL-多々納  03/03/14  特定薬剤治療管理料追加
+      *  01.00.08    NACL-多々納  05/09/14  患者の入金方法追加
+      *  04.01.00    NACL-多々納  07/12/14  病名疾患区分反映区分追加他
+      *  04.02.00    NACL-多々納  08/03/XX  Ｈ２０．４改正
+      *  04.03.00    NACL-多々納  08/07/XX  最大RL=19280 へ変更
+      *  04.04.00    NACL-多々納  08/12/XX  入院料包括対応
+      *  04.07.00    NACL-多々納  12/01/25  入力スクロール背景色
+      *  04.07.00    NACL-多々納  14/03/XX  Ｈ２６年４月改正対応
+      *  04.08.00    NACL-多々納  16/03/XX  Ｈ２８年４月改正対応
+      *  04.08.00    NACL-多々納  16/08/XX  相互作用チェック区分対応
+      ************************************************************
+      *
+       01  SPA-K01KYOUTU.
+      *初期設定（システム管理）
+           03  SPA-K02SYS-AREA.
+      *前回処方表示フラグ
+               05  SPA-ZENSYOHOFLG         PIC  X(01).
+      *院外処方せん発行フラグ
+               05  SPA-SYOHOPRTFLG         PIC  9(01).
+      *処方区分
+               05  SPA-SYOHOKBN            PIC X(01).
+      *請求書発行フラグ（システム管理）
+               05  SPA-SKYPRTFLG-SYS       PIC X(01).
+      *請求書発行フラグ
+               05  SPA-SKYPRTFLG           PIC X(01).
+      *診療費明細書発行フラグ
+               05  SPA-MEIPRTFLG           PIC X(01).
+      *相互作用チェック期間
+               05  SPA-INTERACT-KIKAN      PIC 9(02).
+      *H28.8
+      *相互作用チェック区分
+               05  SPA-INTERACT-CHKKBN     PIC X(01).
+      *外来管理加算チェック
+               05  SPA-GAIKANRIKBN-CHK     PIC X(01).
+      *分散入力フラグ
+               05  SPA-BUNSAN              PIC  X(01).
+      *薬剤情報発行フラグ
+               05  SPA-YAKJYOPRTFLG        PIC  9(01).
+      *お薬手帳発行フラグ
+               05  SPA-OKUSURIPRTFLG       PIC  9(01).
+      *予約票発行フラグ
+               05  SPA-YYKHYOPRTFLG       PIC  9(01).
+      *小児科外来診療科
+               05  SPA-SYONIKA             PIC  9(01).
+      *老人慢性疾患外来総合診療科
+               05  SPA-ROUMANSEI           PIC  9(01).
+      *時間外特例医療機関
+               05  SPA-JIKANTOKU           PIC  9(01).
+      *電子化加算
+               05  SPA-DENSIKA             PIC  9(01).
+      *夜間・早朝加算
+               05  SPA-YAKANKBN            PIC  9(01).
+      *地域医療貢献加算
+               05  SPA-CHIIKKBN            PIC  9(01).
+      *明細書発行体制等加算
+               05  SPA-MEISAKBN            PIC  9(01).
+      *H26.4
+      *地域包括診療加算
+               05  SPA-CHKHTKKSN           PIC  9(01).
+      *H28.4
+      *認知症地域包括診療加算（施設基準）
+               05  SPA-NNCHIHKJN           PIC  9(01).
+      *小児かかりつけ（施設基準）
+               05  SPA-SYOUNIKJN           PIC  9(01).
+      *在宅療養加算（施設基準）
+               05  SPA-ZATAKUKJN           PIC  9(01).
+      *H30.4
+      *        機能強化加算（施設基準）
+               05  SPA-KYOUKAKSN           PIC  9(01).
+      *
+      *病院種別
+               05  SPA-NAI-HOSPSBT         PIC 9(01).
+      *病床数
+               05  SPA-NAI-BEDSU           PIC 9(04).
+      *病床数（一般）
+               05  SPA-NAI-BEDSUIPN        PIC 9(04).
+      *
+      *調剤技術基本料有無
+               05  SPA-CHOKI-FLG           PIC  9(01).
+      *薬剤情報提供料有無(一般）
+               05  SPA-YAKJYO-1            PIC  9(01).
+      *薬剤情報提供料有無(老人１）
+               05  SPA-YAKJYO-2            PIC  9(01).
+      *薬剤情報提供料有無(老人２）
+               05  SPA-YAKJYO-3            PIC  9(01).
+      *療養担当手当（北海道）
+               05  SPA-RYOYOU-FLG          PIC  X(01).
+      *特定薬剤治療管理料有無
+               05  SPA-TOKUTEI-FLG         PIC  X(01).
+      *
+      *外来カーソル移動
+               05  SPA-GAI-CURSOR-SET      PIC  X(01).
+      *育児栄養加算自動算定
+               05  SPA-IKUJIEIYO-FLG       PIC X(01).
+      *育児栄養加算自動算定科
+               05  SPA-IKUJIEIYO-SRYKA     PIC X(02).
+      *入院初診料自動発生
+               05  SPA-NYU-SYOSIN          PIC X(02).
+      *入院調剤技術基本料チェック
+               05  SPA-CHOKICHK-FLG        PIC X(01).
+               05  SPA-CHOKI-ARI           PIC X(01).
+      *時間外加算特例乳幼児
+               05  SPA-JIKANTOKU-NYU       PIC X(01).
+      *画像診断管理加算１（写真診断）
+               05  SPA-GAZOUKSN1           PIC X(01).
+      *最終受診日から初診判定までの期間
+               05  SPA-LAST-KIKAN          PIC 9(02).
+      *時間外チェック除外時間
+               05  SPA-JIKANTOKU-CHK       PIC X(01).
+               05  SPA-JIKANCHK-TIME-G.
+                   07  SPA-JIKANCHK-TIME   OCCURS  2.
+                       09  SPA-JIKANCHK-STR        PIC 9(04).
+                       09  SPA-JIKANCHK-END        PIC 9(04).
+               05  SPA-JIKANCHK-ERR        PIC X(01).
+      *複数科まとめ集計
+               05  SPA-KAGRPFLG            PIC X(01).
+      *!
+      *ＤＯ初期表示
+               05  SPA-DOSRYKBNFLG         PIC  X(02).
+      *中途表示一覧
+               05  SPA-WKSRYHYOFLG         PIC  X(01).
+      *!
+      *同日再診・訂正選択
+               05  SPA-TEISEIFLG           PIC  X(01).
+      *皮下筋肉注射料変換選択
+               05  SPA-CHG310FLG           PIC  X(01).
+      *ＣＬＡＩＭ展開選択
+               05  SPA-SINSATU-FLG         PIC  X(01).
+      *!
+      *後発医薬品変更可
+               05  SPA-KOUHATUKA           PIC  X(01).
+      *患者取消確認チェック
+               05  SPA-CLEARCHK-FLG        PIC X(01).
+      *薬剤情報提供料チェック
+               05  SPA-YAKJYOCHK-FLG       PIC X(01).
+      *中途終了展開時の自動発生
+               05  SPA-CHUTOTENKAI-FLG     PIC X(01).
+      *訂正時の自動発生
+               05  SPA-TEISEI-FLG          PIC X(01).
+      *訂正時の自動発生（特定疾患処方管理）
+               05  SPA-TEISEITOKU-FLG      PIC X(01).
+      *病名表示区分
+               05  SPA-BYOHYOKBN-FLG       PIC X(01).
+      *検体検査加算自動発生
+               05  SPA-KENSAAUTO-FLG       PIC X(01).
+      *自立支援負担変更区分
+               05  SPA-FTNHEN-KBN          PIC X(01).
+      *訂正時の自動発生（処方せん料）（未使用）
+               05  SPA-TEISEISYO-FLG       PIC X(01).
+      *包括診療行為チェック
+               05  SPA-HKTSANTEI-FLG       PIC 9(01).
+      *包括診療行為チェック（入院料）
+               05  SPA-HKTNYUIN-FLG        PIC 9(01).
+      *包括診療行為チェック（小児科外来診察料）
+               05  SPA-HKTSANTEI-202       PIC 9(01).
+      *包括診療行為チェック（生活習慣病管理料）
+               05  SPA-HKTSANTEI-203       PIC 9(01).
+      *包括診療行為チェック（在宅末期医療総合診察料）
+               05  SPA-HKTSANTEI-204       PIC 9(01).
+      *包括診療行為チェック（在宅時医学総合管理料）
+               05  SPA-HKTSANTEI-205       PIC 9(01).
+      *包括診療行為チェック（特定施設入居時等医学管理料）
+               05  SPA-HKTSANTEI-206       PIC 9(01).
+      *        包括診療行為チェック（地域包括診療料）
+               05  SPA-HKTSANTEI-207       PIC 9(01).
+      *        包括診療行為チェック（小児かかりつけ診療料料）
+               05  SPA-HKTSANTEI-209       PIC 9(01).
+      *        包括診療行為チェック
+               05  SPA-HKTSANTEI-210       PIC 9(01).
+      *
+      *H26.4
+      *        妥結率５割以下区分  (H26.4から使用）
+               05  SPA-DAKT50-KBN          PIC 9(01).
+      *H27.4??
+      *        低紹介率病院区分  (H27.4から使用）
+               05  SPA-TEIRITU-KBN         PIC 9(01).
+      *@
+      *腫瘍マーカー一覧展開選択
+               05  SPA-AKUSEIHYOFLG        PIC  X(01).
+      *病名疾患区分からの自動発生
+               05  SPA-BYOMEIAUTO-FLG      PIC X(01).
+      *投薬診療種別変換選択
+               05  SPA-CHGSRYSYU-FLG       PIC  X(01).
+      *残量廃棄区分
+               05  SPA-HAIKIKBN-FLG        PIC  X(01).
+      *精神療法２０未満加算区分
+               05  SPA-SEI20KSNKBN         PIC  X(01).
+      *H29.7
+      *心身療法２０未満加算区分
+               05  SPA-SIN20KSNKBN         PIC  X(01).
+      *リハビリ・患者情報表示区分
+               05  SPA-GMNHYOKBN-G.
+                   07  SPA-GMNHYOKBN       PIC  X(01)
+                                           OCCURS   6.
+      *入力スクロール背景色
+               05  SPA-BGCOLORS               PIC X(16).
+               05  SPA-BGLINEKBN              PIC X(01).
+               05  SPA-ERRCOLORS              PIC X(16).
+               05  SPA-KEICOLORS              PIC X(16).
+      *H28.4
+      *一般名表示区分
+               05  SPA-GENERICFLG             PIC X(01).
+      *H30.9
+      *選択式コメント表示区分
+               05  SPA-RECEKISAIFLG           PIC X(01).
+      *
+      *前回保険組合せ相違チェック
+               05  SPA-ZENHKNCHK-FLG       PIC X(01).
+      *薬剤情報提供料算定有無(K08)
+               05  SPA-YAKJYO-ARI             PIC 9(01).
+      *入院時初回加算(検査）算定有無
+               05  SPA-NYUKENSA-FLG           PIC X(01).
+      *診察料自動発生有無
+               05  SPA-INITAUTO-FLG           PIC X(01).
+      *
+      *手帳加算確認チェック
+               05  SPA-TECHOKBN-FLG           PIC X(01).
+      *ver.4.8
+      *時間外緊急院内チェック
+               05  SPA-JGAIKEIKBN-FLG         PIC X(01).
+      *H28.11
+      *薬剤投与量チェック
+               05  SPA-TOUYOCHK-FLG           PIC X(01).
+      *H29.3
+      *訂正時の展開（処方料）
+               05  SPA-TEISHOHOU-FLG       PIC X(01).
+      *H29.4
+      *投薬３０日超チェック
+               05  SPA-SHOHOU30CHK         PIC X(01).
+      *ver.4.8
+      *患者情報表示
+               05  SPA-POPUPKBN-G.
+                   07  SPA-POPUP-TIMEOUT      PIC 9(03).
+                   07  SPA-POPUP-HKNCHK       PIC X(01).
+                   07  SPA-POPUP-MEMO1        PIC X(01).
+                   07  SPA-POPUP-MEMO2        PIC X(01).
+      *ver.4.8
+      *労災レセ電対応あり
+               05  SPA-ROURECEKBN             PIC 9(01).
+      *ver.4.8
+      *    電子点数表チェック区分
+               05  SPA-ETENSU-CHK             PIC  9(01).
+      *H27.6
+      *        セット全展開
+               05  SPA-SETALLKBN              PIC  X(01).
+      *H29.9
+      *        自費コード端数処理
+               05  SPA-JIHI-HASU-KBN          PIC  X(01).
+      *
+           03  SPA-K01SET-AREA.
+      *処理フラグ（０：通常、１：訂正）
+               05  SPA-SYORIFLG                PIC  9(01).
+      *訂正伝票番号
+               05  SPA-DENPNUM                 PIC  9(07).
+      *継続中フラグ（１：継続中）
+               05  SPA-CONTFLG                 PIC  9(01).
+      *主保険−保険番号
+               05  SPA-HKNNUM              PIC  X(03).
+      *公費１−保険番号
+               05  SPA-KOH1HKNNUM          PIC  X(03).
+      *公費２−保険番号
+               05  SPA-KOH2HKNNUM          PIC  X(03).
+      *公費３−保険番号
+               05  SPA-KOH3HKNNUM          PIC  X(03).
+      *公費４−保険番号
+               05  SPA-KOH4HKNNUM          PIC  X(03).
+      *主保険ＩＤ（労災・自賠責用）
+               05  SPA-HKNID               PIC  9(10).
+      *傷病年月日（労災・自賠責用）
+               05  SPA-RSI-SHOBYOYMD       PIC  X(08).
+      *発生年月日（労災・自賠責用）
+               05  SPA-RSI-HASSYOYMD       PIC  X(08).
+      *労災  アフターケアフラグ
+      *********05  SPA-RSI-HKNKBN          PIC  X(01).
+      *保険名称（保険者番号編集）
+               05  SPA-HKNCOMBIMEI-60       PIC X(60).
+      *保険組合せ有効期間（入院まとめチェック）
+               05  SPA-COB-TEKSTYMD         PIC X(08).
+               05  SPA-COB-TEKEDYMD         PIC X(08).
+      *前回保険組合せ判定用
+               05  SPA-HKNCHK-FLG          PIC 9(01).
+               05  SPA-HKNCHK-CHK          PIC 9(01).
+      *
+      *初診算定日
+               05  SPA-SYOYMD              PIC  X(08).
+      *初診算定日（訂正時の初回）
+               05  SPA-SYOYMD1             PIC  X(08).
+      *初診算定日（訂正時の直帰）
+               05  SPA-SYOYMD-OLD          PIC  X(08).
+      *最終受診日
+               05  SPA-LSTYMD              PIC  X(08).
+      *最終受診科
+               05  SPA-LSTSRYKA            PIC  X(02).
+      *他科受診科有り
+               05  SPA-TAKA-SRYKA-R.
+                   07  SPA-TAKA-SRYKA          PIC  X(02)
+                                               OCCURS  10.
+      *最終受診科
+               05  SPA-LSTSRYKAMEI         PIC  X(20).
+      *最終受診日（履歴）
+               05  SPA-RRK-LSTYMD          PIC  X(08).
+               05  SPA-RRK-LSTSRYKA        PIC  X(02).
+      *初診料算定有無
+               05  SPA-SYOSIN              PIC  9(01).
+      *
+               05  SPA-SYOSINFLG           PIC  9(01).
+      *他保険受診科有り
+               05  SPA-TA-HKNCOMBI-AREA.
+                   07  SPA-TA-HKNCOMBI         PIC  9(04)
+                                               OCCURS  10.
+      *同日診察料有無
+               05  SPA-DOUJITU             PIC  9(01).
+      *同日初診算定日（直帰）
+               05  SPA-DOUYMD              PIC  X(08).
+      *初診算定日（労災以外）
+               05  SPA-SYOYMD-HKN          PIC  X(08).
+      *初診算定日（労災）
+               05  SPA-SYOYMD-RSI          PIC  X(08).
+      *外来診療料算定有無
+               05  SPA-GAIRAISIN           PIC  9(01).
+      *特定疾患有無（病名）
+               05  SPA-TOKUTEI             PIC  9(01).
+      *皮膚科特定疾患有無（病名）
+               05  SPA-TOKUTEI-F           PIC  9(02).
+      *未収金
+               05  SPA-MISYUMONEY          PIC  S9(08).
+      *患者の入金方法
+               05  SPA-NYUKIN-HOHO         PIC   X(02).
+      *
+      *特定疾患処方管理加算有無
+               05  SPA-TOKUTEIFLG          PIC  9(01).
+      *長期投薬加算有無
+               05  SPA-CHOKITOFLG          PIC  9(01).
+      *長期投薬加算警告
+               05  SPA-CHOKITOFLG-CHK      PIC  9(01).
+      *特定疾患科
+               05  SPA-TOKUTEI-AREA-G.
+                   07  SPA-TOKU-SRYKA-G    OCCURS   10.
+                       09  SPA-TOKU-SRYKA      PIC X(02).
+                       09  SPA-TOKU-FLG        PIC 9(02).
+                       09  SPA-TOKU05-FLG      PIC 9(02).
+                       09  SPA-ATOPII          PIC 9(01).
+                   07  SPA-ATOPII-FLG      PIC  9(01).
+               05  SPA-TOKUTEI-CNT         PIC  9(01).
+               05  SPA-TOKUTEI-SRYKA       PIC  X(02).
+      *
+      *当月累計点数
+               05  SPA-ZAITENTOTAL         PIC  9(10).
+      *年齢（Ｋ０２で計算）
+               05  SPA-NENREI.
+                   09  SPA-NENREI-YY       PIC 9(03).
+                   09  SPA-NENREI-MM       PIC 9(02).
+                   09  SPA-NENREI-DD       PIC 9(02).
+      *年齢（表示）
+               05  SPA-NENREI-HEN          PIC X(10).
+      *         老人区分
+               05  SPA-NAI-ROUJIN          PIC 9(01).
+      *         老人公費有無
+               05  SPA-NAI-ROUJIN2         PIC 9(01).
+      *性別区分
+               05  SPA-NAI-SEX             PIC X(01).
+      *
+      *外来管理料算定有無（Ｋ０２で使用）
+               05  SPA-NAI-GAIFLG          PIC 9(01).
+      *
+      *受け渡し診療日（和暦）
+               05  SPA-RRKYMDW             PIC  X(09).
+      *受け渡し診療日
+               05  SPA-RRKYMD              PIC  X(08).
+      *受け渡し連番
+               05  SPA-RENNUM              PIC  9(01).
+      *院外処方区分
+               05  SPA-INGAIKBN            PIC  X(01).
+      *継続区分
+               05  SPA-CONTKBN             PIC  X(01).
+      *伝票状態区分
+               05  SPA-DENPJTIKBN          PIC  X(01).
+      *同時診療伝票番号
+               05  SPA-DOUJI-DENPNUM       PIC  9(07).
+      *同時診療連番
+               05  SPA-DOUJI-RENNUM        PIC  9(01).
+      *中途終了分の保険組合せ
+               05  SPA-WKSRY-HKNCOMBI      PIC  9(04).
+      *ＣＬＡＩＭ展開
+               05  SPA-WKSRY-KARTE-FLG     PIC  9(01).
+      *老人保険変更なし
+               05  SPA-RJN-ERR             PIC  9(01).
+      *保険変更なし
+               05  SPA-HKN-ERR             PIC  9(01).
+               05  SPA-HKN-ERR2            PIC  9(01).
+      *入院料なし
+               05  SPA-NYU-ERR             PIC  9(01).
+      *翌月入院料なし
+               05  SPA-NYU-ERR-2           PIC  9(01).
+      *診療年月日末日
+               05  SPA-SRYLST-DD           PIC  9(02).
+      *
+      *訂正前診療科
+               05  SPA-OLD-SRYKA           PIC X(02).
+      *訂正前保険組合せ
+               05  SPA-OLD-HKNCOMBI        PIC X(04).
+      *外来訂正時対象伝票番号
+               05  SPA-TEI-AREA.
+                   07  SPA-TEI-TBL             OCCURS   15.
+                       09  SPA-TEI-DENPNUM     PIC 9(07).
+                       09  SPA-TEI-SRYKA       PIC X(02).
+                       09  SPA-TEI-HKNCOMBI    PIC X(04).
+                       09  SPA-TEI-RENNUM          PIC  9(01).
+                       09  SPA-TEI-DOUJI-RENNUM    PIC  9(01).
+      *主ドクター
+               05  SPA-DRCD-NAME               PIC X(50).
+      *施設入居(H20.9)
+               05  SPA-PTTOKK-KBN              PIC X(02).
+               05  SPA-PTTOKK-NAIYO            PIC X(12).
+      *
+      *H26.4
+      *        地域包括診療対象疾病あり
+               05  SPA-CHKHKTBYO-ARI       PIC 9(01).
+      *H28.4
+      *        未就学前
+               05  SPA-SYUGAKUKBN          PIC 9(01).
+      *        認知症包括診療対象（患者）
+               05  SPA-NNCHIH-ARI          PIC 9(01).
+      *        小児かかりつけ対象（患者）
+               05  SPA-SYOUNI-ARI          PIC 9(01).
+      *H28.9
+      *        要介護対象
+               05  SPA-YOUKAIGO-ARI        PIC 9(01).
+      *H30.4
+      *        妊婦区分（患者登録）
+               05  SPA-NINPUKBN-ARI        PIC 9(01).
+      *
+      *H28.12
+      *        指導料等自動算定コード
+               05  SPA-AUTOSIDOU-G.
+                   07  SPA-AUTOSIDOU       PIC X(09)
+                                           OCCURS   3.
+      *
+      *入院用（Ｋ０２Ｎ）
+               05  SPA-K02N-DATA-REC.
+      *        入院日
+                 06  SPA-K02N-NYUINYMD           PIC X(08).
+      *        退院日
+                 06  SPA-K02N-TAIINYMD           PIC X(08).
+      *        当月入院有無（算定履歴チェック用）
+                 06  SPA-K02N-NYUINFLG          PIC  9(01).
+      *   入院期間
+                 06  SPA-K02-NYUIN-AREA.
+                   07  SPA-K02-NYUDAY         PIC 9(01)
+                                              OCCURS   31.
+      *        最終退院日
+                 06  SPA-NAI-LASTTAIIN          PIC X(08).
+      *        入院中区分（アフターケアの外来）
+                 06  SPA-NAI-NYUIN              PIC 9(01).
+      *        入院料包括チェック
+                 06  SPA-NYUHKT-AREA.
+                   07  SPA-NYUHKTCHK           PIC 9(01).
+                   07  SPA-NYUHKTCD            PIC X(03).
+                   07  SPA-NYUHKTSRYCD         PIC X(09).
+                   07  SPA-NYUHKT-G.
+                       09  SPA-NYUHKT-OCCURS   OCCURS   31.
+                           11  SPA-NYUHKTFLG       PIC 9(01).
+                           11  SPA-DEKIDAFLG       PIC 9(01).
+      *        他院退院日
+                 06  SPA-TAI-TAIINYMD            PIC X(08).
+      *        同日再入院日
+                 06  SPA-K02N-DOUDAY             PIC 9(02).
+      *        同日再入院区分（診療日）
+                 06  SPA-K02N-DOUKBN             PIC X(01).
+      *        中途終了選択の区分
+                 06  SPA-WKSRY-DOUKBN          PIC  X(01).
+      *        継続開始日入院日
+                 06  SPA-STR-NYUINYMD          PIC X(08).
+                 06  SPA-K02N-DOUTAIKBN        PIC X(01).
+      *
+      *複数診療科用
+           03  SPA-FUKU-AREA.
+               05  SPA-FUKU-SYORI          PIC  X(01).
+               05  SPA-FUKU-DENPNUM        PIC  9(07).
+               05  SPA-FUKU-MATKBN         PIC  X(01).
+               05  SPA-FUKU-CNT            PIC  9(04).
+      *
+               05  SPA-FUKU-HKNCOMBI       PIC  X(04).
+      *
+           03  SPA-K02SET-AREA.
+               05  SPA-K02FLGSET-AREA.
+      *小児科外来診療科算定有り
+               07  SPA-SYONIKA-ARI         PIC  9(01).
+               07  SPA-SYONIKA-ARI2        PIC  9(01).
+               07  SPA-SYONIKA-ARI3        PIC  9(01).
+      *老人慢性疾患外来総合診療科有り（１：院外、２:院内）
+               07  SPA-ROUMANSEI-ARI       PIC  9(01).
+      *老人慢性疾患外来総合診療科有り（前回）
+               07  SPA-ROUMANSEI-ARI2      PIC  9(01).
+      *在宅訪問診療科有り
+               07  SPA-HOUMON-ARI          PIC  9(01).
+      *
+      *寝たきり老人在宅総合診察料あり
+               07  SPA-NETAKIRI-ARI        PIC  9(01).
+               07  SPA-NETAKIRI-ARI2       PIC  9(01).
+      *        当日自動算定済み
+               07  SPA-NETAKIRI-ARI3       PIC  9(01).
+      *        算定済み
+               07  SPA-NETAKIRI-ARI4       PIC  9(01).
+      *
+      *在宅末期医療総合診察料あり
+               07  SPA-ZAIMATU-ARI         PIC  9(01).
+               07  SPA-ZAIMATU-ARI2        PIC  9(01).
+      *
+      *生活習慣病指導管理料あり
+               07  SPA-SEIKATU-ARI         PIC  9(01).
+               07  SPA-SEIKATU-ARI2        PIC  9(01).
+               07  SPA-SEIKATU-CHK         PIC  9(01).
+               07  SPA-SEIKATU-FLG         PIC  9(01).
+      *
+      *開放型病院共同指導料算定あり
+               07  SPA-KAIHOU1-ARI         PIC  9(01).
+               07  SPA-KAIHOU2-ARI         PIC  9(01).
+      *
+      *在宅時医学総合管理料算定あり
+               07  SPA-ZAIKANRI-ARI         PIC  9(01).
+               07  SPA-ZAIKANRI-ARI2        PIC  9(01).
+      *Ｈ２０．４から
+      *後期高齢者診療料算定あり
+               07  SPA-KOURESRY-ARI         PIC  9(01).
+               07  SPA-KOURESRY-ARI2        PIC  9(01).
+      *特定施設入居時医学総合管理料算定あり
+               07  SPA-IGAKUKAN-ARI         PIC  9(01).
+               07  SPA-IGAKUKAN-ARI2        PIC  9(01).
+      *
+      *消炎鎮痛等処置当月内算定
+               07  SPA-SYOEN-CNT           PIC  9(03).
+      *当月外来管理加算の取れない患者
+               07  SPA-GAIRAI-NASI         PIC  9(01).
+      *
+      *H28.9  改正
+      *目標設定等支援管理料算定日
+               07  SPA-MOKUHYO01-YMD       PIC  X(08).
+               07  SPA-MOKUHYO02-YMD       PIC  X(08).
+      *
+      *包括剤コード入力
+               05  SPA-HKTSANTEI-08        PIC  9(01).
+      *
+      *急性発症１８０日以内
+               05  SPA-KYUSEI-180          PIC  X(08).
+      *急性発症９０日以内
+               05  SPA-KYUSEI-90           PIC  X(08).
+      *急性発症日
+               05  SPA-KYUSEI-YMD          PIC  X(08).
+      *急性発症終了日
+               05  SPA-KYUSEI-END          PIC  X(08).
+      *急性発症（当日）
+               05  SPA-KYUSEI-FLG          PIC  9(01).
+      *
+      *受診回数
+               05  SPA-SINSATU-CNT         PIC  9(03).
+      *１５歳未満再診科算定有り
+               05  SPA-15MIMAN-ARI         PIC  9(01).
+      *
+      *特定薬剤治療管理料初回年月日
+               05  SPA-TOKTEI-YMD          PIC  X(08).
+      *厚生省が定める患者（再診料）
+               05  SPA-TOKUTEI-KNJ         PIC  9(01).
+               05  SPA-TOKUTEI-KNJ2        PIC  9(01).
+      *厚生省が定める患者（外来管理）
+               05  SPA-TOKUTEIG-KNJ        PIC  9(01).
+               05  SPA-TOKUTEIG-KNJ2       PIC  9(01).
+      *人工腎臓
+               05  SPA-TOKUTEI-JNZ         PIC  9(01).
+      *再診料変更確認済み
+               05  SPA-SAISIN-CHK          PIC  9(01).
+      *
+      *労災外来管理加算点数
+               05  SPA-GAIRAI-TEN          PIC  9(08)V9(03).
+      *
+      *他保険で算定済み
+               05  SPA-SYOHOU-ZUMI.
+                   07  SPA-SYOHO-KBN       PIC 9(01).
+                   07  SPA-SYOHO-HKN       PIC X(04).
+                   07  SPA-SYOHO-HKNMEI    PIC X(60).
+                   07  SPA-SYOHO-MEI       PIC X(30).
+      *
+      *他保険受診有無
+               05  SPA-TAHOKEN-FLG         PIC  9(01).
+      *他科同日再診
+               05  SPA-TAKADOU-FLG         PIC  9(01).
+      *訂正初期表示
+               05  SPA-SINSATU-SAI         PIC  9(01).
+      *受付有無
+               05  SPA-UKETUKE-ARI         PIC  9(01).
+      *
+      *内服薬剤７種類以上確認
+               05  SPA-NAIFUKU-CHK         PIC  9(01).
+               05  SPA-NAIFUKU-OK          PIC  9(01).
+      *外来調基算定確認
+               05  SPA-CHOZAI-CHK          PIC  9(01).
+      *外来処方せん算定確認
+               05  SPA-SYOHOU-CHK          PIC  9(01).
+      *手帳加算確認
+               05  SPA-TECHOKBN-CHK        PIC  9(01).
+      *ver.4.7
+      *緊急時間外加算チェック
+               05  SPA-KENJIKAN-CHK        PIC  9(01).
+               05  SPA-GAZJIKAN-CHK        PIC  9(01).
+      *
+      *外来複数保険組合せ
+               05  SPA-TBL-HKNCOMBI-AREA.
+                   07  SPA-TBL-HKNCOMBI-OCC     OCCURS   15.
+                       09  SPA-TBL-HKNCOMBI     PIC X(04).
+                       09  SPA-TBL-HKNCOMBIMEI  PIC X(60).
+                       09  SPA-TBL-FTNRATEMEI   PIC X(05).
+                       09  SPA-TBL-FTNRATE      PIC 9(03).
+      *                複数科
+                       09  SPA-TBL-SRYKA-AREA   OCCURS   10.
+                           11  SPA-TBL-SRYKA    PIC X(02).
+                           11  SPA-TBL-DRCD.
+                               13  SPA-TBL-DRCD1    PIC X(01).
+                               13  SPA-TBL-DRCD2    PIC X(04).
+      *
+      *        同日初診算定科
+               05  SPA-DOUSYOSIN-AREA.
+                   07  SPA-DOUSYOSIN-OCC           OCCURS   10.
+                       09  SPA-DOU-SRYKA           PIC X(02).
+                       09  SPA-DOU-SRYYMD          PIC X(08).
+      *
+      *        初診料の併用チェック
+               05  SPA-SYOSIN-KEI          PIC 9(01).
+               05  SPA-SYOSIN-KEIFLG       PIC 9(01).
+      *@
+      *        包括診療チェックあり
+               05  SPA-HKTSANTEI-CHK           PIC 9(01).
+               05  SPA-HKTKEI-FLG              PIC 9(01).
+      *H26.4
+      *        地域包括診療料算定
+               05  SPA-CHKHKT-ARI          PIC 9(01).
+               05  SPA-CHKHKT-ARI2         PIC 9(01).
+      *H28.4
+      *        認知症地域包括診療料算定
+               05  SPA-NNCHKT-ARI          PIC 9(01).
+               05  SPA-NNCHKT-ARI2         PIC 9(01).
+      *        小児かかりつけ診療料
+               05  SPA-SYONIKKR-ARI        PIC 9(01).
+               05  SPA-SYONIKKR-ARI2       PIC 9(01).
+               05  SPA-SYONIKKR-ARI3       PIC 9(01).
+      *H28.9
+      *認知症地域包括薬剤チェック区分
+               05  SPA-NINCHI-CHK          PIC 9(01).
+      *H29.4
+      *投薬３０日超チェックチェック区分
+               05  SPA-SHOH30-CHK          PIC 9(01).
+      *
+      *H30.4
+      *        妊婦区分（入力）
+               05  SPA-NINPUKBN-IN         PIC 9(01).
+      *        抗不安・不眠長期区分
+               05  SPA-FUANCHOKI           PIC 9(01).
+      *H30.4
+      *        オンライン診療料算定
+               05  SPA-ONLINE-ARI          PIC 9(01).
+               05  SPA-ONLINE-ARI2         PIC 9(01).
+      *@
+           03  SPA-SONOTA-AREA.
+      *確認メッセージ
+               05  SPA-ERRMSG2             PIC  X(100).
+      *
+      *確認メッセージ
+               05  SPA-KIDCD               PIC  X(04).
+      *確認画面より
+               05  SPA-KID1-AREA.
+                   07  SPA-KID1-FLG        PIC  X(02).
+      *確認画面２
+               05  SPA-KIDCD2              PIC  X(04).
+               05  SPA-KID2-AREA.
+      *        メッセージ
+                   07  SPA-KID2-FLG        PIC  X(02).
+                   07  SPA-KID2-KIDMSG     PIC  X(100).
+                   07  SPA-KID2GMN-CUR     PIC  9(02).
+      *
+      *Ｐ入力画面より
+               05  SPA-K99-DATA            PIC  X(25).
+      *Ｋ９８画面より
+               05  SPA-K98-AREA.
+                   07  SPA-K98-CDSYUBETU       PIC X(01).
+                   07  SPA-K98-INPUTCD         PIC X(22).
+                   07  SPA-K98-TYPE            PIC X(01).
+      *
+                   07  SPA-K98-SRYCD-G.
+                       09  SPA-K98-SRYCD-OCC   OCCURS  10.
+                           11  SPA-K98-SRYCD       PIC X(09).
+      *
+      *禁忌一覧画面より（Ｋ０２１）
+               05  SPA-K021-CHK             PIC  9(01).
+               05  SPA-K021-SAKI            PIC  X(03).
+      *
+      *ＤＯ画面より（Ｋ０９）
+               05  SPA-K09-SELOK            PIC  9(01).
+      *
+      *初診料自動算定日付
+               05  SPA-SYOSIN-AREA.
+                   07  SPA-SYOSIN-YMD          PIC X(08).
+                   07  SPA-SYOSIN-SRYCD        PIC X(09).
+      *
+      *請求確認画面より（Ｋ０３）
+           03  SPA-K03SONOTA.
+               05  SPA-K03-CHOSEI           PIC S9(07).
+               05  SPA-K03-SKYKUKBN         PIC  X(01).
+      *
+      *診療科一覧
+           03  SPA-K01SONOTA.
+               05  SPA-GMN-SRYKA-AREA.
+                   07  SPA-GMN-SRYKALST                OCCURS  99.
+                       09  SPA-GMN-SRYKAL      PIC X(02).
+                       09  SPA-GMN-F1L         PIC X(01).
+                       09  SPA-GMN-SRYKAMEIL   PIC X(12).
+                   07  SPA-SRYKA-MAX           PIC 9(02).
+      *
+      *戻り先
+           03  SPA-HZN-MOTOPG          PIC X(08).
+      *戻り先（KHELP,K081)
+           03  SPA-ETC-MOTOPG          PIC X(08).
+      *H26.4
+      *    画面最大行数
+           03  SPA-GMLINCNT            PIC 9(02).
+      *
+      *ver.4.8
+      *H26.10
+      *    抗精神薬多剤投与確認
+           03  SPA-PSYCHO-CHK          PIC  9(01).
+           03  SPA-PSYCHO-OK           PIC  9(01).
+      *ver.4.8
+      *    後発変更不可（処方毎）
+           03  SPA-GENECHG-KBN         PIC  9(01).
+      *H27.4
+      *    投薬３割逓減確認
+           03  SPA-TEIGEN30-CHK        PIC  9(01).
+           03  SPA-TEIGEN30-OK         PIC  9(01).
+      *H27.6
+      *    抗精神薬３種類投与
+           03  SPA-PSYCHO-80-AREA.
+               05  SPA-PSYCHO-80-OCC       OCCURS   10.
+                   07  SPA-PSY80-ARI       PIC 9(01).
+                   07  SPA-PSY80-KA        PIC X(02).
+      *H30.4
+      *    不安不眠薬投与確認
+           03  SPA-FUANCHK-CHK          PIC  9(01).
+           03  SPA-FUANCHK-OK           PIC  9(01).
+      *
+      *(4.7　は予備使用）
+      *    予備
+           03  SPA-K01-YOBI            PIC X(10).
+      *!!!!!
+      *4.8
+      *連続挿入
+           03  SPA-RENZ-FLG            PIC 9(01).
+           03  SPA-RENZ-INPUT          PIC X(54).
+      *
+      *ヘルプ・発行指示共通
+           03  SPA-ETCKYOUTU-AREA           PIC X(7500).
+      *

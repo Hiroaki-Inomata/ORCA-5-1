@@ -1,0 +1,32 @@
+create	table	tbl_rece_putb	(
+	HOSPID	char(24),
+	PREFKBN	char(1),
+	SYUBETU_SRT1	integer,
+	GRP_NO1	char(3),
+	SYUBETU_SRT2	integer,
+	GRP_NO2	char(3),
+	SYUBETU_GAI	char(4),
+	SYUBETU_NYU	char(4),
+	SYUBETU_UNDER_NO1	char(2),
+	SYUBETU_UNDER_NO2	char(2),
+	KOUHI_NO	numeric(3,0),
+	KOUHI_NUM	char(3),
+	STYUKYMD	char(8),
+	EDYUKYMD	char(8),
+	TERMID	varchar(64),
+	OPID	varchar(16),
+	CREYMD	char(8),
+	UPYMD	char(8),
+	UPHMS	char(6),
+	primary	key(
+		HOSPID,
+		PREFKBN,
+		SYUBETU_SRT1,
+		GRP_NO1,
+		SYUBETU_SRT2,
+		GRP_NO2,
+		KOUHI_NO,
+		STYUKYMD,
+		EDYUKYMD
+	)
+);

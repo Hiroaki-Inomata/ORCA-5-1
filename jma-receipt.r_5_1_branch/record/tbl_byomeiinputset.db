@@ -1,0 +1,76 @@
+tbl_byomeiinputset {
+	HOSPNUM				number(2,0);
+	BYOMEIINPUTSET			varchar(10);
+	BYOMEIINPUTSETNAME		varchar(40);
+	BYOMEIINPUTCD1			varchar(20);
+	BYOMEIINPUTCD2			varchar(20);
+	BYOMEIINPUTCD3			varchar(20);
+	BYOMEIINPUTCD4			varchar(20);
+	BYOMEIINPUTCD5			varchar(20);
+	BYOMEIINPUTCD6			varchar(20);
+	TERMID  			varchar(64);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,BYOMEIINPUTSET;
+};
+
+path	key	{ 	
+	DBSELECT	{
+		DECLARE tbl_byomeiinputset_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_byomeiinputset
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEIINPUTSET   =   :BYOMEIINPUTSET
+		;
+
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_byomeiinputset_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_byomeiinputset
+			WHERE HOSPNUM          =   :HOSPNUM
+			ORDER  BY  BYOMEIINPUTSET
+		;
+	};
+};
+
+path	key3	{ 	
+	DBSELECT	{
+		DECLARE tbl_byomeiinputset_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_byomeiinputset
+			WHERE HOSPNUM          =    :HOSPNUM
+			AND   BYOMEIINPUTSET   like :BYOMEIINPUTSET
+			ESCAPE  '/'
+			ORDER  BY  BYOMEIINPUTSET
+		;
+	};
+};
+
+path	del1	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_byomeiinputset
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEIINPUTSET   =   :BYOMEIINPUTSET
+		;
+	}; 
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_byomeiinputset_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_byomeiinputset
+			WHERE HOSPNUM          =   :HOSPNUM
+		;
+	};
+};
+

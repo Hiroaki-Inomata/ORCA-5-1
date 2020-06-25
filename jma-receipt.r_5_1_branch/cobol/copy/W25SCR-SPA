@@ -1,0 +1,78 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      *****************************************************************
+      *
+      *    システム管理情報設定 共通ＳＰＡ(SPA-WORK の内容)
+      *          
+      *****************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      *****************************************************************
+      *
+       01  SPA-W25-GMN-AREA.
+      *    診療行為検索画面ＳＰＡ
+               05  SPA-W25GMN-AREA.
+                   07  SPA-W25-GMN-MAX               PIC 9(03).
+                   07  SPA-W25-NEXT                  PIC 9(04).
+                   07  SPA-W25-PAGE                  PIC 9(04).
+                   07  SPA-W25-GMN-CUR               PIC 9(03).
+      *
+                   07  SPA-W25-GMN-SELNUM-G.
+                       09  SPA-W25-GMN-SELNUM        PIC X(03).
+      ********                                   OCCURS  5.
+                   07  SPA-W25-NAI-SELNUM-G.
+                       09  SPA-W25-NAI-SELNUM        PIC 9(03).
+      ********                                       OCCURS  5.
+                   07  SPA-W25-GMN-INPUT             PIC X(22).
+                   07  SPA-W25-GMN-SYORI             PIC X(01).
+                   07  SPA-W25-GMN-SYORI2            PIC X(01).
+                   07  SPA-W25-GMN-SYORI3            PIC X(02).
+                   07  SPA-W25-NAI-KENSA.
+                       09  SPA-W25-NAI-KENSANO       PIC 9(02).
+                       09  SPA-W25-NAI-HOUKATU       PIC X(01).
+                   07  SPA-W25-OLD-SYORI             PIC X(01).
+                   07  SPA-W25-SENTAKU               PIC X(30).
+      *
+                   07  SPA-W25-GMN-TBL.
+                     09  SPA-W25-GMN-TBLREC        OCCURS   200.
+                       11  SPA-W25-GMN-NO         PIC 9(03).
+                       11  SPA-W25-GMN-NO-X       REDEFINES
+                           SPA-W25-GMN-NO         PIC X(03).
+                       11  SPA-W25-GMN-INPUTCD    PIC X(20).
+                       11  SPA-W25-GMN-SRYCD      PIC X(09).
+                       11  SPA-W25-GMN-NAME       PIC X(70).
+                       11  SPA-W25-GMN-TANI       PIC X(10).
+                       11  SPA-W25-GMN-KISOTEN    PIC 9(07)V99.
+                       11  SPA-W25-GMN-SETCD      PIC X(10).
+      *
+                       11  SPA-W25-NAI-NO         PIC 9(03).
+      *        自院採用
+                   07  SPA-W25-JIIN-G.
+                       09  SPA-W25-JIIN               PIC X(01).
+                       09  SPA-W25-JIINF              PIC X(01).
+                       09  SPA-W25-JIINMEI            PIC X(18).
+                   07  SPA-W25-JIIN-COB               OCCURS  10.
+                       09  SPA-W25-JIINLST            PIC X(20).
+      *
+                   07  SPA-W25-USER-G.
+                       09  SPA-W25-USER               PIC X(01).
+                       09  SPA-W25-USERF              PIC X(01).
+                       09  SPA-W25-USERMEI            PIC X(18).
+                   07  SPA-W25-USER-COB               OCCURS  10.
+                       09  SPA-W25-USERLST            PIC X(20).
+      *

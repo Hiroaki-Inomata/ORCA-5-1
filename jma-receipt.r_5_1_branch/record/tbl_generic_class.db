@@ -1,0 +1,51 @@
+tbl_generic_class {
+	YAKKAKJNCD		varchar(12);
+	YUKOSTYMD		varchar(8);
+	YUKOEDYMD		varchar(8);
+	KOUHATU	    		number(1,0);
+	UPYMD    		varchar(8);
+#-----> 主キー更新用項目
+	UPYAKKAKJNCD			char(12),virtual;
+	UPYUKOSTYMD			char(8),virtual;
+	UPYUKOEDYMD 			char(8),virtual;
+};
+primary	{
+	YAKKAKJNCD,YUKOSTYMD,YUKOEDYMD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_generic_class_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_class
+			WHERE YAKKAKJNCD =   :YAKKAKJNCD
+ 			AND   YUKOSTYMD  <=  :YUKOSTYMD
+			AND   YUKOEDYMD  >=  :YUKOEDYMD
+		;
+	};
+};
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_generic_class_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_generic_class
+			WHERE 	YAKKAKJNCD	= :YAKKAKJNCD
+			ORDER	BY	YUKOSTYMD
+		;
+	};
+};
+path	upd1	{
+	DBUPDATE		{
+		UPDATE tbl_generic_class
+				SET
+				YAKKAKJNCD     = :YAKKAKJNCD,
+				YUKOSTYMD      = :YUKOSTYMD,
+				YUKOEDYMD      = :YUKOEDYMD,
+				KOUHATU          = :KOUHATU,
+				UPYMD      = :UPYMD 
+			WHERE 	YAKKAKJNCD      =  :UPYAKKAKJNCD
+			AND	YUKOSTYMD	=	:UPYUKOSTYMD
+			AND	YUKOEDYMD	=	:UPYUKOEDYMD
+		;
+	};
+};

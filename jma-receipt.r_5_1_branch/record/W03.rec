@@ -1,0 +1,341 @@
+W03 {
+  fixed2 {
+    B03 {
+      state int;
+    };
+    B10 {
+      state int;
+      label varchar(10);
+    };
+    CD01 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD02 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD03 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD04 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD05 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD06 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD07 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD08 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD09 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD10 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD11 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD12 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD13 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD14 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD15 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD16 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD17 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD18 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD19 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD20 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD21 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD22 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD23 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD24 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    CD25 {
+      style varchar(20);
+      textdata varchar(4);
+    };
+    DSPNAME01 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME02 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME03 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME04 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME05 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME06 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME07 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME08 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME09 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME10 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME11 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME12 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME13 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME14 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME15 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME16 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME17 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME18 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME19 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME20 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME21 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME22 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME23 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME24 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    DSPNAME25 {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    STYUKYMD {
+      textdata varchar(9);
+    };
+    EDYUKYMD {
+      textdata varchar(9);
+    };
+    SSTKIJUN01 {
+      numdata number(1);
+    };
+    SSTKIJUN02 {
+      numdata number(1);
+    };
+    SSTKIJUN03 {
+      numdata number(1);
+    };
+    SSTKIJUN04 {
+      numdata number(1);
+    };
+    SSTKIJUN05 {
+      numdata number(1);
+    };
+    SSTKIJUN06 {
+      numdata number(1);
+    };
+    SSTKIJUN07 {
+      numdata number(1);
+    };
+    SSTKIJUN08 {
+      numdata number(1);
+    };
+    SSTKIJUN09 {
+      numdata number(1);
+    };
+    SSTKIJUN10 {
+      numdata number(1);
+    };
+    SSTKIJUN11 {
+      numdata number(1);
+    };
+    SSTKIJUN12 {
+      numdata number(1);
+    };
+    SSTKIJUN13 {
+      numdata number(1);
+    };
+    SSTKIJUN14 {
+      numdata number(1);
+    };
+    SSTKIJUN15 {
+      numdata number(1);
+    };
+    SSTKIJUN16 {
+      numdata number(1);
+    };
+    SSTKIJUN17 {
+      numdata number(1);
+    };
+    SSTKIJUN18 {
+      numdata number(1);
+    };
+    SSTKIJUN19 {
+      numdata number(1);
+    };
+    SSTKIJUN20 {
+      numdata number(1);
+    };
+    SSTKIJUN21 {
+      numdata number(1);
+    };
+    SSTKIJUN22 {
+      numdata number(1);
+    };
+    SSTKIJUN23 {
+      numdata number(1);
+    };
+    SSTKIJUN24 {
+      numdata number(1);
+    };
+    SSTKIJUN25 {
+      numdata number(1);
+    };
+    SELCD {
+      textdata varchar(4);
+    };
+    SRYCD {
+      textdata varchar(9);
+    };
+    MEISYO {
+      textdata varchar(100);
+    };
+    KIJUN01 {
+      numdata number(4);
+    };
+    KIJUN02 {
+      numdata number(4);
+    };
+    KIJUN03 {
+      numdata number(4);
+    };
+    KIJUN04 {
+      numdata number(4);
+    };
+    KIJUN05 {
+      numdata number(4);
+    };
+    KIJUN06 {
+      numdata number(4);
+    };
+    KIJUN07 {
+      numdata number(4);
+    };
+    KIJUN08 {
+      numdata number(4);
+    };
+    KIJUN09 {
+      numdata number(4);
+    };
+    KIJUN10 {
+      numdata number(4);
+    };
+    TEIGENCD {
+      numdata number(4);
+    };
+    YUKOKIKAN {
+      textdata varchar(30);
+    };
+    MIDASI { #GtkLabel
+      style varchar(20);
+      textdata varchar(30);
+    };
+  };
+};

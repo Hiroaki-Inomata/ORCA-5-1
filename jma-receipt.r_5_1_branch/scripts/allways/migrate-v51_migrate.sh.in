@@ -1,0 +1,216 @@
+#!/bin/bash
+#
+# jma-receipt ver5.1.0
+# 
+# バージョンアップによる移行処理
+#
+# データ移行処理
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+# TODO
+# dbstub のリザルトコードの扱いとログ出力
+
+#------------------------------------
+# $1 : 医療機関識別番号(HOSPNUM)
+# $2 : ジョブＩＤ
+# $3 : シェルＩＤ
+#------------------------------------
+
+HOSPNUM=${1}
+LDDIRECTORY=${LDDEFDIR}/dirmigv51
+
+EXDATE=$(date  '+%Y%m%d%H%M')
+RUNDATE="${EXDATE}00"
+
+prf2monblob() {
+  PRFNAME="${HOSPNUM}${PROID}-prf.csv"
+  CSVFILE="${MCP_TEMPDIR}/${PRFNAME}"
+  echo "--- file name  [ ${PRFFILE} => ${CSVFILE} ]"
+  nkf -s ${PRFFILE} > ${CSVFILE}
+  if [ "${MCP_MIDDLEWARE_NAME}" = "panda" ]; then
+    cp -p ${PRFFILE} ${LOGDIR}/${PRFNAME}
+  fi
+
+  #if [ -s ${CSVFILE} ]; then
+    RECCNT="$(wc -l ${CSVFILE} | awk '{i=split($0,arr," ");printf("%06d",arr[1])}')"
+    ${MONBLOB} -dir ${LDDIRECTORY} -import ${CSVFILE} > ${MCP_TEMPDIR}/blobid-$$
+    MONBLOBID=`cat ${MCP_TEMPDIR}/blobid-$$`
+    PARAM="1,MIGRATE1,${RUNDATE},${1},,${RUNDATE:0:8},MIGRATE,1,,,,${1},0000001,MIGRATE,01,0,/tmp,${PRFNAME},${RECCNT},${MONBLOBID}"
+    ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ORCBFILEMIS -parameter "${PARAM}"
+    rm ${CSVFILE}
+    rm ${MCP_TEMPDIR}/blobid-$$
+  #fi
+}
+
+# 住所テーブル
+
+echo "住所テーブルを開始します。"
+SQL="SELECT COUNT(*) FROM tbl_adrs_user WHERE hospnum=${HOSPNUM};"
+RCNT=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+if [ ${RCNT} -gt 0 ]; then
+  echo "tbl_adrs_user (hospnum=${HOSPNUM}) はレコードが存在するため処理をスキップしました。"
+else
+  PROID=ORCBMIGADRS
+  LIMITTER=`printf "%05d" 0`
+  PRFFILE="${MCP_TEMPDIR}/${HOSPNUM}${PROID}-prf.dat"
+  PARAM="${HOSPNUM},${LIMITTER},${PRFFILE},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+  RC=${PIPESTATUS[0]}
+  chmod 644 ${PRFFILE}
+  if [ ${RC} = 0 ]; then
+    prf2monblob 5
+    echo "住所テーブルは終了しました。"
+  else
+    echo " "
+    echo "******************************************"
+    echo "住所テーブルの移行処理は異常終了しました。"
+    echo "******************************************"
+    echo " "
+    echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+    exit 1
+  fi
+fi
+
+# チェックテーブル
+
+echo "チェックテーブルを開始します。"
+SQL="SELECT COUNT(*) FROM tbl_chk_user WHERE hospnum=${HOSPNUM};"
+RCNT=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+if [ ${RCNT} -gt 0 ]; then
+  echo "tbl_chk_user (hospnum=${HOSPNUM}) はレコードが存在するため処理をスキップしました。"
+else
+  PROID=ORCBMIGCHK
+  LIMITTER=`printf "%05d" 0`
+  PRFFILE="${MCP_TEMPDIR}/${HOSPNUM}${PROID}-prf.dat"
+  PARAM="${HOSPNUM},${LIMITTER},${PRFFILE},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+  RC=${PIPESTATUS[0]}
+  chmod 644 ${PRFFILE}
+  if [ ${RC} = 0 ]; then
+    prf2monblob 2
+    echo "チェックテーブルは終了しました。"
+  else
+    echo " "
+    echo "**********************************************"
+    echo "チェックテーブルの移行処理は異常終了しました。"
+    echo "**********************************************"
+    echo " "
+    echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+    exit 1
+  fi
+fi
+
+# 保険者テーブル
+
+echo "保険者テーブルを開始します。"
+SQL="SELECT COUNT(*) FROM tbl_hknjainf_user WHERE hospnum=${HOSPNUM};"
+RCNT=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+if [ ${RCNT} -gt 0 ]; then
+  echo "tbl_hknjainf_user (hospnum=${HOSPNUM}) はレコードが存在するため処理をスキップしました。"
+else
+  PROID=ORCBMIGHKNJAINF
+  LIMITTER=`printf "%05d" 0`
+  PRFFILE="${MCP_TEMPDIR}/${HOSPNUM}${PROID}-prf.dat"
+  PARAM="${HOSPNUM},${LIMITTER},${PRFFILE},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+  RC=${PIPESTATUS[0]}
+  chmod 644 ${PRFFILE}
+  if [ ${RC} = 0 ]; then
+    prf2monblob 4
+    echo "保険者テーブルは終了しました。"
+  else
+    echo " "
+    echo "********************************************"
+    echo "保険者テーブルの移行処理は異常終了しました。"
+    echo "********************************************"
+    echo " "
+    echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+    exit 1
+  fi
+fi
+
+# 一般老人置換テーブル
+
+echo "一般老人置換テーブルを開始します。"
+SQL="SELECT COUNT(*) FROM tbl_srycdchg_user WHERE hospnum=${HOSPNUM};"
+RCNT=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+if [ ${RCNT} -gt 0 ]; then
+  echo "tbl_srycdchg_user (hospnum=${HOSPNUM}) はレコードが存在するため処理をスキップしました。"
+else
+  PROID=ORCBMIGSRYCDCHG
+  LIMITTER=`printf "%05d" 0`
+  PRFFILE="${MCP_TEMPDIR}/${HOSPNUM}${PROID}-prf.dat"
+  PARAM="${HOSPNUM},${LIMITTER},${PRFFILE},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+  RC=${PIPESTATUS[0]}
+  chmod 644 ${PRFFILE}
+  if [ ${RC} = 0 ]; then
+    prf2monblob 3
+    echo "一般老人置換テーブルは終了しました。"
+  else
+    echo " "
+    echo "**************************************************"
+    echo "一般老人置換テーブルの移行処理は異常終了しました。"
+    echo "**************************************************"
+    echo " "
+    echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+    exit 1
+  fi
+fi
+
+# 点数テーブル
+
+echo "点数テーブルを開始します。"
+SQL="SELECT COUNT(*) FROM tbl_tensu_user WHERE hospnum=${HOSPNUM} AND SUBSTR(srycd,1,1) <> '0';"
+RCNT=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+if [ ${RCNT} -gt 0 ]; then
+  echo "tbl_tensu_user (hospnum=${HOSPNUM}) はレコードが存在するため処理をスキップしました。"
+else
+  PROID=ORCBMIGTENSU
+  LIMITTER=`printf "%05d" 0`
+  PRFFILE="${MCP_TEMPDIR}/${HOSPNUM}${PROID}-prf.dat"
+  PARAM="${HOSPNUM},${LIMITTER},${PRFFILE},"
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+  RC=${PIPESTATUS[0]}
+  chmod 644 ${PRFFILE}
+  if [ ${RC} = 0 ]; then
+    prf2monblob 1
+    echo "点数テーブルは終了しました。"
+  else
+    echo " "
+    echo "******************************************"
+    echo "点数テーブルの移行処理は異常終了しました。"
+    echo "******************************************"
+    echo " "
+    echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+    exit 1
+  fi
+fi
+
+# 点数付加テーブル
+
+echo "点数付加テーブルを開始します。"
+PROID=ORCBMIGTENSUPLUS
+PARAM="${HOSPNUM},"
+${DBSTUB} -dir ${LDDIRECTORY} -bd migv51 ${PROID} -parameter "${PARAM}" 2>&1 | nkf -Ewu
+RC=${PIPESTATUS[0]}
+if [ ${RC} = 0 ]; then
+  echo "点数付加テーブルは終了しました。"
+else
+  echo " "
+  echo "**********************************************"
+  echo "点数付加テーブルの移行処理は異常終了しました。"
+  echo "**********************************************"
+  echo " "
+  echo "1" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+  exit 1
+fi
+
+echo "0" > ${MCP_TEMPDIR}/migrate-v51_migrate_rc
+exit 0

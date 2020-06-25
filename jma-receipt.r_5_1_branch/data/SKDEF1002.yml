@@ -1,0 +1,29 @@
+kanri_cd    : "1002"
+name        : "医療機関情報−所在地、連絡先"
+class_cd    : "*"
+item_max    : 4
+item_list   :
+- item_no   : 1
+  item      : "POST"
+  item_jp   : "郵便番号"
+  type      : "X"
+  start     : 1
+  length    : 7
+- item_no   : 2
+  item      : "ADRS"
+  item_jp   : "所在地"
+  type      : "N"
+  start     : 8
+  length    : 200
+- item_no   : 3
+  item      : "TEL"
+  item_jp   : "電話番号"
+  type      : "X"
+  start     : 208
+  length    : 15
+- item_no   : 4
+  item      : "FAX"
+  item_jp   : "ＦＡＸ番号"
+  type      : "X"
+  start     : 223
+  length    : 15

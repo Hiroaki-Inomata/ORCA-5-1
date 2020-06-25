@@ -1,0 +1,17 @@
+name	hokkaido;
+
+arraysize	20;
+textsize	400;
+
+bind	"SEIKYU0103"	"OpenCOBOL";
+bind	"SEIKYU0105"	"OpenCOBOL";
+bind	"SEIKYU0107"	"OpenCOBOL";
+bind	"SEIKYU0109"	"OpenCOBOL";
+bind	"SOKATU0100"	"OpenCOBOL";
+bind	"SOKATU0110"	"OpenCOBOL";
+bind	"SOKATU0115"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

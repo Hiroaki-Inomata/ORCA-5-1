@@ -1,0 +1,117 @@
+xml_patientmodv3res1 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3res1 {
+	Request_Number		varchar(02);
+	Response_Number		varchar(02);
+	Karte_Uid		varchar(36);
+	Orca_Uid		varchar(36);
+	Continue_Mode		varchar(05);
+	Information_Date	varchar(10);
+       	Information_Time	varchar(8);
+	Api_Result		varchar(3);
+	Api_Result_Message	varchar(100);
+       	Reskey			varchar(100);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(50);
+		WholeName_inKana	varchar(50);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		HouseHolder_WholeName	varchar(50);
+		Relationship 		varchar(30);
+		Occupation     		varchar(20);
+		NickName		varchar(50);
+		CellularNumber		varchar(15);
+		FaxNumber		varchar(15);
+		EmailAddress		varchar(50);
+		Home_Address_Information	{
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber1		varchar(15);
+			PhoneNumber2		varchar(15);
+        	};
+#--- 勤務先
+		WorkPlace_Information	{
+			WholeName		varchar(50);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber		varchar(15);
+        	};
+#--- 連絡先
+		Contact_Information	{
+			WholeName		varchar(50);
+			Relationship 		varchar(30);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber1		varchar(15);
+			PhoneNumber2		varchar(15);
+        	};
+#--- 帰省先
+		Home2_Information	{
+			WholeName		varchar(50);
+			Address_ZipCode		varchar(07);
+			WholeAddress1		varchar(100);
+			WholeAddress2		varchar(100);
+			PhoneNumber		varchar(15);
+        	};
+		Contraindication1		varchar(100);
+		Contraindication2		varchar(100);
+		Allergy1		varchar(100);
+		Allergy2		varchar(100);
+		Infection1		varchar(100);
+		Infection2		varchar(100);
+		Comment1		varchar(100);
+		Comment2		varchar(100);
+		TestPatient_Flag	varchar(01);
+		Death_Flag		varchar(01);
+#---            減免事由
+		Reduction_Reason	varchar(02);
+		Reduction_Reason_Name	varchar(20);
+#---            割引率
+		Discount		varchar(02);
+		Discount_Name		varchar(14);
+#---            状態１から３
+		Condition1		varchar(02);
+		Condition1_Name		varchar(20);
+		Condition2		varchar(02);
+		Condition2_Name		varchar(20);
+		Condition3		varchar(02);
+		Condition3_Name		varchar(20);
+    	};
+#---   同一患者情報
+	Patient2_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(50);
+		WholeName_inKana	varchar(50);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+		WholeAddress1		varchar(100);
+		WholeAddress2		varchar(100);
+        } [20];
+#---    エラーメッセージ
+	Patient_Message_Information	{
+	Patient_Message_Info	{
+		Patient_Result		varchar(4);
+		Patient_Result_Message	varchar(200);
+      	  } [50];
+        };
+#---    ワーニングメッセージ
+	Patient_Warning_Information	{
+	Patient_Warning_Info	{
+		Patient_Warning		varchar(4);
+		Patient_Warning_Message	varchar(200);
+          } [50];
+        };
+#--- 確認メッセージ
+	Patient_Select_Information	{
+        Patient_Select			varchar(4);
+        Patient_Select_Message		varchar(100);
+   	};
+   };
+};

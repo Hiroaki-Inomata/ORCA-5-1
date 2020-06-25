@@ -1,0 +1,17 @@
+kanri_cd    : "1013"
+name        : "ÀÁµá½ñ¼«ÈñÌ¾¾Î¾ðÊó"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "JIHINAME"
+  item_jp   : "¼«ÈñÌ¾¾Î"
+  type      : "X"
+  start     : 1
+  length    : 40
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 41
+  length    : 460

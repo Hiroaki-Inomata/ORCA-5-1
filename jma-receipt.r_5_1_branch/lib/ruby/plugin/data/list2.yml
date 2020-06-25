@@ -1,0 +1,11 @@
+---
+ - :name: foo
+   :version: "1.1"
+   :vendor: test
+   :date: "20090102"
+   :url: http://localhost:3000/foo-1.1.jpp
+ - :name: bar
+   :version: "1.0"
+   :vendor: test
+   :date: "20090102"
+   :url: http://localhost:3000/bar-1.0.jpp

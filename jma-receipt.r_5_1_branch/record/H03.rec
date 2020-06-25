@@ -1,0 +1,50 @@
+H03 {
+  fixed6 {
+    SELNUM {
+      numdata number(4);
+    };
+    scrolledwindow1 {
+      KANRI_LIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(6);
+            column3 varchar(10);
+            column4 varchar(2);
+            column5 varchar(4);
+            column6 varchar(2);
+            column7 varchar(3);
+            column8 varchar(9);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    scrolledwindow2 {
+      BODY_LIST {
+        HYODAI {
+          textdata varchar(14);
+        };
+        count int;
+        row int;
+          item {
+            column1 varchar(3);
+            column2 varchar(2);
+            column3 varchar(20);
+            column4 varchar(40);
+            column5 varchar(6);
+            column6 varchar(10);
+            column7 varchar(8);
+            column8 varchar(40);
+            column9 varchar(4);
+            column10 varchar(2);
+            column11 varchar(100);
+            column12 varchar(3);
+          }[100];
+          selectdata bool[100];
+          fgcolor varchar(16)[100];
+          bgcolor varchar(16)[100];
+      };
+    };
+  };
+};

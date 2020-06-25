@@ -1,0 +1,237 @@
+--                                    --
+--  算定履歴テーブルの変更            --
+--                                    --
+-- 項目の追加                         --
+--     当月算定点数対象フラグ         --
+--                    MSANTEIFLG      --
+--     当月算定点数   MSANTEITEN      --
+--     当月算定点数区分               --
+--                    MSANTEITENKBN   --
+--                                    --
+-- Update Date : 2005/02/28           --
+--                                    --
+
+-- TBL_SANTEIWK 作成                  --
+
+CREATE TABLE "tbl_santeiwk" (
+	"hospid" character(24) NOT NULL,
+	"ptid" numeric(10,0) NOT NULL,
+	"sryym" character(6) NOT NULL,
+	"srycd" character(9) NOT NULL,
+	"nyugaikbn" character(1) NOT NULL,
+	"sryka" character(2) NOT NULL,
+	"hkncombinum" numeric(4,0) DEFAULT 0 NOT NULL,
+	"fsanteiymd" character(8),
+	"msanteid" character(2),
+	"msanteicnt" numeric(3,0) DEFAULT 0,
+	"day1" numeric(3,0) DEFAULT 0,
+	"day2" numeric(3,0) DEFAULT 0,
+	"day3" numeric(3,0) DEFAULT 0,
+	"day4" numeric(3,0) DEFAULT 0,
+	"day5" numeric(3,0) DEFAULT 0,
+	"day6" numeric(3,0) DEFAULT 0,
+	"day7" numeric(3,0) DEFAULT 0,
+	"day8" numeric(3,0) DEFAULT 0,
+	"day9" numeric(3,0) DEFAULT 0,
+	"day10" numeric(3,0) DEFAULT 0,
+	"day11" numeric(3,0) DEFAULT 0,
+	"day12" numeric(3,0) DEFAULT 0,
+	"day13" numeric(3,0) DEFAULT 0,
+	"day14" numeric(3,0) DEFAULT 0,
+	"day15" numeric(3,0) DEFAULT 0,
+	"day16" numeric(3,0) DEFAULT 0,
+	"day17" numeric(3,0) DEFAULT 0,
+	"day18" numeric(3,0) DEFAULT 0,
+	"day19" numeric(3,0) DEFAULT 0,
+	"day20" numeric(3,0) DEFAULT 0,
+	"day21" numeric(3,0) DEFAULT 0,
+	"day22" numeric(3,0) DEFAULT 0,
+	"day23" numeric(3,0) DEFAULT 0,
+	"day24" numeric(3,0) DEFAULT 0,
+	"day25" numeric(3,0) DEFAULT 0,
+	"day26" numeric(3,0) DEFAULT 0,
+	"day27" numeric(3,0) DEFAULT 0,
+	"day28" numeric(3,0) DEFAULT 0,
+	"day29" numeric(3,0) DEFAULT 0,
+	"day30" numeric(3,0) DEFAULT 0,
+	"day31" numeric(3,0) DEFAULT 0,
+	"termid" character varying(16),
+	"opid" character varying(16),
+	"creymd" character(8),
+	"upymd" character(8),
+	"uphms" character(6),
+	Constraint "tbl_santeiwk_primary_key" Primary Key ("hospid", "ptid", "sryym", "srycd", "nyugaikbn", "sryka", "hkncombinum")
+);
+
+-- TBL_SANTEI → TBL_SANTEIWK      --
+
+insert into tbl_santeiwk
+select * from tbl_santei;
+
+-- TBL_SANTEI 削除                  --
+
+drop table tbl_santei;
+
+-- TBL_SANTEI 作成                  --
+
+CREATE TABLE "tbl_santei" (
+	"hospid" character(24) NOT NULL,
+	"ptid" numeric(10,0) NOT NULL,
+	"sryym" character(6) NOT NULL,
+	"srycd" character(9) NOT NULL,
+	"nyugaikbn" character(1) NOT NULL,
+	"sryka" character(2) NOT NULL,
+	"hkncombinum" numeric(4,0) DEFAULT 0 NOT NULL,
+	"fsanteiymd" character(8),
+	"msanteid" character(2),
+	"msanteicnt" numeric(3,0) DEFAULT 0,
+	"day1" numeric(3,0) DEFAULT 0,
+	"day2" numeric(3,0) DEFAULT 0,
+	"day3" numeric(3,0) DEFAULT 0,
+	"day4" numeric(3,0) DEFAULT 0,
+	"day5" numeric(3,0) DEFAULT 0,
+	"day6" numeric(3,0) DEFAULT 0,
+	"day7" numeric(3,0) DEFAULT 0,
+	"day8" numeric(3,0) DEFAULT 0,
+	"day9" numeric(3,0) DEFAULT 0,
+	"day10" numeric(3,0) DEFAULT 0,
+	"day11" numeric(3,0) DEFAULT 0,
+	"day12" numeric(3,0) DEFAULT 0,
+	"day13" numeric(3,0) DEFAULT 0,
+	"day14" numeric(3,0) DEFAULT 0,
+	"day15" numeric(3,0) DEFAULT 0,
+	"day16" numeric(3,0) DEFAULT 0,
+	"day17" numeric(3,0) DEFAULT 0,
+	"day18" numeric(3,0) DEFAULT 0,
+	"day19" numeric(3,0) DEFAULT 0,
+	"day20" numeric(3,0) DEFAULT 0,
+	"day21" numeric(3,0) DEFAULT 0,
+	"day22" numeric(3,0) DEFAULT 0,
+	"day23" numeric(3,0) DEFAULT 0,
+	"day24" numeric(3,0) DEFAULT 0,
+	"day25" numeric(3,0) DEFAULT 0,
+	"day26" numeric(3,0) DEFAULT 0,
+	"day27" numeric(3,0) DEFAULT 0,
+	"day28" numeric(3,0) DEFAULT 0,
+	"day29" numeric(3,0) DEFAULT 0,
+	"day30" numeric(3,0) DEFAULT 0,
+	"day31" numeric(3,0) DEFAULT 0,
+	"msanteiflg" numeric(1,0) DEFAULT 0,
+	"msanteiten" numeric(8,0) DEFAULT 0,
+	"msanteitenkbn" numeric(1,0) DEFAULT 0,
+	"termid" character varying(16),
+	"opid" character varying(16),
+	"creymd" character(8),
+	"upymd" character(8),
+	"uphms" character(6),
+	Constraint "tbl_santei_primary_key" Primary Key ("hospid", "ptid", "sryym", "srycd", "nyugaikbn", "sryka", "hkncombinum")
+);
+
+-- TBL_SANTEIWK → TBL_SANTEI   --
+
+insert into tbl_santei
+(hospid,
+ptid,
+sryym,
+srycd,
+nyugaikbn,
+sryka,
+hkncombinum,
+fsanteiymd,
+msanteid,
+msanteicnt,
+day1,
+day2,
+day3,
+day4,
+day5,
+day6,
+day7,
+day8,
+day9,
+day10,
+day11,
+day12,
+day13,
+day14,
+day15,
+day16,
+day17,
+day18,
+day19,
+day20,
+day21,
+day22,
+day23,
+day24,
+day25,
+day26,
+day27,
+day28,
+day29,
+day30,
+day31,
+msanteiflg,
+msanteiten,
+msanteitenkbn,
+termid,
+opid,
+creymd,
+upymd,
+uphms
+)
+select hospid,
+ptid,
+sryym,
+srycd,
+nyugaikbn,
+sryka,
+hkncombinum,
+fsanteiymd,
+msanteid,
+msanteicnt,
+day1,
+day2,
+day3,
+day4,
+day5,
+day6,
+day7,
+day8,
+day9,
+day10,
+day11,
+day12,
+day13,
+day14,
+day15,
+day16,
+day17,
+day18,
+day19,
+day20,
+day21,
+day22,
+day23,
+day24,
+day25,
+day26,
+day27,
+day28,
+day29,
+day30,
+day31,
+0,
+0,
+0,
+termid,
+opid,
+creymd,
+upymd,
+uphms
+ from tbl_santeiwk;
+
+-- TBL_SANTEIWK 削除             --
+
+drop table tbl_santeiwk;
+

@@ -1,0 +1,12 @@
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB01','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB02','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB03','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB04','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB05','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB06','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB07','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB08','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB09','','','','','','','','        ','        ','      ');
+INSERT INTO "tbl_dbkanri" VALUES ('ORCADB10','','','','','','','','        ','        ','      ');
+UPDATE "tbl_dbkanri" SET dbrversion1 = (SELECT dbrversion1 from tbl_dbkanri where kanricd = 'ORCADB00') where kanricd >= 'ORCADB01';
+UPDATE "tbl_dbkanri" SET dbrversion2 = (SELECT dbrversion1 from tbl_dbkanri where kanricd = 'ORCADB00') where kanricd >= 'ORCADB01';

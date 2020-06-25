@@ -1,0 +1,10 @@
+VID1 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(11);
+    };
+    ID1MSG {
+      textdata varchar(71);
+    };
+  };
+};

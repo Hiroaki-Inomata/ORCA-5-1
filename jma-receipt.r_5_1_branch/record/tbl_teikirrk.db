@@ -1,0 +1,46 @@
+tbl_teikirrk {
+	HOSPNUM				number(2,0);
+       SRYYM           char(6);
+       KBT             char(1);
+       TERMID          varchar(16);
+       OPID            varchar(16);
+       CREYMD          varchar(8);
+       UPYMD           varchar(8);
+       UPHMS           varchar(6);
+};
+primary	{
+	HOSPNUM,SRYYM,KBT;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikirrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikirrk
+		WHERE 	HOSPNUM	= :HOSPNUM
+        AND  SRYYM   =   :SRYYM
+        AND    KBT     =   :KBT
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikirrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikirrk
+		WHERE 	HOSPNUM	= :HOSPNUM
+		ORDER BY SRYYM DESC,KBT DESC
+		;
+	};
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_teikirrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_teikirrk
+		WHERE 	HOSPNUM	= :HOSPNUM
+		;
+	};
+};

@@ -1,0 +1,43 @@
+W01 {
+  fixed1 {
+    scrolledwindow1 {
+      TENSU_LIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(3);
+            column2 varchar(9);
+            column3 varchar(9);
+          }[100];
+          selectdata bool[100];
+      };
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    SELNUM {
+      numdata number(3);
+    };
+    MIDASI {
+      textdata varchar(20);
+    };
+    KBNCD_COMBO {
+      KBNCD {
+        textdata varchar(35);
+      };
+      count int;
+        item varchar(35)[200];
+    };
+    KANRICD_COMBO {
+      KANRICD {
+        textdata varchar(35);
+      };
+      count int;
+        item varchar(35)[100];
+    };
+  };
+};

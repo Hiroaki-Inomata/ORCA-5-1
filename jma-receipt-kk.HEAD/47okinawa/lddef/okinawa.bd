@@ -1,0 +1,23 @@
+name	okinawa;
+
+arraysize	20;
+textsize	400;
+
+bind	"SOKATU4700"	"OpenCOBOL";
+bind	"SOKATU4710"	"OpenCOBOL";
+bind	"SOKATU4705"	"OpenCOBOL";
+bind	"SOKATU4715"	"OpenCOBOL";
+bind	"SEIKYU4701"	"OpenCOBOL";
+bind	"SEIKYU4703"	"OpenCOBOL";
+bind	"SEIKYU4705"	"OpenCOBOL";
+bind	"SEIKYU47BYOMEI1"	"OpenCOBOL";
+bind	"SEIKYU47BYOMEI2"	"OpenCOBOL";
+bind	"SEIKYU4707"	"OpenCOBOL";
+bind	"SEIKYU4709"	"OpenCOBOL";
+bind	"SEIKYU4711"	"OpenCOBOL";
+bind	"SEIKYU4713"	"OpenCOBOL";
+
+#include "orcadb.inc"
+db "shell" {
+        shell;
+};

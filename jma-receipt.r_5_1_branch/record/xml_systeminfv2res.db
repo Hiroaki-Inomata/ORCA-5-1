@@ -1,0 +1,30 @@
+xml_systeminfv2res {
+	context	    int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	private_objects {
+		Information_Date 			varchar(10);
+		Information_Time 			varchar(08);
+		Api_Result	     			varchar(04);
+		Api_Result_Message 			varchar(100);
+		Jma_Receipt_Version			varchar(64);
+		Database_Information	{
+			Local_Version			varchar(64);
+			New_Version				varchar(64);
+		};
+		Master_Update_Information {
+			Last_Update_Date		varchar(10);
+			Master_Version_Information {
+				Name					varchar(30);
+				Local_Version			varchar(64);
+				New_Version				varchar(64);
+			}[99];
+		};
+		Program_Update_Information	{
+			Date					varchar(10);
+			State					varchar(08);
+			Comment					varchar(100);
+		}[10];
+   	};
+};

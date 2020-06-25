@@ -1,0 +1,64 @@
+Z99 {
+  fixed2 {
+    INPUTCD01 {
+      textdata varchar(20);
+    };
+    INPUTCD02 {
+      textdata varchar(20);
+    };
+    INPUTCD03 {
+      textdata varchar(20);
+    };
+    INPUTCD04 {
+      textdata varchar(20);
+    };
+    INPUTCD05 {
+      textdata varchar(20);
+    };
+    INPUTCD06 {
+      textdata varchar(20);
+    };
+    INPUTCD07 {
+      textdata varchar(20);
+    };
+    INPUTCD08 {
+      textdata varchar(20);
+    };
+    INPUTCD09 {
+      textdata varchar(20);
+    };
+    INPUTCD10 {
+      textdata varchar(20);
+    };
+    HYOUJI01 {
+      textdata varchar(4);
+    };
+    HYOUJI02 {
+      textdata varchar(4);
+    };
+    HYOUJI03 {
+      textdata varchar(4);
+    };
+    HYOUJI04 {
+      textdata varchar(4);
+    };
+    HYOUJI05 {
+      textdata varchar(4);
+    };
+    HYOUJI06 {
+      textdata varchar(4);
+    };
+    HYOUJI07 {
+      textdata varchar(4);
+    };
+    HYOUJI08 {
+      textdata varchar(4);
+    };
+    HYOUJI09 {
+      textdata varchar(4);
+    };
+    HYOUJI10 {
+      textdata varchar(4);
+    };
+  };
+};

@@ -1,0 +1,32 @@
+xml_patientmodv3req7 {
+	context	        int;
+	object		object;
+	mode		int;
+	recordname	varchar(128);
+	patientmodv3req7 {
+	Request_Number		varchar(2);
+	Karte_Uid		varchar(36);
+	Orca_Uid		varchar(36);
+	Base_Date		varchar(10);
+	Continue_Mode		varchar(05);
+	Patient_Information	{
+		Patient_ID		varchar(20);
+		WholeName		varchar(100);
+		WholeName_inKana	varchar(100);
+		BirthDate		varchar(10);
+		Sex			varchar(1);
+        };
+#---    ´µ¼Ô¶Ø´÷ÌôºŞ¾ğÊó
+	Patient_Contra_Information	{
+            Contra_Mode			varchar(6);
+	    Patient_Contra_Info	{
+#---            ÌôºŞ¥³¡¼¥É
+		Medication_Code		varchar(09);
+#---            ¶Ø´÷³«»ÏÆüÉÕ
+                Contra_StartDate	varchar(10);
+#---            ÅêÌô³«»ÏÆüÉÕ
+                Medication_StartDate	varchar(10);
+	        } [500];
+        };
+    };
+};

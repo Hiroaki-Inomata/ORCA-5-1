@@ -1,0 +1,140 @@
+tbl_file_info	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			char(8);
+	SRYYM			varchar(06);
+	SHELLID			varchar(20);
+	RENNUM  		number(3);
+	SHORI_RENNUM		number(3);
+	SKYYMD   		varchar(08);
+	TITLE			varchar(100);
+	TEISYUTUSAKI		char(1);
+	NYUGAIKBN		char(1);
+	CNT_ALL  		number(7);
+	CNT_NYUIN 		number(7);
+	CNT_GAIRAI		number(7);
+	FOR_FOLDER		varchar(200);
+	FOR_DATA		varchar(200);
+	TO_FOLDER		varchar(200);
+	TO_DATA			varchar(200);
+	CODE_TYPE		char(1);
+	DATA_TYPE		char(1);
+	ERR_CODE		char(1);
+	ERR_MSG 		varchar(200);
+	SYOYMD 			varchar(8);
+	CREYMD 			varchar(8);
+	CREHMS			varchar(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,SRYYM,SHELLID,RENNUM,SHORI_RENNUM;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_file_info_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                    AND   SRYYM 	=   :SRYYM
+                    AND   SHELLID	=   :SHELLID
+                    AND   RENNUM	=   :RENNUM
+                    AND   SHORI_RENNUM	=   :SHORI_RENNUM 
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_file_info_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                ORDER BY SRYYM,SHELLID,RENNUM,SHORI_RENNUM          
+		;
+	};
+};
+
+path	key3		{ 	
+	DBSELECT	{
+		DECLARE tbl_file_info_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                    AND   SRYYM 	=   :SRYYM
+                ORDER BY SHELLID,RENNUM,SHORI_RENNUM          
+		;
+	};
+};
+
+path	key4		{ 	
+	DBSELECT	{
+		DECLARE tbl_file_info_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+                    AND   TBL_KEY	=   :TBL_KEY
+                    AND   SRYYM 	=   :SRYYM
+                    AND   SHELLID 	=   :SHELLID
+                ORDER BY RENNUM,SHORI_RENNUM          
+		;
+	};
+};
+
+path    del1    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_file_info
+		WHERE   HOSPNUM = :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+                ;
+        };
+};
+
+path    del2    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_file_info
+		WHERE   HOSPNUM = :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+		AND     SRYYM 	=   :SRYYM
+                ;
+        };
+};
+
+path    del3    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_file_info
+		WHERE   HOSPNUM = :HOSPNUM
+		AND     TBL_KEY	=   :TBL_KEY
+		AND     SRYYM 	=   :SRYYM
+		AND     SHELLID =   :SHELLID
+                ;
+        };
+};
+
+path	all		{ 	
+	DBSELECT	{
+		DECLARE tbl_file_info_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_file_info
+		WHERE 	  HOSPNUM	=   :HOSPNUM
+		;
+	};
+};
+
+path    del4    {
+	DBDELETE        {
+		DELETE
+		FROM tbl_file_info
+		WHERE   HOSPNUM	 	=   :HOSPNUM
+		AND     TBL_KEY	 	=   :TBL_KEY
+		AND     SRYYM	 	=   :SRYYM
+		AND     SHELLID  	=   :SHELLID
+		AND   SHORI_RENNUM	=   :SHORI_RENNUM 
+		;
+	};
+};

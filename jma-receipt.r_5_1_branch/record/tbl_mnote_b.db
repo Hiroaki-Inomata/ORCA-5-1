@@ -1,0 +1,101 @@
+tbl_mnote_b	{
+	HOSPNUM			number(2,0);
+	TBL_KEY			char(8);
+	RENNUM			number(4);
+	TBL_GROUP		char(14);
+	TBL_UUID 		char(36);
+	SHORI_RENNUM	number(4);
+	SHELLID			varchar(20);
+	SRYYM			varchar(6);
+	SRYYMD			varchar(8);
+	SEQ_NO			number(5);
+	CSVDATA			varchar(20000);
+	CREYMD			varchar(8);
+	UPYMD			char(8);
+	UPHMS			char(6);
+};
+
+primary	{
+	HOSPNUM,TBL_KEY,RENNUM,TBL_GROUP,TBL_UUID,SHORI_RENNUM,SEQ_NO;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_b_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+        AND     TBL_UUID     =   :TBL_UUID
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		AND	SEQ_NO		=	:SEQ_NO
+		;
+	};
+};
+
+path	key2		{ 	
+	DBSELECT	{
+		DECLARE tbl_mnote_b_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+        AND     TBL_UUID     =   :TBL_UUID
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		ORDER	 BY	SEQ_NO 
+		;
+	};
+};
+
+path    del1   {
+	DBDELETE        {
+		DELETE
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM		=	:HOSPNUM
+		AND	TBL_KEY		=	:TBL_KEY
+		AND	RENNUM		=	:RENNUM
+		AND	TBL_GROUP	=	:TBL_GROUP
+        AND     TBL_UUID     =   :TBL_UUID
+		AND	SHORI_RENNUM	=	:SHORI_RENNUM 
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_mnote_b_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM		=	 :HOSPNUM
+		;
+	};
+};
+
+path	del2	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND   TBL_KEY        =   :TBL_KEY
+                    AND     TBL_GROUP    =   :TBL_GROUP
+                    AND     TBL_UUID     =   :TBL_UUID
+                    AND     RENNUM       =   :RENNUM
+                    AND     SHORI_RENNUM =   :SHORI_RENNUM
+		;
+	};
+};
+
+path	del3 {
+	DBDELETE	{
+		DELETE
+		FROM tbl_mnote_b
+		WHERE 	HOSPNUM	= :HOSPNUM
+                    AND     TBL_KEY      =   'MEDINOTE'
+                    AND     substring(TBL_GROUP,1,8) < :SRYYMD
+		;
+	};
+};

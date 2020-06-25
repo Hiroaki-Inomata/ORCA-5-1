@@ -1,0 +1,41 @@
+W05 {
+  fixed1 {
+    YUKOSTYMD {
+      textdata varchar(9);
+    };
+    YUKOEDYMD {
+      textdata varchar(9);
+    };
+    B03 {
+      state int;
+    };
+    SRYKANAME1 {
+      textdata varchar(10);
+    };
+    SRYKANAME {
+      textdata varchar(40);
+    };
+    SRYCD {
+      textdata varchar(2);
+    };
+    SRYKANAME2 {
+      textdata varchar(6);
+    };
+    SRYKANAME3 {
+      textdata varchar(2);
+    };
+    CMB_RECESRYKA {
+      RECESRYKA {
+        textdata varchar(43);
+      };
+      count int;
+      item varchar(43)[50];
+    };
+    JIKANKSN1_40 {
+      isactive bool;
+    };
+    JIKANKSN1_50 {
+      isactive bool;
+    };
+  };
+};

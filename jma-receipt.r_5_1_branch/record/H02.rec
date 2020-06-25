@@ -1,0 +1,68 @@
+H02 {
+  fixed32 {
+    B12 {
+      state int;
+    };
+    SELNUM {
+      state int;
+      numdata number(2);
+    };
+    LABEL {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    SYORIYM {
+      style varchar(20);
+      textdata varchar(6);
+    };
+    NYUGAIKBN {
+      style varchar(20);
+      textdata varchar(6);
+    };
+    RECESYUBETU {
+      style varchar(20);
+      textdata varchar(10);
+    };
+    HKNJANUM {
+      style varchar(20);
+      textdata varchar(8);
+    };
+    KIGO {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    ERR {
+      style varchar(20);
+      textdata varchar(100);
+    };
+    scrolledwindow26 {
+      HENREILIST {
+        count int;
+        row int;
+          item {
+            column1 varchar(2);
+            column2 varchar(7);
+            column3 varchar(2);
+            column4 varchar(2);
+            column5 varchar(10);
+            column6 varchar(8);
+            column7 varchar(20);
+            column8 varchar(4);
+            column9 varchar(2);
+            column10 varchar(100);
+            column11 varchar(2);
+            column12 varchar(6);
+            column13 varchar(2);
+            column14 varchar(10);
+            column15 varchar(8);
+            column16 varchar(20);
+            column17 varchar(2);
+            column18 varchar(4);
+            column19 varchar(2);
+            column20 varchar(2);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+  };
+};

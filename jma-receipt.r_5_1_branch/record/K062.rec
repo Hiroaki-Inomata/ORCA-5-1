@@ -1,0 +1,206 @@
+K062 {
+  fixed5 {
+    MEISYO {
+      textdata varchar(70);
+    };
+    DAY01 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY02 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY03 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY04 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY05 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY06 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY07 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY08 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY09 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY10 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY11 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY12 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY13 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY14 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY15 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY16 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY17 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY18 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY19 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY20 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY21 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY22 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY23 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY24 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY25 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY26 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY27 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY28 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY29 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY30 {
+      style varchar(20);
+      numdata number(2);
+    };
+    DAY31 {
+      style varchar(20);
+      numdata number(2);
+    };
+    SELNUM {
+      numdata number(2);
+    };
+    COMMENT01 {
+      textdata varchar(80);
+    };
+    COMMENT02 {
+      textdata varchar(80);
+    };
+    COMMENT03 {
+      textdata varchar(80);
+    };
+    COMMENT04 {
+      textdata varchar(80);
+    };
+    COMMENT05 {
+      textdata varchar(80);
+    };
+    MUN5 {
+      textdata varchar(4);
+    };
+    MUN4 {
+      textdata varchar(4);
+    };
+    MUN3 {
+      textdata varchar(4);
+    };
+    MUN2 {
+      textdata varchar(4);
+    };
+    MUN1 {
+      textdata varchar(4);
+    };
+    SRYCD {
+      textdata varchar(9);
+    };
+    SRYYM {
+      textdata varchar(6);
+    };
+    HKNCOMBI {
+      textdata varchar(4);
+    };
+    HKNCOMBIMEI {
+      textdata varchar(20);
+    };
+    MIDASI {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    ENDYMD {
+      textdata varchar(11);
+    };
+    ENDYMD01 {
+      textdata varchar(11);
+    };
+    ENDYMD02 {
+      textdata varchar(11);
+    };
+    ENDYMD03 {
+      textdata varchar(11);
+    };
+    ENDYMD04 {
+      textdata varchar(11);
+    };
+    ENDYMD05 {
+      textdata varchar(11);
+    };
+    MIDASI2 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    MSGENDYMD {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

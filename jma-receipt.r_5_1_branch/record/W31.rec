@@ -1,0 +1,249 @@
+W31 {
+  fixed6 {
+    B02 {
+      label varchar(10);
+    };
+    B03 {
+      label varchar(10);
+      state int;
+    };
+    STYUKYMD {
+      textdata varchar(10);
+    };
+    EDYUKYMD {
+      textdata varchar(10);
+    };
+    N1 {
+      pageno int;
+      FT01 {
+        CHK_MEDKBN01 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN02 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN03 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN04 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN05 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN06 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN07 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN08 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN09 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN10 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN11 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN12 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN13 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN14 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN15 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN16 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN17 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN18 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN19 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN20 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN21 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN22 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN23 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN24 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN25 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN26 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN27 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN28 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN29 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN30 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN31 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN32 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN33 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN34 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN35 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN36 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN37 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN38 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN39 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+        CHK_MEDKBN40 {
+          isactive bool;
+          label varchar(60);
+          state int;
+        };
+      };
+      NB01 {
+        state int;
+      };
+      FT02 {
+        LBLADLINPUTINFO {
+          textdata varchar(80);
+        };
+        CMB_ADLINPUTKBN {
+          ADLINPUTKBN {
+            textdata varchar(22);
+            state int;
+          };
+          count int;
+            item varchar(22)[2];
+          state int;
+        };
+        CMB_SETMEDKBN {
+          SETMEDKBN {
+            textdata varchar(32);
+          };
+          count int;
+            item varchar(32)[2];
+        };
+      };
+      NB02 {
+        state int;
+      };
+    };
+  };
+};

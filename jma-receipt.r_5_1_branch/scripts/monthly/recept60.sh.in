@@ -1,0 +1,153 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#        ＣＳＶ＿ＩＮＦＯからのファイル作成
+#        ${1} HOSPNUM
+#        ${2} SRYYM
+#        ${3} SHELLID
+#        ${4} SHORI-RENNUM
+#        ${5} RENNUM
+#        ${6} 保存場所
+#        ${7} TO-FOLDER
+#        ${8} TO-DATA
+#        ${9} 端末ｉｐアドレス
+#        ${10} ジョブＩＤ
+#        ${11} シェルＩＤ
+#        ${12} エラーファイル名 
+#        ${13} ファイル出力先
+#        ${14} コード区分（1:S-jis 2:EUC 3:UTF-8）
+#        ${15} 履歴保存設定区分（出産育児一時金）
+#            1:履歴保存する
+#        ${16} 提出先（出産育児一時金）
+#-------------------------------------------#
+
+        LOG_FILE="/var/log/jma-receipt/${1}recept60.log"
+        [ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+
+        FILE_1=${MCP_TEMPDIR}/${1}"TIHOUKOUHI01.txt"
+        FILE_2=${13}${1}${8}
+        FILE_3=${MCP_TEMPDIR}/${1}${8}
+
+        echo "arg1  = [" ${1} "]"   
+        echo "arg2  = [" ${2} "]"   
+        echo "arg6  = [" ${6} "]"   
+        echo "arg8  = [" ${8} "]"   
+        echo "arg13 = [" ${13} "]"  
+        echo "arg14 = [" ${14} "]"  
+        echo "arg15 = [" ${15} "]"  
+        echo "arg16 = [" ${16} "]"  
+#        echo "hostname =  [" `hostname`  "]" 
+        echo "file1= [" $FILE_1 "]"  
+        echo "file2= [" $FILE_2 "]"  
+        echo "file3= [" $FILE_3 "]"  
+
+##      エラーファイル削除
+	echo "errfile = [" ${MCP_TEMPDIR}/${18}  "]" 
+        rm  -f ${MCP_TEMPDIR}/${18}
+
+#       該当ファイル削除
+	rm -f $FILE_2
+	rm -f $FILE_1
+	rm -f $FILE_3
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBM600 -parameter ${1},${2},${3},${4},${5},${8},${10},${11},${12} 
+        if  [ -e ${12} ]; then
+            exit
+        fi
+
+
+#       コード区分によりコード変換
+
+        if   [ ${14} = '1' ]; then
+            echo "nkf -Esx"   
+            if  [ ${6} != '5' ]&& [ ${6} != '6' ]; then
+                 nkf -Esx $FILE_1 > $FILE_2
+            else
+                 nkf -Esx $FILE_1 > $FILE_3
+            fi
+        else
+            if   [ ${14} = '3' ]; then
+            echo "nkf -wx"   
+                if  [ ${6} != '5' ]&& [ ${6} != '6' ]; then
+                    nkf -wx $FILE_1 > $FILE_2
+                else
+                    nkf -wx $FILE_1 > $FILE_3
+                fi
+            else
+            echo "cp"   
+                if  [ ${6} != '5' ]&& [ ${6} != '6' ]; then
+                    cp $FILE_1  $FILE_2
+                else
+                    cp $FILE_1  $FILE_3
+               fi
+            fi
+        fi
+         
+#       システム管理場所出力のとき
+        if  [ ${6} -eq '3' ]|| [ ${6} -eq '4' ]; then
+#           履歴保存先のフォルダへファイル作成
+            if  [ ${15} -eq '1' ]; then
+                if  [ ${16} -eq '1' ]; then
+                    OUT_FOLDER="${13}${1}_Shaho_${2}/"
+                else
+                    OUT_FOLDER="${13}${1}_Kokuho_${2}/"
+                fi
+                if ! test -d  "$OUT_FOLDER"; then
+                     mkdir $OUT_FOLDER
+                     RC=$?
+                     echo "--- mkdir end   ---[" $RC  "]" 
+                     if  [ $RC -ne '0' ]; then
+                         ERRCD='0077'
+                         $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${10}${11}'  '${ERRCD},${1} 
+                         echo "--- mkdir  err   ---" 
+                         exit
+                     fi
+                     chmod -R g+r ${OUT_FOLDER}
+                     echo "--- mkdir rireki holder ---" 
+                else
+                     rm $OUT_FOLDER${8}*
+                     echo "--- rm rireki holder file ---" 
+                fi
+                echo "--- folder name  [" $OUT_FOLDER "]" 
+	        echo "ファイルの処理(履歴保存)"
+                if  test -e "$FILE_2"; then
+                    cp $FILE_2 ${OUT_FOLDER}${8}
+                    chmod -R g+r ${OUT_FOLDER}${8}
+	        else
+    	            echo $FILE_2 "nothing"
+	            break
+	        fi
+            else
+#               履歴保存を行わないとき
+                chmod -R g+r $FILE_2
+            fi
+        fi
+
+#       ＣＤ−Ｒ出力のときisoファイル作成
+        if  [ ${6} -eq '6' ]; then
+            echo "--- iso start ---" 
+            DIR=`mktemp -d`
+            cp $FILE_3 ${DIR}/${8}
+            mkisofs --input-charset cp437 -l -o $FILE_3.iso ${DIR}/
+	    RC=$?
+            echo "--- iso end   ---[" $RC  "]" 
+	    if  [ $RC -ne '0' ]; then
+	        ERRCD='0000'$RC
+	        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${10}${11}'  '${ERRCD:${#ERRCD}-4:4},${1} 
+                echo "--- iso err   ---" 
+                exit
+	    fi
+        fi
+       
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE${10}${11},${1} 
+
+        exit 

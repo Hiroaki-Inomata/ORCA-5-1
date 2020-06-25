@@ -1,0 +1,107 @@
+      *******************************************************************
+      * Project code name "ORCA"
+      * 日医標準レセプトソフト（JMA standard receipt software）
+      * Copyright(C) 2002 JMA (Japan Medical Association)
+      *
+      * This program is part of "JMA standard receipt software".
+      *
+      *     This program is distributed in the hope that it will be useful
+      * for further advancement in medical care, according to JMA Open
+      * Source License, but WITHOUT ANY WARRANTY.
+      *     Everyone is granted permission to use, copy, modify and
+      * redistribute this program, but only under the conditions described
+      * in the JMA Open Source License. You should have received a copy of
+      * this license along with this program. If not, stop using this
+      * program and contact JMA, 2-28-16 Honkomagome, Bunkyo-ku, Tokyo,
+      * 113-8621, Japan.
+      ********************************************************************
+      ************************************************************
+      *    診療行為 入院指示せん共通ＳＰＡ
+      *                           (SPA-WORK の SPA-ETCKYOUTU-AREA)
+      ************************************************************
+      *  コピー句修正履歴
+      * Maj/Min/Rev  修正者       日付      内容
+      ************************************************************
+      *
+       01  SPA-K081.
+      *    入院指示せん発行区分内容
+           03  SPA-K081NAI-AREA.
+               05  SPA-NAI-SIJISENKBN              PIC 9(01).
+               05  SPA-NAI-SYOHOU                  PIC 9(01).
+               05  SPA-NAI-CHUSYA                  PIC 9(01).
+               05  SPA-NAI-SIJISEN                 PIC 9(01).
+               05  SPA-K081-OKFLG                  PIC 9(01).
+      *    ユーザプログラム起動有無
+               05  SPA-K081NAI-GYOUMU-FLG             PIC X(01).
+               05  SPA-K081NAI-GYOUMU-ARI             PIC 9(01).
+      *
+      *    入院指示せん印刷画面
+           03  SPA-K081GMN-AREA.
+               05  SPA-K081GMN-CUR                 PIC 9(02).
+      *
+               05  SPA-K081GMN-SYOHOU-G.
+                   07  SPA-K081GMN-SYOHOU          PIC X(01).
+                   07  SPA-K081GMN-SYOHOU-H        PIC X(01).
+                   07  SPA-K081GMN-SYOHOU-MEI      PIC X(10).
+               05  SPA-K081GMN-SYOHOU-LIST-G.
+                   07  SPA-K081GMN-SYOHOU-LST      PIC X(12)
+                                                   OCCURS   2.
+                   07  SPA-K081-SYOHOU-MAX         PIC 9(04).
+      *
+               05  SPA-K081GMN-CHUSYA-G.
+                   07  SPA-K081GMN-CHUSYA          PIC X(01).
+                   07  SPA-K081GMN-CHUSYA-H        PIC X(01).
+                   07  SPA-K081GMN-CHUSYA-MEI      PIC X(10).
+               05  SPA-K081GMN-CHUSYA-LIST-G.
+                   07  SPA-K081GMN-CHUSYA-LST      PIC X(12)
+                                                   OCCURS   2.
+                   07  SPA-K081-CHUSYA-MAX         PIC 9(04).
+      *
+               05  SPA-K081GMN-SIJISEN-G.
+                   07  SPA-K081GMN-SIJISEN         PIC X(01).
+                   07  SPA-K081GMN-SIJISEN-H       PIC X(01).
+                   07  SPA-K081GMN-SIJISEN-MEI     PIC X(10).
+               05  SPA-K081GMN-SIJISEN-LIST-G.
+                   07  SPA-K081GMN-SIJISEN-LST     PIC X(12)
+                                                   OCCURS   2.
+                   07  SPA-K081-SIJISEN-MAX        PIC 9(04).
+      *
+               05  SPA-K081GMN-DRCD-G.
+                   07  SPA-K081GMN-DRCD        PIC X(04).
+                   07  SPA-K081GMN-F1          PIC X(01).
+                   07  SPA-K081GMN-DRCDMEI     PIC X(24).
+               05  SPA-K081GMN-DRCDLST-G.
+                   07  SPA-K081GMN-DRCDLST     OCCURS  99.
+                       09  SPA-K081GMN-DRCDL       PIC X(04).
+                       09  SPA-K081GMN-F1L         PIC X(01).
+                       09  SPA-K081GMN-DRCDMEIL    PIC X(24).
+                   07  SPA-K081-DRCD-MAX            PIC 9(04).
+      *
+               05  SPA-K081GMN-CHK1-OCC            OCCURS   4.
+                   07  SPA-K081GMN-CHK1            PIC X(30).
+                   07  SPA-K081GMN-CHK1KBN         PIC 9(01).
+                   07  SPA-K081GMN-CHK1FLG         PIC 9(01).
+                   07  SPA-K081GMN-CHK1-VALUE      PIC X(01).
+               05  SPA-K081GMN-CHK2-OCC            OCCURS   4.
+                   07  SPA-K081GMN-CHK2            PIC X(30).
+                   07  SPA-K081GMN-CHK2KBN         PIC 9(01).
+                   07  SPA-K081GMN-CHK2FLG         PIC 9(01).
+                   07  SPA-K081GMN-CHK2-VALUE      PIC X(01).
+               05  SPA-K081GMN-CHK3-OCC            OCCURS   4.
+                   07  SPA-K081GMN-CHK3            PIC X(30).
+                   07  SPA-K081GMN-CHK3KBN         PIC 9(01).
+                   07  SPA-K081GMN-CHK3FLG         PIC 9(01).
+                   07  SPA-K081GMN-CHK3-VALUE      PIC X(01).
+      *
+      *    ユーザプログラム画面用
+           03  SPA-K081GMN-USERPG-AREA.
+      *        Ｕ・Ｐ
+               05  SPA-K081GMN-USERPG-G.
+                   09  SPA-K081GMN-USERPG            PIC X(01).
+                   09  SPA-K081GMN-UP1               PIC X(01).
+                   09  SPA-K081GMN-USERPGMEI         PIC X(18).
+               05  SPA-K081GMN-USERPG-LSTG.
+                   09  SPA-K081GMN-USERPG-LIST     PIC X(20)
+                                                   OCCURS  2.
+               05  SPA-K081GMN-USERPG-MAX          PIC 9(02).
+      *

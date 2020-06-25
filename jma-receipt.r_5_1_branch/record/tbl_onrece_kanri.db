@@ -1,0 +1,198 @@
+tbl_onrece_kanri   {
+        HOSPNUM			number(2,0);
+	TEISYUTUSAKI		char(1);
+	HOSPCD			char(7);
+	SRYYM			char(6);
+	UCNT			number(3);
+	SCNT			number(3);
+	RENNUM			number(3);
+#---> キー部
+	SYORIYMD		char(8);
+	UKEYMD			char(8);
+	SKYYMD			char(8);
+	RECV_FLG		number(1);
+	AMOUNT_FLG		number(1);
+	SEND_PATIENT_CNT	number(5);
+	NOSEND_PATIENT_CNT	number(5);
+	SEND_TOTAL_CNT		number(5);
+	TERMID			varchar(64);
+	OPID  			varchar(16);
+	CREYMD			char(8);
+	UPYMD 			char(8);
+	UPHMS 			char(6);
+#-----> 検索用項目
+	UCNT_V			number(3),virtual;
+	SCNT_V			number(3),virtual;
+};
+
+primary {
+        HOSPNUM,TEISYUTUSAKI,HOSPCD,SRYYM,UCNT,SCNT,RENNUM;
+};
+
+path    key             {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= :RENNUM
+                    AND HOSPCD          = :HOSPCD
+                ;
+        };
+};
+
+path    key1            {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key1_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    AND	RENNUM		= 0
+                    AND HOSPCD          = :HOSPCD
+                ;
+        };
+};
+
+path    key2            {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key2_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	RENNUM		= 0
+                ;
+        };
+};
+
+path    key3            {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key3_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	SRYYM		= :SRYYM
+                    AND	RENNUM		= 0
+                ;
+        };
+};
+
+path    key4            {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key4_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	RENNUM		= 0
+                    ORDER BY SYORIYMD,UCNT DESC
+                ;
+        };
+};
+
+path    key5             {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key5_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    ORDER BY RENNUM DESC
+                ;
+        };
+};
+
+path    key6            {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key6_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	RENNUM		> 0
+                    ORDER BY RENNUM DESC
+                ;
+        };
+};
+
+path    key7             {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key7_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND HOSPCD          = :HOSPCD
+                    AND	UCNT		= :UCNT
+                ;
+        };
+};
+
+path    upd1    {
+        DBUPDATE        {
+                UPDATE  tbl_onrece_kanri
+                                SET
+	SCNT		=	:SCNT,
+	UKEYMD		=	:UKEYMD,
+	SKYYMD		=	:SKYYMD,
+	SYORIYMD	=	:SYORIYMD,
+	RECV_FLG	=	:RECV_FLG,
+	AMOUNT_FLG	=	:AMOUNT_FLG,
+	SEND_PATIENT_CNT	=	:SEND_PATIENT_CNT,
+	SEND_TOTAL_CNT	=	:SEND_TOTAL_CNT,
+	UPYMD 		=	:UPYMD,
+	UPHMS 		=	:UPHMS
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND	UCNT		= :UCNT_V
+                    AND	SCNT		= :SCNT_V
+                    AND	RENNUM		= :RENNUM
+                    AND HOSPCD          = :HOSPCD
+                ;
+        };
+};
+
+path    key8             {
+        DBSELECT        {
+                DECLARE tbl_onrece_kanri_key8_csr CURSOR FOR
+                SELECT *
+                FROM tbl_onrece_kanri
+                WHERE	HOSPNUM		= :HOSPNUM
+                    AND	TEISYUTUSAKI	= :TEISYUTUSAKI
+                    AND	SRYYM		= :SRYYM
+                    AND HOSPCD          = :HOSPCD
+                    AND	UCNT		= :UCNT
+                    AND	SCNT		= :SCNT
+                    ORDER BY RENNUM DESC
+                ;
+        };
+};
+
+path	del1	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_onrece_kanri
+		WHERE	HOSPNUM		= :HOSPNUM
+		    AND	UCNT		= :UCNT
+		    AND	SCNT		= :SCNT
+		    AND	substring(CREYMD,1,6) < :SRYYM
+		;
+	};
+};
+

@@ -1,0 +1,481 @@
+I41 {
+  fixed1 {
+    B05 {
+      label varchar(10);
+    };
+    B05S {
+      label varchar(10);
+      state int;
+    };
+    PTNUM {
+      textdata varchar(20);
+    };
+    SRYYM {
+      textdata varchar(6);
+    };
+    KANANAME {
+      textdata varchar(50);
+    };
+    NAME {
+      textdata varchar(50);
+    };
+    BIRTHDAY {
+      textdata varchar(9);
+    };
+    SEX {
+      textdata varchar(2);
+    };
+    IJYOU91 {
+      style varchar(20);
+      textdata varchar(9);
+    };
+    IJYOU180 {
+      textdata varchar(9);
+    };
+    NYUINBI {
+      textdata varchar(9);
+    };
+    TAINBI {
+      textdata varchar(9);
+    };
+    NYUINNISSU {
+      numdata number(6);
+    };
+    NUM {
+      textdata varchar(3);
+    };
+    MEISYO {
+      textdata varchar(50);
+    };
+    KEIKOKU {
+      style varchar(20);
+      textdata varchar(60);
+    };
+    KOMENTO {
+      textdata varchar(50);
+    };
+    LDAY01 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY02 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY03 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY04 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY05 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY06 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY07 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY08 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY09 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY10 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY11 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY12 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY13 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY14 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY15 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY16 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY17 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY18 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY19 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY20 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY21 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY22 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY23 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY24 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY25 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY26 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY27 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY28 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY29 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY30 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    LDAY31 {
+      style varchar(20);
+      textdata varchar(2);
+    };
+    DAY01 {
+      textdata varchar(3);
+    };
+    DAY02 {
+      textdata varchar(3);
+    };
+    DAY03 {
+      textdata varchar(3);
+    };
+    DAY04 {
+      textdata varchar(3);
+    };
+    DAY05 {
+      textdata varchar(3);
+    };
+    DAY06 {
+      textdata varchar(3);
+    };
+    DAY07 {
+      textdata varchar(3);
+    };
+    DAY08 {
+      textdata varchar(3);
+    };
+    DAY09 {
+      textdata varchar(3);
+    };
+    DAY10 {
+      textdata varchar(3);
+    };
+    DAY11 {
+      textdata varchar(3);
+    };
+    DAY12 {
+      textdata varchar(3);
+    };
+    DAY13 {
+      textdata varchar(3);
+    };
+    DAY14 {
+      textdata varchar(3);
+    };
+    DAY15 {
+      textdata varchar(3);
+    };
+    DAY16 {
+      textdata varchar(3);
+    };
+    DAY17 {
+      textdata varchar(3);
+    };
+    DAY18 {
+      textdata varchar(3);
+    };
+    DAY19 {
+      textdata varchar(3);
+    };
+    DAY20 {
+      textdata varchar(3);
+    };
+    DAY21 {
+      textdata varchar(3);
+    };
+    DAY22 {
+      textdata varchar(3);
+    };
+    DAY23 {
+      textdata varchar(3);
+    };
+    DAY24 {
+      textdata varchar(3);
+    };
+    DAY25 {
+      textdata varchar(3);
+    };
+    DAY26 {
+      textdata varchar(3);
+    };
+    DAY27 {
+      textdata varchar(3);
+    };
+    DAY28 {
+      textdata varchar(3);
+    };
+    DAY29 {
+      textdata varchar(3);
+    };
+    DAY30 {
+      textdata varchar(3);
+    };
+    DAY31 {
+      textdata varchar(3);
+    };
+    scrolledwindow1 {
+      DATELIST {
+        count int;
+        row int;
+        rowattr int;
+        LBLDAY01 {
+          style varchar(20);
+        };
+        LBLDAY02 {
+          style varchar(20);
+        };
+        LBLDAY03 {
+          style varchar(20);
+        };
+        LBLDAY04 {
+          style varchar(20);
+        };
+        LBLDAY05 {
+          style varchar(20);
+        };
+        LBLDAY06 {
+          style varchar(20);
+        };
+        LBLDAY07 {
+          style varchar(20);
+        };
+        LBLDAY08 {
+          style varchar(20);
+        };
+        LBLDAY09 {
+          style varchar(20);
+        };
+        LBLDAY10 {
+          style varchar(20);
+        };
+        LBLDAY11 {
+          style varchar(20);
+        };
+        LBLDAY12 {
+          style varchar(20);
+        };
+        LBLDAY13 {
+          style varchar(20);
+        };
+        LBLDAY14 {
+          style varchar(20);
+        };
+        LBLDAY15 {
+          style varchar(20);
+        };
+        LBLDAY16 {
+          style varchar(20);
+        };
+        LBLDAY17 {
+          style varchar(20);
+        };
+        LBLDAY18 {
+          style varchar(20);
+        };
+        LBLDAY19 {
+          style varchar(20);
+        };
+        LBLDAY20 {
+          style varchar(20);
+        };
+        LBLDAY21 {
+          style varchar(20);
+        };
+        LBLDAY22 {
+          style varchar(20);
+        };
+        LBLDAY23 {
+          style varchar(20);
+        };
+        LBLDAY24 {
+          style varchar(20);
+        };
+        LBLDAY25 {
+          style varchar(20);
+        };
+        LBLDAY26 {
+          style varchar(20);
+        };
+        LBLDAY27 {
+          style varchar(20);
+        };
+        LBLDAY28 {
+          style varchar(20);
+        };
+        LBLDAY29 {
+          style varchar(20);
+        };
+        LBLDAY30 {
+          style varchar(20);
+        };
+        LBLDAY31 {
+          style varchar(20);
+        };
+          item {
+            column1 varchar(3);
+            column2 varchar(60);
+            column3 varchar(7);
+            column4 varchar(2);
+            column5 varchar(2);
+            column6 varchar(2);
+            column7 varchar(2);
+            column8 varchar(2);
+            column9 varchar(2);
+            column10 varchar(2);
+            column11 varchar(2);
+            column12 varchar(2);
+            column13 varchar(2);
+            column14 varchar(2);
+            column15 varchar(2);
+            column16 varchar(2);
+            column17 varchar(2);
+            column18 varchar(2);
+            column19 varchar(2);
+            column20 varchar(2);
+            column21 varchar(2);
+            column22 varchar(2);
+            column23 varchar(2);
+            column24 varchar(2);
+            column25 varchar(2);
+            column26 varchar(2);
+            column27 varchar(2);
+            column28 varchar(2);
+            column29 varchar(2);
+            column30 varchar(2);
+            column31 varchar(2);
+            column32 varchar(2);
+            column33 varchar(2);
+            column34 varchar(2);
+          }[400];
+          selectdata bool[400];
+      };
+    };
+    scrolledwindow2 {
+      KUMILIST {
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(50);
+          }[30];
+          selectdata bool[30];
+      };
+    };
+    scrolledwindow3 {
+      SAGAKULIST {
+        SAGAKU_TITLE {
+          textdata varchar(22);
+        };
+        count int;
+        row int;
+        rowattr int;
+          item {
+            column1 varchar(4);
+            column2 varchar(22);
+          }[99];
+          selectdata bool[99];
+      };
+    };
+    TSUSANNISSU {
+      numdata number(6);
+    };
+    SYUBETSU1 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SYUBETSU2 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SYUBETSU3 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SYUBETSU4 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SYUBETSU5 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    SYUBETSU6 {
+      style varchar(20);
+      textdata varchar(20);
+    };
+    LASTNYUIN {
+      style varchar(20);
+      textdata varchar(40);
+    };
+    AGE {
+      textdata varchar(9);
+    };
+    NYUINKA {
+      style varchar(20);
+      textdata varchar(40);
+    };
+    UPYMD {
+      style varchar(20);
+      textdata varchar(20);
+    };
+  };
+};

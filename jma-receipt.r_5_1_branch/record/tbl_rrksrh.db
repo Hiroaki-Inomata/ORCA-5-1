@@ -1,0 +1,206 @@
+tbl_rrksrh {
+	HOSPNUM				number(2,0);
+	TERMID				char(64);
+	PTID				number(10,0);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	DRCD				char(5);
+	HKNCOMBINUM			number(4,0);
+	SRYYMD				char(8);
+	CREYMD				char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+	STSRYYMD			char(8),virtual;
+	EDSRYYMD			char(8),virtual;
+	KOHNUM				char(3)[5],virtual;
+	YMDHMS				varchar(12),virtual;
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_rrksrh_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_rrksrh
+	    WHERE	HOSPNUM    =    :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_rrksrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     TERMID     =    :TERMID
+ 		;
+	};
+};
+
+path	ins1_1 	{
+	DBINSERT	{
+	INSERT INTO TBL_RRKSRH
+	( 
+              HOSPNUM,
+              TERMID,
+              PTID,
+              NYUGAIKBN,
+              SRYKA,
+              DRCD,
+              HKNCOMBINUM,
+              SRYYMD,
+              CREYMD,
+              UPYMD,
+              UPHMS
+        )
+	SELECT HOSPNUM,
+              :TERMID,
+               PTID,
+               NYUGAIKBN,
+               SRYKA,
+               DRCD,
+               to_number(HKNCOMBINUM,'9999'),
+               SRYYMD,
+              :CREYMD,
+              :UPYMD,
+              :UPHMS
+        FROM   TBL_JYURRK
+        WHERE HOSPNUM = :HOSPNUM
+          AND NYUGAIKBN LIKE :NYUGAIKBN
+          AND SRYKA LIKE :SRYKA
+          AND DRCD  LIKE :DRCD
+          AND SRYYMD >= :STSRYYMD
+          AND SRYYMD <= :EDSRYYMD
+     ;
+	};
+};
+
+path	ins1_2 	{
+	DBINSERT	{
+	INSERT INTO TBL_RRKSRH
+	( 
+              HOSPNUM,
+              TERMID,
+              PTID,
+              NYUGAIKBN,
+              SRYKA,
+              DRCD,
+              HKNCOMBINUM,
+              SRYYMD,
+              CREYMD,
+              UPYMD,
+              UPHMS
+        )
+        SELECT A.HOSPNUM,
+              :TERMID,
+               A.PTID,
+               '1',
+               B.SRYKA,
+               '',
+               to_number(B.HKNCOMBINUM,'9999'),
+               A.SRYYMD,
+              :CREYMD,
+              :UPYMD,
+              :UPHMS
+      FROM TBL_NRRKSRH A,
+           TBL_NSRYSRH B 
+     WHERE  A.HOSPNUM = :HOSPNUM
+       AND  B.SRYKA LIKE :SRYKA
+       AND  A.SRYYMD >= :STSRYYMD
+       AND  A.SRYYMD <= :EDSRYYMD
+       AND  A.HOSPNUM = B.HOSPNUM
+       AND  A.PTID = B.PTID
+       AND  A.ZAINUM = B.ZAINUM
+	 GROUP  BY A.HOSPNUM,
+               A.PTID,
+               B.SRYKA,
+               B.HKNCOMBINUM,
+               A.SRYYMD
+	;
+	};
+};
+
+path crtv01	{
+	DBCREATE	{
+		CREATE TEMP VIEW TMPV_Q001 AS
+    SELECT TBL_HKNCOMBI.HOSPNUM,
+           TBL_HKNCOMBI.PTID,
+           TBL_HKNCOMBI.HKNCOMBINUM,
+           TBL_RRKSRH.NYUGAIKBN,
+           TBL_RRKSRH.DRCD,
+           TBL_RRKSRH.SRYKA,
+           TBL_RRKSRH.SRYYMD,
+           TBL_PTHKNINF.HKNID,
+           TBL_PTHKNINF.HKNNUM,
+           TBL_PTHKNINF.HKNJANUM,
+           TBL_PTHKNINF.HONKZKKBN,
+           TBL_PTHKNINF.HOJOKBN,
+           TBL_PTHKNINF.KIGO,
+           TBL_PTHKNINF.NUM,
+           TBL_PTHKNINF.TEKEDYMD AS HKNEDYMD,
+           TBL_PTKOHINF.KOHID,
+           TBL_PTKOHINF.KOHNUM,
+           TBL_PTKOHINF.PAYKBN,
+           TBL_PTKOHINF.FTNJANUM,
+           TBL_PTKOHINF.JKYSNUM,
+           TBL_PTKOHINF.TEKSTYMD,
+           TBL_PTKOHINF.TEKEDYMD AS KOHEDYMD,
+           TBL_PTRSIINF.JIBAIKBN
+      FROM TBL_HKNCOMBI JOIN TBL_RRKSRH 
+        ON (TBL_HKNCOMBI.HOSPNUM = TBL_RRKSRH.HOSPNUM
+       AND  TBL_HKNCOMBI.PTID = TBL_RRKSRH.PTID
+       AND  TBL_HKNCOMBI.HKNCOMBINUM = TBL_RRKSRH.HKNCOMBINUM
+       AND  TBL_RRKSRH.TERMID = :TERMID )
+      LEFT JOIN TBL_PTHKNINF 
+        ON (TBL_HKNCOMBI.HOSPNUM = TBL_PTHKNINF.HOSPNUM
+       AND TBL_HKNCOMBI.PTID = TBL_PTHKNINF.PTID 
+       AND TBL_HKNCOMBI.HKNID = TBL_PTHKNINF.HKNID  )
+      LEFT JOIN TBL_PTKOHINF 
+        ON (TBL_HKNCOMBI.HOSPNUM = TBL_PTKOHINF.HOSPNUM
+       AND  TBL_HKNCOMBI.PTID = TBL_PTKOHINF.PTID
+       AND (( TBL_HKNCOMBI.KOH1ID = TBL_PTKOHINF.KOHID AND TBL_HKNCOMBI.KOH1HKNNUM = TBL_PTKOHINF.KOHNUM)
+         OR ( TBL_HKNCOMBI.KOH2ID = TBL_PTKOHINF.KOHID AND TBL_HKNCOMBI.KOH2HKNNUM = TBL_PTKOHINF.KOHNUM)
+         OR ( TBL_HKNCOMBI.KOH3ID = TBL_PTKOHINF.KOHID AND TBL_HKNCOMBI.KOH3HKNNUM = TBL_PTKOHINF.KOHNUM)
+         OR ( TBL_HKNCOMBI.KOH4ID = TBL_PTKOHINF.KOHID AND TBL_HKNCOMBI.KOH4HKNNUM = TBL_PTKOHINF.KOHNUM)
+         OR ( TBL_PTKOHINF.KOHNUM IN (
+                                   :KOHNUM[1],
+                                   :KOHNUM[2],
+                                   :KOHNUM[3],
+                                   :KOHNUM[4],
+                                   :KOHNUM[5]
+                                   ) AND (TBL_PTKOHINF.SAKJOKBN = '')
+        AND (TBL_RRKSRH.SRYYMD >= TBL_PTKOHINF.TEKSTYMD 
+        AND  TBL_RRKSRH.SRYYMD <= TBL_PTKOHINF.TEKEDYMD)
+)))
+      LEFT JOIN TBL_PTRSIINF
+        ON (TBL_HKNCOMBI.HOSPNUM = TBL_PTRSIINF.HOSPNUM
+       AND TBL_HKNCOMBI.PTID = TBL_PTRSIINF.PTID 
+       AND TBL_HKNCOMBI.HKNID = TBL_PTRSIINF.HKNID  )
+		;
+	};
+};
+
+path drtv01	{
+	DBDROP	{
+		DROP VIEW TMPV_Q001;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_rrksrh
+		WHERE	HOSPNUM    =    :HOSPNUM
+		AND     CREYMD    <     :CREYMD
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_rrksrh
+		WHERE  HOSPNUM      =   :HOSPNUM
+		AND    UPYMD||UPHMS <   :YMDHMS
+   ;
+	};
+};

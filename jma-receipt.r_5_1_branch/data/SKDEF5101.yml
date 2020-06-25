@@ -1,0 +1,17 @@
+kanri_cd    : "5101"
+name        : "病棟種別"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "BTU-SBT-NM"
+  item_jp   : "病棟種別名称"
+  type      : "X"
+  start     : 1
+  length    : 20
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 21
+  length    : 480

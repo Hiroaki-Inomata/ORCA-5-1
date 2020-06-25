@@ -1,0 +1,17 @@
+push_medical01	{
+	event				varchar(50);
+	body	{
+		Patient_Mode		varchar(10);
+		Patient_ID		varchar(20);
+		Information_Date	varchar(10);
+		Information_Time	varchar(08);
+		Perform_Date		varchar(10);
+		Medical_Information  {
+			Insurance_Combination_Number	varchar(04);
+			Department_Code		varchar(2);
+			Physician_Code		varchar(5);
+			Invoice_Number		varchar(07);
+			} [15];
+	};
+};
+

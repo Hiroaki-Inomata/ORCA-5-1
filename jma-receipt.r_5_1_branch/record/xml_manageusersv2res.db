@@ -1,0 +1,42 @@
+xml_manageusersv2res {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	manageusersres {
+		Information_Date 			varchar(10);
+		Information_Time 			varchar(08);
+		Api_Result	     			varchar(04);
+		Api_Result_Message 			varchar(100);
+		Request_Number				varchar(02);
+		Base_Date					varchar(10);
+		User_Information{
+			User_Id					varchar(16);
+			Hospital_Id_Number		varchar(02);
+			Group_Number			varchar(1);
+			User_Number				varchar(4);
+			Full_Name				varchar(80);
+			Kana_Name				varchar(80);
+			Start_Date				varchar(10);
+			Expiry_Date				varchar(10);
+			New_User_Id				varchar(16);
+			New_Hospital_Id_Number	varchar(02);
+			New_Group_Number		varchar(1);
+			New_User_Number			varchar(4);
+			New_Full_Name			varchar(80);
+			New_Kana_Name			varchar(80);
+			New_Start_Date			varchar(10);
+			New_Expiry_Date			varchar(10);
+			Administrator_Privilege varchar(1);
+			Menu_Item_Information{
+				Menu_Item_Number     varchar(3);
+				Menu_Item_Name       varchar(30);
+				Menu_Item_Privilege  varchar(1);
+			}[50];
+		}[600];
+		Menu_Item_Name_Information{
+			Menu_Item_Number      varchar(3);
+			Menu_Item_Name        varchar(30);
+		}[50];
+	};
+};

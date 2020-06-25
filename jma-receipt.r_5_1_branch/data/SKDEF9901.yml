@@ -1,0 +1,18 @@
+kanri_cd    : "9901"
+name        : "£Ð£Õ£Ó£ÈÄÌÃÎ°õºþ"
+class_cd    : "*"
+item_max    : 2
+item_list   :
+- item_no   : 1
+  item      : "USE-PRINT-SERVER"
+  item_jp   : "PUSHÄÌÃÎ¤Ë¤è¤ë¥µ¡¼¥Ð°õºþ"
+  type      : "9"
+  start     : 1
+  length    : 1
+  precision : 0
+- item_no   : 2
+  item      : "YOBI"
+  item_jp   : "Í½È÷"
+  type      : "X"
+  start     : 2
+  length    : 499

@@ -1,0 +1,109 @@
+tbl_nrrksrh {
+	HOSPNUM				number(2,0);
+	PTID 				number(10,0);
+	SRYYMD				char(8);
+	ZAINUM				number(9,0);
+	RRKNUM				number(3,0);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#--
+	SELSHONUM		    number(3,0) ,virtual;
+	SELSRYCD		    char(9) ,virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,SRYYMD,ZAINUM,RRKNUM ;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_nrrksrh_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nrrksrh
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      =   :SRYYMD
+			AND   ZAINUM      =   :ZAINUM
+			AND   RRKNUM      =   :RRKNUM
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nrrksrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      LIKE   :SRYYMD
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nrrksrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_nrrksrh
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      >   :SRYYMD
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_nrrksrh_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nrrksrh
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      =   :SRYYMD
+			AND   RRKNUM      =   :RRKNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_nrrksrh_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nrrksrh
+			WHERE HOSPNUM     =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYMD      LIKE   :SRYYMD
+			AND   ZAINUM      =   :ZAINUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_nrrksrh_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_nrrksrh
+		WHERE   HOSPNUM   =   :HOSPNUM
+		  AND   PTID      =   :PTID
+          AND   SRYYMD   >=   :UPYMD
+          AND   ZAINUM      in
+         (  SELECT ZAINUM      FROM tbl_nsrysrh
+		    WHERE  HOSPNUM     =  :HOSPNUM
+		    AND    PTID        =  :PTID
+		    AND    SRYCD       =  :SELSRYCD )
+         ORDER BY  (SRYYMD = :SRYYMD),SRYYMD
+        ;
+	};
+};

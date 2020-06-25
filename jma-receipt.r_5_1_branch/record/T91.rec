@@ -1,0 +1,20 @@
+T91 {
+  fixed1 {
+    sw1 {
+      hpos int;
+      vpos int;
+      dataview {
+        textdata varchar(63000);
+      };
+    };
+    MIDASI2 {
+      textdata varchar(18);
+    };
+    MIDASI1 {
+      textdata varchar(18);
+    };
+    CNTHEN {
+      textdata varchar(28);
+    };
+  };
+};

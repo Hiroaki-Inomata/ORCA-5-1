@@ -1,0 +1,10 @@
+xml_hspmmv2req {
+	context	int;
+	object	object;
+	mode	int;
+	recordname	varchar(128);
+	hspmmv2req	{
+		Patient_ID		 varchar(20);
+		Perform_Month	 varchar(7);
+	};
+};

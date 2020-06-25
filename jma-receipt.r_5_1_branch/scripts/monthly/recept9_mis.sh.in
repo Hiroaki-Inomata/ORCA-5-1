@@ -1,0 +1,128 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+#-------------------------------------------#
+#    診療情報システム提供用
+#     recept9.sh を複写
+#-------------------------------------------#
+#    医療請求書用ファイル（入院）作成
+#
+#        CPCOMMONSHELL1.INC  
+#        $1 SRYYM TERID SYSYMD
+#        $2 SYOKBN
+#           1:一括作成  2:個別作成
+#        $3 RECEKBN
+#           0:全体  1:社保　2:国保
+#        $4 エラーファイル名 
+#        $5 JOBID 
+#        $6 SHELLID
+#        $7 県単用項目編集プログラム名
+#        $8  処理年月
+#        $9  作成年月日
+#        $10 作成時間
+#        $11 県番号（個別作成のときは"00"）
+#        $12 社保レセ電出力区分
+#        $13 国保レセ電出力区分
+#        $14 県区分（個別作成のとき山形、福岡のみ設定）
+#        $16 HOSPNUM 
+#        $18 レセプト作成区分
+#            1:提出用レセ、2:点検用レセ、3:点検用レセ（０点公費記載）
+#            4:点検用レセ（包括算定分記載）、5:点検用レセ（０点公費・包括算定分記載）
+#            8:ＥＦファイル作成、9:連携基盤用
+#        $19 請求データ削除区分
+#            0:削除しない、2:削除する
+#        $20 業務区分
+#            0:レセプト 1:会計照会 2:入院会計照会 3:診療行為
+#-------------------------------------------#
+
+echo "arg1  = [" ${1} "]"
+echo "arg2  = [" ${2} "]"
+echo "arg3  = [" ${3} "]"
+echo "arg4  = [" ${4} "]"
+echo "arg5  = [" ${5} "]"
+echo "arg6  = [" ${6} "]"
+echo "arg7  = [" ${7} "]"
+echo "arg8  = [" ${8} "]"
+echo "arg9  = [" ${9} "]"
+echo "arg10 = [" ${10} "]"
+echo "arg12 = [" ${12} "]"
+echo "arg13 = [" ${13} "]"
+echo "arg16 = [" ${16} "]"
+echo "arg18 = [" ${18} "]"
+echo "arg19 = [" ${19} "]"
+
+##      エラーファイル削除
+echo "errfile = [" ${MCP_TEMPDIR}/${4}  "]"
+rm  -f ${MCP_TEMPDIR}/${4}
+
+rm  -f ${MCP_TEMPDIR}/${16}00RECE6*
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBSETBTPARA -parameter ${16},$5,$6,00,,
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0600 -parameter $1$2$3$5$6,B,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0610 -parameter $1$2$3$5$6,B,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0620 -parameter $1$3$5$6,${18},${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0630 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0640 -parameter $1$5$6,${18},${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0650 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0655 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0660 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0670 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0680 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0690 -parameter $1$5$6,${18},${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0700 -parameter $1$5$6,${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+ 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0730 -parameter $9${10}$1$2$3$8$5$6,B,${19},${20},${16},${4}
+[ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+##  レセ電作成
+if  [ ${12} -eq '2' ] || [ ${12} -eq '3' ] || [ ${13} -eq '2' ] || [ ${13} -eq '3' ]; then
+    if ( ( [ ${12} != '2' ] && [ ${12} != '3' ] ) && [ ${3} -eq '1' ] ) || \
+       ( ( [ ${13} != '2' ] && [ ${13} != '3' ] ) && [ ${3} -eq '2' ] ); then
+       echo "no1"
+    else
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0250 -parameter $1,$3,${12},${13},$5,$6,${18},${16},${4}
+        [ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0260 -parameter $1,$3,${12},${13},$5,$6,${18},${16},${4}
+        [ -e ${MCP_TEMPDIR}/${4} ] && exit
+
+        $DBSTUB -dir $LDDIRECTORY -bd orcabt ORCR0350 -parameter $1,$3,${12},${13},$5,$6,${16},${9},${10},B,${4}
+        [ -e ${MCP_TEMPDIR}/${4} ] && exit
+    fi
+fi
+
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter JBE$5$6,${16}
+
+rm  -f ${MCP_TEMPDIR}/${16}00RECE6*
+
+exit

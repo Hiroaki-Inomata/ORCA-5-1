@@ -1,0 +1,14 @@
+xml_stock1v2req {
+    context	int;
+    object	object;
+	mode	int;
+	recordname	varchar(128);
+	stock1v2req {
+		Request_Number		varchar(2);
+		Karte_Uid		varchar(36);
+		Orca_Uid		varchar(36);
+		Base_Date		varchar(10);
+		InOut			varchar(1);
+		Contain_TestPatient	varchar(4);
+	};
+};

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+PATH=${PATCHSCRIPTSDIR}:${SCRIPTSDIR}:${PATH}
+
+. $(basename ${0%.sh}_main.sh) "$@"
+

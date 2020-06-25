@@ -1,0 +1,32 @@
+S07 {
+  fixed1 {
+    LBLSKYPRT {
+      textdata varchar(70);
+    };
+    SRYYM {
+      textdata varchar(10);
+    };
+    CMB_KIKANKBN {
+      KIKANKBN {
+        textdata varchar(20);
+      };
+      count int;
+        item varchar(20)[5];
+    };
+    STDAY {
+      state int;
+      numdata number(2);
+    };
+    EDDAY {
+      state int;
+      numdata number(2);
+    };
+    CMB_TUKIGRPKBN {
+      TUKIGRPKBN {
+        textdata varchar(30);
+      };
+      count int;
+        item varchar(30)[5];
+    };
+  };
+};

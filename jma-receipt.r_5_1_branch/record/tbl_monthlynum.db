@@ -1,0 +1,95 @@
+tbl_monthlynum {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	KOHNUM				char(3);
+	KOHID				number(10);
+	SRYYM  				char(6);
+	NYUGAIKBN			char(1);
+	JKYSNUM 			char(20);
+	TERMID   			varchar(32);
+	OPID				varchar(16);
+	CREYMD   			char(8);
+	UPYMD				char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,KOHNUM,KOHID,SRYYM,NYUGAIKBN;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_monthlynum_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHNUM      =   :KOHNUM
+			AND   SRYYM       =   :SRYYM
+			AND  NYUGAIKBN    =   :NYUGAIKBN
+                        
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_monthlynum_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM      =   :HOSPNUM
+			AND     PTID        =   :PTID
+			AND     KOHNUM      =   :KOHNUM
+			ORDER   BY  SRYYM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_monthlynum_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     KOHNUM    =   :KOHNUM
+			AND     SRYYM     =   :SRYYM
+			ORDER   BY  PTID
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_monthlynum_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_monthlynum_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_monthlynum
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   KOHID       =   :KOHID
+			AND   SRYYM       =   :SRYYM
+			AND  NYUGAIKBN    =   :NYUGAIKBN
+                        
+		;
+	};
+};
+

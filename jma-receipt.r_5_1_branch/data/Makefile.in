@@ -1,0 +1,136 @@
+top_srcdir = @top_srcdir@
+include $(top_srcdir)/Makefile.directories
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+ORCADATA_files = \
+	SRYKBNNAME.TXT \
+	TENSUKBNNAME.TXT \
+	transparent.jpg \
+	test.pdf \
+	SKDEF1001.yml \
+	SKDEF1002.yml \
+	SKDEF1003.yml \
+	SKDEF1006.yml \
+	SKDEF1007.yml \
+	SKDEF1017.yml \
+	SKDEF1031.yml \
+	SKDEF1038.yml \
+	SKDEF1039.yml \
+	SKDEF2005.yml \
+	SKDEF200501.yml \
+	SKDEF200505.yml \
+	SKDEF2010.yml \
+	SKDEF4001.yml \
+	SKDEF5000.yml \
+	SKDEF5001.yml \
+	SKDEF5002.yml \
+	SKDEF1008.yml \
+	SKDEF1005.yml \
+	SKDEF1009.yml \
+	SKDEF1012.yml \
+	SKDEF1013.yml \
+	SKDEF1014.yml \
+	SKDEF1016.yml \
+	SKDEF1900.yml \
+	SKDEF1901.yml \
+	SKDEF1902.yml \
+	SKDEF1903.yml \
+	SKDEF2003.yml \
+	SKDEF2006.yml \
+	SKDEF4100.yml \
+	SKDEF3004.yml \
+	SKDEF9700.yml \
+	SKDEF5101.yml \
+	SKDEF5102.yml \
+	SKDEF5103.yml \
+	SKDEF5104.yml \
+	SKDEF5105.yml \
+	SKDEF5106.yml \
+	SKDEF5107.yml \
+	SKDEF5108.yml \
+	SKDEF5109.yml \
+	SKDEF5110.yml \
+	SKDEF5111.yml \
+	SKDEF5112.yml \
+	SKDEF5113.yml \
+	SKDEF5114.yml \
+	SKDEF5115.yml \
+	SKDEF2007.yml \
+	SKDEF1011.yml \
+	SKDEF1018.yml \
+	SKDEF1021.yml \
+	SKDEF1022.yml \
+	SKDEF1026.yml \
+	SKDEF1027.yml \
+	SKDEF1028.yml \
+	SKDEF1030.yml \
+	SKDEF1040.yml \
+	SKDEF1041.yml \
+	SKDEF1042.yml \
+	SKDEF1043.yml \
+	SKDEF1044.yml \
+	SKDEF1045.yml \
+	SKDEF1046.yml \
+	SKDEF1050.yml \
+	SKDEF1920.yml \
+	SKDEF2001.yml \
+	SKDEF2002.yml \
+	SKDEF2004.yml \
+	SKDEF2008.yml \
+	SKDEF2009.yml \
+	SKDEF2011.yml \
+	SKDEF2012.yml \
+	SKDEF2013.yml \
+	SKDEF3001.yml \
+	SKDEF3002.yml \
+	SKDEF3003.yml \
+	SKDEF3005.yml \
+	SKDEF4002.yml \
+	SKDEF4003.yml \
+	SKDEF5003.yml \
+	SKDEF5007.yml \
+	SKDEF5010.yml \
+	SKDEF5011.yml \
+	SKDEF5012.yml \
+	SKDEF5013.yml \
+	SKDEF5015.yml \
+	SKDEF5020.yml \
+	SKDEF8000.yml \
+	SKDEF9100.yml \
+	SKDEF9101.yml \
+	SKDEF9701.yml \
+	SKDEF9901.yml \
+	SKDEF9104.yml \
+	SKDEF5008.yml \
+	SKDEF1019.yml \
+	SKDEF1020.yml \
+	SKDEF1033.yml \
+	SKDEF1036.yml \
+	SKDEF1201.yml \
+	SKDEF1202.yml \
+	SKDEF9000.yml \
+	SKDEF9001.yml \
+	SKDEF9103.yml \
+	SKDEF9702.yml \
+	SKDEF9703.yml \
+	SKDEF9704.yml \
+	SKDEF9705.yml \
+	SKDEF9706.yml \
+	SKDEF9707.yml \
+	SKDEF9708.yml \
+	SKDEF9800.yml \
+
+all:   
+
+filecheck:
+
+clean: 
+
+distclean: 
+	-rm -f Makefile
+
+install: all
+	$(INSTALL) -d $(orcadatadir)
+	$(INSTALL_DATA) $(ORCADATA_files) $(orcadatadir)

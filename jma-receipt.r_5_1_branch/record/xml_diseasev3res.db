@@ -1,0 +1,60 @@
+xml_diseasev3res {
+	context int;
+	object  object;
+	mode	int;
+	recordname	varchar(128);
+	diseaseres {
+		Information_Date			varchar(10);
+		Information_Time			varchar(8);
+		Api_Result				varchar(3);
+		Api_Result_Message			varchar(100);
+		Reskey					varchar(100);
+		Perform_Date				varchar(10);
+		Perform_Time				varchar(8);
+		Department_Code				varchar(2);
+		Department_Name				varchar(80);
+		Patient_ID				varchar(20);
+		Base_Month				varchar(7);
+		Disease_Message_Information {
+			Disease_Result			varchar(3);
+			Disease_Result_Message		varchar(100);
+			Disease_Warning_Info {
+				 Disease_Warning        varchar(3);
+				 Disease_Warning_Message	varchar(100);
+				 Disease_Warning_Item_Position  varchar(2);
+				 Disease_Warning_StartDate	varchar(10);
+				 Disease_Warning_Name	varchar(80);
+				 Disease_Warning_Code	varchar(155);
+				 Disease_Warning_Change varchar(2);
+			};
+		} [50];
+		Disease_Unmatch_Information	{
+			Disease_Unmatch_Information_Overflow    varchar(5);
+			Disease_Unmatch_Info {
+				Disease_Code			varchar(155);
+				Disease_Name			varchar(80);
+				Disease_Supplement_Name		varchar(80);
+				Disease_Supplement_Single	{
+					Disease_Supplement_Single_Code	varchar(20);
+					Disease_Supplement_Single_Name	varchar(80);
+				}[3] ;
+				Disease_InOut			varchar(1);
+				Disease_Category		varchar(2);
+				Disease_SuspectedFlag		varchar(1);
+				Disease_AcuteFlag		varchar(1);
+				Disease_StartDate		varchar(10);
+				Disease_EndDate			varchar(10);
+				Disease_OutCome			varchar(1);
+				Disease_Karte_Name		varchar(80);
+				Disease_Class			varchar(2);
+				Insurance_Combination_Number	varchar(4);
+				Disease_Receipt_Print		varchar(1);
+				Disease_Receipt_Print_Period	varchar(2);
+				Insurance_Disease		varchar(1);
+				Discharge_Certificate		varchar(1);
+				Main_Disease_Class		varchar(2);
+				Sub_Disease_Class		varchar(2);
+			}[50] ;
+		};
+	};
+};

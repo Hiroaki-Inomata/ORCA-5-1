@@ -1,0 +1,784 @@
+tbl_kohsky	{
+HOSPNUM		number(2,0);
+SRYYM		number(6);
+NYUGAIKBN	char(1);
+PTID		number(10);
+RECEKA		char(2);
+TEISYUTUSAKI	number(1,0);
+RECESYUBETU	char(4);
+HKNJANUM_KEY	char(8);
+HOJOKBN_KEY     char(1);
+KOHID_KEY       number(10);
+TEKSTYMD	char(8);
+RECEIPT_KBN	char(10);
+PTNUM		char(20);
+KANANAME        char(50);
+NAME            char(100);
+SEX             char(01);
+BIRTHDAY        number(08);
+AGE	        number(3,0); 
+DEATHKBN        char(01);
+SRYKA1          char(02);
+SRYKA2          char(02);
+SRYKA3          char(02);
+SRYKA4          char(02);
+SRYKA5          char(02);
+SRYKA6          char(02);
+SRYKA7          char(02);
+SRYKA8          char(02);
+SRYKA9          char(02);
+SRYKA10         char(02);
+SRYKA11         char(02);
+SRYKA12         char(02);
+SRYKA13         char(02);
+SRYKA14         char(02);
+SRYKA15         char(02);
+SRYKA16         char(02);
+SRYKA17         char(02);
+SRYKA18         char(02);
+SRYKA19         char(02);
+SRYKA20         char(02);
+HKNID           number(10);
+HKNNUM          char(03);
+HKNHBTNUM       char(02);
+HKNJANUM        char(08);
+HONKZKKBN       char(01);
+HOJOKBN         char(01);
+CONTKBN         char(01);
+KIGO            char(80);
+NUM             char(80);
+KYURATE         number(03);
+CERTNUM         char(03);
+RJNHKNID        number(10);
+RJNHKNNUM       char(03);
+RJNHBTNUM       char(02);
+RJNFTNJANUM     char(08);
+RJNJKYSNUM      char(07);
+KOHID1           number(10);
+KOHNUM1          char(03);
+KOHHBTNUM1       char(02);
+KOHFTNJANUM1     char(20);
+KOHJKYSNUM1      char(20);
+KOHID2           number(10);
+KOHNUM2          char(03);
+KOHHBTNUM2       char(02);
+KOHFTNJANUM2     char(20);
+KOHJKYSNUM2      char(20);
+KOHID3           number(10);
+KOHNUM3          char(03);
+KOHHBTNUM3       char(02);
+KOHFTNJANUM3     char(20);
+KOHJKYSNUM3      char(20);
+KOHID4           number(10);
+KOHNUM4          char(03);
+KOHHBTNUM4       char(02);
+KOHFTNJANUM4     char(20);
+KOHJKYSNUM4      char(20);
+HKNCOMBI1	number(4,0);
+HKNNUMHC1	char(3);
+KOHNUMHC11  char(3);
+KOHNUMHC12	char(3);
+KOHNUMHC13	char(3);
+KOHNUMHC14	char(3);
+HKNCOMBI2	number(4,0);
+HKNNUMHC2	char(3);
+KOHNUMHC21	char(3);
+KOHNUMHC22	char(3);
+KOHNUMHC23	char(3);
+KOHNUMHC24	char(3);
+HKNCOMBI3	number(4,0);
+HKNNUMHC3	char(3);
+KOHNUMHC31	char(3);
+KOHNUMHC32	char(3);
+KOHNUMHC33	char(3);
+KOHNUMHC34	char(3);
+HKNCOMBI4	number(4,0);
+HKNNUMHC4	char(3);
+KOHNUMHC41	char(3);
+KOHNUMHC42	char(3);
+KOHNUMHC43	char(3);
+KOHNUMHC44	char(3);
+HKNCOMBI5	number(4,0);
+HKNNUMHC5	char(3);
+KOHNUMHC51	char(3);
+KOHNUMHC52	char(3);
+KOHNUMHC53	char(3);
+KOHNUMHC54	char(3);
+HKNCOMBI6	number(4,0);
+HKNNUMHC6	char(3);
+KOHNUMHC61	char(3);
+KOHNUMHC62	char(3);
+KOHNUMHC63	char(3);
+KOHNUMHC64	char(3);
+HKNCOMBI7	number(4,0);
+HKNNUMHC7	char(3);
+KOHNUMHC71	char(3);
+KOHNUMHC72	char(3);
+KOHNUMHC73	char(3);
+KOHNUMHC74	char(3);
+HKNCOMBI8	number(4,0);
+HKNNUMHC8	char(3);
+KOHNUMHC81	char(3);
+KOHNUMHC82	char(3);
+KOHNUMHC83	char(3);
+KOHNUMHC84	char(3);
+HKNCOMBI9	number(4,0);
+HKNNUMHC9	char(3);
+KOHNUMHC91	char(3);
+KOHNUMHC92	char(3);
+KOHNUMHC93	char(3);
+KOHNUMHC94	char(3);
+HKNCOMBI10	number(4,0);
+HKNNUMHC10	char(3);
+KOHNUMHC101	char(3);
+KOHNUMHC102	char(3);
+KOHNUMHC103	char(3);
+KOHNUMHC104	char(3);
+KHNTEN1	number(8,0);
+KAISU1	number(5,0);
+TENSU11	number(8,0);
+TENSU12	number(8,0);
+TENSU13	number(8,0);
+TENSU14	number(8,0);
+TENSU15	number(8,0);
+KHNTEN2	number(8,0);
+KAISU2	number(5,0);
+TENSU21	number(8,0);
+TENSU22	number(8,0);
+TENSU23	number(8,0);
+TENSU24	number(8,0);
+TENSU25	number(8,0);
+KHNTEN3	number(8,0);
+KAISU3	number(5,0);
+TENSU31	number(8,0);
+TENSU32	number(8,0);
+TENSU33	number(8,0);
+TENSU34	number(8,0);
+TENSU35	number(8,0);
+KHNTEN4	number(8,0);
+KAISU4	number(5,0);
+TENSU41	number(8,0);
+TENSU42	number(8,0);
+TENSU43	number(8,0);
+TENSU44	number(8,0);
+TENSU45	number(8,0);
+KHNTEN5	number(8,0);
+KAISU5	number(5,0);
+TENSU51	number(8,0);
+TENSU52	number(8,0);
+TENSU53	number(8,0);
+TENSU54	number(8,0);
+TENSU55	number(8,0);
+KHNTEN6	number(8,0);
+KAISU6	number(5,0);
+TENSU61	number(8,0);
+TENSU62	number(8,0);
+TENSU63	number(8,0);
+TENSU64	number(8,0);
+TENSU65	number(8,0);
+KHNTEN7	number(8,0);
+KAISU7	number(5,0);
+TENSU71	number(8,0);
+TENSU72	number(8,0);
+TENSU73	number(8,0);
+TENSU74	number(8,0);
+TENSU75	number(8,0);
+KHNTEN8	number(8,0);
+KAISU8	number(5,0);
+TENSU81	number(8,0);
+TENSU82	number(8,0);
+TENSU83	number(8,0);
+TENSU84	number(8,0);
+TENSU85	number(8,0);
+KHNTEN9	number(8,0);
+KAISU9	number(5,0);
+TENSU91	number(8,0);
+TENSU92	number(8,0);
+TENSU93	number(8,0);
+TENSU94	number(8,0);
+TENSU95	number(8,0);
+KHNTEN10	number(8,0);
+KAISU10	number(5,0);
+TENSU101	number(8,0);
+TENSU102	number(8,0);
+TENSU103	number(8,0);
+TENSU104	number(8,0);
+TENSU105	number(8,0);
+KHNTEN11	number(8,0);
+KAISU11	number(5,0);
+TENSU111	number(8,0);
+TENSU112	number(8,0);
+TENSU113	number(8,0);
+TENSU114	number(8,0);
+TENSU115	number(8,0);
+KHNTEN12	number(8,0);
+KAISU12	number(5,0);
+TENSU121	number(8,0);
+TENSU122	number(8,0);
+TENSU123	number(8,0);
+TENSU124	number(8,0);
+TENSU125	number(8,0);
+KHNTEN13	number(8,0);
+KAISU13	number(5,0);
+TENSU131	number(8,0);
+TENSU132	number(8,0);
+TENSU133	number(8,0);
+TENSU134	number(8,0);
+TENSU135	number(8,0);
+KHNTEN14	number(8,0);
+KAISU14	number(5,0);
+TENSU141	number(8,0);
+TENSU142	number(8,0);
+TENSU143	number(8,0);
+TENSU144	number(8,0);
+TENSU145	number(8,0);
+KHNTEN15	number(8,0);
+KAISU15	number(5,0);
+TENSU151	number(8,0);
+TENSU152	number(8,0);
+TENSU153	number(8,0);
+TENSU154	number(8,0);
+TENSU155	number(8,0);
+KHNTEN16	number(8,0);
+KAISU16	number(5,0);
+TENSU161	number(8,0);
+TENSU162	number(8,0);
+TENSU163	number(8,0);
+TENSU164	number(8,0);
+TENSU165	number(8,0);
+KHNTEN17	number(8,0);
+KAISU17	number(5,0);
+TENSU171	number(8,0);
+TENSU172	number(8,0);
+TENSU173	number(8,0);
+TENSU174	number(8,0);
+TENSU175	number(8,0);
+KHNTEN18	number(8,0);
+KAISU18	number(5,0);
+TENSU181	number(8,0);
+TENSU182	number(8,0);
+TENSU183	number(8,0);
+TENSU184	number(8,0);
+TENSU185	number(8,0);
+KHNTEN19	number(8,0);
+KAISU19	number(5,0);
+TENSU191	number(8,0);
+TENSU192	number(8,0);
+TENSU193	number(8,0);
+TENSU194	number(8,0);
+TENSU195	number(8,0);
+KHNTEN20	number(8,0);
+KAISU20	number(5,0);
+TENSU201	number(8,0);
+TENSU202	number(8,0);
+TENSU203	number(8,0);
+TENSU204	number(8,0);
+TENSU205	number(8,0);
+KHNTEN21	number(8,0);
+KAISU21	number(5,0);
+TENSU211	number(8,0);
+TENSU212	number(8,0);
+TENSU213	number(8,0);
+TENSU214	number(8,0);
+TENSU215	number(8,0);
+KHNTEN22	number(8,0);
+KAISU22	number(5,0);
+TENSU221	number(8,0);
+TENSU222	number(8,0);
+TENSU223	number(8,0);
+TENSU224	number(8,0);
+TENSU225	number(8,0);
+KHNTEN23	number(8,0);
+KAISU23	number(5,0);
+TENSU231	number(8,0);
+TENSU232	number(8,0);
+TENSU233	number(8,0);
+TENSU234	number(8,0);
+TENSU235	number(8,0);
+KHNTEN24	number(8,0);
+KAISU24	number(5,0);
+TENSU241	number(8,0);
+TENSU242	number(8,0);
+TENSU243	number(8,0);
+TENSU244	number(8,0);
+TENSU245	number(8,0);
+KHNTEN25	number(8,0);
+KAISU25	number(5,0);
+TENSU251	number(8,0);
+TENSU252	number(8,0);
+TENSU253	number(8,0);
+TENSU254	number(8,0);
+TENSU255	number(8,0);
+KHNTEN26	number(8,0);
+KAISU26	number(5,0);
+TENSU261	number(8,0);
+TENSU262	number(8,0);
+TENSU263	number(8,0);
+TENSU264	number(8,0);
+TENSU265	number(8,0);
+KHNTEN27	number(8,0);
+KAISU27	number(5,0);
+TENSU271	number(8,0);
+TENSU272	number(8,0);
+TENSU273	number(8,0);
+TENSU274	number(8,0);
+TENSU275	number(8,0);
+KHNTEN28	number(8,0);
+KAISU28	number(5,0);
+TENSU281	number(8,0);
+TENSU282	number(8,0);
+TENSU283	number(8,0);
+TENSU284	number(8,0);
+TENSU285	number(8,0);
+KHNTEN29	number(8,0);
+KAISU29	number(5,0);
+TENSU291	number(8,0);
+TENSU292	number(8,0);
+TENSU293	number(8,0);
+TENSU294	number(8,0);
+TENSU295	number(8,0);
+KHNTEN30	number(8,0);
+KAISU30	number(5,0);
+TENSU301	number(8,0);
+TENSU302	number(8,0);
+TENSU303	number(8,0);
+TENSU304	number(8,0);
+TENSU305	number(8,0);
+KHNTEN31	number(8,0);
+KAISU31	number(5,0);
+TENSU311	number(8,0);
+TENSU312	number(8,0);
+TENSU313	number(8,0);
+TENSU314	number(8,0);
+TENSU315	number(8,0);
+KHNTEN32	number(8,0);
+KAISU32	number(5,0);
+TENSU321	number(8,0);
+TENSU322	number(8,0);
+TENSU323	number(8,0);
+TENSU324	number(8,0);
+TENSU325	number(8,0);
+KHNTEN33	number(8,0);
+KAISU33	number(5,0);
+TENSU331	number(8,0);
+TENSU332	number(8,0);
+TENSU333	number(8,0);
+TENSU334	number(8,0);
+TENSU335	number(8,0);
+KHNTEN34	number(8,0);
+KAISU34	number(5,0);
+TENSU341	number(8,0);
+TENSU342	number(8,0);
+TENSU343	number(8,0);
+TENSU344	number(8,0);
+TENSU345	number(8,0);
+KHNTEN35	number(8,0);
+KAISU35	number(5,0);
+TENSU351	number(8,0);
+TENSU352	number(8,0);
+TENSU353	number(8,0);
+TENSU354	number(8,0);
+TENSU355	number(8,0);
+KHNTEN36	number(8,0);
+KAISU36	number(5,0);
+TENSU361	number(8,0);
+TENSU362	number(8,0);
+TENSU363	number(8,0);
+TENSU364	number(8,0);
+TENSU365	number(8,0);
+KHNTEN37	number(8,0);
+KAISU37	number(5,0);
+TENSU371	number(8,0);
+TENSU372	number(8,0);
+TENSU373	number(8,0);
+TENSU374	number(8,0);
+TENSU375	number(8,0);
+KHNTEN38	number(8,0);
+KAISU38	number(5,0);
+TENSU381	number(8,0);
+TENSU382	number(8,0);
+TENSU383	number(8,0);
+TENSU384	number(8,0);
+TENSU385	number(8,0);
+KHNTEN39	number(8,0);
+KAISU39	number(5,0);
+TENSU391	number(8,0);
+TENSU392	number(8,0);
+TENSU393	number(8,0);
+TENSU394	number(8,0);
+TENSU395	number(8,0);
+KHNTEN40	number(8,0);
+KAISU40	number(5,0);
+TENSU401	number(8,0);
+TENSU402	number(8,0);
+TENSU403	number(8,0);
+TENSU404	number(8,0);
+TENSU405	number(8,0);
+KHNTEN41	number(8,0);
+KAISU41	number(5,0);
+TENSU411	number(8,0);
+TENSU412	number(8,0);
+TENSU413	number(8,0);
+TENSU414	number(8,0);
+TENSU415	number(8,0);
+KHNTEN42	number(8,0);
+KAISU42	number(5,0);
+TENSU421	number(8,0);
+TENSU422	number(8,0);
+TENSU423	number(8,0);
+TENSU424	number(8,0);
+TENSU425	number(8,0);
+KHNTEN43	number(8,0);
+KAISU43	number(5,0);
+TENSU431	number(8,0);
+TENSU432	number(8,0);
+TENSU433	number(8,0);
+TENSU434	number(8,0);
+TENSU435	number(8,0);
+KHNTEN44	number(8,0);
+KAISU44	number(5,0);
+TENSU441	number(8,0);
+TENSU442	number(8,0);
+TENSU443	number(8,0);
+TENSU444	number(8,0);
+TENSU445	number(8,0);
+KHNTEN45	number(8,0);
+KAISU45	number(5,0);
+TENSU451	number(8,0);
+TENSU452	number(8,0);
+TENSU453	number(8,0);
+TENSU454	number(8,0);
+TENSU455	number(8,0);
+KHNTEN46	number(8,0);
+KAISU46	number(5,0);
+TENSU461	number(8,0);
+TENSU462	number(8,0);
+TENSU463	number(8,0);
+TENSU464	number(8,0);
+TENSU465	number(8,0);
+KHNTEN47	number(8,0);
+KAISU47	number(5,0);
+TENSU471	number(8,0);
+TENSU472	number(8,0);
+TENSU473	number(8,0);
+TENSU474	number(8,0);
+TENSU475	number(8,0);
+KHNTEN48	number(8,0);
+KAISU48	number(5,0);
+TENSU481	number(8,0);
+TENSU482	number(8,0);
+TENSU483	number(8,0);
+TENSU484	number(8,0);
+TENSU485	number(8,0);
+KHNTEN49	number(8,0);
+KAISU49	    number(5,0);
+TENSU491	number(8,0);
+TENSU492	number(8,0);
+TENSU493	number(8,0);
+TENSU494	number(8,0);
+TENSU495	number(8,0);
+KHNTEN50	number(8,0);
+KAISU50	    number(5,0);
+TENSU501	number(8,0);
+TENSU502	number(8,0);
+TENSU503	number(8,0);
+TENSU504	number(8,0);
+TENSU505	number(8,0);
+JNISSU1          number(2,0);
+JNISSU2          number(2,0);
+JNISSU3          number(2,0);
+JNISSU4          number(2,0);
+JNISSU5          number(2,0);
+TOTALTEN1        number(8,0);
+TOTALTEN2        number(8,0);
+TOTALTEN3        number(8,0);
+TOTALTEN4        number(8,0);
+TOTALTEN5        number(8,0);
+FTNMONEY1        number(9,0);
+FTNMONEY2        number(9,0);
+FTNMONEY3        number(9,0);
+FTNMONEY4        number(9,0);
+FTNMONEY5        number(9,0);
+YKZFTN1          number(5,0);
+YKZFTN2          number(5,0);
+YKZFTN3          number(5,0);
+YKZFTN4          number(5,0);
+YKZFTN5          number(5,0);
+SHOKUJINISSU1    number(2,0);
+SHOKUJIRYOYOHI1  number(9,0);
+SHOKUJIFTN1      number(9,0);
+SHOKUJINISSU2    number(2,0);
+SHOKUJIRYOYOHI2  number(9,0);
+SHOKUJIFTN2      number(9,0);
+SHOKUJINISSU3    number(2,0);
+SHOKUJIRYOYOHI3  number(9,0);
+SHOKUJIFTN3      number(9,0);
+SHOKUJINISSU4    number(2,0);
+SHOKUJIRYOYOHI4  number(9,0);
+SHOKUJIFTN4      number(9,0);
+SHOKUJINISSU5    number(2,0);
+SHOKUJIRYOYOHI5  number(9,0);
+SHOKUJIFTN5      number(9,0);
+SHOKUJIFTNKBN    char(01);
+SHOSHINTIME     char(1);
+ZAITAKU        char(1);
+ZAITAKU_SAIKEI	number(9,0); 
+SKYYM		    char(6);
+HENREIYM	    char(6);
+SKYKBN		    char(1);
+TEISEIKBN	    char(1);
+FLG1				number(1,0);
+FLG2				number(1,0);
+FLG3				number(1,0);
+FLG4				number(1,0);
+FLG5				number(1,0);
+CREYMD	        char(8);
+UPDYMD	        char(8);
+#-----> 検索用項目
+XXKOHNUM1 			char(3),virtual;
+XXKOHNUM2 			char(3),virtual;
+XXKOHNUM3 			char(3),virtual;
+XXKOHNUM4 			char(3),virtual;
+};
+primary{
+	HOSPNUM,SRYYM,NYUGAIKBN,PTID,RECEKA,TEISYUTUSAKI,RECESYUBETU,HKNJANUM_KEY,HOJOKBN_KEY,KOHID_KEY,TEKSTYMD,RECEIPT_KBN;
+};
+
+path	key		{ 	
+	DBSELECT	{
+		DECLARE tbl_kohsky_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   PTID         =   :PTID
+                  AND   RECEKA       =   :RECEKA 
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   RECESYUBETU  =   :RECESYUBETU
+                  AND   HKNJANUM_KEY =   :HKNJANUM_KEY
+                  AND   HOJOKBN_KEY  =   :HOJOKBN_KEY
+                  AND   KOHID_KEY    =   :KOHID_KEY 
+                  AND   TEKSTYMD     =   :TEKSTYMD
+                  AND   RECEIPT_KBN    =   :RECEIPT_KBN
+		;
+	};
+};
+
+path	key2	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM     )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+		;
+	};
+};
+
+path	key3	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM       )
+                  AND (   (( SRYYM       =   :SKYYM     )
+                       AND ( SKYKBN      <>  '0'        )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM     )
+                       AND ( SKYKBN      <>  '0'        )))
+                  AND (   (  KOHNUM1     =   :XXKOHNUM1 )
+                       OR (  KOHNUM2     =   :XXKOHNUM1 )
+                       OR (  KOHNUM3     =   :XXKOHNUM1 )
+                       OR (  KOHNUM4     =   :XXKOHNUM1 ) )
+		;
+	};
+};
+
+path	key4	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM     )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (   (  KOHNUM1     =   :XXKOHNUM1 )
+                       OR (  KOHNUM2     =   :XXKOHNUM1 )
+                       OR (  KOHNUM3     =   :XXKOHNUM1 )
+                       OR (  KOHNUM4     =   :XXKOHNUM1 )
+                       OR (  KOHNUM1     =   :XXKOHNUM2 )
+                       OR (  KOHNUM2     =   :XXKOHNUM2 )
+                       OR (  KOHNUM3     =   :XXKOHNUM2 )
+                       OR (  KOHNUM4     =   :XXKOHNUM2 ) )
+		;
+	};
+};
+
+path	key5	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM     )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (   (  KOHNUM1     =   :XXKOHNUM1 )
+                       OR (  KOHNUM2     =   :XXKOHNUM1 )
+                       OR (  KOHNUM3     =   :XXKOHNUM1 )
+                       OR (  KOHNUM4     =   :XXKOHNUM1 )
+                       OR (  KOHNUM1     =   :XXKOHNUM2 )
+                       OR (  KOHNUM2     =   :XXKOHNUM2 )
+                       OR (  KOHNUM3     =   :XXKOHNUM2 )
+                       OR (  KOHNUM4     =   :XXKOHNUM2 )
+                       OR (  KOHNUM1     =   :XXKOHNUM3 )
+                       OR (  KOHNUM2     =   :XXKOHNUM3 )
+                       OR (  KOHNUM3     =   :XXKOHNUM3 )
+                       OR (  KOHNUM4     =   :XXKOHNUM3 ) )
+		;
+	};
+};
+path	key6	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM     )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (   (  KOHNUM1     =   :XXKOHNUM1 )
+                       OR (  KOHNUM2     =   :XXKOHNUM1 )
+                       OR (  KOHNUM3     =   :XXKOHNUM1 )
+                       OR (  KOHNUM4     =   :XXKOHNUM1 )
+                       OR (  KOHNUM1     =   :XXKOHNUM2 )
+                       OR (  KOHNUM2     =   :XXKOHNUM2 )
+                       OR (  KOHNUM3     =   :XXKOHNUM2 )
+                       OR (  KOHNUM4     =   :XXKOHNUM2 )
+                       OR (  KOHNUM1     =   :XXKOHNUM3 )
+                       OR (  KOHNUM2     =   :XXKOHNUM3 )
+                       OR (  KOHNUM3     =   :XXKOHNUM3 )
+                       OR (  KOHNUM4     =   :XXKOHNUM3 )
+                       OR (  KOHNUM1     =   :XXKOHNUM4 )
+                       OR (  KOHNUM2     =   :XXKOHNUM4 )
+                       OR (  KOHNUM3     =   :XXKOHNUM4 )
+                       OR (  KOHNUM4     =   :XXKOHNUM4 ) )
+		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_kohsky
+                WHERE   HOSPNUM       =   :HOSPNUM
+                  AND   SRYYM        =   :SRYYM
+                  AND   NYUGAIKBN    =   :NYUGAIKBN
+                  AND   TEISYUTUSAKI =   :TEISYUTUSAKI
+                  AND   SKYKBN       <>  '0' 
+		;
+	};
+};
+
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_kohsky
+                WHERE   HOSPNUM      =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+                  AND   SKYKBN      <>  '0' 
+		;
+	};
+};
+
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_kohsky
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	all	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+			WHERE   HOSPNUM    =   :HOSPNUM
+      		;
+	};
+};
+
+
+path	key7	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_kohsky
+                WHERE (      HOSPNUM      =   :HOSPNUM     )
+                  AND (   (( SRYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )
+                       AND (( SKYYM       =  '000000' ) OR ( SKYYM = :SKYYM )))
+                       OR (( SKYYM       =   :SKYYM   )
+                       AND ( SKYKBN      <>  '0'      )))
+                  AND (      PTID        =   :PTID       )
+		;
+	};
+};
+
+path	st_key1	{
+	DBSELECT	{
+		DECLARE tbl_kohsky_st_key1_csr CURSOR FOR
+		SELECT a.* FROM tbl_kohsky a,tbl_ptinf b
+		WHERE (    a.HOSPNUM      =   :HOSPNUM     )
+		AND (   (( a.SRYYM       =   :SKYYM   )
+		AND ( a.SKYKBN      <>  '0'      )
+		AND (( a.SKYYM       =  '000000' )
+			OR ( a.SKYYM = :SKYYM )))
+			OR (( a.SKYYM       =   :SKYYM   )
+		AND ( a.SKYKBN      <>  '0'      )))
+		AND (      a.NYUGAIKBN  LIKE  :NYUGAIKBN    )
+		AND (    a.HOSPNUM  =  b.HOSPNUM )
+		AND (    a.PTID    =  b.PTID   )
+		AND (  b.TSTPTNUMKBN <> '1'    )
+	};
+};
+
+path	del4 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_kohsky
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   SRYYM       =   :SRYYM
+                  AND   NYUGAIKBN   =   :NYUGAIKBN
+                  AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_kohsky
+		SET	PTNUM       =   :PTNUM
+                WHERE   HOSPNUM     =   :HOSPNUM
+                  AND   PTID        =   :PTID
+		;
+	};
+};

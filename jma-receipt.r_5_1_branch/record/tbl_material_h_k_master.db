@@ -1,0 +1,50 @@
+tbl_material_h_k_master {
+	KIKAKUCD			number(5,0);
+	KIKAKU				varchar(120);
+	CREYMD   			varchar(8);
+	UPYMD    			varchar(8);
+	UPHMS				varchar(6);
+};
+primary	{
+	KIKAKUCD;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_material_h_k_master_key_csr CURSOR FOR
+		SELECT *
+		FROM master.tbl_material_h_k
+		WHERE 	KIKAKUCD = :KIKAKUCD
+		;
+	};
+
+	DBINSERT	{
+		INSERT INTO 	master.tbl_material_h_k
+			VALUES(
+				:KIKAKUCD,
+				:KIKAKU,
+				:CREYMD,
+				:UPYMD,
+				:UPHMS
+			)
+		;
+	};
+
+	DBUPDATE		{
+		UPDATE master.tbl_material_h_k
+			SET
+				KIKAKUCD = :KIKAKUCD,
+				KIKAKU   = :KIKAKU,
+				CREYMD   = :CREYMD,
+				UPYMD    = :UPYMD,
+				UPHMS    = :UPHMS
+			WHERE 	KIKAKUCD = :KIKAKUCD
+		;
+	};
+
+	DBDELETE	{
+		DELETE FROM	master.tbl_material_h_k
+			WHERE 	KIKAKUCD = :KIKAKUCD
+		;
+	};
+};

@@ -1,0 +1,22 @@
+xml_foundv3req {
+  context                          int;
+  object                           object;
+  mode                             int;
+  recordname                       varchar(128);
+  foundv3req{
+    Request_Number                 varchar(02);
+    Karte_Uid                      varchar(36);
+    Orca_Uid                       varchar(36);
+    Export_Information{
+      Export_Patient_List_Class   varchar(01);
+    };
+    Print_Information{
+      Print_Patient_List_Class     varchar(01);
+    };
+    Patient_List_Information{
+      Title_Name                   varchar(100);
+      Target_Name                  varchar(100)[2];
+    };
+  };
+};
+

@@ -1,0 +1,16 @@
+WID2 {
+  fixed1 {
+    ID1CODE {
+      textdata varchar(10);
+    };
+    ID1MSG {
+      textdata varchar(80);
+    };
+    B01 {
+      label varchar(6);
+    };
+    B12 {
+      label varchar(6);
+    };
+  };
+};

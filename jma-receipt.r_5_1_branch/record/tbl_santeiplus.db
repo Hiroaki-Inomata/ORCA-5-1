@@ -1,0 +1,143 @@
+tbl_santeiplus {
+	HOSPNUM				number(2,0);
+	PTID				number(10,0);
+	SRYYM				char(6);
+	SRYCD				char(9);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	HKNCOMBINUM			number(4,0);
+	DAYKEY   			number(2,0);
+	RENNUM				number(2,0);
+	COMMENT  			varchar(80);
+	ENDYMD				char(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+
+primary	{
+	HOSPNUM,PTID,SRYYM,SRYCD,NYUGAIKBN,SRYKA,HKNCOMBINUM,DAYKEY,RENNUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_santeiplus_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   DAYKEY      =   :DAYKEY
+			AND   RENNUM      =   :RENNUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_santeiplus_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   SRYKA       =   :SRYKA
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   DAYKEY      =   :DAYKEY
+			ORDER   BY      RENNUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_santeiplus_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   SRYKA       =   :SRYKA
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY      DAYKEY,
+					RENNUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_santeiplus_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+path	del2 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   SRYKA       =   :SRYKA
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+		;
+	};
+};
+
+path	del3 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   SRYKA       =   :SRYKA
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   DAYKEY      =   :DAYKEY
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_santeiplus_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_santeiplus
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYYM       =   :SRYYM
+			AND   SRYCD       =   :SRYCD
+			AND   SRYKA       =   :SRYKA
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   DAYKEY      =   :DAYKEY
+			AND   RENNUM      =    0
+		;
+	};
+};

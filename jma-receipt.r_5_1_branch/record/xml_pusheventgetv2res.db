@@ -1,0 +1,7 @@
+xml_pusheventgetv2res {
+  object       object;
+  mode         int;
+  data{
+    data       varchar(4096);
+  };
+};

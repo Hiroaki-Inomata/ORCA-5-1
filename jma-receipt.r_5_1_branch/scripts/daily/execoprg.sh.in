@@ -1,0 +1,91 @@
+#!/bin/bash
+
+if test -z "$JMARECEIPT_ENV" ; then
+    JMARECEIPT_ENV="@jma-receipt-env@"
+fi
+if ! test -f "$JMARECEIPT_ENV"; then
+    exit 0
+fi
+
+. $JMARECEIPT_ENV
+
+
+
+
+
+#-------------------------------------------#
+#    日次統計出力処理
+#        $1-${11} 印刷ＤＢ用固定引数
+#        ${12} ジョブＩＤ
+#        ${13} シェルＩＤ
+#        ${14} 医療機関番号 
+#        ${15} エラーファイル名 
+#        ${16} PRGRAMID   X(08)
+#        ${17} PARA (1)   X(20)
+#        ${18} PARA (2)   X(20)
+#        ${19} PARA (3)   X(20)
+#        ${20} PARA (4)   X(20)
+#        ${21} PARA (5)   X(20)
+#        ${22} PARA (6)   X(20)
+#        ${23} PARA (7)   X(20)
+#        ${24} PARA (8)   X(20)
+#        ${25} PARA (9)   X(20)
+#        ${26} PARA (10)  X(20)
+#-------------------------------------------#
+##
+
+ echo "window  ${MCP_WINDOW}"
+
+if  [ "${MCP_WINDOW}" == "tempmedicaladdv3" ]; then
+      mkdir -p  ${MCP_TEMPDIR}
+fi
+
+cleanup(){
+##      �ѥ�᡼���ե�������
+        if  [ -e "${PARA_FILE_FULL}" ]; then
+            rm   ${PARA_FILE_FULL}
+        fi
+}
+trap cleanup EXIT
+
+
+RENNUM=0
+ERR_FILE_OLD=${15}
+ERR_FILE_BASE=$(basename ${15})
+ERR_FILE_FULL=${MCP_TEMPDIR}/${ERR_FILE_BASE}
+HOSPNUM=${14}
+TERMID=$9
+LD=051
+
+case ${13} in
+ 'MONTHLY')
+        LD=052;;
+ 'TENSU2')
+        LD=102;;
+esac
+
+
+LOG_FILE=/var/log/jma-receipt/${HOSPNUM}orcb${LD}.log
+[ -e ${LOG_FILE} ] && rm ${LOG_FILE}
+echo $(basename ${LOG_FILE})
+
+
+[ -e ${ERR_FILE_OLD} ] && rm  ${ERR_FILE_OLD} 
+[ -e ${ERR_FILE_FULL} ] && rm  ${ERR_FILE_FULL} 
+
+echo $#
+
+
+RENNUM=$(expr $RENNUM + 1) 
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBLMAIN -parameter "${16},$1,$2,$3,$RENNUM,$5,$6,$7,$8,$9,${10},${11},${12},${13},${14},${ERR_FILE_OLD},${17},${18},${19},${20},${21},${22},${23},${24},${25},${26},"
+if  [ -e ${ERR_FILE_FULL} ]; then
+	exit
+fi
+if  [ -e ${ERR_FILE_OLD} ]; then
+	$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB2 -parameter "$(printf '%-18s9999' JBE${12}${13}),${HOSPNUM},,,エラーファイルの出力先を変更してください"
+    exit
+fi
+    
+$DBSTUB -dir $LDDIRECTORY -bd orcabt ORCBJOB -parameter "JBE${12}${13},${14}"
+exit 
+

@@ -1,0 +1,121 @@
+#!/bin/bash
+#
+# jma-receipt ver5.1.0
+# 
+# バージョンアップによる移行処理
+#
+# 標準テーブルに対してマスタ更新処理の制御
+# 移行対象テーブルのみ
+
+JMARECEIPT_ENV="@jma-receipt-env@"
+if [ ! -f ${JMARECEIPT_ENV} ]; then
+    echo "${JMARECEIPT_ENV} does not found."
+    exit 1
+fi
+. $JMARECEIPT_ENV
+
+if [ `whoami` != "${ORCAUSER}" ]; then
+  echo "マスタ更新処理は${ORCAUSER}ユーザーで実行してください。"
+  exit 1
+fi
+
+delete_tempdir(){
+  if [ ${FLG_TEMPDIR_GEN} -eq 1 ]; then
+    rm -R ${MCP_TEMPDIR}
+  fi
+}
+
+job_terminate(){
+  delete_tempdir 
+  delete_pgpass
+  exit ${1}
+}
+
+RUNDATE=$(date  '+%Y%m%d%H%M%S')
+FLG_TEMPDIR_GEN=0
+if [ -z "${MCP_TEMPDIR}" ]; then
+  export MCP_TEMPDIR=/tmp/orca_root/$(uuidgen)
+  mkdir -p ${MCP_TEMPDIR}
+  FLG_TEMPDIR_GEN=1
+fi 
+
+export PATH=${PATCHSCRIPTSDIR}:${SCRIPTSDIR}:$PATH
+export COB_LIBRARY_PATH=${PATCHLIBDIR}:${ORCALIBDIR}:/usr/lib/panda
+
+create_pgpass
+SQL="select hospnum from tbl_sysbase;"
+HNLIST=`psql ${DBCONNOPTION} ${DBNAME} -Atqc "${SQL}"`
+for hospnum in ${HNLIST} ; do
+  HOSPNUM=`printf "%02d" $hospnum`
+  echo "マスタ更新処理 医療機関識別番号 [ ${HOSPNUM} ] 開始"
+
+  MNTERRFS=${HOSPNUM}MNTERR-${RUNDATE}.$$
+  MLIERRFS=${HOSPNUM}MLIERR-${RUNDATE}.$$
+  HOSPIDFS=${HOSPNUM}HOSPID-${RUNDATE}.$$
+
+  MNTERRFL=${MCP_TEMPDIR}/${MNTERRFS}
+  MLIERRFL=${MCP_TEMPDIR}/${MLIERRFS}
+  HOSPIDFL=${MCP_TEMPDIR}/${HOSPIDFS}
+
+  if [ -e ${MNTERRFL} ]; then
+    rm ${MNTERRFL}
+  fi
+  if [ -e ${MLIERRFL} ]; then
+    rm ${MLIERRFL}
+  fi
+  if [ -e ${HOSPIDFL} ]; then
+    rm ${HOSPIDFL}
+  fi
+
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBCHECKREDL -parameter "${MNTERRFS}"
+  if [ -e ${MNTERRFL} ]; then
+    cat ${MNTERRFL} | nkf -w
+    echo "医療機関識別番号 [ ${HOSPNUM} ] 処理環境ではありません。"
+    job_terminate 1
+  fi
+
+  ${DBSTUB} -dir ${LDDIRECTORY} -bd orcabt ORCBMNT01 -parameter "${HOSPNUM},${MNTERRFS},${HOSPIDFS}"
+  if [ -e ${MNTERRFL} ]; then
+    cat ${MNTERRFL} | nkf -w
+    echo "医療機関識別番号 [ ${HOSPNUM} ] 他で処理中かもしれません。"
+    job_terminate 1
+  fi
+
+  if [ -e ${HOSPIDFL} ]; then
+    HOSPID=$(cat ${HOSPIDFL})
+    rm ${HOSPIDFL}
+  else
+    echo "医療機関識別番号 [ ${HOSPNUM} ] HOSPIDが取得できませんでした。"
+    job_terminate 1
+  fi
+
+  ACCESSKEY=`${MONSQL} -dir ${LDDIRECTORY} -c "select access_key_1 from tbl_access_key where hospnum=${HOSPNUM};" -o CSV2`
+
+  export MON_BATCH_ID=$(uuidgen)
+  export MON_BATCH_NAME="migrate-v51_master_upgrade.sh"
+  export MON_BATCH_GROUPNAME="${HOSPNUM}"
+  export MON_BATCH_EXTRA="0000001MSTMNT"
+  export MON_DIRECTORY_PATH="${LDDIRECTORY}"
+  export MCP_TENANT=1
+  if [ -z ${MCP_MIDDLEWARE_NAME} ] || \
+    ([ "${MCP_MIDDLEWARE_NAME}" != "ginbee" ] && \
+     [ "${MCP_MIDDLEWARE_NAME}" != "panda" ]) ; then
+    export MCP_MIDDLEWARE_NAME="panda"
+  fi
+
+  /usr/lib/panda/bin/monbatch  "execshell.sh \"allways\" \"migrate-v51_master_upgrade.sh\"  \"${HOSPNUM}\" T \"${HOSPID}\" \"${MNTERRFS}\" 0000001 MSTMNT \"${MLIERRFS}\" 0000001 MSTMLI \"${ACCESSKEY}\""
+  if [ -e ${MCP_TEMPDIR}/migrate-v51_master_upgrade_rc ]; then
+    MSTMNT=`cat ${MCP_TEMPDIR}/migrate-v51_master_upgrade_rc`
+  else
+    MSTMNT=1
+  fi
+  if [ ${MSTMNT} -ne 0 ] ; then
+    echo -e "\e[1;31m医療機関識別番号 [ ${HOSPNUM} ] エラーが発生しました。\e[m"
+    job_terminate ${MSTMNT}
+  fi
+  echo "マスタ更新処理 医療機関識別番号 [ ${HOSPNUM} ] 終了"
+done
+delete_tempdir 
+delete_pgpass
+
+exit 0

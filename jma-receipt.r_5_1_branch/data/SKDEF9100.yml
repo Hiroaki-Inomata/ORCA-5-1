@@ -1,0 +1,24 @@
+kanri_cd    : "9100"
+name        : "ＩＣリーダライタ情報"
+class_cd    : "*"
+item_max    : 3
+item_list   :
+- item_no   : 1
+  item      : "CONNECT"
+  item_jp   : "接続する・しない"
+  type      : "X"
+  start     : 1
+  length    : 1
+- item_no   : 2
+  item      : "KEEPINGTERM"
+  item_jp   : "データ保持期間"
+  type      : "9"
+  start     : 2
+  length    : 3
+  precision : 0
+- item_no   : 3
+  item      : "YOBI"
+  item_jp   : "予備"
+  type      : "X"
+  start     : 5
+  length    : 496

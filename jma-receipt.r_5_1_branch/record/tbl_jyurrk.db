@@ -1,0 +1,1592 @@
+tbl_jyurrk {
+	HOSPNUM				number(2,0);
+	PTID 				number(10);
+	NYUGAIKBN			char(1);
+	SRYKA				char(2);
+	SRYYMD				char(8);
+	RENNUM				number(1);
+	DOUJI_RENNUM			number(1);
+	KAIKEI_RENNUM			number(3);
+	EDANUM				number(1);
+	DRCD				char(5);
+	HKNCOMBINUM			char(4);
+	HKNKBN  			char(1);
+	DENPNUM				number(7);
+	GRP_DENPNUM			number(7);
+	GRP_RENNUM			number(2);
+	SYU_UPDKBN  			char(1);
+	SRYKBN1				char(2);
+	SRYKBN2				char(2);
+	SRYKBN3				char(2);
+	SRYKBN4				char(2);
+	SRYKBN5				char(2);
+	SRYKBN6				char(2);
+	SRYKBN7				char(2);
+	SRYKBN8				char(2);
+	SRYKBN9				char(2);
+	SRYKBN10			char(2);
+	SRYKBN11			char(2);
+	ZAINUM1				number(8);
+	ZAINUM2				number(8);
+	ZAINUM3				number(8);
+	ZAINUM4				number(8);
+	ZAINUM5				number(8);
+	ZAINUM6				number(8);
+	ZAINUM7				number(8);
+	ZAINUM8				number(8);
+	ZAINUM9				number(8);
+	ZAINUM10			number(8);
+	ZAINUM11			number(8);
+	ZAINUM12			number(8);
+	ZAINUM13			number(8);
+	ZAINUM14			number(8);
+	ZAINUM15			number(8);
+	TERMID   			varchar(16);
+	OPID     			varchar(16);
+	CREYMD   			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+#-----> 主キー更新用項目
+	UPHOSPNUM			number(2,0),virtual;
+	UPPTID 				number(10),virtual;
+        UPNYUGAIKBN                     char(1),virtual;
+	UPSRYKA				char(2),virtual;
+	UPSRYYMD			char(8),virtual;
+	UPRENNUM			number(1),virtual;
+	UPDOUJI_RENNUM		number(1),virtual;
+	UPKAIKEI_RENNUM		number(3),virtual;
+	UPEDANUM            number(1),virtual;
+};
+
+primary	{
+	HOSPNUM,PTID,NYUGAIKBN,SRYKA,SRYYMD,RENNUM,
+	DOUJI_RENNUM,KAIKEI_RENNUM,EDANUM;
+};
+
+path	key 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			AND   DOUJI_RENNUM =  :DOUJI_RENNUM
+                	AND   KAIKEI_RENNUM = :KAIKEI_RENNUM
+			AND   EDANUM      =   :EDANUM
+		;
+	};
+};
+
+path	key2 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			ORDER   BY        SRYYMD DESC,
+			                  DENPNUM,
+			                  GRP_DENPNUM,
+			                  GRP_RENNUM,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key3 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY        SRYYMD,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key4 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA 
+			AND   SRYYMD      =   :SRYYMD
+			ORDER   BY        RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key5 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA 
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			ORDER   BY        DOUJI_RENNUM,
+                                          KAIKEI_RENNUM,
+                                          EDANUM
+		;
+	};
+};
+
+path	key6 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   DENPNUM     =   :DENPNUM
+			ORDER   BY        SRYKA,
+			                  SRYYMD,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key7 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			ORDER   BY        SRYYMD  DESC,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	upd1	{ 	
+	DBUPDATE	{
+		UPDATE	tbl_jyurrk 
+				SET	
+                   HOSPNUM              = :HOSPNUM,
+                   PTID                = :PTID,
+		   NYUGAIKBN           = :NYUGAIKBN,
+                   SRYKA               = :SRYKA,
+                   SRYYMD              = :SRYYMD,
+                   RENNUM              = :RENNUM,
+                   DOUJI_RENNUM        = :DOUJI_RENNUM,
+                   KAIKEI_RENNUM       = :KAIKEI_RENNUM,
+                   EDANUM              = :EDANUM,
+                   DRCD                = :DRCD,
+                   HKNCOMBINUM         = :HKNCOMBINUM,
+                   HKNKBN              = :HKNKBN,
+                   DENPNUM             = :DENPNUM,
+                   GRP_DENPNUM         = :GRP_DENPNUM,
+                   GRP_RENNUM          = :GRP_RENNUM,
+                   SRYKBN1             = :SRYKBN1,
+                   SRYKBN2             = :SRYKBN2,
+                   SRYKBN3             = :SRYKBN3,
+                   SRYKBN4             = :SRYKBN4,
+                   SRYKBN5             = :SRYKBN5,
+                   SRYKBN6             = :SRYKBN6,
+                   SRYKBN7             = :SRYKBN7,
+                   SRYKBN8             = :SRYKBN8,
+                   SRYKBN9             = :SRYKBN9,
+                   SRYKBN10            = :SRYKBN10,
+                   SRYKBN11            = :SRYKBN11,
+                   ZAINUM1             = :ZAINUM1,
+                   ZAINUM2             = :ZAINUM2,
+                   ZAINUM3             = :ZAINUM3,
+                   ZAINUM4             = :ZAINUM4,
+                   ZAINUM5             = :ZAINUM5,
+                   ZAINUM6             = :ZAINUM6,
+                   ZAINUM7             = :ZAINUM7,
+                   ZAINUM8             = :ZAINUM8,
+                   ZAINUM9             = :ZAINUM9,
+                   ZAINUM10            = :ZAINUM10,
+                   ZAINUM11            = :ZAINUM11,
+                   ZAINUM12            = :ZAINUM12,
+                   ZAINUM13            = :ZAINUM13,
+                   ZAINUM14            = :ZAINUM14,
+                   ZAINUM15            = :ZAINUM15,
+                   TERMID              = :TERMID,
+                   OPID                = :OPID,
+                   CREYMD              = :CREYMD,
+                   UPYMD               = :UPYMD,
+                   UPHMS               = :UPHMS
+               WHERE   HOSPNUM        =   :UPHOSPNUM
+                 AND   PTID          =   :UPPTID
+ 	  	 AND   NYUGAIKBN     =   :UPNYUGAIKBN
+                 AND   SRYKA         =   :UPSRYKA 
+                 AND   SRYYMD        =   :UPSRYYMD
+                 AND   RENNUM        =   :UPRENNUM
+                 AND   DOUJI_RENNUM  =   :UPDOUJI_RENNUM
+                 AND   KAIKEI_RENNUM =   :UPKAIKEI_RENNUM
+                 AND   EDANUM        =   :UPEDANUM
+		;
+	};
+};
+
+path	all 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+ 		;
+	};
+};
+
+path	del1 	{
+	DBDELETE	{
+		DELETE
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+		;
+	};
+};
+
+path	key8 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			ORDER   BY        SRYYMD  DESC,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key9 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key9_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYMD      =   :SRYYMD
+			ORDER   BY        RENNUM,
+			                  DOUJI_RENNUM,
+			                  KAIKEI_RENNUM,
+                                          EDANUM
+		;
+	};
+};
+path	key10 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNCOMBINUM <>  '9999'
+            AND   (HOSPNUM,PTID,SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   :HOSPNUM
+		        	AND   PTID        =   :PTID
+		        	AND   HKNCOMBINUM <>  '9999'
+                                AND   SRYYMD      <=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+			ORDER   BY        DENPNUM,
+		                          RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key11 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBINUM <>  '9999'
+            AND   (HOSPNUM,PTID,SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   :HOSPNUM
+		        	AND   PTID        =   :PTID
+              			AND   SRYKA       =   :SRYKA
+		        	AND   HKNCOMBINUM <>  '9999'
+                                AND   SRYYMD      <=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+			ORDER   BY        RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key12	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key12_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			ORDER   BY        SRYYMD  DESC,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key13	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key13_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			ORDER   BY        SRYYMD  DESC,
+                                          DENPNUM,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key14	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key14_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			ORDER   BY        SRYYMD,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+                              EDANUM,
+							  GRP_DENPNUM,
+							  GRP_RENNUM
+		;
+	};
+};
+path	key15	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key15_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+                                          EDANUM
+		;
+	};
+};
+path	key16	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key16_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+                                          EDANUM
+		;
+	};
+};path	key17	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key17_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD  DESC,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key18	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key18_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD  DESC,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key19	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key19_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key20	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key20_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+                        AND ((ZAINUM1     =   :ZAINUM1 )
+                        OR   (ZAINUM2     =   :ZAINUM2 )
+                        OR   (ZAINUM3     =   :ZAINUM3 )
+                        OR   (ZAINUM4     =   :ZAINUM4 )
+                        OR   (ZAINUM5     =   :ZAINUM5 )
+                        OR   (ZAINUM6     =   :ZAINUM6 )
+                        OR   (ZAINUM7     =   :ZAINUM7 )
+                        OR   (ZAINUM8     =   :ZAINUM8 )
+                        OR   (ZAINUM9     =   :ZAINUM9 )
+                        OR   (ZAINUM10    =   :ZAINUM10)
+                        OR   (ZAINUM11    =   :ZAINUM11)
+                        OR   (ZAINUM12    =   :ZAINUM12)
+                        OR   (ZAINUM13    =   :ZAINUM13)
+                        OR   (ZAINUM14    =   :ZAINUM14)
+                        OR   (ZAINUM15    =   :ZAINUM15))
+			ORDER   BY        SRYYMD,
+                                          RENNUM,
+                                          DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key21	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key21_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			ORDER   BY        PTID,
+                                          SRYYMD,
+                                          RENNUM,
+                                          DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key22	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key22_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			AND   DOUJI_RENNUM =  :DOUJI_RENNUM
+			AND   EDANUM      =   :EDANUM
+		;
+	};
+};
+path	key23	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key23_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD
+		;
+	};
+};
+path	key24	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key24_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+                        AND  (SRYKBN1     <>  '  '
+                        OR    SRYKBN2     <>  '  '
+                        OR    SRYKBN3     <>  '  '
+                        OR    SRYKBN4     <>  '  '
+                        OR    SRYKBN5     <>  '  '
+                        OR    SRYKBN6     <>  '  '
+                        OR    SRYKBN7     <>  '  '
+                        OR    SRYKBN8     <>  '  '
+                        OR    SRYKBN9     <>  '  '
+                        OR    SRYKBN10    <>  '  '
+                        OR    SRYKBN11    <>  '  ')
+			ORDER   BY        SRYYMD  DESC,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+
+path	all2 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_all2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   SRYYMD    LIKE   :SRYYMD
+		;
+	};
+};
+
+path	key25 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key25_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM <>  '9999'
+			AND   SRYYMD      <=  :SRYYMD
+			ORDER   BY        SRYYMD DESC,
+			                  DENPNUM DESC
+		;
+	};
+};
+path	key26 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key26_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   GRP_DENPNUM =   :GRP_DENPNUM
+			ORDER   BY        GRP_RENNUM,
+                                          EDANUM
+		;
+	};
+};
+
+#sitekey
+path	st_key1 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_st_key1_csr CURSOR FOR
+		SELECT a.* FROM tbl_jyurrk a,tbl_ptinf b
+		WHERE    a.HOSPNUM  =  :HOSPNUM
+		AND   a.NYUGAIKBN  =  :NYUGAIKBN
+		AND   (a.SRYYMD    >= :SRYYMD
+		AND    a.SRYYMD    <= :UPSRYYMD)
+		AND   a.HOSPNUM     =  b.HOSPNUM
+		AND   a.PTID       =  b.PTID
+		AND   b.TSTPTNUMKBN  <> '1'
+		ORDER  BY   a.PTID,
+		a.SRYYMD,
+		a.RENNUM,
+		a.DOUJI_RENNNUM,
+		a.EDANUM
+		;
+	};
+};
+
+path	key27 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key27_csr CURSOR FOR
+		SELECT distinct HOSPNUM,ptid,nyugaikbn,sryka,substring(sryymd,1,6) as sryymd,hknkbn
+		FROM tbl_jyurrk
+			WHERE HOSPNUM      =    :HOSPNUM
+			AND   PTID        =    :PTID
+			AND   SRYYMD      LIKE :SRYYMD
+		;
+	};
+};
+
+path	key28 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key28_csr CURSOR FOR
+		SELECT distinct HOSPNUM,ptid,nyugaikbn,sryka,substring(sryymd,1,6) as sryymd,hknkbn
+		FROM tbl_jyurrk
+			WHERE HOSPNUM      =    :HOSPNUM
+			AND   PTID        =    :PTID
+			AND   NYUGAIKBN   =    :NYUGAIKBN
+			AND   HKNKBN      =    :HKNKBN
+			AND   SRYYMD      LIKE :SRYYMD
+		;
+	};
+};
+
+path	key29	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key29_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYYMD      =   :SRYYMD
+			AND   HKNCOMBINUM <>  '9999'
+			ORDER   BY        PTID,
+			                  GRP_DENPNUM,
+			                  GRP_RENNUM,
+                                          DENPNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key30	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key30_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   PTID        =    :PTID
+			AND   SRYKA       =   :SRYKA
+			AND   HKNCOMBINUM <>  '9999'
+			ORDER   BY        SRYYMD DESC,
+			                  DENPNUM DESC
+		;
+	};
+};
+path    del2    {
+        DBDELETE        {
+                DELETE
+                FROM tbl_jyurrk
+                        WHERE   HOSPNUM    =   :HOSPNUM
+                        AND   PTID        =   :PTID
+                        AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   SRYYMD      LIKE :SRYYMD
+                ;
+        };
+};
+
+path    key31   {
+        DBSELECT        {
+                DECLARE tbl_jyurrk_key31_csr CURSOR FOR
+                SELECT *
+                FROM tbl_jyurrk
+                        WHERE HOSPNUM      =    :HOSPNUM
+                        AND   PTID        =    :PTID
+                        AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   SRYYMD      LIKE :SRYYMD
+                ;
+        };
+};
+path	key32 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key32_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b, tbl_ptinf c
+			WHERE   a.HOSPNUM    =   :HOSPNUM
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYKA       =   :SRYKA
+			AND   a.HKNCOMBINUM <>  '9999'
+            AND   (a.HOSPNUM,a.PTID,a.SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   a.HOSPNUM
+		        	AND   PTID        =   a.PTID
+         			AND   NYUGAIKBN   =   a.NYUGAIKBN
+              			AND   SRYKA       =   a.SRYKA
+                                AND   SRYYMD      >=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID       =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID       =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER BY b.PTNUM,
+			         a.RENNUM,
+			         a.DOUJI_RENNUM,
+			         a.EDANUM
+		;
+	};
+};
+
+path	key33	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key33_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			AND   HKNCOMBINUM <>  '9999'
+                        AND   EDANUM      =    1
+			ORDER   BY        HKNCOMBINUM,SRYKA,SRYYMD
+		;
+	};
+};
+
+path	key34	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key34_csr CURSOR FOR
+		SELECT PTID
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+            AND  SRYYMD       LIKE  :SRYYMD
+			AND   HKNCOMBINUM <>  '9999'
+            AND   EDANUM      =    1
+            GROUP   BY        PTID
+			ORDER   BY        PTID
+		;
+	};
+};
+path	key35 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key35_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   HKNCOMBINUM <>  '9999'
+            AND   (HOSPNUM,PTID,SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   :HOSPNUM
+		        	AND   PTID        =   :PTID
+           			AND   NYUGAIKBN   =   :NYUGAIKBN
+		        	AND   HKNCOMBINUM <>  '9999'
+                                AND   SRYYMD      <=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+			ORDER   BY        DENPNUM,
+		                          RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key36 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key36_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYYMD      >=  :SRYYMD
+			AND   SRYYMD      <=  :UPSRYYMD
+			AND   EDANUM      =   1
+		;
+	};
+};
+
+path	key37 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key37_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE HOSPNUM    =   :HOSPNUM
+			AND   PTID      =   :PTID
+			AND   SRYYMD  LIKE  :SRYYMD
+			AND   HKNCOMBINUM <>  '9999'
+			AND   EDANUM      =   1
+		;
+	};
+};
+path	key38	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key38_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND   SRYYMD      =   :SRYYMD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        RENNUM,
+                                          DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key39	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key39_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYYMD    LIKE  :SRYYMD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			AND   HKNKBN      =   :HKNKBN
+		;
+	};
+};
+
+path	key40	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key40_csr CURSOR FOR
+		SELECT PTID
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND  SRYYMD       LIKE  :SRYYMD
+			AND   HKNCOMBINUM <>  '9999'
+			AND   PTID        =   :PTID
+			AND   EDANUM      =    1
+		;
+	};
+};
+path	key41	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key41_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY        SRYYMD  DESC
+		;
+	};
+};
+
+path	key42 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key42_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE HOSPNUM    =   :HOSPNUM
+			AND   PTID      =   :PTID
+			AND   SRYYMD  LIKE  :SRYYMD
+			AND   EDANUM      =   1
+		;
+	};
+};
+
+path	key43	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key43_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND  (SRYYMD      >=  :SRYYMD
+			AND   SRYYMD      <=  :UPSRYYMD)
+			AND   HKNCOMBINUM <>  '9999'
+			AND   EDANUM      =   1
+			ORDER   BY        SRYYMD  DESC,
+			                  DENPNUM DESC
+		;
+	};
+};
+path	key44 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key44_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b, tbl_ptinf c
+			WHERE   a.HOSPNUM    =   :HOSPNUM
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.HKNCOMBINUM <>  '9999'
+            AND   (a.HOSPNUM,a.PTID,a.SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   a.HOSPNUM
+		        	AND   PTID        =   a.PTID
+         			AND   NYUGAIKBN   =   a.NYUGAIKBN
+                                AND   SRYYMD      >=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID       =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID       =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER BY b.PTNUM,
+			         a.RENNUM,
+			         a.DOUJI_RENNUM,
+			         a.EDANUM
+		;
+	};
+};
+
+path	key45 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key45_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a
+			WHERE   a.HOSPNUM   =   :HOSPNUM
+		        AND   a.PTID        =   :PTID
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYKA    LIKE   :SRYKA
+			AND   a.HKNCOMBINUM <>  '9999'
+            AND   (a.HOSPNUM,a.PTID,a.SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   a.HOSPNUM
+		        	AND   PTID        =   a.PTID
+         			AND   NYUGAIKBN   =   a.NYUGAIKBN
+                                AND   SRYYMD      >=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+			ORDER BY a.RENNUM,
+			         a.DOUJI_RENNUM,
+			         a.EDANUM
+		;
+	};
+};
+
+path	key46 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key46_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   HKNCOMBINUM <>  '9999'
+			ORDER   BY        SRYYMD
+		;
+	};
+};
+
+path	key47 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key47_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+	        AND   SRYYMD	  =   :SRYYMD	
+			AND   HKNCOMBINUM =   :HKNCOMBINUM 
+			AND   DENPNUM     =   :DENPNUM
+			ORDER   BY        RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key48 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key48_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+		        AND   SRYYMD	  =   :SRYYMD
+			AND   HKNCOMBINUM =   :HKNCOMBINUM 
+			ORDER   BY        RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key50	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key50_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     RENNUM     >=  4
+			ORDER   BY        PTID,
+				          NYUGAIKBN,
+					  SRYKA,
+					  SRYYMD,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+path	key51	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key51_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			ORDER   BY        DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+
+path	key52 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key52_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYKA       <   'A1'
+			ORDER   BY        SRYYMD,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key53 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key53_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   SRYKA       like 'A%'
+			ORDER   BY        SRYYMD,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key54 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key54_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM   =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYYMD     like :SRYYMD
+			AND   SRYKA      like 'A%'
+			ORDER   BY        SRYYMD,
+                                          SRYKA,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key55	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key55_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE HOSPNUM      =   :HOSPNUM
+			AND   NYUGAIKBN    =   :NYUGAIKBN
+			AND   SRYYMD       =   :SRYYMD
+			AND   HKNCOMBINUM  <>  '9999'
+			AND   EDANUM      =   1
+			ORDER   BY        DENPNUM
+		;
+	};
+};
+
+path	key56	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key56_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.NYUGAIKBN    =   :NYUGAIKBN
+			AND   a.SRYKA        =   :SRYKA
+			AND   a.SRYYMD     like :SRYYMD
+			AND   a.HKNCOMBINUM  <>  '9999'
+			AND   a.EDANUM      =   1
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID        =  b.PTID
+			ORDER   BY        b.PTNUM,
+			                  a.SRYYMD,
+			                  a.DENPNUM
+		;
+	};
+};
+
+
+path	key57	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key57_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b,tbl_ptinf c
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.NYUGAIKBN    =   :NYUGAIKBN
+			AND   a.SRYYMD     like :SRYYMD
+			AND   a.HKNCOMBINUM  <>  '9999'
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID        =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID        =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER   BY        c.KANANAME,
+			                  b.PTNUM,
+			                  a.SRYYMD,
+			                  a.DENPNUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+path	key58	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key58_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID         =   :PTID
+			AND   SRYYMD    LIKE   :SRYYMD
+			ORDER   BY        NYUGAIKBN,
+			                  DENPNUM
+		;
+	};
+};
+
+path	key59 {
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key59_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     SRYYMD    LIKE :SRYYMD
+			ORDER   BY        NYUGAIKBN,
+			                  PTID,
+			                  DENPNUM
+		;
+	};
+};
+
+path	key60	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key60_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+                        AND   SRYYMD      <=  :SRYYMD
+                        AND   EDANUM      =    1
+			ORDER   BY        SRYYMD  DESC,
+                                          DENPNUM,
+			                  RENNUM,
+			                  DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+path	key61 	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key61_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b, tbl_ptinf c
+			WHERE   a.HOSPNUM    =   :HOSPNUM
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYKA       LIKE  :SRYKA
+			AND   a.HKNCOMBINUM <>  '9999'
+            AND   (a.HOSPNUM,a.PTID,a.SRYYMD)  in
+                  (SELECT HOSPNUM,PTID,MAX(SRYYMD)
+                                   FROM tbl_jyurrk 
+                               	WHERE   HOSPNUM    =   a.HOSPNUM
+		        	AND   PTID        =   a.PTID
+         			AND   NYUGAIKBN   =   a.NYUGAIKBN
+                                AND   SRYYMD      >=  :SRYYMD 
+                   GROUP BY HOSPNUM,PTID )
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID       =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID       =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER BY ( CASE :UPEDANUM
+			             WHEN 1 THEN (c.KANANAME,b.PTNUM)
+			             ELSE (b.PTNUM,'')
+			           END),
+			         a.RENNUM,
+			         a.DOUJI_RENNUM,
+			         a.EDANUM
+		;
+	};
+};
+path	key62	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key62_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk a,tbl_sryact b
+			WHERE   a.HOSPNUM    =   :HOSPNUM
+			AND   a.PTID        =   :PTID
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYKA       =   :SRYKA
+                        AND   a.HOSPNUM     =   b.HOSPNUM
+			AND   a.PTID        =   b.PTID
+			AND   a.NYUGAIKBN   =   b.NYUGAIKBN
+			AND   a.SRYKA       =   b.SRYKA
+                        AND   b.SRYYM       =   :UPHMS
+                        AND  (b.SRYCD1      =   '099209910')
+                        AND ((b.ZAINUM      =   a.ZAINUM1 )
+                        OR   (b.ZAINUM     =   a.ZAINUM2 )
+                        OR   (b.ZAINUM     =   a.ZAINUM3 )
+                        OR   (b.ZAINUM     =   a.ZAINUM4 )
+                        OR   (b.ZAINUM     =   a.ZAINUM5 )
+                        OR   (b.ZAINUM     =   a.ZAINUM6 )
+                        OR   (b.ZAINUM     =   a.ZAINUM7 )
+                        OR   (b.ZAINUM     =   a.ZAINUM8 )
+                        OR   (b.ZAINUM     =   a.ZAINUM9 )
+                        OR   (b.ZAINUM    =   a.ZAINUM10)
+                        OR   (b.ZAINUM    =   a.ZAINUM11)
+                        OR   (b.ZAINUM    =   a.ZAINUM12)
+                        OR   (b.ZAINUM    =   a.ZAINUM13)
+                        OR   (b.ZAINUM    =   a.ZAINUM14)
+                        OR   (b.ZAINUM    =   a.ZAINUM15))
+			ORDER   BY        a.SRYYMD,
+                                          a.RENNUM,
+                                          a.DOUJI_RENNUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+path	key63	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key63_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND     PTID        =   :PTID
+			AND     NYUGAIKBN   =   :NYUGAIKBN
+			AND     SRYKA       =   :SRYKA
+                        AND ((  ZAINUM1     =   :ZAINUM1 )
+                        OR   (  ZAINUM2    =    :ZAINUM2 )
+                        OR   (  ZAINUM3    =    :ZAINUM3 )
+                        OR   (  ZAINUM4    =    :ZAINUM4 )
+                        OR   (  ZAINUM5    =    :ZAINUM5 )
+                        OR   (  ZAINUM6    =    :ZAINUM6 )
+                        OR   (  ZAINUM7    =    :ZAINUM7 )
+                        OR   (  ZAINUM8    =    :ZAINUM8 )
+                        OR   (  ZAINUM9    =    :ZAINUM9 )
+                        OR   (  ZAINUM10   =    :ZAINUM10)
+                        OR   (  ZAINUM12   =    :ZAINUM12)
+                        OR   (  ZAINUM13   =    :ZAINUM13)
+                        OR   (  ZAINUM14   =    :ZAINUM14)
+                        OR   (  ZAINUM15   =    :ZAINUM15))
+			ORDER   BY        SRYYMD,
+                                          RENNUM,
+                                          DOUJI_RENNUM,
+			                  EDANUM
+		;
+	};
+};
+
+
+path	key64	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key64_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b,tbl_ptinf c
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.NYUGAIKBN    =   :NYUGAIKBN
+			AND   (a.SRYYMD      >= :SRYYMD
+			AND    a.SRYYMD      <= :UPSRYYMD)
+			AND   a.HKNCOMBINUM  <>  '9999'
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID        =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID        =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER   BY        c.KANANAME,
+			                  b.PTNUM,
+			                  a.SRYYMD,
+			                  a.DENPNUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+#FALSEの値はTRUEより小さいため、ドクターコードが一致した場合は先頭で返却される
+path	key65	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key65_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =  :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+			AND   SRYYMD      =   :SRYYMD
+			AND   RENNUM      =   :RENNUM
+			AND   EDANUM      =   :EDANUM
+			AND   HKNCOMBINUM =   :HKNCOMBINUM
+			ORDER   BY    ( DRCD <> :DRCD ) 
+		;
+	};
+};
+
+path	key66	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key66_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =  :HOSPNUM
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   UPYMD       >=  :UPYMD
+			ORDER   BY      SRYYMD,
+					DENPNUM,
+			                EDANUM
+		;
+	};
+};
+
+path	key67	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key67_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM    =   :HOSPNUM
+			AND   PTID        =   :PTID
+			AND   NYUGAIKBN   =   :NYUGAIKBN
+			AND   SRYKA       =   :SRYKA
+                        AND  (SRYYMD      >=  :SRYYMD
+                        AND   SRYYMD      <=  :UPSRYYMD)
+			AND   HKNCOMBINUM <>  '9999'
+                        AND   EDANUM      =    1
+			ORDER   BY      SRYYMD,
+					DENPNUM
+		;
+	};
+};
+path	key68	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key68_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk a,tbl_sryact b
+			WHERE   a.HOSPNUM    =   :HOSPNUM
+			AND   a.PTID        =   :PTID
+			AND   a.NYUGAIKBN   =   :NYUGAIKBN
+			AND   a.SRYKA       =   :SRYKA
+                        AND   a.HOSPNUM     =   b.HOSPNUM
+			AND   a.PTID        =   b.PTID
+			AND   a.NYUGAIKBN   =   b.NYUGAIKBN
+			AND   a.SRYKA       =   b.SRYKA
+                        AND   b.SRYYM       =   :UPHMS
+                        AND  (b.SRYCD1      =   '099209911')
+                        AND ((b.ZAINUM      =   a.ZAINUM1 )
+                        OR   (b.ZAINUM     =   a.ZAINUM2 )
+                        OR   (b.ZAINUM     =   a.ZAINUM3 )
+                        OR   (b.ZAINUM     =   a.ZAINUM4 )
+                        OR   (b.ZAINUM     =   a.ZAINUM5 )
+                        OR   (b.ZAINUM     =   a.ZAINUM6 )
+                        OR   (b.ZAINUM     =   a.ZAINUM7 )
+                        OR   (b.ZAINUM     =   a.ZAINUM8 )
+                        OR   (b.ZAINUM     =   a.ZAINUM9 )
+                        OR   (b.ZAINUM    =   a.ZAINUM10)
+                        OR   (b.ZAINUM    =   a.ZAINUM11)
+                        OR   (b.ZAINUM    =   a.ZAINUM12)
+                        OR   (b.ZAINUM    =   a.ZAINUM13)
+                        OR   (b.ZAINUM    =   a.ZAINUM14)
+                        OR   (b.ZAINUM    =   a.ZAINUM15))
+			ORDER   BY        a.SRYYMD,
+                                          a.RENNUM,
+                                          a.DOUJI_RENNUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+path	key69	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key69_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b,tbl_ptinf c
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.NYUGAIKBN    =   :NYUGAIKBN
+			AND   (a.SRYYMD      >= :SRYYMD
+			AND    a.SRYYMD      <= :UPSRYYMD)
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID        =  b.PTID
+	        	AND   a.HOSPNUM     =  c.HOSPNUM
+	        	AND   a.PTID        =  c.PTID
+        		AND   c.TSTPTNUMKBN  <> '1'
+			ORDER   BY        c.KANANAME,
+			                  b.PTNUM,
+			                  a.SRYYMD,
+			                  a.DENPNUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+path	key70	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key70_csr CURSOR FOR
+		SELECT a.*
+                FROM tbl_jyurrk a,tbl_ptnum b
+			WHERE a.HOSPNUM      =   :HOSPNUM
+			AND   a.NYUGAIKBN    =   :NYUGAIKBN
+			AND   a.UPYMD       >=  :UPYMD
+	        	AND   a.HOSPNUM     =  b.HOSPNUM
+	        	AND   a.PTID        =  b.PTID
+			ORDER   BY        a.SRYYMD,
+					  b.PTNUM,
+			                  a.SRYKA,
+			                  a.HKNCOMBINUM,
+			                  a.EDANUM
+		;
+	};
+};
+
+
+path	key71	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key71_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_jyurrk a,tbl_ptinf b
+			WHERE   a.HOSPNUM     =  :HOSPNUM
+			AND     a.NYUGAIKBN   =   :NYUGAIKBN
+			AND     a.UPYMD       >=  :UPYMD
+	        	AND     a.HOSPNUM     =  b.HOSPNUM
+	        	AND     a.PTID        =  b.PTID
+        		AND     b.TSTPTNUMKBN  <> '1'
+			ORDER   BY      a.SRYYMD,
+					a.DENPNUM,
+			                a.EDANUM
+		;
+	};
+};
+
+path  key72   {
+  DBSELECT  {
+    DECLARE tbl_jyurrk_key72_csr CURSOR FOR
+    SELECT a.* FROM tbl_jyurrk a,tbl_ptnum b, tbl_ptinf c
+      WHERE (a.HOSPNUM,a.PTID,a.NYUGAIKBN,a.SRYYMD) in
+            (SELECT HOSPNUM,PTID,NYUGAIKBN,MAX(SRYYMD) FROM tbl_jyurrk
+             WHERE   HOSPNUM    =   :HOSPNUM
+              AND    NYUGAIKBN  =   :NYUGAIKBN
+              AND   (SRYYMD    >=   :SRYYMD
+              AND    SRYYMD    <=   :UPSRYYMD)
+                   GROUP BY HOSPNUM,PTID,NYUGAIKBN )
+            AND   a.HKNCOMBINUM <>  '9999'
+            AND   a.HOSPNUM    =  b.HOSPNUM
+            AND   a.PTID       =  b.PTID
+            AND   a.HOSPNUM    =  c.HOSPNUM
+            AND   a.PTID       =  c.PTID
+            AND   c.TSTPTNUMKBN  <> '1'
+      ORDER   BY        c.KANANAME,
+                        b.PTNUM,
+                        a.SRYYMD,
+                        a.RENNUM,
+                        a.DOUJI_RENNUM,
+                        a.EDANUM
+    ;
+  };
+};
+
+path	key74	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key74_csr CURSOR FOR
+		SELECT *
+		FROM tbl_jyurrk
+			WHERE   HOSPNUM        =  :HOSPNUM
+			AND     NYUGAIKBN      =   :NYUGAIKBN
+			AND     SRYYMD         LIKE :SRYYMD
+			ORDER   BY      SRYYMD,
+					SRYKA,
+					PTID,
+					HKNCOMBINUM,
+                                        RENNUM,
+			                EDANUM
+		;
+	};
+};
+
+path	key75	{
+	DBSELECT	{
+		DECLARE tbl_jyurrk_key75_csr CURSOR FOR
+		SELECT a.*
+		FROM tbl_jyurrk a,tbl_ptinf b
+			WHERE   a.HOSPNUM     =  :HOSPNUM
+			AND     a.NYUGAIKBN   =   :NYUGAIKBN
+			AND     a.SRYYMD      LIKE :SRYYMD
+	        	AND     a.HOSPNUM     =  b.HOSPNUM
+	        	AND     a.PTID        =  b.PTID
+        		AND     b.TSTPTNUMKBN  <> '1'
+			ORDER   BY      a.SRYYMD,
+					a.SRYKA,
+					a.PTID,
+					a.HKNCOMBINUM,
+                                        a.RENNUM,
+			                a.EDANUM
+		;
+	};
+};
+

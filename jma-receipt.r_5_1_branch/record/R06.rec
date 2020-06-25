@@ -1,0 +1,26 @@
+R06 {
+  fi1 {
+    PRTNM_COMBO {
+      PRTNM {
+        textdata varchar(19);
+      };
+      count int;
+        item varchar(19)[100];
+    };
+    PRTNM_N_COMBO {
+      PRTNM_N {
+        textdata varchar(19);
+      };
+      count int;
+        item varchar(19)[100];
+    };
+    SETTEI1 {
+      state int;
+      isactive bool;
+    };
+    SETTEI2 {
+      state int;
+      isactive bool;
+    };
+  };
+};

@@ -1,0 +1,66 @@
+include $(top_builddir)/Makefile.directories
+
+COBOL = @COBC@
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+HOSP = @HOSP@
+
+COBCOPYS = -I$(srcdir)/../../cobol/copy
+
+COBOLFLAGS = @COBOLFLAGS@
+EXEC_COBOLFLAGS = @EXEC_COBOLFLAGS@
+DEPDIR = .deps
+
+OBJS = ${SRCS:.CBL=.so}
+EXEC = ${EXEC_SRCS:.CBL=}
+
+define postprocess-depend
+@if test ! -d $(DEPDIR); then mkdir $(DEPDIR); fi
+endef
+
+
+all: $(OBJS) $(EXEC)
+	
+clean: 
+	-rm -f $(OBJS) $(EXEC)
+
+distclean: 
+	-rm -f $(OBJS) $(EXEC)
+	-rm -R $(DEPDIR)
+
+-include $(wildcard $(DEPDIR)/*.Po) /dev/null
+
+filecheck:
+	@(for i in $(SRCS) $(EXEC_SRCS) ;do echo "make	$${i}"; done ;\
+	find . \
+	-name "." -o \
+	-name "CVS" -prune -o \
+	-name ".deps" -prune -o \
+	-name "Makefile*" -o \
+	-name ".cvsignore" -o \
+	-name "*.bak" -o \
+	-name "*.so" -o \
+	-name "ORCXSMST1" -o \
+	-name "ORCSCOMMON.CBL.in" -o \
+	-name "kanaconv.h" -o \
+	-printf "file\t%f\n") \
+	|sort -k2 |uniq -u -f1 
+
+install: all installdirs
+	for f in $(OBJS); do \
+	  $(INSTALL) -m 555 $${f} $(orcalibdir) ; done
+	for f in $(EXEC); do \
+	  $(INSTALL) -m 555 $${f} $(bindir) ; done
+
+installdirs:
+	$(INSTALL) -d $(orcalibdir)
+	$(INSTALL) -d $(bindir)
+
+%.so: %.CBL
+	$(postprocess-depend)
+	$(COBOL) $(COBOLFLAGS)  $(COBCOPYS)  -MT $@ -MF $(DEPDIR)/${@:.so=.Po} $< 
+	
+%: %.CBL
+	$(postprocess-depend)
+	$(COBOL) $(EXEC_COBOLFLAGS) $(COBCOPYS) -MT $@ -MF $(DEPDIR)/${@:=.Po} $<
+

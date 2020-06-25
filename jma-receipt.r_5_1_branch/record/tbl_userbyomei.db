@@ -1,0 +1,222 @@
+tbl_userbyomei {
+	HOSPNUM				number(2,0);
+	CDSYU				char(1);
+	BYOMEIINPUTCD		varchar(20);
+	BUNRUICD            char(3);
+	DSPSEQ              number(2);
+	BYOMEICDSU			number(2);
+	BYOMEICD_1			char(7);
+	BYOMEICD_2			char(7);
+	BYOMEICD_3 			char(7);
+	BYOMEICD_4			char(7);
+	BYOMEICD_5			char(7);
+	BYOMEICD_6			char(7);
+	BYOMEICD_7			char(7);
+	BYOMEICD_8			char(7);
+	BYOMEICD_9 			char(7);
+	BYOMEICD_10			char(7);
+	BYOMEICD_11			char(7);
+	BYOMEICD_12			char(7);
+	BYOMEICD_13			char(7);
+	BYOMEICD_14			char(7);
+	BYOMEICD_15			char(7);
+	BYOMEICD_16			char(7);
+	BYOMEICD_17			char(7);
+	BYOMEICD_18			char(7);
+	BYOMEICD_19			char(7);
+	BYOMEICD_20			char(7);
+	BYOMEICD_21			char(7);
+	UTAGAIFLG  			char(1);
+	MANSEIKBN  			number(2);
+	BYOMEI     			varchar(160);
+	BYOMEIMOJI 			number(2);
+	CHARTBYOMEI			varchar(160);
+	CHARTBYOMEIMOJI		number(2);
+	HOSOKU_COMMENT			varchar(80);
+	BYOMEIHENFLG		char(1);
+	HKNBYOMEIFLG		char(1);
+	BYOMEISBT   		char(1);
+	KHNBYOMEICD			char(7);
+	KHNBUICD_1			char(7);
+	KHNBUICD_2			char(7);
+	KHNBUICD_3			char(7);
+	TERMID  			varchar(16);
+	OPID    			varchar(16);
+	CREYMD  			char(8);
+	UPYMD    			char(8);
+	UPHMS				char(6);
+};
+primary	{
+	HOSPNUM,CDSYU,BYOMEIINPUTCD;
+};
+
+path	key	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   CDSYU           =   :CDSYU 
+			AND   BYOMEIINPUTCD   =   :BYOMEIINPUTCD 
+		;
+
+	};
+};
+
+path	key2	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key2_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEI       LIKE :BYOMEI
+		;
+	};
+};
+
+path	key3	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key3_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+                    AND (      CDSYU      =  'A'                   
+                          OR   CDSYU      =  'J'        )
+                    ORDER  BY  DSPSEQ,BYOMEIINPUTCD       
+		;
+	};
+};
+
+path	key4	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key4_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+                    AND   CDSYU           =  'C'                   
+                    ORDER  BY  BYOMEIINPUTCD       
+		;
+	};
+};
+
+path	key5	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key5_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+                    AND   BUNRUICD        =   :BUNRUICD                   
+                    ORDER  BY  BYOMEIINPUTCD       
+		;
+	};
+};
+
+path	key6	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key6_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   CDSYU           <>  'C'
+			AND   BYOMEIINPUTCD   =   :BYOMEIINPUTCD 
+		;
+	};
+};
+
+path	key7	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key7_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BUNRUICD        =   :BUNRUICD                   
+			AND   CDSYU           <>  'C'
+			ORDER  BY  DSPSEQ,BYOMEIINPUTCD       
+		;
+	}; 
+};
+
+path	key8	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key8_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEI       LIKE   :BYOMEI
+			AND   CDSYU           <>  'C'
+                    ORDER  BY  BYOMEIINPUTCD       
+		;
+	};
+};
+
+path	key9	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_ptbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+                    AND   CDSYU           =  'C'                   
+                    ORDER  BY  BYOMEI
+		;
+	};
+};
+
+path	del1	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEIINPUTCD   =   :BYOMEIINPUTCD
+			AND   CDSYU           =  'C'
+		;
+	}; 
+};
+
+path	del2	{ 	
+	DBDELETE	{
+		DELETE
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BUNRUICD        =   :BUNRUICD                   
+		;
+	}; 
+};
+
+path	all	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_all_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+		;
+	};
+};
+
+path	key10	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key10_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   BYOMEI       LIKE   :BYOMEI
+			AND   CDSYU           <>  'C'
+			AND   BUNRUICD     LIKE   :BUNRUICD
+			ORDER  BY  BYOMEIINPUTCD
+		;
+	};
+};
+
+path	key11	{ 	
+	DBSELECT	{
+		DECLARE tbl_userbyomei_key11_csr CURSOR FOR
+		SELECT *
+		FROM tbl_userbyomei
+			WHERE HOSPNUM          =   :HOSPNUM
+			AND   CDSYU           <>  'C'
+			AND   BYOMEIINPUTCD   LIKE :BYOMEIINPUTCD 
+			ESCAPE  '/'
+			ORDER  BY  DSPSEQ,BYOMEIINPUTCD
+		;
+	};
+};
+
+
